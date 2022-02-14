@@ -62,7 +62,6 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  height: 100px;
   top: 10px;
   display: flex;
   align-items: center;
