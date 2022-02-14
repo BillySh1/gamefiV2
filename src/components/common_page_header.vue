@@ -1,15 +1,22 @@
 <template>
   <div class="box">
-    <div class="page_title">招贤纳士</div>
+    <div class="page_title">
+      <img class="title_badge" src="../assets/common/active_title.png" alt="" />
+      招贤纳士
+    </div>
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
         <img class="img_left" :src="item.img" alt="" />
         {{ item.value }}
-        <img class="img_right" src="../assets/common/currency_plus.png" alt="" />
+        <img
+          class="img_right"
+          src="../assets/common/currency_plus.png"
+          alt=""
+        />
       </div>
     </div>
     <div class="icon_box">
-      <img class="icon"  src="../assets/common/notice.svg" alt="" />
+      <img class="icon" src="../assets/common/notice.svg" alt="" />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
     </div>
   </div>
@@ -75,10 +82,18 @@ export default {
     rgba(61, 11, 11, 0.8125) 47.11%,
     rgba(39, 33, 33, 0) 96.81%
   );
-  font-family: FZYanZhenQingKaiShuJF;
   font-size: 4rem;
-  font-weight: 400;
 }
+.page_title {
+  position: relative;
+}
+.title_badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .currency_menu {
   font-size: 0.35em;
   display: flex;
@@ -93,15 +108,15 @@ export default {
   display: flex;
   align-items: center;
 }
-.img_left{
-    transform: translateX(-50%);
+.img_left {
+  transform: translateX(-50%);
 }
-.img_right{
-    transform: translateX(50%);
+.img_right {
+  transform: translateX(50%);
 }
-.icon{
-    width: 66px;
-    height: 66px;
-    margin-right: 24px;
+.icon {
+  width: 66px;
+  height: 66px;
+  margin-right: 24px;
 }
 </style>
