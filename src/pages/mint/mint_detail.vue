@@ -46,7 +46,11 @@
             />
           </div>
 
-          <div class="right_c_btn">
+          <div class="right_c_btn" @click="()=>{
+            $router.push({
+              name:'minting',
+              query:{}
+            })}" >
             <img src="../../assets/mint/btn.svg" alt="" />
             <div class="richt_c_btn_value">购买</div>
           </div>
@@ -167,6 +171,7 @@ export default {
 .right_c_btn {
   position: relative;
   transform: scale(0.8);
+  cursor: pointer;
 }
 .richt_c_btn_value {
   position: absolute;

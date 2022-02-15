@@ -31,11 +31,21 @@
           >
             {{ item.title }}
           </div>
-          <img
-            :class="activeIndex == item.key ? 'active_img' : 'img'"
-            :src="item.img"
-            alt=""
-          />
+          <div :class="activeIndex == item.key ? 'active_img_box' : 'img_box'">
+            <img
+              :style="{
+                transform: `translate(${item.offsetX + ',' + item.offsetY})`,
+              }"
+              class="img_bg"
+              :src="item.img"
+            />
+            <img
+              :class="activeIndex == item.key ? 'rotate' : ''"
+              style="width: 100%; heihgt: 100%"
+              :src="item.bg"
+            />
+          </div>
+
           <div class="price_box" v-show="activeIndex == item.key">
             <img src="../../assets/mint/price_icon.svg" alt="" />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
@@ -71,19 +81,34 @@ export default {
                 key: 0,
                 img:require('../../assets/mint/type0.svg'),
                 price: 5000,
-                title:'校尉腰牌'
+                title:'校尉腰牌',
+                bg: require('../../assets/mint/type0_bg.svg'),
+                maxWidth: 180,
+                maxHeight: 344,
+                offsetX:"-45%",
+                offsetY:'-40%'
               },
               {
                 key:1,
                 img:require('../../assets/mint/type1.svg'),
                 price: 20000,
-                title:'鎏金虎符'
+                title:'鎏金虎符',
+                bg: require('../../assets/mint/type1_bg.svg'),
+                maxWidth: 430,
+                maxHeight: 157,
+                offsetX:"-50%",
+                offsetY:'-50%'
               },
               {
                 key:2,
                 img:require('../../assets/mint/type2.svg'),
                 price: 50000,
-                title:'传国玉玺'
+                title:'传国玉玺',
+                bg: require('../../assets/mint/type2_bg.svg'),
+                maxWidth: 311,
+                maxHeight: 337,
+                offsetX:"-60%",
+                offsetY:'-50%'
               },
             ]
           })
@@ -130,14 +155,43 @@ export default {
   font-size: 4rem;
   letter-spacing: 0.1em;
 }
-.img {
+.img_box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 330px;
+  height: 330px;
+  margin: auto;
   transition: 500ms;
   transform: translateY(150px);
   filter: grayscale(100%);
 }
-.active_img {
+.active_img_box {
+  position: relative;
   width: 430px;
+  height: 430px;
   filter: none;
+  margin: auto;
+}
+.img_bg {
+  max-width: 80%;
+  max-height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotate {
+  animation: spin 60s infinite linear;
 }
 </style>
