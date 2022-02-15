@@ -13,14 +13,16 @@
           style="cursor: pointer"
           v-for="item in blindBoxes"
           :key="item.key"
-          @click="()=>{
-            $router.push({
-              name:'mint_detail',
-              query:{
-                type: activeIndex
-              }
-            })
-          }"
+          @click="
+            () => {
+              $router.push({
+                name: 'mint_detail',
+                query: {
+                  info: JSON.stringify(blindBoxes[activeIndex]),
+                },
+              });
+            }
+          "
         >
           <div
             :class="
