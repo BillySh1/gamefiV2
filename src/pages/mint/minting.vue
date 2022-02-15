@@ -2,14 +2,15 @@
   <div class="container">
     <CommonPageHeader />
     <div class="content">
-      <Lottie :options="lottie_optins" />
+      <Lottie :options="lottie_options" />
     </div>
     <CommonPageFooter />
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import { reactive,toRefs,onBeforeMount,onMounted,computed} from 'vue'
+import {useRoute} from 'vue-router'
 import CommonPageFooter from '../../components/common_page_footer'
 import CommonPageHeader from '../../components/common_page_header'
 export default {
@@ -19,18 +20,26 @@ export default {
         CommonPageHeader
     },
       setup() {
+          const route = useRoute()
           const data = reactive({
-              lottie_optins:{
-                  animationData: require('../../assets/mint/type0.json')
+              info:'',
+              jsonData:'',
+
+          });
+        const lottie_options = computed(()=>{
+            return  {
+                  animationData: require(`../../assets/mint/type${data.info.key}.json`),
               }
-          })
+        })
           onBeforeMount(() => {
+              data.info = JSON.parse(route.query.info)
           })
           onMounted(() => {
           })
           const refData = toRefs(data);
           return {
               ...refData,
+              lottie_options
           }
 
       }

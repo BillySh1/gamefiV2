@@ -3,7 +3,16 @@
     <CommonPageHeader />
     <div class="content">
       <div class="left_c">
-        <img :src="info.img" />
+        <div class="img_box">
+          <img
+            :style="{
+              transform: `translate(${info.offsetX + ',' + info.offsetY})`,
+            }"
+            class="img_c"
+            :src="info.img"
+          />
+          <img class="rotate" style="width: 100%; heihgt: 100%" :src="info.bg" />
+        </div>
       </div>
       <div class="right_c">
         <div class="right_c_title">
@@ -46,11 +55,19 @@
             />
           </div>
 
-          <div class="right_c_btn" @click="()=>{
-            $router.push({
-              name:'minting',
-              query:{}
-            })}" >
+          <div
+            class="right_c_btn"
+            @click="
+              () => {
+                $router.push({
+                  name: 'minting',
+                  query: {
+                    info: JSON.stringify(info),
+                  },
+                });
+              }
+            "
+          >
             <img src="../../assets/mint/btn.svg" alt="" />
             <div class="richt_c_btn_value">购买</div>
           </div>
@@ -106,6 +123,34 @@ export default {
 }
 .left_c {
   width: 40%;
+}
+.img_box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 430px;
+  height: 430px;
+  margin: auto;
+}
+.img_c {
+  max-width: 80%;
+  max-height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotate {
+  animation: spin 60s infinite linear;
 }
 .right_c {
   width: 40%;
