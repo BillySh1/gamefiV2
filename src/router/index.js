@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routerHistory = createWebHashHistory();
 
-const _mint = import("../pages/mint/mint.vue");
+const mint = import("../pages/mint/mint.vue");
+const mint_detail = import('../pages/mint/mint_detail.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -13,8 +14,14 @@ const router = createRouter({
     },
     {
       path: "/mint",
-      component: _mint,
+      name:'mint',
+      component: mint,
     },
+    {
+      path:"/mintDetail",
+      name:'mint_detail',
+      component: mint_detail
+    }
   ],
 });
 
