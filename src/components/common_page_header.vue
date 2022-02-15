@@ -82,7 +82,7 @@ export default {
     rgba(61, 11, 11, 0.8125) 47.11%,
     rgba(39, 33, 33, 0) 96.81%
   );
-  font-size: 4rem;
+  font-size: 3em;
 }
 .page_title {
   position: relative;
@@ -104,7 +104,7 @@ export default {
 }
 .currency_item {
   background: #00000042;
-  margin: 0 3rem;
+  margin: 0 3em;
   display: flex;
   align-items: center;
 }
@@ -115,8 +115,8 @@ export default {
   transform: translateX(50%);
 }
 .icon {
-  width: 66px;
-  height: 66px;
-  margin-right: 24px;
+  width: 1.375em;
+  height: 1.375em;
+  margin-right: 0.5em;
 }
 </style>
