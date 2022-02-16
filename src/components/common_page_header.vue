@@ -72,7 +72,7 @@ export default {
   top: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background: linear-gradient(
     90.07deg,
     #420606 -0.03%,
@@ -82,12 +82,14 @@ export default {
     rgba(61, 11, 11, 0.8125) 47.11%,
     rgba(39, 33, 33, 0) 96.81%
   );
-  font-size: 3em;
+  font-size: 4rem;
 }
 .page_title {
+  width: fit-content;
   position: relative;
 }
 .title_badge {
+  max-width: 250%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,23 +97,26 @@ export default {
 }
 
 .currency_menu {
-  font-size: 0.35em;
+  font-size: 1.625rem;
   display: flex;
   align-items: center;
   font-family: SF Pro Text;
   font-style: italic;
   font-weight: 700;
+  -webkit-text-stroke: 0.86px solid #231008;
 }
 .currency_item {
   background: #00000042;
-  margin: 0 3em;
+  margin: 0 3rem;
   display: flex;
   align-items: center;
 }
 .img_left {
+  height: 3rem;
   transform: translateX(-50%);
 }
 .img_right {
+  height: 3rem;
   transform: translateX(50%);
 }
 .icon {

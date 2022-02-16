@@ -85,16 +85,15 @@ export default {
   bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .swap {
   display: flex;
   align-items: center;
   font-size: 2.5rem;
   font-weight: 400;
-  margin-left: 1rem;
   .text {
-    margin-left: 0.5rem;
+    margin-left: 2rem;
   }
 }
 .menu {
