@@ -41,14 +41,16 @@
           <div class="input_box">
             <img
               style="cursor: pointer"
+              class="img_action"
               src="../../assets/mint/minus.svg"
               alt=""
             />
             <div class="ipt_bg">
-              <img src="../../assets/mint/input.svg" alt="" />
+              <img class="ipt_img" src="../../assets/mint/input.svg" alt="" />
               <input v-model="buyValue" class="input" type="text" />
             </div>
             <img
+            class="img_action"
               style="cursor: pointer"
               src="../../assets/mint/add.svg"
               alt=""
@@ -68,7 +70,7 @@
               }
             "
           >
-            <img src="../../assets/mint/btn.svg" alt="" />
+            <img class="btn_img" src="../../assets/mint/btn.svg" alt="" />
             <div class="richt_c_btn_value">购买</div>
           </div>
         </div>
@@ -129,13 +131,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 430px;
-  height: 430px;
+  width: 50rem;
+  height: 50rem;
   margin: auto;
 }
 .img_c {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 70%;
+  max-height: 70%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -158,7 +160,7 @@ export default {
 .right_c_title {
   display: flex;
   align-items: center;
-  font-size: 3.75rem;
+  font-size: 4rem;
 }
 .right_c_title_value {
   position: relative;
@@ -166,6 +168,7 @@ export default {
   align-items: center;
 }
 .right_c_title_badge {
+  max-width: 200%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -176,12 +179,12 @@ export default {
   align-items: center;
   margin-left: 6rem;
   font-family: zihun129hao-baihexinfengti;
-  font-size: 4rem;
+  font-size: 5rem;
   letter-spacing: 0.1em;
 }
 .right_c_content {
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 2rem;
+  font-size: 3rem;
   text-align: left;
   color: #ffffff;
   margin: 2.5rem 0;
@@ -189,12 +192,19 @@ export default {
 .right_c_action {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .input_box {
   display: flex;
   align-items: center;
-  transform: scale(0.8);
+  margin-right: 6rem;
+  .img_action{
+    width: 4rem;
+  }
+  .ipt_img{
+    margin: 0 2rem;
+    width: 25rem;
+  }
 }
 .ipt_bg {
   position: relative;
@@ -210,13 +220,16 @@ export default {
   background: transparent;
   border: none;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 5rem;
   color: #f2dbb9;
 }
 .right_c_btn {
   position: relative;
   transform: scale(0.8);
   cursor: pointer;
+  .btn_img{
+    max-width: 20rem;
+  }
 }
 .richt_c_btn_value {
   position: absolute;
@@ -224,6 +237,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 3rem;
+  font-size: 4rem;
 }
 </style>

@@ -69,7 +69,7 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  top: 10px;
+  top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-around;

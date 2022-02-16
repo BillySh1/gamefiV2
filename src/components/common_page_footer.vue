@@ -105,9 +105,9 @@ export default {
   justify-content: center;
   .menu_item {
     position: relative;
-    margin: 0 1rem;
+    margin: 0 3rem;
     .img{
-      height: 10rem;
+      height: 12rem;
     }
     .text {
       position: absolute;
