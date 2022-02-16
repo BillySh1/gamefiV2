@@ -1,11 +1,6 @@
 <template>
   <div class="box">
-    <div class="wallet_zone">
-      <div class="chain_icon" >
-        <img :src="chainIcon" alt="">
-      </div>
-      <div class="wallet_address"> 0xeded4c……91e3 </div>
-    </div>
+    <InjectWallet />
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
         <img class="img_left" :src="item.img" alt="" />
@@ -25,13 +20,12 @@
 </template>
 
 <script>
-import { reactive, toRefs, onMounted, computed } from "vue";
+import { reactive, toRefs, onMounted } from "vue";
+import InjectWallet from './inject_wallet.vue'
 export default {
   name: "common_page_header",
+  components:{InjectWallet},
   setup() {
-    const chainIcon = computed(()=>{
-      return require('../assets/index/chainIcon/bsc.svg')
-    })
     const data = reactive({
       list: [
         {
@@ -66,7 +60,6 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
-      chainIcon
     };
   },
 };
@@ -75,52 +68,40 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  top: 10px;
+  top: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  font-size: 4em;
-}
-.wallet_address{
-  font-size: 1rem;
-}
-.chain_icon{
-  border-radius: 100%;
-  background:rgba(0, 0, 0, 0.5)
-}
-.page_title {
-  position: relative;
-}
-.title_badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: space-around;
+  font-size: 4rem;
 }
 
+
 .currency_menu {
-  font-size: 22.4px;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   font-family: SF Pro Text;
   font-style: italic;
   font-weight: 700;
+  -webkit-text-stroke: 0.86px solid #231008;
 }
 .currency_item {
   background: #00000042;
-  margin: 0 48px;
+  margin: 0 2.5rem;
   display: flex;
   align-items: center;
 }
 .img_left {
+  height: 4rem;
   transform: translateX(-50%);
 }
 .img_right {
+  height: 4rem;
   transform: translateX(50%);
 }
 .icon {
-  width: 66px;
-  height: 66px;
-  margin-right: 24px;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
 }
 </style>

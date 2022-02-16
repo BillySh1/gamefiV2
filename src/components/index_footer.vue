@@ -1,19 +1,19 @@
 <template>
   <div class="box">
     <div class="swap">
-      <img src="../assets/common/mmc_logo.svg" alt="" />
+      <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
     <div class="menu">
       <div v-for="item in menuList" :key="item.key" class="menu_item">
-        <img :src="item.img" alt="" />
+        <img class="img" :src="item.img" alt="" />
         <div class="text">
           {{ item.text }}
         </div>
       </div>
     </div>
     <div class="call">
-      <img src="../assets/common/call.png" alt="" />
+      <img class="img" src="../assets/common/call.png" alt="" />
     </div>
   </div>
 </template>
@@ -82,29 +82,33 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .swap {
   display: flex;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: 400;
-  margin-left: 1rem;
   .text {
-    margin-left: 0.5rem;
+    margin-left: 2rem;
+  }
+  .img {
+    width: 6rem;
   }
 }
 .menu {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   .menu_item {
     position: relative;
-    margin: 0 1rem;
+    margin: 0 3rem;
+    .img {
+      height: 12rem;
+    }
     .text {
       position: absolute;
       right: 0;
@@ -116,5 +120,8 @@ export default {
 }
 .call {
   margin-right: 1rem;
+  .img {
+    height: 8rem;
+  }
 }
 </style>

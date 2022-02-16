@@ -144,7 +144,7 @@ export default {
   font-family: FZYanZhenQingKaiShuJF;
   font-size: 3rem;
   color: #a5a5a5;
-  transform: translateY(100px);
+  transform: translateY(5rem);
   transition: 500ms;
 }
 .swiper_title_active {
