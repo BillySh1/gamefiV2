@@ -97,7 +97,7 @@ export default {
 }
 
 .currency_menu {
-  font-size: 1.625rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   font-family: SF Pro Text;
@@ -107,21 +107,21 @@ export default {
 }
 .currency_item {
   background: #00000042;
-  margin: 0 3rem;
+  margin: 0 4rem;
   display: flex;
   align-items: center;
 }
 .img_left {
-  height: 3rem;
+  height: 4rem;
   transform: translateX(-50%);
 }
 .img_right {
-  height: 3rem;
+  height: 4rem;
   transform: translateX(50%);
 }
 .icon {
-  width: 1.375em;
-  height: 1.375em;
+  width: 1.5em;
+  height: 1.5em;
   margin-right: 0.5em;
 }
 </style>

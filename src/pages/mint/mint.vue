@@ -5,7 +5,6 @@
       <Swiper
         :slidesPerView="3"
         :loop="true"
-        :spaceBetween="50"
         :centeredSlides="true"
         @slideChange="onSlideChange"
       >
@@ -47,7 +46,11 @@
           </div>
 
           <div class="price_box" v-show="activeIndex == item.key">
-            <img src="../../assets/mint/price_icon.svg" alt="" />
+            <img
+              class="price_icon"
+              src="../../assets/mint/price_icon.svg"
+              alt=""
+            />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
               item.price
             }}</span>
@@ -160,17 +163,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 330px;
-  height: 330px;
+  width: 35rem;
+  height: 35rem;
   margin: auto;
   transition: 500ms;
-  transform: translateY(150px);
+  transform: translateY(10rem);
   filter: grayscale(100%);
 }
 .active_img_box {
   position: relative;
-  width: 430px;
-  height: 430px;
+  width: 40rem;
+  height: 40rem;
   filter: none;
   margin: auto;
 }
@@ -181,6 +184,14 @@ export default {
   top: 50%;
   left: 50%;
   z-index: 99;
+}
+.price_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.price_icon {
+  width: 4rem;
 }
 
 @keyframes spin {
