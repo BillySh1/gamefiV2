@@ -1,8 +1,10 @@
 <template>
   <div class="box">
-    <div class="page_title">
-      <img class="title_badge" src="../assets/common/active_title.png" alt="" />
-      招贤纳士
+    <div class="wallet_zone">
+      <div class="chain_icon" >
+        <img :src="chainIcon" alt="">
+      </div>
+      <div class="wallet_address"> 0xeded4c……91e3 </div>
     </div>
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
@@ -23,10 +25,13 @@
 </template>
 
 <script>
-import { reactive, toRefs, onMounted } from "vue";
+import { reactive, toRefs, onMounted, computed } from "vue";
 export default {
   name: "common_page_header",
   setup() {
+    const chainIcon = computed(()=>{
+      return require('../assets/index/chainIcon/bsc.svg')
+    })
     const data = reactive({
       list: [
         {
@@ -61,6 +66,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      chainIcon
     };
   },
 };
@@ -73,16 +79,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background: linear-gradient(
-    90.07deg,
-    #420606 -0.03%,
-    rgba(63, 10, 10, 0.956468) 12.78%,
-    rgba(102, 30, 30, 0.932711) 17.89%,
-    rgba(71, 13, 13, 0.91001) 24.48%,
-    rgba(61, 11, 11, 0.8125) 47.11%,
-    rgba(39, 33, 33, 0) 96.81%
-  );
-  font-size: 64px;
+  font-size: 4em;
+}
+.wallet_address{
+  font-size: 1rem;
+}
+.chain_icon{
+  border-radius: 100%;
+  background:rgba(0, 0, 0, 0.5)
 }
 .page_title {
   position: relative;

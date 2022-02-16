@@ -1,11 +1,20 @@
 <template>
-  <div></div>
+  <div class="container">
+      <IndexHeader/>
+      <IndexFooter/>
+  </div>
 </template>
 
 <script lang='js'>
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import IndexHeader from '../../components/index_header'
+import IndexFooter from '../../components/index_footer'
 export default {
-    name: '',
+    name: 'home',
+    components:{
+        IndexHeader,
+        IndexFooter
+    },
       setup() {
           console.log('1-开始创建组件-setup')
           const data = reactive({
@@ -26,4 +35,11 @@ export default {
   };
 </script>
 <style lang='less' scoped>
+.container{
+    width: 100%;
+    height: 100%;
+    background: url('../../assets/index/home_bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 </style>

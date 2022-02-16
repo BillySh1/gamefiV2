@@ -5,13 +5,14 @@ const routerHistory = createWebHashHistory();
 const mint = import("../pages/mint/mint.vue");
 const mint_detail = import('../pages/mint/mint_detail.vue');
 const minting = import('../pages/mint/minting.vue')
+const index = import('../pages/index/index.vue')
 
 const router = createRouter({
   history: routerHistory,
   routes: [
     {
       path: "/",
-      redirect: "/mint",
+      redirect: "/home",
     },
     {
       path: "/mint",
@@ -27,6 +28,11 @@ const router = createRouter({
       path:'/mintSuccess',
       name:'minting',
       component:minting
+    },
+    {
+      path:'/home',
+      name:'home',
+      component: index
     }
   ],
 });
