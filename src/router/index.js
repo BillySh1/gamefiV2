@@ -3,12 +3,13 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routerHistory = createWebHashHistory();
 
 const mint = import("../pages/mint/mint.vue");
-const mint_detail = import('../pages/mint/mint_detail.vue');
-const minting = import('../pages/mint/minting.vue')
-const index = import('../pages/index/index.vue')
+const mint_detail = import("../pages/mint/mint_detail.vue");
+const minting = import("../pages/mint/minting.vue");
+const index = import("../pages/index/index.vue");
 
 const router = createRouter({
   history: routerHistory,
+  base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
@@ -16,24 +17,24 @@ const router = createRouter({
     },
     {
       path: "/mint",
-      name:'mint',
+      name: "mint",
       component: mint,
     },
     {
-      path:"/mintDetail",
-      name:'mint_detail',
-      component: mint_detail
+      path: "/mintDetail",
+      name: "mint_detail",
+      component: mint_detail,
     },
     {
-      path:'/mintSuccess',
-      name:'minting',
-      component:minting
+      path: "/mintSuccess",
+      name: "minting",
+      component: minting,
     },
     {
-      path:'/home',
-      name:'home',
-      component: index
-    }
+      path: "/home",
+      name: "home",
+      component: index,
+    },
   ],
 });
 
