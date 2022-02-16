@@ -1,6 +1,9 @@
 <template>
   <div class="box">
+    <div class="wallet_box">
     <InjectWallet />
+
+    </div>
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
         <img class="img_left" :src="item.img" alt="" />
@@ -71,10 +74,12 @@ export default {
   top: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 4rem;
 }
-
+.wallet_box{
+  margin-left: 1rem;
+}
 
 .currency_menu {
   font-size: 2rem;

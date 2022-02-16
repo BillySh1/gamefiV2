@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="call">
+    <div class="call" @click="()=>$router.push({name:'mint'})" >
       <img class="img" src="../assets/common/call.png" alt="" />
     </div>
   </div>
@@ -82,20 +82,21 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .swap {
   display: flex;
   align-items: center;
   font-size: 4rem;
   font-weight: 400;
+  margin-left: 2rem;
   .text {
     margin-left: 2rem;
   }
-  .img{
+  .img {
     width: 6rem;
   }
 }
@@ -106,21 +107,21 @@ export default {
   .menu_item {
     position: relative;
     margin: 0 3rem;
-    .img{
+    .img {
       height: 12rem;
     }
     .text {
       position: absolute;
       right: 0;
       bottom: 0;
-      font-size: 2rem;
+      font-size: 3.5rem;
       font-weight: 400;
     }
   }
 }
 .call {
-  margin-right: 1rem;
-  .img{
+  margin-right: 8rem;
+  .img {
     height: 8rem;
   }
 }

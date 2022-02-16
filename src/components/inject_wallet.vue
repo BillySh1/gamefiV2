@@ -52,10 +52,10 @@ export default {
   }
 }
 .wallet_address {
-  padding: 1rem 2rem;
+  padding: 1rem 6rem;
   background: rgba(0, 0, 0, 0.7);
   font-family: Roboto;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border-radius: 10rem;
 }
 </style>

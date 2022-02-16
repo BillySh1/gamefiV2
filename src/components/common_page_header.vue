@@ -119,6 +119,9 @@ export default {
   height: 4rem;
   transform: translateX(50%);
 }
+.icon_box{
+  place-self: flex-end;
+}
 .icon {
   width: 1.5em;
   height: 1.5em;
