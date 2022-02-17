@@ -106,15 +106,15 @@ export default {
   justify-content: center;
   .menu_item {
     position: relative;
-    margin: 0 3rem;
+    margin: 0 2.5rem;
     .img {
-      height: 12rem;
+      height: 10rem;
     }
     .text {
       position: absolute;
       right: 0;
       bottom: 0;
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-weight: 400;
     }
   }

@@ -18,6 +18,37 @@
           />
         </div>
       </div>
+      <div class="float_left_box">
+        <div class="float_left_item">
+          <InjectIcon
+            style="margin-left: 1rem"
+            :src="require('../../assets/index/airdrop.svg')"
+            text="空投"
+          />
+        </div>
+        <div class="leader_board_box">
+          <img src="../../assets/index/Leader_board.svg" alt="" />
+          <div class="leader_board_text">排行榜</div>
+        </div>
+      </div>
+
+      <div class="float_action_buttons">
+        <img class="up" src="../../assets/index/ac_bottom.svg" alt="" />
+        <div class="actions_inner">
+          <div class="left">
+            <img src="../../assets/index/ac_left.svg" alt="" />
+            <div class="text">群英会战</div>
+          </div>
+          <div class="middle">
+            <img src="../../assets/index/ac_middle.svg" alt="" />
+            <div class="text">排位赛</div>
+          </div>
+          <div class="right">
+            <img src="../../assets/index/ac_right.svg" alt="" />
+            <div class="text">攻城略地</div>
+          </div>
+        </div>
+      </div>
     </div>
     <CommonPageFooter />
   </div>
@@ -73,5 +104,79 @@ export default {
   position: absolute;
   right: 1rem;
   top: 12rem;
+}
+
+.float_left_box {
+  position: absolute;
+  left: 0;
+  top: 30%;
+  .leader_board_box {
+    position: relative;
+    img {
+      width: 10rem;
+    }
+    .leader_board_text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6rem;
+      font-size: 5.5rem;
+      font-weight: 400;
+      letter-spacing: 1.5rem;
+      -webkit-text-stroke: 0.5px #231008;
+    }
+  }
+}
+.float_action_buttons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-65%);
+  bottom: 10%;
+  .up {
+    width: 80rem;
+  }
+  .actions_inner {
+    display: flex;
+    margin-top: 4rem;
+    font-family: zihun143-zhengkuchaojihei;
+    font-size: 3.5rem;
+    text-align: center;
+
+    .left {
+      position: relative;
+      transform: translateX(5rem);
+      img {
+        width: 40rem;
+      }
+    }
+    .middle {
+      position: relative;
+      transform: translateY(-4rem);
+      font-size: 5.5rem;
+      letter-spacing: 2rem;
+      img {
+        width: 50rem;
+      }
+      .text {
+        transform: translate(-50%, -75%);
+      }
+    }
+    .right {
+      position: relative;
+      transform: translateX(-5rem);
+      img {
+        width: 40rem;
+      }
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      letter-spacing: 1rem;
+      -webkit-text-stroke: 0.5px #231008;
+    }
+  }
 }
 </style>

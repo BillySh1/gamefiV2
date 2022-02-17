@@ -31,6 +31,7 @@ export default {
   position: relative;
   .img {
     height: 10rem;
+    width: 10rem;
   }
   .text {
     position: absolute;
