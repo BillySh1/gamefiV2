@@ -140,7 +140,7 @@ export default {
     display: flex;
     margin-top: 4rem;
     font-family: zihun143-zhengkuchaojihei;
-    font-size: 3.5rem;
+    font-size: 4rem;
     text-align: center;
 
     .left {

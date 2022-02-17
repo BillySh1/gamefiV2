@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="call" @click="()=>$router.push({name:'mint'})" >
+    <div class="call" @click="() => $router.push({ name: 'mint' })">
       <img class="img" src="../assets/common/call.png" alt="" />
     </div>
   </div>
@@ -82,10 +82,26 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  bottom: 1rem;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: linear-gradient(
+    180deg,
+    rgba(45, 40, 40, 0) -27.5%,
+    #2e1a09 172.5%
+  );
+
+  border-image: linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0) 1.88%,
+      rgba(255, 249, 227, 0.44) 26.35%,
+      #fff9e3 41.35%,
+      #fff9e3 90.21%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    1;
+  border-top: 1px solid;
 }
 .swap {
   display: flex;
@@ -104,8 +120,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 9.16%,
+    #fff9e3 18.24%,
+    #ffffff 55.22%,
+    #fff9e3 85.85%,
+    rgba(255, 255, 255, 0) 94.35%
+  );
+  border-image-slice: 1;
+  transform: skewX(-15deg);
+
   .menu_item {
     position: relative;
+    transform: skewX(15deg);
+    cursor: pointer;
     margin: 0 2.5rem;
     .img {
       height: 10rem;
@@ -121,6 +151,7 @@ export default {
 }
 .call {
   margin-right: 8rem;
+  cursor: pointer;
   .img {
     height: 8rem;
   }
