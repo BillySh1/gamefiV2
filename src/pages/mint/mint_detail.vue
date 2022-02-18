@@ -25,7 +25,7 @@
           </div>
           <div class="right_c_price">
             <img
-              style="margin-right: 4rem"
+              style="margin-right: 2rem"
               src="../../assets/mint/price_icon.svg"
             />
             <span>{{ info.price }}</span>
@@ -131,8 +131,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50rem;
-  height: 50rem;
+  width: 25rem;
+  height: 25rem;
   margin: auto;
 }
 .img_c {
@@ -160,12 +160,12 @@ export default {
 .right_c_title {
   display: flex;
   align-items: center;
-  font-size: 4rem;
 }
 .right_c_title_value {
   position: relative;
   display: flex;
   align-items: center;
+  font-size: 1.5rem;
 }
 .right_c_title_badge {
   max-width: 200%;
@@ -177,17 +177,17 @@ export default {
 .right_c_price {
   display: flex;
   align-items: center;
-  margin-left: 6rem;
+  margin-left: 3rem;
   font-family: zihun129hao-baihexinfengti;
-  font-size: 5rem;
+  font-size: 2.5rem;
   letter-spacing: 0.1em;
 }
 .right_c_content {
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 3rem;
+  font-size: 1.5rem;
   text-align: left;
   color: #ffffff;
-  margin: 2.5rem 0;
+  margin: 1rem 0;
 }
 .right_c_action {
   display: flex;
@@ -197,18 +197,18 @@ export default {
 .input_box {
   display: flex;
   align-items: center;
-  margin-right: 6rem;
+  margin-right: 3rem;
   .img_action{
-    width: 4rem;
+    width: 2rem;
   }
   .ipt_img{
-    margin: 0 2rem;
-    width: 25rem;
+    margin: 0 1rem;
+    width: 12.5rem;
   }
 }
 .ipt_bg {
   position: relative;
-  margin: 0 2rem;
+  margin: 0 1rem;
 }
 .input {
   width: 60%;
@@ -220,7 +220,7 @@ export default {
   background: transparent;
   border: none;
   text-align: center;
-  font-size: 5rem;
+  font-size: 2.5rem;
   color: #f2dbb9;
 }
 .right_c_btn {
@@ -228,7 +228,7 @@ export default {
   transform: scale(0.8);
   cursor: pointer;
   .btn_img{
-    max-width: 20rem;
+    max-width: 10rem;
   }
 }
 .richt_c_btn_value {
@@ -237,6 +237,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 4rem;
+  font-size: 2rem;
 }
 </style>

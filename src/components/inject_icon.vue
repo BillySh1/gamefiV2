@@ -30,14 +30,14 @@ export default {
 .box {
   position: relative;
   .img {
-    height: 10rem;
-    width: 10rem;
+    height: 5rem;
+    width: 5rem;
   }
   .text {
     position: absolute;
     right: 0;
     bottom: 0;
-    font-size: 3.5rem;
+    font-size: 1.5rem;
     font-weight: 400;
   }
 }

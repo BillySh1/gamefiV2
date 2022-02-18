@@ -112,8 +112,8 @@ export default {
 }
 .float_right_box {
   position: absolute;
-  right: 1rem;
-  top: 12rem;
+  right: 0.5rem;
+  top: 6rem;
 }
 
 .float_left_box {
@@ -124,17 +124,17 @@ export default {
     cursor: pointer;
     position: relative;
     img {
-      width: 10rem;
+      width: 5rem;
     }
     .leader_board_text {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 6rem;
-      font-size: 5.5rem;
+      width: 3rem;
+      font-size: 2.5rem;
       font-weight: 400;
-      letter-spacing: 1.5rem;
+      letter-spacing: 0.5rem;
       -webkit-text-stroke: 0.5px #231008;
     }
   }
@@ -145,29 +145,29 @@ export default {
   transform: translateX(-65%);
   bottom: 10%;
   .up {
-    width: 80rem;
+    width: 40rem;
   }
   .actions_inner {
     display: flex;
-    margin-top: 4rem;
+    margin-top: 2rem;
     font-family: zihun143-zhengkuchaojihei;
-    font-size: 4rem;
+    font-size: 2rem;
     text-align: center;
 
     .left {
       position: relative;
-      transform: translateX(5rem);
+      transform: translateX(2.5rem);
       img {
-        width: 40rem;
+        width: 20rem;
       }
     }
     .middle {
       position: relative;
-      transform: translateY(-4rem);
-      font-size: 5.5rem;
+      transform: translateY(-2rem);
+      font-size: 2.5rem;
       letter-spacing: 2rem;
       img {
-        width: 50rem;
+        width: 25rem;
       }
       .text {
         transform: translate(-50%, -75%);
@@ -175,9 +175,9 @@ export default {
     }
     .right {
       position: relative;
-      transform: translateX(-5rem);
+      transform: translateX(-2.5rem);
       img {
-        width: 40rem;
+        width: 20rem;
       }
     }
     .text {
@@ -185,7 +185,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      letter-spacing: 1rem;
+      letter-spacing: 0.5rem;
       -webkit-text-stroke: 0.5px #231008;
     }
   }

@@ -142,20 +142,20 @@ export default {
 
 .swiper_title {
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 3rem;
+  font-size: 1.5rem;
   color: #a5a5a5;
-  transform: translateY(5rem);
+  transform: translateY(2.5rem);
   transition: 500ms;
 }
 .swiper_title_active {
   font-family: FZYanZhenQingKaiShuJF;
-  font-size: 3.75rem;
+  font-size: 1.75rem;
   color: #f2dbb9;
 }
 
 .swiper_price_value {
   font-family: zihun129hao-baihexinfengti;
-  font-size: 4rem;
+  font-size: 2rem;
   letter-spacing: 0.1em;
 }
 .img_box {
@@ -163,17 +163,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35rem;
-  height: 35rem;
+  width: 17rem;
+  height: 17rem;
   margin: auto;
   transition: 500ms;
-  transform: translateY(10rem);
+  transform: translateY(5rem);
   filter: grayscale(100%);
 }
 .active_img_box {
   position: relative;
-  width: 40rem;
-  height: 40rem;
+  width: 20rem;
+  height: 20rem;
   filter: none;
   margin: auto;
 }
@@ -191,7 +191,7 @@ export default {
   justify-content: center;
 }
 .price_icon {
-  width: 4rem;
+  width: 2rem;
 }
 
 @keyframes spin {

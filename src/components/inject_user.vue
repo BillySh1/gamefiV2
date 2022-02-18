@@ -44,16 +44,16 @@ export default {
 <style lang="less" scoped>
 .box {
   position: absolute;
-  left: 2rem;
-  top: 10rem;
+  left: 1rem;
+  top: 5rem;
 }
 .inner {
   display: flex;
   align-items: center;
 }
 .avatar_box {
-  width: 12rem;
-  height: 12rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 0.5rem;
   border: solid 1.5px transparent;
   background-image: linear-gradient(#fee, #fee),
@@ -67,7 +67,7 @@ export default {
   }
 }
 .info_box {
-  height: 12rem;
+  height: 6rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -77,15 +77,14 @@ export default {
   text-align: center;
   z-index: 1;
   width: auto;
-  height: 6rem;
-  margin-bottom: 1rem;
+  height: 3rem;
+  margin-bottom: 0.5rem;
   img {
     height: 100%;
   }
   .power_value {
     white-space: nowrap;
     position: absolute;
-    font-size: 2.5rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -93,14 +92,14 @@ export default {
 }
 .title_box {
   position: relative;
-  height: 5rem;
+  height: 2.5rem;
   img {
     height: 100%;
   }
   .title_value {
     white-space: nowrap;
     position: absolute;
-    font-size: 2rem;
+    font-size: 1rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
