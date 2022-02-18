@@ -1,8 +1,11 @@
 <template>
-  <div class="box">
-    <div class="page_title">
+  <div :class="$route.name == 'home' ? 'box' : 'box colored_box'">
+    <div v-if="$route.name == 'home'" class="wallet_box">
+      <InjectWallet />
+    </div>
+    <div v-else class="page_title">
       <img class="title_badge" src="../assets/common/active_title.png" alt="" />
-      {{title}}
+      {{ title }}
     </div>
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
@@ -24,9 +27,13 @@
 
 <script>
 import { reactive, toRefs, onMounted } from "vue";
+import InjectWallet from "./inject_wallet.vue";
 export default {
   name: "common_page_header",
-  props:['title'],
+  props: ["title"],
+  components: {
+    InjectWallet,
+  },
   setup() {
     const data = reactive({
       list: [
@@ -73,7 +80,10 @@ export default {
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  font-size: 4rem;
+}
+.colored_box {
   background: linear-gradient(
     90.07deg,
     #420606 -0.03%,
@@ -83,7 +93,10 @@ export default {
     rgba(61, 11, 11, 0.8125) 47.11%,
     rgba(39, 33, 33, 0) 96.81%
   );
-  font-size: 4rem;
+  justify-content: space-around;
+}
+.wallet_box {
+  margin-left: 1rem;
 }
 .page_title {
   width: fit-content;
@@ -120,7 +133,7 @@ export default {
   height: 4rem;
   transform: translateX(50%);
 }
-.icon_box{
+.icon_box {
   place-self: flex-end;
 }
 .icon {

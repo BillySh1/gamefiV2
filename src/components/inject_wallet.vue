@@ -55,7 +55,7 @@ export default {
   padding: 1rem 6rem;
   background: rgba(0, 0, 0, 0.7);
   font-family: Roboto;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border-radius: 10rem;
 }
 </style>

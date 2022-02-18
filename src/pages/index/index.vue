@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <IndexHeader />
+    <CommonPageHeader />
     <div class="content">
       <InjectUser />
       <div class="float_right_box">
-        <div class="float_right_item">
+        <div class="float_item" @click="jump('invite')">
           <InjectIcon
             :src="require('../../assets/index/invite.svg')"
             text="邀请"
             style="margin-bottom: 2rem"
           />
         </div>
-        <div class="float_right_item">
+        <div class="float_item" @click="jump('title')" >
           <InjectIcon
             :src="require('../../assets/index/title.svg')"
             text="称号"
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="float_left_box">
-        <div class="float_left_item">
+        <div class="float_item" @click="jump('airdrop')" >
           <InjectIcon
             style="margin-left: 1rem"
             :src="require('../../assets/index/airdrop.svg')"
@@ -57,14 +57,14 @@
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
 import {useRouter} from 'vue-router'
-import IndexHeader from '../../components/index_header'
+import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
 import InjectUser from '../../components/inject_user'
 import InjectIcon from '../../components/inject_icon'
 export default {
     name: 'home',
     components:{
-        IndexHeader,
+        CommonPageHeader,
         CommonPageFooter,
         InjectUser,
         InjectIcon
@@ -106,6 +106,9 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+}
+.float_item{
+  cursor: pointer;
 }
 .float_right_box {
   position: absolute;

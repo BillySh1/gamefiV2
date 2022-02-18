@@ -7,7 +7,7 @@
     >
       <div class="text">主页</div>
     </div>
-    <div class="swap">
+    <div class="swap" @click="$router.push({name:'swap'})" >
       <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
@@ -144,6 +144,7 @@ export default {
   }
 }
 .swap {
+  cursor: pointer;
   display: flex;
   align-items: center;
   font-size: 4rem;
