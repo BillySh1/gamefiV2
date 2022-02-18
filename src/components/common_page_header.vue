@@ -2,7 +2,7 @@
   <div class="box">
     <div class="page_title">
       <img class="title_badge" src="../assets/common/active_title.png" alt="" />
-      招贤纳士
+      {{title}}
     </div>
     <div class="currency_menu">
       <div class="currency_item" v-for="item in list" :key="item.key">
@@ -26,6 +26,7 @@
 import { reactive, toRefs, onMounted } from "vue";
 export default {
   name: "common_page_header",
+  props:['title'],
   setup() {
     const data = reactive({
       list: [
@@ -69,7 +70,7 @@ export default {
 .box {
   width: 100%;
   position: absolute;
-  top: 1rem;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;

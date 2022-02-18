@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <CommonPageHeader />
+    <CommonPageHeader title="招贤纳士" />
     <div class="content">
       <Swiper
         :slidesPerView="3"

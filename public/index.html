@@ -7,11 +7,11 @@
 
     <!--Enable Safari and Chrome-android to add it to the main screen-->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -36,7 +36,6 @@
   </body>
   <style>
     html {
-      
       font-size: 1vmin;
     }
     body {
@@ -45,7 +44,6 @@
       height: 100%;
       padding: 0;
       margin: 0;
-      background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
     }
     #app {
       width: 100vw;
@@ -57,6 +55,7 @@
       color: #f2dbb9;
       overflow: hidden;
       z-index: 0;
+      background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
     }
     @media screen and (orientation: portrait) {
       #app {

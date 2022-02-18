@@ -26,7 +26,7 @@
             text="空投"
           />
         </div>
-        <div class="leader_board_box">
+        <div class="leader_board_box" @click="jump('leader')" >
           <img src="../../assets/index/Leader_board.svg" alt="" />
           <div class="leader_board_text">排行榜</div>
         </div>
@@ -56,6 +56,7 @@
 
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import {useRouter} from 'vue-router'
 import IndexHeader from '../../components/index_header'
 import CommonPageFooter from '../../components/common_page_footer'
 import InjectUser from '../../components/inject_user'
@@ -69,7 +70,7 @@ export default {
         InjectIcon
     },
       setup() {
-          console.log('1-开始创建组件-setup')
+        const router = useRouter()
           const data = reactive({
 
           })
@@ -80,8 +81,14 @@ export default {
               console.log('3.-组件挂载到页面之后执行-------onMounted')
           })
           const refData = toRefs(data);
+          const jump = (name)=>{
+            router.push({
+              name:name
+            })
+          }
           return {
               ...refData,
+              jump
           }
 
       }
@@ -111,6 +118,7 @@ export default {
   left: 0;
   top: 30%;
   .leader_board_box {
+    cursor: pointer;
     position: relative;
     img {
       width: 10rem;

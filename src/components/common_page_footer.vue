@@ -1,11 +1,23 @@
 <template>
   <div class="box">
+    <div
+      class="back_to_home"
+      v-show="$route.name != 'home'"
+      @click="() => $router.push({ name: 'home' })"
+    >
+      <div class="text">主页</div>
+    </div>
     <div class="swap">
       <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
     <div class="menu">
-      <div v-for="item in menuList" :key="item.key" class="menu_item">
+      <div
+        v-for="item in menuList"
+        :key="item.key"
+        class="menu_item"
+        @click="() => $router.push({ name: item.href })"
+      >
         <img class="img" :src="item.img" alt="" />
         <div class="text">
           {{ item.text }}
@@ -20,51 +32,54 @@
 
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import {useRoute} from 'vue-router'
 export default {
-    name: '',
+    name: 'common_page_footer',
       setup() {
+        const route = useRoute()
           console.log('1-开始创建组件-setup')
           const data = reactive({
               menuList:[
                   {
                       key:'pack',
                       img:require('../assets/common/pack.svg'),
-                      href:'',
+                      href:'pack',
                       text:'背包'
                   },
                   {
                       key:'market',
                       img:require('../assets/common/market.svg'),
-                      href:'',
+                      href:'market',
                       text:'市场'
                   },
                   {
                       key:'exchange',
                       img:require('../assets/common/exchange.svg'),
-                      href:'',
+                      href:'exchange',
                       text:'兑换'
                   },
                   {
                       key:'store',
                       img:require('../assets/common/store.svg'),
-                      href:'',
+                      href:'store',
                       text:'战备'
                   },
                   {
                       key:'reborn',
                       img:require('../assets/common/reborn.svg'),
-                      href:'',
+                      href:'reborn',
                       text:'重生'
                   },
                   {
                       key:'mix',
                       img:require('../assets/common/mix.svg'),
-                      href:'',
+                      href:'mix',
                       text:'进阶'
                   },
               ]
           })
           onBeforeMount(() => {
+            console.log(route.name,'sss')
               console.log('2.组件挂载页面之前执行----onBeforeMount')
           })
           onMounted(() => {
@@ -91,7 +106,6 @@ export default {
     rgba(45, 40, 40, 0) -27.5%,
     #2e1a09 172.5%
   );
-
   border-image: linear-gradient(
       270deg,
       rgba(255, 255, 255, 0) 1.88%,
@@ -102,6 +116,32 @@ export default {
     )
     1;
   border-top: 1px solid;
+}
+.back_to_home {
+  cursor: pointer;
+  height: 10rem;
+  border-right: 1px solid;
+  border-image-source: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 9.16%,
+    #fff9e3 18.24%,
+    #ffffff 55.22%,
+    #fff9e3 85.85%,
+    rgba(255, 255, 255, 0) 94.35%
+  );
+  border-image-slice: 1;
+  transform: skewX(-15deg);
+  display: flex;
+  align-items: center;
+  .text {
+    background: linear-gradient(127.89deg, #bf9c68 28.12%, #946e36 66.75%);
+    background-clip: text;
+    font-size: 4rem;
+    color: transparent;
+    transform: skewX(15deg);
+    margin-left: 4rem;
+    margin-right: 8rem;
+  }
 }
 .swap {
   display: flex;
