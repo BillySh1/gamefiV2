@@ -14,9 +14,10 @@ const mix = import("../pages/mix/mix.vue");
 const reborn = import("../pages/reborn/reborn.vue");
 const leader_board = import("../pages/leader_board/board.vue");
 const swap = import("../pages/swap/swap.vue");
-const invite = import('../pages/invite/invite.vue')
-const airdrop = import('../pages/airdrop/airdrop.vue')
-const title = import('../pages/title/title.vue')
+const invite = import("../pages/invite/invite.vue");
+const airdrop = import("../pages/airdrop/airdrop.vue");
+const title = import("../pages/title/title.vue");
+const notice = import("../pages/notice/notice.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -87,20 +88,25 @@ const router = createRouter({
       component: swap,
     },
     {
-      path:'/invite',
-      name:'invite',
-      component: invite
+      path: "/invite",
+      name: "invite",
+      component: invite,
     },
     {
-      path:'/airdrop',
-      name:'airdrop',
-      component: airdrop
+      path: "/airdrop",
+      name: "airdrop",
+      component: airdrop,
     },
     {
-      path:'/title',
-      name:'title',
-      component:title
-    }
+      path: "/title",
+      name: "title",
+      component: title,
+    },
+    {
+      path: "/notice",
+      name: "notice",
+      component: notice,
+    },
   ],
 });
 

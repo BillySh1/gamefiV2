@@ -37,14 +37,14 @@ export default {
 }
 .chain_icon_box {
   position: relative;
-  width: 6rem;
-  height: 6rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 100%;
   background: black;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   img {
-    width: 4rem;
-    height: 4rem;
+    width: 2rem;
+    height: 2rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -52,10 +52,10 @@ export default {
   }
 }
 .wallet_address {
-  padding: 1rem 6rem;
+  padding: 0.5rem 3rem;
   background: rgba(0, 0, 0, 0.7);
   font-family: Roboto;
-  font-size: 2rem;
+  font-size: 1rem;
   border-radius: 10rem;
 }
 </style>

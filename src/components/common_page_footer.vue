@@ -119,7 +119,7 @@ export default {
 }
 .back_to_home {
   cursor: pointer;
-  height: 10rem;
+  height: 5rem;
   border-right: 1px solid;
   border-image-source: linear-gradient(
     0deg,
@@ -136,25 +136,25 @@ export default {
   .text {
     background: linear-gradient(127.89deg, #bf9c68 28.12%, #946e36 66.75%);
     background-clip: text;
-    font-size: 4rem;
+    font-size: 2rem;
     color: transparent;
     transform: skewX(15deg);
-    margin-left: 4rem;
-    margin-right: 8rem;
+    margin-left: 2rem;
+    margin-right: 4rem;
   }
 }
 .swap {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: 400;
-  margin-left: 2rem;
+  margin-left: 1rem;
   .text {
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
   .img {
-    width: 6rem;
+    width: 3rem;
   }
 }
 .menu {
@@ -177,24 +177,24 @@ export default {
     position: relative;
     transform: skewX(15deg);
     cursor: pointer;
-    margin: 0 2.5rem;
+    margin: 0 1rem;
     .img {
-      height: 10rem;
+      height: 5rem;
     }
     .text {
       position: absolute;
       right: 0;
       bottom: 0;
-      font-size: 3rem;
+      font-size: 1.5rem;
       font-weight: 400;
     }
   }
 }
 .call {
-  margin-right: 8rem;
+  margin-right: 4rem;
   cursor: pointer;
   .img {
-    height: 8rem;
+    height: 4rem;
   }
 }
 </style>

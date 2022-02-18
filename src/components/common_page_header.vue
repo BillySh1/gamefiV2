@@ -19,7 +19,12 @@
       </div>
     </div>
     <div class="icon_box">
-      <img class="icon" src="../assets/common/notice.svg" alt="" />
+      <img
+        @click="$router.push({ name: 'notice' })"
+        class="icon"
+        src="../assets/common/notice.svg"
+        alt=""
+      />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
     </div>
   </div>
@@ -81,7 +86,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 4rem;
+  font-size: 1.8rem;
 }
 .colored_box {
   background: linear-gradient(
@@ -96,7 +101,7 @@ export default {
   justify-content: space-around;
 }
 .wallet_box {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 .page_title {
   width: fit-content;
@@ -111,7 +116,7 @@ export default {
 }
 
 .currency_menu {
-  font-size: 2rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   font-family: SF Pro Text;
@@ -121,22 +126,23 @@ export default {
 }
 .currency_item {
   background: #00000042;
-  margin: 0 4rem;
+  margin: 0 2rem;
   display: flex;
   align-items: center;
 }
 .img_left {
-  height: 4rem;
+  height: 2rem;
   transform: translateX(-50%);
 }
 .img_right {
-  height: 4rem;
+  height: 2rem;
   transform: translateX(50%);
 }
 .icon_box {
   place-self: flex-end;
 }
 .icon {
+  cursor: pointer;
   width: 1.5em;
   height: 1.5em;
   margin-right: 0.5em;
