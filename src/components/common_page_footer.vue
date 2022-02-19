@@ -101,6 +101,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 5rem;
   background: linear-gradient(
     180deg,
     rgba(45, 40, 40, 0) -27.5%,
@@ -116,6 +117,7 @@ export default {
     )
     1;
   border-top: 1px solid;
+  z-index: 100;
 }
 .back_to_home {
   cursor: pointer;

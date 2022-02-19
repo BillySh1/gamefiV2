@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <CommonPageHeader />
+    <CommonPageHeader :title="pageTitle" />
     <div class="content">
       <div class="left_c">
         <div class="img_box">
@@ -96,6 +96,7 @@ export default {
           const data = reactive({
             info:'',
             buyValue:1,
+            pageTitle:'招贤纳士'
           })
 
           onBeforeMount(() => {

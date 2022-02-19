@@ -87,6 +87,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   font-size: 1.8rem;
+  height: 4rem;
+  z-index: 100;
 }
 .colored_box {
   background: linear-gradient(

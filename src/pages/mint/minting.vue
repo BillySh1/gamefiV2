@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <CommonPageHeader />
+    <CommonPageHeader :title="pageTitle" />
     <div class="content">
       <Lottie :options="lottie_options" />
     </div>
@@ -24,6 +24,7 @@ export default {
           const data = reactive({
               info:'',
               jsonData:'',
+              pageTitle:'招贤纳士'
 
           });
         const lottie_options = computed(()=>{

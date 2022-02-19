@@ -19,7 +19,7 @@ export default {
       setup() {
 
           const data = reactive({
-            pageTitle:'卡牌重生'
+            pageTitle:'我的背包'
           })
 
           onBeforeMount(() => {
