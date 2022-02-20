@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">
+    <div v-if="showPack" class="content">
+      <InjectPackHero :value="true" />
+    </div>
+    <div v-else class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
       <div class="inner">
         <div class="mix_item">
@@ -25,7 +28,9 @@
             src="../../assets/mix/ready.svg"
             alt=""
           />
-          <div class="no_selected">请选择卡牌</div>
+          <div @click="() => (showPack = true)" class="no_selected">
+            请选择卡牌
+          </div>
         </div>
       </div>
       <div class="tip_badge" @click="() => (showModal = true)">
@@ -51,18 +56,21 @@ import { reactive,toRefs,onBeforeMount} from 'vue'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
 import InjectModal  from '../../components/inject_modal'
+import InjectPackHero from '../../components/inejct_pack_hero'
 export default {
     name: 'store',
     components:{
         CommonPageHeader,
         CommonPageFooter,
-        InjectModal
+        InjectModal,
+        InjectPackHero
     },
       setup() {
 
           const data = reactive({
-            pageTitle:'卡牌重生',
+            pageTitle:'卡牌进阶',
             showModal:false,
+            showPack: false,
           })
 
           onBeforeMount(() => {
