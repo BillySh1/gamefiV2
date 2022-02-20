@@ -19,12 +19,30 @@
             class="hero_selected"
             src="../../assets/mix/temp_card.svg"
           />
-          <img v-if="false" class="ready" src="../../assets/mix/ready.svg" alt="" />
+          <img
+            v-if="false"
+            class="ready"
+            src="../../assets/mix/ready.svg"
+            alt=""
+          />
           <div class="no_selected">请选择卡牌</div>
+        </div>
+      </div>
+      <div class="tip_badge" @click="() => (showModal = true)">
+        <div class="inner">
+          <img src="../../assets/common/tip_badge.svg" />
+          <div class="text">进阶规则</div>
         </div>
       </div>
     </div>
     <CommonPageFooter />
+
+    <InjectModal
+      @close="() => (showModal = false)"
+      :value="showModal"
+      title="进阶提醒"
+      >规则</InjectModal
+    >
   </div>
 </template>
 
@@ -32,16 +50,19 @@
 import { reactive,toRefs,onBeforeMount} from 'vue'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
+import InjectModal  from '../../components/inject_modal'
 export default {
     name: 'store',
     components:{
         CommonPageHeader,
-        CommonPageFooter
+        CommonPageFooter,
+        InjectModal
     },
       setup() {
 
           const data = reactive({
-            pageTitle:'卡牌重生'
+            pageTitle:'卡牌重生',
+            showModal:false,
           })
 
           onBeforeMount(() => {
@@ -70,6 +91,23 @@ export default {
     #0e408a 0%,
     rgba(78, 11, 11, 0) 100%
   );
+  .tip_badge {
+    cursor: pointer;
+    position: absolute;
+    bottom: 8rem;
+    left: 0;
+    .inner {
+      position: relative;
+      img {
+        width: 10rem;
+        opacity: 1;
+      }
+      .text {
+        position: absolute;
+        margin: auto;
+      }
+    }
+  }
   .mix_mist {
     position: absolute;
     right: 0;
@@ -88,7 +126,7 @@ export default {
         transform: rotate(0deg);
       }
       to {
-        transform: rotate(360deg);
+        transform: rotate(-360deg);
       }
     }
     .mix_swirl {
