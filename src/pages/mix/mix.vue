@@ -94,7 +94,7 @@ export default {
   .tip_badge {
     cursor: pointer;
     position: absolute;
-    bottom: 8rem;
+    top: 8rem;
     left: 0;
     .inner {
       position: relative;
