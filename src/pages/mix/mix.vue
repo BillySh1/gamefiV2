@@ -2,7 +2,7 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <div v-if="showPack" class="content">
-      <InjectPackHero :value="true" />
+      <InjectPackHero :value="showPack" />
     </div>
     <div v-else class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />

@@ -1,0 +1,368 @@
+{
+  "盒子/整体": {
+    "keyframes": {
+      "rotation": [
+        {
+          "id": "54ca8ab5-e071-4bd6-b5c9-74efe403d482",
+          "ms": 0,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "de884079-e884-4325-852d-2d04f16a06b0",
+          "ms": 99,
+          "property": "rotation",
+          "value": -6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "58926079-bc50-4024-87df-2ddb018d8cd5",
+          "ms": 203,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "213fc052-fb1b-4d19-abe1-19ccb3dc0cc4",
+          "ms": 302,
+          "property": "rotation",
+          "value": 6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "e0471c4d-6f1d-4a52-81b5-0d130976001c",
+          "ms": 401,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "534e6bac-85ee-41f3-abde-2eab2770ff71",
+          "ms": 504,
+          "property": "rotation",
+          "value": -6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "da5e13b1-1f17-4526-9d4d-50732f0b2fbf",
+          "ms": 601,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "a9d7fa68-31ce-4df5-98cd-f87f26b7806e",
+          "ms": 702,
+          "property": "rotation",
+          "value": 6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "86a4600f-d81e-42d0-bf83-3b3e535c5415",
+          "ms": 801,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "a495209b-922e-4228-877e-042d1db42110",
+          "ms": 903,
+          "property": "rotation",
+          "value": -6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "793853ef-55f0-4581-b532-27d47fbc74b9",
+          "ms": 1001,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "e03ca424-6be3-4ce9-a62f-add2d4ba5523",
+          "ms": 1101,
+          "property": "rotation",
+          "value": 6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "c08e44c0-d33b-4cdc-8395-b660362f809b",
+          "ms": 1200,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "fe719ac7-f4af-4b8e-a4ea-b77b9fe44507",
+          "ms": 1301,
+          "property": "rotation",
+          "value": -6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "80a1ab60-d481-4090-b473-2a1335ca6edd",
+          "ms": 1401,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "2c3ba124-118b-49bb-9d84-2643a48df680",
+          "ms": 1501,
+          "property": "rotation",
+          "value": 6,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "b0027ab0-fc89-412a-b4a7-fa29f6db6b72",
+          "ms": 1602,
+          "property": "rotation",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        }
+      ],
+      "y": [
+        {
+          "id": "f093fbed-65e7-4072-b1d9-cc521fdce657",
+          "ms": 0,
+          "property": "y",
+          "value": 510.3568,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ac7c3821-0157-4f26-9b4a-e29e047956d1",
+          "ms": 1595,
+          "property": "y",
+          "value": 510.3568,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "id": "cdc1c15d-19ac-41d7-91c2-c434eb705fa8",
+          "ms": 0,
+          "property": "opacity",
+          "value": 1,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "c4e99668-1fb4-4707-8d99-56308a208d26",
+          "ms": 1934,
+          "property": "opacity",
+          "value": 1,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "91a4141e-e579-4838-9c5a-c12c0ff1290f",
+          "ms": 2204,
+          "property": "opacity",
+          "value": 0,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        }
+      ]
+    },
+    "version": "0.2.0",
+    "anchorPoint": "MIDDLECENTER"
+  },
+  "盒子": {
+    "keyframes": {
+      "y": [
+        {
+          "id": "c2a71da7-523b-4fb7-a19e-45f65d78f473",
+          "ms": 0,
+          "property": "y",
+          "value": 549.5653,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "version": "0.2.0",
+    "anchorPoint": "MIDDLECENTER"
+  },
+  "盖子": {
+    "keyframes": {
+      "y": [
+        {
+          "id": "2b48de42-c0b0-4092-a2c5-6889c4ab3c8d",
+          "ms": 0,
+          "property": "y",
+          "value": 445.1482,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "aaa33b9b-b483-40ac-8f57-4dd70fe71770",
+          "ms": 1646,
+          "property": "y",
+          "value": 445.1482,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "16e85124-9354-4ba4-9d53-a9e76d187d55",
+          "ms": 1736,
+          "property": "y",
+          "value": 300,
+          "easing": "easeOut",
+          "easingCurve": [
+            0,
+            0,
+            0.58,
+            1
+          ]
+        }
+      ]
+    },
+    "version": "0.2.0",
+    "anchorPoint": "MIDDLECENTER"
+  }
+}

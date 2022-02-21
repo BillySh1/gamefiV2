@@ -1,9 +1,22 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">
+    <div v-if="showDetailPack" class="content hero_pack">
+      <InjectPackHero :value="curShowType === 0" />
+      <CommonPackDetail
+        @back="() => (curShowType = undefined)"
+        :value="curShowType === 1 || curShowType == 2"
+        :type ="curShowType"
+      />
+    </div>
+    <div v-else class="content">
       <div class="type_bpx">
-        <div v-for="item in routerItems" :key="item.key" class="item">
+        <div
+          v-for="item in routerItems"
+          :key="item.key"
+          class="item"
+          @click="() => (curShowType = item.key)"
+        >
           <img :src="item.img" alt="" />
           <div class="text">
             {{ item.name }}
@@ -15,19 +28,24 @@
         <img class="badge top" src="../../assets/pack/line.svg" alt="" />
       </div>
     </div>
+
     <CommonPageFooter />
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed} from 'vue'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
+import InjectPackHero from '../../components/inejct_pack_hero'
+import CommonPackDetail from './common_pack_detail'
 export default {
-    name: 'store',
+    name: 'pack',
     components:{
         CommonPageHeader,
-        CommonPageFooter
+        CommonPageFooter,
+        InjectPackHero,
+        CommonPackDetail
     },
       setup() {
 
@@ -36,16 +54,24 @@ export default {
             routerItems:[
               {key:0,name:'武将',img:require('../../assets/pack/0.svg')},
               {key:1,name:'装备',img:require('../../assets/pack/1.svg')},
-              {key:2,name:'珍宝',img:require('../../assets/pack/2.svg')}
-            ]
+              {key:2,name:'珍宝',img:require('../../assets/pack/2.svg')},
+
+            ],
+            curShowType: 1
           })
 
           onBeforeMount(() => {
           })
-
+          const showDetailPack = computed(()=>{
+            if(data.curShowType !== undefined){
+              return true
+            }
+            return false
+          })
           const refData = toRefs(data);
           return {
               ...refData,
+              showDetailPack
           }
 
       }
@@ -56,6 +82,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .content {
   position: relative;
   height: 100%;
@@ -64,6 +91,10 @@ export default {
   justify-content: center;
   background: #280505;
 }
+.hero_pack {
+  background: url("../../assets/pack/pack_hero_bg.svg") no-repeat;
+  background-size: cover;
+}
 .type_bpx {
   width: 100%;
   display: flex;
@@ -71,7 +102,7 @@ export default {
   justify-content: space-around;
   z-index: 100;
   .item {
-    &:hover{
+    &:hover {
       opacity: 1;
     }
     cursor: pointer;
@@ -92,7 +123,7 @@ export default {
   .badge {
     width: 100%;
   }
-  .top{
+  .top {
     transform: translateY(-1.5rem);
   }
 }
