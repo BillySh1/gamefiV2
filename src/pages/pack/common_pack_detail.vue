@@ -40,10 +40,12 @@
               v-for="(item, index) in packItems"
               :key="index"
               class="pack_item"
+              @click="() => (curItemIndex = index)"
+              :style="curItemIndex == index ? 'opacity:1' : ''"
             >
               <img src="../../assets/pack/common_pack_item_bg.svg" alt="" />
             </div>
-            <div class="empty" ></div>
+            <div class="empty"></div>
           </div>
         </div>
       </div>
@@ -52,7 +54,7 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed} from 'vue'
 export default {
     name: 'common_pack_detail',
     props:['value','type'],
@@ -60,9 +62,12 @@ export default {
           const data = reactive({
             tabs:[{key:1,name:'装备'},{key:2,name:'珍宝'}],
             curTab: 1,
-            packItems:[0,1,2,3,4,5,6,7,8,9]
+            packItems:[0,1,2,3,4,5,6,7,8,9],
+            curItemIndex:0,
           })
-
+          const curItemShow = computed(()=>{
+            return data.packItems[data.curItemIndex]
+          })
           onBeforeMount(() => {
             data.curTab = prop.type
           })
@@ -70,6 +75,7 @@ export default {
           const refData = toRefs(data);
           return {
               ...refData,
+              curItemShow
           }
 
       }
@@ -163,6 +169,12 @@ export default {
           flex-wrap: wrap;
           align-items: center;
           .pack_item {
+            border-radius: 1rem;
+            opacity: 0.6;
+            &:hover {
+              opacity: 1;
+            }
+            cursor: pointer;
             width: 9rem;
             height: 9rem;
             img {
@@ -170,7 +182,7 @@ export default {
               height: 100%;
             }
           }
-          .empty{
+          .empty {
             height: 0;
             width: 0;
           }
