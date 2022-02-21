@@ -50,7 +50,5 @@ export default {
     font-size: 2rem;
     margin: 1rem 0;
   }
-  .content {
-  }
 }
 </style>

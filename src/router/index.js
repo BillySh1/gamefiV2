@@ -19,6 +19,7 @@ const airdrop = import("../pages/airdrop/airdrop.vue");
 const title = import("../pages/title/title.vue");
 const notice = import("../pages/notice/notice.vue");
 const showItem = import("../components/buy_item_success.vue");
+const storeDetail = import('../pages/store/store_detail.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -113,6 +114,11 @@ const router = createRouter({
       name: "showItem",
       component: showItem,
     },
+    {
+      path:'/storeDetail',
+      name:'storeDetail',
+      component: storeDetail
+    }
    
   ],
 });

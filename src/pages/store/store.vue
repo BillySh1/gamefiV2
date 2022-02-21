@@ -7,10 +7,12 @@
           :class="item.key == curType ? 'tab_item active' : 'tab_item'"
           v-for="item in storeInfos"
           :key="item.key"
-          @click="() => {
-            goodsIndex = 0;
-            curType = item.key
-          }"
+          @click="
+            () => {
+              goodsIndex = 0;
+              curType = item.key;
+            }
+          "
         >
           <img :src="item.img" />
           <div class="text">{{ item.name }}</div>
@@ -50,8 +52,10 @@
 
 <script lang="js">
 import { reactive,toRefs, computed} from 'vue'
+import {useRouter} from 'vue-router'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
+import useShopItems from './use_shop_items.js'
 export default {
     name: 'store',
     components:{
@@ -59,48 +63,35 @@ export default {
         CommonPageFooter
     },
       setup() {
-
+        const router = useRouter();
           const data = reactive({
             info:'',
             curType:0,
             storeInfos:[
                 {
                     key:0,
-                    name:'军士',
-                    img:require('../../assets/store/type0.svg')
+                    name:'战备',
+                    img:require('../../assets/store/type0.png')
                 },
                 {
                     key:1,
-                    name:'孟婆',
-                    img:require('../../assets/store/type1.svg')
+                    name:'神谕',
+                    img:require('../../assets/store/type1.png')
                 },
                 {
                     key:2,
-                    name:'宝石哥',
-                    img:require('../../assets/store/type2.svg')
+                    name:'奇珍',
+                    img:require('../../assets/store/type2.png')
                 }
             ],
             goodsIndex:0,
-            buyItems:[
-              [
-                {key:0,img:require('../../assets/store/item/type_0_0.svg'),name:'粮草'},
-                {key:1,img:require('../../assets/store/item/type_0_1.svg'),name:'战鼓'}
-                ],
-                [
-                  {key:0,img:require('../../assets/store/item/type_1_0.svg'),name:'孟婆汤'},
-                ],
-                [
-                  {key:0,img:require('../../assets/store/item/type_2_0.svg'),name:'幸运宝石'},
-                  {key:1,img:require('../../assets/store/item/type_2_1.svg'),name:'天佑宝石'},
-                  {key:2,img:require('../../assets/store/item/type_2_2.svg'),name:'神眷宝石'},
-                ]
-            ]
+            buyItems:useShopItems()
           })
         const pageTitle = computed(()=> {
               return ['战备商店','阴间商店','宝石商店'][data.curType]
           })
         const mainImg = computed(()=>{
-            return require(`../../assets/store/${data.curType}_img.svg`)
+            return require(`../../assets/store/type${data.curType}.png`)
         })
         const curCurgoods = computed(()=>{
           return data.buyItems[data.curType][data.goodsIndex]
@@ -123,6 +114,12 @@ export default {
           data.goodsIndex += index
         }
         const goodsClick = ()=>{
+          router.push({
+            name:'storeDetail',
+            query:{
+              info: curCurgoods.value.tokenId
+            }
+          })
           console.log('click', data.buyItems[data.curType][data.goodsIndex])
         }
           const refData = toRefs(data);
@@ -144,6 +141,8 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  background: url('../../assets/store/store_bg.png') no-repeat;
+  background-size: cover;
 }
 .content {
   position: relative;
@@ -177,16 +176,16 @@ export default {
 }
 .role_img {
   position: absolute;
-  bottom: 0;
+  width: 35rem;
+  top: 50%;
+  transform: translateY(-50%);
   left: 10%;
-  height: 80%;
 }
 
 .store_zone {
   position: absolute;
-
-  transform: translateY(3rem);
-  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
   right: 5rem;
 }
 .store_inner {
@@ -242,8 +241,8 @@ export default {
         }
       }
       .goods_img {
-        max-width: 30rem;
-        max-height: 40rem;
+        max-width: 20rem;
+        max-height: 30rem;
       }
     }
   }
