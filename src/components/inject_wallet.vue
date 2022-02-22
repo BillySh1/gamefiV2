@@ -3,20 +3,40 @@
     <div class="chain_icon_box">
       <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
     </div>
-    <div class="wallet_address">0xeded4c……91e3</div>
+    <div class="wallet_address">
+      {{ walletValue }}
+    </div>
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import { reactive,toRefs,onBeforeMount,onMounted,computed} from 'vue'
+import initWeb3 from '../utils/initWeb3.js'
 export default {
-    name: '',
+    name: 'inject_wallet',
       setup() {
           console.log('1-开始创建组件-setup')
           const data = reactive({
-
+            wallet:'连接钱包',
+            web3:''
           })
-          onBeforeMount(() => {
+          const walletValue = computed(()=>{
+            const wallet = data.wallet;
+            let res = wallet;
+            if(wallet.length > 10){
+              res = wallet.slice(0,5) + '...' + wallet.slice(wallet.length-4,wallet.length)
+            }
+            return res
+          })
+          onBeforeMount(async () => {
+            await initWeb3.Init(
+              (addr)=>{
+                data.wallet = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            )
               console.log('2.组件挂载页面之前执行----onBeforeMount')
           })
           onMounted(() => {
@@ -25,6 +45,7 @@ export default {
           const refData = toRefs(data);
           return {
               ...refData,
+              walletValue
           }
 
       }

@@ -1,10 +1,8 @@
 <template>
-  <router-view v-show="canShow" ></router-view>
+  <router-view v-show="canShow"></router-view>
   <div class="mask" v-show="!canShow">
-    <img src="./assets/pack/bg_badge.svg" alt="">
-    <div class="text" >
-      请切换至正确的网络
-    </div>
+    <img src="./assets/pack/bg_badge.svg" alt="" />
+    <div class="text">请切换至正确的网络</div>
   </div>
 </template>
 
@@ -30,22 +28,25 @@ export default {
         this.canShow = true;
       }
     },
+    async init() {
+      await initWeb3.Init(
+        (addr) => {
+          this.account = addr;
+        },
+        (provider) => {
+          this.Web3 = provider;
+        }
+      );
+    },
   },
   async created() {
-    await initWeb3.Init(
-      (addr) => {
-        this.account = addr;
-      },
-      (provider) => {
-        this.Web3 = provider;
-      }
-    );
+    await this.init();
     this.watchChain();
     this.judge();
   },
 };
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .mask {
   position: fixed;
   top: 0;
@@ -57,10 +58,10 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  img{
+  img {
     position: absolute;
     top: 50%;
-        
+
     width: 100%;
   }
 }
