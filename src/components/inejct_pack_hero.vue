@@ -2,8 +2,17 @@
   <div v-if="value" class="pack_container">
     <div class="pack_main">
       <div class="top_box">
-        <img style="width: 2rem" src="../assets/common/back.svg" />
-        222
+        <img
+          class="back"
+          style="width: 2.5rem"
+          src="../assets/common/back.svg"
+        />
+        <div class="filter_box">
+          <CommonPackFilter />
+        </div>
+        <div class="search_box">
+          <CommonSearch />
+        </div>
       </div>
       <div class="content">
         <div class="badge">
@@ -31,13 +40,17 @@
 <script lang="js">
 import { reactive,toRefs,onBeforeMount} from 'vue'
 import PackHeroItem from './pack_hero_item'
+import CommonPackFilter from './common_pack_filter'
+import CommonSearch from './common_search'
 import Page from './page'
 export default {
     name: 'inject_pack_hero',
     props:['value'],
     components:{
         PackHeroItem,
-        Page
+        Page,
+        CommonPackFilter,
+        CommonSearch
     },
       setup() {
 
@@ -76,14 +89,22 @@ export default {
   flex-direction: column;
   justify-content: center;
   .top_box {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .back {
+      cursor: pointer;
+      margin-left: 4rem;
+    }
+    .filter_box{
+      transform: translateX(-10rem);
+    }
   }
   .content {
     margin: 1rem 0;
     background: #471111;
-    height: 25rem;
+    height: 20rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

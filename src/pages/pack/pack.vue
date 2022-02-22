@@ -57,7 +57,7 @@ export default {
               {key:2,name:'珍宝',img:require('../../assets/pack/2.svg')},
 
             ],
-            curShowType: undefined
+            curShowType: 0
           })
 
           onBeforeMount(() => {

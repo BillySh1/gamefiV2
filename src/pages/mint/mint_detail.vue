@@ -88,8 +88,10 @@
 import { reactive,toRefs,onBeforeMount} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from 'vuex'
+import initWeb3 from '../../utils/initWeb3.js'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
+
 export default {
     name: 'mint_detail',
     components:{
@@ -102,11 +104,26 @@ export default {
           const data = reactive({
             info:'',
             buyValue:1,
-            pageTitle:'招贤纳士'
+            pageTitle:'招贤纳士',
+            web3:'',
+            account:'',
+            price: 0,
           })
-
-          onBeforeMount(() => {
-            console.log(store.state.c_airdrop,'sss')
+          const getprice = async()=>{
+            const c = await store.state.c_richShop
+            console.log(c,'sss')
+            data.price = 0
+          }
+          onBeforeMount(async() => {
+            await initWeb3.Init(
+              (addr)=>{
+                data.account = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            )
+            await getprice()
             data.info = JSON.parse(route.query.info);
           })
 
