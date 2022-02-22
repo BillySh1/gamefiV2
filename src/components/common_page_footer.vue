@@ -25,7 +25,11 @@
       </div>
     </div>
     <div class="call" @click="() => $router.push({ name: 'mint' })">
-      <img class="img" src="../assets/common/call.png" alt="" />
+      <img v-if="$route.name == 'home'" class="img" src="../assets/common/call.svg" alt="" />
+      <div v-else class="common_call" >
+        <img src="../assets/common/common_call.svg" alt="">
+        <div class="text" >招贤纳士</div>
+      </div>
     </div>
   </div>
 </template>
@@ -174,8 +178,12 @@ export default {
   );
   border-image-slice: 1;
   transform: skewX(-15deg);
+  padding: 0 4rem;
 
   .menu_item {
+    &:hover{
+      opacity: .6;
+    }
     position: relative;
     transform: skewX(15deg);
     cursor: pointer;
@@ -193,10 +201,28 @@ export default {
   }
 }
 .call {
+  position: relative;
   margin-right: 4rem;
   cursor: pointer;
   .img {
-    height: 4rem;
+    position: absolute;
+    height: 16rem;
+    transform: translate(-100%,-90%);
+  }
+  .common_call{
+    position: relative;
+    width: 10rem;
+    img{
+      width: 100%;
+    }
+    .text{
+      width: 100%;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+    }
   }
 }
 </style>

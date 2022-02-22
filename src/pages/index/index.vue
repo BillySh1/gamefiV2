@@ -155,6 +155,7 @@ export default {
     text-align: center;
 
     .left {
+      cursor: pointer;
       position: relative;
       transform: translateX(2.5rem);
       img {
@@ -162,6 +163,7 @@ export default {
       }
     }
     .middle {
+      cursor: pointer;
       position: relative;
       transform: translateY(-2rem);
       font-size: 2.5rem;
@@ -174,6 +176,7 @@ export default {
       }
     }
     .right {
+      cursor: pointer;
       position: relative;
       transform: translateX(-2.5rem);
       img {

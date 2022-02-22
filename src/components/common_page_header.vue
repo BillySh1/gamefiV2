@@ -137,6 +137,7 @@ export default {
   transform: translateX(-50%);
 }
 .img_right {
+  cursor: pointer;
   height: 2rem;
   transform: translateX(50%);
 }
