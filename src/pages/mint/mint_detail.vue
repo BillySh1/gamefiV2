@@ -32,10 +32,10 @@
           </div>
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌，卡牌共具有五种品质 每种品质的特性不尽相同
+          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌，卡牌共具有五种品质 每种品质的特性不尽相同
+          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
         </div>
         <div class="right_c_action">
           <div class="input_box">
@@ -99,7 +99,7 @@ export default {
             pageTitle:'招贤纳士'
           })
 
-          onBeforeMount(() => {
+          onBeforeMount(() => { 
             data.info = JSON.parse(route.query.info);
           })
 

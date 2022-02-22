@@ -88,7 +88,7 @@ export default {
             buyItems:useShopItems()
           })
         const pageTitle = computed(()=> {
-              return ['战备商店','阴间商店','宝石商店'][data.curType]
+              return ['战备','神谕','奇珍'][data.curType]
           })
         const mainImg = computed(()=>{
             return require(`../../assets/store/type${data.curType}.png`)
