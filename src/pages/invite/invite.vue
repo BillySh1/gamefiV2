@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="bottom_box">
-          <div class="item">
+          <div class="item" @click="()=>$router.push({name:'inviteBoard'})" >
             <img src="../../assets/invite/item1_bg.svg" alt="" />
             <div class="inner" >
               <img src="../../assets/invite/icons/2.svg" alt="">

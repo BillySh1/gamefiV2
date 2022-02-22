@@ -20,6 +20,7 @@ const title = import("../pages/title/title.vue");
 const notice = import("../pages/notice/notice.vue");
 const showItem = import("../components/buy_item_success.vue");
 const storeDetail = import('../pages/store/store_detail.vue')
+const inviteBoard = import('../pages/invite/invite_board.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -118,6 +119,11 @@ const router = createRouter({
       path:'/storeDetail',
       name:'storeDetail',
       component: storeDetail
+    },
+    {
+      path:'/inviteBoard',
+      name:'inviteBoard',
+      component: inviteBoard
     }
    
   ],
