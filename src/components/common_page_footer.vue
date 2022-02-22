@@ -25,9 +25,9 @@
       </div>
     </div>
     <div class="call" @click="() => $router.push({ name: 'mint' })">
-      <img v-if="$route.name == 'home'" class="img" src="../assets/common/call.svg" alt="" />
+      <img v-if="$route.name == 'home'" class="img" src="../assets/common/call.png" alt="" />
       <div v-else class="common_call" >
-        <img src="../assets/common/common_call.svg" alt="">
+        <img src="../assets/common/common_call.png" alt="">
         <div class="text" >招贤纳士</div>
       </div>
     </div>

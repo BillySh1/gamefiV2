@@ -1,6 +1,7 @@
 {
     "short_name": "RICH",
     "name": "Rich-The-Three-Kingdom",
+    "description":"rich-nft",
     "icons": [
       {
         "src": "./favicon.ico",
@@ -8,6 +9,6 @@
         "type": "image/ico"
       }
     ],
-    "display": "fullscreen",
-    "orientation": "landscape"
+    "display": "standalone",
+    "orientation": "portrait"
   }
