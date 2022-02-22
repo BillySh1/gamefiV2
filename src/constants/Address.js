@@ -1,4 +1,4 @@
-export default {
+const test = {
   m3t: "0xe6f401B6b8674043A61e3163fCD3aE834498fC57",
   mmc: "0xAbeb3eA7847751aAe15936E47683F6b31c8f5aE0",
   hero: "0xc1fD505FAFb9365EbCdB46b7a5bF748EE9b4FeB2",
@@ -8,4 +8,11 @@ export default {
   airdrop: "0xCFE5Be2a4D79fFaaC21DB2cecb41D47A108F5F87",
   shop: "0xec30Dddc38e88c802bb61E00B699e869D35F9670",
   training: "0x1d57D9Ea99Dba0F978ce8824c4be75Be41Bb445b",
-};
+}
+
+// const main = {
+
+// }
+
+
+export default test

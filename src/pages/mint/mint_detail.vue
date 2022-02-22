@@ -11,7 +11,11 @@
             class="img_c"
             :src="info.img"
           />
-          <img class="rotate" style="width: 100%; heihgt: 100%" :src="info.bg" />
+          <img
+            class="rotate"
+            style="width: 100%; heihgt: 100%"
+            :src="info.bg"
+          />
         </div>
       </div>
       <div class="right_c">
@@ -50,7 +54,7 @@
               <input v-model="buyValue" class="input" type="text" />
             </div>
             <img
-            class="img_action"
+              class="img_action"
               style="cursor: pointer"
               src="../../assets/mint/add.svg"
               alt=""
@@ -83,6 +87,7 @@
 <script lang="js">
 import { reactive,toRefs,onBeforeMount} from 'vue'
 import {useRoute} from 'vue-router'
+import {useStore} from 'vuex'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
 export default {
@@ -93,13 +98,15 @@ export default {
     },
       setup() {
         const route = useRoute();
+        const store = useStore();
           const data = reactive({
             info:'',
             buyValue:1,
             pageTitle:'招贤纳士'
           })
 
-          onBeforeMount(() => { 
+          onBeforeMount(() => {
+            console.log(store.state.c_airdrop,'sss')
             data.info = JSON.parse(route.query.info);
           })
 
@@ -199,10 +206,10 @@ export default {
   display: flex;
   align-items: center;
   margin-right: 3rem;
-  .img_action{
+  .img_action {
     width: 2rem;
   }
-  .ipt_img{
+  .ipt_img {
     margin: 0 1rem;
     width: 12.5rem;
   }
@@ -228,7 +235,7 @@ export default {
   position: relative;
   transform: scale(0.8);
   cursor: pointer;
-  .btn_img{
+  .btn_img {
     max-width: 10rem;
   }
 }
