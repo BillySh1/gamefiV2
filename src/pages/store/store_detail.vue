@@ -11,13 +11,13 @@
             class="img_c"
             :src="info.img"
           />
-          <img class="rotate" style="width: 100%; heihgt: 100%" :src="info.bg" />
+          <img class="img_bg" src="../../assets/store/buy_item_bg.png">
         </div>
       </div>
       <div class="right_c">
         <div class="right_c_title">
           <div class="right_c_title_value">
-            {{ info.title }}
+            {{ info.name }}
             <img
               class="right_c_title_badge"
               src="../../assets/common/active_title.png"
@@ -32,10 +32,10 @@
           </div>
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌，卡牌共具有五种品质 每种品质的特性不尽相同
+          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌，卡牌共具有五种品质 每种品质的特性不尽相同
+          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
         </div>
         <div class="right_c_action">
           <div class="input_box">
@@ -62,9 +62,9 @@
             @click="
               () => {
                 $router.push({
-                  name: 'minting',
+                  name: 'buySuccess',
                   query: {
-                    info: JSON.stringify(info),
+                    info: info.tokenId,
                   },
                 });
               }
@@ -85,7 +85,7 @@ import { reactive,toRefs,onBeforeMount} from 'vue'
 import {useRoute} from 'vue-router'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
-// import useGetShopDetailByTokenId from './use_shop_items.js'
+import {useGetShopDetailByTokenId} from './use_shop_items.js'
 export default {
     name: 'mint_detail',
     components:{
@@ -97,17 +97,17 @@ export default {
           const data = reactive({
             info:'',
             buyValue:1,
-            pageTitle:'招贤纳士'
+            pageTitle:'购买详情'
           })
 
           onBeforeMount(() => {
-              console.log(route.query.info,'sss')
-            data.info = JSON.parse(route.query.info);
+            data.info = useGetShopDetailByTokenId(route.query.info)
           })
 
           const refData = toRefs(data);
           return {
               ...refData,
+              useGetShopDetailByTokenId
 
           }
 
@@ -134,9 +134,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25rem;
-  height: 25rem;
+  width: 20rem;
+  height: 20rem;
   margin: auto;
+  .img_bg{
+    width: 100%;
+  }
 }
 .img_c {
   max-width: 70%;
@@ -144,6 +147,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%,-50%);
   z-index: 99;
 }
 @keyframes spin {

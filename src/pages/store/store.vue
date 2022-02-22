@@ -55,7 +55,7 @@ import { reactive,toRefs, computed} from 'vue'
 import {useRouter} from 'vue-router'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
-import useShopItems from './use_shop_items.js'
+import {useShopItems} from './use_shop_items.js'
 export default {
     name: 'store',
     components:{
@@ -120,7 +120,6 @@ export default {
               info: curCurgoods.value.tokenId
             }
           })
-          console.log('click', data.buyItems[data.curType][data.goodsIndex])
         }
           const refData = toRefs(data);
           return {

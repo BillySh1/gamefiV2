@@ -19,8 +19,9 @@ const airdrop = import("../pages/airdrop/airdrop.vue");
 const title = import("../pages/title/title.vue");
 const notice = import("../pages/notice/notice.vue");
 const showItem = import("../components/buy_item_success.vue");
-const storeDetail = import('../pages/store/store_detail.vue')
-const inviteBoard = import('../pages/invite/invite_board.vue')
+const storeDetail = import("../pages/store/store_detail.vue");
+const storeSuccess = import("../pages/store/store_buy_success.vue");
+const inviteBoard = import("../pages/invite/invite_board.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -116,16 +117,20 @@ const router = createRouter({
       component: showItem,
     },
     {
-      path:'/storeDetail',
-      name:'storeDetail',
-      component: storeDetail
+      path: "/storeDetail",
+      name: "storeDetail",
+      component: storeDetail,
     },
     {
-      path:'/inviteBoard',
-      name:'inviteBoard',
-      component: inviteBoard
-    }
-   
+      path: "/inviteBoard",
+      name: "inviteBoard",
+      component: inviteBoard,
+    },
+    {
+      path: "/buySuccess",
+      name: "buySuccess",
+      component: storeSuccess,
+    },
   ],
 });
 
