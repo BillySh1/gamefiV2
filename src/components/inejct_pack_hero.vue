@@ -6,6 +6,7 @@
           class="back"
           style="width: 2.5rem"
           src="../assets/common/back.svg"
+          @click="() => $emit('back')"
         />
         <div class="filter_box">
           <CommonPackFilter />
@@ -21,7 +22,7 @@
         </div>
         <div class="card_content">
           <div v-for="(item, index) in curItems" :key="index" class="card_item">
-            <PackHeroItem />
+            <PackHeroItem :info="item" />
           </div>
         </div>
       </div>
@@ -150,6 +151,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.5rem 0;
+    background: rgba(0, 0, 0, 0.5);
     .back {
       cursor: pointer;
       margin-left: 4rem;
@@ -160,7 +163,7 @@ export default {
   }
   .content {
     margin: 1rem 0;
-    background: #471111;
+    background: rgba(0, 0, 0, 0.5);
     height: 20rem;
     display: flex;
     align-items: center;
@@ -188,16 +191,22 @@ export default {
       align-items: center;
       gap: 2rem;
       .card_item {
+        cursor: pointer;
+        &:hover{
+          opacity: .8;
+        }
         height: 100%;
-        width: calc(100% / 4);
+        width: 20%;
       }
     }
   }
   .page_nation_box {
+    padding: 0.5rem 0;
     display: flex;
     width: 100%;
     align-items: center;
     flex-direction: row-reverse;
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 </style>

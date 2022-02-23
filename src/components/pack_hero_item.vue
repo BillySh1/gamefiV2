@@ -11,7 +11,7 @@
           <img class="part" src="../assets/pack/power_text_right.svg" alt="" />
         </div>
         <img class="power_img" src="../assets/pack/power_img.svg" />
-        <div class="power_value">9,99999</div>
+        <div class="power_value">{{info.power}}</div>
       </div>
     </div>
   </div>
@@ -20,7 +20,8 @@
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
 export default {
-    name: '',
+    name: 'pack_hero_item',
+    props:['info'],
       setup() {
           const data = reactive({
 
