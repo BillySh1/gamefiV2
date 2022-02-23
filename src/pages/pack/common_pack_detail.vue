@@ -41,54 +41,96 @@
               v-for="(item, index) in curPackData"
               :key="index"
               class="pack_item"
-              @click="() => (curItemIndex = index)"
+              @click="() => {
+                curItemIndex = index;
+                curItemShow = curPackData[curItemIndex]
+              }"
               :style="curItemIndex == index ? 'opacity:1' : ''"
             >
               <img src="../../assets/pack/common_pack_item_bg.svg" alt="" />
+              <div class="inner_item_zone">
+                <CommonPackItem :info="item" />
+              </div>
             </div>
             <div class="empty"></div>
           </div>
+         
         </div>
+         <div class="detail_box" >
+            <div class="inner" >
+              {{curItemShow}}
+            </div>
+          </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,computed,watch} from 'vue'
+import { reactive,toRefs,onBeforeMount,watch} from 'vue'
+import {useStore} from 'vuex'
+import initWeb3 from '../../utils/initWeb3.js'
+import {useGetShopDetailByTokenId} from '../store/use_shop_items.js'
+import CommonPackItem from './common_pack_item'
 export default {
     name: 'common_pack_detail',
     props:['value','type'],
+    components:{
+      CommonPackItem
+    },
       setup(prop) {
+        const store = useStore()
           const data = reactive({
             tabs:[{key:1,name:'装备'},{key:2,name:'珍宝'}],
             curTab: 1,
-            goodsItems:[0,1,2,3,4,5,6,7,8,9],
+            goodsItems:[],
             equpmentItems:[],
             curPackData:[],
             curItemIndex:0,
+            loading: false,
+            account:'',
+            web3:'',
+            curItemShow:'',
           });
           watch(()=>data.curTab,(v)=>{
             if(v==1){
               data.curPackData = data.equpmentItems
+              
             }else if(v==2){
               data.curPackData = data.goodsItems
             }
-            console.log(data.curPackData,'fff')
+            data.curItemShow = data.curPackData[data.curItemIndex]
           },{
             immediate:true
           })
-          const curItemShow = computed(()=>{
-            return data.curPackData[data.curItemIndex]
-          })
-          onBeforeMount(() => {
+          
+          onBeforeMount(async() => {
+            data.loading = true;
+            await initWeb3.Init(
+              (addr)=>{
+                data.account = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            )
+            await getGoodsPack();
             data.curTab = prop.type
+            data.loading = false;
           })
-
+          const getGoodsPack = async()=>{
+            const c = store.state.c_richShop
+            const res = await c.methods.ownList(data.account).call();
+            data.goodsItems = res.map((x,idx)=>{
+              return {
+                ...useGetShopDetailByTokenId(idx),
+                num: x
+              }
+            })
+          }
           const refData = toRefs(data);
           return {
               ...refData,
-              curItemShow,
           }
 
       }
@@ -118,7 +160,7 @@ export default {
     display: flex;
     align-items: center;
     text-align: center;
-    
+
     .inner_box {
       position: relative;
       width: 100%;
@@ -188,12 +230,21 @@ export default {
             position: absolute;
             left: 50%;
             top: 50%;
-      font-size: 1.2rem;
-      transform: translate(-60%,-50%);
-    }
+            font-size: 1.2rem;
+            transform: translate(-60%, -50%);
+          }
           .pack_item {
+            position: relative;
             border-radius: 1rem;
             opacity: 0.6;
+            .inner_item_zone{
+              width: 70%;
+              height: 70%;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+            }
             &:hover {
               opacity: 1;
             }
@@ -208,6 +259,22 @@ export default {
           .empty {
             height: 0;
             width: 0;
+          }
+        }
+      }
+      .detail_box{
+        position: absolute;
+        width: 25rem;
+        height: 30rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(38%,-55%);
+        .inner{
+          position: relative;
+          width: 100%;
+          height: 100%;
+          .up{
+            
           }
         }
       }
