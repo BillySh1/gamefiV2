@@ -4,8 +4,12 @@
     <div class="content">
       <img class="bg" src="../../assets/store/success_bg.svg" alt="" />
       <img class="item" :src="info.img" alt="" />
-      <div class="text" >
-          购买成功
+      <div class="text">
+        数量: {{ num }} <br />
+        <br />购买成功
+      </div>
+      <div class="back" >
+        {{remainS}} s后进入背包
       </div>
     </div>
     <CommonPageFooter />
@@ -14,7 +18,7 @@
 
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,computed} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
 import CommonPageFooter from '../../components/common_page_footer'
 import CommonPageHeader from '../../components/common_page_header'
 import {useGetShopDetailByTokenId} from './use_shop_items.js'
@@ -26,11 +30,13 @@ export default {
     },
       setup() {
           const route = useRoute()
+          const router = useRouter()
           const data = reactive({
               info:'',
               jsonData:'',
-              pageTitle:'招贤纳士'
-
+              pageTitle:'购买成功',
+              num:0,
+              remainS: 3,
           });
         const lottie_options = computed(()=>{
             return  {
@@ -38,8 +44,20 @@ export default {
               }
         })
           onBeforeMount(() => {
-              data.info = useGetShopDetailByTokenId(route.query.info)
+              data.info = useGetShopDetailByTokenId(JSON.parse(route.query.info).tokenId);
+              data.num = route.query.num
+              lazyJump();
           })
+          const lazyJump = ()=>{
+            setInterval(() => {
+              data.remainS--;
+              if(data.remainS == 0){
+                router.push({
+                  name:'pack'
+                })
+              }
+            }, 1000);
+          }
 
           const refData = toRefs(data);
           return {
@@ -86,9 +104,13 @@ export default {
       transform: rotate(360deg);
     }
   }
-  .text{
+  .text {
     transform: translateY(-5rem);
     font-size: 2rem;
+  }
+  .back{
+    color: white;
+    opacity: .5;
   }
 }
 </style>

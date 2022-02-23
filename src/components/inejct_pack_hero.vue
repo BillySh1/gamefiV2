@@ -1,5 +1,7 @@
 <template>
   <div v-if="value" class="pack_container">
+    <Lottie v-if="loading" :options="lottie_options" />
+
     <div class="pack_main">
       <div class="top_box">
         <img
@@ -72,6 +74,10 @@ export default {
             rawData:[],
             curPage:1,
             total: 0,
+            lottie_options:{
+              animationData:require('../assets/common/loading.json')
+            },
+            loading: false,
           })
           const getCurShowItems = ()=>{
             data.curItems = [];
@@ -82,6 +88,7 @@ export default {
             data.curItems =  rawData.slice(startIndex,endIndex+1) 
           }
           onBeforeMount(async() => {
+            data.loading = true
             await initWeb3.Init(
               (addr)=>{
                 data.account = addr
@@ -92,6 +99,7 @@ export default {
             )
             await getPack();
             getCurShowItems()
+            data.loading = false
           })
           const getPack = async()=>{
             try{
@@ -189,11 +197,12 @@ export default {
       width: 80%;
       display: flex;
       align-items: center;
+      justify-content: space-evenly;
       gap: 2rem;
       .card_item {
         cursor: pointer;
-        &:hover{
-          opacity: .8;
+        &:hover {
+          opacity: 0.8;
         }
         height: 100%;
         width: 20%;
