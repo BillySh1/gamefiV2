@@ -4,8 +4,7 @@ import router from "./router";
 import lottie from "vue-lottie";
 import store from './store/index';
 import { createToast } from 'mosha-vue-toastify';
-// 导入提醒框样式
-import 'mosha-vue-toastify/dist/style.css'
+import './style/toast.less'
 
 const _app = createApp(App);
 _app.config.globalProperties.$toast = createToast

@@ -132,6 +132,7 @@ export default {
           }
           const approve = async()=>{
             try{
+              proxy.$toast('等待授权',store.state.toast_info)
             const c = store.state.c_mmc;
             const value = data.web3.utils.toWei(getprice.value.toString(),'ether')
             const addr = store.state.c_recruit.options.address;
@@ -144,9 +145,10 @@ export default {
           })
           if(res.status){
             data.btnStatus = 1;
-            proxy.$toast('授权成功')
+            proxy.$toast('授权成功',store.state.toast_success)
           }
             }catch(e){
+              proxy.$toast('授权失败',store.state.toast_error)
               console.log(e)
             }
 

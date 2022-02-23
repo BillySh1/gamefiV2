@@ -57,6 +57,30 @@ const store = createStore({
       account: "",
       web3: "",
       c_airdrop: "",
+      toast_success:{
+        type:'success',
+        timeout: 3000,
+        showCloseButton: false,
+        showIcon: true,
+        transition: 'slide',
+        hideProgressBar: true,
+      },
+      toast_info:{
+        type:'info',
+        timeout: 1000000,
+        showCloseButton: false,
+        showIcon: true,
+        transition: 'slide',
+        hideProgressBar: true,
+      },
+      toast_error:{
+        type:'danger',
+        timeout: 3000,
+        showCloseButton: false,
+        showIcon: true,
+        transition: 'slide',
+        hideProgressBar: true,
+      }
     };
   },
 });
