@@ -92,22 +92,25 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed,getCurrentInstance} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from 'vuex'
 import initWeb3 from '../../utils/initWeb3.js'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
 
+
+
 export default {
     name: 'mint_detail',
     components:{
         CommonPageHeader,
-        CommonPageFooter
+        CommonPageFooter,
     },
       setup() {
         const route = useRoute();
         const store = useStore();
+        const { proxy } = getCurrentInstance();
           const data = reactive({
             info:'',
             buyValue:1,
@@ -140,8 +143,8 @@ export default {
             from: data.account
           })
           if(res.status){
-            data.btnStatus = 1
-            console.log('授权成功')
+            data.btnStatus = 1;
+            proxy.$toast('授权成功')
           }
             }catch(e){
               console.log(e)
