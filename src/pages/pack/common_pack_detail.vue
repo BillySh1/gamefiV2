@@ -36,8 +36,9 @@
 
         <div class="content_box">
           <div class="inner">
+            <div v-if="!curPackData.length" class="emptyShow">暂无物品</div>
             <div
-              v-for="(item, index) in packItems"
+              v-for="(item, index) in curPackData"
               :key="index"
               class="pack_item"
               @click="() => (curItemIndex = index)"
@@ -54,7 +55,7 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed,watch} from 'vue'
 export default {
     name: 'common_pack_detail',
     props:['value','type'],
@@ -62,11 +63,23 @@ export default {
           const data = reactive({
             tabs:[{key:1,name:'装备'},{key:2,name:'珍宝'}],
             curTab: 1,
-            packItems:[0,1,2,3,4,5,6,7,8,9],
+            goodsItems:[0,1,2,3,4,5,6,7,8,9],
+            equpmentItems:[],
+            curPackData:[],
             curItemIndex:0,
+          });
+          watch(()=>data.curTab,(v)=>{
+            if(v==1){
+              data.curPackData = data.equpmentItems
+            }else if(v==2){
+              data.curPackData = data.goodsItems
+            }
+            console.log(data.curPackData,'fff')
+          },{
+            immediate:true
           })
           const curItemShow = computed(()=>{
-            return data.packItems[data.curItemIndex]
+            return data.curPackData[data.curItemIndex]
           })
           onBeforeMount(() => {
             data.curTab = prop.type
@@ -75,7 +88,7 @@ export default {
           const refData = toRefs(data);
           return {
               ...refData,
-              curItemShow
+              curItemShow,
           }
 
       }
@@ -102,6 +115,10 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
     .inner_box {
       position: relative;
       width: 100%;
@@ -167,7 +184,13 @@ export default {
           padding-left: 2rem;
           display: flex;
           flex-wrap: wrap;
-          align-items: center;
+          .emptyShow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+      font-size: 1.2rem;
+      transform: translate(-60%,-50%);
+    }
           .pack_item {
             border-radius: 1rem;
             opacity: 0.6;
