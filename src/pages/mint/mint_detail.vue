@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">
+    <div v-if="loading" class="content">
+      <Lottie :options="lottie_options" />
+    </div>
+
+    <div v-else class="content">
       <div class="left_c">
         <div class="img_box">
           <img
@@ -93,7 +97,7 @@
 
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,computed,getCurrentInstance} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import initWeb3 from '../../utils/initWeb3.js'
 import CommonPageHeader from '../../components/common_page_header'
@@ -109,6 +113,7 @@ export default {
     },
       setup() {
         const route = useRoute();
+        const router = useRouter()
         const store = useStore();
         const { proxy } = getCurrentInstance();
           const data = reactive({
@@ -119,6 +124,11 @@ export default {
             account:'',
             price: 0,
             btnStatus: 0,
+            beforePack:[],
+            loading:false,
+            lottie_options:{
+              animationData: require('../../assets/common/loading.json')
+            }
           })
           const getprice = computed(()=>{
            return data.buyValue * Number(data.info.price)
@@ -164,15 +174,50 @@ export default {
                 gas: Number.parseInt(gas, 10) + 50000,
                 from: data.account
               })
+              data.loading = true
               
               
               if(res.status){
-                proxy.$toast('购买成功',store.state.toast_success)
+                data.loading = false
+                proxy.$toast('购买成功',store.state.toast_success);
+                router.push({
+                  name:'minting',
+                  query: {
+                    info:JSON.stringify(data.info)
+                  }
+                })
               }
-                           
+                   
             }catch(e){
               proxy.$toast('购买失败',store.state.toast_error)
               console.log(e)
+            }
+          }
+          
+          const getBeforePack = async()=>{
+             try{
+            const c = store.state.c_hero;
+            const res = await c.methods.cardList(data.account).call();
+            res.map(x=>{
+              data.beforePack.push({
+                tokenId: x.tokenId,
+                heroId: x.heroId,
+                rarity: x.rarity,
+                quality: x.quality,
+                properties: x.properties.map(x=>Number(x)/100),
+                power: Number(x.power)/100,
+                star: x.star,
+                rebirthTimes: x.rebirthTimes,
+                preference: x.preference,
+                native: x.native,
+                level: x.level,
+                camp:x.camp,
+                addition:x.addition
+              })
+            })
+            sessionStorage.setItem('before_pack',JSON.stringify(data.beforePack))
+            }catch(e){
+                proxy.$toast('购买成功',store.state.toast_success)
             }
 
           }
@@ -188,8 +233,9 @@ export default {
           const btnText = computed(()=>{
             return ['授权','购买'][data.btnStatus]
           })
+
+
           onBeforeMount(async() => {
-            
             await initWeb3.Init(
               (addr)=>{
                 data.account = addr
@@ -199,7 +245,7 @@ export default {
               }
             )
             data.info = JSON.parse(route.query.info);
-            console.log(data.info,store.state.c_hero)
+            await getBeforePack()
           })
           
           const refData = toRefs(data);

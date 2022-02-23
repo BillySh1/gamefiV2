@@ -2,26 +2,26 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routerHistory = createWebHashHistory();
 
-const mint = import("../pages/mint/mint.vue");
-const mint_detail = import("../pages/mint/mint_detail.vue");
-const minting = import("../pages/mint/minting.vue");
-const home = import("../pages/index/index.vue");
-const store = import("../pages/store/store.vue");
-const pack = import("../pages/pack/pack.vue");
-const market = import("../pages/market/market.vue");
-const exchange = import("../pages/exchange/exhcange.vue");
-const mix = import("../pages/mix/mix.vue");
-const reborn = import("../pages/reborn/reborn.vue");
-const leader_board = import("../pages/leader_board/board.vue");
-const swap = import("../pages/swap/swap.vue");
-const invite = import("../pages/invite/invite.vue");
-const airdrop = import("../pages/airdrop/airdrop.vue");
-const title = import("../pages/title/title.vue");
-const notice = import("../pages/notice/notice.vue");
-const showItem = import("../components/buy_item_success.vue");
-const storeDetail = import("../pages/store/store_detail.vue");
-const storeSuccess = import("../pages/store/store_buy_success.vue");
-const inviteBoard = import("../pages/invite/invite_board.vue");
+const mint = () => import("../pages/mint/mint.vue");
+const mint_detail = () => import("../pages/mint/mint_detail.vue");
+const minting = () => import("../pages/mint/minting.vue");
+const home = () => import("../pages/index/index.vue");
+const store = () => import("../pages/store/store.vue");
+const pack = () => import("../pages/pack/pack.vue");
+const market = () => import("../pages/market/market.vue");
+const exchange = () => import("../pages/exchange/exhcange.vue");
+const mix = () => import("../pages/mix/mix.vue");
+const reborn = () => import("../pages/reborn/reborn.vue");
+const leader_board = () => import("../pages/leader_board/board.vue");
+const swap = () => import("../pages/swap/swap.vue");
+const invite = () => import("../pages/invite/invite.vue");
+const airdrop = () => import("../pages/airdrop/airdrop.vue");
+const title = () => import("../pages/title/title.vue");
+const notice = () => import("../pages/notice/notice.vue");
+const showItem = () => import("../components/buy_item_success.vue");
+const storeDetail = () => import("../pages/store/store_detail.vue");
+const storeSuccess = () => import("../pages/store/store_buy_success.vue");
+const inviteBoard = () => import("../pages/invite/invite_board.vue");
 
 const router = createRouter({
   history: routerHistory,

@@ -2,11 +2,14 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <div v-if="showDetailPack" class="content hero_pack">
-      <InjectPackHero @back="()=> curShowType == undefined" :value="curShowType === 0" />
+      <InjectPackHero
+        @back="() => (curShowType = undefined)"
+        :value="curShowType === 0"
+      />
       <CommonPackDetail
         @back="() => (curShowType = undefined)"
         :value="curShowType === 1 || curShowType == 2"
-        :type ="curShowType"
+        :type="curShowType"
       />
     </div>
     <div v-else class="content">
