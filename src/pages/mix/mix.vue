@@ -4,7 +4,7 @@
     <div v-if="showPack" class="content">
       <InjectPackHero :value="showPack" />
     </div>
-    <div v-else class="content">
+    <div v-if='!showPack && !loading' class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
       <div class="inner">
         <div class="mix_item">
@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+      <Lottie v-if="loading" :options="lottie_options" />
     <CommonPageFooter />
 
     <InjectModal
@@ -52,7 +53,7 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
+import { reactive,toRefs} from 'vue'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
 import InjectModal  from '../../components/inject_modal'
@@ -71,9 +72,10 @@ export default {
             pageTitle:'卡牌进阶',
             showModal:false,
             showPack: false,
-          })
-
-          onBeforeMount(() => {
+            lottie_options:{
+              animationData: require('../../assets/mix/mixing.json')
+            },
+            loading: false,
           })
 
           const refData = toRefs(data);

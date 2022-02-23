@@ -236,6 +236,7 @@ export default {
 
 
           onBeforeMount(async() => {
+            data.loading = true
             await initWeb3.Init(
               (addr)=>{
                 data.account = addr
@@ -246,6 +247,7 @@ export default {
             )
             data.info = JSON.parse(route.query.info);
             await getBeforePack()
+            data.loading = false
           })
           
           const refData = toRefs(data);
