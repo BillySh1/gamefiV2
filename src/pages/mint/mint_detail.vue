@@ -32,7 +32,7 @@
               style="margin-right: 2rem"
               src="../../assets/mint/price_icon.svg"
             />
-            <span>{{ info.price }}</span>
+            <span>{{ getprice }}</span>
           </div>
         </div>
         <div class="right_c_content">
@@ -47,35 +47,42 @@
               style="cursor: pointer"
               class="img_action"
               src="../../assets/mint/minus.svg"
-              alt=""
+              @click="
+                () => {
+                  const temp = buyValue - 1;
+                  if (temp < 0) {
+                    buyValue = 0;
+                    return;
+                  }
+                  buyValue = temp;
+                }
+              "
             />
             <div class="ipt_bg">
               <img class="ipt_img" src="../../assets/mint/input.svg" alt="" />
-              <input v-model="buyValue" class="input" type="text" />
+              <input
+                v-model="buyValue"
+                class="input"
+                @input="
+                  buyValue = Number($event.target.value.replace(/\D+/, ''))
+                "
+              />
             </div>
             <img
               class="img_action"
               style="cursor: pointer"
               src="../../assets/mint/add.svg"
-              alt=""
+              @click="
+                () => {
+                  buyValue += 1;
+                }
+              "
             />
           </div>
 
-          <div
-            class="right_c_btn"
-            @click="
-              () => {
-                $router.push({
-                  name: 'minting',
-                  query: {
-                    info: JSON.stringify(info),
-                  },
-                });
-              }
-            "
-          >
+          <div class="right_c_btn" @click="btnClick">
             <img class="btn_img" src="../../assets/mint/btn.svg" alt="" />
-            <div class="richt_c_btn_value">购买</div>
+            <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>
       </div>
@@ -85,7 +92,7 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from 'vuex'
 import initWeb3 from '../../utils/initWeb3.js'
@@ -108,12 +115,45 @@ export default {
             web3:'',
             account:'',
             price: 0,
+            btnStatus: 0,
           })
-          const getprice = async()=>{
-            const c = await store.state.c_richShop
-            console.log(c,'sss')
-            data.price = 0
+          const getprice = computed(()=>{
+           return data.buyValue * Number(data.info.price)
+          })
+          const btnClick = async()=>{
+            if(data.btnStatus == 0){
+              await approve()
+            }else if(data.btnStatus === 1){
+              await buy()
+            }
           }
+          const approve = async()=>{
+            try{
+            const c = store.state.c_mmc;
+            const value = data.web3.utils.toWei(getprice.value.toString(),'ether')
+            const addr = store.state.c_recruit.options.address;
+            const gasPrice = await data.web3.eth.getGasPrice();
+            const gas = await c.methods.approve(addr, value).estimateGas({from: data.account});
+            const res = await c.methods.approve(addr,value).send({
+            gas: gas,
+            gasPrice: gasPrice,
+            from: data.account
+          })
+          if(res.status){
+            data.btnStatus = 1
+            console.log('授权成功')
+          }
+            }catch(e){
+              console.log(e)
+            }
+
+          }
+          const buy = async()=>{
+
+          }
+          const btnText = computed(()=>{
+            return ['授权','购买'][data.btnStatus]
+          })
           onBeforeMount(async() => {
             await initWeb3.Init(
               (addr)=>{
@@ -123,14 +163,15 @@ export default {
                 data.web3 = p
               }
             )
-            await getprice()
             data.info = JSON.parse(route.query.info);
           })
 
           const refData = toRefs(data);
           return {
               ...refData,
-
+              btnText,
+              btnClick,
+              getprice
           }
 
       }

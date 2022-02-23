@@ -63,10 +63,12 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs} from 'vue'
+import { reactive,toRefs,onBeforeMount} from 'vue'
+import {useStore} from 'vuex'
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import CommonPageHeader from '../../components/common_page_header'
 import CommonPageFooter from '../../components/common_page_footer'
+import initWeb3 from '../../utils/initWeb3.js'
 import 'swiper/swiper.less';
 export default {
     name: 'mint',
@@ -77,6 +79,7 @@ export default {
       SwiperSlide
     },
       setup() {
+        const store = useStore();
           const data = reactive({
             activeIndex:0,
             blindBoxes:[
@@ -94,7 +97,7 @@ export default {
               {
                 key:1,
                 img:require('../../assets/mint/type1.svg'),
-                price: 20000,
+                price: 10000,
                 title:'鎏金虎符',
                 bg: require('../../assets/mint/type1_bg.svg'),
                 maxWidth: 430,
@@ -105,7 +108,7 @@ export default {
               {
                 key:2,
                 img:require('../../assets/mint/type2.svg'),
-                price: 50000,
+                price: 30000,
                 title:'传国玉玺',
                 bg: require('../../assets/mint/type2_bg.svg'),
                 maxWidth: 311,
@@ -113,9 +116,31 @@ export default {
                 offsetX:"-60%",
                 offsetY:'-50%'
               },
-            ]
+            ],
+            account: '',
+            web3:'',
+          });
+          onBeforeMount(async()=>{
+            await initWeb3.Init(
+              (addr)=>{
+                data.account = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            );
+            await getPrice()
           })
-
+      const getPrice = async()=>{
+        const c = store.state.c_recruit;
+        const res = await c.methods.getBlindBoxPrice().call();
+        if(res.length){
+          const priceMap = res.map(x=>data.web3.utils.fromWei(x,'ether'))
+          priceMap.forEach((i,idx)=>{
+            data.blindBoxes[idx].price = i
+          })
+        }
+      }
       const onSlideChange = (e) => {
         data.activeIndex = e.realIndex;
       };

@@ -8,7 +8,7 @@
 
 <script>
 import initWeb3 from "./utils/initWeb3";
-const acceptNetWorks = [56, 97];
+const acceptNetWorks = [ 97];
 export default {
   name: "App",
   data() {
