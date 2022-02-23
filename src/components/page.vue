@@ -1,10 +1,15 @@
 <template>
   <div class="page_box">
     <div
-      v-for="(item, index) in page_num"
+      v-for="(item, index) in totalPages"
       :key="index"
       :class="cur_page == item ? 'page_item active' : 'page_item'"
-      @click="()=>change(item)"
+      @click="
+        () => {
+          change(item);
+          $emit('change', item);
+        }
+      "
     >
       {{ item }}
     </div>
@@ -12,20 +17,23 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import { reactive,toRefs,onMounted,computed} from 'vue'
 export default {
     name: 'page',
-      setup() {
-          console.log('1-开始创建组件-setup')
+    props:['current','total'],
+      setup(prop) {
           const data = reactive({
-              page_num:[1,2,3,4,5,6],
-              cur_page:1,
+              cur_page: prop.current,
           })
-          onBeforeMount(() => {
-              console.log('2.组件挂载页面之前执行----onBeforeMount')
-          })
+        const totalPages = computed(()=>{
+          let res = [];
+          for(let i = 1; i<= prop.total; i++){
+            res.push(i)
+          }
+          return res
+        })
           onMounted(() => {
-              console.log('3.-组件挂载到页面之后执行-------onMounted')
+              console.log(totalPages.value,'sss')
           })
           const change = (item)=>{
               data.cur_page = item;
@@ -34,7 +42,8 @@ export default {
           const refData = toRefs(data);
           return {
               ...refData,
-              change
+              change,
+              totalPages
           }
 
       }

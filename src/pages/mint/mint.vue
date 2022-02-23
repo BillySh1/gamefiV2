@@ -166,14 +166,12 @@ export default {
 }
 
 .swiper_title {
-  font-family: FZYanZhenQingKaiShuJF;
   font-size: 1.5rem;
   color: #a5a5a5;
   transform: translateY(2.5rem);
   transition: 500ms;
 }
 .swiper_title_active {
-  font-family: FZYanZhenQingKaiShuJF;
   font-size: 1.75rem;
   color: #f2dbb9;
 }

@@ -20,17 +20,22 @@
           <div class="text">蜀</div>
         </div>
         <div class="card_content">
-          <div
-            v-for="(item, index) in curShowItems"
-            :key="index"
-            class="card_item"
-          >
+          <div v-for="(item, index) in curItems" :key="index" class="card_item">
             <PackHeroItem />
           </div>
         </div>
       </div>
       <div class="page_nation_box">
-        <Page />
+        <Page
+          @change="
+            (num) => {
+              curPage = num;
+              getCurShowItems();
+            }
+          "
+          :current="curPage"
+          :total="total"
+        />
       </div>
       <img style="width: 100%" src="../assets/pack/bottom_border.svg" />
     </div>
@@ -38,10 +43,12 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
+import { reactive,toRefs,onBeforeMount,getCurrentInstance} from 'vue'
+import {useStore} from 'vuex'
 import PackHeroItem from './pack_hero_item'
 import CommonPackFilter from './common_pack_filter'
 import CommonSearch from './common_search'
+import initWeb3 from '../utils/initWeb3.js'
 import Page from './page'
 export default {
     name: 'inject_pack_hero',
@@ -53,19 +60,69 @@ export default {
         CommonSearch
     },
       setup() {
-
+          const store = useStore();
+          const proxy = getCurrentInstance()
           const data = reactive({
             pageTitle:'我的背包',
             allItems:[],
-            curShowItems:[1,2,3,4],
+            curItems:[],
+            web3:'',
+            account:'',
+            rawData:[],
+            curPage:1,
+            total: 0,
           })
-
-          onBeforeMount(() => {
+          const getCurShowItems = ()=>{
+            data.curItems = [];
+            const curPage = data.curPage;
+            const rawData = data.rawData;
+            const startIndex = (curPage-1)*4;
+            const endIndex = curPage*4 > rawData.length ? rawData.length-1 : curPage*4 -1;
+            data.curItems =  rawData.slice(startIndex,endIndex+1) 
+          }
+          onBeforeMount(async() => {
+            await initWeb3.Init(
+              (addr)=>{
+                data.account = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            )
+            await getPack();
+            getCurShowItems()
           })
-
+          const getPack = async()=>{
+            try{
+            const c = store.state.c_hero;
+            const res = await c.methods.cardList(data.account).call();
+            res.map(x=>{
+              data.rawData.push({
+                tokenId: x.tokenId,
+                heroId: x.heroId,
+                rarity: x.rarity,
+                quality: x.quality,
+                properties: x.properties.map(x=>Number(x)/100),
+                power: Number(x.power)/100,
+                star: x.star,
+                rebirthTimes: x.rebirthTimes,
+                preference: x.preference,
+                native: x.native,
+                level: x.level,
+                camp:x.camp,
+                addition:x.addition
+              })
+            })
+            data.total =Math.ceil(data.rawData.length / 4)
+            }catch(e){
+                proxy.$toast('购买成功',store.state.toast_success)
+            }
+            
+          }
           const refData = toRefs(data);
           return {
               ...refData,
+              getCurShowItems,
           }
 
       }
@@ -97,7 +154,7 @@ export default {
       cursor: pointer;
       margin-left: 4rem;
     }
-    .filter_box{
+    .filter_box {
       transform: translateX(-10rem);
     }
   }

@@ -133,12 +133,12 @@ export default {
           const approve = async()=>{
             try{
               proxy.$toast('等待授权',store.state.toast_info)
-            const c = store.state.c_mmc;
-            const value = data.web3.utils.toWei(getprice.value.toString(),'ether')
-            const addr = store.state.c_recruit.options.address;
-            const gasPrice = await data.web3.eth.getGasPrice();
-            const gas = await c.methods.approve(addr, value).estimateGas({from: data.account});
-            const res = await c.methods.approve(addr,value).send({
+              const c = store.state.c_mmc;
+              const value = data.web3.utils.toWei(getprice.value.toString(),'ether')
+              const addr = store.state.c_recruit.options.address;
+              const gasPrice = await data.web3.eth.getGasPrice();
+              const gas = await c.methods.approve(addr, value).estimateGas({from: data.account});
+              const res = await c.methods.approve(addr,value).send({
             gas: gas,
             gasPrice: gasPrice,
             from: data.account
@@ -154,12 +154,42 @@ export default {
 
           }
           const buy = async()=>{
+            try{
+              proxy.$toast('等待购买',store.state.toast_info)
+              const c = store.state.c_recruit;
+              const gasPrice = await data.web3.eth.getGasPrice();
+              const gas = await c.methods.buy(data.info.key,data.buyValue,'0x0000000000000000000000000000000000000000').estimateGas({from: data.account});
+              const res = await c.methods.buy(data.info.key,data.buyValue,'0x0000000000000000000000000000000000000000').send({
+                gasPrice:gasPrice,
+                gas: Number.parseInt(gas, 10) + 50000,
+                from: data.account
+              })
+              
+              
+              if(res.status){
+                proxy.$toast('购买成功',store.state.toast_success)
+              }
+                           
+            }catch(e){
+              proxy.$toast('购买失败',store.state.toast_error)
+              console.log(e)
+            }
 
           }
+          // 订阅事件
+          // const watchEvent = ()=>{
+          //    store.state.c_hero.events.NewHero({fromBlock:0},function(){
+          //     }).on('data',(ret)=>{
+          //       console.log(ret,'ret')
+          //     }).on('error',(err)=>{
+          //       console.log(err,'err')
+          //     })
+          // }
           const btnText = computed(()=>{
             return ['授权','购买'][data.btnStatus]
           })
           onBeforeMount(async() => {
+            
             await initWeb3.Init(
               (addr)=>{
                 data.account = addr
@@ -169,8 +199,9 @@ export default {
               }
             )
             data.info = JSON.parse(route.query.info);
+            console.log(data.info,store.state.c_hero)
           })
-
+          
           const refData = toRefs(data);
           return {
               ...refData,
