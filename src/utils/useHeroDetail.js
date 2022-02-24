@@ -65,7 +65,7 @@ const heroMap = {
   },
   140: {
     name: "刘备",
-    img: "",
+    img: require('../assets/cardImgs/hero/1/140.png'),
   },
   130: {
     name: "关羽",

@@ -39,7 +39,7 @@ export default {
           });
         const lottie_options = computed(()=>{
             return  {
-                  animationData: require(`../../assets/mint/type${data.info.key}.json`),
+                  animationData: require(`../../assets/common/loading.json`),
               }
         })
           onBeforeMount(async() => {

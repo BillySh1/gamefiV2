@@ -2,8 +2,11 @@
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
-    <div class="inner">
-      {{ tokenId }}
+    <div v-else class="inner">
+      <div class="hero_card_big" >
+       <HeroCardItem :info='info' />
+
+      </div>
     </div>
     <CommonPageFooter />
     <img class="bg_badge" src="../../assets/pack/bg_badge.svg" />
@@ -18,11 +21,13 @@ import CommonPageFooter from '../../components/common_page_footer'
 import {useRoute} from 'vue-router'
 import initWeb3 from '../../utils/initWeb3.js'
 import useHeroDetail from '../../utils/useHeroDetail.js'
+import HeroCardItem from '../../components/hero_card_item'
 export default {
     name: 'hero_detail',
     components:{
         CommonPageHeader,
-        CommonPageFooter
+        CommonPageFooter,
+        HeroCardItem
     },
       setup() {
           const route = useRoute();
@@ -55,6 +60,7 @@ export default {
                  const res = await c.methods.getHero(data.tokenId).call();
                  const uid = res.camp.toString() + res.rarity.toString()+ res.heroId.toString()
                  data.info = {...res,...useHeroDetail(uid), uid: uid}
+                 console.log(data.info,'ggg')
              }
           const refData = toRefs(data);
           return {
@@ -89,6 +95,13 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .hero_card_big{
+      width: 25%;
+      height: 100%;
+    }
   }
 }
 </style>

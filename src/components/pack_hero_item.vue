@@ -1,7 +1,7 @@
 <template>
   <div class="power_box">
     <div class="card_content">
-      <HeroCardItem :info="info" />
+      <HeroCardItem :info="curInfo" />
     </div>
     <div class="power_zone">
       <div class="zone_inner">
@@ -11,14 +11,14 @@
           <img class="part" src="../assets/pack/power_text_right.svg" alt="" />
         </div>
         <img class="power_img" src="../assets/pack/power_img.svg" />
-        <div class="power_value">{{info.power}}</div>
+        <div class="power_value">{{ info.power }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed} from 'vue'
 import HeroCardItem from './hero_card_item'
 export default {
     name: 'pack_hero_item',
@@ -30,14 +30,17 @@ export default {
           const data = reactive({
 
           })
+          const curInfo = computed(()=>{
+            return prop.info
+          })
           onBeforeMount(() => {
             console.log(prop,'fff')
           })
-          onMounted(() => {
-          })
+         
           const refData = toRefs(data);
           return {
               ...refData,
+              curInfo
           }
 
       }
@@ -51,15 +54,11 @@ export default {
   border-radius: 1rem;
   .card_content {
     position: absolute;
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    img {
-      width: 100%;
-      height: 100%;
-    }
   }
   .power_zone {
     position: absolute;

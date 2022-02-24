@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div v-if="loading" class="content">
-      <Lottie :options="lottie_options" />
+    <div v-if="minting" class="content">
+      <Lottie v-if="minting" :options="lottie_minting_options" />
     </div>
 
     <div v-else class="content">
@@ -125,11 +125,16 @@ export default {
             price: 0,
             btnStatus: 0,
             beforePack:[],
-            loading:false,
+            minting: false,
             lottie_options:{
               animationData: require('../../assets/common/loading.json')
             }
           })
+           const lottie_minting_options = computed(()=>{
+            return  {
+                  animationData: require(`../../assets/mint/type${data.info.key}.json`),
+              }
+        })
           const getprice = computed(()=>{
            return data.buyValue * Number(data.info.price)
           })
@@ -169,16 +174,16 @@ export default {
               const c = store.state.c_recruit;
               const gasPrice = await data.web3.eth.getGasPrice();
               const gas = await c.methods.buy(data.info.key,data.buyValue,'0x0000000000000000000000000000000000000000').estimateGas({from: data.account});
+              data.minting = true;
               const res = await c.methods.buy(data.info.key,data.buyValue,'0x0000000000000000000000000000000000000000').send({
                 gasPrice:gasPrice,
-                gas: Number.parseInt(gas, 10) + 50000,
+                gas: Number.parseInt(gas, 10) + 1000000,
                 from: data.account
               })
-              data.loading = true
+             
               
               
               if(res.status){
-                data.loading = false
                 proxy.$toast('购买成功',store.state.toast_success);
                 router.push({
                   name:'minting',
@@ -191,6 +196,8 @@ export default {
             }catch(e){
               proxy.$toast('购买失败',store.state.toast_error)
               console.log(e)
+            }finally{
+                data.minting = false
             }
           }
           
@@ -255,7 +262,8 @@ export default {
               ...refData,
               btnText,
               btnClick,
-              getprice
+              getprice,
+              lottie_minting_options
           }
 
       }
