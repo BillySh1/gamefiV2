@@ -1,7 +1,7 @@
 <template>
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
-    <div></div>
+    <Lottie v-if="loading" :options="lottie_options" />
     <div class="inner">
       {{ tokenId }}
     </div>
@@ -12,9 +12,12 @@
 
 <script lang='js'>
 import { reactive,toRefs,onBeforeMount} from 'vue'
+import {useStore} from 'vuex'
 import CommonPageHeader from '../../components/common_page_header';
 import CommonPageFooter from '../../components/common_page_footer'
 import {useRoute} from 'vue-router'
+import initWeb3 from '../../utils/initWeb3.js'
+import useHeroDetail from '../../utils/useHeroDetail.js'
 export default {
     name: 'hero_detail',
     components:{
@@ -23,14 +26,36 @@ export default {
     },
       setup() {
           const route = useRoute();
+          const store = useStore()
           const data = reactive({
               tokenId: 0,
-              pageTitle:'卡牌详情'
+              info:'',
+              pageTitle:'卡牌详情',
+              loading: false,
+              lottie_options:{
+                  animationData:require('../../assets/common/loading.json')
+              }
           })
-          onBeforeMount(() => {
-              data.tokenId = route.query.tokenId || 0
+          onBeforeMount(async () => {
+              data.tokenId = route.query.tokenId || 0;
+              data.loading = true;
+            await initWeb3.Init(
+              (addr)=>{
+                data.account = addr
+              },
+              (p)=>{
+                data.web3 = p
+              }
+            );
+            await getTokenInfo();
+            data.loading = false;
           })
-          
+             const getTokenInfo = async()=>{
+                 const c = store.state.c_hero
+                 const res = await c.methods.getHero(data.tokenId).call();
+                 const uid = res.camp.toString() + res.rarity.toString()+ res.heroId.toString()
+                 data.info = {...res,...useHeroDetail(uid), uid: uid}
+             }
           const refData = toRefs(data);
           return {
               ...refData,

@@ -63,6 +63,7 @@ import PackHeroItem from './pack_hero_item'
 import CommonPackFilter from './common_pack_filter'
 import CommonSearch from './common_search'
 import initWeb3 from '../utils/initWeb3.js'
+import useHeroDetail from '../utils/useHeroDetail.js'
 import Page from './page'
 export default {
     name: 'inject_pack_hero',
@@ -117,6 +118,7 @@ export default {
             const c = store.state.c_hero;
             const res = await c.methods.cardList(data.account).call();
             res.map(x=>{
+            const uid = x.camp.toString() + x.rarity.toString() + x.heroId.toString()
               data.rawData.push({
                 tokenId: x.tokenId,
                 heroId: x.heroId,
@@ -130,9 +132,12 @@ export default {
                 native: x.native,
                 level: x.level,
                 camp:x.camp,
-                addition:x.addition
+                addition:x.addition,
+                ...useHeroDetail(uid),
+                uid: uid
               })
             })
+            console.log(data.rawData,'ggg')
             data.total =Math.ceil(data.rawData.length / 4)
             }catch(e){
                 proxy.$toast('购买成功',store.state.toast_success)

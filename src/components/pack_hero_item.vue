@@ -1,7 +1,7 @@
 <template>
   <div class="power_box">
     <div class="card_content">
-      <img src="../assets/mix/temp_card.svg" alt="" />
+      <HeroCardItem :info="info" />
     </div>
     <div class="power_zone">
       <div class="zone_inner">
@@ -19,14 +19,19 @@
 
 <script lang="js">
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+import HeroCardItem from './hero_card_item'
 export default {
     name: 'pack_hero_item',
+    components:{
+      HeroCardItem
+    },
     props:['info'],
-      setup() {
+      setup(prop) {
           const data = reactive({
 
           })
           onBeforeMount(() => {
+            console.log(prop,'fff')
           })
           onMounted(() => {
           })
