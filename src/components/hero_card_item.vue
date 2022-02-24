@@ -34,72 +34,82 @@
   </div>
 </template>
 
-<script lang='js'>
-import { reactive,toRefs,computed} from 'vue'
-import useHeroDetail from '../utils/useHeroDetail.js'
+<script>
+import { reactive, toRefs, computed } from "vue";
+import useHeroDetail from "../utils/useHeroDetail.js";
 export default {
-    name: 'hero_card_img',
-    props:['info'],
-      setup(prop) {
-          console.log('1-开始创建组件-setup')
-          const data = reactive({
-          })
-         
-          const borderImg = computed(()=>{
-              return [require('../assets/cardImgs/hero/bg/r0.png'),
-                      require('../assets/cardImgs/hero/bg/r1.png'),
-                      require('../assets/cardImgs/hero/bg/r2.png'),
-                      require('../assets/cardImgs/hero/bg/r3.png'),
-                      require('../assets/cardImgs/hero/bg/r4.png')][prop.info.rarity] || require('../assets/cardImgs/hero/bg/r4.png')
-          })
-          const qualityImg = computed(()=>{
-              return [require('../assets/cardImgs/hero/bg/q0.png'),
-              require('../assets/cardImgs/hero/bg/q1.png'),
-              require('../assets/cardImgs/hero/bg/q2.png'),
-              require('../assets/cardImgs/hero/bg/q3.png'),][prop.info.quality]
-          })
-          const campImg = computed(()=>{
-              return {
-                  img:[require('../assets/cardImgs/hero/bg/c0.png'),
-              require('../assets/cardImgs/hero/bg/c1.png'),
-              require('../assets/cardImgs/hero/bg/c2.png'),
-              require('../assets/cardImgs/hero/bg/c3.png'),
-              ][prop.info.camp],
-              }
-          })
-          const stars = computed(()=>{
-              const total = [1,3,4,5,10][prop.info.rarity];
-              const res = []
-              for(let i =0; i< total; i++){
-                res.push({
-                    status: 0
-                })
-              }
-              return res;
-          })
-          const nameTop = computed(()=>{
-              return ['10%','8.5%','7%','7.5%','5%','5%'][prop.info.rarity]
-          })
+  name: "hero_card_img",
+  props: ["info"],
+  setup(prop) {
+    console.log("1-开始创建组件-setup");
+    const data = reactive({});
 
-          const transform = computed(()=>{
-              return  [['-23%','-17%'],['-30%','-17%'],['-37%','-17%'],['-31%','-17%'],['-49%','-15%']][prop.info.rarity]
-          })
-          
-         
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              borderImg,
-              nameTop,
-              qualityImg,
-              stars,
-              campImg,
-              useHeroDetail,
-              transform
-          }
-
+    const borderImg = computed(() => {
+      return (
+        [
+          require("../assets/cardImgs/hero/bg/r0.png"),
+          require("../assets/cardImgs/hero/bg/r1.png"),
+          require("../assets/cardImgs/hero/bg/r2.png"),
+          require("../assets/cardImgs/hero/bg/r3.png"),
+          require("../assets/cardImgs/hero/bg/r4.png"),
+        ][prop.info.rarity] || require("../assets/cardImgs/hero/bg/r4.png")
+      );
+    });
+    const qualityImg = computed(() => {
+      return [
+        require("../assets/cardImgs/hero/bg/q0.png"),
+        require("../assets/cardImgs/hero/bg/q1.png"),
+        require("../assets/cardImgs/hero/bg/q2.png"),
+        require("../assets/cardImgs/hero/bg/q3.png"),
+      ][prop.info.quality];
+    });
+    const campImg = computed(() => {
+      return {
+        img: [
+          require("../assets/cardImgs/hero/bg/c0.png"),
+          require("../assets/cardImgs/hero/bg/c1.png"),
+          require("../assets/cardImgs/hero/bg/c2.png"),
+          require("../assets/cardImgs/hero/bg/c3.png"),
+        ][prop.info.camp],
+      };
+    });
+    const stars = computed(() => {
+      const total = [1, 3, 4, 5, 10][prop.info.rarity];
+      const res = [];
+      for (let i = 0; i < total; i++) {
+        res.push({
+          status: 0,
+        });
       }
-  };
+      return res;
+    });
+    const nameTop = computed(() => {
+      return ["10%", "8.5%", "7%", "7.5%", "5%", "5%"][prop.info.rarity];
+    });
+
+    const transform = computed(() => {
+      return [
+        ["-23%", "-17%"],
+        ["-30%", "-17%"],
+        ["-37%", "-17%"],
+        ["-31%", "-17%"],
+        ["-49%", "-15%"],
+      ][prop.info.rarity];
+    });
+
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      borderImg,
+      nameTop,
+      qualityImg,
+      stars,
+      campImg,
+      useHeroDetail,
+      transform,
+    };
+  },
+};
 </script>
 <style lang='less' scoped>
 .hero_card_box {

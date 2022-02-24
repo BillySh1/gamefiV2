@@ -3,9 +3,8 @@
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="inner">
-      <div class="hero_card_big" >
-       <HeroCardItem :info='info' />
-
+      <div class="hero_card_big">
+        <HeroCardItem :info="info" />
       </div>
     </div>
     <CommonPageFooter />
@@ -13,62 +12,62 @@
   </div>
 </template>
 
-<script lang='js'>
-import { reactive,toRefs,onBeforeMount} from 'vue'
-import {useStore} from 'vuex'
-import CommonPageHeader from '../../components/common_page_header';
-import CommonPageFooter from '../../components/common_page_footer'
-import {useRoute} from 'vue-router'
-import initWeb3 from '../../utils/initWeb3.js'
-import useHeroDetail from '../../utils/useHeroDetail.js'
-import HeroCardItem from '../../components/hero_card_item'
+<script>
+import { reactive, toRefs, onBeforeMount } from "vue";
+import { useStore } from "vuex";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import { useRoute } from "vue-router";
+import initWeb3 from "../../utils/initWeb3.js";
+import useHeroDetail from "../../utils/useHeroDetail.js";
+import HeroCardItem from "../../components/hero_card_item";
 export default {
-    name: 'hero_detail',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-        HeroCardItem
-    },
-      setup() {
-          const route = useRoute();
-          const store = useStore()
-          const data = reactive({
-              tokenId: 0,
-              info:'',
-              pageTitle:'卡牌详情',
-              loading: false,
-              lottie_options:{
-                  animationData:require('../../assets/common/loading.json')
-              }
-          })
-          onBeforeMount(async () => {
-              data.tokenId = route.query.tokenId || 0;
-              data.loading = true;
-            await initWeb3.Init(
-              (addr)=>{
-                data.account = addr
-              },
-              (p)=>{
-                data.web3 = p
-              }
-            );
-            await getTokenInfo();
-            data.loading = false;
-          })
-             const getTokenInfo = async()=>{
-                 const c = store.state.c_hero
-                 const res = await c.methods.getHero(data.tokenId).call();
-                 const uid = res.camp.toString() + res.rarity.toString()+ res.heroId.toString()
-                 data.info = {...res,...useHeroDetail(uid,res.preference), uid: uid}
-                 console.log(data.info,'ggg')
-             }
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+  name: "hero_detail",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    HeroCardItem,
+  },
+  setup() {
+    const route = useRoute();
+    const store = useStore();
+    const data = reactive({
+      tokenId: 0,
+      info: "",
+      pageTitle: "卡牌详情",
+      loading: false,
+      lottie_options: {
+        animationData: require("../../assets/common/loading.json"),
+      },
+    });
+    onBeforeMount(async () => {
+      data.tokenId = route.query.tokenId || 0;
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getTokenInfo();
+      data.loading = false;
+    });
+    const getTokenInfo = async () => {
+      const c = store.state.c_hero;
+      const res = await c.methods.getHero(data.tokenId).call();
+      const uid =
+        res.camp.toString() + res.rarity.toString() + res.heroId.toString();
+      data.info = { ...res, ...useHeroDetail(uid, res.preference), uid: uid };
+      console.log(data.info, "ggg");
+    };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang='less' scoped>
 .hero_detail_box {
@@ -98,7 +97,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .hero_card_big{
+    .hero_card_big {
       width: 25%;
       height: 100%;
     }

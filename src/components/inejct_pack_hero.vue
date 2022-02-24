@@ -23,6 +23,7 @@
           <div class="text">蜀</div>
         </div>
         <div class="card_content">
+          <div class="empty" v-if="!curItems.length" >暂无武将</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
@@ -215,6 +216,13 @@ export default {
       align-items: center;
       gap: 2rem;
       transform: translateX(10%);
+      .empty{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 1.5rem;
+      }
       .card_item {
         cursor: pointer;
         &:hover {

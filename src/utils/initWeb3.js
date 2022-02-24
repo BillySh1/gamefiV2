@@ -1,10 +1,10 @@
 import Web3 from "web3";
 export default {
-  async  Init(callback, provider) {
+  async Init(callback, provider) {
     if (window.ethereum) {
       this.provider = window.ethereum;
       try {
-        await this.provider.request({ method: "eth_requestAccounts" });
+        this.provider.request({ method: "eth_requestAccounts" });
       } catch (error) {
         console.log("User denied account access");
       }
@@ -15,6 +15,7 @@ export default {
         "https://bsc-dataseed.binance.org/"
       );
     }
+   
     const web3 = new Web3(this.provider);
     provider(web3);
     await web3.eth.getAccounts().then((accs) => {
@@ -22,5 +23,5 @@ export default {
       callback(accs[0]);
       sessionStorage.setItem("account", accs);
     });
-  }
-}
+  },
+};

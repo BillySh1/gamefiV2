@@ -3,19 +3,18 @@
     <div class="chain_icon_box">
       <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
     </div>
-    <div class="wallet_address">
+    <div class="wallet_address" @click="connect">
       {{ walletValue }}
     </div>
   </div>
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted,computed} from 'vue'
+import { reactive,toRefs,onBeforeMount,computed} from 'vue'
 import initWeb3 from '../utils/initWeb3.js'
 export default {
     name: 'inject_wallet',
       setup() {
-          console.log('1-开始创建组件-setup')
           const data = reactive({
             wallet:'连接钱包',
             web3:''
@@ -23,12 +22,20 @@ export default {
           const walletValue = computed(()=>{
             const wallet = data.wallet;
             let res = wallet;
-            if(wallet.length > 10){
+            if(wallet && wallet.length > 10){
               res = wallet.slice(0,5) + '...' + wallet.slice(wallet.length-4,wallet.length)
+              return res
             }
-            return res
+            return '连接钱包'
           })
-          onBeforeMount(async () => {
+          const watchAcc = ()=>{
+            if(!window.ethereum) return 
+             window.ethereum.on('accountsChanged', function (a) {
+            data.wallet = a
+            });
+          }
+          const connect = async()=>{
+            if(data.wallet.length >10) return
             await initWeb3.Init(
               (addr)=>{
                 data.wallet = addr
@@ -37,15 +44,18 @@ export default {
                 data.web3 = p
               }
             )
-              console.log('2.组件挂载页面之前执行----onBeforeMount')
+          }
+          onBeforeMount(async () => {
+            watchAcc
+            await connect()
           })
-          onMounted(() => {
-              console.log('3.-组件挂载到页面之后执行-------onMounted')
-          })
+         
           const refData = toRefs(data);
           return {
               ...refData,
-              walletValue
+              walletValue,
+              connect,
+              watchAcc
           }
 
       }
@@ -73,6 +83,7 @@ export default {
   }
 }
 .wallet_address {
+  cursor: pointer;
   padding: 0.5rem 3rem;
   background: rgba(0, 0, 0, 0.7);
   font-family: Roboto;
