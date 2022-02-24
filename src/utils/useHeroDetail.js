@@ -157,7 +157,7 @@ const heroMap = {
   },
   222: {
     name: "孙策",
-    img: "",
+    img: require('../assets/cardImgs/hero/2/222.png'),
   },
   223: {
     name: "太史慈",
@@ -213,7 +213,7 @@ const heroMap = {
   },
   320: {
     name: "貂蝉",
-    img: "",
+    img: require("../assets/cardImgs/hero/3/320.png"),
   },
   321: {
     name: "华佗",
@@ -255,14 +255,36 @@ const heroMap = {
     name: "袁术",
     img: require("../assets/cardImgs/hero/3/315.png"),
   },
+  's0':{
+    name:'盾士',
+    img:require("../assets/cardImgs/hero/s0.png")
+  },
+  's1':{
+    name:'战士 ',
+    img:require("../assets/cardImgs/hero/s1.png")
+  },
+  's2':{
+    name:'谋士 ',
+    img:require("../assets/cardImgs/hero/s2.png")
+  },
+  's3':{
+    name:'刺士',
+    img:require("../assets/cardImgs/hero/s3.png")
+  },
+  's4':{
+    name:'辅士',
+    img:require("../assets/cardImgs/hero/s4.png")
+  },
   err: {
     name: "小兵",
     img: require("../assets/cardImgs/hero/0/010.png"),
   },
 };
 
-const getHeroInfo = (id) => {
-  if (id[1] == 0) return heroMap["err"];
+const getHeroInfo = (id,p) => {
+  if (id[1] == 0) {
+    return heroMap[`s${p}`]
+  }
   return heroMap[id];
 };
 

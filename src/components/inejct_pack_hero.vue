@@ -98,6 +98,7 @@ export default {
             const startIndex = (curPage-1)*4;
             const endIndex = curPage*4 > rawData.length ? rawData.length-1 : curPage*4 -1;
             data.curItems =  rawData.slice(startIndex,endIndex+1) 
+            console.log(data.curItems)
           }
           onBeforeMount(async() => {
             data.loading = true
@@ -133,14 +134,13 @@ export default {
                 level: x.level,
                 camp:x.camp,
                 addition:x.addition,
-                ...useHeroDetail(uid),
-                uid: uid
+                uid: uid,
+                ...useHeroDetail(uid,x.preference)
               })
             })
-            console.log(data.rawData,'ggg')
             data.total =Math.ceil(data.rawData.length / 4)
             }catch(e){
-                proxy.$toast('购买成功',store.state.toast_success)
+                proxy.$toast('获取武将背包失败',store.state.toast_error)
             }
             
           }
@@ -213,8 +213,8 @@ export default {
       width: 80%;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
       gap: 2rem;
+      transform: translateX(10%);
       .card_item {
         cursor: pointer;
         &:hover {

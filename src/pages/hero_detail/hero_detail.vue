@@ -59,7 +59,7 @@ export default {
                  const c = store.state.c_hero
                  const res = await c.methods.getHero(data.tokenId).call();
                  const uid = res.camp.toString() + res.rarity.toString()+ res.heroId.toString()
-                 data.info = {...res,...useHeroDetail(uid), uid: uid}
+                 data.info = {...res,...useHeroDetail(uid,res.preference), uid: uid}
                  console.log(data.info,'ggg')
              }
           const refData = toRefs(data);

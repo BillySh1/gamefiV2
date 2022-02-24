@@ -1,7 +1,7 @@
 <template>
   <div class="power_box">
     <div class="card_content">
-      <HeroCardItem :info="curInfo" />
+      <HeroCardItem :info="info" />
     </div>
     <div class="power_zone">
       <div class="zone_inner">
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
+import { reactive,toRefs} from 'vue'
 import HeroCardItem from './hero_card_item'
 export default {
     name: 'pack_hero_item',
@@ -26,21 +26,15 @@ export default {
       HeroCardItem
     },
     props:['info'],
-      setup(prop) {
+      setup() {
           const data = reactive({
-
           })
-          const curInfo = computed(()=>{
-            return prop.info
-          })
-          onBeforeMount(() => {
-            console.log(prop,'fff')
-          })
+        
          
           const refData = toRefs(data);
           return {
               ...refData,
-              curInfo
+              
           }
 
       }
@@ -49,6 +43,7 @@ export default {
 <style lang="less" scoped>
 .power_box {
   position: relative;
+  width: 100%;
   height: 100%;
   border: 1px solid #946e36;
   border-radius: 1rem;
@@ -56,7 +51,7 @@ export default {
     position: absolute;
     width: 95%;
     height: 95%;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
