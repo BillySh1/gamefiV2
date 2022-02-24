@@ -23,7 +23,7 @@ export default {
             const wallet = data.wallet;
             let res = wallet;
             if(wallet && wallet.length > 10){
-              res = wallet.slice(0,5) + '...' + wallet.slice(wallet.length-4,wallet.length)
+              res = wallet.slice(0,5) + '...' + wallet.slice(wallet.length-8,wallet.length)
               return res
             }
             return '连接钱包'

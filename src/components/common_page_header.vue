@@ -26,6 +26,12 @@
         alt=""
       />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
+      <img
+        @click="exitFullScreen"
+        class="icon"
+        src="../assets/common/lang.svg"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -71,9 +77,16 @@ export default {
     });
 
     onMounted(() => {});
+    const exitFullScreen = () => {
+      const tp = require("tp-js-sdk");
+      tp.fullScreen({
+        fullScreen: 0,
+      });
+    };
     const refData = toRefs(data);
     return {
       ...refData,
+      exitFullScreen,
     };
   },
 };

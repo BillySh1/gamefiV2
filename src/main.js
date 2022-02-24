@@ -13,13 +13,18 @@ _app.component("Lottie", lottie);
 _app.use(router);
 _app.use(store);
 
-
 if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
   tp.rollHorizontal({
     horizontal: true,
   });
   tp.fullScreen({
     fullScreen: 1,
+  });
+  tp.popGestureRecognizerEnable({
+    enable: false,
+  });
+  tp.forwardNavigationGesturesEnable({
+    enable: false,
   });
 }
 
