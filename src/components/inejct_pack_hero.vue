@@ -23,7 +23,18 @@
           <div class="text">蜀</div>
         </div>
         <div class="card_content">
-          <div v-for="(item, index) in curItems" :key="index" class="card_item">
+          <div
+            v-for="(item, index) in curItems"
+            :key="index"
+            class="card_item"
+            @click="
+              () =>
+                $router.push({
+                  name: 'heroDetail',
+                  query: { tokenId: item.tokenId },
+                })
+            "
+          >
             <PackHeroItem :info="item" />
           </div>
         </div>

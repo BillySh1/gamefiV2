@@ -2,7 +2,7 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
-    <div class="content">
+    <div v-else class="content">
       <div class="left_c">
         <div class="img_box">
           <img
@@ -185,16 +185,15 @@ export default {
               const c = store.state.c_richShop;
               const gasPrice = await data.web3.eth.getGasPrice();
               const gas = await c.methods.buy(data.account,data.info.tokenId,data.buyValue).estimateGas({from: data.account});
+              data.loading = true
               const res = await c.methods.buy(data.account,data.info.tokenId,data.buyValue).send({
                 gasPrice:gasPrice,
                 gas: Number.parseInt(gas, 10),
                 from: data.account
               })
-              data.loading = true
               
               
               if(res.status){
-                data.loading = false
                 proxy.$toast('购买成功',store.state.toast_success);
                 router.push({
                   name:'buySuccess',
@@ -209,6 +208,8 @@ export default {
               proxy.$toast('购买失败',store.state.toast_error)
               console.log(e)
             }
+            data.loading = false
+
           }
           const refData = toRefs(data);
           return {

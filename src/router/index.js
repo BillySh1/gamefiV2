@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const routerHistory = createWebHashHistory();
 
@@ -22,6 +22,7 @@ const showItem = () => import("../components/buy_item_success.vue");
 const storeDetail = () => import("../pages/store/store_detail.vue");
 const storeSuccess = () => import("../pages/store/store_buy_success.vue");
 const inviteBoard = () => import("../pages/invite/invite_board.vue");
+const heroDetail = () => import("../pages/hero_detail/hero_detail.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -130,6 +131,11 @@ const router = createRouter({
       path: "/buySuccess",
       name: "buySuccess",
       component: storeSuccess,
+    },
+    {
+      path: "/heroDetail",
+      name: "heroDetail",
+      component: heroDetail,
     },
   ],
 });
