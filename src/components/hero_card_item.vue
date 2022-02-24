@@ -35,7 +35,7 @@
 </template>
 
 <script lang='js'>
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
+import { reactive,toRefs,computed} from 'vue'
 import useHeroDetail from '../utils/useHeroDetail.js'
 export default {
     name: 'hero_card_img',
@@ -43,7 +43,6 @@ export default {
       setup(prop) {
           console.log('1-开始创建组件-setup')
           const data = reactive({
-              transform:''
           })
          
           const borderImg = computed(()=>{
@@ -81,9 +80,11 @@ export default {
           const nameTop = computed(()=>{
               return ['10%','8.5%','7%','7.5%','5%','5%'][prop.info.rarity]
           })
-          onBeforeMount(() => {
-              data.transform = [['-23%','-17%'],['-30%','-17%'],['-37%','-17%'],['-31%','-17%'],['-49%','-15%']][prop.info.rarity]
+
+          const transform = computed(()=>{
+              return  [['-23%','-17%'],['-30%','-17%'],['-37%','-17%'],['-31%','-17%'],['-49%','-15%']][prop.info.rarity]
           })
+          
          
           const refData = toRefs(data);
           return {
@@ -93,7 +94,8 @@ export default {
               qualityImg,
               stars,
               campImg,
-              useHeroDetail
+              useHeroDetail,
+              transform
           }
 
       }
