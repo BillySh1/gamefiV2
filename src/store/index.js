@@ -46,9 +46,13 @@ const c_map = {
     address: addressMap.shop,
   },
   c_training: {
-    abi: TrainingABI,
+    abi: TrainingABI.abi,
     address: addressMap.training,
   },
+  c_usdt:{
+    abi: MMCTokenABI.abi,
+    address: addressMap.usdt
+  }
 };
 
 const store = createStore({

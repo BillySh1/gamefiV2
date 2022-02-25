@@ -8,11 +8,11 @@ const test = {
   airdrop: "0xcDb5D492d46132169DE428168A6264468286F718",
   shop: "0x8524ee34bD07351a73052D1A75e41548cBFDF534",
   training: "0x701ABE28d9c08f12fFE6ADEf7F7939C5fd4e755F",
-}
+  usdt: "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
+};
 
 // const main = {
 
 // }
 
-
-export default test
+export default test;

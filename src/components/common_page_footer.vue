@@ -153,14 +153,14 @@ export default {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   margin-left: 1rem;
   .text {
     margin-left: 1rem;
   }
   .img {
-    width: 3rem;
+    width: 2.5rem;
   }
 }
 .menu {
@@ -189,13 +189,13 @@ export default {
     cursor: pointer;
     margin: 0 1rem;
     .img {
-      height: 5rem;
+      height: 4.5rem;
     }
     .text {
       position: absolute;
       right: 0;
-      bottom: 0;
-      font-size: 1.5rem;
+      bottom: 10%;
+      font-size: 1rem;
       font-weight: 400;
     }
   }

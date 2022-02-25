@@ -32,12 +32,8 @@ export default {
   position: relative;
   width: fit-content;
   padding: 1rem 1.5rem;
-  background: linear-gradient(
-    180deg,
-    rgba(95, 26, 26, 0.05) 0%,
-    rgba(62, 18, 18, 0.05) 100%
-  );
-  border: 2px solid #a98461;
+  background: url('../assets/pack/active_tab.png') no-repeat;
+  background-size: 100% 100%;
   border-radius: 10px;
   font-size: 1.5rem;
 }
