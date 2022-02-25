@@ -1,12 +1,12 @@
 <template>
-  <div v-if="value" class="mask" @click="$emit('close')" >
+  <div v-if="value" class="mask" @click="$emit('close')">
     <img class="close" src="../assets/common/close.svg" alt="" />
     <div class="inner">
       <img class="bg" src="../assets/common/modal_bg.svg" alt="" />
       <div class="title">{{ title }}</div>
-        <div class="content" >
-            <slot></slot>
-        </div>
+      <div class="content">
+        <slot></slot>
+      </div>
       <div class="confirm">
         <div class="confirm_inner">
           <img src="../assets/common/modal_confirm_bg.svg" alt="" />
@@ -17,29 +17,26 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+<script >
+import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
-    name: 'inject_modal',
-    props:['value','title'],
-      setup() {
-          console.log('1-开始创建组件-setup')
-          const data = reactive({
-
-          })
-          onBeforeMount(() => {
-              console.log('2.组件挂载页面之前执行----onBeforeMount')
-          })
-          onMounted(() => {
-              console.log('3.-组件挂载到页面之后执行-------onMounted')
-          })
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+  name: "inject_modal",
+  props: ["value", "title"],
+  setup() {
+    console.log("1-开始创建组件-setup");
+    const data = reactive({});
+    onBeforeMount(() => {
+      console.log("2.组件挂载页面之前执行----onBeforeMount");
+    });
+    onMounted(() => {
+      console.log("3.-组件挂载到页面之后执行-------onMounted");
+    });
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .mask {
@@ -95,13 +92,13 @@ export default {
       }
     }
   }
-  .content{
-      position: absolute;
-      max-width: 80%;
-      margin: auto;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
+  .content {
+    position: absolute;
+    max-width: 80%;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>

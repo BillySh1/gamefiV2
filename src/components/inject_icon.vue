@@ -5,26 +5,21 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
+<script >
+import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
-    name: 'inject_icon',
-    props:['src','text','size'],
-      setup() {
-          const data = reactive({
-
-          })
-          onBeforeMount(() => {
-          })
-          onMounted(() => {
-          })
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+  name: "inject_icon",
+  props: ["src", "text", "size"],
+  setup() {
+    const data = reactive({});
+    onBeforeMount(() => {});
+    onMounted(() => {});
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .box {

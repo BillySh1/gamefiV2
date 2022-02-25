@@ -17,28 +17,24 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs} from 'vue'
-import HeroCardItem from './hero_card_item'
+<script>
+import { reactive, toRefs } from "vue";
+import HeroCardItem from "./hero_card_item";
 export default {
-    name: 'pack_hero_item',
-    components:{
-      HeroCardItem
-    },
-    props:['info'],
-      setup() {
-          const data = reactive({
-          })
-        
-         
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              
-          }
+  name: "pack_hero_item",
+  components: {
+    HeroCardItem,
+  },
+  props: ["info"],
+  setup() {
+    const data = reactive({});
 
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .power_box {
@@ -92,7 +88,9 @@ export default {
         }
       }
     }
-
+    .power_img {
+      width: 2rem;
+    }
     .power_value {
       font-family: SF Pro Text;
       font-size: 2rem;

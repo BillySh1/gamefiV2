@@ -22,24 +22,27 @@
           </div>
         </div>
         <div class="bottom_box">
-          <div class="item" @click="()=>$router.push({name:'inviteBoard'})" >
+          <div
+            class="item"
+            @click="() => $router.push({ name: 'inviteBoard' })"
+          >
             <img src="../../assets/invite/item1_bg.svg" alt="" />
-            <div class="inner" >
-              <img src="../../assets/invite/icons/2.svg" alt="">
+            <div class="inner">
+              <img src="../../assets/invite/icons/2.svg" alt="" />
               邀请排行榜
             </div>
           </div>
           <div class="item">
             <img src="../../assets/invite/item2_bg.svg" alt="" />
-            <div class="inner" >
-              <img src="../../assets/invite/icons/3.svg" alt="">
+            <div class="inner">
+              <img src="../../assets/invite/icons/3.svg" alt="" />
               邀请规则
             </div>
           </div>
           <div class="item">
             <img src="../../assets/invite/item3_bg.svg" alt="" />
-            <div class="inner" >
-              <img src="../../assets/invite/icons/4.svg" alt="">
+            <div class="inner">
+              <img src="../../assets/invite/icons/4.svg" alt="" />
               生成我的邀请码
             </div>
           </div>
@@ -50,32 +53,29 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
+<script >
+import { reactive, toRefs, onBeforeMount } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "呼朋唤友",
+    });
 
-          const data = reactive({
-            pageTitle:'呼朋唤友'
-          })
+    onBeforeMount(() => {});
 
-          onBeforeMount(() => {
-          })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
@@ -161,10 +161,10 @@ export default {
       align-items: center;
       justify-content: space-between;
       .item {
-        width: calc( 100%/3 - 1rem);
+        width: calc(100% / 3 - 1rem);
         cursor: pointer;
         position: relative;
-        img{
+        img {
           width: 100%;
         }
         .inner {
@@ -172,7 +172,7 @@ export default {
           width: 100%;
           top: 50%;
           left: 50%;
-          transform: translate(-50%,-50%);          
+          transform: translate(-50%, -50%);
           display: flex;
           flex-direction: column;
           align-items: center;

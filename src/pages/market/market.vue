@@ -6,32 +6,29 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
+<script >
+import { reactive, toRefs, onBeforeMount } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "交易市场",
+    });
 
-          const data = reactive({
-            pageTitle:'交易市场'
-          })
+    onBeforeMount(() => {});
 
-          onBeforeMount(() => {
-          })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {

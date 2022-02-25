@@ -10,49 +10,44 @@
           <div :style="getQualityStyle">史诗品质</div>
         </div>
         <img class="card" src="../assets/mix/temp_card.svg" />
-        <div class="bottom" >
-            进阶成功
-        </div>
+        <div class="bottom">进阶成功</div>
       </div>
     </div>
     <CommonPageFooter />
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
-import CommonPageHeader from './common_page_header'
-import CommonPageFooter from './common_page_footer'
+<script >
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import CommonPageHeader from "./common_page_header";
+import CommonPageFooter from "./common_page_footer";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "",
+    });
 
-          const data = reactive({
-            pageTitle:'',
-          })
+    onBeforeMount(() => {});
+    const getRarityStyle = computed(() => {
+      return "";
+    });
+    const getQualityStyle = computed(() => {
+      return "";
+    });
 
-          onBeforeMount(() => {
-          })
-        const getRarityStyle  = computed(()=>{
-            return ''
-        })
-        const getQualityStyle  = computed(()=>{
-            return ''
-        })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              getRarityStyle,
-              getQualityStyle
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      getRarityStyle,
+      getQualityStyle,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
@@ -75,21 +70,20 @@ export default {
     left: 50%;
     transform: translate(-50%, -55%);
     .title {
-        font-size: 2.5rem;
-        margin-bottom: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
     }
     .up_box {
       display: flex;
       font-size: 3rem;
       gap: 2rem;
     }
-    .bottom{
-        font-size: 2.5rem;
+    .bottom {
+      font-size: 2.5rem;
     }
-    .card{
-        margin: 1vmin 0;
-        width: 15rem;
-        
+    .card {
+      margin: 1vmin 0;
+      width: 15rem;
     }
   }
 }

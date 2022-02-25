@@ -4,7 +4,7 @@
     <div v-if="showPack" class="content">
       <InjectPackHero :value="showPack" />
     </div>
-    <div v-if='!showPack && !loading' class="content">
+    <div v-if="!showPack && !loading" class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
       <div class="inner">
         <div class="mix_item">
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-      <Lottie v-if="loading" :options="lottie_options" />
+    <Lottie v-if="loading" :options="lottie_options" />
     <CommonPageFooter />
 
     <InjectModal
@@ -52,39 +52,37 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import InjectModal  from '../../components/inject_modal'
-import InjectPackHero from '../../components/inejct_pack_hero'
+<script >
+import { reactive, toRefs } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import InjectModal from "../../components/inject_modal";
+import InjectPackHero from "../../components/inejct_pack_hero";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-        InjectModal,
-        InjectPackHero
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    InjectModal,
+    InjectPackHero,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "卡牌进阶",
+      showModal: false,
+      showPack: false,
+      lottie_options: {
+        animationData: require("../../assets/mix/mixing.json"),
+      },
+      loading: false,
+    });
 
-          const data = reactive({
-            pageTitle:'卡牌进阶',
-            showModal:false,
-            showPack: false,
-            lottie_options:{
-              animationData: require('../../assets/mix/mixing.json')
-            },
-            loading: false,
-          })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {

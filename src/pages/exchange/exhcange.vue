@@ -23,7 +23,11 @@
           <div class="icon">
             <img src="../../assets/exchange/coin.png" />
           </div>
-          <input class="ipt" v-model="buyNum" />
+          <input
+            class="ipt"
+            v-model="buyNum"
+            @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
+          />
           <div class="text">铜钱</div>
         </div>
         <div class="action_button">
@@ -33,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!loading"  class="balance_box">
+    <div v-if="!loading" class="balance_box">
       <div>余额</div>
       <div class="item">
         <img class="icon" src="../../assets/exchange/coin.png" />
@@ -74,8 +78,8 @@ export default {
       usdt_balance: 0,
       account: "",
       web3: "",
-      lottie_options:{
-        animationData: require('../../assets/common/loading.json')
+      lottie_options: {
+        animationData: require("../../assets/common/loading.json"),
       },
       loading: false,
     });
@@ -83,7 +87,7 @@ export default {
       return ["授权 USDT", "兑换成铜钱"][data.btnStatus];
     });
     onBeforeMount(async () => {
-      data.loading = true
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -93,15 +97,21 @@ export default {
         }
       );
       await getBalanceInfo();
-      data.loading = false
+      data.loading = false;
     });
     const getBalanceInfo = async () => {
       const c_m3t = store.state.c_m3t;
       const c_usdt = store.state.c_usdt;
-      const raw_m3t = await c_m3t.methods.balanceOf(data.account).call()
-      data.m3t_balance = Number.parseInt(data.web3.utils.fromWei(raw_m3t,'ether'),10).toFixed(2)
-      const raw_usdt = await c_usdt.methods.balanceOf(data.account).call()
-      data.usdt_balance = Number.parseInt(data.web3.utils.fromWei(raw_usdt,'ether'),10).toFixed(2)
+      const raw_m3t = await c_m3t.methods.balanceOf(data.account).call();
+      data.m3t_balance = Number.parseInt(
+        data.web3.utils.fromWei(raw_m3t, "ether"),
+        10
+      ).toFixed(2);
+      const raw_usdt = await c_usdt.methods.balanceOf(data.account).call();
+      data.usdt_balance = Number.parseInt(
+        data.web3.utils.fromWei(raw_usdt, "ether"),
+        10
+      ).toFixed(2);
     };
     // const approveU = async()=>{
     // }
@@ -130,7 +140,6 @@ export default {
     .item {
       display: flex;
       align-items: center;
-      width: 12rem;
       .icon {
         height: 2rem;
       }
@@ -183,6 +192,9 @@ export default {
       justify-content: space-between;
       .icon {
         width: 6rem;
+        img {
+          width: 100%;
+        }
       }
       .ipt {
         outline: none;

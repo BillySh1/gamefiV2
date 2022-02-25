@@ -9,57 +9,59 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
-import initWeb3 from '../utils/initWeb3.js'
+<script >
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import initWeb3 from "../utils/initWeb3.js";
 export default {
-    name: 'inject_wallet',
-      setup() {
-          const data = reactive({
-            wallet:'连接钱包',
-            web3:''
-          })
-          const walletValue = computed(()=>{
-            const wallet = data.wallet;
-            let res = wallet;
-            if(wallet && wallet.length > 10){
-              res = wallet.slice(0,5) + '...' + wallet.slice(wallet.length-8,wallet.length)
-              return res
-            }
-            return '连接钱包'
-          })
-          const watchAcc = ()=>{
-            if(!window.ethereum) return 
-             window.ethereum.on('accountsChanged', function (a) {
-            data.wallet = a
-            });
-          }
-          const connect = async()=>{
-            if(data.wallet.length >10) return
-            await initWeb3.Init(
-              (addr)=>{
-                data.wallet = addr
-              },
-              (p)=>{
-                data.web3 = p
-              }
-            )
-          }
-          onBeforeMount(async () => {
-            watchAcc
-            await connect()
-          })
-         
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              walletValue,
-              connect,
-              watchAcc
-          }
-
+  name: "inject_wallet",
+  setup() {
+    const data = reactive({
+      wallet: "连接钱包",
+      web3: "",
+    });
+    const walletValue = computed(() => {
+      const wallet = data.wallet;
+      let res = wallet;
+      if (wallet && wallet.length > 10) {
+        res =
+          wallet.slice(0, 5) +
+          "..." +
+          wallet.slice(wallet.length - 8, wallet.length);
+        return res;
       }
-  };
+      return "连接钱包";
+    });
+    const watchAcc = () => {
+      if (!window.ethereum) return;
+      window.ethereum.on("accountsChanged", function (a) {
+        data.wallet = a;
+      });
+    };
+    const connect = async () => {
+      if (data.wallet.length > 10) return;
+      await initWeb3.Init(
+        (addr) => {
+          data.wallet = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+    };
+    onBeforeMount(async () => {
+      watchAcc;
+      await connect();
+    });
+
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      walletValue,
+      connect,
+      watchAcc,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .wallet_box {

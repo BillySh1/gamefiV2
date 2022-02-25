@@ -16,38 +16,36 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onMounted,computed} from 'vue'
+<script >
+import { reactive, toRefs, onMounted, computed } from "vue";
 export default {
-    name: 'page',
-    props:['current','total'],
-      setup(prop) {
-          const data = reactive({
-              cur_page: prop.current,
-          })
-        const totalPages = computed(()=>{
-          let res = [];
-          for(let i = 1; i<= prop.total; i++){
-            res.push(i)
-          }
-          return res
-        })
-          onMounted(() => {
-              console.log(totalPages.value,'sss')
-          })
-          const change = (item)=>{
-              data.cur_page = item;
-              
-          }
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              change,
-              totalPages
-          }
-
+  name: "page",
+  props: ["current", "total"],
+  setup(prop) {
+    const data = reactive({
+      cur_page: prop.current,
+    });
+    const totalPages = computed(() => {
+      let res = [];
+      for (let i = 1; i <= prop.total; i++) {
+        res.push(i);
       }
-  };
+      return res;
+    });
+    onMounted(() => {
+      console.log(totalPages.value, "sss");
+    });
+    const change = (item) => {
+      data.cur_page = item;
+    };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      change,
+      totalPages,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .page_box {

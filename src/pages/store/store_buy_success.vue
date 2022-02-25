@@ -8,65 +8,64 @@
         数量: {{ num }} <br />
         <br />购买成功
       </div>
-      <div class="back" >
-        {{remainS}} s后进入背包
-      </div>
+      <div class="back">{{ remainS }} s后进入背包</div>
     </div>
     <CommonPageFooter />
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
-import {useRoute,useRouter} from 'vue-router'
-import CommonPageFooter from '../../components/common_page_footer'
-import CommonPageHeader from '../../components/common_page_header'
-import {useGetShopDetailByTokenId} from './use_shop_items.js'
+<script >
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import CommonPageFooter from "../../components/common_page_footer";
+import CommonPageHeader from "../../components/common_page_header";
+import { useGetShopDetailByTokenId } from "./use_shop_items.js";
 export default {
-    name: 'minging',
-    components:{
-        CommonPageFooter,
-        CommonPageHeader
-    },
-      setup() {
-          const route = useRoute()
-          const router = useRouter()
-          const data = reactive({
-              info:'',
-              jsonData:'',
-              pageTitle:'购买成功',
-              num:0,
-              remainS: 3,
+  name: "minging",
+  components: {
+    CommonPageFooter,
+    CommonPageHeader,
+  },
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const data = reactive({
+      info: "",
+      jsonData: "",
+      pageTitle: "购买成功",
+      num: 0,
+      remainS: 3,
+    });
+    const lottie_options = computed(() => {
+      return {
+        animationData: require(`../../assets/mint/type${data.info.key}.json`),
+      };
+    });
+    onBeforeMount(() => {
+      data.info = useGetShopDetailByTokenId(
+        JSON.parse(route.query.info).tokenId
+      );
+      data.num = route.query.num;
+      lazyJump();
+    });
+    const lazyJump = () => {
+      setInterval(() => {
+        data.remainS--;
+        if (data.remainS == 0) {
+          router.push({
+            name: "pack",
           });
-        const lottie_options = computed(()=>{
-            return  {
-                  animationData: require(`../../assets/mint/type${data.info.key}.json`),
-              }
-        })
-          onBeforeMount(() => {
-              data.info = useGetShopDetailByTokenId(JSON.parse(route.query.info).tokenId);
-              data.num = route.query.num
-              lazyJump();
-          })
-          const lazyJump = ()=>{
-            setInterval(() => {
-              data.remainS--;
-              if(data.remainS == 0){
-                router.push({
-                  name:'pack'
-                })
-              }
-            }, 1000);
-          }
+        }
+      }, 1000);
+    };
 
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              lottie_options
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      lottie_options,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
@@ -108,9 +107,9 @@ export default {
     transform: translateY(-5rem);
     font-size: 2rem;
   }
-  .back{
+  .back {
     color: white;
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 </style>

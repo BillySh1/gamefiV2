@@ -7,7 +7,7 @@
     >
       <div class="text">主页</div>
     </div>
-    <div class="swap" @click="$router.push({name:'swap'})" >
+    <div class="swap" @click="$router.push({ name: 'swap' })">
       <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
@@ -25,77 +25,81 @@
       </div>
     </div>
     <div class="call" @click="() => $router.push({ name: 'mint' })">
-      <img v-if="$route.name == 'home'" class="img" src="../assets/common/call.png" alt="" />
-      <div v-else class="common_call" >
-        <img src="../assets/common/common_call.png" alt="">
-        <div class="text" >招贤纳士</div>
+      <img
+        v-if="$route.name == 'home'"
+        class="img"
+        src="../assets/common/call.png"
+        alt=""
+      />
+      <div v-else class="common_call">
+        <img src="../assets/common/common_call.png" alt="" />
+        <div class="text">招贤纳士</div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
-import {useRoute} from 'vue-router'
+<script >
+import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { useRoute } from "vue-router";
 export default {
-    name: 'common_page_footer',
-      setup() {
-        const route = useRoute()
-          console.log('1-开始创建组件-setup')
-          const data = reactive({
-              menuList:[
-                  {
-                      key:'pack',
-                      img:require('../assets/common/pack.svg'),
-                      href:'pack',
-                      text:'背包'
-                  },
-                  {
-                      key:'market',
-                      img:require('../assets/common/market.svg'),
-                      href:'market',
-                      text:'市场'
-                  },
-                  {
-                      key:'exchange',
-                      img:require('../assets/common/exchange.svg'),
-                      href:'exchange',
-                      text:'兑换'
-                  },
-                  {
-                      key:'store',
-                      img:require('../assets/common/store.svg'),
-                      href:'store',
-                      text:'战备'
-                  },
-                  {
-                      key:'reborn',
-                      img:require('../assets/common/reborn.svg'),
-                      href:'reborn',
-                      text:'重生'
-                  },
-                  {
-                      key:'mix',
-                      img:require('../assets/common/mix.svg'),
-                      href:'mix',
-                      text:'进阶'
-                  },
-              ]
-          })
-          onBeforeMount(() => {
-            console.log(route.name,'sss')
-              console.log('2.组件挂载页面之前执行----onBeforeMount')
-          })
-          onMounted(() => {
-              console.log('3.-组件挂载到页面之后执行-------onMounted')
-          })
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+  name: "common_page_footer",
+  setup() {
+    const route = useRoute();
+    console.log("1-开始创建组件-setup");
+    const data = reactive({
+      menuList: [
+        {
+          key: "pack",
+          img: require("../assets/common/pack.svg"),
+          href: "pack",
+          text: "背包",
+        },
+        {
+          key: "market",
+          img: require("../assets/common/market.svg"),
+          href: "market",
+          text: "市场",
+        },
+        {
+          key: "exchange",
+          img: require("../assets/common/exchange.svg"),
+          href: "exchange",
+          text: "兑换",
+        },
+        {
+          key: "store",
+          img: require("../assets/common/store.svg"),
+          href: "store",
+          text: "战备",
+        },
+        {
+          key: "reborn",
+          img: require("../assets/common/reborn.svg"),
+          href: "reborn",
+          text: "重生",
+        },
+        {
+          key: "mix",
+          img: require("../assets/common/mix.svg"),
+          href: "mix",
+          text: "进阶",
+        },
+      ],
+    });
+    onBeforeMount(() => {
+      console.log(route.name, "sss");
+      console.log("2.组件挂载页面之前执行----onBeforeMount");
+    });
+    onMounted(() => {
+      console.log("3.-组件挂载到页面之后执行-------onMounted");
+    });
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .box {
@@ -181,8 +185,8 @@ export default {
   padding: 0 4rem;
 
   .menu_item {
-    &:hover{
-      opacity: .6;
+    &:hover {
+      opacity: 0.6;
     }
     position: relative;
     transform: skewX(15deg);
@@ -207,21 +211,21 @@ export default {
   .img {
     position: absolute;
     height: 16rem;
-    transform: translate(-100%,-90%);
+    transform: translate(-100%, -90%);
   }
-  .common_call{
+  .common_call {
     position: relative;
     width: 10rem;
-    img{
+    img {
       width: 100%;
     }
-    .text{
+    .text {
       width: 100%;
       font-size: 1.5rem;
       position: absolute;
       top: 50%;
-      left:50%;
-      transform: translate(-50%,-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

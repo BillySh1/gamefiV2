@@ -15,70 +15,69 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import NoticeItem from './notice_item'
+<script >
+import { reactive, toRefs, onBeforeMount } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import NoticeItem from "./notice_item";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-        NoticeItem
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    NoticeItem,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "公告栏",
+      noticeData: [
+        {
+          key: 0,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+        {
+          key: 1,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+        {
+          key: 1,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+        {
+          key: 1,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+        {
+          key: 1,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+        {
+          key: 1,
+          time: new Date(),
+          title: "富贾三国公测",
+          content: "这是内容这是内容",
+        },
+      ],
+    });
 
-          const data = reactive({
-            pageTitle:'公告栏',
-            noticeData:[{
-              key:0,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            },
-            {
-              key:1,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            },
-            {
-              key:1,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            },
-            {
-              key:1,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            },
-            {
-              key:1,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            },
-            {
-              key:1,
-              time: new Date(),
-              title:'富贾三国公测',
-              content:'这是内容这是内容'
-            }]
-          })
+    onBeforeMount(() => {});
 
-          onBeforeMount(() => {
-          })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
@@ -104,7 +103,7 @@ export default {
       position: absolute;
       width: 85%;
       height: 80%;
-      overflow-x:hidden;
+      overflow-x: hidden;
       overflow-y: auto;
       top: 50%;
       left: 50%;

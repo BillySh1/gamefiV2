@@ -50,97 +50,96 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs, computed} from 'vue'
-import {useRouter} from 'vue-router'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import {useShopItems} from './use_shop_items.js'
+<script >
+import { reactive, toRefs, computed } from "vue";
+import { useRouter } from "vue-router";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import { useShopItems } from "./use_shop_items.js";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter
-    },
-      setup() {
-        const router = useRouter();
-          const data = reactive({
-            info:'',
-            curType:0,
-            storeInfos:[
-                {
-                    key:0,
-                    name:'战备',
-                    img:require('../../assets/store/type0.png')
-                },
-                {
-                    key:1,
-                    name:'神谕',
-                    img:require('../../assets/store/type1.png')
-                },
-                {
-                    key:2,
-                    name:'奇珍',
-                    img:require('../../assets/store/type2.png')
-                }
-            ],
-            goodsIndex:0,
-            buyItems:useShopItems()
-          })
-        const pageTitle = computed(()=> {
-              return ['战备','神谕','奇珍'][data.curType]
-          })
-        const mainImg = computed(()=>{
-            return require(`../../assets/store/type${data.curType}.png`)
-        })
-        const curCurgoods = computed(()=>{
-          return data.buyItems[data.curType][data.goodsIndex]
-        })
-        const showLeft = computed(()=>{
-          const arr = data.buyItems[data.curType]
-          if(arr.length > 1 && data.goodsIndex > 0){
-            return true
-          }
-          return false
-        })
-        const showRight = computed(()=>{
-          const arr = data.buyItems[data.curType]
-          if(arr.length > 1 && data.goodsIndex < arr.length-1){
-            return true
-          }
-          return false
-        })
-        const changeGoodsIndex = (index)=>{
-          data.goodsIndex += index
-        }
-        const goodsClick = ()=>{
-          router.push({
-            name:'storeDetail',
-            query:{
-              info: curCurgoods.value.tokenId
-            }
-          })
-        }
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              pageTitle,
-              mainImg,
-              curCurgoods,
-              showLeft,
-              showRight,
-              changeGoodsIndex,
-              goodsClick
-          }
-
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+  },
+  setup() {
+    const router = useRouter();
+    const data = reactive({
+      info: "",
+      curType: 0,
+      storeInfos: [
+        {
+          key: 0,
+          name: "战备",
+          img: require("../../assets/store/type0.png"),
+        },
+        {
+          key: 1,
+          name: "神谕",
+          img: require("../../assets/store/type1.png"),
+        },
+        {
+          key: 2,
+          name: "奇珍",
+          img: require("../../assets/store/type2.png"),
+        },
+      ],
+      goodsIndex: 0,
+      buyItems: useShopItems(),
+    });
+    const pageTitle = computed(() => {
+      return ["战备", "神谕", "奇珍"][data.curType];
+    });
+    const mainImg = computed(() => {
+      return require(`../../assets/store/type${data.curType}.png`);
+    });
+    const curCurgoods = computed(() => {
+      return data.buyItems[data.curType][data.goodsIndex];
+    });
+    const showLeft = computed(() => {
+      const arr = data.buyItems[data.curType];
+      if (arr.length > 1 && data.goodsIndex > 0) {
+        return true;
       }
-  };
+      return false;
+    });
+    const showRight = computed(() => {
+      const arr = data.buyItems[data.curType];
+      if (arr.length > 1 && data.goodsIndex < arr.length - 1) {
+        return true;
+      }
+      return false;
+    });
+    const changeGoodsIndex = (index) => {
+      data.goodsIndex += index;
+    };
+    const goodsClick = () => {
+      router.push({
+        name: "storeDetail",
+        query: {
+          info: curCurgoods.value.tokenId,
+        },
+      });
+    };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      pageTitle,
+      mainImg,
+      curCurgoods,
+      showLeft,
+      showRight,
+      changeGoodsIndex,
+      goodsClick,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
   width: 100%;
   height: 100%;
-  background: url('../../assets/store/store_bg.png') no-repeat;
+  background: url("../../assets/store/store_bg.png") no-repeat;
   background-size: cover;
 }
 .content {

@@ -36,49 +36,45 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,computed} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import InjectPackHero from '../../components/inejct_pack_hero'
-import CommonPackDetail from './common_pack_detail'
+<script >
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import InjectPackHero from "../../components/inejct_pack_hero";
+import CommonPackDetail from "./common_pack_detail";
 export default {
-    name: 'pack',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-        InjectPackHero,
-        CommonPackDetail
-    },
-      setup() {
+  name: "pack",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    InjectPackHero,
+    CommonPackDetail,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "我的背包",
+      routerItems: [
+        { key: 0, name: "武将", img: require("../../assets/pack/0.svg") },
+        { key: 1, name: "装备", img: require("../../assets/pack/1.svg") },
+        { key: 2, name: "珍宝", img: require("../../assets/pack/2.svg") },
+      ],
+      curShowType: undefined,
+    });
 
-          const data = reactive({
-            pageTitle:'我的背包',
-            routerItems:[
-              {key:0,name:'武将',img:require('../../assets/pack/0.svg')},
-              {key:1,name:'装备',img:require('../../assets/pack/1.svg')},
-              {key:2,name:'珍宝',img:require('../../assets/pack/2.svg')},
-
-            ],
-            curShowType: undefined
-          })
-
-          onBeforeMount(() => {
-          })
-          const showDetailPack = computed(()=>{
-            if(data.curShowType !== undefined){
-              return true
-            }
-            return false
-          })
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              showDetailPack
-          }
-
+    onBeforeMount(() => {});
+    const showDetailPack = computed(() => {
+      if (data.curShowType !== undefined) {
+        return true;
       }
-  };
+      return false;
+    });
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      showDetailPack,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {

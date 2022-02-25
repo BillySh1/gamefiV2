@@ -14,35 +14,31 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount} from 'vue'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import CommonButton from '../../components/common_button'
+<script >
+import { reactive, toRefs, onBeforeMount } from "vue";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import CommonButton from "../../components/common_button";
 export default {
-    name: 'store',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter,
-        CommonButton
-    },
-      setup() {
+  name: "store",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    CommonButton,
+  },
+  setup() {
+    const data = reactive({
+      pageTitle: "邀请排行榜",
+    });
 
-          const data = reactive({
-            pageTitle:'邀请排行榜',
+    onBeforeMount(() => {});
 
-          })
-
-          onBeforeMount(() => {
-          })
-
-          const refData = toRefs(data);
-          return {
-              ...refData,
-          }
-
-      }
-  };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {

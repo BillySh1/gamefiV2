@@ -88,141 +88,151 @@
   </div>
 </template>
 
-<script lang="js">
-import { reactive,toRefs,onBeforeMount,computed,getCurrentInstance} from 'vue'
-import {useRoute,useRouter} from 'vue-router'
-import {useStore} from 'vuex'
-import CommonPageHeader from '../../components/common_page_header'
-import CommonPageFooter from '../../components/common_page_footer'
-import {useGetShopDetailByTokenId} from './use_shop_items.js'
-import initWeb3 from '../../utils/initWeb3.js'
+<script >
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import { useGetShopDetailByTokenId } from "./use_shop_items.js";
+import initWeb3 from "../../utils/initWeb3.js";
 export default {
-    name: 'mint_detail',
-    components:{
-        CommonPageHeader,
-        CommonPageFooter
-    },
-      setup() {
-        const store = useStore()
-        const route = useRoute();
-        const router = useRouter()
-        const {proxy} = getCurrentInstance()
-          const data = reactive({
-            info:'',
-            buyValue:1,
-            pageTitle:'购买详情',
-            web3:'',
-            account:'',
-            singlePrice: null,
-            payment:0,
-            loading: false,
-            lottie_options:{
-              animationData: require('../../assets/common/loading.json')
-            },
-            btnStatus:0,
-          })
+  name: "mint_detail",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+  },
+  setup() {
+    const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
+    const { proxy } = getCurrentInstance();
+    const data = reactive({
+      info: "",
+      buyValue: 1,
+      pageTitle: "购买详情",
+      web3: "",
+      account: "",
+      singlePrice: null,
+      payment: 0,
+      loading: false,
+      lottie_options: {
+        animationData: require("../../assets/common/loading.json"),
+      },
+      btnStatus: 0,
+    });
 
-          onBeforeMount(async() => {
-            data.loading = true;
-            await initWeb3.Init(
-              (addr)=>{
-                data.account = addr
-              },
-              (p)=>{
-                data.web3 = p
-              }
-            )
-            data.info = useGetShopDetailByTokenId(route.query.info)
-            await getPrice();
-            data.loading = false;
-          })
-          const totalPrice = computed(()=>{
-            return data.buyValue * Number(data.singlePrice)
-          })
-          const btnText = computed(()=>{
-            return ['授权','购买'][data.btnStatus]
-          })
-          const getPrice = async()=>{
-            const c = store.state.c_richShop;
-            const {price, priceToken} = await c.methods._items(data.info.tokenId).call();
-            data.singlePrice = data.web3.utils.fromWei(price,'ether');
-            data.payment = priceToken
-          }
-          const btnClick = async()=>{
-            if(data.btnStatus == 0){
-              await approve()
-
-            }else if(data.btnStatus === 1){
-              await buy()
-            }
-          }
-          const approve = async()=>{
-            try{
-              proxy.$toast('等待授权',store.state.toast_info)
-              const c = data.payment ==1 ? store.state.c_m3t :store.state.c_mmc;
-              const value = data.web3.utils.toWei(totalPrice.value.toString(),'ether')
-              const addr = store.state.c_richShop.options.address;
-              const gasPrice = await data.web3.eth.getGasPrice();
-              const gas = await c.methods.approve(addr, value).estimateGas({from: data.account});
-              const res = await c.methods.approve(addr,value).send({
-            gas: gas,
-            gasPrice: gasPrice,
-            from: data.account
-          })
-          if(res.status){
-            data.btnStatus = 1;
-            proxy.$toast('授权成功',store.state.toast_success)
-          }
-            }catch(e){
-              proxy.$toast('授权失败',store.state.toast_error)
-              console.log(e)
-            }
-
-          }
-          const buy = async()=>{
-            try{
-              proxy.$toast('等待购买确认',store.state.toast_info)
-              const c = store.state.c_richShop;
-              const gasPrice = await data.web3.eth.getGasPrice();
-              const gas = await c.methods.buy(data.account,data.info.tokenId,data.buyValue).estimateGas({from: data.account});
-              data.loading = true
-              const res = await c.methods.buy(data.account,data.info.tokenId,data.buyValue).send({
-                gasPrice:gasPrice,
-                gas: Number.parseInt(gas, 10),
-                from: data.account
-              })
-              
-              
-              if(res.status){
-                proxy.$toast('购买成功',store.state.toast_success);
-                router.push({
-                  name:'buySuccess',
-                  query: {
-                    info:JSON.stringify(data.info),
-                    num: data.buyValue
-                  }
-                })
-              }
-                   
-            }catch(e){
-              proxy.$toast('购买失败',store.state.toast_error)
-              console.log(e)
-            }
-            data.loading = false
-
-          }
-          const refData = toRefs(data);
-          return {
-              ...refData,
-              useGetShopDetailByTokenId,
-              totalPrice,
-              btnClick,
-              btnText
-
-          }
-
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      data.info = useGetShopDetailByTokenId(route.query.info);
+      await getPrice();
+      data.loading = false;
+    });
+    const totalPrice = computed(() => {
+      return data.buyValue * Number(data.singlePrice);
+    });
+    const btnText = computed(() => {
+      return ["授权", "购买"][data.btnStatus];
+    });
+    const getPrice = async () => {
+      const c = store.state.c_richShop;
+      const { price, priceToken } = await c.methods
+        ._items(data.info.tokenId)
+        .call();
+      data.singlePrice = data.web3.utils.fromWei(price, "ether");
+      data.payment = priceToken;
+    };
+    const btnClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus === 1) {
+        await buy();
       }
-  };
+    };
+    const approve = async () => {
+      try {
+        proxy.$toast("等待授权", store.state.toast_info);
+        const c = data.payment == 1 ? store.state.c_m3t : store.state.c_mmc;
+        const value = data.web3.utils.toWei(
+          totalPrice.value.toString(),
+          "ether"
+        );
+        const addr = store.state.c_richShop.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, value)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.approve(addr, value).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast("授权成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("授权失败", store.state.toast_error);
+        console.log(e);
+      }
+    };
+    const buy = async () => {
+      try {
+        proxy.$toast("等待购买确认", store.state.toast_info);
+        const c = store.state.c_richShop;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .buy(data.account, data.info.tokenId, data.buyValue)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods
+          .buy(data.account, data.info.tokenId, data.buyValue)
+          .send({
+            gasPrice: gasPrice,
+            gas: Number.parseInt(gas, 10),
+            from: data.account,
+          });
+
+        if (res.status) {
+          proxy.$toast("购买成功", store.state.toast_success);
+          router.push({
+            name: "buySuccess",
+            query: {
+              info: JSON.stringify(data.info),
+              num: data.buyValue,
+            },
+          });
+        }
+      } catch (e) {
+        proxy.$toast("购买失败", store.state.toast_error);
+        console.log(e);
+      }
+      data.loading = false;
+    };
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      useGetShopDetailByTokenId,
+      totalPrice,
+      btnClick,
+      btnText,
+    };
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
