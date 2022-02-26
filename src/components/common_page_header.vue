@@ -14,7 +14,7 @@
         <img
           class="img_right"
           src="../assets/common/currency_plus.png"
-          alt=""
+          @click="()=>$router.push({name:item.href})"
         />
       </div>
     </div>
@@ -57,6 +57,7 @@ export default {
           key: "m3t",
           img: require("../assets/exchange/coin.png"),
           value: 1000,
+          href:'exchange'
         },
         {
           key: "card",

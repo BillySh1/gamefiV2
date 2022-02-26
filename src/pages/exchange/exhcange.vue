@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <InjectGoBack />
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-if="!loading" class="content">
@@ -74,6 +75,7 @@ import {
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button";
+import InjectGoBack from "../../components/inejct_go_back.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 export default {
@@ -82,6 +84,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     CommonButton,
+    InjectGoBack,
   },
   setup() {
     const store = useStore();
@@ -191,7 +194,7 @@ export default {
         10
       ).toFixed(2);
     };
-   
+
     const refData = toRefs(data);
     return {
       ...refData,
