@@ -19,19 +19,28 @@
         </div>
       </div>
       <div class="right">
-        <div class="buy_num">
-          <div class="icon">
-            <img src="../../assets/exchange/coin.png" />
+        <div class="up_box">
+          <div class="buy_num">
+            <div class="icon">
+              <img src="../../assets/exchange/usdt.png" />
+            </div>
+            <input
+              class="ipt"
+              v-model="buyNum"
+              @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
+            />
+            <div class="text">USDT</div>
           </div>
-          <input
-            class="ipt"
-            v-model="buyNum"
-            @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
-          />
-          <div class="text">铜钱</div>
+          <div class="xs">
+            <div>当前可置换</div>
+            <div style="margin: 0 1rem">{{ 25 * buyNum }}</div>
+            <div>铜钱</div>
+          </div>
         </div>
+
         <div class="action_button">
-          <CommonButton style="font-size: 2rem; width: 20rem">
+          <div class="badge">请在上方输入您需要置换的USDT</div>
+          <CommonButton style="font-size: 2rem; width: 20rem" @click="btnClick">
             {{ btnText }}
           </CommonButton>
         </div>
@@ -55,7 +64,13 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button";
@@ -70,6 +85,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       pageTitle: "钱庄兑换",
       buyNum: 1000,
@@ -86,6 +102,68 @@ export default {
     const btnText = computed(() => {
       return ["授权 USDT", "兑换成铜钱"][data.btnStatus];
     });
+    const btnClick = async () => {
+      if (data.btnStatus === 0) {
+        await approve();
+      } else if (data.btnStatus === 1) {
+        await exchange();
+      }
+    };
+    const approve = async () => {
+      try {
+        proxy.$toast("等待授权", store.state.toast_info);
+        const c = store.state.c_usdt;
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const addr = store.state.c_m3t.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, value)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.approve(addr, value).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast("授权成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("授权失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const exchange = async () => {
+      try {
+        proxy.$toast("等待兑换确认", store.state.toast_info);
+        const c = store.state.c_m3t;
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .recharge(value)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.recharge(value).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast("兑换成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("兑换失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        await getBalanceInfo();
+        data.btnStatus = 0;
+        data.loading = false;
+      }
+    };
     onBeforeMount(async () => {
       data.loading = true;
       await initWeb3.Init(
@@ -113,12 +191,12 @@ export default {
         10
       ).toFixed(2);
     };
-    // const approveU = async()=>{
-    // }
+   
     const refData = toRefs(data);
     return {
       ...refData,
       btnText,
+      btnClick,
     };
   },
 };
@@ -183,35 +261,55 @@ export default {
     width: 40%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
+    .up_box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2rem;
+      .xs {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 1.2rem;
+      }
+    }
     .buy_num {
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
+      font-size: 2rem;
+      gap: 2rem;
       .icon {
-        width: 6rem;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
         img {
-          width: 100%;
+          margin-left: 1rem;
+          max-width: 2.5rem;
         }
       }
       .ipt {
         outline: none;
         border: none;
-        font-size: 3.5rem;
+        font-size: 2rem;
         background: transparent;
-        width: auto;
+        width: 30%;
         color: #f2dbb9;
-        width: 15rem;
         text-align: center;
-      }
-      .text {
-        font-size: 3.5rem;
       }
     }
     .action_button {
       cursor: pointer;
+      .badge {
+        text-align: center;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 0.5rem;
+      }
     }
   }
 }

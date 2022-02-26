@@ -225,7 +225,7 @@ export default {
         position: absolute;
         bottom: 0;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, 50%);
         font-size: 2rem;
         img {
           width: 100%;
@@ -239,8 +239,7 @@ export default {
         }
       }
       .goods_img {
-        max-width: 20rem;
-        max-height: 30rem;
+        height: 15rem;
       }
     }
   }

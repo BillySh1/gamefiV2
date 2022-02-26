@@ -55,7 +55,7 @@ export default {
         },
         {
           key: "m3t",
-          img: require("../assets/common/m3t.png"),
+          img: require("../assets/exchange/coin.png"),
           value: 1000,
         },
         {

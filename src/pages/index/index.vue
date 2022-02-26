@@ -6,14 +6,14 @@
       <div class="float_right_box">
         <div class="float_item" @click="jump('invite')">
           <InjectIcon
-            :src="require('../../assets/index/invite.svg')"
+            :src="require('../../assets/index/invite.png')"
             text="邀请"
             style="margin-bottom: 2rem"
           />
         </div>
         <div class="float_item" @click="jump('title')">
           <InjectIcon
-            :src="require('../../assets/index/title.svg')"
+            :src="require('../../assets/index/title.png')"
             text="称号"
           />
         </div>
@@ -22,7 +22,7 @@
         <div class="float_item" @click="jump('airdrop')">
           <InjectIcon
             style="margin-left: 1rem"
-            :src="require('../../assets/index/airdrop.svg')"
+            :src="require('../../assets/index/airdrop.png')"
             text="空投"
           />
         </div>
