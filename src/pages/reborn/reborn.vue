@@ -28,15 +28,19 @@
           @select="(i) => handleSelectHero(i)"
         />
       </div>
-      <div v-if="curSelectedHero" class="cur_selected_item">
+      <div v-if="curSelectedHero && !processing" class="cur_selected_item">
         <HeroCardItem :info="curSelectedHero" />
       </div>
 
-      <div v-if="curSelectedHero" class="cur_selected_cost">
+      <div v-if="curSelectedHero && !processing" class="cur_selected_cost">
         需要花费 {{ cost }} 枚两仪石, 当前数量 {{ stockBalance }}
       </div>
 
-      <div v-if="curSelectedHero" class="action_btn" @click="actionButtonClick">
+      <div
+        v-if="curSelectedHero && !processing"
+        class="action_btn"
+        @click="actionButtonClick"
+      >
         <CommonButton>{{ btnText }}</CommonButton>
       </div>
     </div>
@@ -59,7 +63,7 @@ import InejctPackHero from "../../components/inejct_pack_hero.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
-import getHeroInfo from "../../utils/useHeroDetail";
+// import getHeroInfo from "../../utils/useHeroDetail";
 const openAni = require("../../assets/reborn/open.json");
 const closeAni = require("../../assets/reborn/close.json");
 export default {
@@ -98,6 +102,8 @@ export default {
       btnStatus: 0,
       cost: 0,
       stockBalance: 0,
+      processing: false,
+      newMintedHero: "",
     });
 
     const btnText = computed(() => {
@@ -218,30 +224,37 @@ export default {
           .estimateGas({ from: data.account });
         data.step = 2;
         data.ani1.play();
+        data.processing = true;
         const res = await c.methods.rebirth(tokenId).send({
           gasPrice: gasPrice,
-          gas: gas,
+          gas: Number.parseInt(gas,10) + 50000,
           from: data.account,
         });
         if (res.status) {
+          data.step = 0;
           proxy.$toast("重生成功", store.state.toast_success);
-          await getNewHero();
+          data.curSelectedHero = undefined;
+          // await getNewHero();
         }
       } catch (e) {
         proxy.$toast("重生失败", store.state.toast_error);
         console.log(e);
       } finally {
-        data.loading = false;
+        data.processing = false;
       }
     };
-    const getNewHero = async () => {
-      const c = store.state.c_hero;
-      const tokenId = data.curSelectedHero.tokenId;
-      const res = await c.methods.getHero(tokenId).call();
-      const uid =
-        res.camp.toString() + res.rarity.toString() + res.heroId.toString();
-      data.newMintedItems = [...res, ...getHeroInfo(uid, res.preference)];
-    };
+    // const getNewHero = async () => {
+    //   const c = store.state.c_hero;
+    //   const tokenId = data.curSelectedHero.tokenId;
+    //   const res = await c.methods.getHero(tokenId).call();
+    //   const uid =
+    //     res.camp.toString() + res.rarity.toString() + res.heroId.toString();
+    //   data.newMintedHero = {
+    //     ...res,
+    //     ...getHeroInfo(uid, res.preference),
+    //   };
+    //   console.log(data.newMintedHero,'fff')
+    // };
     const handleClickReborn = () => {
       if (data.step == 0 && !data.isOpen) {
         data.ani0.play();
@@ -252,7 +265,7 @@ export default {
       }
     };
     onBeforeMount(async () => {
-      data.loading = true
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -261,7 +274,7 @@ export default {
           data.web3 = p;
         }
       );
-      data.loading = false
+      data.loading = false;
     });
 
     const refData = toRefs(data);

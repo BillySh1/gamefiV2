@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">market</div>
+    <div class="content">
+      <div></div>
+    </div>
     <CommonPageFooter />
   </div>
 </template>
@@ -34,6 +36,8 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  background: url('../../assets/market/bg.png') no-repeat;
+  background-size: cover;
 }
 .content {
   position: relative;
