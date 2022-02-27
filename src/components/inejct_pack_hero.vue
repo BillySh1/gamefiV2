@@ -29,11 +29,16 @@
             :key="index"
             class="card_item"
             @click="
-              () =>
-                $router.push({
-                  name: 'heroDetail',
-                  query: { tokenId: item.tokenId },
-                })
+              () => {
+                if (toSelect) {
+                  $emit('select', item);
+                } else {
+                  $router.push({
+                    name: 'heroDetail',
+                    query: { tokenId: item.tokenId },
+                  });
+                }
+              }
             "
           >
             <PackHeroItem :info="item" />
@@ -68,7 +73,7 @@ import useHeroDetail from "../utils/useHeroDetail.js";
 import Page from "./page";
 export default {
   name: "inject_pack_hero",
-  props: ["value"],
+  props: ["value", "toSelect"],
   components: {
     PackHeroItem,
     Page,

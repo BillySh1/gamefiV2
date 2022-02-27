@@ -13,7 +13,6 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
-import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonPageHeader from "../../components/common_page_header";
@@ -25,10 +24,8 @@ export default {
     CommonPageHeader,
   },
   setup() {
-    const route = useRoute();
     const store = useStore();
     const data = reactive({
-      info: { key: 0 },
       jsonData: "",
       pageTitle: "招贤纳士",
       cardList: [],
@@ -52,7 +49,6 @@ export default {
           data.web3 = p;
         }
       );
-      data.info = JSON.parse(route.query.info);
       await getCardList();
       data.loading = false;
     });

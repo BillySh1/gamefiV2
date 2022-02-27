@@ -1,19 +1,19 @@
 const useShopItems = () => [
   [
     {
-      tokenId: 10,
+      tokenId: 11,
       img: require("../../assets/store/item/type_0_0.svg"),
       name: "粮草",
     },
     {
-      tokenId: 11,
+      tokenId: 12,
       img: require("../../assets/store/item/type_0_1.svg"),
       name: "战鼓",
     },
   ],
   [
     {
-      tokenId: 9,
+      tokenId: 10,
       img: require("../../assets/store/item/type_1_0.svg"),
       name: "两仪石",
     },
@@ -22,6 +22,7 @@ const useShopItems = () => [
       img: require("../../assets/store/item/yuruyi.png"),
       name: "玉如意",
     },
+  
     
   ],
   [
@@ -47,24 +48,29 @@ const useShopItems = () => [
       name: "并尊盟约",
     },
     {
+      tokenId: 9,
+      img: require('../../assets/store/item/jinjie.png'),
+      name:'进阶额外'
+    },
+    {
       tokenId: 0,
       img: require("../../assets/store/item/shengji.png"),
-      name: "凡 卷",
+      name: "纵横卷",
     },
     {
       tokenId: 1,
       img: require("../../assets/store/item/shengji.png"),
-      name: "良 卷",
+      name: "太公略",
     },
     {
       tokenId: 2,
       img: require("../../assets/store/item/shengji.png"),
-      name: "狂 卷",
+      name: "鬼道志",
     },
     {
       tokenId: 3,
       img: require("../../assets/store/item/shengji.png"),
-      name: "神 卷",
+      name: "天神迹",
     },
   ],
 ];
