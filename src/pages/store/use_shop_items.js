@@ -54,23 +54,23 @@ const useShopItems = () => [
     },
     {
       tokenId: 0,
-      img: require("../../assets/store/item/shengji.png"),
+      img: require("../../assets/store/item/up_1.png"),
       name: "纵横卷",
     },
     {
       tokenId: 1,
-      img: require("../../assets/store/item/shengji.png"),
+      img: require("../../assets/store/item/up_2.png"),
       name: "太公略",
     },
     {
       tokenId: 2,
-      img: require("../../assets/store/item/shengji.png"),
-      name: "鬼道志",
+      img: require("../../assets/store/item/up_3.png"),
+      name: "广雅笺",
     },
     {
       tokenId: 3,
-      img: require("../../assets/store/item/shengji.png"),
-      name: "天神迹",
+      img: require("../../assets/store/item/up_4.png"),
+      name: "大禹谟",
     },
   ],
 ];

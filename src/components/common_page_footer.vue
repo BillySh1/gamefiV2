@@ -199,7 +199,7 @@ export default {
       position: absolute;
       right: 0;
       bottom: 10%;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 400;
     }
   }

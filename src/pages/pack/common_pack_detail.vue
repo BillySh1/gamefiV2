@@ -39,6 +39,7 @@
             <div v-if="!curPackData.length" class="emptyShow">暂无物品</div>
             <div
               v-for="(item, index) in curPackData"
+              v-show="item.num > 0"
               :key="index"
               class="pack_item"
               @click="
@@ -232,17 +233,22 @@ export default {
           padding-left: 2rem;
           display: flex;
           flex-wrap: wrap;
+          align-items: baseline;
           .emptyShow {
             position: absolute;
             left: 50%;
             top: 50%;
+            
             font-size: 1.2rem;
             transform: translate(-60%, -50%);
           }
           .pack_item {
             position: relative;
             border-radius: 1rem;
-            opacity: 0.6;
+            opacity: 0.7;
+            &:hover {
+              opacity: 1;
+            }
             .inner_item_zone {
               width: 70%;
               height: 70%;
@@ -251,9 +257,7 @@ export default {
               left: 50%;
               transform: translate(-50%, -50%);
             }
-            &:hover {
-              opacity: 1;
-            }
+
             cursor: pointer;
             width: 9rem;
             height: 9rem;
