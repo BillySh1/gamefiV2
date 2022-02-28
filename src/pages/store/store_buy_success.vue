@@ -34,7 +34,7 @@ export default {
       jsonData: "",
       pageTitle: "购买成功",
       num: 0,
-      remainS: 3,
+      remainS: 5,
     });
     const lottie_options = computed(() => {
       return {
@@ -108,6 +108,11 @@ export default {
     font-size: 2rem;
   }
   .back {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
     color: white;
     opacity: 0.5;
   }

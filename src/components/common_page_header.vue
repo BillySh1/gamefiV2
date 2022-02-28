@@ -29,7 +29,7 @@
       <img
         @click="exitFullScreen"
         class="icon"
-        src="../assets/common/lang.svg"
+        src="../assets/common/exitFullScreen.png"
         alt=""
       />
     </div>
