@@ -148,7 +148,7 @@ export default {
     display: flex;
     margin-top: 2rem;
     font-family: zihun143;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
 
     .left {
@@ -163,13 +163,14 @@ export default {
       cursor: pointer;
       position: relative;
       transform: translateY(-2rem);
-      font-size: 2.5rem;
-      letter-spacing: 8px;
+      font-size: 3rem;
+      letter-spacing: 1.8rem;
       img {
         width: 23rem;
       }
       .text {
-        transform: translate(-50%, -75%);
+        width: 100%;
+        transform: translate(-47%, -75%);
       }
     }
     .right {
@@ -187,7 +188,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      -webkit-text-stroke: 0.5px #231008;
+      -webkit-text-stroke: 1px #231008;
     }
   }
 }
