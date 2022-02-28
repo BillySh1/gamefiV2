@@ -2,33 +2,38 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <div v-if="showPack" class="content">
-      <InjectPackHero :value="showPack" />
+      <InjectPackHero :value="showPack" @back="() => (showPack = false)" />
+      <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
     </div>
     <div v-if="!showPack && !loading" class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
       <div class="inner">
         <div class="mix_item">
           <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
-          <img class="hero_selected" src="../../assets/mix/temp_card.svg" />
-          <img class="ready" src="../../assets/mix/ready.svg" alt="" />
+          <HeroCardItem v-if="leftInfo" :info="leftInfo" />
+          <img
+            v-if="leftInfo"
+            class="ready"
+            src="../../assets/mix/ready.svg"
+            alt=""
+          />
+          <div v-else @click="() => (showPack = true)" class="no_selected">
+            请选择卡牌
+          </div>
         </div>
         <div class="mix_swirl">
           <img src="../../assets/mix/swirl.svg" alt="" />
         </div>
         <div class="mix_item right">
           <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
+          <HeroCardItem v-if="rightInfo" :info="rightInfo" />
           <img
-            v-if="false"
-            class="hero_selected"
-            src="../../assets/mix/temp_card.svg"
-          />
-          <img
-            v-if="false"
+            v-if="rightInfo"
             class="ready"
             src="../../assets/mix/ready.svg"
             alt=""
           />
-          <div @click="() => (showPack = true)" class="no_selected">
+          <div v-else @click="() => (showPack = true)" class="no_selected">
             请选择卡牌
           </div>
         </div>
@@ -58,6 +63,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectModal from "../../components/inject_modal";
 import InjectPackHero from "../../components/inejct_pack_hero";
+import HeroCardItem from "../../components/hero_card_item.vue";
 export default {
   name: "store",
   components: {
@@ -65,6 +71,7 @@ export default {
     CommonPageFooter,
     InjectModal,
     InjectPackHero,
+    HeroCardItem,
   },
   setup() {
     const data = reactive({
@@ -75,6 +82,8 @@ export default {
         animationData: require("../../assets/mix/mixing.json"),
       },
       loading: false,
+      leftInfo: "",
+      rightInfo: "",
     });
 
     const refData = toRefs(data);

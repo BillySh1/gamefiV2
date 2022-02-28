@@ -1,13 +1,20 @@
 <template>
   <div v-if="value" class="mask" @click="$emit('close')">
     <img class="close" src="../assets/common/close.svg" alt="" />
-    <div class="inner">
-      <img class="bg" src="../assets/common/modal_bg.svg" alt="" />
+    <div
+      class="inner"
+      @click="
+        (e) => {
+          e.stopPropagation();
+        }
+      "
+    >
+      <img class="bg" src="../assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>
       <div class="content">
         <slot></slot>
       </div>
-      <div class="confirm">
+      <div class="confirm" @click="$emit('confirm')">
         <div class="confirm_inner">
           <img src="../assets/common/modal_confirm_bg.svg" alt="" />
           <div class="text">确认</div>
@@ -23,14 +30,9 @@ export default {
   name: "inject_modal",
   props: ["value", "title"],
   setup() {
-    console.log("1-开始创建组件-setup");
     const data = reactive({});
-    onBeforeMount(() => {
-      console.log("2.组件挂载页面之前执行----onBeforeMount");
-    });
-    onMounted(() => {
-      console.log("3.-组件挂载到页面之后执行-------onMounted");
-    });
+    onBeforeMount(() => {});
+    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
@@ -78,11 +80,11 @@ export default {
     left: 50%;
     transform: translate(-55%, 25%);
     bottom: 0;
-    font-size: 3rem;
+    font-size: 2rem;
     .confirm_inner {
       position: relative;
       img {
-        width: 15rem;
+        width: 10rem;
       }
       .text {
         position: absolute;

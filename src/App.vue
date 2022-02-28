@@ -43,6 +43,7 @@ export default {
     await this.init();
     this.watchChain();
     this.judge();
+ 
   },
 };
 </script>

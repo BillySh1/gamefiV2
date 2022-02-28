@@ -155,6 +155,7 @@ export default {
       cursor: pointer;
       position: relative;
       transform: translateX(2.5rem);
+      white-space: nowrap;
       img {
         width: 18rem;
       }
@@ -178,7 +179,7 @@ export default {
       position: relative;
       transform: translateX(-2.5rem);
       letter-spacing: 4px;
-
+      white-space: nowrap;
       img {
         width: 18rem;
       }
@@ -188,7 +189,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      -webkit-text-stroke: 1px #231008;
+      -webkit-text-stroke: 0.8px #231008;
     }
   }
 }
