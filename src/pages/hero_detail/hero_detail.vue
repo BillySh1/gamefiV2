@@ -55,13 +55,19 @@
             </div>
             <div v-if="curTabKey == 2" class="attributes">
               <div class="attributes_detail">
-                <div class="detail_item"  v-for="(item, index) in heroAttrDetailMap" :key="index">
+                <div
+                  class="detail_item"
+                  v-for="(item, index) in heroAttrDetailMap"
+                  :key="index"
+                >
                   <div class="title">{{ item.title }}</div>
-                  <div class="value" style='color:#ffffff' >{{ item.value }}</div>
+                  <div class="value" style="color: #ffffff">
+                    {{ item.value }}
+                  </div>
                 </div>
               </div>
               <div class="attr_map">
-                <img src="../../assets/pack/radar.png" alt="">
+                <img src="../../assets/pack/radar.png" alt="" />
               </div>
             </div>
           </div>
@@ -72,7 +78,18 @@
           <img src="../../assets/pack/yellow.png" alt="" />
           <div class="text">装备</div>
         </div>
-        <div class="action_item">
+        <div
+          class="action_item"
+          @click="
+            () =>
+              $router.push({
+                name: 'upgrade',
+                query: {
+                  tokenId: info.tokenId,
+                },
+              })
+          "
+        >
           <img src="../../assets/pack/blue.png" alt="" />
           <div class="text">升级</div>
         </div>
@@ -348,7 +365,7 @@ export default {
               display: flex;
               align-items: center;
               justify-content: center;
-              img{
+              img {
                 height: 100%;
               }
             }
