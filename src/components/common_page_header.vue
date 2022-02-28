@@ -8,7 +8,7 @@
       {{ title }}
     </div>
     <div class="currency_menu">
-      <div class="currency_item" v-for="item in list" :key="item.key">
+      <div class="currency_item" v-for="item,index in list" :key="item.key" :style="index == 1 || index==0 ? 'width:10rem' :''" >
         <img class="img_left" :src="item.img" alt="" />
         {{ item.value }}
         <img
@@ -144,6 +144,7 @@ export default {
   background: #00000042;
   margin: 0 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .img_left {

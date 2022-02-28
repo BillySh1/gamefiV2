@@ -1,12 +1,18 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <div
+      v-if="leftInfo && leftInfo.tokenId && rightInfo && rightInfo.tokenId"
+      class="cost_badge"
+    >
+      需要消耗 并尊盟约, 数量: {{ costNum }}
+    </div>
     <div v-if="showPack" class="content">
       <InjectPackHero
         :value="showPack"
         @back="() => (showPack = false)"
         :toSelect="true"
-        @select="handleSelect"
+        @select="(x) => handleSelect(x)"
       />
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
     </div>
@@ -15,7 +21,9 @@
       <div class="inner">
         <div class="mix_item">
           <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
-          <HeroCardItem v-if="leftInfo" :info="leftInfo" />
+          <div class="hero_selected" v-if="leftInfo">
+            <HeroCardItem :info="leftInfo" />
+          </div>
           <img
             v-if="leftInfo"
             class="ready"
@@ -40,7 +48,9 @@
         </div>
         <div class="mix_item right">
           <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
-          <HeroCardItem v-if="rightInfo" :info="rightInfo" />
+          <div class="hero_selected" v-if="rightInfo">
+            <HeroCardItem v-if="rightInfo" :info="rightInfo" />
+          </div>
           <img
             v-if="rightInfo"
             class="ready"
@@ -68,6 +78,12 @@
         </div>
       </div>
     </div>
+    <div
+      v-if="leftInfo && leftInfo.tokenId && rightInfo && rightInfo.tokenId"
+      class="action_btn"
+    >
+      <CommonButton>授权卡牌</CommonButton>
+    </div>
     <Lottie v-if="loading" :options="lottie_options" />
     <CommonPageFooter />
 
@@ -81,12 +97,14 @@
 </template>
 
 <script >
-import { reactive, toRefs } from "vue";
+import { getCurrentInstance, reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectModal from "../../components/inject_modal";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import HeroCardItem from "../../components/hero_card_item.vue";
+import CommonButton from "../../components/common_button.vue";
+import { useStore } from "vuex";
 export default {
   name: "store",
   components: {
@@ -95,8 +113,11 @@ export default {
     InjectModal,
     InjectPackHero,
     HeroCardItem,
+    CommonButton,
   },
   setup() {
+    const { proxy } = getCurrentInstance();
+    const store = useStore();
     const data = reactive({
       pageTitle: "卡牌进阶",
       showModal: false,
@@ -107,12 +128,36 @@ export default {
       loading: false,
       leftInfo: "",
       rightInfo: "",
+      curRarity: undefined,
       origin: 0,
+      costNum: 0,
     });
     const handleSelect = (item) => {
-      if (origin == 0) {
+      if (data.curRarity && data.curRarity != item.rarity) {
+        proxy.$toast("请选择稀有度相同的英雄", store.state.toast_error);
+        return;
+      }
+
+      if (data.curRarity == undefined) {
+        data.curRarity = item.rarity;
+      }
+      if (data.origin == 0) {
+        if (data.rightInfo && data.rightInfo.tokenId == item.tokenId) {
+          proxy.$toast(
+            "该英雄已选择, 请选择不同的英雄",
+            store.state.toast_error
+          );
+          return;
+        }
         data.leftInfo = item;
-      } else if (origin == 1) {
+      } else if (data.origin == 1) {
+        if (data.leftInfo && data.leftInfo.tokenId == item.tokenId) {
+          proxy.$toast(
+            "该英雄已选择, 请选择不同的英雄",
+            store.state.toast_error
+          );
+          return;
+        }
         data.rightInfo = item;
       }
       data.showPack = false;
@@ -127,10 +172,27 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
   background-size: 100%;
   background: black;
+  .action_btn {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    z-index: 21;
+    transform: translateX(-50%);
+  }
+  .cost_badge{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 21;
+    font-size: 1.2rem;
+  }
 }
 .content {
   position: relative;
@@ -198,12 +260,13 @@ export default {
     .mix_item_bg {
       width: 100%;
     }
+
     .hero_selected {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 70%;
+      width: 55%;
       z-index: 101;
     }
     .ready {

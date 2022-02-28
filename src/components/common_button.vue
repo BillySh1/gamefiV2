@@ -31,7 +31,6 @@ export default {
   padding: 1rem 1.5rem;
   background: url("../assets/pack/active_tab.png") no-repeat;
   background-size: 100% 100%;
-  border-radius: 10px;
   font-size: 1.5rem;
 }
 </style>
