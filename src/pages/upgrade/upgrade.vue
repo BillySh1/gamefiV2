@@ -18,8 +18,27 @@
       <div class="hero_card_big">
         <HeroCardItem :info="info" />
       </div>
-      <div class="operate_box" ></div>
-      <div class="tabs_box" ></div>
+      <div class="operate_box">
+        <ComUpgrade v-if="curTab == 0" :info="info" :stockBox="stockBox" />
+        <ComOverfulfil v-if="curTab == 1"  />
+        <ComSkill v-if="curTab == 2" />
+        <img class="divider" src="../../assets/upgrade/divider_tab.png" />
+
+        <div class="tabs_box">
+          <div
+            v-for="(item, index) in tabMap"
+            :key="index"
+            class="tab_item"
+            :style="curTab == index ? 'opacity:1' : ''"
+            @click="() => (curTab = index)"
+          >
+            <img src="../../assets/upgrade/tab_bg.png" />
+            <div class="inner">
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <CommonPageFooter />
     <img class="bg_badge" src="../../assets/pack/bg_badge.svg" />
@@ -36,12 +55,18 @@ import HeroCardItem from "../../components/hero_card_item.vue";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import { useGetShopDetailByTokenId } from "../store/use_shop_items";
+import ComUpgrade from "./com_upgrade.vue";
+import ComOverfulfil from './com_overfulfil.vue'
+import ComSkill from './com_skill.vue'
 export default {
   name: "upgrade",
   components: {
     HeroCardItem,
     CommonPageHeader,
     CommonPageFooter,
+    ComUpgrade,
+    ComOverfulfil,
+    ComSkill
   },
   setup() {
     const store = useStore();
@@ -52,6 +77,9 @@ export default {
       web3: "",
       loading: false,
       stockBox: [],
+      costNum: "",
+      curTab: 0,
+      tabMap: ["升级", "突破", "技能"],
     });
     const getWeb3 = async () => {
       await initWeb3.Init(
@@ -63,6 +91,7 @@ export default {
         }
       );
     };
+
     const getHeroInfo = async () => {
       const c = store.state.c_hero;
       const res = await c.methods.getHero(route.query.tokenId).call();
@@ -105,7 +134,6 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, 0%);
-    z-index: 2;
     opacity: 0.8;
   }
 }
@@ -121,7 +149,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   .hero_card_big {
-      width: 20%;
+    width: 20%;
   }
   .stock_item_box {
     width: 15%;
@@ -139,15 +167,42 @@ export default {
       }
     }
   }
-  .operate_box{
-      width: 50%;
-      height: 35rem;
-      background: red;
-  }
-  .tabs_box{
-      width: 10%;
-      height: 35rem;
-      background: blue;
+  .operate_box {
+    width: 50%;
+    height: 35rem;
+    display: flex;
+    .divider {
+      margin-left: 2rem;
+
+      height: 100%;
+    }
+    .tabs_box {
+      width: 30%;
+      height: 100%;
+
+      .tab_item {
+        position: relative;
+        width: 8rem;
+        margin-bottom: 4px;
+        color: white;
+        cursor: pointer;
+        opacity: 0.6;
+        &:hover {
+          opacity: 1;
+        }
+        img {
+          width: 100%;
+        }
+        .inner {
+          width: 100%;
+          font-size: 1.2rem;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
   }
 }
 </style>
