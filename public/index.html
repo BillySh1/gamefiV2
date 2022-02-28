@@ -3,22 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
 
     <!--Enable Safari and Chrome-android to add it to the main screen-->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
 
-    <!-- <meta
-      content="”width"
-      ="device-width,initial-scale"
-      ="1.0,minimum-scale"
-      ="1.0,maximum-scale"
-      ="1.0,user-scalable"
-      ="no,minimal-ui”"
-      name="”viewport”"
-    /> -->
     <meta name="”apple-mobile-web-app-title”" content="富贾三国" />
     <meta name="”full-screen”" content="”yes”" />
     <meta name="”x5-fullscreen”" content="”true”" />
@@ -27,6 +21,14 @@
 
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
+    <link
+      rel="preload"
+      as="font"
+      href="./fonts/FZYanZQKSJF.TTF"
+      type="font/TTF"
+      crossorigin="anonymous"
+    />
+
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -39,15 +41,16 @@
     </noscript>
 
     <div id="app"></div>
-    <script>
-      // setTimeout(() => {
-      //   const el = document.getElementById("app");
-      //   el.requestFullscreen();
-      // }, 2000);
-
-    </script>
   </body>
   <style>
+    @font-face {
+      font-family: "FZYanZhenQingKaiShuJF";
+      font-weight: 400;
+      font-style: normal;
+      font-display: auto;
+      unicode-range: U+000-5FF;
+      src: local("FZZJ-ZYGDKJW"), url("./fonts/FZZJ-ZYGDKJW.TTF");
+    }
     html {
       font-size: 1vmax;
     }
