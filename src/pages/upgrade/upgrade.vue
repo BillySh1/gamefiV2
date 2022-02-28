@@ -20,7 +20,7 @@
       </div>
       <div class="operate_box">
         <ComUpgrade v-if="curTab == 0" :info="info" :stockBox="stockBox" />
-        <ComOverfulfil v-if="curTab == 1"  />
+        <ComOverfulfil v-if="curTab == 1" :info="info" />
         <ComSkill v-if="curTab == 2" />
         <img class="divider" src="../../assets/upgrade/divider_tab.png" />
 
@@ -30,7 +30,10 @@
             :key="index"
             class="tab_item"
             :style="curTab == index ? 'opacity:1' : ''"
-            @click="() => (curTab = index)"
+            @click="() => {
+              if(index == 2) return
+              curTab = index
+            }"
           >
             <img src="../../assets/upgrade/tab_bg.png" />
             <div class="inner">

@@ -135,7 +135,7 @@ export default {
   font-size: 1rem;
   display: flex;
   align-items: center;
-  font-family: SF Pro Text;
+  font-family: SF Pro text;
   font-style: italic;
   font-weight: 700;
   -webkit-text-stroke: 0.86px solid #231008;

@@ -12,11 +12,14 @@
     </div>
     <div class="cost_box">
       <div class="info">
-        需要消耗 <strong>{{ costNum }}</strong>
+        需要消耗 <strong class="num" >{{ updateInfo.bookUse }}</strong>
         <strong>{{ costName }}</strong> 升级
         <img :src="costImg" alt="" />
       </div>
       <img class="divider" src="../../assets/upgrade/divider.png" />
+    </div>
+    <div class="property_box" >
+        <img src="../../assets/upgrade/properties_bg.png" alt="">
     </div>
   </div>
 </template>
@@ -60,7 +63,6 @@ export default {
       data.updateInfo = await c.methods
         .getUpgradeDetail(props.info.tokenId)
         .call();
-      console.log(data.updateInfo, "fff");
     };
     const refData = toRefs(data);
     return {
@@ -111,7 +113,6 @@ export default {
       rgba(234, 9, 9, 0.3) 0%,
       rgba(40, 2, 2, 0) 100%
     );
-
     .info {
       display: flex;
       align-items: center;
@@ -121,10 +122,20 @@ export default {
       img {
         height: 6rem;
       }
+      .num{
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 3rem;
+      }
     }
     .divider {
       width: 100%;
     }
+  }
+  .property_box{
+      width: 100%;
+      img{
+         width: 100%;
+      }
   }
 }
 </style>

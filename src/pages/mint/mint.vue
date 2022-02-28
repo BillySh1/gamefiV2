@@ -176,7 +176,7 @@ export default {
 }
 
 .swiper_price_value {
-  font-family: zihun129hao-baihexinfengti;
+  font-family: zihun129;
   font-size: 2rem;
   letter-spacing: 0.1em;
 }

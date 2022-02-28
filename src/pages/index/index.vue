@@ -147,7 +147,7 @@ export default {
   .actions_inner {
     display: flex;
     margin-top: 2rem;
-    font-family: zihun143-zhengkuchaojihei;
+    font-family: zihun143;
     font-size: 1.8rem;
     text-align: center;
 

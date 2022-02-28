@@ -305,12 +305,11 @@ export default {
   display: flex;
   align-items: center;
   margin-left: 3rem;
-  font-family: zihun129hao-baihexinfengti;
+  font-family: zihun129;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
 }
 .right_c_content {
-  font-family: FZYanZhenQingKaiShuJF;
   font-size: 1.5rem;
   text-align: left;
   color: #ffffff;
@@ -363,7 +362,6 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: FZYanZhenQingKaiShuJF;
   font-size: 2rem;
 }
 </style>

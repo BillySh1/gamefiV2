@@ -24,7 +24,11 @@
         <InejctPackHero
           :toSelect="true"
           :value="showPack && step == 1"
-          @back="() => (showPack = false)"
+          @back="() => {
+            showPack = false;
+            step = 0;
+            isOpen = false;
+          }"
           @select="(i) => handleSelectHero(i)"
         />
       </div>

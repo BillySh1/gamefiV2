@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "FangZhengYzq";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("./fonts/FZYanZQKSJF.TTF");
+}
+@font-face {
+  font-family: zihun143;
+  src: url('./fonts/字魂143号-正酷超级黑-Heavy.ttf');
+}
+@font-face {
+  font-family: zihun129;
+  src: url('./fonts/字魂129号-白鹤新风体.ttf');
+}
