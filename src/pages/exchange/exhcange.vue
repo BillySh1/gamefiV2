@@ -75,7 +75,7 @@ import {
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button";
-import InjectGoBack from "../../components/inejct_go_back.vue";
+import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 export default {

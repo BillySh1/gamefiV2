@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <InjectGoBack v-if="!loading" />
     <CommonPageHeader :title="pageTitle" />
     <Lottie
       v-if="loading"
@@ -46,6 +47,7 @@
       </div>
     </div>
     <div
+      v-if="!loading"
       class="tip_badge"
       @click="
         () =>
@@ -78,6 +80,7 @@ import { useGetShopDetailByTokenId } from "../store/use_shop_items";
 import ComUpgrade from "./com_upgrade.vue";
 import ComOverfulfil from "./com_overfulfil.vue";
 import ComSkill from "./com_skill.vue";
+import InjectGoBack from "../../components/inject_go_back.vue";
 export default {
   name: "upgrade",
   components: {
@@ -86,6 +89,7 @@ export default {
     ComUpgrade,
     ComOverfulfil,
     ComSkill,
+    InjectGoBack,
   },
   setup() {
     const store = useStore();

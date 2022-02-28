@@ -32,6 +32,7 @@ export default {
     top: 10%;
     left: 4%;
     width: 4rem;
+    z-index: 99;
     cursor: pointer;
     &:hover{
         opacity: .7;
