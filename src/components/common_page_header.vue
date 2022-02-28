@@ -8,13 +8,18 @@
       {{ title }}
     </div>
     <div class="currency_menu">
-      <div class="currency_item" v-for="item,index in list" :key="item.key" :style="index == 1 || index==0 ? 'width:10rem' :''" >
+      <div
+        class="currency_item"
+        v-for="(item, index) in list"
+        :key="item.key"
+        :style="index == 1 || index == 0 ? 'width:10rem' : ''"
+      >
         <img class="img_left" :src="item.img" alt="" />
         {{ item.value }}
         <img
           class="img_right"
           src="../assets/common/currency_plus.png"
-          @click="()=>$router.push({name:item.href})"
+          @click="() => $router.push({ name: item.href })"
         />
       </div>
     </div>
@@ -57,22 +62,25 @@ export default {
           key: "m3t",
           img: require("../assets/exchange/coin.png"),
           value: 1000,
-          href:'exchange'
+          href: "exchange",
         },
         {
           key: "card",
           img: require("../assets/common/card.png"),
           value: 1000,
+          href: "mint",
         },
         {
           key: "grain",
           img: require("../assets/common/grain.png"),
           value: 1000,
+          href: "store",
         },
         {
           key: "drum",
           img: require("../assets/common/drum.png"),
           value: 1000,
+          href: "store",
         },
       ],
     });
