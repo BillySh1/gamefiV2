@@ -30,10 +30,12 @@
             :key="index"
             class="tab_item"
             :style="curTab == index ? 'opacity:1' : ''"
-            @click="() => {
-              if(index == 2) return
-              curTab = index
-            }"
+            @click="
+              () => {
+                if (index == 2) return;
+                curTab = index;
+              }
+            "
           >
             <img src="../../assets/upgrade/tab_bg.png" />
             <div class="inner">
@@ -43,7 +45,23 @@
         </div>
       </div>
     </div>
-    <CommonPageFooter />
+    <div
+      class="tip_badge"
+      @click="
+        () =>
+          $router.push({
+            name: 'store',
+            query: {
+              type: 2,
+            },
+          })
+      "
+    >
+      <div class="inner">
+        <img src="../../assets/common/tip_badge.svg" />
+        <div class="text">前往商城</div>
+      </div>
+    </div>
     <img class="bg_badge" src="../../assets/pack/bg_badge.svg" />
   </div>
 </template>
@@ -56,20 +74,18 @@ import initWeb3 from "../../utils/initWeb3";
 import useHeroDetail from "../../utils/useHeroDetail";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import CommonPageHeader from "../../components/common_page_header.vue";
-import CommonPageFooter from "../../components/common_page_footer.vue";
 import { useGetShopDetailByTokenId } from "../store/use_shop_items";
 import ComUpgrade from "./com_upgrade.vue";
-import ComOverfulfil from './com_overfulfil.vue'
-import ComSkill from './com_skill.vue'
+import ComOverfulfil from "./com_overfulfil.vue";
+import ComSkill from "./com_skill.vue";
 export default {
   name: "upgrade",
   components: {
     HeroCardItem,
     CommonPageHeader,
-    CommonPageFooter,
     ComUpgrade,
     ComOverfulfil,
-    ComSkill
+    ComSkill,
   },
   setup() {
     const store = useStore();
@@ -104,10 +120,13 @@ export default {
     };
     const getStockBox = async () => {
       const c = store.state.c_richShop;
-      for (let i = 0; i < 4; i++) {
+      const map = [0, 1, 2, 3, 7];
+      for (let i = 0; i < map.length; i++) {
         await data.stockBox.push({
-          ...useGetShopDetailByTokenId(i),
-          num: await c.methods.balanceOf(data.account, i.toString()).call(),
+          ...useGetShopDetailByTokenId(map[i]),
+          num: await c.methods
+            .balanceOf(data.account, map[i].toString())
+            .call(),
         });
       }
     };
@@ -131,6 +150,27 @@ export default {
   width: 100%;
   height: 100%;
   background: #2c0707;
+  .tip_badge {
+    cursor: pointer;
+    position: fixed;
+    bottom: 15%;
+    left: 0;
+    width: 10rem;
+    z-index: 22;
+    .inner {
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        white-space: nowrap;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
   .bg_badge {
     position: absolute;
     width: 100%;
