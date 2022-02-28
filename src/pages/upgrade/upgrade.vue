@@ -95,6 +95,7 @@ export default {
     const store = useStore();
     const route = useRoute();
     const data = reactive({
+      pageTitle: "卡牌升级",
       info: "",
       account: "",
       web3: "",

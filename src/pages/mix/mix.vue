@@ -2,7 +2,12 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <div v-if="showPack" class="content">
-      <InjectPackHero :value="showPack" @back="() => (showPack = false)" />
+      <InjectPackHero
+        :value="showPack"
+        @back="() => (showPack = false)"
+        :toSelect="true"
+        @select="handleSelect"
+      />
       <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
     </div>
     <div v-if="!showPack && !loading" class="content">
@@ -17,7 +22,16 @@
             src="../../assets/mix/ready.svg"
             alt=""
           />
-          <div v-else @click="() => (showPack = true)" class="no_selected">
+          <div
+            v-else
+            @click="
+              () => {
+                origin = 0;
+                showPack = true;
+              }
+            "
+            class="no_selected"
+          >
             请选择卡牌
           </div>
         </div>
@@ -33,7 +47,16 @@
             src="../../assets/mix/ready.svg"
             alt=""
           />
-          <div v-else @click="() => (showPack = true)" class="no_selected">
+          <div
+            v-else
+            @click="
+              () => {
+                origin = 1;
+                showPack = true;
+              }
+            "
+            class="no_selected"
+          >
             请选择卡牌
           </div>
         </div>
@@ -84,11 +107,20 @@ export default {
       loading: false,
       leftInfo: "",
       rightInfo: "",
+      origin: 0,
     });
-
+    const handleSelect = (item) => {
+      if (origin == 0) {
+        data.leftInfo = item;
+      } else if (origin == 1) {
+        data.rightInfo = item;
+      }
+      data.showPack = false;
+    };
     const refData = toRefs(data);
     return {
       ...refData,
+      handleSelect,
     };
   },
 };
