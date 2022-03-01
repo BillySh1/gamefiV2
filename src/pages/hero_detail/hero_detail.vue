@@ -1,6 +1,7 @@
 <template>
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack  />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="inner">
       <div class="hero_card_big">
@@ -29,7 +30,7 @@
                 <span>品质: {{ qualityText }}</span>
               </div>
               <div class="intros">
-                这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍
+                {{info.intro}}
               </div>
               <div class="chain_info">
                 <span>Token ID: {{ info.tokenId }}</span>
@@ -109,6 +110,7 @@ import { useRoute } from "vue-router";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import HeroCardItem from "../../components/hero_card_item";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import {
   useQualityText,
   usePreferenceText,
@@ -121,6 +123,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     HeroCardItem,
+    InjectGoBack
   },
   setup() {
     const route = useRoute();
