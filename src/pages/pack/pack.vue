@@ -4,11 +4,11 @@
     <div v-if="showDetailPack" class="content hero_pack">
       <InjectPackHero
         @back="() => (curShowType = undefined)"
-        :value="curShowType === 0"
+        :value="curShowType == 0"
       />
       <CommonPackDetail
         @back="() => (curShowType = undefined)"
-        :value="curShowType === 1 || curShowType == 2"
+        :value="curShowType == 1 || curShowType == 2"
         :type="curShowType"
       />
     </div>
@@ -38,6 +38,7 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import { useRoute } from "vue-router";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectPackHero from "../../components/inejct_pack_hero";
@@ -51,6 +52,7 @@ export default {
     CommonPackDetail,
   },
   setup() {
+    const route = useRoute();
     const data = reactive({
       pageTitle: "我的背包",
       routerItems: [
@@ -61,7 +63,9 @@ export default {
       curShowType: undefined,
     });
 
-    onBeforeMount(() => {});
+    onBeforeMount(() => {
+      data.curShowType = route.query.type;
+    });
     const showDetailPack = computed(() => {
       if (data.curShowType !== undefined) {
         return true;

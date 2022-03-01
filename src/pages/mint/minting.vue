@@ -1,20 +1,48 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <img
+      v-if="!loading"
+      class="light"
+      src="../../assets/store/success_bg.svg"
+      alt=""
+    />
     <div class="content">
       <Lottie v-if="loading" :options="lottie_options" />
       <div v-else class="main">
         <div class="title">恭喜您获得了</div>
         <div class="up_box">
-          <div :style="getRarityStyle">{{ curInfo.name }}</div>
-          <div :style="getQualityStyle">{{ curQuality }}品质</div>
+          <div :style="`color:${getRarityStyle}`">{{ curInfo.name }}</div>
+          <div>
+            <span :style="`color:${getQualityStyle}`">{{ curQuality }}</span>
+            品质
+          </div>
         </div>
         <div class="card">
           <HeroCardItem :info="curInfo" />
         </div>
         <div class="bottom">
-          <div class="btn">下一张</div>
-          <div class="btn">显示全部</div>
+          <CommonButton
+            v-if="
+              newMintedItems.length > 1 && curIndex < newMintedItems.length - 1
+            "
+            @click="() => curIndex++"
+            class="btn"
+            >下一张</CommonButton
+          >
+          <CommonButton
+            class="btn"
+            @click="
+              () =>
+                $router.push({
+                  name: 'pack',
+                  query: {
+                    type: 0,
+                  },
+                })
+            "
+            >放入背包</CommonButton
+          >
         </div>
       </div>
     </div>
@@ -30,12 +58,14 @@ import CommonPageHeader from "../../components/common_page_header";
 import initWeb3 from "../../utils/initWeb3.js";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
+import CommonButton from "../../components/common_button.vue";
 export default {
   name: "minging",
   components: {
     CommonPageFooter,
     CommonPageHeader,
     HeroCardItem,
+    CommonButton,
   },
   setup() {
     const store = useStore();
@@ -70,6 +100,14 @@ export default {
     });
     const curInfo = computed(() => {
       return data.newMintedItems[data.curIndex];
+    });
+    const getRarityStyle = computed(() => {
+      return ["white", "blue", "purple", "orange", "gold"][
+        curInfo.value.rarity
+      ];
+    });
+    const getQualityStyle = computed(() => {
+      return ["white", "blue", "purple", "orange"][curInfo.value.quality];
     });
 
     const getCardList = async () => {
@@ -126,44 +164,70 @@ export default {
       lottie_options,
       curInfo,
       curQuality,
+      getRarityStyle,
+      getQualityStyle,
     };
   },
 };
 </script>
 <style lang="less" scoped>
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .light {
+    width: 35rem;
+    animation: spin 3s ease-in-out infinite;
+  }
 }
 .content {
+  position: absolute;
+  width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .main {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     .title {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-size: 2rem;
     }
     .up_box {
       display: flex;
-      font-size: 3rem;
+      font-size: 2.5rem;
       gap: 2rem;
     }
     .bottom {
-      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 1.8rem;
+      .btn {
+        cursor: pointer;
+      }
     }
     .card {
-      margin: 1vmin 0;
       width: 15rem;
+      height: 18rem;
     }
   }
 }

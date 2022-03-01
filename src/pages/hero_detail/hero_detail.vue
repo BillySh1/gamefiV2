@@ -1,7 +1,7 @@
 <template>
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack  />
+    <InjectGoBack />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="inner">
       <div class="hero_card_big">
@@ -28,9 +28,11 @@
                 <span>职业: {{ preferenceText }}</span>
                 <span>阵营: {{ campText }}</span>
                 <span>品质: {{ qualityText }}</span>
+                <span>等级: {{ info.level }} 级</span>
+                <span>星级: {{ info.star }} 星</span>
               </div>
               <div class="intros">
-                {{info.intro}}
+                {{ info.intro }}
               </div>
               <div class="chain_info">
                 <span>Token ID: {{ info.tokenId }}</span>
@@ -110,7 +112,7 @@ import { useRoute } from "vue-router";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import HeroCardItem from "../../components/hero_card_item";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import {
   useQualityText,
   usePreferenceText,
@@ -123,7 +125,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     HeroCardItem,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const route = useRoute();
@@ -258,7 +260,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 100%;
+          width: 90%;
           height: 15%;
           border-bottom: 1px solid rgba(255, 255, 255, 0.5);
           .tab_item {
@@ -300,7 +302,12 @@ export default {
             .infos {
               width: 100%;
               display: flex;
-              justify-content: space-between;
+              flex-wrap: wrap;
+              span {
+                text-align: left;
+                display: block;
+                width: 33%;
+              }
             }
             .intros {
               width: 100%;

@@ -11,7 +11,7 @@
       >
         {{ info.name }}
       </div>
-      <div class="lv_t" :style="`left:${nameTop};`">lv</div>
+      <div class="lv_t" :style="`left:${nameTop}`">lv.{{ info.level }}</div>
       <div class="quality">
         <img :src="qualityImg" alt="" />
       </div>
@@ -20,6 +20,13 @@
           v-for="(item, index) in stars"
           :key="index"
           src="../assets/cardImgs/hero/bg/star.png"
+        />
+      </div>
+      <div class="levels">
+        <img
+          v-for="(item, index) in levels"
+          :key="index"
+          src="../assets/cardImgs/level.png"
           alt=""
         />
       </div>
@@ -29,6 +36,13 @@
       >
         <img :src="campImg.img" />
       </div>
+      <div class="badge" :style="info.rarity == 2 ? 'left:10%' : ''">
+        <img :src="getBadgeImg" alt="" />
+      </div>
+      <div class="badge_inner" :style="getBadgeInnerStyle">
+        <img :src="getPreference[0]" />
+        {{ getPreference[1] }}
+      </div>
     </div>
     <img class="hero" :src="info.img" />
   </div>
@@ -37,12 +51,14 @@
 <script>
 import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
+import { useRoute } from "vue-router";
 export default {
   name: "hero_card_img",
   props: ["info"],
   setup(prop) {
     console.log("1-开始创建组件-setup");
     const data = reactive({});
+    const route = useRoute();
 
     const borderImg = computed(() => {
       return (
@@ -74,9 +90,17 @@ export default {
       };
     });
     const stars = computed(() => {
-      const total = [1, 3, 4, 5, 10][prop.info.rarity];
       const res = [];
-      for (let i = 0; i < total; i++) {
+      for (let i = 0; i < Number(prop.info.star); i++) {
+        res.push({
+          status: 0,
+        });
+      }
+      return res;
+    });
+    const levels = computed(() => {
+      const res = [];
+      for (let i = 0; i < Number(prop.info.level); i++) {
         res.push({
           status: 0,
         });
@@ -86,7 +110,33 @@ export default {
     const nameTop = computed(() => {
       return ["10%", "8.5%", "7%", "7.5%", "5%", "5%"][prop.info.rarity];
     });
-
+    const getBadgeImg = computed(() => {
+      return [
+        require("../assets/cardImgs/badge_0.png"),
+        require("../assets/cardImgs/badge_1.png"),
+        require("../assets/cardImgs/badge_2.png"),
+        require("../assets/cardImgs/badge_3.png"),
+      ][prop.info.camp];
+    });
+    const getPreference = computed(() => {
+      return [
+        [require("../assets/cardImgs/p_0.png"), "盾"],
+        [require("../assets/cardImgs/p_1.png"), "战"],
+        [require("../assets/cardImgs/p_2.png"), "谋"],
+        [require("../assets/cardImgs/p_3.png"), "刺"],
+        [require("../assets/cardImgs/p_4.png"), "辅"],
+      ][prop.info.preference];
+    });
+    const getBadgeInnerStyle = computed(() => {
+      let res = "";
+      if (route.name == "heroDetail") {
+        res += "font-size: 1.5rem;";
+      }
+      if (prop.info.rarity == 2) {
+        res += "left:14%;";
+      }
+      return res;
+    });
     const transform = computed(() => {
       return [
         ["-23%", "-17%"],
@@ -107,6 +157,10 @@ export default {
       campImg,
       useHeroDetail,
       transform,
+      levels,
+      getBadgeImg,
+      getPreference,
+      getBadgeInnerStyle,
     };
   },
 };
@@ -147,10 +201,10 @@ export default {
     color: white;
   }
   .lv_t {
-    font-size: 1.5vmin;
+    font-size: 1rem;
+    max-width: 1rem;
     position: absolute;
     top: 51%;
-    transform: translateX(50%);
     z-index: 30;
     color: white;
   }
@@ -168,14 +222,29 @@ export default {
   .stars {
     position: absolute;
     top: 10%;
-    right: 5%;
+    right: 0%;
     z-index: 30;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     gap: 4px;
-    width: 7%;
-    filter: grayscale(100);
+    width: 10%;
+    img {
+      width: 100%;
+    }
+  }
+  .levels {
+    position: absolute;
+    bottom: 18%;
+    left: 7%;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 9.5%;
+    gap: -1px;
     img {
       width: 100%;
     }
@@ -188,6 +257,31 @@ export default {
     width: 20%;
     img {
       width: 100%;
+    }
+  }
+  .badge {
+    position: absolute;
+    left: 12%;
+    bottom: 2%;
+    z-index: 30;
+    width: 53%;
+    img {
+      width: 100%;
+    }
+  }
+  .badge_inner {
+    position: absolute;
+    left: 15%;
+    bottom: 6%;
+    z-index: 30;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 25%;
+      border-radius: 99%;
+      background: #250a0a;
     }
   }
 }

@@ -31,8 +31,8 @@ export default {
     position: fixed;
     top: 10%;
     left: 4%;
-    width: 4rem;
-    z-index: 99;
+    width: 3rem;
+    z-index: 2;
     cursor: pointer;
     &:hover{
         opacity: .7;

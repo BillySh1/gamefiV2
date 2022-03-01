@@ -20,8 +20,8 @@
         <HeroCardItem :info="info" />
       </div>
       <div class="operate_box">
-        <ComUpgrade v-if="curTab == 0" :info="info" :stockBox="stockBox" />
-        <ComOverfulfil v-if="curTab == 1" :info="info" />
+        <ComUpgrade v-if="curTab == 0" :info="info" :stockBox="stockBox" @refresh="refresh" />
+        <ComOverfulfil v-if="curTab == 1" :info="info" @refresh="refresh" />
         <ComSkill v-if="curTab == 2" />
         <img class="divider" src="../../assets/upgrade/divider_tab.png" />
 
@@ -136,6 +136,12 @@ export default {
         });
       }
     };
+    const refresh = async()=>{
+      data.loading = true;
+      await getHeroInfo();
+      await getStockBox();
+      data.loading = false;
+    }
     onBeforeMount(async () => {
       data.loading = true;
       await getWeb3();
@@ -147,6 +153,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      refresh
     };
   },
 };
@@ -162,7 +169,6 @@ export default {
     bottom: 15%;
     left: 0;
     width: 10rem;
-    z-index: 22;
     .inner {
       position: relative;
       img {

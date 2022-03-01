@@ -8,7 +8,10 @@
           class="back"
           style="width: 2.5rem"
           src="../assets/common/back.svg"
-          @click="() => $emit('back')"
+          @click="(e) => {
+            e.stopPropagation()
+            $emit('back')
+          }"
         />
         <div class="filter_box">
           <CommonPackFilter />
@@ -195,10 +198,9 @@ export default {
   .content {
     margin: 1rem 0;
     background: rgba(0, 0, 0, 0.5);
-    height: 20rem;
+    height: 23rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 1rem 2rem;
     .badge {
       position: relative;
@@ -235,7 +237,7 @@ export default {
           opacity: 0.8;
         }
         height: 100%;
-        width: 20%;
+        width: 22%;
       }
     }
   }

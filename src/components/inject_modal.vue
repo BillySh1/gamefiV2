@@ -1,6 +1,5 @@
 <template>
   <div v-if="value" class="mask" @click="$emit('close')">
-    <img class="close" src="../assets/common/close.svg" alt="" />
     <div
       class="inner"
       @click="
@@ -9,6 +8,8 @@
         }
       "
     >
+      <img class="close" src="../assets/common/close.svg" alt="" />
+
       <img class="bg" src="../assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>
       <div class="content">
@@ -52,13 +53,7 @@ export default {
   background: rgba(0, 0, 0, 0.8);
   z-index: 999;
 }
-.close {
-  position: absolute;
-  cursor: pointer;
-  top: 7rem;
-  left: 5rem;
-  width: 1.5rem;
-}
+
 .inner {
   position: absolute;
   top: 50%;
@@ -66,6 +61,14 @@ export default {
   transform: translate(-50%, -50%);
   width: 70rem;
   color: white;
+  .close {
+    position: absolute;
+    cursor: pointer;
+    top: 0%;
+    right: 0%;
+    transform: translate(50%, -50%);
+    width: 1.5rem;
+  }
   .bg {
     width: 100%;
   }

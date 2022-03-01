@@ -44,11 +44,21 @@
     </div>
     <div v-else class="property_box">无法继续升级，请前往突破</div>
     <div class="action_box" v-if="updateInfo.canLevelup">
-      <div class="item" @click="handleClickUpgrade">
+      <div
+        :class="
+          Number(remainNum) < Number(updateInfo.bookUse)
+            ? 'item disable'
+            : 'item'
+        "
+        @click="handleClickUpgrade"
+      >
         <img src="../../assets/upgrade/action_bg.png" alt="" />
         <div class="inner">升级</div>
       </div>
-      <div class="item" @click="handleClickOneKeyUpgrade">
+      <div
+        :class="oneKeyInfo.canLevelup ? 'item' : 'item disable'"
+        @click="handleClickOneKeyUpgrade"
+      >
         <div class="inner">一键升级</div>
         <img src="../../assets/upgrade/action_bg_1.png" alt="" />
       </div>
@@ -59,6 +69,7 @@
         :title="'确认升级'"
         :btnText="modalBtnText"
         @confirm="modalBtnClick"
+        @close="() => (showUpgradeModal = false)"
       >
         <div class="modal_inner_box">
           <div class="up">
@@ -84,6 +95,7 @@
         :title="'一键升级'"
         :btnText="modalBtnText"
         @confirm="() => modalBtnClick(true)"
+        @close="() => (showOneKeyModal = false)"
       >
         <div class="modal_inner_box">
           <div class="up">
@@ -262,6 +274,7 @@ export default {
     });
 
     onBeforeMount(async () => {
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -271,7 +284,8 @@ export default {
         }
       );
       await getUpdateInfo();
-      console.log(data.updateInfo,'ff',props.info,'ff');
+      await getOneKeyInfo();
+      data.loading = false;
     });
 
     const handleClickUpgrade = async () => {
@@ -299,6 +313,7 @@ export default {
       data.oneKeyInfo = await c.methods
         .getOnekeyUpgradeDetail(props.info.tokenId, data.account)
         .call();
+      console.log("oneKey", data.oneKeyInfo);
     };
     const refData = toRefs(data);
     return {
@@ -426,6 +441,10 @@ export default {
     align-items: center;
     justify-content: space-around;
     margin-top: 1rem;
+    .disable {
+      filter: grayscale(100);
+      pointer-events: none;
+    }
     .item {
       position: relative;
       cursor: pointer;
