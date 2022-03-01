@@ -37,5 +37,8 @@ export default {
     &:hover{
         opacity: .7;
     }
+    img{
+        width: 100%;
+    }
 }
 </style>
