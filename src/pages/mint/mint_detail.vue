@@ -1,8 +1,14 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div v-if="minting" class="content">
+    <div v-if="minting || loading" class="content">
       <Lottie v-if="minting" :options="lottie_minting_options" />
+      <Lottie
+        v-if="loading"
+        :options="{
+          animationData: require('../../assets/common/loading.json'),
+        }"
+      />
     </div>
 
     <div v-else class="content">
@@ -130,6 +136,7 @@ export default {
       btnStatus: 0,
       beforePack: [],
       minting: false,
+      loading: false,
       lottie_options: {
         animationData: require("../../assets/common/loading.json"),
       },
@@ -159,6 +166,7 @@ export default {
         const gas = await c.methods
           .approve(addr, value)
           .estimateGas({ from: data.account });
+        data.loading = true;
         const res = await c.methods.approve(addr, value).send({
           gas: gas,
           gasPrice: gasPrice,
@@ -171,6 +179,8 @@ export default {
       } catch (e) {
         proxy.$toast("授权失败", store.state.toast_error);
         console.log(e);
+      } finally {
+        data.loading = false;
       }
     };
     const buy = async () => {
@@ -241,15 +251,7 @@ export default {
         proxy.$toast("购买成功", store.state.toast_success);
       }
     };
-    // 订阅事件
-    // const watchEvent = ()=>{
-    //    store.state.c_hero.events.NewHero({fromBlock:0},function(){
-    //     }).on('data',(ret)=>{
-    //       console.log(ret,'ret')
-    //     }).on('error',(err)=>{
-    //       console.log(err,'err')
-    //     })
-    // }
+ 
     const btnText = computed(() => {
       return ["授权", "购买"][data.btnStatus];
     });
