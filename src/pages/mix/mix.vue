@@ -132,7 +132,13 @@ export default {
       origin: 0,
       costNum: 0,
     });
-    const handleSelect = (item) => {
+    const getCost = async () => {
+      const c = store.state.c_training;
+      data.costNum = await c.methods
+        .advanceAdditionGemCost(data.curRarity)
+        .call();
+    };
+    const handleSelect = async (item) => {
       if (data.curRarity && data.curRarity != item.rarity) {
         proxy.$toast("请选择稀有度相同的英雄", store.state.toast_error);
         return;
@@ -140,6 +146,7 @@ export default {
 
       if (data.curRarity == undefined) {
         data.curRarity = item.rarity;
+        await getCost();
       }
       if (data.origin == 0) {
         if (data.rightInfo && data.rightInfo.tokenId == item.tokenId) {
@@ -185,7 +192,7 @@ export default {
     z-index: 21;
     transform: translateX(-50%);
   }
-  .cost_badge{
+  .cost_badge {
     position: absolute;
     top: 20%;
     left: 50%;
