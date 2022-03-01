@@ -122,6 +122,7 @@ export default {
       const uid =
         res.camp.toString() + res.rarity.toString() + res.heroId.toString();
       data.info = { ...res, ...useHeroDetail(uid, res.preference), uid: uid };
+      data.info.power = Number(data.info.power) / 100
     };
     const getStockBox = async () => {
       const c = store.state.c_richShop;

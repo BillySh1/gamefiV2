@@ -17,7 +17,7 @@
       <div class="confirm" @click="$emit('confirm')">
         <div class="confirm_inner">
           <img src="../assets/common/modal_confirm_bg.svg" alt="" />
-          <div class="text">确认</div>
+          <div class="text">{{ btnText || "确认" }}</div>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
   name: "inject_modal",
-  props: ["value", "title"],
+  props: ["value", "title", "btnText"],
   setup() {
     const data = reactive({});
     onBeforeMount(() => {});
@@ -43,6 +43,8 @@ export default {
 <style lang="less" scoped>
 .mask {
   position: fixed;
+  width: 100%;
+  height: 100%;
   top: 0;
   right: 0;
   left: 0;
@@ -96,7 +98,7 @@ export default {
   }
   .content {
     position: absolute;
-    max-width: 80%;
+    width: 100%;
     margin: auto;
     top: 50%;
     left: 50%;

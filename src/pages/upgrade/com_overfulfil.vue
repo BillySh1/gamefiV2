@@ -32,11 +32,11 @@
       </div>
       <div>突破后战力值</div>
       <div class="power_value">
-        {{ nextPower }}
+        {{ updateInfo.power / 100 }}
       </div>
-      <div class="action_btn">
+      <div class="action_btn" @click="handleBtnClick">
         <img src="../../assets/upgrade/action_bg_round.png" alt="" />
-        <div class="inner">授权</div>
+        <div class="inner">{{ btnText }}</div>
       </div>
     </div>
     <div v-else class="over_box">
@@ -46,20 +46,27 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 export default {
   name: "com_upgrade",
   props: ["info", "stockBox"],
   setup(props) {
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       updateInfo: "",
       account: "",
       web3: "",
       remainNum: 0,
-      nextPower: 0,
       canDo: false,
+      btnStatus: 0,
     });
     const store = useStore();
 
@@ -75,19 +82,120 @@ export default {
       await getUpdateInfo();
       await getRemainNum();
     });
-    const getRemainNum = async()=>{
-      const c = store.state.c_richShop
-      data.remainNum = await c.methods.balanceOf(data.account,'7').call()
-    }
+    const handleBtnClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await overfulfill();
+      }
+    };
+    const approveStock = async () => {
+      try {
+        proxy.$toast(`等待授权 玉如意`, store.state.toast_info);
+        const c = store.state.c_richShop;
+        const addr = store.state.c_training.options.address;
+        const isApproved = await c.methods
+          .isApprovedForAll(data.account, addr)
+          .call();
+        if (isApproved) {
+          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
+          data.btnStatus = 1;
+          return;
+        }
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .setApprovalForAll(addr, true)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.setApprovalForAll(addr, true).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast(`授权成功`, store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(`授权失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const approve = async () => {
+      try {
+        proxy.$toast(`等待授权${props.info.name}`, store.state.toast_info);
+        const c = store.state.c_hero;
+        const addr = store.state.c_training.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const tokenId = props.info.tokenId;
+        const gas = await c.methods
+          .approve(addr, tokenId)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.setApprovalForAll(addr, tokenId).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast(`授权${props.info.name}成功`, store.state.toast_success);
+          await approveStock();
+        }
+      } catch (e) {
+        proxy.$toast(`授权${props.info.name}失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const overfulfill = async () => {
+      try {
+        proxy.$toast("等待确认", store.state.toast_info);
+        const c = store.state.c_training;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const tokenId = props.info.tokenId;
+        const gas = await c.methods
+          .upgradeStar(tokenId)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.upgradeStar(tokenId).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("突破成功", store.state.toast_success);
+          data.showOneKeyModal = false;
+        }
+      } catch (e) {
+        proxy.$toast("突破失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const getRemainNum = async () => {
+      const c = store.state.c_richShop;
+      data.remainNum = await c.methods.balanceOf(data.account, "7").call();
+    };
     const getUpdateInfo = async () => {
       const c = store.state.c_training;
       data.updateInfo = await c.methods
-        .getUpgradeDetail(props.info.tokenId)
+        .getUpgradeStarDetails(props.info.tokenId)
         .call();
+      data.canDo = data.updateInfo.canUpgradeStar;
+      console.log(data.updateInfo, "ggg", props.info.tokenId);
     };
+    const btnText = computed(() => {
+      return ["授权", "突破"][data.btnStatus];
+    });
     const refData = toRefs(data);
     return {
       ...refData,
+      btnText,
+      handleBtnClick,
     };
   },
 };
@@ -189,6 +297,7 @@ export default {
       color: red;
     }
     .action_btn {
+      cursor: pointer;
       position: relative;
       width: 8rem;
       img {

@@ -81,10 +81,15 @@
     <div
       v-if="leftInfo && leftInfo.tokenId && rightInfo && rightInfo.tokenId"
       class="action_btn"
+      @click="btnClick"
     >
-      <CommonButton>授权卡牌</CommonButton>
+      <CommonButton>{{ btnText }}</CommonButton>
     </div>
-    <Lottie v-if="loading" :options="lottie_options" />
+    <Lottie v-if="mixing" :options="lottie_options" />
+    <Lottie
+      v-if="loading"
+      :options="{ animationData: require('../../assets/common/loading.json') }"
+    />
     <CommonPageFooter />
 
     <InjectModal
@@ -97,7 +102,13 @@
 </template>
 
 <script >
-import { getCurrentInstance, reactive, toRefs } from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  onBeforeMount,
+  reactive,
+  toRefs,
+} from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectModal from "../../components/inject_modal";
@@ -105,6 +116,7 @@ import InjectPackHero from "../../components/inejct_pack_hero";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import CommonButton from "../../components/common_button.vue";
 import { useStore } from "vuex";
+import initWeb3 from "../../utils/initWeb3";
 export default {
   name: "store",
   components: {
@@ -129,9 +141,116 @@ export default {
       leftInfo: "",
       rightInfo: "",
       curRarity: undefined,
+      curCamp: undefined,
       origin: 0,
       costNum: 0,
+      btnStatus: 0,
+      account: "",
+      mixing: false,
+      web3: "",
     });
+    const btnText = computed(() => {
+      return ["授权卡牌", "授权并尊盟约", "确认进阶"][data.btnStatus];
+    });
+    const btnClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await approveStock();
+      } else if (data.btnStatus == 2) {
+        await mix();
+      }
+    };
+    const approve = async () => {
+      try {
+        proxy.$toast(`等待授权`, store.state.toast_info);
+        const c = store.state.c_hero;
+        const addr = store.state.c_training.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .setApprovalForAll(addr, true)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.setApprovalForAll(addr, true).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast(`授权 成功`, store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(`授权  失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const approveStock = async () => {
+      try {
+        const c = store.state.c_richShop;
+        const addr = store.state.c_training.options.address;
+        const isApproved = await c.methods
+          .isApprovedForAll(data.account, addr)
+          .call();
+        if (isApproved) {
+          data.btnStatus = 2;
+          return;
+        }
+        proxy.$toast(`等待授权并尊盟约`, store.state.toast_info);
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .setApprovalForAll(addr, true)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.setApprovalForAll(addr, true).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 2;
+          proxy.$toast(`授权成功`, store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(`授权失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const mix = async () => {
+      try {
+        proxy.$toast("等待确认", store.state.toast_info);
+        const c = store.state.c_training;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
+        const gas = await c.methods
+          .upgradeRarity(selected, false, 0, false)
+          .estimateGas({ from: data.account });
+        data.step = 2;
+        data.ani1.play();
+        data.mixing = true;
+        const res = await c.methods
+          .upgradeRarity(selected, false, 0, false)
+          .send({
+            gasPrice: gasPrice,
+            gas: Number.parseInt(gas, 10) + 500000,
+            from: data.account,
+          });
+        if (res.status) {
+          data.step = 0;
+          proxy.$toast("进阶成功", store.state.toast_success);
+          data.curSelectedHero = undefined;
+        }
+      } catch (e) {
+        proxy.$toast("进阶失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.mixing = false;
+      }
+    };
     const getCost = async () => {
       const c = store.state.c_training;
       data.costNum = await c.methods
@@ -143,11 +262,19 @@ export default {
         proxy.$toast("请选择稀有度相同的英雄", store.state.toast_error);
         return;
       }
+      if (data.curCamp && data.curCamp != item.camp) {
+        proxy.$toast("请选择相同阵营的英雄", store.state.toast_error);
+        return;
+      }
 
       if (data.curRarity == undefined) {
         data.curRarity = item.rarity;
         await getCost();
       }
+      if (data.curCamp == undefined) {
+        data.curCamp = item.camp;
+      }
+
       if (data.origin == 0) {
         if (data.rightInfo && data.rightInfo.tokenId == item.tokenId) {
           proxy.$toast(
@@ -169,10 +296,24 @@ export default {
       }
       data.showPack = false;
     };
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      data.loading = false;
+    });
     const refData = toRefs(data);
     return {
       ...refData,
       handleSelect,
+      btnText,
+      btnClick,
     };
   },
 };
