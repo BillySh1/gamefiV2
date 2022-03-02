@@ -32,17 +32,17 @@
       />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
       <img
+        v-if="isMobile"
         @click="exitFullScreen"
         class="icon"
-        src="../assets/common/exitFullScreen.png"
-        alt=""
+        :src="getScreenAciton"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, onMounted } from "vue";
+import { reactive, toRefs, computed } from "vue";
 import InjectWallet from "./inject_wallet.vue";
 export default {
   name: "common_page_header",
@@ -85,17 +85,37 @@ export default {
       ],
     });
 
-    onMounted(() => {});
+    const isMobile = computed(() => {
+      if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+        return true;
+      }
+      return false;
+    });
+    const getScreenAciton = computed(() => {
+      const isFullScreen = sessionStorage.getItem("fullScreen");
+      console.log(isFullScreen, "sss");
+      return isFullScreen
+        ? require("../assets/common/exitFullScreen.png")
+        : require("../assets/common/fullScreen.png");
+    });
     const exitFullScreen = () => {
       const tp = require("tp-js-sdk");
-      tp.fullScreen({
-        fullScreen: 0,
-      });
+      if (sessionStorage.getItem("fullScreen")) {
+        tp.fullScreen({
+          fullScreen: 0,
+        });
+      } else {
+        tp.fullScreen({
+          fullScreen: 1,
+        });
+      }
     };
     const refData = toRefs(data);
     return {
       ...refData,
       exitFullScreen,
+      isMobile,
+      getScreenAciton,
     };
   },
 };
