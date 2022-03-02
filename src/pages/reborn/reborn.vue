@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack  />
     <Lottie
       v-if="loading"
       :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -68,18 +69,20 @@ import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button.vue";
 import InejctPackHero from "../../components/inejct_pack_hero.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 const openAni = require("../../assets/reborn/open.json");
 const closeAni = require("../../assets/reborn/close.json");
 export default {
-  name: "store",
+  name: "reborn",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     InejctPackHero,
     HeroCardItem,
     CommonButton,
+    InjectGoBack
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -238,9 +241,11 @@ export default {
         if (res.status) {
           data.step = 0;
           proxy.$toast("重生成功", store.state.toast_success);
-          data.curSelectedHero = undefined;
           router.push({
             name: "minting",
+            query:{
+              tokenId: data.curSelectedHero.tokenId
+            }
           });
         }
       } catch (e) {

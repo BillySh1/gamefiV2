@@ -53,6 +53,7 @@
 <script >
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonPageHeader from "../../components/common_page_header";
 import initWeb3 from "../../utils/initWeb3.js";
@@ -69,6 +70,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
     const data = reactive({
       jsonData: "",
       pageTitle: "招贤纳士",
@@ -94,6 +96,9 @@ export default {
           data.web3 = p;
         }
       );
+      if (route.query && route.query.tokenId) {
+        await getNewHero();
+      }
       await getCardList();
       data.loading = false;
     });
@@ -108,7 +113,22 @@ export default {
     const getQualityStyle = computed(() => {
       return ["white", "blue", "purple", "orange"][curInfo.value.quality];
     });
-
+    const getNewHero = async () => {
+      try {
+        data.curIndex = 0;
+        const c = store.state.c_hero;
+        const res = await c.methods.getHero(route.query.tokenId).call();
+        const uid =
+          res.camp.toString() + res.rarity.toString() + res.heroId.toString();
+        data.newMintedItems.push({
+          ...res,
+          uid,
+          ...useHeroDetail(uid, res.preference),
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
     const getCardList = async () => {
       try {
         data.curIndex = 0;

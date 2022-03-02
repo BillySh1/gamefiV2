@@ -10,7 +10,6 @@ export default {
     name: '',
       setup() {
           const data = reactive({
-
           })
           onBeforeMount(() => {
           })
