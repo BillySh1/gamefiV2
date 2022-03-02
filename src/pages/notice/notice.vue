@@ -1,14 +1,16 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <div class="content">
       <div class="border">
         <img src="../../assets/notice/border.svg" alt="" />
-        <div class="inner">
+        <div v-if="noticeData.length > 0" class="inner">
           <div v-for="item in noticeData" :key="item.key" class="inner_item">
             <NoticeItem :info="item" />
           </div>
         </div>
+        <div v-else class="empty">暂无公告</div>
       </div>
     </div>
     <CommonPageFooter />
@@ -16,61 +18,61 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import NoticeItem from "./notice_item";
 export default {
-  name: "store",
+  name: "notice",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     NoticeItem,
+    InjectGoBack
   },
   setup() {
     const data = reactive({
       pageTitle: "公告栏",
       noticeData: [
-        {
-          key: 0,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
+        // {
+        //   key: 0,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
+        // {
+        //   key: 1,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
+        // {
+        //   key: 1,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
+        // {
+        //   key: 1,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
+        // {
+        //   key: 1,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
+        // {
+        //   key: 1,
+        //   time: new Date(),
+        //   title: "富贾三国公测",
+        //   content: "这是内容这是内容",
+        // },
       ],
     });
-
-    onBeforeMount(() => {});
 
     const refData = toRefs(data);
     return {
@@ -108,6 +110,13 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -45%);
+    }
+    .empty {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
     }
   }
 }

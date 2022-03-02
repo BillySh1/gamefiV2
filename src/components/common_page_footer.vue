@@ -41,12 +41,9 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
-import { useRoute } from "vue-router";
 export default {
   name: "common_page_footer",
   setup() {
-    const route = useRoute();
-    console.log("1-开始创建组件-setup");
     const data = reactive({
       menuList: [
         {
@@ -88,11 +85,8 @@ export default {
       ],
     });
     onBeforeMount(() => {
-      console.log(route.name, "sss");
-      console.log("2.组件挂载页面之前执行----onBeforeMount");
     });
     onMounted(() => {
-      console.log("3.-组件挂载到页面之后执行-------onMounted");
     });
     const refData = toRefs(data);
     return {

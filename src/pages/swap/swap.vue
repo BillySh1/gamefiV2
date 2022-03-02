@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">swap</div>
+    <div class="content">swap系统正在开发中，敬请期待</div>
     <CommonPageFooter />
   </div>
 </template>
@@ -11,14 +11,14 @@ import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 export default {
-  name: "store",
+  name: "swap",
   components: {
     CommonPageHeader,
     CommonPageFooter,
   },
   setup() {
     const data = reactive({
-      pageTitle: "兑换MMC",
+      pageTitle: "Swap",
     });
 
     onBeforeMount(() => {});
@@ -41,5 +41,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
 }
 </style>

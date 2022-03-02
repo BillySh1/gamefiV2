@@ -176,6 +176,7 @@ export default {
         const gas = await c.methods
           .approve(addr, value)
           .estimateGas({ from: data.account });
+        data.loading = true;
         const res = await c.methods.approve(addr, value).send({
           gas: gas,
           gasPrice: gasPrice,
@@ -188,6 +189,8 @@ export default {
       } catch (e) {
         proxy.$toast("授权失败", store.state.toast_error);
         console.log(e);
+      } finally {
+        data.loading = false;
       }
     };
     const buy = async () => {

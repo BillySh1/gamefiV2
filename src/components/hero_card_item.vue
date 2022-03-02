@@ -56,7 +56,6 @@ export default {
   name: "hero_card_img",
   props: ["info"],
   setup(prop) {
-    console.log("1-开始创建组件-setup");
     const data = reactive({});
     const route = useRoute();
 

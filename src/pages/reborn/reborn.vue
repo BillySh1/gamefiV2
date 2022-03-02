@@ -24,11 +24,13 @@
         <InejctPackHero
           :toSelect="true"
           :value="showPack && step == 1"
-          @back="() => {
-            showPack = false;
-            step = 0;
-            isOpen = false;
-          }"
+          @back="
+            () => {
+              showPack = false;
+              step = 0;
+              isOpen = false;
+            }
+          "
           @select="(i) => handleSelectHero(i)"
         />
       </div>
@@ -60,6 +62,7 @@ import {
   getCurrentInstance,
   computed,
 } from "vue";
+import { useRouter } from "vue-router";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button.vue";
@@ -67,7 +70,6 @@ import InejctPackHero from "../../components/inejct_pack_hero.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
-// import getHeroInfo from "../../utils/useHeroDetail";
 const openAni = require("../../assets/reborn/open.json");
 const closeAni = require("../../assets/reborn/close.json");
 export default {
@@ -82,6 +84,7 @@ export default {
   setup() {
     const { proxy } = getCurrentInstance();
     const store = useStore();
+    const router = useRouter();
     const data = reactive({
       account: "",
       web3: "",
@@ -185,7 +188,6 @@ export default {
     const approveStock = async () => {
       try {
         const c = store.state.c_richShop;
-
         const addr = store.state.c_training.options.address;
         const isApproved = await c.methods
           .isApprovedForAll(data.account, addr)
@@ -194,7 +196,6 @@ export default {
           data.btnStatus = 2;
           return;
         }
-
         proxy.$toast(`等待授权两仪石`, store.state.toast_info);
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -231,14 +232,16 @@ export default {
         data.processing = true;
         const res = await c.methods.rebirth(tokenId).send({
           gasPrice: gasPrice,
-          gas: Number.parseInt(gas,10) + 50000,
+          gas: Number.parseInt(gas, 10) + 50000,
           from: data.account,
         });
         if (res.status) {
           data.step = 0;
           proxy.$toast("重生成功", store.state.toast_success);
           data.curSelectedHero = undefined;
-          // await getNewHero();
+          router.push({
+            name: "minting",
+          });
         }
       } catch (e) {
         proxy.$toast("重生失败", store.state.toast_error);
@@ -247,18 +250,34 @@ export default {
         data.processing = false;
       }
     };
-    // const getNewHero = async () => {
-    //   const c = store.state.c_hero;
-    //   const tokenId = data.curSelectedHero.tokenId;
-    //   const res = await c.methods.getHero(tokenId).call();
-    //   const uid =
-    //     res.camp.toString() + res.rarity.toString() + res.heroId.toString();
-    //   data.newMintedHero = {
-    //     ...res,
-    //     ...getHeroInfo(uid, res.preference),
-    //   };
-    //   console.log(data.newMintedHero,'fff')
-    // };
+    const getBeforePack = async () => {
+      const temp = [];
+      try {
+        const c = store.state.c_hero;
+        const res = await c.methods.cardList(data.account).call();
+        res.map((x) => {
+          temp.push({
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+          });
+        });
+        sessionStorage.setItem("before_pack", JSON.stringify(temp));
+      } catch (e) {
+        console.log(e);
+        proxy.$toast("获取背包列表失败", store.state.toast_error);
+      }
+    };
     const handleClickReborn = () => {
       if (data.step == 0 && !data.isOpen) {
         data.ani0.play();
@@ -278,6 +297,7 @@ export default {
           data.web3 = p;
         }
       );
+      await getBeforePack();
       data.loading = false;
     });
 

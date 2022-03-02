@@ -212,9 +212,6 @@ export default {
           proxy.$toast("购买成功", store.state.toast_success);
           router.push({
             name: "minting",
-            query: {
-              info: JSON.stringify(data.info),
-            },
           });
         }
       } catch (e) {

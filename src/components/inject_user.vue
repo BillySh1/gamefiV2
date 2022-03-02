@@ -7,7 +7,7 @@
       <div class="info_box">
         <div class="power_box">
           <img class="power_bg" src="../assets/index/power_bg.svg" alt="" />
-          <div class="power_value">战力 1,000000</div>
+          <div class="power_value">战力 {{ power }}</div>
         </div>
         <div class="title_box">
           <img src="../assets/index/title_bg.svg" alt="" />
@@ -19,18 +19,12 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs } from "vue";
 export default {
-  name: "",
+  name: "inject_user",
+  props:['power'],
   setup() {
-    console.log("1-开始创建组件-setup");
-    const data = reactive({});
-    onBeforeMount(() => {
-      console.log("2.组件挂载页面之前执行----onBeforeMount");
-    });
-    onMounted(() => {
-      console.log("3.-组件挂载到页面之后执行-------onMounted");
-    });
+    const data = reactive({})
     const refData = toRefs(data);
     return {
       ...refData,

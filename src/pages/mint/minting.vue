@@ -95,7 +95,6 @@ export default {
         }
       );
       await getCardList();
-      console.log(curInfo, "fff");
       data.loading = false;
     });
     const curInfo = computed(() => {

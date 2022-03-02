@@ -1,8 +1,12 @@
 <template>
   <div class="container">
     <CommonPageHeader />
-    <div class="content">
-      <InjectUser />
+    <Lottie
+      v-if="loading"
+      :options="{ animationData: require('../../assets/common/loading.json') }"
+    />
+    <div v-else class="content">
+      <InjectUser :power="power" />
       <div class="float_right_box">
         <div class="float_item" @click="jump('invite')">
           <InjectIcon
@@ -35,7 +39,7 @@
       <div class="float_action_buttons">
         <img class="up" src="../../assets/index/ac_bottom.svg" alt="" />
         <div class="actions_inner">
-          <div class="left">
+          <div class="left" @click="jump('allStarsEntry')">
             <img src="../../assets/index/ac_left.svg" alt="" />
             <div class="text">群英会战</div>
           </div>
@@ -55,12 +59,14 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { onBeforeMount, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectUser from "../../components/inject_user";
 import InjectIcon from "../../components/inject_icon";
+import initWeb3 from "../../utils/initWeb3";
 export default {
   name: "home",
   components: {
@@ -71,13 +77,37 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const data = reactive({});
-    onBeforeMount(() => {
-      console.log("2.组件挂载页面之前执行----onBeforeMount");
+    const store = useStore();
+
+    const data = reactive({
+      account: "",
+      web3: "",
+      power: 0,
+      loading: false,
     });
-    onMounted(() => {
-      console.log("3.-组件挂载到页面之后执行-------onMounted");
+
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPower();
+      data.loading = false;
     });
+    const getPower = async () => {
+      const c = store.state.c_hero;
+      const list = await c.methods.cardList(data.account).call();
+      data.power = list.reduce((pre, cur) => {
+        pre += Number(cur.power) / 100;
+        return pre;
+      }, 0);
+    };
+
     const refData = toRefs(data);
     const jump = (name) => {
       router.push({
