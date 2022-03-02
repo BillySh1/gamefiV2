@@ -60,7 +60,16 @@
         </div>
         <div class="detail_box">
           <div class="inner">
-            {{ curItemShow }}
+            <div class="up">
+              <div class="left">
+                <img src="../../assets/pack/detail_stock_box.png" alt="" />
+                <img class="content"  alt="" />
+              </div>
+              <div class="right">
+                {{ curItemShow }}
+              </div>
+            </div>
+            <div class="bottom"></div>
           </div>
         </div>
       </div>
@@ -69,7 +78,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, watch } from "vue";
+import { reactive, toRefs, onBeforeMount, watch, computed } from "vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useGetShopDetailByTokenId } from "../store/use_shop_items.js";
@@ -105,13 +114,14 @@ export default {
         } else if (v == 2) {
           data.curPackData = data.goodsItems;
         }
-        data.curItemShow = data.curPackData[data.curItemIndex];
       },
       {
         immediate: true,
       }
     );
-
+    const curItemShow = computed(() => {
+      return data.curPackData[data.curItemIndex];
+    });
     onBeforeMount(async () => {
       data.loading = true;
       await initWeb3.Init(
@@ -139,6 +149,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      curItemShow,
     };
   },
 };
@@ -151,7 +162,7 @@ export default {
   right: 0;
   bottom: 0;
   height: 100%;
-
+  z-index: 40;
   .bg {
     width: 100%;
     height: 100%;
@@ -238,7 +249,7 @@ export default {
             position: absolute;
             left: 50%;
             top: 50%;
-            
+
             font-size: 1.2rem;
             transform: translate(-60%, -50%);
           }
@@ -283,7 +294,35 @@ export default {
           position: relative;
           width: 100%;
           height: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
           .up {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            .left {
+              position: relative;
+              width: 45%;
+              img {
+                width: 100%;
+              }
+              .content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 95%;
+              }
+            }
+            .right {
+              width: 50%;
+            }
+          }
+          .bottom {
+            width: 100%;
+            height: 50%;
           }
         }
       }

@@ -15,7 +15,9 @@
         :style="index == 1 || index == 0 ? 'width:10rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
-        {{ item.value }}
+        <div class="value" >
+          {{ item.value }}
+        </div>
         <img
           class="img_right"
           src="../assets/common/currency_plus.png"
@@ -133,8 +135,8 @@ export default {
       const cardNum = await hero.methods.cardList(data.account).call();
       const mmcBalance = await mmc.methods.balanceOf(data.account).call();
       const m3tBalance = await m3t.methods.balanceOf(data.account).call();
-      data.list[0].value = data.web3.utils.fromWei(mmcBalance, "ether");
-      data.list[1].value = data.web3.utils.fromWei(m3tBalance, "ether");
+      data.list[0].value = data.web3.utils.fromWei(mmcBalance, "ether").split('.')[0]
+      data.list[1].value = data.web3.utils.fromWei(m3tBalance, "ether").split('.')[0]
       data.list[2].value = cardNum.length;
       data.list[3].value = await shop.methods
         .balanceOf(data.account, 11)
@@ -199,15 +201,22 @@ export default {
   font-family: SF Pro text;
   font-style: italic;
   font-weight: 700;
+  gap: 4rem;
   -webkit-text-stroke: 0.86px solid #231008;
 }
 .currency_item {
-  min-width: 5rem;
+  width: 10rem;
+
   background: #00000042;
-  margin: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .value{
+    max-width: 6rem;
+      white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
 }
 .img_left {
   height: 2rem;
