@@ -99,7 +99,7 @@ export default {
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const data = reactive({
-      pageTitle: "卡牌市场",
+      pageTitle: "我的订单",
       allItems: [],
       curItems: [],
       web3: "",

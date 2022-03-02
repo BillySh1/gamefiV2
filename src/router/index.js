@@ -24,6 +24,8 @@ const storeSuccess = () => import("../pages/store/store_buy_success.vue");
 const inviteBoard = () => import("../pages/invite/invite_board.vue");
 const heroDetail = () => import("../pages/hero_detail/hero_detail.vue");
 const upgradePage = () => import("../pages/upgrade/upgrade.vue");
+const marketDetail = () => import("../pages/market/market_camp_detail.vue");
+const orderDetail = () => import("../pages/market/order.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -142,6 +144,16 @@ const router = createRouter({
       path: "/upgrade",
       name: "upgrade",
       component: upgradePage,
+    },
+    {
+      path: "/marketDetail",
+      name: "marketDetail",
+      component: marketDetail,
+    },
+    {
+      path: "/order",
+      name: "order",
+      component: orderDetail,
     },
   ],
 });

@@ -3,16 +3,23 @@
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
     <div class="content">
-      <div v-for="item,index in campBox" :key="index" class="item" >
-        <img :src="item.img" alt="">
+      <div
+        v-for="(item, index) in campBox"
+        :key="index"
+        class="item"
+        @click="
+          () => $router.push({ name: 'marketDetail', query: { type: index } })
+        "
+      >
+        <img :src="item.img" alt="" />
       </div>
     </div>
-     <div class="tip_badge" >
-        <div class="inner">
-          <img src="../../assets/common/tip_badge.svg" />
-          <div class="text">进阶规则</div>
-        </div>
+    <div class="tip_badge" @click="()=>$router.push({name:'order'})" >
+      <div class="inner">
+        <img src="../../assets/common/tip_badge.svg" />
+        <div class="text">我的订单</div>
       </div>
+    </div>
     <CommonPageFooter />
   </div>
 </template>
@@ -21,35 +28,35 @@
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const data = reactive({
       pageTitle: "交易市场",
-      campBox:[
+      campBox: [
         {
-          name:'魏',
-          img:require('../../assets/market/camp/0.png')
+          name: "魏",
+          img: require("../../assets/market/camp/0.png"),
         },
-         {
-          name:'蜀',
-          img:require('../../assets/market/camp/1.png')
+        {
+          name: "蜀",
+          img: require("../../assets/market/camp/1.png"),
         },
-         {
-          name:'吴',
-          img:require('../../assets/market/camp/2.png')
+        {
+          name: "吴",
+          img: require("../../assets/market/camp/2.png"),
         },
-         {
-          name:'群',
-          img:require('../../assets/market/camp/3.png')
+        {
+          name: "群",
+          img: require("../../assets/market/camp/3.png"),
         },
-      ]
+      ],
     });
 
     onBeforeMount(() => {});
@@ -66,7 +73,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url('../../assets/market/bg.png') no-repeat;
+  background: url("../../assets/market/bg.png") no-repeat;
   background-size: cover;
   .tip_badge {
     cursor: pointer;
@@ -83,7 +90,7 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
       }
     }
   }
@@ -95,13 +102,13 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  .item{
+  .item {
     cursor: pointer;
-    &:hover{
-      opacity: .8;
+    &:hover {
+      opacity: 0.8;
     }
     height: 20rem;
-    img{
+    img {
       height: 100%;
     }
   }
