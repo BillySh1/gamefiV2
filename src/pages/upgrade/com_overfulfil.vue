@@ -13,7 +13,7 @@
     <div class="cost_box">
       <div class="info">
         需要消耗
-        <div class="num">{{ updateInfo.bookUse }}</div>
+        <div class="num">{{ updateInfo.breakGemUse }}</div>
         <strong style="color: yellow">玉如意</strong> 突破
         <img src="../../assets/store/item/yuruyi.png" alt="" />
       </div>
@@ -34,7 +34,7 @@
       <div class="power_value">
         {{ updateInfo.power / 100 }}
       </div>
-      <div class="action_btn" @click="handleBtnClick">
+      <div :class="Number(updateInfo.breakGemUse) > Number(remainNum)?'action_btn disable': 'action_btn' " @click="handleBtnClick">
         <img src="../../assets/upgrade/action_bg_round.png" alt="" />
         <div class="inner">{{ btnText }}</div>
       </div>
@@ -58,7 +58,7 @@ import { useStore } from "vuex";
 export default {
   name: "com_upgrade",
   props: ["info", "stockBox"],
-  setup(props) {
+  setup(props, context) {
     const { proxy } = getCurrentInstance();
     const data = reactive({
       updateInfo: "",
@@ -174,6 +174,7 @@ export default {
         console.log(e);
       } finally {
         data.loading = false;
+        context.emit("refresh");
       }
     };
     const getRemainNum = async () => {
@@ -295,6 +296,10 @@ export default {
     }
     .power_value {
       color: red;
+    }
+    .disable{
+      pointer-events: none;
+      filter: grayscale(100);
     }
     .action_btn {
       cursor: pointer;

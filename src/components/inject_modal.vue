@@ -8,7 +8,7 @@
         }
       "
     >
-      <img class="close" src="../assets/common/close.svg" alt="" />
+      <img class="close" src="../assets/common/close.svg" alt="" @click="$emit('close')" />
 
       <img class="bg" src="../assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>

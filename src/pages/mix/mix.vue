@@ -1,11 +1,25 @@
 <template>
   <div class="container">
+    <InjectGoBack v-if="!loading && !mixing && !showModal && !showPack" />
+    <Lottie
+      v-if="loading"
+      :options="{ animationData: require('../../assets/common/loading.json') }"
+    />
+    <Lottie v-if="mixing" :options="lottie_options" />
+
     <CommonPageHeader :title="pageTitle" />
     <div
-      v-if="leftInfo && leftInfo.tokenId && rightInfo && rightInfo.tokenId"
+      v-if="
+        leftInfo &&
+        leftInfo.tokenId &&
+        rightInfo &&
+        rightInfo.tokenId &&
+        !loading &&
+        !mixing
+      "
       class="cost_badge"
     >
-      需要消耗 并尊盟约, 数量: {{ costNum }}
+      需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }}
     </div>
     <div v-if="showPack" class="content">
       <InjectPackHero
@@ -79,17 +93,24 @@
       </div>
     </div>
     <div
-      v-if="leftInfo && leftInfo.tokenId && rightInfo && rightInfo.tokenId"
-      class="action_btn"
+      v-if="
+        leftInfo &&
+        leftInfo.tokenId &&
+        rightInfo &&
+        rightInfo.tokenId &&
+        !loading &&
+        !mixing
+      "
+      :class="
+        Number(remainNum) < Number(costNum)
+          ? 'action_btn disable'
+          : 'action_btn'
+      "
       @click="btnClick"
     >
       <CommonButton>{{ btnText }}</CommonButton>
     </div>
-    <Lottie v-if="mixing" :options="lottie_options" />
-    <Lottie
-      v-if="loading"
-      :options="{ animationData: require('../../assets/common/loading.json') }"
-    />
+
     <CommonPageFooter />
 
     <InjectModal
@@ -111,12 +132,14 @@ import {
 } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from "../../components/inject_go_back.vue";
 import InjectModal from "../../components/inject_modal";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import CommonButton from "../../components/common_button.vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3";
+import { useRouter } from "vue-router";
 export default {
   name: "store",
   components: {
@@ -126,10 +149,12 @@ export default {
     InjectPackHero,
     HeroCardItem,
     CommonButton,
+    InjectGoBack,
   },
   setup() {
     const { proxy } = getCurrentInstance();
     const store = useStore();
+    const router = useRouter();
     const data = reactive({
       pageTitle: "卡牌进阶",
       showModal: false,
@@ -148,6 +173,7 @@ export default {
       account: "",
       mixing: false,
       web3: "",
+      remainNum: 0,
     });
     const btnText = computed(() => {
       return ["授权卡牌", "授权并尊盟约", "确认进阶"][data.btnStatus];
@@ -230,7 +256,6 @@ export default {
           .upgradeRarity(selected, false, 0, false)
           .estimateGas({ from: data.account });
         data.step = 2;
-        data.ani1.play();
         data.mixing = true;
         const res = await c.methods
           .upgradeRarity(selected, false, 0, false)
@@ -242,7 +267,9 @@ export default {
         if (res.status) {
           data.step = 0;
           proxy.$toast("进阶成功", store.state.toast_success);
-          data.curSelectedHero = undefined;
+          router.push({
+            name: "minting",
+          });
         }
       } catch (e) {
         proxy.$toast("进阶失败", store.state.toast_error);
@@ -270,6 +297,7 @@ export default {
       if (data.curRarity == undefined) {
         data.curRarity = item.rarity;
         await getCost();
+        await getRemainNum();
       }
       if (data.curCamp == undefined) {
         data.curCamp = item.camp;
@@ -306,8 +334,41 @@ export default {
           data.web3 = p;
         }
       );
+      await getBeforePack();
       data.loading = false;
     });
+    const getRemainNum = async () => {
+      const c = store.state.c_richShop;
+      data.remainNum = await c.methods.balanceOf(data.account, 8).call();
+    };
+    const getBeforePack = async () => {
+      const temp = [];
+      try {
+        const c = store.state.c_hero;
+        const res = await c.methods.cardList(data.account).call();
+        res.map((x) => {
+          temp.push({
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+          });
+        });
+        sessionStorage.setItem("before_pack", JSON.stringify(temp));
+      } catch (e) {
+        console.log(e);
+        proxy.$toast("获取背包列表失败", store.state.toast_error);
+      }
+    };
     const refData = toRefs(data);
     return {
       ...refData,
@@ -325,6 +386,10 @@ export default {
   height: 100%;
   background-size: 100%;
   background: black;
+  .disable {
+    pointer-events: none;
+    filter: grayscale(100);
+  }
   .action_btn {
     cursor: pointer;
     position: absolute;
@@ -353,7 +418,7 @@ export default {
   .tip_badge {
     cursor: pointer;
     position: absolute;
-    top: 8rem;
+    bottom: 15%;
     left: 0;
     .inner {
       position: relative;

@@ -17,8 +17,15 @@
           返回
         </div>
       </div>
-      <Lottie :options="{animationData:require('../../assets/all_stars/entry/fire.json')}" />
+     
     </div>
+     <div class="fire">
+        <Lottie
+          :options="{
+            animationData: require('../../assets/all_stars/entry/fire.json'),
+          }"
+        />
+      </div>
   </div>
 </template>
 
@@ -50,6 +57,12 @@ export default {
     background: url("../../assets/all_stars/entry/mask.png") no-repeat;
     background-size: 100% 100%;
   }
+  .fire{
+    position: absolute;
+    bottom: 0%;
+    z-index: 2;
+    width: 120%;
+  }
 }
 .content {
   position: absolute;
@@ -59,6 +72,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 20;
   .logo {
     width: 50rem;
   }

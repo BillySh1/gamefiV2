@@ -42,7 +42,9 @@
         </div>
       </div>
     </div>
-    <div v-else class="property_box">无法继续升级，请前往突破</div>
+    <div v-else class="property_box">
+      <div class="empty">无法继续升级，请前往突破</div>
+    </div>
     <div class="action_box" v-if="updateInfo.canLevelup">
       <div
         :class="
@@ -140,7 +142,7 @@ export default {
     InjectModal,
     HeroCardItem,
   },
-  setup(props) {
+  setup(props, context) {
     const data = reactive({
       updateInfo: "",
       account: "",
@@ -252,6 +254,7 @@ export default {
         console.log(e);
       } finally {
         data.loading = false;
+        context.emit("refresh");
       }
     };
     const costName = computed(() => {
@@ -393,6 +396,10 @@ export default {
   .property_box {
     position: relative;
     width: 100%;
+    .empty {
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
     img {
       width: 100%;
     }

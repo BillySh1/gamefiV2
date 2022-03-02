@@ -125,6 +125,7 @@ export default {
       data.info.power = Number(data.info.power) / 100
     };
     const getStockBox = async () => {
+      data.stockBox = []
       const c = store.state.c_richShop;
       const map = [0, 1, 2, 3, 7];
       for (let i = 0; i < map.length; i++) {
@@ -169,6 +170,7 @@ export default {
     bottom: 15%;
     left: 0;
     width: 10rem;
+    z-index: 50;
     .inner {
       position: relative;
       img {
