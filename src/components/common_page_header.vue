@@ -42,8 +42,10 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed } from "vue";
+import { reactive, toRefs, computed, onBeforeMount } from "vue";
 import InjectWallet from "./inject_wallet.vue";
+import initWeb3 from "../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "common_page_header",
   props: ["title"],
@@ -51,35 +53,38 @@ export default {
     InjectWallet,
   },
   setup() {
+    const store = useStore();
     const data = reactive({
+      account: "",
+      web3: "",
       list: [
         {
           key: "mmc",
           img: require("../assets/common/mmc.png"),
-          value: 1000,
+          value: 0,
         },
         {
           key: "m3t",
           img: require("../assets/exchange/coin.png"),
-          value: 1000,
+          value: 0,
           href: "exchange",
         },
         {
           key: "card",
           img: require("../assets/common/card.png"),
-          value: 1000,
+          value: 0,
           href: "mint",
         },
         {
           key: "grain",
           img: require("../assets/common/grain.png"),
-          value: 1000,
+          value: 0,
           href: "store",
         },
         {
           key: "drum",
           img: require("../assets/common/drum.png"),
-          value: 1000,
+          value: 0,
           href: "store",
         },
       ],
@@ -108,6 +113,35 @@ export default {
           fullScreen: 1,
         });
       }
+    };
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getInfo();
+    });
+    const getInfo = async () => {
+      const mmc = store.state.c_mmc;
+      const shop = store.state.c_richShop;
+      const hero = store.state.c_hero;
+      const m3t = store.state.c_m3t;
+      const cardNum = await hero.methods.cardList(data.account).call();
+      const mmcBalance = await mmc.methods.balanceOf(data.account).call();
+      const m3tBalance = await m3t.methods.balanceOf(data.account).call();
+      data.list[0].value = data.web3.utils.fromWei(mmcBalance, "ether");
+      data.list[1].value = data.web3.utils.fromWei(m3tBalance, "ether");
+      data.list[2].value = cardNum.length;
+      data.list[3].value = await shop.methods
+        .balanceOf(data.account, 11)
+        .call();
+      data.list[4].value = await shop.methods
+        .balanceOf(data.account, 12)
+        .call();
     };
     const refData = toRefs(data);
     return {
@@ -168,6 +202,7 @@ export default {
   -webkit-text-stroke: 0.86px solid #231008;
 }
 .currency_item {
+  min-width: 5rem;
   background: #00000042;
   margin: 0 2rem;
   display: flex;
