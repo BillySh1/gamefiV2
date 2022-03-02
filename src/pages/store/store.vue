@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <InjectGoback/>
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
       <div class="tabs">
@@ -55,12 +56,14 @@ import { reactive, toRefs, computed } from "vue";
 import { useRouter } from "vue-router";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoback from '../../components/inject_go_back.vue'
 import { useShopItems } from "./use_shop_items.js";
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
+    InjectGoback
   },
   setup() {
     const router = useRouter();

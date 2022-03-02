@@ -11,7 +11,7 @@
         </div>
         <div class="title_box">
           <img src="../assets/index/title_bg.svg" alt="" />
-          <div class="title_value">一等公爵</div>
+          <div class="title_value">内测玩家</div>
         </div>
       </div>
     </div>

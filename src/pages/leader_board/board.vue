@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">leader_board</div>
+    <div class="content">排行榜系统正在开发中，敬请期待</div>
     <CommonPageFooter />
   </div>
 </template>
@@ -41,5 +41,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
 }
 </style>

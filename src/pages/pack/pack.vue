@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoback />
     <div v-if="showDetailPack" class="content hero_pack">
       <InjectPackHero
         @back="() => (curShowType = undefined)"
@@ -43,6 +44,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import CommonPackDetail from "./common_pack_detail";
+import InjectGoback from '../../components/inject_go_back.vue'
 export default {
   name: "pack",
   components: {
@@ -50,6 +52,7 @@ export default {
     CommonPageFooter,
     InjectPackHero,
     CommonPackDetail,
+    InjectGoback
   },
   setup() {
     const route = useRoute();
