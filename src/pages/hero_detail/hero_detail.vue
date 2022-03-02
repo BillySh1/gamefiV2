@@ -77,9 +77,14 @@
         </div>
       </dir>
       <div class="action_box">
-        <div class="action_item">
+        <div class="action_item" @click="$router.push({
+          name:'sell',
+          query:{
+            tokenId: info.tokenId
+          }
+        })" >
           <img src="../../assets/pack/yellow.png" alt="" />
-          <div class="text">装备</div>
+          <div class="text">出售</div>
         </div>
         <div
           class="action_item"

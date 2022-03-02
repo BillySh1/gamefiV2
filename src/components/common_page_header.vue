@@ -93,7 +93,6 @@ export default {
     });
     const getScreenAciton = computed(() => {
       const isFullScreen = sessionStorage.getItem("fullScreen");
-      console.log(isFullScreen, "sss");
       return isFullScreen
         ? require("../assets/common/exitFullScreen.png")
         : require("../assets/common/fullScreen.png");

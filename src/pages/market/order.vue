@@ -1,6 +1,6 @@
 <template>
   <div class="pack_container">
-    <CommonPageHeader :pageTitle="pageTitle" />
+    <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
 
     <div class="pack_main">
@@ -15,20 +15,30 @@
             }
           "
         />
-        <div class="filter_box">
-          <CommonPackFilter />
-        </div>
         <div class="search_box">
           <CommonSearch />
         </div>
       </div>
       <div class="content">
         <div class="badge">
-          <img src="../../assets/pack/hero_badge.svg" alt="" />
-          <div class="text">蜀</div>
+          <div class="tabs">
+            <div
+              v-for="(item, index) in tabs"
+              :key="index"
+              @click="() => (curTab = item.key)"
+              :class="curTab == item.key ? 'item active' : 'item'"
+            >
+              {{ item.name }}
+            </div>
+          </div>
+          <img
+            class="divider"
+            src="../../assets/market/order/divider.svg"
+            alt=""
+          />
         </div>
         <div class="card_content">
-          <div class="empty" v-if="!allItems.length">市场中暂无卡牌</div>
+          <div class="empty" v-if="!rawData.length">未查询到订单</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
@@ -46,7 +56,7 @@
               }
             "
           >
-            <PackHeroItem :info="item" />
+            <MarketHeroItem :info="item" />
           </div>
         </div>
       </div>
@@ -62,23 +72,22 @@
           :total="total"
         />
       </div>
-      <img style="width: 100%" src="../../assets/pack/bottom_border.svg" />
     </div>
-    <div class="tip_badge" @click="() => $router.push({ name: 'order' })">
-      <div class="inner">
-        <img src="../../assets/common/tip_badge.svg" />
-        <div class="text">我的订单</div>
-      </div>
-    </div>
+
     <CommonPageFooter />
   </div>
 </template>
 
-<script >
-import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
+<script>
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  getCurrentInstance,
+  watch,
+} from "vue";
 import { useStore } from "vuex";
-import PackHeroItem from "../../components/pack_hero_item";
-import CommonPackFilter from "../../components/common_pack_filter";
+import MarketHeroItem from "./market_hero_item.vue";
 import CommonSearch from "../../components/common_search";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
@@ -88,9 +97,8 @@ import Page from "../../components/page";
 export default {
   name: "market_camp_detail",
   components: {
-    PackHeroItem,
+    MarketHeroItem,
     Page,
-    CommonPackFilter,
     CommonSearch,
     CommonPageHeader,
     CommonPageFooter,
@@ -100,7 +108,6 @@ export default {
     const { proxy } = getCurrentInstance();
     const data = reactive({
       pageTitle: "我的订单",
-      allItems: [],
       curItems: [],
       web3: "",
       account: "",
@@ -111,6 +118,12 @@ export default {
         animationData: require("../../assets/common/loading.json"),
       },
       loading: false,
+      tabs: [
+        { key: 0, name: "挂单中" },
+        { key: 1, name: "已购买" },
+        { key: 2, name: "已售出" },
+      ],
+      curTab: 0,
     });
     const getCurShowItems = () => {
       data.curItems = [];
@@ -120,7 +133,6 @@ export default {
       const endIndex =
         curPage * 4 > rawData.length ? rawData.length - 1 : curPage * 4 - 1;
       data.curItems = rawData.slice(startIndex, endIndex + 1);
-      console.log(data.curItems);
     };
     onBeforeMount(async () => {
       data.loading = true;
@@ -132,42 +144,65 @@ export default {
           data.web3 = p;
         }
       );
-      await getList();
-      getCurShowItems();
+      await getListingList();
       data.loading = false;
     });
-    const getList = async () => {
+    const getListingList = async () => {
       try {
+        data.loading = true;
         const c = store.state.c_exchange;
-        const res = await c.methods
-          .getExchangeList("0x0000000000000000000000000000000000000000")
-          .call();
-        res.map((x) => {
+        const res = await c.methods.getExchangeList(data.account).call();
+        if (!res.length) {
+          return;
+        }
+        res.map(({ detail, order }) => {
           const uid =
-            x.camp.toString() + x.rarity.toString() + x.heroId.toString();
+            detail.camp.toString() +
+            detail.rarity.toString() +
+            detail.heroId.toString();
           data.rawData.push({
-            tokenId: x.tokenId,
-            heroId: x.heroId,
-            rarity: x.rarity,
-            quality: x.quality,
-            properties: x.properties.map((x) => Number(x) / 100),
-            power: Number(x.power) / 100,
-            star: x.star,
-            rebirthTimes: x.rebirthTimes,
-            preference: x.preference,
-            native: x.native,
-            level: x.level,
-            camp: x.camp,
-            addition: x.addition,
+            tokenId: detail.tokenId,
+            heroId: detail.heroId,
+            rarity: detail.rarity,
+            quality: detail.quality,
+            properties: detail.properties.map((x) => Number(x) / 100),
+            power: detail.power,
+            star: detail.star,
+            rebirthTimes: detail.rebirthTimes,
+            preference: detail.preference,
+            native: detail.native,
+            level: detail.level,
+            camp: detail.camp,
+            addition: detail.addition,
             uid: uid,
-            ...useHeroDetail(uid, x.preference),
+            ...useHeroDetail(uid, detail.preference),
+            creator: order.creator,
+            price: order.price,
           });
         });
         data.total = Math.ceil(data.rawData.length / 4);
+        getCurShowItems();
       } catch (e) {
+        console.log(e);
         proxy.$toast("获取市场失败", store.state.toast_error);
+      } finally {
+        data.loading = false;
       }
     };
+    watch(
+      () => data.curTab,
+      async (v) => {
+        data.rawData = [];
+        data.curItems = [];
+        if (v == 0) {
+          getListingList();
+        } else if (v == 1) {
+          console.log("goumai");
+        } else if (v == 2) {
+          console.log("shouchu");
+        }
+      }
+    );
     const refData = toRefs(data);
     return {
       ...refData,
@@ -181,26 +216,6 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("../../assets/market/bg.png");
-  .tip_badge {
-    cursor: pointer;
-    position: absolute;
-    bottom: 8rem;
-    left: 0;
-    .inner {
-      position: relative;
-      img {
-        width: 10rem;
-        opacity: 1;
-      }
-      .text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
-  }
 }
 .pack_main {
   position: absolute;
@@ -210,12 +225,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   .top_box {
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 0rem;
     .back {
       cursor: pointer;
       margin-left: 4rem;
@@ -226,7 +240,6 @@ export default {
   }
   .content {
     margin: 1rem 0;
-    background: rgba(0, 0, 0, 0.5);
     height: 23rem;
     display: flex;
     align-items: center;
@@ -234,16 +247,35 @@ export default {
     .badge {
       position: relative;
       height: 100%;
-      img {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .divider {
         height: 100%;
       }
-      .text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, 0);
-        width: 3rem;
-        font-size: 3rem;
+      .tabs {
+        width: 10rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .item {
+          cursor: pointer;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          font-weight: 700;
+          border-radius: 10px;
+          padding: 1rem 0;
+          margin: 1rem 0;
+        }
+        .active {
+          background: url("../../assets/pack/active_tab.png") no-repeat;
+          background-size: 100% 100%;
+        }
       }
     }
     .card_content {
@@ -276,7 +308,6 @@ export default {
     width: 100%;
     align-items: center;
     flex-direction: row-reverse;
-    background: rgba(0, 0, 0, 0.5);
   }
 }
 </style>

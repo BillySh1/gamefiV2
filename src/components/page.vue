@@ -13,11 +13,12 @@
     >
       {{ item }}
     </div>
+    <div class="page_item active" v-if="totalPages.length === 0">1</div>
   </div>
 </template>
 
 <script >
-import { reactive, toRefs, onMounted, computed } from "vue";
+import { reactive, toRefs, computed } from "vue";
 export default {
   name: "page",
   props: ["current", "total"],
@@ -32,9 +33,7 @@ export default {
       }
       return res;
     });
-    onMounted(() => {
-      console.log(totalPages.value, "sss");
-    });
+
     const change = (item) => {
       data.cur_page = item;
     };

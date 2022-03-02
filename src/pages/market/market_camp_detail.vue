@@ -28,25 +28,21 @@
           <div class="text">蜀</div>
         </div>
         <div class="card_content">
-          <div class="empty" v-if="!allItems.length">市场中暂无卡牌</div>
+          <div class="empty" v-if="!rawData.length">市场中暂无卡牌</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
             class="card_item"
             @click="
               () => {
-                if (toSelect) {
-                  $emit('select', item);
-                } else {
-                  $router.push({
-                    name: 'heroDetail',
-                    query: { tokenId: item.tokenId },
-                  });
-                }
+                $router.push({
+                  name: 'orderDetail',
+                  query: { tokenId: item.tokenId },
+                });
               }
             "
           >
-            <PackHeroItem :info="item" />
+            <MarketHeroItem :info="item" />
           </div>
         </div>
       </div>
@@ -77,7 +73,7 @@
 <script >
 import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
-import PackHeroItem from "../../components/pack_hero_item";
+import MarketHeroItem from "./market_hero_item.vue";
 import CommonPackFilter from "../../components/common_pack_filter";
 import CommonSearch from "../../components/common_search";
 import CommonPageHeader from "../../components/common_page_header.vue";
@@ -88,7 +84,7 @@ import Page from "../../components/page";
 export default {
   name: "market_camp_detail",
   components: {
-    PackHeroItem,
+    MarketHeroItem,
     Page,
     CommonPackFilter,
     CommonSearch,
@@ -100,7 +96,6 @@ export default {
     const { proxy } = getCurrentInstance();
     const data = reactive({
       pageTitle: "卡牌市场",
-      allItems: [],
       curItems: [],
       web3: "",
       account: "",
@@ -120,7 +115,6 @@ export default {
       const endIndex =
         curPage * 4 > rawData.length ? rawData.length - 1 : curPage * 4 - 1;
       data.curItems = rawData.slice(startIndex, endIndex + 1);
-      console.log(data.curItems);
     };
     onBeforeMount(async () => {
       data.loading = true;
@@ -142,29 +136,37 @@ export default {
         const res = await c.methods
           .getExchangeList("0x0000000000000000000000000000000000000000")
           .call();
-        res.map((x) => {
+        if (!res.length) {
+          return;
+        }
+        res.map(({ detail, order }) => {
           const uid =
-            x.camp.toString() + x.rarity.toString() + x.heroId.toString();
+            detail.camp.toString() +
+            detail.rarity.toString() +
+            detail.heroId.toString();
           data.rawData.push({
-            tokenId: x.tokenId,
-            heroId: x.heroId,
-            rarity: x.rarity,
-            quality: x.quality,
-            properties: x.properties.map((x) => Number(x) / 100),
-            power: Number(x.power) / 100,
-            star: x.star,
-            rebirthTimes: x.rebirthTimes,
-            preference: x.preference,
-            native: x.native,
-            level: x.level,
-            camp: x.camp,
-            addition: x.addition,
+            tokenId: detail.tokenId,
+            heroId: detail.heroId,
+            rarity: detail.rarity,
+            quality: detail.quality,
+            properties: detail.properties.map((x) => Number(x) / 100),
+            power: detail.power,
+            star: detail.star,
+            rebirthTimes: detail.rebirthTimes,
+            preference: detail.preference,
+            native: detail.native,
+            level: detail.level,
+            camp: detail.camp,
+            addition: detail.addition,
             uid: uid,
-            ...useHeroDetail(uid, x.preference),
+            ...useHeroDetail(uid, detail.preference),
+            creator: order.creator,
+            price: order.price,
           });
         });
         data.total = Math.ceil(data.rawData.length / 4);
       } catch (e) {
+        console.log(e);
         proxy.$toast("获取市场失败", store.state.toast_error);
       }
     };

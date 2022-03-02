@@ -25,7 +25,9 @@ const inviteBoard = () => import("../pages/invite/invite_board.vue");
 const heroDetail = () => import("../pages/hero_detail/hero_detail.vue");
 const upgradePage = () => import("../pages/upgrade/upgrade.vue");
 const marketDetail = () => import("../pages/market/market_camp_detail.vue");
-const orderDetail = () => import("../pages/market/order.vue");
+const order = () => import("../pages/market/order.vue");
+const orderDetail = ()=>import('../pages/market/order_detail.vue')
+const sell = () => import("../pages/market/sell.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -153,7 +155,17 @@ const router = createRouter({
     {
       path: "/order",
       name: "order",
+      component: order,
+    },
+    {
+      path:'/orderDetail',
+      name:'orderDetail',
       component: orderDetail,
+    },
+    {
+      path: "/sell",
+      name: "sell",
+      component: sell,
     },
   ],
 });
