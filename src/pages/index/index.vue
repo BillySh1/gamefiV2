@@ -8,13 +8,21 @@
     <div v-else class="content">
       <InjectUser :power="power" />
       <div class="float_right_box">
-        <div class="float_item" @click="jump('invite')">
-          <InjectIcon
-            :src="require('../../assets/index/invite.png')"
-            text="邀请"
-            style="margin-bottom: 2rem"
-          />
+        <div class="flex">
+          <div class="float_item" @click="jump('invite')">
+            <InjectIcon
+              :src="require('../../assets/index/invite.png')"
+              text="邀请"
+            />
+          </div>
+          <div class="float_item" @click="jump('airdrop')">
+            <InjectIcon
+              :src="require('../../assets/index/airdrop.png')"
+              text="空投"
+            />
+          </div>
         </div>
+
         <div class="float_item" @click="jump('title')">
           <InjectIcon
             :src="require('../../assets/index/title.png')"
@@ -23,13 +31,6 @@
         </div>
       </div>
       <div class="float_left_box">
-        <div class="float_item" @click="jump('airdrop')">
-          <InjectIcon
-            style="margin-left: 1rem"
-            :src="require('../../assets/index/airdrop.png')"
-            text="空投"
-          />
-        </div>
         <div class="leader_board_box" @click="jump('leader')">
           <img src="../../assets/index/Leader_board.svg" alt="" />
           <div class="leader_board_text">排行榜</div>
@@ -139,8 +140,17 @@ export default {
 }
 .float_right_box {
   position: absolute;
-  right: 0.5rem;
+  right: 2rem;
   top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .float_left_box {
@@ -169,16 +179,16 @@ export default {
 .float_action_buttons {
   position: absolute;
   left: 50%;
-  transform: translateX(-65%);
-  bottom: 10%;
+  transform: translateX(-70%);
+  bottom: 12%;
   .up {
-    width: 40rem;
+    width: 38rem;
   }
   .actions_inner {
     display: flex;
     margin-top: 2rem;
     font-family: zihun143;
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
 
     .left {
@@ -187,21 +197,21 @@ export default {
       transform: translateX(2.5rem);
       white-space: nowrap;
       img {
-        width: 18rem;
+        width: 17rem;
       }
     }
     .middle {
       cursor: pointer;
       position: relative;
-      transform: translateY(-2rem);
-      font-size: 3rem;
+      transform: translateY(-1.8rem);
+      font-size: 2.5rem;
       letter-spacing: 1.8rem;
       img {
-        width: 23rem;
+        width: 20rem;
       }
       .text {
         width: 100%;
-        transform: translate(-47%, -75%);
+        transform: translate(-47%, -83%);
       }
     }
     .right {
@@ -211,7 +221,7 @@ export default {
       letter-spacing: 4px;
       white-space: nowrap;
       img {
-        width: 18rem;
+        width: 17rem;
       }
     }
     .text {

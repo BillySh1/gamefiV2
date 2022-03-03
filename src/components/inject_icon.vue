@@ -32,6 +32,7 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+    transform: translate(25%,25%);
     font-size: 1.5rem;
     font-weight: 400;
   }

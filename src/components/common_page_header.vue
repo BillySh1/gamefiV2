@@ -33,7 +33,7 @@
         alt=""
       />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
-      <img @click="exitFullScreen" class="icon" :src="getScreenAciton" />
+      <img v-if="isMobile"  @click="exitFullScreen" class="icon" :src="getScreenAciton" />
     </div>
   </div>
 </template>
