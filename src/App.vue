@@ -1,19 +1,26 @@
 <template>
-  <router-view v-show="canShow"></router-view>
-  <div class="mask" v-show="!canShow">
+  <router-view v-if="correctChainId && connected"></router-view>
+  <div class="mask" v-show="!correctChainId">
     <img src="./assets/pack/bg_badge.svg" alt="" />
     <div class="text">请切换至正确的网络</div>
+  </div>
+  <div class="mask" v-if="!connected">
+    <img src="./assets/pack/bg_badge.svg" alt="" />
+    <div class="text">未监测到钱包 请先连接钱包</div>
   </div>
 </template>
 
 <script>
 import initWeb3 from "./utils/initWeb3";
-const acceptNetWorks = [ 97];
+const acceptNetWorks = [97];
 export default {
-  name: "App",
+  name: "app",
   data() {
     return {
-      canShow: true,
+      correctChainId: false,
+      connected: false,
+      account: "",
+      web3: "",
     };
   },
   methods: {
@@ -23,12 +30,17 @@ export default {
     async judge() {
       let chainId = await this.Web3.eth.getChainId();
       if (!acceptNetWorks.includes(chainId)) {
-        this.canShow = false;
+        this.correctChainId = false;
       } else {
-        this.canShow = true;
+        this.correctChainId = true;
+      }
+      if (!this.account || this.account.length === 0) {
+        this.connected = false;
+      } else {
+        this.connected = true;
       }
     },
-    async init() {
+    async initWeb3Status() {
       await initWeb3.Init(
         (addr) => {
           this.account = addr;
@@ -38,12 +50,18 @@ export default {
         }
       );
     },
+    async init() {
+      await this.initWeb3Status();
+      window.ethereum.on("accountsChanged", async (acc) => {
+        this.account = acc[0];
+        await this.judge();
+      });
+    },
   },
-  async created() {
+  async mounted() {
     await this.init();
     this.watchChain();
     this.judge();
- 
   },
 };
 </script>

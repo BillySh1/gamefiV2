@@ -30,13 +30,17 @@ const sell = () => import("../pages/market/sell.vue");
 
 const allStarsEntry = () => import("../pages/all_stars/entry.vue");
 
+const connect = () => import("../pages/error/connect.vue");
+
 const router = createRouter({
   history: routerHistory,
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
+      name: "err",
       redirect: "/home",
+      component: connect,
     },
     {
       path: "/mint",
