@@ -222,7 +222,6 @@ export default {
       width: 80%;
       display: flex;
       align-items: center;
-      gap: 2rem;
       transform: translateX(10%);
       .empty {
         position: absolute;
@@ -236,6 +235,7 @@ export default {
         &:hover {
           opacity: 0.8;
         }
+        margin-right: 2rem;
         height: 100%;
         width: 22%;
       }
