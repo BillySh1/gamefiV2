@@ -3,7 +3,7 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
 
-      <div class="name">
+      <div class="name" :style="$route.path == '/heroDetail' ? 'left:10%' : ''">
         {{ info.name }}
       </div>
       <div class="quality">
@@ -42,12 +42,14 @@
 <script>
 import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
+import { useRoute } from "vue-router";
 export default {
   name: "hero_card_img",
   props: ["info"],
   setup(prop) {
     const data = reactive({});
-
+    const route = useRoute();
+    console.log(route, "fff");
     const borderImg = computed(() => {
       return (
         [
@@ -175,7 +177,7 @@ export default {
     left: 9%;
     transform: translate(0, -50%);
     z-index: 30;
-    font-size: 1.1rem;
+    font-size: 1rem;
     max-width: 1.1rem;
     color: white;
   }
@@ -207,10 +209,10 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 4px;
     width: 10%;
     img {
       width: 100%;
+      margin-bottom: 4px;
     }
   }
   .levels {

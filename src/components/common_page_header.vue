@@ -10,8 +10,9 @@
     <div class="currency_menu">
       <div
         class="currency_item"
-        v-for="(item) in list"
+        v-for="(item,index) in list"
         :key="item.key"
+        :style=" index ==0 || index== 1? 'width: 10rem' :'' "
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
@@ -215,12 +216,12 @@ export default {
 }
 .currency_item {
   font-family: Arial, Helvetica, sans-serif;
-  width: 10rem;
+  width: 6rem;
   background: #00000042;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1vmin;
+  font-size: 1rem;
   .value {
     max-width: 8rem;
     white-space: nowrap;
