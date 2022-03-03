@@ -42,14 +42,11 @@
 <script>
 import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
-import { useRoute } from "vue-router";
 export default {
   name: "hero_card_img",
   props: ["info"],
   setup(prop) {
     const data = reactive({});
-    const route = useRoute();
-    console.log(route, "fff");
     const borderImg = computed(() => {
       return (
         [
@@ -177,7 +174,7 @@ export default {
     left: 9%;
     transform: translate(0, -50%);
     z-index: 30;
-    font-size: 1rem;
+    font-size: 1.1rem;
     max-width: 1.1rem;
     color: white;
   }

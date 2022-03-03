@@ -25,9 +25,9 @@ export default {
 .btn_box {
   position: relative;
   width: fit-content;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   background: url("../assets/pack/active_tab.png") no-repeat;
   background-size: 100% 100%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 </style>

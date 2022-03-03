@@ -204,7 +204,7 @@ export default {
           )
           .send({
             gasPrice: gasPrice,
-            gas: Number.parseInt(gas, 10) + 1000000,
+            gas: Number.parseInt(gas, 10) + 50000,
             from: data.account,
           });
 

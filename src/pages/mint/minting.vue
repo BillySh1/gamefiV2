@@ -231,14 +231,14 @@ export default {
     }
     .up_box {
       display: flex;
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin: 1.5rem 0;
     }
     .bottom {
       display: flex;
       align-items: center;
-      font-size: 1.8rem;
-      margin-top: 1.2rem;
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
       .btn {
         cursor: pointer;
       }
