@@ -3,15 +3,9 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
 
-      <div
-        class="name"
-        :style="`left:${nameTop};${
-          $route.name == 'heroDetail' ? 'font-size:1.5rem' : ''
-        }`"
-      >
+      <div class="name">
         {{ info.name }}
       </div>
-      <!-- <div class="lv_t" :style="`left:${nameTop}`">lv.{{ info.level }}</div> -->
       <div class="quality">
         <img :src="qualityImg" alt="" />
       </div>
@@ -30,16 +24,13 @@
           alt=""
         />
       </div>
-      <div
-        class="camp"
-        :style="`transform: translate( ${transform[0]}, ${transform[1]} )`"
-      >
+      <div class="camp">
         <img :src="campImg.img" />
       </div>
-      <div class="badge" :style="info.rarity == 2 ? 'left:10%' : ''">
+      <div class="badge">
         <img :src="getBadgeImg" alt="" />
       </div>
-      <div class="badge_inner" :style="getBadgeInnerStyle">
+      <div class="badge_inner">
         <img :src="getPreference[0]" />
         {{ getPreference[1] }}
       </div>
@@ -51,13 +42,11 @@
 <script>
 import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
-import { useRoute } from "vue-router";
 export default {
   name: "hero_card_img",
   props: ["info"],
   setup(prop) {
     const data = reactive({});
-    const route = useRoute();
 
     const borderImg = computed(() => {
       return (
@@ -126,16 +115,7 @@ export default {
         [require("../assets/cardImgs/p_4.png"), "辅"],
       ][prop.info.preference];
     });
-    const getBadgeInnerStyle = computed(() => {
-      let res = "";
-      if (route.name == "heroDetail") {
-        res += "font-size: 1.5rem;";
-      }
-      if (prop.info.rarity == 2) {
-        res += "left:14%;";
-      }
-      return res;
-    });
+
     const transform = computed(() => {
       return [
         ["-23%", "-17%"],
@@ -159,7 +139,6 @@ export default {
       levels,
       getBadgeImg,
       getPreference,
-      getBadgeInnerStyle,
     };
   },
 };
@@ -193,6 +172,7 @@ export default {
   .name {
     position: absolute;
     top: 30%;
+    left: 9%;
     transform: translate(0, -50%);
     z-index: 30;
     font-size: 1.1rem;
@@ -236,14 +216,13 @@ export default {
   .levels {
     position: absolute;
     bottom: 18%;
-    left: 7%;
+    left: 8%;
     z-index: 30;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 9.5%;
-    gap: -1px;
+    width: 9%;
     img {
       width: 100%;
     }
@@ -252,6 +231,7 @@ export default {
     position: absolute;
     right: 0%;
     bottom: 0%;
+    transform: translate(-23%, -17%);
     z-index: 30;
     width: 20%;
     img {
@@ -260,10 +240,11 @@ export default {
   }
   .badge {
     position: absolute;
-    left: 12%;
-    bottom: 2%;
+    left: 0%;
+    bottom: 0%;
     z-index: 30;
     width: 53%;
+    transform: translate(23%, -15%);
     img {
       width: 100%;
     }
@@ -277,6 +258,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.1rem;
     img {
       width: 25%;
       border-radius: 99%;

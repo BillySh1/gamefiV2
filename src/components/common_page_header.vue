@@ -10,9 +10,8 @@
     <div class="currency_menu">
       <div
         class="currency_item"
-        v-for="(item, index) in list"
+        v-for="(item) in list"
         :key="item.key"
-        :style="index == 1 || index == 0 ? 'width:8rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
@@ -208,24 +207,22 @@ export default {
 }
 
 .currency_menu {
-  font-size: 1rem;
   display: flex;
   align-items: center;
-  font-family: SF Pro text;
-  font-style: italic;
-  font-weight: 700;
-  gap: 4rem;
+  justify-content: space-around;
   -webkit-text-stroke: 0.86px solid #231008;
+  min-width: 65%;
 }
 .currency_item {
-  width: 7rem;
-
+  font-family: Arial, Helvetica, sans-serif;
+  width: 10rem;
   background: #00000042;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1vmin;
   .value {
-    max-width: 4rem;
+    max-width: 8rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -43,7 +43,7 @@
             </div>
             <div v-if="curTabKey == 1" class="quick_info">
               <div class="intros">
-                这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍这里是英雄介绍
+                {{ info.intro }}
               </div>
               <div class="chain_info">
                 <div
@@ -77,12 +77,17 @@
         </div>
       </dir>
       <div class="action_box">
-        <div class="action_item" @click="$router.push({
-          name:'sell',
-          query:{
-            tokenId: info.tokenId
-          }
-        })" >
+        <div
+          class="action_item"
+          @click="
+            $router.push({
+              name: 'sell',
+              query: {
+                tokenId: info.tokenId,
+              },
+            })
+          "
+        >
           <img src="../../assets/pack/yellow.png" alt="" />
           <div class="text">出售</div>
         </div>
@@ -398,6 +403,7 @@ export default {
         position: relative;
         cursor: pointer;
         width: 80%;
+        max-width: 15rem;
         img {
           width: 100%;
         }
