@@ -27,6 +27,8 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
     enable: false,
   });
   sessionStorage.setItem("fullScreen", true);
+} else {
+  sessionStorage.setItem("fullScreen", false);
 }
 
 _app.mount("#app");

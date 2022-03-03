@@ -15,7 +15,7 @@
         :style="index == 1 || index == 0 ? 'width:10rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
-        <div class="value" >
+        <div class="value">
           {{ item.value }}
         </div>
         <img
@@ -33,12 +33,7 @@
         alt=""
       />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
-      <img
-        v-if="isMobile"
-        @click="exitFullScreen"
-        class="icon"
-        :src="getScreenAciton"
-      />
+      <img @click="exitFullScreen" class="icon" :src="getScreenAciton" />
     </div>
   </div>
 </template>
@@ -90,8 +85,8 @@ export default {
           href: "store",
         },
       ],
+      isFull: false,
     });
-
     const isMobile = computed(() => {
       if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
         return true;
@@ -99,22 +94,35 @@ export default {
       return false;
     });
     const getScreenAciton = computed(() => {
-      const isFullScreen = sessionStorage.getItem("fullScreen");
-      return isFullScreen
+      return sessionStorage.getItem("fullScreen")
         ? require("../assets/common/exitFullScreen.png")
         : require("../assets/common/fullScreen.png");
     });
     const exitFullScreen = () => {
-      const tp = require("tp-js-sdk");
-      if (sessionStorage.getItem("fullScreen")) {
-        tp.fullScreen({
-          fullScreen: 0,
-        });
+      const isPcFull = document.webkitIsFullScreen || document.isFullScreen;
+      if (isMobile.value) {
+        const tp = require("tp-js-sdk");
+        if (sessionStorage.getItem("fullScreen")) {
+          tp.fullScreen({
+            fullScreen: 0,
+          });
+          sessionStorage.setItem("fullScreen", false);
+        } else {
+          tp.fullScreen({
+            fullScreen: 1,
+          });
+          sessionStorage.setItem("fullScreen", true);
+        }
       } else {
-        tp.fullScreen({
-          fullScreen: 1,
-        });
+        if (!isPcFull) {
+          document.documentElement.requestFullscreen();
+          sessionStorage.setItem("fullScreen", true);
+        } else {
+          document.exitFullscreen();
+          sessionStorage.setItem("fullScreen", false);
+        }
       }
+      data.isFull = sessionStorage.getItem("fullScreen");
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -125,6 +133,7 @@ export default {
           data.web3 = p;
         }
       );
+      data.isFull = sessionStorage.getItem("fullScreen");
       await getInfo();
     });
     const getInfo = async () => {
@@ -135,8 +144,12 @@ export default {
       const cardNum = await hero.methods.cardList(data.account).call();
       const mmcBalance = await mmc.methods.balanceOf(data.account).call();
       const m3tBalance = await m3t.methods.balanceOf(data.account).call();
-      data.list[0].value = data.web3.utils.fromWei(mmcBalance, "ether").split('.')[0]
-      data.list[1].value = data.web3.utils.fromWei(m3tBalance, "ether").split('.')[0]
+      data.list[0].value = data.web3.utils
+        .fromWei(mmcBalance, "ether")
+        .split(".")[0];
+      data.list[1].value = data.web3.utils
+        .fromWei(m3tBalance, "ether")
+        .split(".")[0];
       data.list[2].value = cardNum.length;
       data.list[3].value = await shop.methods
         .balanceOf(data.account, 11)
@@ -211,11 +224,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .value{
+  .value {
     max-width: 6rem;
-      white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 .img_left {
