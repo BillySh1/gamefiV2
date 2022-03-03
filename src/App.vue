@@ -99,26 +99,26 @@ export default {
     position: absolute;
     width: 80rem;
     height: auto;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   img {
     position: absolute;
-    top: 50%;
+    top: 40%;
     width: 100%;
   }
   .text {
     position: absolute;
     font-size: 1.5rem;
-    top: 70%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, 0);
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
     .btn {
       display: block;
       position: relative;

@@ -246,9 +246,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: white;
+    color: rgba(255, 255, 255, .8);
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 2;
     .rate {
       .rate_detail {

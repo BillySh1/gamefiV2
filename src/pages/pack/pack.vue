@@ -105,7 +105,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   z-index: 100;
   .item {
     &:hover {
@@ -114,7 +114,7 @@ export default {
     cursor: pointer;
     opacity: 0.8;
     img {
-      width: 23rem;
+      width: 18rem;
     }
     .text {
       margin-top: 1rem;

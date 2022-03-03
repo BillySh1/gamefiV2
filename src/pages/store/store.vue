@@ -177,9 +177,9 @@ export default {
 }
 .role_img {
   position: absolute;
-  width: 35rem;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 30rem;
+  top: 55%;
+  transform: translate(10%,-50%);
   left: 10%;
 }
 

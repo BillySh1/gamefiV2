@@ -12,7 +12,7 @@
       <div v-else class="main">
         <div class="title">恭喜您获得了</div>
         <div class="up_box">
-          <div :style="`color:${getRarityStyle}`">{{ curInfo.name }}</div>
+          <div :style="`color:${getRarityStyle};margin-right:1rem`">{{ curInfo.name }}</div>
           <div>
             <span :style="`color:${getQualityStyle}`">{{ curQuality }}</span>
             品质
@@ -226,20 +226,19 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
     .title {
       font-size: 2rem;
     }
     .up_box {
       display: flex;
       font-size: 2.5rem;
-      gap: 2rem;
+      margin: 1.5rem 0;
     }
     .bottom {
       display: flex;
       align-items: center;
-      gap: 2rem;
       font-size: 1.8rem;
+      margin-top: 1.2rem;
       .btn {
         cursor: pointer;
       }

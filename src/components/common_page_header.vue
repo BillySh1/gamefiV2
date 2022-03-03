@@ -12,7 +12,7 @@
         class="currency_item"
         v-for="(item, index) in list"
         :key="item.key"
-        :style="index == 1 || index == 0 ? 'width:10rem' : ''"
+        :style="index == 1 || index == 0 ? 'width:8rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
@@ -218,14 +218,14 @@ export default {
   -webkit-text-stroke: 0.86px solid #231008;
 }
 .currency_item {
-  width: 10rem;
+  width: 7rem;
 
   background: #00000042;
   display: flex;
   justify-content: space-between;
   align-items: center;
   .value {
-    max-width: 6rem;
+    max-width: 4rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

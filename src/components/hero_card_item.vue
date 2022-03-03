@@ -11,7 +11,7 @@
       >
         {{ info.name }}
       </div>
-      <div class="lv_t" :style="`left:${nameTop}`">lv.{{ info.level }}</div>
+      <!-- <div class="lv_t" :style="`left:${nameTop}`">lv.{{ info.level }}</div> -->
       <div class="quality">
         <img :src="qualityImg" alt="" />
       </div>

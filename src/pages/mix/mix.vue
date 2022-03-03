@@ -468,7 +468,7 @@ export default {
     position: relative;
     z-index: 99;
     transform: translateX(10rem);
-    width: 32rem;
+    width: 25rem;
     cursor: pointer;
     .mix_item_bg {
       width: 100%;
@@ -495,12 +495,11 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 2rem;
       color: rgba(255, 255, 255, 0.3);
     }
   }
   .right {
-    transform: translateX(-10rem);
+    transform: translateX(-12rem);
   }
 }
 </style>
