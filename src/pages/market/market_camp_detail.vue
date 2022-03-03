@@ -1,6 +1,6 @@
 <template>
   <div class="pack_container">
-    <CommonPageHeader :pageTitle="pageTitle" />
+    <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
 
     <div class="pack_main">

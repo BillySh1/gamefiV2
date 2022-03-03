@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="content">
       <div class="left_c">
@@ -33,11 +34,9 @@
           </div>
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
+          {{info.intro}}
         </div>
-        <div class="right_c_content">
-          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
-        </div>
+       
         <div class="right_c_action">
           <div class="input_box">
             <img
@@ -100,6 +99,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import { useGetShopDetailByTokenId } from "./use_shop_items.js";
 import initWeb3 from "../../utils/initWeb3.js";
 export default {
@@ -107,6 +107,7 @@ export default {
   components: {
     CommonPageHeader,
     CommonPageFooter,
+    InjectGoBack,
   },
   setup() {
     const store = useStore();

@@ -26,7 +26,7 @@ export default {
         res =
           wallet.slice(0, 5) +
           "..." +
-          wallet.slice(wallet.length - 8, wallet.length);
+          wallet.slice(wallet.length - 5, wallet.length);
         return res;
       }
       return "连接钱包";
@@ -86,7 +86,7 @@ export default {
 }
 .wallet_address {
   cursor: pointer;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
   background: rgba(0, 0, 0, 0.7);
   font-family: Roboto;
   font-size: 1rem;

@@ -7,7 +7,11 @@
     >
       <div class="text">主页</div>
     </div>
-    <div class="swap" @click="$router.push({ name: 'swap' })">
+    <div
+      class="swap"
+      @click="$router.push({ name: 'swap' })"
+      :style="$route.name == 'home' ? 'margin-left:8rem' : ''"
+    >
       <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
@@ -84,10 +88,8 @@ export default {
         },
       ],
     });
-    onBeforeMount(() => {
-    });
-    onMounted(() => {
-    });
+    onBeforeMount(() => {});
+    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,

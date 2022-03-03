@@ -30,9 +30,10 @@ export default {
   }
   .text {
     position: absolute;
-    right: 0;
+    white-space: nowrap;
+    left: 50%;
     bottom: 0;
-    transform: translate(25%,25%);
+    transform: translate(-40%,25%);
     font-size: 1.5rem;
     font-weight: 400;
   }

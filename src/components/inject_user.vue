@@ -74,6 +74,7 @@ export default {
     height: 100%;
   }
   .power_value {
+    font-size: 1rem;
     white-space: nowrap;
     position: absolute;
     top: 50%;

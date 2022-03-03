@@ -128,7 +128,7 @@ export default {
   height: 100%;
   background: url("../../assets/index/home_bg.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .content {
   width: 100%;
@@ -140,7 +140,7 @@ export default {
 }
 .float_right_box {
   position: absolute;
-  right: 2rem;
+  right: 0rem;
   top: 6rem;
   display: flex;
   flex-direction: column;
@@ -148,7 +148,7 @@ export default {
   .flex {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
     margin-bottom: 2rem;
   }
 }
@@ -182,7 +182,7 @@ export default {
   transform: translateX(-70%);
   bottom: 12%;
   .up {
-    width: 38rem;
+    width: 30rem;
   }
   .actions_inner {
     display: flex;
@@ -194,20 +194,20 @@ export default {
     .left {
       cursor: pointer;
       position: relative;
-      transform: translateX(2.5rem);
+      transform: translateX(1.4rem);
       white-space: nowrap;
       img {
-        width: 17rem;
+        width: 16rem;
       }
     }
     .middle {
       cursor: pointer;
       position: relative;
-      transform: translateY(-1.8rem);
-      font-size: 2.5rem;
-      letter-spacing: 1.8rem;
+      transform: translateY(-1rem);
+      font-size: 2.3rem;
+      letter-spacing: 1.5rem;
       img {
-        width: 20rem;
+        width: 18rem;
       }
       .text {
         width: 100%;
@@ -217,11 +217,11 @@ export default {
     .right {
       cursor: pointer;
       position: relative;
-      transform: translateX(-2.5rem);
+      transform: translateX(-1.4rem);
       letter-spacing: 4px;
       white-space: nowrap;
       img {
-        width: 17rem;
+        width: 16rem;
       }
     }
     .text {
@@ -229,7 +229,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      -webkit-text-stroke: 0.8px #231008;
+      -webkit-text-stroke: 0.5px #231008;
     }
   }
 }
