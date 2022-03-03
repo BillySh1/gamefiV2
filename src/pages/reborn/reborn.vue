@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack  />
+    <InjectGoBack v-if="!showPack"  />
     <Lottie
       v-if="loading"
       :options="{ animationData: require('../../assets/common/loading.json') }"
