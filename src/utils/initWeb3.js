@@ -3,11 +3,7 @@ export default {
   async Init(callback, provider) {
     if (window.ethereum) {
       this.provider = window.ethereum;
-      try {
-        this.provider.request({ method: "eth_requestAccounts" });
-      } catch (error) {
-        console.log("User denied account access");
-      }
+      
     } else if (window.web3) {
       this.provider = window.web3.currentProvider;
     } else {

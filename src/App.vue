@@ -1,12 +1,16 @@
 <template>
   <router-view v-if="correctChainId && connected"></router-view>
-  <div class="mask" v-show="!correctChainId">
-    <img src="./assets/pack/bg_badge.svg" alt="" />
-    <div class="text">请切换至正确的网络</div>
-  </div>
-  <div class="mask" v-if="!connected">
-    <img src="./assets/pack/bg_badge.svg" alt="" />
-    <div class="text">未监测到钱包 请先连接钱包</div>
+
+  <div class="mask black" v-if="!connected || !correctChainId">
+    <img class="logo" src="./assets/common/logo.png" alt="" />
+    <div class="text">
+      <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
+      <div v-show="!correctChainId" >请切换至正确的网络</div>
+      <div class="btn" v-show="!connected" >
+        <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
+        <div class="inner" @click="connect" >连接钱包</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,6 +30,20 @@ export default {
   methods: {
     watchChain() {
       window.ethereum.on("chainChanged", async () => await this.judge());
+    },
+    async connect() {
+      try {
+        window.ethereum
+          .request({ method: "eth_requestAccounts" })
+          .then(async (acc) => {
+            if (acc && acc.length) {
+              this.account = acc[0];
+            }
+            await this.judege();
+          });
+      } catch (error) {
+        console.log("User denied account access",error);
+      }
     },
     async judge() {
       let chainId = await this.Web3.eth.getChainId();
@@ -77,11 +95,52 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 4rem;
+  .logo {
+    position: absolute;
+    width: 80rem;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   img {
     position: absolute;
     top: 50%;
-
     width: 100%;
   }
+  .text {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    .btn {
+      display: block;
+      position: relative;
+      width: 12rem;
+      height: auto;
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .inner {
+        cursor: pointer;
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        white-space: nowrap;
+      }
+    }
+  }
+}
+.black {
+  background: black;
 }
 </style>
