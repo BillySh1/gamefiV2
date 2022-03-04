@@ -63,13 +63,20 @@
             <div class="up">
               <div class="left">
                 <img src="../../assets/pack/detail_stock_box.png" alt="" />
-                <img class="content"  alt="" />
+                <img
+                  v-if="curItemShow"
+                  class="content"
+                  :src="curItemShow.img"
+                  alt=""
+                />
               </div>
-              <div class="right">
-                {{ curItemShow }}
+              <div class="right" v-if="curItemShow">
+                {{ curItemShow.name }}
               </div>
             </div>
-            <div class="bottom"></div>
+            <div class="bottom" v-if="curItemShow">
+              {{ curItemShow.intro }}
+            </div>
           </div>
         </div>
       </div>
@@ -78,7 +85,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, watch, computed } from "vue";
+import { reactive, toRefs, onBeforeMount, watch } from "vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useGetShopDetailByTokenId } from "../store/use_shop_items.js";
@@ -96,7 +103,7 @@ export default {
         { key: 1, name: "装备" },
         { key: 2, name: "珍宝" },
       ],
-      curTab: 1,
+      curTab: 0,
       goodsItems: [],
       equpmentItems: [],
       curPackData: [],
@@ -104,24 +111,23 @@ export default {
       loading: false,
       account: "",
       web3: "",
-      curItemShow: "",
+      curItemShow: {},
     });
     watch(
-      () => data.curTab,
+      data.curTab,
       (v) => {
         if (v == 1) {
           data.curPackData = data.equpmentItems;
         } else if (v == 2) {
           data.curPackData = data.goodsItems;
         }
+        data.curItemIndex = 0;
+        data.curItemShow = data.curPackData[data.curItemIndex];
       },
       {
         immediate: true,
       }
     );
-    const curItemShow = computed(() => {
-      return data.curPackData[data.curItemIndex];
-    });
     onBeforeMount(async () => {
       data.loading = true;
       await initWeb3.Init(
@@ -145,11 +151,11 @@ export default {
           num: x,
         };
       });
+      data.curItemShow = data.goodsItems[data.curItemIndex];
     };
     const refData = toRefs(data);
     return {
       ...refData,
-      curItemShow,
     };
   },
 };
@@ -313,14 +319,16 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 95%;
+                width: 70%;
               }
             }
             .right {
               width: 50%;
+              font-size: 3rem;
             }
           }
           .bottom {
+            font-size: 1.5rem;
             width: 100%;
             height: 50%;
           }

@@ -24,10 +24,39 @@
       </div>
       <div class="content">
         <div class="badge">
-          <img src="../../assets/pack/hero_badge.svg" alt="" />
-          <div class="text">蜀</div>
+          <div class="tabs">
+            <div class="title">
+              <img src="../../assets/pack/tab_title_bg.png" alt="" />
+              <div class="inner">武将</div>
+            </div>
+            <div
+              v-for="(item, index) in tabs"
+              :key="index"
+              @click="() => (curTab = item.key)"
+              :class="curTab == item.key ? 'item active' : 'item'"
+            >
+              {{ item.name }}
+            </div>
+          </div>
+          <img
+            class="divider"
+            src="../../assets/market/order/divider.svg"
+            alt=""
+          />
         </div>
         <div class="card_content">
+          <div
+            class="left"
+            v-if="curPage > 1"
+            @click="
+              () => {
+                curPage--;
+                getCurShowItems();
+              }
+            "
+          >
+            <img src="../../assets/store/left.png" alt="" />
+          </div>
           <div class="empty" v-if="!rawData.length">市场中暂无卡牌</div>
           <div
             v-for="(item, index) in curItems"
@@ -44,23 +73,28 @@
           >
             <MarketHeroItem :info="item" />
           </div>
+          <div
+            class="right"
+            v-if="curPage < total"
+            @click="
+              () => {
+                curPage++;
+                getCurShowItems();
+              }
+            "
+          >
+            <img src="../../assets/store/right.png" alt="" />
+          </div>
         </div>
       </div>
-      <div class="page_nation_box">
-        <Page
-          @change="
-            (num) => {
-              curPage = num;
-              getCurShowItems();
-            }
-          "
-          :current="curPage"
-          :total="total"
-        />
-      </div>
+
       <img style="width: 100%" src="../../assets/pack/bottom_border.svg" />
     </div>
-    <div class="tip_badge" @click="() => $router.push({ name: 'order' })">
+    <div
+      class="tip_badge"
+      v-if="!loading"
+      @click="() => $router.push({ name: 'order' })"
+    >
       <div class="inner">
         <img src="../../assets/common/tip_badge.svg" />
         <div class="text">我的订单</div>
@@ -80,12 +114,10 @@ import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
-import Page from "../../components/page";
 export default {
   name: "market_camp_detail",
   components: {
     MarketHeroItem,
-    Page,
     CommonPackFilter,
     CommonSearch,
     CommonPageHeader,
@@ -106,6 +138,12 @@ export default {
         animationData: require("../../assets/common/loading.json"),
       },
       loading: false,
+      tabs: [
+        { key: 0, name: "战力" },
+        { key: 1, name: "品级" },
+        { key: 2, name: "稀有度" },
+      ],
+      curTab: 0,
     });
     const getCurShowItems = () => {
       data.curItems = [];
@@ -236,26 +274,82 @@ export default {
     .badge {
       position: relative;
       height: 100%;
-      img {
+      display: flex;
+      align-items: center;
+      margin-left: 2rem;
+      .divider {
+        margin-left: 1rem;
         height: 100%;
       }
-      .text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, 0);
-        width: 3rem;
-        font-size: 3rem;
+      .tabs {
+        width: 13rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .title {
+          position: relative;
+          img {
+            width: 100%;
+          }
+          .inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 600;
+            white-space: nowrap;
+          }
+        }
+        .item {
+          cursor: pointer;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          font-weight: 700;
+          border-radius: 10px;
+          padding: 1rem 0;
+          margin: 1rem 0;
+        }
+        .active {
+          background: url("../../assets/pack/active_tab.png") no-repeat;
+          background-size: 100% 100%;
+        }
       }
     }
     .card_content {
       height: 100%;
-      width: 80%;
       display: flex;
       align-items: center;
-      gap: 2rem;
       transform: translateX(10%);
+      .left {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-100%, -50%);
+        cursor: pointer;
+        width: 2rem;
+        img {
+          width: 100%;
+        }
+      }
+      .right {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(100%, -50%);
+        cursor: pointer;
+        width: 2rem;
+        img {
+          width: 100%;
+        }
+      }
       .empty {
+        width: 100%;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -267,8 +361,9 @@ export default {
         &:hover {
           opacity: 0.8;
         }
-        height: 100%;
-        width: 22%;
+        margin: 0 1rem;
+        height: 90%;
+        width: 16rem;
       }
     }
   }

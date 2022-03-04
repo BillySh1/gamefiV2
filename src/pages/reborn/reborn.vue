@@ -9,14 +9,14 @@
     <div v-else class="content">
       <Lottie
         class="lottie"
-        v-if="(step == 0 || step == 1) && !showPack"
+        v-show="(step == 0 || step == 1) && !showPack"
         @animCreated="handleAni0"
         :options="step0Options"
         @click="handleClickReborn"
       />
       <Lottie
         class="lottie"
-        v-if="step == 2"
+        v-show="step == 2"
         @animCreated="handleAni1"
         :options="step1Options"
         @click="handleClickReborn"
