@@ -2,7 +2,7 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
-      <img class="bg" src="../../assets/store/success_bg.svg" alt="" />
+      <img class="bg" src="../../assets/store/success_bg.png" alt="" />
       <img class="item" :src="info.img" alt="" />
       <div class="text">
         数量: {{ num }} <br />

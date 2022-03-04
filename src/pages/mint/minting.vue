@@ -4,7 +4,7 @@
     <img
       v-if="!loading"
       class="light"
-      src="../../assets/store/success_bg.svg"
+      src="../../assets/store/success_bg.png"
       alt=""
     />
     <div class="content">

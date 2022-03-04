@@ -25,14 +25,14 @@
           <img
             v-show="showLeft"
             class="left"
-            src="../../assets/store/left.svg"
+            src="../../assets/store/left.png"
             @click="changeGoodsIndex(-1)"
           />
-          <img class="store_img" src="../../assets/store/store.svg" />
+          <img class="store_img" src="../../assets/store/store.png" />
           <img
             v-show="showRight"
             class="right"
-            src="../../assets/store/right.svg"
+            src="../../assets/store/right.png"
             @click="changeGoodsIndex(1)"
           />
           <div class="goods" @click="goodsClick">
