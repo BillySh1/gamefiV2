@@ -6,7 +6,7 @@
       </div>
       <div class="info_box">
         <div class="power_box">
-          <img class="power_bg" src="../assets/index/power_bg.svg" alt="" />
+          <img class="power_bg" src="../assets/index/power_bg.png" alt="" />
           <div class="power_value">战力 {{ power }}</div>
         </div>
         <div class="title_box">

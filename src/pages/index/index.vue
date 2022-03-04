@@ -38,18 +38,18 @@
       </div>
 
       <div class="float_action_buttons">
-        <img class="up" src="../../assets/index/ac_bottom.svg" alt="" />
+        <img class="up" src="../../assets/index/ac_bottom.png" alt="" />
         <div class="actions_inner">
           <div class="left" @click="jump('allStarsEntry')">
-            <img src="../../assets/index/ac_left.svg" alt="" />
+            <img src="../../assets/index/ac_left.png" alt="" />
             <div class="text">群英会战</div>
           </div>
           <div class="middle">
-            <img src="../../assets/index/ac_middle.svg" alt="" />
+            <img src="../../assets/index/ac_middle.png" alt="" />
             <div class="text">排位赛</div>
           </div>
           <div class="right">
-            <img src="../../assets/index/ac_right.svg" alt="" />
+            <img src="../../assets/index/ac_right.png" alt="" />
             <div class="text">攻城略地</div>
           </div>
         </div>
