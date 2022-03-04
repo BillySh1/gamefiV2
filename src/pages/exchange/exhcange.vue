@@ -20,6 +20,19 @@
         </div>
       </div>
       <div class="right">
+        <div v-if="!loading" class="balance_box">
+          <div class="item title" >余额</div>
+          <div class="item">
+            <img class="icon" src="../../assets/exchange/coin.png" />
+            <span class="name">铜钱</span>
+            <span>{{ m3t_balance }}</span>
+          </div>
+          <div class="item">
+            <img class="icon" src="../../assets/exchange/usdt.png" />
+            <span class="name">USDT</span>
+            <span>{{ usdt_balance }}</span>
+          </div>
+        </div>
         <div class="up_box">
           <div class="buy_num">
             <div class="icon">
@@ -47,19 +60,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!loading" class="balance_box">
-      <div>余额</div>
-      <div class="item">
-        <img class="icon" src="../../assets/exchange/coin.png" />
-        <span class="name">铜钱</span>
-        <span>{{ m3t_balance }}</span>
-      </div>
-      <div class="item">
-        <img class="icon" src="../../assets/exchange/usdt.png" />
-        <span class="name">USDT</span>
-        <span>{{ usdt_balance }}</span>
-      </div>
-    </div>
+
     <CommonPageFooter />
   </div>
 </template>
@@ -211,26 +212,6 @@ export default {
   height: 100%;
   background: url("../../assets/exchange/ex_bg.png") no-repeat;
   background-size: 100% 100%;
-  .balance_box {
-    position: absolute;
-    top: 12%;
-    right: 10%;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    .item {
-      display: flex;
-      align-items: center;
-      .icon {
-        height: 2rem;
-      }
-      .name {
-        margin: 0 1rem;
-        white-space: nowrap;
-        color: rgba(255, 255, 255, 0.7);
-      }
-    }
-  }
 }
 .content {
   position: absolute;
@@ -246,7 +227,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: rgba(255, 255, 255, .8);
+    color: rgba(255, 255, 255, 0.8);
     text-align: left;
     font-size: 1.5rem;
     line-height: 2;
@@ -266,6 +247,27 @@ export default {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+    .balance_box {
+      display: flex;
+      align-items: center;
+      .item {
+        display: flex;
+        align-items: center;
+        margin: 0 1rem;
+        min-width: 6rem;
+        .icon {
+          height: 2rem;
+        }
+        .name {
+          margin: 0 1rem;
+          white-space: nowrap;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+      .title{
+        min-width: 4rem;
+      }
+    }
     .up_box {
       display: flex;
       flex-direction: column;

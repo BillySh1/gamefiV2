@@ -28,20 +28,20 @@
         :toSelect="true"
         @select="(x) => handleSelect(x)"
       />
-      <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
+      <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />
     </div>
     <div v-if="!showPack && !loading" class="content">
-      <img class="mix_mist" src="../../assets/mix/mix_mist.svg" alt="" />
+      <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />
       <div class="inner">
         <div class="mix_item">
-          <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
+          <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="leftInfo">
             <HeroCardItem :info="leftInfo" />
           </div>
           <img
             v-if="leftInfo"
             class="ready"
-            src="../../assets/mix/ready.svg"
+            src="../../assets/mix/ready.png"
             alt=""
           />
           <div
@@ -58,17 +58,17 @@
           </div>
         </div>
         <div class="mix_swirl">
-          <img src="../../assets/mix/swirl.svg" alt="" />
+          <img src="../../assets/mix/swirl.png" alt="" />
         </div>
         <div class="mix_item right">
-          <img class="mix_item_bg" src="../../assets/mix/mix_item.svg" alt="" />
+          <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="rightInfo">
             <HeroCardItem v-if="rightInfo" :info="rightInfo" />
           </div>
           <img
             v-if="rightInfo"
             class="ready"
-            src="../../assets/mix/ready.svg"
+            src="../../assets/mix/ready.png"
             alt=""
           />
           <div
