@@ -94,9 +94,7 @@ export default {
       }
       return res;
     });
-    const nameTop = computed(() => {
-      return ["10%", "8.5%", "7%", "7.5%", "5%", "5%"][prop.info.rarity];
-    });
+
     const getBadgeImg = computed(() => {
       return [
         require("../assets/cardImgs/badge_0.png"),
@@ -112,29 +110,18 @@ export default {
         [require("../assets/cardImgs/p_2.png"), "谋"],
         [require("../assets/cardImgs/p_3.png"), "刺"],
         [require("../assets/cardImgs/p_4.png"), "辅"],
+        [require("../assets/cardImgs/p_4.png"), "主公"],
       ][prop.info.preference];
-    });
-
-    const transform = computed(() => {
-      return [
-        ["-23%", "-17%"],
-        ["-30%", "-17%"],
-        ["-37%", "-17%"],
-        ["-31%", "-17%"],
-        ["-49%", "-15%"],
-      ][prop.info.rarity];
     });
 
     const refData = toRefs(data);
     return {
       ...refData,
       borderImg,
-      nameTop,
       qualityImg,
       stars,
       campImg,
       useHeroDetail,
-      transform,
       levels,
       getBadgeImg,
       getPreference,
@@ -171,7 +158,7 @@ export default {
   .name {
     position: absolute;
     top: 30%;
-    left: 9%;
+    left: 8.5%;
     transform: translate(0, -50%);
     z-index: 30;
     font-size: 1.1rem;

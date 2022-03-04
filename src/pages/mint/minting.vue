@@ -12,7 +12,9 @@
       <div v-else class="main">
         <div class="title">恭喜您获得了</div>
         <div class="up_box">
-          <div :style="`color:${getRarityStyle};margin-right:1rem`">{{ curInfo.name }}</div>
+          <div :style="`color:${getRarityStyle};margin-right:1rem`">
+            {{ curInfo.name }}
+          </div>
           <div>
             <span :style="`color:${getQualityStyle}`">{{ curQuality }}</span>
             品质
@@ -22,6 +24,12 @@
           <HeroCardItem :info="curInfo" />
         </div>
         <div class="bottom">
+          <CommonButton
+            v-if="newMintedItems.length > 1 && curIndex > 0"
+            @click="() => curIndex--"
+            class="btn"
+            >上一张</CommonButton
+          >
           <CommonButton
             v-if="
               newMintedItems.length > 1 && curIndex < newMintedItems.length - 1
@@ -241,6 +249,7 @@ export default {
       margin-top: 1.5rem;
       .btn {
         cursor: pointer;
+        margin-right: 1rem;
       }
     }
     .card {
