@@ -28,7 +28,7 @@ export default {
     });
     const totalPages = computed(() => {
       let res = [];
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= prop.total; i++) {
         res.push(i);
       }
       return res;
