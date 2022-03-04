@@ -49,7 +49,7 @@
               "
             />
             <div class="ipt_bg">
-              <img class="ipt_img" src="../../assets/mint/input.svg" alt="" />
+              <img class="ipt_img" src="../../assets/mint/input.png" alt="" />
               <input
                 v-model="price"
                 class="input"
