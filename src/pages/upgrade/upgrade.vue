@@ -171,6 +171,7 @@ export default {
     left: 0;
     width: 10rem;
     z-index: 50;
+     white-space: nowrap;
     .inner {
       position: relative;
       img {

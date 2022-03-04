@@ -88,7 +88,6 @@
         </div>
       </div>
 
-      <img style="width: 100%" src="../../assets/pack/bottom_border.svg" />
     </div>
     <div
       class="tip_badge"
@@ -227,6 +226,7 @@ export default {
     position: absolute;
     bottom: 8rem;
     left: 0;
+    white-space: nowrap;
     .inner {
       position: relative;
       img {
@@ -271,6 +271,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
+    padding-bottom: 3rem;
     .badge {
       position: relative;
       height: 100%;
@@ -323,6 +324,7 @@ export default {
     }
     .card_content {
       height: 100%;
+      width: 85%;
       display: flex;
       align-items: center;
       transform: translateX(10%);
@@ -363,7 +365,7 @@ export default {
         }
         margin: 0 1rem;
         height: 90%;
-        width: 16rem;
+        width: 15rem;
       }
     }
   }

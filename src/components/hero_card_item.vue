@@ -3,7 +3,7 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
 
-      <div class="name" :style="$route.path == '/heroDetail' ? 'left:10%' : ''">
+      <div class="name" :style="$route.path == '/heroDetail' ? 'left:9%' : ''">
         {{ info.name }}
       </div>
       <div class="quality">

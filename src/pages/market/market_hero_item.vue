@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="priceZone">
-      <div class="title">价格</div>
+      <div class="title">MMC</div>
       <div class="value">{{ getPrice }}</div>
     </div>
   </div>
@@ -80,23 +80,26 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .priceZone{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      transform: translateY(-50%);
-      .title{
-          color: rgba(255, 255, 255, .5);
-      }
-      .value{
-          font-family: SF Pro Text;
-          font-size: 2rem;
-          font-weight: 700;
-          font-style: italic;
-          background: linear-gradient(48.4deg, #FFCA7B 4.15%, #A67327 64.55%);
-          color: transparent;
-          background-clip: text;
-      }
+  .priceZone {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transform: translateY(100%);
+    .title {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .value {
+      font-family: SF Pro Text;
+      font-size: 2rem;
+      font-weight: 700;
+      font-style: italic;
+      background: linear-gradient(48.4deg, #ffca7b 4.15%, #a67327 64.55%);
+      color: transparent;
+      background-clip: text;
+    }
   }
   .power_zone {
     position: absolute;
@@ -129,7 +132,7 @@ export default {
           width: 30%;
         }
         .text {
-          font-size: 1.5rem;
+          font-size: 1.2rem;
           margin: 0 1rem;
           white-space: nowrap;
         }
@@ -140,7 +143,7 @@ export default {
     }
     .power_value {
       font-family: SF Pro Text;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-style: italic;
       font-weight: 700;
     }

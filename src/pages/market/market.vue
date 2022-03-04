@@ -80,6 +80,7 @@ export default {
     position: absolute;
     bottom: 8rem;
     left: 0;
+     white-space: nowrap;
     .inner {
       position: relative;
       img {

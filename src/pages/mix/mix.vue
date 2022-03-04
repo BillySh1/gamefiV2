@@ -420,6 +420,7 @@ export default {
     position: absolute;
     bottom: 15%;
     left: 0;
+     white-space: nowrap;
     .inner {
       position: relative;
       img {

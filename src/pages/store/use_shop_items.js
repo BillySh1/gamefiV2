@@ -2,13 +2,13 @@ const useShopItems = () => [
   [
     {
       tokenId: 11,
-      img: require("../../assets/store/item/type_0_0.svg"),
+      img: require("../../assets/store/item/type_0_0.png"),
       name: "粮草",
       intro:'《宋史·食货志三》:“即今所在粮草尽乏，漕臣计无所出，文移指空而已。” '
     },
     {
       tokenId: 12,
-      img: require("../../assets/store/item/type_0_1.svg"),
+      img: require("../../assets/store/item/type_0_1.png"),
       name: "衅鼓",
       intro:'上古时的一种祭礼。上古凡重要器物（如钟、鼓等）制成后，一定要杀牛、羊、猪等，把它们的血涂在新器物上表示祭，称作衅。 古代战争时杀人或杀牲把血涂在鼓上行祭:君之惠，不以累臣衅鼓。'
     },
@@ -16,7 +16,7 @@ const useShopItems = () => [
   [
     {
       tokenId: 10,
-      img: require("../../assets/store/item/type_1_0.svg"),
+      img: require("../../assets/store/item/type_1_0.png"),
       name: "两仪石",
       intro:'太极生两仪，两仪生四象， 两仪石是英雄重生的必备材料'
     },
@@ -32,19 +32,19 @@ const useShopItems = () => [
   [
     {
       tokenId: 4,
-      img: require("../../assets/store/item/type_2_0.svg"),
+      img: require("../../assets/store/item/type_2_0.png"),
       name: "幸运石",
       intro:'提高出现优秀品质概率的宝石'
     },
     {
       tokenId: 5,
-      img: require("../../assets/store/item/type_2_1.svg"),
+      img: require("../../assets/store/item/type_2_1.png"),
       name: "天佑石",
       intro:'提高出现史诗品质概率的宝石'
     },
     {
       tokenId: 6,
-      img: require("../../assets/store/item/type_2_2.svg"),
+      img: require("../../assets/store/item/type_2_2.png"),
       name: "神眷石",
       intro:'提高出现传说品质概率的宝石'
     },

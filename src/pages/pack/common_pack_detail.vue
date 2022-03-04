@@ -114,7 +114,7 @@ export default {
       curItemShow: {},
     });
     watch(
-      data.curTab,
+      () => data.curTab,
       (v) => {
         if (v == 1) {
           data.curPackData = data.equpmentItems;
@@ -122,7 +122,7 @@ export default {
           data.curPackData = data.goodsItems;
         }
         data.curItemIndex = 0;
-        data.curItemShow = data.curPackData[data.curItemIndex];
+        data.curItemShow = data.curPackData[0]
       },
       {
         immediate: true,
@@ -151,7 +151,6 @@ export default {
           num: x,
         };
       });
-      data.curItemShow = data.goodsItems[data.curItemIndex];
     };
     const refData = toRefs(data);
     return {
