@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack v-if="!showPack"  />
+    <InjectGoBack v-if="!showPack && !loading" />
     <Lottie
       v-if="loading"
       :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -9,7 +9,7 @@
     <div v-else class="content">
       <Lottie
         class="lottie"
-        v-if="step == 0"
+        v-if="(step == 0 || step == 1) && !showPack"
         @animCreated="handleAni0"
         :options="step0Options"
         @click="handleClickReborn"
@@ -69,7 +69,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button.vue";
 import InejctPackHero from "../../components/inejct_pack_hero.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 const openAni = require("../../assets/reborn/open.json");
@@ -82,7 +82,7 @@ export default {
     InejctPackHero,
     HeroCardItem,
     CommonButton,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -95,12 +95,12 @@ export default {
       step: 0,
       step0Options: {
         animationData: openAni,
-        autoplay: false,
+        autoplay: true,
         loop: false,
       },
       step1Options: {
         animationData: closeAni,
-        autoplay: false,
+        autoplay: true,
         loop: true,
       },
       ani0: undefined,
@@ -134,8 +134,11 @@ export default {
         data.stockBalance = await cShop.methods
           .balanceOf(data.account, "10")
           .call();
-        data.step = 2;
-        data.curSelectedHero = item;
+
+        data.showPack = false;
+        setTimeout(() => {
+          data.curSelectedHero = item;
+        }, 1000);
       } catch (e) {
         console.log(e);
       } finally {
@@ -243,9 +246,9 @@ export default {
           proxy.$toast("重生成功", store.state.toast_success);
           router.push({
             name: "minting",
-            query:{
-              tokenId: data.curSelectedHero.tokenId
-            }
+            query: {
+              tokenId: data.curSelectedHero.tokenId,
+            },
           });
         }
       } catch (e) {
@@ -288,7 +291,7 @@ export default {
         data.ani0.play();
         data.isOpen = true;
       } else if (data.step == 0 && data.isOpen) {
-        data.step++;
+        data.step = 1;
         data.showPack = true;
       }
     };
@@ -359,14 +362,14 @@ export default {
   }
   position: fixed;
   cursor: pointer;
-  bottom: 15%;
+  bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 101;
 }
 .cur_selected_cost {
   position: fixed;
-  bottom: 25%;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 101;
