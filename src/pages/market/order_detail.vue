@@ -37,7 +37,7 @@
         </div>
         <div class="right_c_action">
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="../../assets/mint/btn.svg" alt="" />
+            <img class="btn_img" src="../../assets/mint/btn.png" alt="" />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>

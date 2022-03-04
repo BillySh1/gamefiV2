@@ -25,8 +25,8 @@ export default {
 .box {
   position: relative;
   .img {
-    height: 5rem;
-    width: 5rem;
+    height: 4.5rem;
+    width: 4.5rem;
   }
   .text {
     position: absolute;

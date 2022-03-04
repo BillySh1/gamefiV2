@@ -137,6 +137,7 @@ export default {
 }
 .float_item {
   cursor: pointer;
+  margin-left: 1rem;
 }
 .float_right_box {
   position: absolute;
@@ -148,8 +149,8 @@ export default {
   .flex {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     margin-bottom: 2rem;
+    
   }
 }
 
@@ -188,6 +189,7 @@ export default {
     display: flex;
     margin-top: 2rem;
     font-family: zihun143;
+    font-weight: bold;
     font-size: 1.8rem;
     text-align: center;
 

@@ -5,10 +5,17 @@
     <img class="logo" src="./assets/common/logo.png" alt="" />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
-      <div v-show="!correctChainId" >请切换至正确的网络</div>
-      <div class="btn" v-show="!connected" >
+      <div v-show="!correctChainId">请切换至正确的网络</div>
+      <div class="btn" v-show="!connected || !correctChainId">
         <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
-        <div class="inner" @click="connect" >连接钱包</div>
+        <div v-if="!connected" class="inner" @click="connect">连接钱包</div>
+        <div
+          v-if="isMobile && !correctChainId"
+          class="inner"
+          @click="switchNetWork"
+        >
+          切换网络
+        </div>
       </div>
     </div>
   </div>
@@ -27,6 +34,14 @@ export default {
       web3: "",
     };
   },
+  computed: {
+    isMobile() {
+      if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+        return true;
+      }
+      return false;
+    },
+  },
   methods: {
     watchChain() {
       window.ethereum.on("chainChanged", async () => await this.judge());
@@ -42,8 +57,12 @@ export default {
             await this.judege();
           });
       } catch (error) {
-        console.log("User denied account access",error);
+        console.log("User denied account access", error);
       }
+    },
+    switchNetWork() {
+      const tp = require("tp-js-sdk");
+      tp.close();
     },
     async judge() {
       let chainId = await this.Web3.eth.getChainId();

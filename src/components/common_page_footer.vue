@@ -52,37 +52,37 @@ export default {
       menuList: [
         {
           key: "pack",
-          img: require("../assets/common/pack.svg"),
+          img: require("../assets/common/pack.png"),
           href: "pack",
           text: "背包",
         },
         {
           key: "market",
-          img: require("../assets/common/market.svg"),
+          img: require("../assets/common/market.png"),
           href: "market",
           text: "市场",
         },
         {
           key: "exchange",
-          img: require("../assets/common/exchange.svg"),
+          img: require("../assets/common/exchange.png"),
           href: "exchange",
           text: "兑换",
         },
         {
           key: "store",
-          img: require("../assets/common/store.svg"),
+          img: require("../assets/common/store.png"),
           href: "store",
           text: "战备",
         },
         {
           key: "reborn",
-          img: require("../assets/common/reborn.svg"),
+          img: require("../assets/common/reborn.png"),
           href: "reborn",
           text: "重生",
         },
         {
           key: "mix",
-          img: require("../assets/common/mix.svg"),
+          img: require("../assets/common/mix.png"),
           href: "mix",
           text: "进阶",
         },

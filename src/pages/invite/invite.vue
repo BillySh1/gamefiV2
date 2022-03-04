@@ -5,7 +5,7 @@
       <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
       <div class="invite_box">
         <div class="up">
-          <img src="../../assets/invite/up_bg.svg" alt="" />
+          <img src="../../assets/invite/up_bg.png" alt="" />
           <div class="info_box">
             <div class="item title">
               <img src="../../assets/invite/icons/1.svg" alt="" />
@@ -26,21 +26,21 @@
             class="item"
             @click="() => $router.push({ name: 'inviteBoard' })"
           >
-            <img src="../../assets/invite/item1_bg.svg" alt="" />
+            <img src="../../assets/invite/item_1.png" alt="" />
             <div class="inner">
               <img src="../../assets/invite/icons/2.svg" alt="" />
               邀请排行榜
             </div>
           </div>
           <div class="item">
-            <img src="../../assets/invite/item2_bg.svg" alt="" />
+            <img src="../../assets/invite/item_2.png" alt="" />
             <div class="inner">
               <img src="../../assets/invite/icons/3.svg" alt="" />
               邀请规则
             </div>
           </div>
           <div class="item">
-            <img src="../../assets/invite/item3_bg.svg" alt="" />
+            <img src="../../assets/invite/item_3.png" alt="" />
             <div class="inner">
               <img src="../../assets/invite/icons/4.svg" alt="" />
               生成我的邀请码
