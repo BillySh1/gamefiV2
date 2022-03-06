@@ -32,7 +32,7 @@
             <div
               v-for="(item, index) in tabs"
               :key="index"
-              @click="() => (curTab = item.key)"
+              @click="() => filterTab(item)"
               :class="curTab == item.key ? 'item active' : 'item'"
             >
               {{ item.name }}
@@ -156,9 +156,17 @@ export default {
         }
       );
       await getPack();
-      getCurShowItems();
+      filterTab({ key: 0 });
       data.loading = false;
     });
+    const filterTab = (item) => {
+      data.curTab = item.key;
+      const _v = ["power", "quality", "rarity"][item.key];
+      data.rawData.sort((a, b) => {
+        return Number(b[_v]) - Number(a[_v]);
+      });
+      getCurShowItems();
+    };
     const getPack = async () => {
       try {
         const c = store.state.c_hero;
@@ -184,7 +192,7 @@ export default {
             ...useHeroDetail(uid, x.preference),
           });
         });
-       
+
         data.total = Math.ceil(data.rawData.length / 4);
       } catch (e) {
         proxy.$toast("获取武将背包失败", store.state.toast_error);
@@ -194,6 +202,7 @@ export default {
     return {
       ...refData,
       getCurShowItems,
+      filterTab,
     };
   },
 };
@@ -334,13 +343,6 @@ export default {
       }
     }
   }
-  .page_nation_box {
-    padding: 0.5rem 0;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: row-reverse;
-    background: rgba(0, 0, 0, 0.5);
-  }
+  
 }
 </style>

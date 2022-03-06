@@ -25,14 +25,10 @@
       <div class="content">
         <div class="badge">
           <div class="tabs">
-            <div class="title">
-              <img src="../../assets/pack/tab_title_bg.png" alt="" />
-              <div class="inner">武将</div>
-            </div>
             <div
               v-for="(item, index) in tabs"
               :key="index"
-              @click="() => (curTab = item.key)"
+              @click="() => filterTab(item)"
               :class="curTab == item.key ? 'item active' : 'item'"
             >
               {{ item.name }}
@@ -47,7 +43,7 @@
         <div class="card_content">
           <div
             class="left"
-            v-if="curPage > 1"
+            v-show="curPage > 1"
             @click="
               () => {
                 curPage--;
@@ -75,7 +71,7 @@
           </div>
           <div
             class="right"
-            v-if="curPage < total"
+            v-show="curPage < total"
             @click="
               () => {
                 curPage++;
@@ -87,7 +83,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div
       class="tip_badge"
@@ -141,6 +136,7 @@ export default {
         { key: 0, name: "战力" },
         { key: 1, name: "品级" },
         { key: 2, name: "稀有度" },
+        { key: 3, name: "价格" },
       ],
       curTab: 0,
     });
@@ -164,9 +160,17 @@ export default {
         }
       );
       await getList();
-      getCurShowItems();
+      filterTab({ key: 0 });
       data.loading = false;
     });
+    const filterTab = (item) => {
+      data.curTab = item.key;
+      const _v = ["power", "quality", "rarity", "price"][item.key];
+      data.rawData.sort((a, b) => {
+        return Number(b[_v]) - Number(a[_v]);
+      });
+      getCurShowItems();
+    };
     const getList = async () => {
       try {
         const c = store.state.c_exchange;
@@ -211,6 +215,7 @@ export default {
     return {
       ...refData,
       getCurShowItems,
+      filterTab,
     };
   },
 };
@@ -224,7 +229,7 @@ export default {
   .tip_badge {
     cursor: pointer;
     position: absolute;
-    bottom: 8rem;
+    bottom: 6rem;
     left: 0;
     white-space: nowrap;
     .inner {
@@ -267,11 +272,11 @@ export default {
   .content {
     margin: 1rem 0;
     background: rgba(0, 0, 0, 0.5);
-    height: 23rem;
+    height: 24rem;
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
-    padding-bottom: 3rem;
+    padding: 1rem 0rem;
+    padding-bottom: 2rem;
     .badge {
       position: relative;
       height: 100%;
@@ -324,7 +329,6 @@ export default {
     }
     .card_content {
       height: 100%;
-      width: 85%;
       display: flex;
       align-items: center;
       transform: translateX(10%);
@@ -365,17 +369,9 @@ export default {
         }
         margin: 0 1rem;
         height: 90%;
-        width: 15rem;
+        width: 16rem;
       }
     }
-  }
-  .page_nation_box {
-    padding: 0.5rem 0;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: row-reverse;
-    background: rgba(0, 0, 0, 0.5);
   }
 }
 </style>
