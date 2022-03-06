@@ -125,6 +125,7 @@
             @click="
               () => {
                 origin = 1;
+                packType = 2;
                 showPack = true;
               }
             "

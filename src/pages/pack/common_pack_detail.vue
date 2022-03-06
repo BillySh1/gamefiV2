@@ -161,6 +161,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .detail_container {
+  @media screen and(max-height: 414px) {
+    transform: scale(0.9);
+  }
   position: fixed;
   top: 0;
   left: 0;

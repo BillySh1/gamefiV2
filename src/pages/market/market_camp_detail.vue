@@ -138,12 +138,13 @@
 import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import MarketHeroItem from "./market_hero_item.vue";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import CommonSearch from "../../components/common_search";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
+import { useRoute } from "vue-router";
 export default {
   name: "market_camp_detail",
   components: {
@@ -151,11 +152,12 @@ export default {
     CommonSearch,
     CommonPageHeader,
     CommonPageFooter,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const store = useStore();
     const { proxy } = getCurrentInstance();
+    const route = useRoute();
     const data = reactive({
       pageTitle: "卡牌市场",
       curItems: [],
@@ -301,6 +303,10 @@ export default {
         }
       );
       await getList();
+      if (route.query.type) {
+        triggerFilter(1,route.query.type)
+        
+      }
       filterTab({ key: 0 });
       data.loading = false;
     });
@@ -329,13 +335,15 @@ export default {
           temp.push(item);
         }
       });
+
       data.filteredData = temp;
+
       getCurShowItems();
     };
     const filterTab = (item) => {
       data.curTab = item.key;
       const _v = ["power", "quality", "rarity", "price"][item.key];
-      data.rawData.sort((a, b) => {
+      data.filteredData.sort((a, b) => {
         return Number(b[_v]) - Number(a[_v]);
       });
       getCurShowItems();
@@ -374,7 +382,7 @@ export default {
             price: order.price,
           });
         });
-         data.filteredData = JSON.parse(JSON.stringify(data.rawData));
+        data.filteredData = JSON.parse(JSON.stringify(data.rawData));
         data.total = Math.ceil(data.filteredData.length / 4);
       } catch (e) {
         console.log(e);
