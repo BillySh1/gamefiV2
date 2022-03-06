@@ -324,12 +324,18 @@ export default {
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
-
         const isUseUpgradeGem = !!data.qualityCost.tokenId;
         const gemId = [4, 5, 6].findIndex((i) => {
           return i == data.qualityCost.tokenId;
         });
         const isUseAddvancedGem = !!data.attrCost.tokenId;
+        console.log(
+          "params",
+          selected,
+          isUseUpgradeGem,
+          gemId,
+          isUseAddvancedGem
+        );
         const gas = await c.methods
           .upgradeRarity(selected, isUseUpgradeGem, gemId, isUseAddvancedGem)
           .estimateGas({ from: data.account });

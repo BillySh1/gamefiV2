@@ -15,8 +15,8 @@
             }
           "
         />
-        <div class="filter_box">
-          <CommonPackFilter />
+        <div class="filter_box" @click="() => (showFilter = true)">
+          <CommonPackFilter :value="showFilter" />
         </div>
         <div class="search_box">
           <CommonSearch />
@@ -135,6 +135,7 @@ export default {
         { key: 2, name: "稀有度" },
       ],
       curTab: 0,
+      showFilter: false,
     });
     const getCurShowItems = () => {
       data.curItems = [];
@@ -343,6 +344,5 @@ export default {
       }
     }
   }
-  
 }
 </style>

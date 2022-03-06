@@ -2,18 +2,59 @@
   <div class="filter_box">
     <div class="text">筛选</div>
   </div>
+  <div v-if="value" class="box" >
+     <div  v-for="(item, index) in filters" :key="index" class="filter_item">
+    <div class="left">
+      {{item.name}}
+    </div>
+    <div class="right">
+      <div class="item" v-for="i in item.items" :key="i.key" >
+        <img :src="i.img" alt="">
+      </div>
+    </div>
+  </div>
+  </div>
+ 
 </template>
 
 <script >
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
-  name: "",
+  name: "common_pack_filter",
+  props: ["value"],
   setup() {
-    const data = reactive({});
-    onBeforeMount(() => {
+    const data = reactive({
+      filters: [
+        {
+          name: "稀有度",
+          key: "rarity",
+          items: [
+            {
+              key: 0,
+              img: require("../assets/pack/filter/rarity/0.png"),
+            },
+            {
+              key: 1,
+              img: require("../assets/pack/filter/rarity/1.png"),
+            },
+            {
+              key: 2,
+              img: require("../assets/pack/filter/rarity/2.png"),
+            },
+            {
+              key: 3,
+              img: require("../assets/pack/filter/rarity/3.png"),
+            },
+            {
+              key: 4,
+              img: require("../assets/pack/filter/rarity/4.png"),
+            },
+          ],
+        },
+      ],
     });
-    onMounted(() => {
-    });
+    onBeforeMount(() => {});
+    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
@@ -41,6 +82,32 @@ export default {
   border: 1px solid #3e3002;
   .text {
     font-size: 1.5rem;
+  }
+}
+.box{
+  background: rgba(0, 0, 0, 0.25);
+}
+.filter_item {
+  height: 4rem;
+  display: flex;
+  margin: 2rem 0;
+  .left {
+    height: 100%;
+    background: rgba(101, 31, 31, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 200px;
+  }
+  .right{
+    display: flex;
+    align-items: center;
+    .item{
+      height: 100%;
+      img{
+        height: 100%;
+      }
+    }
   }
 }
 </style>

@@ -6,7 +6,7 @@
     <div v-if="!loading" class="content">
       <div class="left">
         <div class="intro">
-          <div>铜钱是富贾三国中流通的货币</div>
+          <div>铜钱是富甲三国中流通的货币</div>
           <div>您需要在钱庄中兑换一定数额的铜钱才能</div>
           <div>在商店中正常购买商品</div>
         </div>
@@ -14,7 +14,7 @@
           <div>董卓当前给出的汇率为</div>
           <div class="rate_detail">
             <div>1 USDT</div>
-            <div>:</div>
+            <div style="margin: 0 4rem">:</div>
             <div>{{ 25 }} 铜钱</div>
           </div>
         </div>
@@ -236,7 +236,6 @@ export default {
         font-size: 2.5rem;
         display: flex;
         align-items: center;
-        gap: 4rem;
         color: #f2dbb9;
       }
     }
@@ -245,8 +244,9 @@ export default {
     width: 40%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
+    font-size: 1.5rem;
     .balance_box {
       display: flex;
       align-items: center;
@@ -256,7 +256,7 @@ export default {
         margin: 0 1rem;
         min-width: 6rem;
         .icon {
-          height: 2rem;
+          height: 2.5rem;
         }
         .name {
           margin: 0 1rem;
@@ -272,12 +272,12 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 2rem;
       .xs {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
+        transform: translateX(1rem);
         font-size: 1.2rem;
       }
     }
@@ -285,9 +285,9 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-start;
       font-size: 2rem;
-      gap: 2rem;
+      margin-bottom: 2rem;
       .icon {
         display: flex;
         align-items: center;
