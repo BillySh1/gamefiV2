@@ -345,7 +345,7 @@ export default {
           .upgradeRarity(selected, isUseUpgradeGem, gemId, isUseAddvancedGem)
           .send({
             gasPrice: gasPrice,
-            gas: Number.parseInt(gas, 10) + 500000,
+            gas: Number.parseInt(gas, 10) + 2000000,
             from: data.account,
           });
         if (res.status) {

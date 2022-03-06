@@ -10,9 +10,9 @@
     <div class="currency_menu">
       <div
         class="currency_item"
-        v-for="(item,index) in list"
+        v-for="(item, index) in list"
         :key="item.key"
-        :style=" index ==0 || index== 1? 'width: 10rem' :'' "
+        :style="index == 0 || index == 1 ? 'width: 10rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
@@ -33,7 +33,12 @@
         alt=""
       />
       <img class="icon" src="../assets/common/lang.svg" alt="" />
-      <img v-if="isMobile"  @click="exitFullScreen" class="icon" :src="getScreenAciton" />
+      <img
+        v-if="isMobile"
+        @click="exitFullScreen"
+        class="icon"
+        :src="getScreenAciton"
+      />
     </div>
   </div>
 </template>
@@ -211,7 +216,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  -webkit-text-stroke: 0.86px solid #231008;
+  text-shadow: 1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   min-width: 65%;
 }
 .currency_item {
