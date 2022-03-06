@@ -5,6 +5,19 @@
       v-if="loading"
       :options="{ animationData: require('../../assets/common/loading.json') }"
     />
+    <InjectPackMix
+      :value="showPack && (packType == 0 || packType == 1)"
+      :type="packType"
+      @back="
+        () => {
+          showPack = false;
+        }
+      "
+      @select="selectExtra"
+      :rarity="leftInfo.rarity"
+      :quality="[leftInfo.quality, rightInfo.quality].map((i) => Number(i))"
+    />
+
     <Lottie v-if="mixing" :options="lottie_options" />
 
     <CommonPageHeader :title="pageTitle" />
@@ -15,15 +28,50 @@
         rightInfo &&
         rightInfo.tokenId &&
         !loading &&
-        !mixing
+        !mixing &&
+        !showPack
       "
       class="cost_badge"
     >
-      需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }}
+      <div class="info">
+        需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }}
+      </div>
+      <div class="extra">
+        <div
+          class="item"
+          @click="
+            () => {
+              packType = 0;
+              showPack = true;
+            }
+          "
+        >
+          <img v-if="!qualityCost" src="../../assets/mix/item_add.png" alt="" />
+          <div v-else>
+            <img :src="qualityCost.img" />
+            {{ qualityCost.cost }}
+          </div>
+        </div>
+        <div
+          class="item"
+          @click="
+            () => {
+              packType = 1;
+              showPack = true;
+            }
+          "
+        >
+          <img v-if="!attrCost" src="../../assets/mix/item_add.png" alt="" />
+          <div v-else>
+            <img :src="attrCost.img" />
+            {{ attrCost.cost }}
+          </div>
+        </div>
+      </div>
     </div>
     <div v-if="showPack" class="content">
       <InjectPackHero
-        :value="showPack"
+        :value="showPack && packType == 2"
         @back="() => (showPack = false)"
         :toSelect="true"
         @select="(x) => handleSelect(x)"
@@ -49,6 +97,7 @@
             @click="
               () => {
                 origin = 0;
+                packType = 2;
                 showPack = true;
               }
             "
@@ -99,7 +148,8 @@
         rightInfo &&
         rightInfo.tokenId &&
         !loading &&
-        !mixing
+        !mixing &&
+        !showPack
       "
       :class="
         Number(remainNum) < Number(costNum)
@@ -117,8 +167,17 @@
       @close="() => (showModal = false)"
       :value="showModal"
       title="进阶提醒"
-      >规则</InjectModal
     >
+      <div>相同阵营， 相同稀有度的英雄才可以进阶</div>
+      <div>进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
+      <div>
+        可选择使用宝石(例:
+        神眷石)提升进阶后卡牌的高品质概率，消耗数量视稀有度而定
+      </div>
+      <div>
+        可选择使用金镶灵玉提升进阶后卡牌的初始属性，消耗数量视稀有度而定
+      </div>
+    </InjectModal>
   </div>
 </template>
 
@@ -137,6 +196,7 @@ import InjectModal from "../../components/inject_modal";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import CommonButton from "../../components/common_button.vue";
+import InjectPackMix from "./inject_pack.mix.vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3";
 import { useRouter } from "vue-router";
@@ -150,6 +210,7 @@ export default {
     HeroCardItem,
     CommonButton,
     InjectGoBack,
+    InjectPackMix,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -174,9 +235,12 @@ export default {
       mixing: false,
       web3: "",
       remainNum: 0,
+      qualityCost: "",
+      attrCost: "",
+      packType: undefined,
     });
     const btnText = computed(() => {
-      return ["授权卡牌", "授权并尊盟约", "确认进阶"][data.btnStatus];
+      return ["授权卡牌", "授权进阶道具", "确认进阶"][data.btnStatus];
     });
     const btnClick = async () => {
       if (data.btnStatus == 0) {
@@ -186,6 +250,14 @@ export default {
       } else if (data.btnStatus == 2) {
         await mix();
       }
+    };
+    const selectExtra = (i) => {
+      if (data.packType == 0) {
+        data.qualityCost = i;
+      } else if (data.packType == 1) {
+        data.attrCost = i;
+      }
+      data.showPack = false;
     };
     const approve = async () => {
       try {
@@ -252,13 +324,19 @@ export default {
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
+
+        const isUseUpgradeGem = !!data.qualityCost.tokenId;
+        const gemId = [4, 5, 6].findIndex((i) => {
+          return i == data.qualityCost.tokenId;
+        });
+        const isUseAddvancedGem = !!data.attrCost.tokenId;
         const gas = await c.methods
-          .upgradeRarity(selected, false, 0, false)
+          .upgradeRarity(selected, isUseUpgradeGem, gemId, isUseAddvancedGem)
           .estimateGas({ from: data.account });
         data.step = 2;
         data.mixing = true;
         const res = await c.methods
-          .upgradeRarity(selected, false, 0, false)
+          .upgradeRarity(selected, isUseUpgradeGem, gemId, isUseAddvancedGem)
           .send({
             gasPrice: gasPrice,
             gas: Number.parseInt(gas, 10) + 500000,
@@ -375,6 +453,7 @@ export default {
       handleSelect,
       btnText,
       btnClick,
+      selectExtra,
     };
   },
 };
@@ -400,11 +479,38 @@ export default {
   }
   .cost_badge {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 21;
     font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .info {
+    }
+    .extra {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      .item {
+        &:hover {
+          opacity: 0.8;
+        }
+        cursor: pointer;
+        width: 5rem;
+        height: 5rem;
+        background: url("../../assets/mix/item_bg.png") no-repeat;
+        background-size: 100% 100%;
+        margin: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 50%;
+        }
+      }
+    }
   }
 }
 .content {
@@ -420,7 +526,7 @@ export default {
     position: absolute;
     bottom: 15%;
     left: 0;
-     white-space: nowrap;
+    white-space: nowrap;
     .inner {
       position: relative;
       img {
@@ -455,6 +561,8 @@ export default {
       }
     }
     .mix_swirl {
+      pointer-events: none;
+      user-select: none;
       width: 40rem;
       opacity: 0.6;
       animation: spin 60s infinite linear;

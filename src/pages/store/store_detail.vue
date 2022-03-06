@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack />
+    <InjectGoBack v-if="!loading" />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="content">
       <div class="left_c">

@@ -55,12 +55,12 @@ const useShopItems = () => [
       name: "并尊盟约",
       intro:'英雄进阶的必备材料'
     },
-    // {
-    //   tokenId: 9,
-    //   img: require('../../assets/store/item/jinjie.png'),
-    //   name:'进阶额外',
-    //   intro:'提高进阶后属性的可选材料'
-    // },
+    {
+      tokenId: 9,
+      img: require('../../assets/store/item/lingyu.png'),
+      name:'金镶灵玉',
+      intro:'提高进阶后属性的可选材料'
+    },
     {
       tokenId: 0,
       img: require("../../assets/store/item/up_1.png"),

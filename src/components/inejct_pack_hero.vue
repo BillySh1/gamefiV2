@@ -184,9 +184,7 @@ export default {
             ...useHeroDetail(uid, x.preference),
           });
         });
-        console.log(data.rawData.find(x=>{
-          return x.rarity == 4
-        }))
+       
         data.total = Math.ceil(data.rawData.length / 4);
       } catch (e) {
         proxy.$toast("获取武将背包失败", store.state.toast_error);

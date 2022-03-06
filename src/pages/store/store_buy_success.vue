@@ -16,7 +16,7 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonPageHeader from "../../components/common_page_header";
 import { useGetShopDetailByTokenId } from "./use_shop_items.js";
@@ -35,6 +35,7 @@ export default {
       pageTitle: "购买成功",
       num: 0,
       remainS: 5,
+      lazy: "",
     });
     const lottie_options = computed(() => {
       return {
@@ -49,7 +50,7 @@ export default {
       lazyJump();
     });
     const lazyJump = () => {
-      setInterval(() => {
+      data.lazy = setInterval(() => {
         data.remainS--;
         if (data.remainS == 0) {
           router.push({
@@ -58,6 +59,11 @@ export default {
         }
       }, 1000);
     };
+    onBeforeRouteLeave(() => {
+      if (data.lazy) {
+        clearTimeout(data.lazy);
+      }
+    });
 
     const refData = toRefs(data);
     return {
