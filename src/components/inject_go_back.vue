@@ -9,12 +9,17 @@ import { reactive,toRefs} from 'vue'
 import {useRouter} from 'vue-router'
 export default {
     name: 'inject_go_back',
-      setup() {
+    props:['custom'],
+      setup(prop,ctx) {
           const router = useRouter()
           const data = reactive({
 
           })
           const back = ()=>{
+              if(prop.custom){
+                  ctx.emit('back')
+                  return
+              }
               router.go(-1)
           }
           const refData = toRefs(data);

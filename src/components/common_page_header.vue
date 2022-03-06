@@ -216,7 +216,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  text-shadow: 1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   min-width: 65%;
 }
 .currency_item {

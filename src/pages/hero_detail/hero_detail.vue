@@ -281,7 +281,6 @@ export default {
             justify-content: center;
             font-size: 1.5rem;
             font-weight: 700;
-            border-radius: 10px;
             padding: 0.5rem 0;
             margin: 0.2rem 0;
           }
