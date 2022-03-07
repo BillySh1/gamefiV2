@@ -1,7 +1,7 @@
 <template>
-  <router-view v-if="correctChainId && connected"></router-view>
-
-  <div class="mask black" v-if="!connected || !correctChainId">
+  <router-view v-if="correctChainId && connected && !loading"></router-view>
+  <GlobalLoading v-if="loading" @finish="() => (loading = false)" />
+  <div class="mask black" v-if="(!connected || !correctChainId) && !loading">
     <img class="logo" src="./assets/common/logo.png" alt="" />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
@@ -23,15 +23,20 @@
 
 <script>
 import initWeb3 from "./utils/initWeb3";
+import GlobalLoading from "./components/global_loading.vue";
 const acceptNetWorks = [97];
 export default {
   name: "app",
+  components: {
+    GlobalLoading,
+  },
   data() {
     return {
       correctChainId: false,
       connected: false,
       account: "",
-      web3: "",
+      Web3: "",
+      loading: true,
     };
   },
   computed: {
@@ -54,7 +59,7 @@ export default {
             if (acc && acc.length) {
               this.account = acc[0];
             }
-            await this.judege();
+            await this.judge();
           });
       } catch (error) {
         console.log("User denied account access", error);

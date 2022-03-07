@@ -10,12 +10,10 @@ export default {
         "https://bsc-dataseed.binance.org/"
       );
     }
-   
     const web3 = new Web3(this.provider);
     provider(web3);
     await web3.eth.getAccounts().then((accs) => {
       callback(accs[0]);
-      sessionStorage.setItem("account", accs);
     });
   },
 };

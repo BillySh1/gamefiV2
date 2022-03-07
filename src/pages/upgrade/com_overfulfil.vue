@@ -6,7 +6,7 @@
         <div class="text">战力值</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
-          <img src="../../assets/pack/power_img.svg" alt="" />
+          <img src="../../assets/pack/power_item.png" alt="" />
         </div>
       </div>
     </div>

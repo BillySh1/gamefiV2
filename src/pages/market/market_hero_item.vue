@@ -18,7 +18,7 @@
             alt=""
           />
         </div>
-        <img class="power_img" src="../../assets/pack/power_img.svg" />
+        <img class="power_img" src="../../assets/pack/power_item.png" />
         <div class="power_value">{{ Number(info.power) / 100 }}</div>
       </div>
     </div>
