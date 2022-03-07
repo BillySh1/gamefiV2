@@ -153,6 +153,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    div{
+      margin-bottom: 1rem;
+    }
     .btn {
       display: block;
       position: relative;

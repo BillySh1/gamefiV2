@@ -21,6 +21,11 @@
         :options="step1Options"
         @click="handleClickReborn"
       />
+      <Lottie
+        class="lottit_badge"
+        v-show="processing"
+        :options="{ animationData: require('../../assets/reborn/badge.json') }"
+      />
       <div class="pack_inject_box" v-if="showPack">
         <InejctPackHero
           :toSelect="true"
@@ -338,6 +343,12 @@ export default {
 .lottie {
   cursor: pointer;
   max-width: 80%;
+}
+.lottit_badge{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .pack_inject_box {
   position: fixed;
