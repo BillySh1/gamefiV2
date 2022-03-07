@@ -1,6 +1,9 @@
 <template>
   <div class="progress">
-    {{ "资源加载中,当前进度: " + Math.floor(preload.progress * 100) + "%" }}
+    <img class="logo" src="../assets/common/logo.png" alt="" />
+    <div class="text">
+      {{ "资源加载中,当前进度: " + Math.floor(preload.progress * 100) + "%" }}
+    </div>
   </div>
 </template>
 
@@ -21,21 +24,21 @@ export default {
         "../assets/all_stars/entry/logo.png",
         "../assets/all_stars/entry/mask.png",
         "../assets/all_stars/entry/text.png",
-        '../assets/store/item/jinjie.png',
-        '../assets/store/item/lingyu.png',
-        '../assets/store/item/shengji.png',
-        '../assets/store/item/text_bg.svg',
-        '../assets/store/item/type_0_0.png',
-        '../assets/store/item/type_0_1.png',
-        '../assets/store/item/type_1_0.png',
-        '../assets/store/item/type_2_0.png',
-        '../assets/store/item/type_2_1.png',
-        '../assets/store/item/type_2_2.png',
-        '../assets/store/item/up_0.png',
-        '../assets/store/item/up_2.png',
-        '../assets/store/item/up_3.png',
-        '../assets/store/item/up_4.png',
-        '../assets/store/item/yuruyi.png'
+        "../assets/store/item/jinjie.png",
+        "../assets/store/item/lingyu.png",
+        "../assets/store/item/shengji.png",
+        "../assets/store/item/text_bg.svg",
+        "../assets/store/item/type_0_0.png",
+        "../assets/store/item/type_0_1.png",
+        "../assets/store/item/type_1_0.png",
+        "../assets/store/item/type_2_0.png",
+        "../assets/store/item/type_2_1.png",
+        "../assets/store/item/type_2_2.png",
+        "../assets/store/item/up_0.png",
+        "../assets/store/item/up_2.png",
+        "../assets/store/item/up_3.png",
+        "../assets/store/item/up_4.png",
+        "../assets/store/item/yuruyi.png",
       ],
       createjs: null,
       preload: "",
@@ -84,10 +87,30 @@ export default {
 </script>
 <style lang='less' scoped>
 .progress {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
+  position: relative;
+  background: black;
+  width: 100%;
+  height: 100%;
+
+  .logo {
+    position: absolute;
+    width: 80rem;
+    height: auto;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .text {
+    white-space: nowrap;
+    position: absolute;
+    font-size: 2rem;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

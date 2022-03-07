@@ -8,18 +8,23 @@
         <div class="value_box">
           <img
             class="part"
-            src="../..//assets/pack/power_text_left.svg"
+            src="../../assets/pack/power_text_left.svg"
             alt=""
           />
-          <div class="text">战力</div>
+          <div class="text">
+            <img class="power_img" src="../../assets/pack/power_item.png" />
+          </div>
           <img
             class="part"
             src="../../assets/pack/power_text_right.svg"
             alt=""
           />
         </div>
-        <img class="power_img" src="../../assets/pack/power_item.png" />
-        <div class="power_value">{{ Number(info.power) / 100 }}</div>
+
+        <div class="power_value">
+          <div class="text">战力</div>
+          <div class="value">{{ Number(info.power) / 100 }}</div>
+        </div>
       </div>
     </div>
     <div class="priceZone">
@@ -78,7 +83,7 @@ export default {
     height: 95%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -55%);
   }
   .priceZone {
     position: absolute;
@@ -86,13 +91,15 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     transform: translateY(100%);
     .title {
+      margin-left: 1rem;
       color: rgba(255, 255, 255, 0.5);
     }
     .value {
       font-family: SF Pro Text;
+      margin-right: 1rem;
       font-size: 2rem;
       font-weight: 700;
       font-style: italic;
@@ -109,14 +116,13 @@ export default {
       rgba(41, 22, 22, 0) -20.99%,
       rgba(37, 2, 2, 0.8) 100%
     );
-    height: 50%;
+    height: 10%;
     bottom: 0;
     left: 0;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     display: flex;
     .zone_inner {
-      height: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -127,25 +133,40 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 1vmax;
         .part {
           display: block;
-          width: 30%;
+          width: 35%;
         }
         .text {
-          font-size: 1.2rem;
+          width: 1.8rem;
           margin: 0 1rem;
           white-space: nowrap;
+          img {
+            width: 100%;
+          }
         }
       }
     }
     .power_img {
-      width: 2rem;
+      width: 1.5rem;
     }
     .power_value {
-      font-family: SF Pro Text;
-      font-size: 1.5rem;
-      font-style: italic;
-      font-weight: 700;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      .text {
+        margin-left: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .value {
+        margin-right: 1rem;
+        font-family: SF Pro Text;
+        font-style: italic;
+        font-weight: 700;
+      }
     }
   }
 }
