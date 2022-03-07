@@ -10,8 +10,7 @@
 <script >
 import { reactive, toRefs, onBeforeMount } from "vue";
 const createjs = window.createjs;
-const fs = require("fs");
-const path = require("path");
+
 export default {
   name: "global_loading",
   setup(prop, ctx) {
@@ -59,28 +58,10 @@ export default {
       queue.on("complete", loadComplete);
       queue.loadManifest(data.manifest);
     };
-    const readAll = (parentPath, out) => {
-      try {
-        let files = fs.readdirSync(parentPath);
-        files.forEach((item) => {
-          let tempPath = path.join(parentPath, item);
-          let stats = fs.statSync(tempPath);
-          if (stats.isDirectory()) {
-            readAll(tempPath, out);
-          } else {
-            out.push(tempPath);
-          }
-        });
-      } catch (e) {
-        console.warn("err", parentPath);
-        return out;
-      }
-    };
 
     const refData = toRefs(data);
     return {
       ...refData,
-      readAll,
     };
   },
 };

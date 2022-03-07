@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFilter" class="mask">
+  <div v-if="showFilter" class="mask" @click="showFilter = false" >
     <InjectGoBack :custom="true" @back="() => (showFilter = false)" />
     <div class="box">
       <div
@@ -466,6 +466,9 @@ export default {
         font-size: 1.5rem;
       }
     }
+    .search_box{
+      transform: translate(-5rem);
+    }
   }
   .content {
     margin: 1rem 0;
@@ -582,7 +585,7 @@ export default {
   .box {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
     .filter_item {
       user-select: none;
