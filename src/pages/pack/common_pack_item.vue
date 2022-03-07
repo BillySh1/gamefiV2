@@ -27,9 +27,10 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
   img {
     width: 100%;
-    height: 100%;
   }
   .num {
     position: absolute;

@@ -1,6 +1,12 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack v-if="!loading && !minting" />
+    <img
+      class="badge"
+      src="../../assets/mint/mint_detail_bg_badge.png"
+      alt=""
+    />
     <div v-if="minting || loading" class="content">
       <Lottie v-if="minting" :options="lottie_minting_options" />
       <Lottie
@@ -29,6 +35,7 @@
         </div>
       </div>
       <div class="right_c">
+        <img class="blood" src="../../assets/mint/blood.png" alt="" />
         <div class="right_c_title">
           <div class="right_c_title_value">
             {{ info.title }}
@@ -46,10 +53,10 @@
           </div>
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
+          随机开出不同稀有度的卡牌, 卡牌共具有四种品质，完全随机
         </div>
         <div class="right_c_content">
-          随机开出不同品质的卡牌, 卡牌共具有五种品质 每种品质的特性不尽相同
+          卡牌的共有五种职业，盾，战，谋，刺，辅，每种职业的特性不尽相同
         </div>
         <div class="right_c_action">
           <div class="input_box">
@@ -114,12 +121,14 @@ import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3.js";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from "../../components/inject_go_back.vue";
 
 export default {
   name: "mint_detail",
   components: {
     CommonPageHeader,
     CommonPageFooter,
+    InjectGoBack,
   },
   setup() {
     const route = useRoute();
@@ -248,7 +257,7 @@ export default {
         proxy.$toast("购买成功", store.state.toast_success);
       }
     };
- 
+
     const btnText = computed(() => {
       return ["授权", "购买"][data.btnStatus];
     });
@@ -281,9 +290,18 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
   background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
+  .badge {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+  }
 }
 .content {
   height: 100%;
@@ -323,7 +341,15 @@ export default {
   animation: spin 60s infinite linear;
 }
 .right_c {
+  position: relative;
   width: 40%;
+  .blood {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15rem;
+    transform: translate(50%, -50%);
+  }
 }
 .right_c_title {
   display: flex;
