@@ -3,7 +3,7 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
 
-      <div class="name" :style="$route.path == '/heroDetail' ? 'left:9%' : ''">
+      <div class="name" :style="$route.path == '/heroDetail' ? 'left:9%;font-size:1.5rem' : ''">
         {{ info.name }}
       </div>
       <div class="quality">
@@ -156,13 +156,16 @@ export default {
     z-index: 1;
   }
   .name {
+    @media screen and (max-height: 400px) {
+      left: 7%;
+    }
     position: absolute;
     top: 30%;
     left: 8.5%;
     transform: translate(0, -50%);
     z-index: 30;
-    font-size: 1.1rem;
-    max-width: 1.1rem;
+    font-size: 1rem;
+    max-width: 1rem;
     color: white;
   }
   .lv_t {

@@ -470,7 +470,7 @@ export default {
   .content {
     margin: 1rem 0;
     background: rgba(0, 0, 0, 0.5);
-    height: 24rem;
+    height: 26rem;
     display: flex;
     align-items: center;
     padding: 1rem 0rem;
