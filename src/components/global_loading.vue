@@ -14,45 +14,18 @@ export default {
   name: "global_loading",
   setup(prop, ctx) {
     const data = reactive({
-      manifest: [
-        require("../assets/all_stars/entry/bg.png"),
-        require("../assets/all_stars/entry/btn_bg.png"),
-        require("../assets/index/chainIcon/bsc.svg"),
-        require("../../public/fonts/FZYanZQKSJF.ttf"),
-        require("../assets/store/item/jinjie.png"),
-        require("../assets/store/item/type_0_0.png"),
-        require("../assets/store/item/lingyu.png"),
-        require("../assets/store/item/shengji.png"),
-        require("../assets/store/item/text_bg.svg"),
-        require("../assets/store/item/type_0_1.png"),
-        require("../assets/store/item/type_0_1.png"),
-        require("../assets/store/item/type_1_0.png"),
-        require("../assets/store/item/type_2_0.png"),
-        require("../assets/store/item/type_2_1.png"),
-        require("../assets/store/item/type_2_2.png"),
-        require("../assets/store/item/up_0.png"),
-        require("../assets/store/item/up_1.png"),
-        require("../assets/store/item/up_2.png"),
-        require("../assets/store/item/up_3.png"),
-        require("../assets/store/item/up_4.png"),
-        require("../assets/store/item/yuruyi.png"),
-        require("../assets/store/store_bg.png"),
-        require("../assets/store/type0.png"),
-        require("../assets/store/type1.png"),
-        require("../assets/store/type2.png"),
-      ],
+      manifest: [],
       createjs: null,
       preload: "",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
+      readFiles();
       startPreload();
     });
 
     const loadComplete = () => {
-      setTimeout(() => {
-        ctx.emit("finish");
-      }, 1000);
+      ctx.emit("finish");
     };
     const startPreload = () => {
       data.preload = new data.createjs.LoadQueue(true);
@@ -60,7 +33,15 @@ export default {
       queue.on("complete", loadComplete);
       queue.loadManifest(data.manifest);
     };
-
+    const readFiles = () => {
+      const path = require("path");
+      const files = require.context("../assets/", true, /.png$/).keys();
+      files.map((i) => {
+        const _relativePath = path.join("assets", i);
+        const file = require(`../${_relativePath}`);
+        data.manifest.push(file);
+      });
+    };
     const refData = toRefs(data);
     return {
       ...refData,
