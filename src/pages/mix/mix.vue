@@ -410,7 +410,6 @@ export default {
       data.showPack = false;
     };
     onBeforeMount(async () => {
-      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -420,7 +419,6 @@ export default {
         }
       );
       await getBeforePack();
-      data.loading = false;
     });
     const getRemainNum = async () => {
       const c = store.state.c_richShop;
