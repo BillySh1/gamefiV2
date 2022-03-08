@@ -47,7 +47,7 @@
           <div class="right_c_price">
             <img
               style="margin-right: 2rem"
-              src="../../assets/mint/price_icon.svg"
+              src="../../assets/common/mmc.png"
             />
             <span>{{ getprice }}</span>
           </div>

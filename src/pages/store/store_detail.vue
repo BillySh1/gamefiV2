@@ -34,15 +34,19 @@
           <div class="right_c_price">
             <img
               style="margin-right: 2rem"
-              src="../../assets/mint/price_icon.svg"
+              :src="
+                payment == 1
+                  ? require('../../assets/exchange/coin.png')
+                  : require('../../assets/common/mmc.png')
+              "
             />
             <span>{{ totalPrice }}</span>
           </div>
         </div>
         <div class="right_c_content">
-          {{info.intro}}
+          {{ info.intro }}
         </div>
-       
+
         <div class="right_c_action">
           <div class="input_box">
             <img
@@ -105,7 +109,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import { useGetShopDetailByTokenId } from "./use_shop_items.js";
 import initWeb3 from "../../utils/initWeb3.js";
 export default {
@@ -249,7 +253,7 @@ export default {
   width: 100%;
   height: 100%;
   background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
-   .badge {
+  .badge {
     position: absolute;
     width: 50%;
     height: auto;
@@ -328,12 +332,16 @@ export default {
   transform: translate(-50%, -50%);
 }
 .right_c_price {
+  width: 2rem;
   display: flex;
   align-items: center;
   margin-left: 3rem;
   font-family: zihun129;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
+  img {
+    width: 100%;
+  }
 }
 .right_c_content {
   font-size: 1.5rem;

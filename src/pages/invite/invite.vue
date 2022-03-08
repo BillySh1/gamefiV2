@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <InviteModal
+      :value="showModal"
+      :data="encodeData"
+      @close="() => (showModal = false)"
+    />
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
       <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
@@ -39,7 +44,7 @@
               邀请规则
             </div>
           </div>
-          <div class="item">
+          <div class="item" @click="generate">
             <img src="../../assets/invite/item_3.png" alt="" />
             <div class="inner">
               <img src="../../assets/invite/icons/4.svg" alt="" />
@@ -54,25 +59,51 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InviteModal from "./invite_modal.vue";
+import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
+    InviteModal,
   },
   setup() {
+    const { proxy } = getCurrentInstance();
+    const store = useStore();
     const data = reactive({
+      account: "",
+      web3: "",
       pageTitle: "呼朋唤友",
+      encodeData: "",
+      showModal: false,
     });
 
-    onBeforeMount(() => {});
-
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+    });
+    const generate = () => {
+      data.encodeData =
+        window.location.host + "/#/mint?invite=" + btoa(data.account);
+      navigator.clipboard.writeText(data.encodeData);
+      proxy.$toast("邀请链接已复制", store.state.toast_success);
+      data.showModal = true;
+    };
     const refData = toRefs(data);
     return {
       ...refData,
+      generate,
     };
   },
 };

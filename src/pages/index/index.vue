@@ -1,12 +1,11 @@
 <template>
   <div class="container">
     <CommonPageHeader />
- 
-    <div  class="content">
+
+    <div class="content">
       <InjectUser :power="power" />
       <div class="float_right_box">
         <div class="flex">
-         
           <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
               :src="require('../../assets/index/airdrop.png')"
@@ -15,12 +14,12 @@
           </div>
         </div>
 
-        <div class="float_item" @click="jump('title')">
+        <div class="float_item">
           <!-- <InjectIcon
             :src="require('../../assets/index/title.png')"
             text="称号"
           /> -->
-           <div class="float_item" @click="jump('invite')">
+          <div class="float_item" @click="jump('invite')">
             <InjectIcon
               :src="require('../../assets/index/invite.png')"
               text="邀请"
@@ -145,7 +144,6 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
-    
   }
 }
 
@@ -168,7 +166,7 @@ export default {
       font-size: 2.5rem;
       font-weight: 400;
       letter-spacing: 0.5rem;
-      text-shadow: 1px 1px 4px #000
+      text-shadow: 1px 1px 4px #000;
     }
   }
 }
@@ -226,7 +224,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-shadow: 1px 1px 4px #000
+      text-shadow: 1px 1px 4px #000;
     }
   }
 }

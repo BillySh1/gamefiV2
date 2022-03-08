@@ -9,7 +9,15 @@
           <img class="power_bg" src="../assets/index/power_bg.png" alt="" />
           <div class="power_value">战力 {{ power }}</div>
         </div>
-        <div class="title_box">
+        <div
+          class="title_box"
+          @click="
+            () =>
+              $router.push({
+                name: 'title',
+              })
+          "
+        >
           <img src="../assets/index/title_bg.png" alt="" />
           <div class="title_value">内测玩家</div>
         </div>
@@ -22,9 +30,9 @@
 import { reactive, toRefs } from "vue";
 export default {
   name: "inject_user",
-  props:['power'],
+  props: ["power"],
   setup() {
-    const data = reactive({})
+    const data = reactive({});
     const refData = toRefs(data);
     return {
       ...refData,
