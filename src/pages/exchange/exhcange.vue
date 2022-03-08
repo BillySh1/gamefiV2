@@ -169,7 +169,6 @@ export default {
       }
     };
     onBeforeMount(async () => {
-      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -179,7 +178,6 @@ export default {
         }
       );
       await getBalanceInfo();
-      data.loading = false;
     });
     const getBalanceInfo = async () => {
       const c_m3t = store.state.c_m3t;

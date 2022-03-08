@@ -1,11 +1,8 @@
 <template>
   <div class="container">
     <CommonPageHeader />
-    <Lottie
-      v-if="loading"
-      :options="{ animationData: require('../../assets/common/loading.json') }"
-    />
-    <div v-else class="content">
+ 
+    <div  class="content">
       <InjectUser :power="power" />
       <div class="float_right_box">
         <div class="flex">
@@ -84,11 +81,9 @@ export default {
       account: "",
       web3: "",
       power: 0,
-      loading: false,
     });
 
     onBeforeMount(async () => {
-      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -98,7 +93,6 @@ export default {
         }
       );
       await getPower();
-      data.loading = false;
     });
     const getPower = async () => {
       const c = store.state.c_hero;
