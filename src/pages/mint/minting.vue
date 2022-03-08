@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <img class="badge" src="../../assets/common/hero_sit.png" alt="">
     <img
       v-if="!loading"
       class="light"
@@ -20,24 +21,49 @@
             品质
           </div>
         </div>
-        <div class="card">
-          <HeroCardItem :info="curInfo" />
-        </div>
-        <div class="bottom">
+
+        <div
+          class="card"
+          @click="
+            () =>
+              $router.push({
+                name: 'heroDetail',
+                query: {
+                  tokenId: curInfo.tokenId,
+                },
+              })
+          "
+        >
           <CommonButton
             v-if="newMintedItems.length > 1 && curIndex > 0"
-            @click="() => curIndex--"
-            class="btn"
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                curIndex--;
+              }
+            "
+            class="left"
             >上一张</CommonButton
           >
+          <HeroCardItem :info="curInfo" />
+
           <CommonButton
             v-if="
               newMintedItems.length > 1 && curIndex < newMintedItems.length - 1
             "
-            @click="() => curIndex++"
-            class="btn"
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                curIndex++;
+              }
+            "
+            class="right"
             >下一张</CommonButton
           >
+        </div>
+        <div class="bottom">
           <CommonButton
             class="btn"
             @click="
@@ -51,6 +77,19 @@
             "
             >放入背包</CommonButton
           >
+          <CommonButton
+            class="btn"
+            @click="
+              () =>
+                $router.push({
+                  name: 'heroDetail',
+                  query: {
+                    tokenId: curInfo.tokenId,
+                  },
+                })
+            "
+            >卡牌详情</CommonButton
+          >
         </div>
       </div>
     </div>
@@ -58,7 +97,7 @@
   </div>
 </template>
 
-<script >
+<script>
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
@@ -96,6 +135,9 @@ export default {
     });
     onBeforeMount(async () => {
       data.loading = true;
+      if (route.query && route.query.fromReborn) {
+        data.pageTitle = "卡牌重生";
+      }
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -206,6 +248,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  .badge{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+  }
   @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -246,15 +295,29 @@ export default {
       display: flex;
       align-items: center;
       font-size: 1.5rem;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       .btn {
         cursor: pointer;
         margin-right: 1rem;
       }
     }
     .card {
+      position: relative;
+      cursor: pointer;
       width: 15rem;
       height: 18rem;
+      .left {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-200%, -50%);
+      }
+      .right {
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        transform: translate(200%, -50%);
+      }
     }
   }
 }

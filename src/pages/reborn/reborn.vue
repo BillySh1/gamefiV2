@@ -46,6 +46,20 @@
 
       <div v-if="curSelectedHero && !processing" class="cur_selected_cost">
         需要花费 {{ cost }} 枚两仪石, 当前数量 {{ stockBalance }}
+        <CommonButton
+          class="btn"
+          @click="
+            () => {
+              $router.push({
+                name: 'storeDetail',
+                query: {
+                  info: 10,
+                },
+              });
+            }
+          "
+          >前往商店购买</CommonButton
+        >
       </div>
 
       <div
@@ -238,14 +252,17 @@ export default {
         const gas = await c.methods
           .rebirth(tokenId)
           .estimateGas({ from: data.account });
-        data.step = 2;
-        data.ani1.play();
-        data.processing = true;
+        setTimeout(() => {
+          data.step = 2;
+          data.ani1.play();
+          data.processing = true;
+        }, 3000);
         const res = await c.methods.rebirth(tokenId).send({
           gasPrice: gasPrice,
           gas: Number.parseInt(gas, 10) + 50000,
           from: data.account,
         });
+
         if (res.status) {
           data.step = 0;
           proxy.$toast("重生成功", store.state.toast_success);
@@ -253,6 +270,7 @@ export default {
             name: "minting",
             query: {
               tokenId: data.curSelectedHero.tokenId,
+              fromReborn: 1,
             },
           });
         }
@@ -344,11 +362,11 @@ export default {
   cursor: pointer;
   max-width: 80%;
 }
-.lottit_badge{
+.lottit_badge {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 .pack_inject_box {
   position: fixed;
@@ -380,10 +398,16 @@ export default {
 }
 .cur_selected_cost {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 101;
   color: rgba(255, 255, 255, 0.7);
+  .btn {
+    margin-top: 1rem;
+  }
 }
 </style>

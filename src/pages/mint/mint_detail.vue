@@ -204,7 +204,9 @@ export default {
             "0x0000000000000000000000000000000000000000"
           )
           .estimateGas({ from: data.account });
-        data.minting = true;
+        setTimeout(() => {
+          data.minting = true;
+        }, 3000);
         const res = await c.methods
           .buy(
             data.info.key,

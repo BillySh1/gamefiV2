@@ -24,6 +24,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .btn_box {
+  &:hover{
+    opacity: .8;
+  }
   cursor: pointer;
   position: relative;
   width: fit-content;

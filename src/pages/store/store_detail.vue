@@ -2,6 +2,11 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack v-if="!loading" />
+    <img
+      class="badge"
+      src="../../assets/mint/mint_detail_bg_badge.png"
+      alt=""
+    />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="content">
       <div class="left_c">
@@ -17,6 +22,7 @@
         </div>
       </div>
       <div class="right_c">
+        <img class="blood" src="../../assets/mint/blood.png" alt="" />
         <div class="right_c_title">
           <div class="right_c_title_value">
             {{ info.name }}
@@ -243,6 +249,14 @@ export default {
   width: 100%;
   height: 100%;
   background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
+   .badge {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+  }
 }
 .content {
   height: 100%;
@@ -286,6 +300,14 @@ export default {
   animation: spin 60s infinite linear;
 }
 .right_c {
+  position: relative;
+  .blood {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15rem;
+    transform: translate(50%, -50%);
+  }
   width: 40%;
 }
 .right_c_title {
