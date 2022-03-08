@@ -10,7 +10,7 @@
           <div class="power_value">战力 {{ power }}</div>
         </div>
         <div class="title_box">
-          <img src="../assets/index/title_bg.svg" alt="" />
+          <img src="../assets/index/title_bg.png" alt="" />
           <div class="title_value">内测玩家</div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
   }
 }
 .info_box {
-  height: 6rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -68,8 +68,7 @@ export default {
   text-align: center;
   z-index: 1;
   width: auto;
-  height: 3rem;
-  margin-bottom: 0.5rem;
+  height: 55%;
   img {
     height: 100%;
   }
@@ -83,8 +82,9 @@ export default {
   }
 }
 .title_box {
+  cursor: pointer;
   position: relative;
-  height: 2.5rem;
+  height: 30%;
   img {
     height: 100%;
   }

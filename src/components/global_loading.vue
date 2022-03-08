@@ -1,9 +1,14 @@
 <template>
   <div class="progress">
+    <img class="badge"  src="../assets/common/hero_sit.png" alt="">
     <img class="logo" src="../assets/common/logo.png" alt="" />
     <div class="text">
       {{ "资源加载中,当前进度: " + Math.floor(preload.progress * 100) + "%" }}
     </div>
+    <div class="version" >
+      版本号 {{version}}
+    </div>
+
   </div>
 </template>
 
@@ -17,6 +22,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
+      version: '1.0.0'
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
@@ -55,6 +61,13 @@ export default {
   background: black;
   width: 100%;
   height: 100%;
+   .badge{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+  }
 
   .logo {
     position: absolute;
@@ -75,6 +88,15 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .version{
+    position: absolute;
+    right: 0%;
+    bottom: 5%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, .5);
+
   }
 }
 </style>

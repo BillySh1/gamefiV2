@@ -135,7 +135,7 @@ export default {
 }
 .float_right_box {
   position: absolute;
-  right: 0rem;
+  right: 1rem;
   top: 6rem;
   display: flex;
   flex-direction: column;
@@ -167,7 +167,7 @@ export default {
       font-size: 2.5rem;
       font-weight: 400;
       letter-spacing: 0.5rem;
-      text-shadow: 2px 2px #000;
+      text-shadow: 1px 1px 4px #000
     }
   }
 }
@@ -225,7 +225,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-shadow: 2px 2px #000
+      text-shadow: 1px 1px 4px #000
     }
   }
 }

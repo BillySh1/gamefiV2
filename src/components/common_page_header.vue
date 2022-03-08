@@ -198,7 +198,7 @@ export default {
   justify-content: space-around;
 }
 .wallet_box {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 .page_title {
   width: fit-content;
@@ -244,6 +244,7 @@ export default {
 }
 .icon_box {
   place-self: flex-end;
+  margin-right: 1rem;
 }
 .icon {
   cursor: pointer;

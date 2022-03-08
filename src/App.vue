@@ -7,6 +7,7 @@
     class="mask black"
     v-if="(!connected || !correctChainId) && !loading"
   >
+  <img class="badge" src="./assets/common/hero_sit.png" alt="">
     <img class="logo" src="./assets/common/logo.png" alt="" />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
@@ -125,6 +126,13 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 4rem;
+  .badge{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+  }
   .logo {
     position: absolute;
     width: 80rem;
