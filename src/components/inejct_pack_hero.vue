@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFilter" class="mask" @click="showFilter = false" >
+  <div v-if="showFilter" class="mask" @click="showFilter = false">
     <InjectGoBack :custom="true" @back="() => (showFilter = false)" />
     <div class="box">
       <div
@@ -23,10 +23,12 @@
             class="item"
             v-for="(i, idx) in item.items"
             :key="i.key"
-            @click="(e) => {
-              e.stopPropagation()
-              triggerFilter(index, idx)
-            }"
+            @click="
+              (e) => {
+                e.stopPropagation();
+                triggerFilter(index, idx);
+              }
+            "
           >
             <img v-if="item.key != 'preference'" :src="i.img" alt="" />
             <div v-else class="text">{{ i.name }}</div>
@@ -129,8 +131,6 @@
           </div>
         </div>
       </div>
-
-      <img style="width: 100%" src="../assets/pack/bottom_border.svg" />
     </div>
   </div>
 </template>
@@ -431,7 +431,7 @@ export default {
         font-size: 1.5rem;
       }
     }
-    .search_box{
+    .search_box {
       cursor: pointer;
       transform: translateX(-5rem);
     }

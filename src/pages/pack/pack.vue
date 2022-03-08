@@ -29,7 +29,6 @@
       </div>
       <div class="bg_badge">
         <img class="badge" src="../../assets/pack/bg_badge.svg" alt="" />
-        <img class="badge top" src="../../assets/pack/line.svg" alt="" />
       </div>
     </div>
 
@@ -124,7 +123,7 @@ export default {
 }
 .bg_badge {
   position: absolute;
-  bottom: 10%;
+  bottom: 15%;
   width: 100%;
   .badge {
     width: 100%;
