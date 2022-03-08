@@ -10,7 +10,6 @@
 <script >
 import { reactive, toRefs, onBeforeMount } from "vue";
 const createjs = window.createjs;
-
 export default {
   name: "global_loading",
   setup(prop, ctx) {
@@ -18,9 +17,29 @@ export default {
       manifest: [
         require("../assets/all_stars/entry/bg.png"),
         require("../assets/all_stars/entry/btn_bg.png"),
-        require('../assets/index/chainIcon/bsc.svg'),
-        require('../assets/store/item/type_0_0.png'),
-        require('../../public/fonts/FZYanZQKSJF.ttf'),        
+        require("../assets/index/chainIcon/bsc.svg"),
+        require("../../public/fonts/FZYanZQKSJF.ttf"),
+        require("../assets/store/item/jinjie.png"),
+        require("../assets/store/item/type_0_0.png"),
+        require("../assets/store/item/lingyu.png"),
+        require("../assets/store/item/shengji.png"),
+        require("../assets/store/item/text_bg.svg"),
+        require("../assets/store/item/type_0_1.png"),
+        require("../assets/store/item/type_0_1.png"),
+        require("../assets/store/item/type_1_0.png"),
+        require("../assets/store/item/type_2_0.png"),
+        require("../assets/store/item/type_2_1.png"),
+        require("../assets/store/item/type_2_2.png"),
+        require("../assets/store/item/up_0.png"),
+        require("../assets/store/item/up_1.png"),
+        require("../assets/store/item/up_2.png"),
+        require("../assets/store/item/up_3.png"),
+        require("../assets/store/item/up_4.png"),
+        require("../assets/store/item/yuruyi.png"),
+        require("../assets/store/store_bg.png"),
+        require("../assets/store/type0.png"),
+        require("../assets/store/type1.png"),
+        require("../assets/store/type2.png"),
       ],
       createjs: null,
       preload: "",
