@@ -364,6 +364,20 @@ export default {
         .call();
     };
     const handleSelect = async (item) => {
+      if (data.origin == 0 && data.leftInfo && !data.rightInfo) {
+        data.leftInfo = item;
+        data.curRarity = item.rarity;
+        data.curCamp = item.camp;
+        data.showPack = false;
+        return;
+      }
+      if (data.origin == 1 && data.rightInfo && !data.leftInfo) {
+        data.rightInfo = item;
+        data.curRarity = item.rarity;
+        data.curCamp = item.camp;
+        data.showPack = false;
+        return;
+      }
       if (data.curRarity && data.curRarity != item.rarity) {
         proxy.$toast("请选择稀有度相同的英雄", store.state.toast_error);
         return;

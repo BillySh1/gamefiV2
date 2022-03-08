@@ -53,7 +53,7 @@
               <div class="left">
                 <img src="../../assets/pack/detail_stock_box.png" alt="" />
                 <img
-                  v-if="curItemShow"
+                  v-if="curItemShow && curItemShow.img"
                   class="content"
                   :src="curItemShow.img"
                   alt=""
@@ -66,18 +66,33 @@
             <div class="bottom" v-if="curItemShow">
               {{ curItemShow.intro }} <br /><br />
               需要消耗{{ curItemShow.name }}数量: {{ costNum }}
-
-              <CommonButton
-                :disabled="Number(curItemShow.num) < costNum"
-                class="btn"
-                @click="$emit('select', {
-                  ...curItemShow,
-                  cost: costNum
-
-                })"
-              >
-                确认添加
-              </CommonButton>
+              <div class="flex">
+                <CommonButton
+                  :disabled="Number(curItemShow.num) < costNum"
+                  class="btn"
+                  @click="
+                    $emit('select', {
+                      ...curItemShow,
+                      cost: costNum,
+                    })
+                  "
+                >
+                  确认添加
+                </CommonButton>
+                <CommonButton
+                  class="btn"
+                  @click="
+                    $router.push({
+                      name: 'storeDetail',
+                      query: {
+                        info: curItemShow.tokenId,
+                      },
+                    })
+                  "
+                >
+                  前往商店
+                </CommonButton>
+              </div>
             </div>
           </div>
         </div>
@@ -118,11 +133,13 @@ export default {
         await getGoodsPack();
         if (v == 0) {
           data.curPackData = getCurpackByQuality();
+          data.curItemIndex = 0;
+          data.curItemShow = data.curPackData[0];
         } else if (v == 1) {
           data.curPackData = data.curPackData.slice(3, 4);
+          data.curItemIndex = 0;
+          data.curItemShow = data.curPackData[0];
         }
-        data.curItemIndex = 0;
-        data.curItemShow = data.curPackData[0];
       }
     );
     const costNum = computed(() => {
@@ -351,8 +368,15 @@ export default {
             font-size: 1.5rem;
             width: 100%;
             height: 50%;
-            .btn {
+
+            .flex {
               margin-top: 2rem;
+
+              display: flex;
+              align-items: center;
+              .btn {
+                margin-right: 2rem;
+              }
             }
           }
         }

@@ -6,12 +6,7 @@
       <InjectUser :power="power" />
       <div class="float_right_box">
         <div class="flex">
-          <div class="float_item" @click="jump('invite')">
-            <InjectIcon
-              :src="require('../../assets/index/invite.png')"
-              text="邀请"
-            />
-          </div>
+         
           <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
               :src="require('../../assets/index/airdrop.png')"
@@ -21,10 +16,16 @@
         </div>
 
         <div class="float_item" @click="jump('title')">
-          <InjectIcon
+          <!-- <InjectIcon
             :src="require('../../assets/index/title.png')"
             text="称号"
-          />
+          /> -->
+           <div class="float_item" @click="jump('invite')">
+            <InjectIcon
+              :src="require('../../assets/index/invite.png')"
+              text="邀请"
+            />
+          </div>
         </div>
       </div>
       <div class="float_left_box">
