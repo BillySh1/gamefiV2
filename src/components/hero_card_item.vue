@@ -2,9 +2,25 @@
   <div class="hero_card_box">
     <div class="border">
       <img class="border_img" :src="borderImg" />
-
-      <div class="name" :style="$route.path == '/heroDetail' ? 'left:9%;font-size:1.5rem' : ''">
-        {{ info.name }}
+      <div
+        class="name"
+        :style="$route.path == '/heroDetail' ? 'font-size:1.5rem' : ''"
+      >
+        <span
+          :style="
+            [0, 1, 2].includes(Number(info.rarity))
+              ? 'color: #E8C8C8'
+              : 'color: inherit'
+          "
+          >{{ info.name }}</span
+        >
+      </div>
+      <div
+        v-if="info.native == 1"
+        class="mix"
+        :style="$route.path == '/heroDetail' ? 'width:1.5rem' : ''"
+      >
+        <img src="../assets/cardImgs/mix.png" alt="" />
       </div>
       <div class="quality">
         <img :src="qualityImg" alt="" />
@@ -158,15 +174,28 @@ export default {
   .name {
     @media screen and (max-height: 400px) {
       left: 7%;
+      letter-spacing: 1px;
+      font-size: 1vmin;
     }
     position: absolute;
     top: 30%;
     left: 8.5%;
     transform: translate(0, -50%);
     z-index: 30;
-    font-size: 1rem;
-    max-width: 1rem;
-    color: white;
+    color: #300000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    writing-mode: vertical-lr;
+    letter-spacing: 2px;
+  }
+  .mix {
+    position: absolute;
+    top: 40%;
+    left: 9%;
+    z-index: 30;
+    width: 1.1rem;
+    img {
+      width: 100%;
+    }
   }
   .lv_t {
     font-size: 1rem;
