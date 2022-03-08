@@ -109,10 +109,10 @@ export default {
   z-index: 100;
   .item {
     &:hover {
-      opacity: 1;
+      opacity: 0.8;
     }
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 1;
     img {
       width: 18rem;
     }

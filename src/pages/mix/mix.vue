@@ -492,8 +492,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .info {
-    }
+    // .info {
+    // }
     .extra {
       margin-top: 2rem;
       display: flex;
