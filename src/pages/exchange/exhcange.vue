@@ -54,7 +54,7 @@
 
         <div class="action_button">
           <div class="badge">请在上方输入您需要置换的USDT</div>
-          <CommonButton style="font-size: 2rem; width: 20rem" @click="btnClick">
+          <CommonButton class="btn" @click="btnClick">
             {{ btnText }}
           </CommonButton>
         </div>
@@ -314,6 +314,11 @@ export default {
         font-size: 1.2rem;
         color: rgba(255, 255, 255, 0.6);
         margin-bottom: 0.5rem;
+      }
+      .btn{
+        margin-top: 2rem;
+        font-size: 2rem;
+        width: 20rem;
       }
     }
   }

@@ -173,7 +173,7 @@ export default {
       font-size: 2.5rem;
       font-weight: 400;
       letter-spacing: 0.5rem;
-      text-shadow: 1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      text-shadow: 2px 2px #000;
     }
   }
 }
@@ -231,7 +231,7 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-shadow: 1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      text-shadow: 2px 2px #000
     }
   }
 }

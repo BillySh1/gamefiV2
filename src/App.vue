@@ -1,19 +1,17 @@
 <template>
   <router-view
-    v-if="correctChainId && connected && !loading && (isMobile ? tp : true)"
+    v-if="correctChainId && connected && !loading "
   ></router-view>
   <GlobalLoading v-if="loading" @finish="() => (loading = false)" />
   <div
     class="mask black"
-    v-if="(!connected || !correctChainId || (isMobile && !tp)) && !loading"
+    v-if="(!connected || !correctChainId) && !loading"
   >
     <img class="logo" src="./assets/common/logo.png" alt="" />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
       <div v-show="!correctChainId">请切换至正确的网络</div>
-      <div v-show="!tp && isMobile">
-        请先下载TokenPocket进入
-      </div>
+      
       <div class="btn" v-show="!connected || !correctChainId">
         <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
         <div v-if="!connected" class="inner" @click="connect">连接钱包</div>
@@ -45,7 +43,6 @@ export default {
       account: "",
       Web3: "",
       loading: true,
-      tp: "",
     };
   },
   computed: {
@@ -110,8 +107,6 @@ export default {
     },
   },
   async mounted() {
-    const tp = require('tp-js-sdk');
-    this.tp = tp.isConnected()
     await this.init();
     this.watchChain();
     this.judge();
