@@ -81,7 +81,16 @@
     <div v-if="!showPack && !loading" class="content">
       <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />
       <div class="inner">
-        <div class="mix_item">
+        <div
+          class="mix_item"
+          @click="
+            () => {
+              origin = 0;
+              packType = 2;
+              showPack = true;
+            }
+          "
+        >
           <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="leftInfo">
             <HeroCardItem :info="leftInfo" />
@@ -92,24 +101,21 @@
             src="../../assets/mix/ready.png"
             alt=""
           />
-          <div
-            v-else
-            @click="
-              () => {
-                origin = 0;
-                packType = 2;
-                showPack = true;
-              }
-            "
-            class="no_selected"
-          >
-            请选择卡牌
-          </div>
+          <div v-else class="no_selected">请选择卡牌</div>
         </div>
         <div class="mix_swirl">
           <img src="../../assets/mix/swirl.png" alt="" />
         </div>
-        <div class="mix_item right">
+        <div
+          class="mix_item right"
+          @click="
+            () => {
+              origin = 1;
+              packType = 2;
+              showPack = true;
+            }
+          "
+        >
           <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="rightInfo">
             <HeroCardItem v-if="rightInfo" :info="rightInfo" />
@@ -120,19 +126,7 @@
             src="../../assets/mix/ready.png"
             alt=""
           />
-          <div
-            v-else
-            @click="
-              () => {
-                origin = 1;
-                packType = 2;
-                showPack = true;
-              }
-            "
-            class="no_selected"
-          >
-            请选择卡牌
-          </div>
+          <div v-else class="no_selected">请选择卡牌</div>
         </div>
       </div>
       <div class="tip_badge" @click="() => (showModal = true)">

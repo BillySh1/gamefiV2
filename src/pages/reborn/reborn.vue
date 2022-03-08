@@ -10,7 +10,6 @@
       <Lottie
         class="lottie"
         v-show="(step == 0 || step == 1) && !showPack"
-        @animCreated="handleAni0"
         :options="step0Options"
         @click="handleClickReborn"
       />
@@ -40,7 +39,7 @@
           @select="(i) => handleSelectHero(i)"
         />
       </div>
-      <div v-if="curSelectedHero && !processing" class="cur_selected_item">
+      <div v-if="curSelectedHero && !processing" class="cur_selected_item" @click="handleClickReborn" >
         <HeroCardItem :info="curSelectedHero" />
       </div>
 
@@ -138,9 +137,7 @@ export default {
     const btnText = computed(() => {
       return ["授权英雄", "授权两仪石", "确认重生"][data.btnStatus];
     });
-    const handleAni0 = (ani) => {
-      data.ani0 = ani;
-    };
+
     const handleAni1 = (ani) => {
       data.ani1 = ani;
     };
@@ -310,13 +307,9 @@ export default {
       }
     };
     const handleClickReborn = () => {
-      if (data.step == 0 && !data.isOpen) {
-        data.ani0.play();
-        data.isOpen = true;
-      } else if (data.step == 0 && data.isOpen) {
-        data.step = 1;
-        data.showPack = true;
-      }
+      data.step =1;
+      data.showPack = true;
+      data.curSelectedHero = undefined
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -333,7 +326,6 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
-      handleAni0,
       handleAni1,
       handleClickReborn,
       handleSelectHero,
@@ -377,6 +369,7 @@ export default {
   z-index: 100;
 }
 .cur_selected_item {
+  cursor: pointer;
   position: fixed;
   width: 15rem;
   top: 50%;
