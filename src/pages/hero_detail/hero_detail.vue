@@ -63,12 +63,17 @@
                   v-for="(item, index) in heroAttrDetailMap"
                   :key="index"
                 >
+                  <img
+                    :src="require(`../../assets/pack/p_${index}.png`)"
+                    alt=""
+                  />
                   <div class="title">{{ item.title }}</div>
                   <div class="value" style="color: #ffffff">
                     {{ item.value }}
                   </div>
                 </div>
               </div>
+              <img class="divider" src="../../assets/pack/divider.png" alt="" />
               <div class="attr_map">
                 <img src="../../assets/pack/radar.png" alt="" />
               </div>
@@ -364,25 +369,36 @@ export default {
             align-items: center;
             justify-content: space-between;
             .attributes_detail {
-              width: 20%;
-              height: 100%;
+              min-width: 35%;
+              height: 90%;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: space-between;
               .detail_item {
+                padding: 0.5rem 1rem;
+                border-radius: 0 1rem 0 0;
+                background: #4e2e1c;
+                img {
+                  width: 1.5rem;
+                  margin-right: 1rem;
+                }
                 width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
               }
             }
+            .divider {
+              height: 90%;
+              margin-left: 3rem;
+            }
             .attr_map {
               width: 60%;
               height: 80%;
               display: flex;
               align-items: center;
-              justify-content: center;
+              justify-content: flex-end;
               img {
                 height: 100%;
               }

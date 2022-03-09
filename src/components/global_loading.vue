@@ -1,5 +1,6 @@
 <template>
   <div class="progress">
+    <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
     <img class="badge" src="../assets/common/hero_sit.png" alt="" />
     <img class="logo" src="../assets/common/logo.png" alt="" />
     <div class="text">
@@ -10,10 +11,14 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import InjectGoBack from "../components/inject_go_back.vue";
 const createjs = window.createjs;
 export default {
   name: "global_loading",
+  components: {
+    InjectGoBack,
+  },
   setup(prop, ctx) {
     const data = reactive({
       manifest: [],
@@ -26,7 +31,16 @@ export default {
       readFiles();
       startPreload();
     });
-
+    const isMobile = computed(() => {
+      if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+        return true;
+      }
+      return false;
+    });
+    const close = () => {
+      const tp = require("tp-js-sdk");
+      tp.close();
+    };
     const loadComplete = () => {
       ctx.emit("finish");
     };
@@ -51,6 +65,8 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      isMobile,
+      close,
     };
   },
 };
