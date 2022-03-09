@@ -121,8 +121,6 @@ export default {
         } else if (v == 2) {
           data.curPackData = data.goodsItems;
         }
-        data.curItemIndex = 0;
-        data.curItemShow = data.curPackData[0]
       },
       {
         immediate: true,

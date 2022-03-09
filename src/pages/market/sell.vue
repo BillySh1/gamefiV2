@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <div v-if="minting || loading" class="content">
       <Lottie v-if="minting" :options="lottie_minting_options" />
       <Lottie
@@ -94,6 +95,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
+import InjectGoBack from '../../components/inject_go_back.vue'
 
 export default {
   name: "sell",
@@ -101,6 +103,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     HeroCardItem,
+    InjectGoBack
   },
   setup() {
     const route = useRoute();
@@ -110,7 +113,7 @@ export default {
     const data = reactive({
       info: "",
       price: 1000,
-      pageTitle: "招贤纳士",
+      pageTitle: "出售卡牌",
       web3: "",
       account: "",
       btnStatus: 0,
@@ -335,7 +338,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
   outline: none;
   background: transparent;
   border: none;

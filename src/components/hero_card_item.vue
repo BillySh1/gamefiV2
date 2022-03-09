@@ -4,7 +4,11 @@
       <img class="border_img" :src="borderImg" />
       <div
         class="name"
-        :style="$route.path == '/heroDetail' ? 'font-size:1.5rem' : ''"
+        :style="
+          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path)
+            ? 'font-size:1.5rem'
+            : ''
+        "
       >
         <span
           :style="
@@ -18,7 +22,11 @@
       <div
         v-if="info.native == 1"
         class="mix"
-        :style="$route.path == '/heroDetail' ? 'width:1.5rem' : ''"
+        :style="
+          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path)
+            ? 'width:1.5rem'
+            : ''
+        "
       >
         <img src="../assets/cardImgs/mix.png" alt="" />
       </div>
