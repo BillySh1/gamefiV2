@@ -14,18 +14,14 @@
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
       <div v-show="!correctChainId">请切换至正确的网络</div>
 
-      <div class="btn" v-show="!connected || !correctChainId">
+      <div class="btn" v-show="!connected">
         <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
-        <div v-if="!connected" class="inner" @click="() => (modalShow = true)">
-          连接钱包
-        </div>
-        <div
-          v-if="isMobile && !correctChainId"
-          class="inner"
-          @click="switchNetWork"
-        >
-          切换网络
-        </div>
+        <div class="inner" @click="() => (modalShow = true)">连接钱包</div>
+      </div>
+      <div class="btn" v-show="isMobile && !correctChainId">
+        <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
+
+        <div class="inner" @click="switchNetWork">切换网络</div>
       </div>
     </div>
   </div>
