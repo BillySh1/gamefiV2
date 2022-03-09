@@ -22,6 +22,11 @@
           style="color: yellow"
           >玉如意</span
         >, 数量: {{ remainNum }}
+        <span
+          v-if="Number(remainNum) < Number(updateInfo.breakGemUse)"
+          style="margin-left: 1rem"
+          >数量不足</span
+        >
       </div>
       <img class="divider" src="../../assets/upgrade/divider.png" />
     </div>
@@ -34,7 +39,14 @@
       <div class="power_value">
         {{ updateInfo.power / 100 }}
       </div>
-      <div :class="Number(updateInfo.breakGemUse) > Number(remainNum)?'action_btn disable': 'action_btn' " @click="handleBtnClick">
+      <div
+        :class="
+          Number(updateInfo.breakGemUse) > Number(remainNum)
+            ? 'action_btn disable'
+            : 'action_btn'
+        "
+        @click="handleBtnClick"
+      >
         <img src="../../assets/upgrade/action_bg_round.png" alt="" />
         <div class="inner">{{ btnText }}</div>
       </div>
@@ -297,7 +309,7 @@ export default {
     .power_value {
       color: red;
     }
-    .disable{
+    .disable {
       pointer-events: none;
       filter: grayscale(100);
     }

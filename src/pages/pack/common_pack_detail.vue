@@ -121,6 +121,11 @@ export default {
         } else if (v == 2) {
           data.curPackData = data.goodsItems;
         }
+        data.curItemShow = "";
+        data.curItemIndex = 0;
+        if (data.curPackData.length) {
+          data.curItemShow = data.curPackData[0];
+        }
       },
       {
         immediate: true,
@@ -228,6 +233,10 @@ export default {
             font-weight: 600;
             font-size: 1.2rem;
             color: #272727;
+          }
+          .active {
+            transform: scale(1.2);
+            font-size: 1.5rem;
           }
           .active_text {
             color: white;

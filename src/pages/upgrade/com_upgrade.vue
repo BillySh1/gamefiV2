@@ -16,6 +16,17 @@
         <strong>{{ costName }}</strong> 升级
         <img :src="costImg" alt="" />
       </div>
+      <div class="sub_info">
+        当前拥有 <img :src="costImg" alt="" /><span style="color: yellow">{{
+          costName
+        }}</span
+        >, 数量: {{ remainNum }}
+        <span
+          v-if="Number(remainNum) < Number(updateInfo.bookUse)"
+          style="margin-left: 1rem"
+          >数量不足</span
+        >
+      </div>
       <img class="divider" src="../../assets/upgrade/divider.png" />
     </div>
     <div class="property_box" v-if="updateInfo.canLevelup">
@@ -387,6 +398,15 @@ export default {
       .num {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 2.5rem;
+      }
+    }
+    .sub_info {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.6);
+      img {
+        height: 2rem;
       }
     }
     .divider {

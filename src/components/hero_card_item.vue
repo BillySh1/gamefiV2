@@ -5,7 +5,9 @@
       <div
         class="name"
         :style="
-          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path)
+          ['/heroDetail', '/orderDetail', '/sell', '/upgrade'].includes(
+            $route.path
+          )
             ? 'font-size:1.5rem'
             : ''
         "
@@ -23,7 +25,9 @@
         v-if="info.native == 1"
         class="mix"
         :style="
-          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path)
+          ['/heroDetail', '/orderDetail', '/sell', '/upgrade'].includes(
+            $route.path
+          )
             ? 'width:1.5rem'
             : ''
         "

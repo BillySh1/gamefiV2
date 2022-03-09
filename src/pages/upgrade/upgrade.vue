@@ -8,7 +8,14 @@
     />
     <div v-if="!loading" class="content">
       <div class="stock_item_box">
-        <div v-for="item in stockBox" :key="item.tokenId" class="stock_item">
+        <div v-for="item in stockBox" :key="item.tokenId" class="stock_item" @click="()=>{
+            $router.push({
+              name:'storeDetail',
+              query:{
+                info: item.tokenId
+              }
+            })
+          }" >
           <img :src="item.img" />
           <div class="text">
             {{ item.name }} <br />
@@ -20,7 +27,12 @@
         <HeroCardItem :info="info" />
       </div>
       <div class="operate_box">
-        <ComUpgrade v-if="curTab == 0" :info="info" :stockBox="stockBox" @refresh="refresh" />
+        <ComUpgrade
+          v-if="curTab == 0"
+          :info="info"
+          :stockBox="stockBox"
+          @refresh="refresh"
+        />
         <ComOverfulfil v-if="curTab == 1" :info="info" @refresh="refresh" />
         <ComSkill v-if="curTab == 2" />
         <img class="divider" src="../../assets/upgrade/divider_tab.png" />
@@ -103,7 +115,8 @@ export default {
       stockBox: [],
       costNum: "",
       curTab: 0,
-      tabMap: ["升级", "突破", "技能"],
+      // tabMap: ["升级", "突破", "技能"],
+      tabMap: ["升级", "突破"],
     });
     const getWeb3 = async () => {
       await initWeb3.Init(
@@ -122,10 +135,10 @@ export default {
       const uid =
         res.camp.toString() + res.rarity.toString() + res.heroId.toString();
       data.info = { ...res, ...useHeroDetail(uid, res.preference), uid: uid };
-      data.info.power = Number(data.info.power) / 100
+      data.info.power = Number(data.info.power) / 100;
     };
     const getStockBox = async () => {
-      data.stockBox = []
+      data.stockBox = [];
       const c = store.state.c_richShop;
       const map = [0, 1, 2, 3, 7];
       for (let i = 0; i < map.length; i++) {
@@ -137,12 +150,12 @@ export default {
         });
       }
     };
-    const refresh = async()=>{
+    const refresh = async () => {
       data.loading = true;
       await getHeroInfo();
       await getStockBox();
       data.loading = false;
-    }
+    };
     onBeforeMount(async () => {
       data.loading = true;
       await getWeb3();
@@ -154,7 +167,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
-      refresh
+      refresh,
     };
   },
 };
@@ -171,7 +184,7 @@ export default {
     left: 0;
     width: 10rem;
     z-index: 50;
-     white-space: nowrap;
+    white-space: nowrap;
     .inner {
       position: relative;
       img {
@@ -215,6 +228,7 @@ export default {
     flex-direction: column;
     align-items: center;
     .stock_item {
+      cursor: pointer;
       display: flex;
       align-items: center;
       img {
