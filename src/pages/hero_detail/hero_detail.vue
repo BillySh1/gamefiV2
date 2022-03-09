@@ -28,6 +28,7 @@
                 <span>职业: {{ preferenceText }}</span>
                 <span>阵营: {{ campText }}</span>
                 <span>品质: {{ qualityText }}</span>
+                <span>稀有度: {{ rarityText }}</span>
                 <span>等级: {{ info.level }} 级</span>
                 <span>星级: {{ info.star }} 星</span>
               </div>
@@ -133,6 +134,7 @@ import {
   usePreferenceText,
   useCampText,
   usePropertyName,
+  useRarityName,
 } from "../../utils/useHeroInfo";
 export default {
   name: "hero_detail",
@@ -146,6 +148,9 @@ export default {
     const route = useRoute();
     const store = useStore();
 
+    const rarityText = computed(()=>{
+      return useRarityName(data.info.rarity)
+    })
     const qualityText = computed(() => {
       return useQualityText(data.info.quality);
     });
@@ -218,6 +223,7 @@ export default {
       campText,
       preferenceText,
       heroAttrDetailMap,
+      rarityText
     };
   },
 };

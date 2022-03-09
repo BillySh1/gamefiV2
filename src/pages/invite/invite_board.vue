@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <div class="content">
       <div class="border">
         <img src="../../assets/notice/border.svg" alt="" />
@@ -19,12 +20,14 @@ import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonButton from "../../components/common_button";
+import InjectGoBack from '../../components/inject_go_back.vue'
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     CommonButton,
+    InjectGoBack
   },
   setup() {
     const data = reactive({

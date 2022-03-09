@@ -6,6 +6,7 @@
       @close="() => (showModal = false)"
     />
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack  />
     <div class="content">
       <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
       <div class="invite_box">
@@ -64,6 +65,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InviteModal from "./invite_modal.vue";
 import initWeb3 from "../../utils/initWeb3";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import { useStore } from "vuex";
 export default {
   name: "store",
@@ -71,6 +73,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     InviteModal,
+    InjectGoBack
   },
   setup() {
     const { proxy } = getCurrentInstance();

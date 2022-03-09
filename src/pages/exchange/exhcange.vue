@@ -277,6 +277,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      place-self: flex-end;
       transform: translateX(3rem);
       .xs {
         width: 100%;
@@ -314,6 +315,7 @@ export default {
       }
     }
     .action_button {
+      place-self: center;
       cursor: pointer;
       .badge {
         text-align: center;
