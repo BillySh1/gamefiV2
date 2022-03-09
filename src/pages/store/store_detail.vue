@@ -322,7 +322,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .right_c_title_badge {
   max-width: 200%;

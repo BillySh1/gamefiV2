@@ -91,7 +91,7 @@ export default {
     animation: spin 3s ease-in-out infinite;
   }
   .item {
-    width: 20rem;
+    width: 15rem;
     position: absolute;
     top: 50%;
     left: 50%;
