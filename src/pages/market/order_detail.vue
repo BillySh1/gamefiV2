@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <div v-if="minting || loading" class="content">
       <Lottie v-if="minting" :options="lottie_minting_options" />
       <Lottie
@@ -62,6 +63,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
+import InjectGoBack from "../../components/inject_go_back.vue";
 
 export default {
   name: "order_detail",
@@ -69,6 +71,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     HeroCardItem,
+    InjectGoBack,
   },
   setup() {
     const route = useRoute();
@@ -83,6 +86,7 @@ export default {
       account: "",
       btnStatus: 0,
       rawData: [],
+      beforePack: [],
       minting: false,
       loading: false,
       lottie_options: {
@@ -148,7 +152,7 @@ export default {
         if (res.status) {
           proxy.$toast("购买成功", store.state.toast_success);
           router.push({
-            name: "pack",
+            name: "minting",
           });
         }
       } catch (e) {
@@ -215,9 +219,35 @@ export default {
         }
       );
       await getCurInfo();
+      await getBeforePack();
       data.loading = false;
     });
-
+    const getBeforePack = async () => {
+      try {
+        const c = store.state.c_hero;
+        const res = await c.methods.cardList(data.account).call();
+        res.map((x) => {
+          data.beforePack.push({
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+          });
+        });
+        sessionStorage.setItem("before_pack", JSON.stringify(data.beforePack));
+      } catch (e) {
+        proxy.$toast("购买成功", store.state.toast_success);
+      }
+    };
     const refData = toRefs(data);
     return {
       ...refData,
