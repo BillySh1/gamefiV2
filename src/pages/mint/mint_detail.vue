@@ -361,7 +361,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .right_c_title_badge {
   max-width: 200%;
@@ -377,6 +377,9 @@ export default {
   font-family: zihun129;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
+  img{
+    width: 2rem;
+  }
 }
 .right_c_content {
   font-size: 1.5rem;

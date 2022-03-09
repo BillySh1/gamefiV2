@@ -160,16 +160,17 @@
 
     <InjectModal
       @close="() => (showModal = false)"
+      @confrim="() => (showModal = false)"
       :value="showModal"
       title="进阶提醒"
     >
-      <div>相同阵营， 相同稀有度的英雄才可以进阶</div>
-      <div>进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
-      <div>
+      <div class="modal_text">相同阵营， 相同稀有度的英雄才可以进阶</div>
+      <div class="modal_text">进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
+      <div class="modal_text">
         可选择使用宝石(例:
         神眷石)提升进阶后卡牌的高品质概率，消耗数量视稀有度而定
       </div>
-      <div>
+      <div class="modal_text">
         可选择使用金镶灵玉提升进阶后卡牌的初始属性，消耗数量视稀有度而定
       </div>
     </InjectModal>
@@ -320,9 +321,10 @@ export default {
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
         const isUseUpgradeGem = !!data.qualityCost.tokenId;
-        const gemId = [4, 5, 6].findIndex((i) => {
+        const temp = [4, 5, 6].findIndex((i) => {
           return i == data.qualityCost.tokenId;
         });
+        const gemId = temp == -1 ? 0 : temp;
         const isUseAddvancedGem = !!data.attrCost.tokenId;
         console.log(
           "params",
@@ -478,6 +480,10 @@ export default {
   height: 100%;
   background-size: 100%;
   background: black;
+  .modal_text {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+  }
   .disable {
     pointer-events: none;
     filter: grayscale(100);
