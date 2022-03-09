@@ -36,7 +36,7 @@
       </div>
 
       <div class="float_action_buttons">
-        <img class="up" src="../../assets/index/ac_bottom.png" alt="" />
+        <!-- <img class="up" src="../../assets/index/ac_bottom.png" alt="" /> -->
         <div class="actions_inner">
           <div class="left" @click="jump('allStarsEntry')">
             <img src="../../assets/index/ac_left.png" alt="" />
