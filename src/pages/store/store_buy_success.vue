@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <InjectGoBack />
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
       <img class="bg" src="../../assets/store/success_bg.png" alt="" />
@@ -20,11 +21,13 @@ import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import CommonPageFooter from "../../components/common_page_footer";
 import CommonPageHeader from "../../components/common_page_header";
 import { useGetShopDetailByTokenId } from "./use_shop_items.js";
+import InjectGoBack from "../../components/inject_go_back.vue";
 export default {
   name: "minging",
   components: {
     CommonPageFooter,
     CommonPageHeader,
+    InjectGoBack,
   },
   setup() {
     const route = useRoute();
@@ -92,6 +95,7 @@ export default {
   }
   .item {
     width: 15rem;
+    max-height: 15rem;
     position: absolute;
     top: 50%;
     left: 50%;
