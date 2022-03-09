@@ -8,7 +8,7 @@
       <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canMMC"
         >领取MMC</CommonButton
       >
-      <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canM3t"
+      <CommonButton class="btn" @click="() => getTestToken(0)" v-if="canM3t"
         >领取M3T</CommonButton
       >
     </div>

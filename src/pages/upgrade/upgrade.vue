@@ -186,7 +186,7 @@ export default {
   .tip_badge {
     cursor: pointer;
     position: fixed;
-    bottom: 15%;
+    bottom: 8%;
     left: 0;
     width: 10rem;
     z-index: 50;

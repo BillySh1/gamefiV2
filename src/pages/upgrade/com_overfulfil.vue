@@ -226,8 +226,10 @@ export default {
   .power_box {
     position: relative;
     width: 100%;
+    height: 6rem;
     img {
       width: 100%;
+      height: 100%;
     }
     .inner {
       position: absolute;
@@ -247,7 +249,7 @@ export default {
       }
       .pImg {
         img {
-          height: 3rem;
+          height: 2rem;
         }
       }
     }
