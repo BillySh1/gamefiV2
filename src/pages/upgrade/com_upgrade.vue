@@ -107,6 +107,7 @@
         :value="showOneKeyModal"
         :title="'一键升级'"
         :btnText="modalBtnText"
+        :btnDisable="btnDsiabled"
         @confirm="() => modalBtnClick(true)"
         @close="() => (showOneKeyModal = false)"
       >
@@ -165,6 +166,7 @@ export default {
       oneKeyInfo: "",
       stockBox: [],
       info: "",
+      btnDsiabled: false,
     });
     const store = useStore();
     const { proxy } = getCurrentInstance();
@@ -172,11 +174,13 @@ export default {
       return ["授权", "升级"][data.modalStatus];
     });
     const modalBtnClick = async (isOneKey) => {
+      data.btnDsiabled = true;
       if (data.modalStatus == 0) {
         await approve();
       } else if (data.modalStatus == 1) {
         await update(isOneKey);
       }
+      data.btnDsiabled = false
     };
     const approveStock = async () => {
       try {
@@ -354,8 +358,10 @@ export default {
   .power_box {
     position: relative;
     width: 100%;
+    height: 6rem;
     img {
       width: 100%;
+      height: 100%;
     }
     .inner {
       position: absolute;
@@ -375,7 +381,7 @@ export default {
       }
       .pImg {
         img {
-          height: 3rem;
+          height: 2rem;
         }
       }
     }

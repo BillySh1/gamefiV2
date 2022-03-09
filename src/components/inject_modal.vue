@@ -8,14 +8,22 @@
         }
       "
     >
-      <img class="close" src="../assets/common/close.svg" alt="" @click="$emit('close')" />
+      <img
+        class="close"
+        src="../assets/common/close.svg"
+        alt=""
+        @click="$emit('close')"
+      />
 
       <img class="bg" src="../assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>
       <div class="content">
         <slot></slot>
       </div>
-      <div class="confirm" @click="$emit('confirm')">
+      <div
+        :class="btnDisable ? 'confirm disbale' : 'confirm'"
+        @click="$emit('confirm')"
+      >
         <div class="confirm_inner">
           <img src="../assets/common/modal_confirm_bg.svg" alt="" />
           <div class="text">{{ btnText || "确认" }}</div>
@@ -29,7 +37,7 @@
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
   name: "inject_modal",
-  props: ["value", "title", "btnText"],
+  props: ["value", "title", "btnText", "btnDisable"],
   setup() {
     const data = reactive({});
     onBeforeMount(() => {});
@@ -98,6 +106,11 @@ export default {
         transform: translate(-50%, -50%);
       }
     }
+  }
+  .disbale {
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(100);
   }
   .content {
     position: absolute;

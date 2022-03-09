@@ -81,7 +81,7 @@ const useShopItems = () => [
     {
       tokenId: 7,
       img: require("../../assets/store/item/yuruyi.png"),
-      name: "玉如意",
+      name: "玉灵瓶",
       intro: "英雄突破的材料",
     },
   ],

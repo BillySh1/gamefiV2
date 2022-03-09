@@ -14,13 +14,13 @@
       <div class="info">
         需要消耗
         <div class="num">{{ updateInfo.breakGemUse }}</div>
-        <strong style="color: yellow">玉如意</strong> 突破
+        <strong style="color: yellow">金灵瓶</strong> 突破
         <img src="../../assets/store/item/yuruyi.png" alt="" />
       </div>
       <div class="sub_info">
         当前拥有 <img src="../../assets/store/item/yuruyi.png" alt="" /><span
           style="color: yellow"
-          >玉如意</span
+          >金灵瓶</span
         >, 数量: {{ remainNum }}
         <span
           v-if="Number(remainNum) < Number(updateInfo.breakGemUse)"
@@ -103,7 +103,7 @@ export default {
     };
     const approveStock = async () => {
       try {
-        proxy.$toast(`等待授权 玉如意`, store.state.toast_info);
+        proxy.$toast(`等待授权 金灵瓶`, store.state.toast_info);
         const c = store.state.c_richShop;
         const addr = store.state.c_training.options.address;
         const isApproved = await c.methods

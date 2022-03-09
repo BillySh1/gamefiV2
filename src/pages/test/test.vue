@@ -5,7 +5,7 @@
     <img class="logo" src="../../assets/common/logo.png" alt="" />
     <div v-if="!canMMC && !canM3t" class="text">您暂无领取资格或者已领取</div>
     <div v-else class="btnBox">
-      <CommonButton class="btn"  @click="() => getTestToken(1)" v-if="canMMC"
+      <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canMMC"
         >领取MMC</CommonButton
       >
       <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canM3t"
@@ -73,7 +73,7 @@ export default {
           .getTestToken()
           .estimateGas({ from: data.account });
         const res = await c.methods.getTestToken().send({
-          gas: gas,
+          gas: Number(gas) + 500000,
           gasPrice: gasPrice,
           from: data.account,
         });
@@ -129,8 +129,8 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.btnBox{
-     position: absolute;
+.btnBox {
+  position: absolute;
   font-size: 1.5rem;
   top: 60%;
   left: 50%;
@@ -138,9 +138,9 @@ export default {
   color: white;
   display: flex;
   align-items: center;
-  .btn{
-      margin-right: 2rem;
-      font-size: 1.5rem;
+  .btn {
+    margin-right: 2rem;
+    font-size: 1.5rem;
   }
 }
 </style>
