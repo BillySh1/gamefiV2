@@ -12,21 +12,19 @@
               text="空投"
             />
           </div>
-           <div class="float_item">
-          <!-- <InjectIcon
+          <div class="float_item">
+            <!-- <InjectIcon
             :src="require('../../assets/index/title.png')"
             text="称号"
           /> -->
-          <div class="float_item" @click="jump('invite')">
-            <InjectIcon
-              :src="require('../../assets/index/invite.png')"
-              text="邀请"
-            />
+            <div class="float_item" @click="jump('invite')">
+              <InjectIcon
+                :src="require('../../assets/index/invite.png')"
+                text="邀请"
+              />
+            </div>
           </div>
         </div>
-        </div>
-
-       
       </div>
       <div class="float_left_box">
         <div class="leader_board_box" @click="jump('leader')">
