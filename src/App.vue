@@ -1,21 +1,24 @@
 <template>
-  <router-view
-    v-if="correctChainId && connected && !loading "
-  ></router-view>
+  <router-view v-if="correctChainId && connected && !loading"></router-view>
+  <ConnectWalletModal
+    :value="modalShow"
+    :mobile="isMobile"
+    @connect="() => connect()"
+    @close="() => (modalShow = false)"
+  />
   <GlobalLoading v-if="loading" @finish="() => (loading = false)" />
-  <div
-    class="mask black"
-    v-if="(!connected || !correctChainId) && !loading"
-  >
-  <img class="badge" src="./assets/common/hero_sit.png" alt="">
+  <div class="mask black" v-if="(!connected || !correctChainId) && !loading">
+    <img class="badge" src="./assets/common/hero_sit.png" alt="" />
     <img class="logo" src="./assets/common/logo.png" alt="" />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
       <div v-show="!correctChainId">请切换至正确的网络</div>
-      
+
       <div class="btn" v-show="!connected || !correctChainId">
         <img src="./assets/all_stars/entry/btn_bg.png" alt="" />
-        <div v-if="!connected" class="inner" @click="connect">连接钱包</div>
+        <div v-if="!connected" class="inner" @click="() => (modalShow = true)">
+          连接钱包
+        </div>
         <div
           v-if="isMobile && !correctChainId"
           class="inner"
@@ -31,11 +34,13 @@
 <script>
 import initWeb3 from "./utils/initWeb3";
 import GlobalLoading from "./components/global_loading.vue";
+import ConnectWalletModal from "./components/connect_wallet_modal.vue";
 const acceptNetWorks = [97];
 export default {
   name: "app",
   components: {
     GlobalLoading,
+    ConnectWalletModal,
   },
   data() {
     return {
@@ -44,6 +49,7 @@ export default {
       account: "",
       Web3: "",
       loading: true,
+      modalShow: false,
     };
   },
   computed: {
@@ -58,7 +64,7 @@ export default {
     watchChain() {
       window.ethereum.on("chainChanged", async () => await this.judge());
     },
-    async connect() {
+    connect() {
       try {
         window.ethereum
           .request({ method: "eth_requestAccounts" })
@@ -126,12 +132,12 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  .badge{
+  .badge {
     position: absolute;
     top: 50%;
-    left:50%;
+    left: 50%;
     width: 100%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
   .logo {
     position: absolute;
@@ -156,7 +162,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    div{
+    div {
       margin-bottom: 1rem;
     }
     .btn {
