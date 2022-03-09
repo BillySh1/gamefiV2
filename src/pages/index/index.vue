@@ -120,7 +120,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/index/home_bg.png");
+  background: url("../../assets/index/home_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }

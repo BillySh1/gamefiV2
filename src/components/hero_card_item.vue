@@ -184,7 +184,7 @@ export default {
     z-index: 1;
   }
   .name {
-    @media screen and (max-height: 400px) {
+    @media screen and (max-height: 380px) {
       left: 7%;
       letter-spacing: 1px;
       font-size: 1vmin;

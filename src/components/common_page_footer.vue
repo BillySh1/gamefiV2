@@ -8,10 +8,18 @@
       <div class="text">主页</div>
     </div>
     <div
-      class="swap"
-      @click="$router.push({ name: 'swap' })"
-      :style="$route.name == 'home' ? 'margin-left:8rem' : ''"
+      class="back_to_home"
+      v-show="$route.name == 'home'"
+      @click="
+        () =>
+          $router.push({
+            name: 'testCoin',
+          })
+      "
     >
+      <div class="text">Faucet</div>
+    </div>
+    <div class="swap" @click="$router.push({ name: 'swap' })">
       <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
       <div class="text">Swap</div>
     </div>
@@ -203,17 +211,17 @@ export default {
 .call {
   position: relative;
   margin-right: 4rem;
+  width: 15rem;
   cursor: pointer;
   .img {
     position: absolute;
-    height: 16rem;
-    transform: translate(-100%, -90%);
+    width: 90%;
+    transform: translate(-50%, -90%);
   }
   .common_call {
     position: relative;
-    width: 10rem;
     img {
-      width: 100%;
+      width: 80%;
     }
     .text {
       width: 100%;

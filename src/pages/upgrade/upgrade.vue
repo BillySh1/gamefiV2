@@ -8,14 +8,21 @@
     />
     <div v-if="!loading" class="content">
       <div class="stock_item_box">
-        <div v-for="item in stockBox" :key="item.tokenId" class="stock_item" @click="()=>{
-            $router.push({
-              name:'storeDetail',
-              query:{
-                info: item.tokenId
-              }
-            })
-          }" >
+        <div
+          v-for="item in stockBox"
+          :key="item.tokenId"
+          class="stock_item"
+          @click="
+            () => {
+              $router.push({
+                name: 'storeDetail',
+                query: {
+                  info: item.tokenId,
+                },
+              });
+            }
+          "
+        >
           <img :src="item.img" />
           <div class="text">
             {{ item.name }} <br />
@@ -41,7 +48,7 @@
           <div
             v-for="(item, index) in tabMap"
             :key="index"
-            class="tab_item"
+            :class="item == '技能' ? 'tab_item disable' : 'tab_item'"
             :style="curTab == index ? 'opacity:1' : ''"
             @click="
               () => {
@@ -115,8 +122,7 @@ export default {
       stockBox: [],
       costNum: "",
       curTab: 0,
-      // tabMap: ["升级", "突破", "技能"],
-      tabMap: ["升级", "突破"],
+      tabMap: ["升级", "突破", "技能"],
     });
     const getWeb3 = async () => {
       await initWeb3.Init(
@@ -251,7 +257,11 @@ export default {
     .tabs_box {
       width: 30%;
       height: 100%;
-
+      .disable {
+        user-select: none;
+        pointer-events: none;
+        filter: grayscale(100);
+      }
       .tab_item {
         position: relative;
         width: 8rem;

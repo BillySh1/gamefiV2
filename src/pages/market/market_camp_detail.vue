@@ -528,10 +528,11 @@ export default {
       }
     }
     .card_content {
+      min-width: 60%;
       height: 100%;
       display: flex;
       align-items: center;
-      transform: translateX(10%);
+      transform: translateX(7%);
       .left {
         position: absolute;
         top: 50%;
@@ -569,7 +570,7 @@ export default {
         }
         margin: 0 1rem;
         height: 90%;
-        width: 16rem;
+        width: 16vmax;
       }
     }
   }

@@ -123,7 +123,7 @@ export default {
         }
         data.curItemShow = "";
         data.curItemIndex = 0;
-        if (data.curPackData.length) {
+        if (data.curPackData.length && data.curPackData[0].num > 0) {
           data.curItemShow = data.curPackData[0];
         }
       },

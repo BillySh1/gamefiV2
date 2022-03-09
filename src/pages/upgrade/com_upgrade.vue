@@ -444,14 +444,14 @@ export default {
         width: 50%;
         text-align: center;
         .title {
-          font-size: 1.8rem;
-          margin-bottom: 2rem;
+          font-size: 1.2rem;
+          margin-bottom: 1.5rem;
         }
         .property {
           display: flex;
           align-items: center;
           justify-content: space-around;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
           .name {
             color: white;
           }

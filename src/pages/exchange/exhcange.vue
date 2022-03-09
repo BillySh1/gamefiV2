@@ -269,19 +269,20 @@ export default {
         }
       }
       .title {
+        font-size: 2rem;
         min-width: 4rem;
       }
     }
     .up_box {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
+      transform: translateX(3rem);
       .xs {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        transform: translateX(1rem);
         font-size: 1.2rem;
       }
     }
@@ -297,7 +298,6 @@ export default {
         align-items: center;
         white-space: nowrap;
         img {
-          margin-left: 1rem;
           max-width: 2.5rem;
         }
       }
@@ -305,7 +305,9 @@ export default {
         outline: none;
         border: none;
         font-size: 2rem;
-        background: transparent;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 1rem;
+        margin: 0 1rem;
         width: 30%;
         color: #f2dbb9;
         text-align: center;
