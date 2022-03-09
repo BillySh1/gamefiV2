@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <CommonPageHeader />
+    <CommonPageHeader @exit="$emit('exit')" />
 
     <div class="content">
       <InjectUser :power="power" />

@@ -3,8 +3,12 @@
     <div class="chain_icon_box">
       <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
     </div>
-    <div class="wallet_address" @click="connect">
+    <div class="wallet_address">
       {{ walletValue }}
+      <div class="drop_down">
+        <div class="item" @click="$emit('exit')">断开连接</div>
+        <div class="item" @click="jump2Swap">MemorySwap ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +35,7 @@ export default {
       }
       return "连接钱包";
     });
+    const jump2Swap = () => {};
     const watchAcc = () => {
       if (!window.ethereum) return;
       window.ethereum.on("accountsChanged", function (a) {
@@ -57,8 +62,8 @@ export default {
     return {
       ...refData,
       walletValue,
-      connect,
       watchAcc,
+      jump2Swap,
     };
   },
 };
@@ -85,11 +90,36 @@ export default {
   }
 }
 .wallet_address {
+  position: relative;
+  display: inline-block;
   cursor: pointer;
   padding: 0.5rem 2rem;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   font-family: Roboto;
   font-size: 1rem;
   border-radius: 10rem;
+  .drop_down {
+    display: none;
+    position: absolute;
+    transform: translate(-1rem, 0.5rem);
+    background-color: rgba(0, 0, 0, 0.8);
+    min-width: 10rem;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 0;
+    .item {
+      text-align: left;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      &:hover {
+        opacity: 0.8;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+    }
+  }
+}
+.wallet_address:hover .drop_down {
+  display: block;
 }
 </style>

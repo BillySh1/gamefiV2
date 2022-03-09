@@ -87,6 +87,9 @@ const store = createStore({
       },
     };
   },
+  mutations:{
+    
+  }
 });
 
 let _web3;

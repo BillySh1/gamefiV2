@@ -1,5 +1,8 @@
 <template>
-  <router-view v-if="correctChainId && connected && !loading"></router-view>
+  <router-view
+    @exit="() => disconnect()"
+    v-if="correctChainId && connected && !loading"
+  ></router-view>
   <ConnectWalletModal
     :value="modalShow"
     :mobile="isMobile"
@@ -59,6 +62,10 @@ export default {
   methods: {
     watchChain() {
       window.ethereum.on("chainChanged", async () => await this.judge());
+    },
+    async disconnect() {
+      this.account = "";
+      await this.judge();
     },
     connect() {
       try {

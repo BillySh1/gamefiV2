@@ -1,7 +1,7 @@
 <template>
   <div :class="$route.name == 'home' ? 'box' : 'box colored_box'">
     <div v-if="$route.name == 'home'" class="wallet_box">
-      <InjectWallet />
+      <InjectWallet @exit="$emit('exit')" />
     </div>
     <div v-else class="page_title">
       <img class="title_badge" src="../assets/common/active_title.png" alt="" />
