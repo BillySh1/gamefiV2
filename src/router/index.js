@@ -27,10 +27,10 @@ const marketDetail = () => import("../pages/market/market_camp_detail.vue");
 const order = () => import("../pages/market/order.vue");
 const orderDetail = () => import("../pages/market/order_detail.vue");
 const sell = () => import("../pages/market/sell.vue");
-
 const allStarsEntry = () => import("../pages/all_stars/entry.vue");
-
 const connect = () => import("../pages/error/connect.vue");
+
+const testCoin = () => import("../pages/test/test.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -171,6 +171,11 @@ const router = createRouter({
       path: "/allStarsEntry",
       name: "allStarsEntry",
       component: allStarsEntry,
+    },
+    {
+      path: "/testCoin",
+      name: "testCoin",
+      component: testCoin,
     },
   ],
 });

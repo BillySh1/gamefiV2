@@ -17,13 +17,13 @@
             <img
               class="active"
               v-show="item.key == curTab"
-              src="../../assets/pack/active_tab_item.svg"
+              src="../../assets/pack/active_tab_item.png"
               alt=""
             />
             <img
               class="in_active"
               v-show="item.key != curTab"
-              src="../../assets/pack/common_tab_item.svg"
+              src="../../assets/pack/common_tab_item.png"
               alt=""
             />
             <div>
@@ -223,7 +223,6 @@ export default {
           cursor: pointer;
           img {
             width: 100%;
-            height: 100%;
           }
           .text {
             position: absolute;
@@ -235,7 +234,7 @@ export default {
             color: #272727;
           }
           .active {
-            transform: scale(1.2);
+            transform: scale(1.1);
             font-size: 1.5rem;
           }
           .active_text {

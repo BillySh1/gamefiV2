@@ -21,7 +21,7 @@
       </div>
       <div class="right">
         <div v-if="!loading" class="balance_box">
-          <div class="item title" >余额</div>
+          <div class="item title">余额</div>
           <div class="item">
             <img class="icon" src="../../assets/exchange/coin.png" />
             <span class="name">铜钱</span>
@@ -57,6 +57,12 @@
           <CommonButton class="btn" @click="btnClick">
             {{ btnText }}
           </CommonButton>
+          <!-- <CommonButton
+            class="btn"
+            @click="() => $router.push({ name: 'testCoin' })"
+          >
+            领取测试币
+          </CommonButton> -->
         </div>
       </div>
     </div>
@@ -262,7 +268,7 @@ export default {
           color: rgba(255, 255, 255, 0.7);
         }
       }
-      .title{
+      .title {
         min-width: 4rem;
       }
     }
@@ -313,7 +319,7 @@ export default {
         color: rgba(255, 255, 255, 0.6);
         margin-bottom: 0.5rem;
       }
-      .btn{
+      .btn {
         margin-top: 2rem;
         font-size: 2rem;
         width: 20rem;

@@ -58,9 +58,9 @@ export default {
     const data = reactive({
       pageTitle: "我的背包",
       routerItems: [
-        { key: 0, name: "武将", img: require("../../assets/pack/0.svg") },
-        { key: 1, name: "装备", img: require("../../assets/pack/1.svg") },
-        { key: 2, name: "珍宝", img: require("../../assets/pack/2.svg") },
+        { key: 0, name: "武将", img: require("../../assets/pack/0.png") },
+        { key: 1, name: "装备", img: require("../../assets/pack/1.png") },
+        { key: 2, name: "珍宝", img: require("../../assets/pack/2.png") },
       ],
       curShowType: undefined,
     });

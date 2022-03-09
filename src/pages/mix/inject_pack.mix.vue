@@ -15,7 +15,7 @@
           >
             <img
               class="active"
-              src="../../assets/pack/active_tab_item.svg"
+              src="../../assets/pack/active_tab_item.png"
               alt=""
             />
             <div class="text active_text">
@@ -252,7 +252,6 @@ export default {
           cursor: pointer;
           img {
             width: 100%;
-            height: 100%;
           }
           .text {
             position: absolute;
@@ -262,6 +261,10 @@ export default {
             font-weight: 600;
             font-size: 1.2rem;
             color: #272727;
+          }
+          .active {
+            transform: scale(1.1);
+            font-size: 1.5rem;
           }
           .active_text {
             color: white;
