@@ -13,9 +13,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
   tp.forwardNavigationGesturesEnable({
     enable: false,
   });
-  sessionStorage.setItem("fullScreen", true);
-} else {
-  sessionStorage.setItem("fullScreen", false);
+  sessionStorage.setItem("fullScreen", '1');
 }
 
 import { createApp } from "vue";

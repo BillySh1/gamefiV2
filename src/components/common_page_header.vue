@@ -90,7 +90,7 @@ export default {
           href: "store",
         },
       ],
-      isFull: false,
+      isFull: true,
     });
     const isMobile = computed(() => {
       if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
@@ -99,35 +99,50 @@ export default {
       return false;
     });
     const getScreenAciton = computed(() => {
-      return sessionStorage.getItem("fullScreen")
+      return data.isFull
         ? require("../assets/common/exitFullScreen.png")
         : require("../assets/common/fullScreen.png");
     });
     const exitFullScreen = () => {
-      const isPcFull = document.webkitIsFullScreen || document.isFullScreen;
-      if (isMobile.value) {
-        const tp = require("tp-js-sdk");
-        if (sessionStorage.getItem("fullScreen")) {
-          tp.fullScreen({
-            fullScreen: 0,
-          });
-          sessionStorage.setItem("fullScreen", false);
-        } else {
-          tp.fullScreen({
-            fullScreen: 1,
-          });
-          sessionStorage.setItem("fullScreen", true);
-        }
+      const tp = require("tp-js-sdk");
+      const isF = sessionStorage.getItem("fullScreen");
+      if (isF == 1) {
+        tp.fullScreen({
+          fullScreen: 0,
+        });
+        sessionStorage.setItem("fullScreen", "0");
+        data.isFull = false;
       } else {
-        if (!isPcFull) {
-          document.documentElement.requestFullscreen();
-          sessionStorage.setItem("fullScreen", true);
-        } else {
-          document.exitFullscreen();
-          sessionStorage.setItem("fullScreen", false);
-        }
+        tp.fullScreen({
+          fullScreen: 1,
+        });
+        sessionStorage.setItem("fullScreen", "1");
+        data.isFull = true;
       }
-      data.isFull = sessionStorage.getItem("fullScreen");
+      // const isPcFull = document.webkitIsFullScreen || document.isFullScreen;
+      // if (isMobile.value) {
+      //   const tp = require("tp-js-sdk");
+      //   if (sessionStorage.getItem("fullScreen")) {
+      //     tp.fullScreen({
+      //       fullScreen: 0,
+      //     });
+      //     sessionStorage.setItem("fullScreen", false);
+      //   } else {
+      //     tp.fullScreen({
+      //       fullScreen: 1,
+      //     });
+      //     sessionStorage.setItem("fullScreen", true);
+      //   }
+      // } else {
+      //   if (!isPcFull) {
+      //     document.documentElement.requestFullscreen();
+      //     sessionStorage.setItem("fullScreen", true);
+      //   } else {
+      //     document.exitFullscreen();
+      //     sessionStorage.setItem("fullScreen", false);
+      //   }
+      // }
+      // data.isFull = sessionStorage.getItem("fullScreen");
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
