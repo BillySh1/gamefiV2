@@ -33,6 +33,7 @@ const testCoin = () => import("../pages/test/test.vue");
 
 // 群英会战 start
 const bf_choose = () => import("../pages/all_stars/entry_choose_camp.vue");
+const bf_main = () => import("../pages/all_stars/main.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -183,6 +184,11 @@ const router = createRouter({
       path: "/bf_choose",
       name: "bf_choose",
       component: bf_choose,
+    },
+    {
+      path: "/bf_main",
+      name: "bf_main",
+      component: bf_main,
     },
   ],
 });

@@ -41,7 +41,7 @@
       @confirm="onConfirm"
     >
       <div class="up">
-        确定要为 <span class="camp" >{{ cur.name }}</span> 出战吗
+        确定要为 <span class="camp">{{ cur.name }}</span> 出战吗
       </div>
       <div class="warning">一旦选择阵营，本次战役其间不可更改</div>
     </InjectModal>
@@ -51,12 +51,14 @@
 <script>
 import { reactive, toRefs, onBeforeMount } from "vue";
 import InjectModal from "../../components/inject_modal.vue";
+import { useRouter } from "vue-router";
 export default {
   name: "entry_choose_camp",
   components: {
     InjectModal,
   },
   setup() {
+    const router = useRouter();
     const data = reactive({
       campMap: [
         {
@@ -86,6 +88,9 @@ export default {
     const onConfirm = () => {
       console.log(data.cur);
       data.showModal = false;
+      router.push({
+        name: "bf_main",
+      });
     };
     onBeforeMount(() => {});
     const refData = toRefs(data);
@@ -119,11 +124,11 @@ export default {
   .modal {
     font-size: 2rem;
     line-height: 1.5;
-    .up{
-        .camp{
-            font-size: 2.5rem;
-            margin: 0 1rem;
-        }
+    .up {
+      .camp {
+        font-size: 2.5rem;
+        margin: 0 1rem;
+      }
     }
     .warning {
       color: red;

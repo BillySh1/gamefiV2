@@ -2,18 +2,22 @@
   <div class="box">
     <div class="mask">
       <div class="content">
-        <img class="logo" src="../../allstar_assets/all_stars/entry/logo.png" alt="" />
-        <img class="text" src="../../allstar_assets/all_stars/entry/text.png" alt="" />
+        <img
+          class="logo"
+          src="../../allstar_assets/all_stars/entry/logo.png"
+          alt=""
+        />
+        <img
+          class="text"
+          src="../../allstar_assets/all_stars/entry/text.png"
+          alt=""
+        />
         <img
           class="divider"
           src="../../allstar_assets/all_stars/entry/divider.png"
           alt=""
         />
-        <div class="enter" @click="()=>{
-            $router.push({
-              name:'bf_choose',
-            })
-          }" >
+        <div class="enter" @click="jump">
           <img src="../../allstar_assets/all_stars/entry/btn_bg.png" alt="" />
           <div class="text">加入战斗</div>
         </div>
@@ -21,29 +25,35 @@
           返回
         </div>
       </div>
-     
     </div>
-     <div class="fire">
-        <Lottie
-          :options="{
-            animationData: require('../../allstar_assets/all_stars/entry/fire.json'),
-          }"
-        />
-      </div>
+    <div class="fire">
+      <Lottie
+        :options="{
+          animationData: require('../../allstar_assets/all_stars/entry/fire.json'),
+        }"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs, onBeforeMount } from "vue";
+// import { useRouter } from "vue-router";
 export default {
   name: "all_stars_entry",
   setup() {
+    // const router = useRouter();
     const data = reactive({});
+    const jump = () => {
+      // router.push({
+        // name: "bf_choose",
+      // });
+    };
     onBeforeMount(() => {});
-    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
+      jump,
     };
   },
 };
@@ -61,7 +71,7 @@ export default {
     background: url("../../allstar_assets/all_stars/entry/mask.png") no-repeat;
     background-size: 100% 100%;
   }
-  .fire{
+  .fire {
     position: absolute;
     bottom: 0%;
     z-index: 2;
