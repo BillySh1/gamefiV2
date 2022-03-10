@@ -39,7 +39,11 @@
           @select="(i) => handleSelectHero(i)"
         />
       </div>
-      <div v-if="curSelectedHero && !processing" class="cur_selected_item" @click="handleClickReborn" >
+      <div
+        v-if="curSelectedHero && !processing"
+        class="cur_selected_item"
+        @click="handleClickReborn"
+      >
         <HeroCardItem :info="curSelectedHero" />
       </div>
 
@@ -63,10 +67,11 @@
 
       <div
         v-if="curSelectedHero && !processing"
-        class="action_btn"
+        :class="!canDo ? 'action_btn disable' : 'action_btn'"
         @click="actionButtonClick"
       >
         <CommonButton>{{ btnText }}</CommonButton>
+        <span v-if="!canDo">道具不足</span>
       </div>
     </div>
     <CommonPageFooter />
@@ -137,11 +142,17 @@ export default {
     const btnText = computed(() => {
       return ["授权英雄", "授权两仪石", "确认重生"][data.btnStatus];
     });
-
+    const canDo = computed(() => {
+      return Number(data.stockBalance) > Number(data.cost);
+    });
     const handleAni1 = (ani) => {
       data.ani1 = ani;
     };
     const handleSelectHero = async (item) => {
+      if (item.rarity == 4) {
+        proxy.$toast("金卡不支持重生,请重新选择", store.state.toast_info);
+        return
+      }
       try {
         data.loading = true;
         const cTraing = store.state.c_training;
@@ -307,9 +318,9 @@ export default {
       }
     };
     const handleClickReborn = () => {
-      data.step =1;
+      data.step = 1;
       data.showPack = true;
-      data.curSelectedHero = undefined
+      data.curSelectedHero = undefined;
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -331,6 +342,7 @@ export default {
       handleSelectHero,
       actionButtonClick,
       btnText,
+      canDo,
     };
   },
 };
@@ -351,6 +363,7 @@ export default {
 .lottie {
   cursor: pointer;
   max-width: 80%;
+  z-index: 0;
 }
 .lottit_badge {
   position: absolute;
@@ -387,6 +400,11 @@ export default {
   transform: translateX(-50%);
   z-index: 101;
 }
+.disable {
+  user-select: none;
+  pointer-events: none;
+  filter: grayscale(100);
+}
 .cur_selected_cost {
   position: fixed;
   display: flex;
@@ -397,6 +415,7 @@ export default {
   transform: translateX(-50%);
   z-index: 101;
   color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
   .btn {
     margin-top: 1rem;
   }

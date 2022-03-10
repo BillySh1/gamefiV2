@@ -33,7 +33,10 @@
             </div>
           </div>
         </div>
+
         <div class="right_c_content">
+          <div class="creator">(上架者: {{ info.creator }})</div>
+
           {{ info.intro }}
         </div>
         <div class="right_c_action">
@@ -396,6 +399,10 @@ export default {
   text-align: left;
   color: #ffffff;
   margin: 1rem 0;
+  .creator {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 .right_c_action {
   display: flex;
