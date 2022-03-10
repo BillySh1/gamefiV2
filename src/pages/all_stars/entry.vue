@@ -2,15 +2,19 @@
   <div class="box">
     <div class="mask">
       <div class="content">
-        <img class="logo" src="../../assets/all_stars/entry/logo.png" alt="" />
-        <img class="text" src="../../assets/all_stars/entry/text.png" alt="" />
+        <img class="logo" src="../../allstar_assets/all_stars/entry/logo.png" alt="" />
+        <img class="text" src="../../allstar_assets/all_stars/entry/text.png" alt="" />
         <img
           class="divider"
-          src="../../assets/all_stars/entry/divider.png"
+          src="../../allstar_assets/all_stars/entry/divider.png"
           alt=""
         />
-        <div class="enter">
-          <img src="../../assets/all_stars/entry/btn_bg.png" alt="" />
+        <div class="enter" @click="()=>{
+            $router.push({
+              name:'bf_choose',
+            })
+          }" >
+          <img src="../../allstar_assets/all_stars/entry/btn_bg.png" alt="" />
           <div class="text">加入战斗</div>
         </div>
         <div class="back" @click="() => $router.push({ name: 'home' })">
@@ -22,7 +26,7 @@
      <div class="fire">
         <Lottie
           :options="{
-            animationData: require('../../assets/all_stars/entry/fire.json'),
+            animationData: require('../../allstar_assets/all_stars/entry/fire.json'),
           }"
         />
       </div>
@@ -48,13 +52,13 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  background: url("../../assets/all_stars/entry/bg.png") no-repeat;
+  background: url("../../allstar_assets/all_stars/entry/bg.png") no-repeat;
   background-size: 100% 100%;
   .mask {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url("../../assets/all_stars/entry/mask.png") no-repeat;
+    background: url("../../allstar_assets/all_stars/entry/mask.png") no-repeat;
     background-size: 100% 100%;
   }
   .fire{
