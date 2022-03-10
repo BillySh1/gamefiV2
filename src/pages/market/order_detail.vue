@@ -106,6 +106,8 @@ export default {
         await approve();
       } else if (data.btnStatus === 1) {
         await push();
+      } else if (data.btnStatus === 2) {
+        await pull();
       }
     };
     const approve = async () => {
@@ -130,6 +132,34 @@ export default {
         }
       } catch (e) {
         proxy.$toast(`授权失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const pull = async () => {
+      try {
+        proxy.$toast("等待下架", store.state.toast_info);
+        const c = store.state.c_exchange;
+        console.log(c, "ggg");
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .pull(data.info.tokenId)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.pull(data.info.tokenId).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("下架成功", store.state.toast_success);
+          router.push({
+            name: "minting",
+          });
+        }
+      } catch (e) {
+        proxy.$toast("下架失败", store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -164,7 +194,7 @@ export default {
     };
 
     const btnText = computed(() => {
-      return ["授权", "购买"][data.btnStatus];
+      return ["授权", "购买", "下架"][data.btnStatus];
     });
     const getCurInfo = async () => {
       try {
@@ -220,6 +250,9 @@ export default {
       );
       await getCurInfo();
       await getBeforePack();
+      if (data.info.creator.toLowerCase() == data.account.toLowerCase()) {
+        data.btnStatus = 2;
+      }
       data.loading = false;
     });
     const getBeforePack = async () => {
