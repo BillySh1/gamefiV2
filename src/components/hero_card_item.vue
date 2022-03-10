@@ -11,11 +11,7 @@
         "
       >
         <span
-          :style="
-            [0, 1, 2].includes(Number(info.rarity))
-              ? 'color: #E8C8C8'
-              : 'color: inherit'
-          "
+         
           >{{ info.name }}</span
         >
       </div>
