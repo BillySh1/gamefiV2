@@ -214,19 +214,19 @@ export default {
           items: [
             {
               key: 0,
-              img: require("../../assets/pack/filter/camp/0.png"),
+              img: require("../../assets/cardImgs/hero/bg/c0.png"),
             },
             {
               key: 1,
-              img: require("../../assets/pack/filter/camp/1.png"),
+              img: require("../../assets/cardImgs/hero/bg/c1.png"),
             },
             {
               key: 2,
-              img: require("../../assets/pack/filter/camp/2.png"),
+              img: require("../../assets/cardImgs/hero/bg/c2.png"),
             },
             {
               key: 3,
-              img: require("../../assets/pack/filter/camp/3.png"),
+              img: require("../../assets/cardImgs/hero/bg/c3.png"),
             },
           ],
         },
