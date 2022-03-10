@@ -40,7 +40,12 @@ export default {
 
     const copy = (e) => {
       e.stopPropagation();
-      navigator.clipboard.write(prop.data);
+      const aux = document.createElement("input");
+      aux.setAttribute("value", prop.data);
+      document.body.appendChild(aux);
+      aux.select();
+      document.execCommand("copy");
+      document.body.removeChild(aux);
       proxy.$toast("复制成功", store.state.toast_success);
       ctx.emit("close");
     };

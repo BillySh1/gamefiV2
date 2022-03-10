@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader title="招贤纳士" />
+    <InjectGoBack />
     <div class="content">
       <Swiper
         :slidesPerView="3"
@@ -64,6 +65,7 @@ import { useStore } from "vuex";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from '../../components/inject_go_back.vue'
 import initWeb3 from "../../utils/initWeb3.js";
 import "swiper/swiper.less";
 export default {
@@ -73,6 +75,7 @@ export default {
     CommonPageFooter,
     Swiper,
     SwiperSlide,
+    InjectGoBack
   },
   setup() {
     const store = useStore();

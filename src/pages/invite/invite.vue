@@ -6,7 +6,7 @@
       @close="() => (showModal = false)"
     />
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack  />
+    <InjectGoBack />
     <div class="content">
       <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
       <div class="invite_box">
@@ -18,11 +18,11 @@
               我的收益
             </div>
             <div class="item">
-              <div class="num">3000 <span class="xs">MMC</span></div>
+              <div class="num">0 <span class="xs">MMC</span></div>
               <div class="des">日收益</div>
             </div>
             <div class="item">
-              <div class="num">12,000 <span class="xs">MMC</span></div>
+              <div class="num">0 <span class="xs">MMC</span></div>
               <div class="des">总收益</div>
             </div>
           </div>
@@ -65,7 +65,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InviteModal from "./invite_modal.vue";
 import initWeb3 from "../../utils/initWeb3";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import { useStore } from "vuex";
 export default {
   name: "store",
@@ -73,7 +73,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     InviteModal,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -99,8 +99,7 @@ export default {
     const generate = () => {
       data.encodeData =
         window.location.host + "/#/mint?invite=" + btoa(data.account);
-      navigator.clipboard.writeText(data.encodeData);
-      proxy.$toast("邀请链接已复制", store.state.toast_success);
+      proxy.$toast("邀请链接已生成", store.state.toast_success);
       data.showModal = true;
     };
     const refData = toRefs(data);
