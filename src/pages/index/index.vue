@@ -36,17 +36,14 @@
       <div class="float_action_buttons">
         <!-- <img class="up" src="../../assets/index/ac_bottom.png" alt="" /> -->
         <div class="actions_inner">
-          <div class="left" @click="jump('allStarsEntry')">
-            <img src="../../assets/index/ac_left.png" alt="" />
-            <div class="text">群英会战</div>
+          <div class="left">
+            <img src="../../assets/index/left.png" alt="" />
           </div>
-          <div class="middle">
-            <img src="../../assets/index/ac_middle.png" alt="" />
-            <div class="text">排位赛</div>
+          <div class="middle" @click="jump('allStarsEntry')">
+            <img src="../../assets/index/middle.png" alt="" />
           </div>
           <div class="right">
-            <img src="../../assets/index/ac_right.png" alt="" />
-            <div class="text">攻城略地</div>
+            <img src="../../assets/index/right.png" alt="" />
           </div>
         </div>
       </div>
@@ -172,58 +169,42 @@ export default {
 .float_action_buttons {
   position: absolute;
   left: 50%;
-  transform: translateX(-70%);
-  bottom: 12%;
-  .up {
-    width: 30rem;
-  }
+  transform: translateX(-50%);
+  bottom: 10%;
   .actions_inner {
     display: flex;
     margin-top: 2rem;
-    font-family: zihun143;
-    font-weight: bold;
-    font-size: 1.8rem;
-    text-align: center;
-
     .left {
+      user-select: none;
+      pointer-events: none;
       cursor: pointer;
       position: relative;
-      transform: translateX(1.4rem);
+      transform: translateX(2rem);
       white-space: nowrap;
       img {
         width: 16rem;
       }
     }
     .middle {
+      &:hover {
+        opacity: 0.6;
+      }
       cursor: pointer;
       position: relative;
-      transform: translateY(-1rem);
-      font-size: 2.3rem;
-      letter-spacing: 1.5rem;
+      transform: translateY(-2.5rem);
       img {
-        width: 18rem;
-      }
-      .text {
-        width: 100%;
-        transform: translate(-47%, -83%);
+        width: 22rem;
       }
     }
     .right {
+      user-select: none;
+      pointer-events: none;
       cursor: pointer;
       position: relative;
       transform: translateX(-1.4rem);
-      letter-spacing: 4px;
-      white-space: nowrap;
       img {
-        width: 16rem;
+        width: 18rem;
       }
-    }
-    .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-shadow: 1px 1px 4px #000;
     }
   }
 }

@@ -5,11 +5,7 @@
   font-display: auto;
   src: url("./fonts/FZYanZQKSJF.ttf");
 }
-@font-face {
-  font-family: zihun143;
-  font-display: auto;
-  src: url('./fonts/字魂143号-正酷超级黑-Heavy.ttf');
-}
+
 @font-face {
   font-family: zihun129;
   font-display: auto;
