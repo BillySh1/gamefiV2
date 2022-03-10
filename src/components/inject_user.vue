@@ -19,7 +19,7 @@
           "
         >
           <img src="../assets/index/title_bg.png" alt="" />
-          <div class="title_value">内测玩家</div>
+          <div class="title_value">暂无称号</div>
         </div>
       </div>
     </div>

@@ -19,7 +19,6 @@
             }
           "
         />
-      
         <div class="search_box">
           <CommonSearch />
         </div>
