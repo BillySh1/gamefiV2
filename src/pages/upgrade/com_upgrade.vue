@@ -81,6 +81,7 @@
         :value="showUpgradeModal"
         :title="'确认升级'"
         :btnText="modalBtnText"
+        :btnDisable="btnDsiabled"
         @confirm="modalBtnClick"
         @close="() => (showUpgradeModal = false)"
       >

@@ -41,7 +41,7 @@
       </div>
       <div
         :class="
-          Number(updateInfo.breakGemUse) > Number(remainNum)
+          (Number(updateInfo.breakGemUse) > Number(remainNum) || loading)
             ? 'action_btn disable'
             : 'action_btn'
         "
@@ -79,6 +79,7 @@ export default {
       remainNum: 0,
       canDo: false,
       btnStatus: 0,
+      loading: false
     });
     const store = useStore();
 
@@ -95,11 +96,13 @@ export default {
       await getRemainNum();
     });
     const handleBtnClick = async () => {
+      data.loading = true;
       if (data.btnStatus == 0) {
-        await approve();
+        await approveStock();
       } else if (data.btnStatus == 1) {
         await overfulfill();
       }
+      data.loading = false;
     };
     const approveStock = async () => {
       try {
@@ -135,33 +138,7 @@ export default {
         data.loading = false;
       }
     };
-    const approve = async () => {
-      try {
-        proxy.$toast(`等待授权${props.info.name}`, store.state.toast_info);
-        const c = store.state.c_hero;
-        const addr = store.state.c_training.options.address;
-        const gasPrice = await data.web3.eth.getGasPrice();
-        const tokenId = props.info.tokenId;
-        const gas = await c.methods
-          .approve(addr, tokenId)
-          .estimateGas({ from: data.account });
-        data.loading = true;
-        const res = await c.methods.setApprovalForAll(addr, tokenId).send({
-          gas: gas,
-          gasPrice: gasPrice,
-          from: data.account,
-        });
-        if (res.status) {
-          proxy.$toast(`授权${props.info.name}成功`, store.state.toast_success);
-          await approveStock();
-        }
-      } catch (e) {
-        proxy.$toast(`授权${props.info.name}失败`, store.state.toast_error);
-        console.log(e);
-      } finally {
-        data.loading = false;
-      }
-    };
+   
     const overfulfill = async () => {
       try {
         proxy.$toast("等待确认", store.state.toast_info);
