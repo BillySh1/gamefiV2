@@ -3,6 +3,10 @@
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
 
+     <div class="pack_container">
+    <CommonPageHeader :title="pageTitle" />
+    <Lottie v-if="loading" :options="lottie_options" />
+
     <div class="pack_main">
       <div class="top_box">
         <img
@@ -15,6 +19,7 @@
             }
           "
         />
+      
         <div class="search_box">
           <CommonSearch />
         </div>
@@ -38,41 +43,61 @@
           />
         </div>
         <div class="card_content">
-          <div class="empty" v-if="!rawData.length">未查询到订单</div>
+          <div
+            class="left"
+            v-show="curPage > 1"
+            @click="
+              () => {
+                curPage--;
+                getCurShowItems();
+              }
+            "
+          >
+            <img src="../../assets/store/left.png" alt="" />
+          </div>
+          <div class="empty" v-if="!rawData.length">市场中暂无卡牌</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
             class="card_item"
             @click="
               () => {
-                if (toSelect) {
-                  $emit('select', item);
-                } else {
-                  $router.push({
-                    name: 'heroDetail',
-                    query: { tokenId: item.tokenId },
-                  });
-                }
+                $router.push({
+                  name: 'orderDetail',
+                  query: { tokenId: item.tokenId },
+                });
               }
             "
           >
             <MarketHeroItem :info="item" />
           </div>
+          <div
+            class="right"
+            v-show="curPage < total"
+            @click="
+              () => {
+                curPage++;
+                getCurShowItems();
+              }
+            "
+          >
+            <img src="../../assets/store/right.png" alt="" />
+          </div>
         </div>
       </div>
-      <div class="page_nation_box">
-        <Page
-          @change="
-            (num) => {
-              curPage = num;
-              getCurShowItems();
-            }
-          "
-          :current="curPage"
-          :total="total"
-        />
+    </div>
+    <div
+      class="tip_badge"
+      v-if="!loading"
+      @click="() => $router.push({ name: 'order' })"
+    >
+      <div class="inner">
+        <img src="../../assets/common/tip_badge.svg" />
+        <div class="text">我的订单</div>
       </div>
     </div>
+    <CommonPageFooter />
+  </div>
 
     <CommonPageFooter />
   </div>
@@ -93,12 +118,10 @@ import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
-import Page from "../../components/page";
 export default {
   name: "market_camp_detail",
   components: {
     MarketHeroItem,
-    Page,
     CommonSearch,
     CommonPageHeader,
     CommonPageFooter,
@@ -216,6 +239,27 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  background: url("../../assets/market/bg.png");
+  .tip_badge {
+    cursor: pointer;
+    position: absolute;
+    bottom: 6rem;
+    left: 0;
+    white-space: nowrap;
+    .inner {
+      position: relative;
+      img {
+        width: 10rem;
+        opacity: 1;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 }
 .pack_main {
   position: absolute;
@@ -225,41 +269,82 @@ export default {
   flex-direction: column;
   justify-content: center;
   .top_box {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 0;
+    background: rgba(0, 0, 0, 0.5);
     .back {
       cursor: pointer;
       margin-left: 4rem;
     }
     .filter_box {
       transform: translateX(-10rem);
+      &:hover {
+        opacity: 1;
+      }
+      opacity: 0.6;
+      cursor: pointer;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(
+        89.54deg,
+        rgba(102, 99, 29, 0.5) -138.99%,
+        rgba(0, 0, 0, 0.5) -54.05%,
+        rgba(162, 95, 33, 0.5) 19.67%,
+        rgba(131, 43, 20, 0.5) 98.2%,
+        rgba(255, 101, 101, 0.5) 168.72%
+      );
+      border-radius: 99px;
+      border: 1px solid #3e3002;
+      .text {
+        font-size: 1.5rem;
+      }
+    }
+    .search_box{
+      transform: translate(-5rem);
     }
   }
   .content {
     margin: 1rem 0;
-    height: 23rem;
+    background: rgba(0, 0, 0, 0.5);
+    height: 26rem;
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 0rem;
+    padding-bottom: 2rem;
     .badge {
       position: relative;
       height: 100%;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      margin-left: 2rem;
       .divider {
+        margin-left: 1rem;
         height: 100%;
       }
       .tabs {
-        width: 10rem;
+        width: 13rem;
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        .title {
+          position: relative;
+          img {
+            width: 100%;
+          }
+          .inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 600;
+            white-space: nowrap;
+          }
+        }
         .item {
           cursor: pointer;
           width: 100%;
@@ -278,13 +363,35 @@ export default {
       }
     }
     .card_content {
+      min-width: 60%;
       height: 100%;
-      width: 80%;
       display: flex;
       align-items: center;
-      gap: 2rem;
-      transform: translateX(10%);
+      transform: translateX(7%);
+      .left {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-100%, -50%);
+        cursor: pointer;
+        width: 2rem;
+        img {
+          width: 100%;
+        }
+      }
+      .right {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(100%, -50%);
+        cursor: pointer;
+        width: 2rem;
+        img {
+          width: 100%;
+        }
+      }
       .empty {
+        width: 100%;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -296,17 +403,11 @@ export default {
         &:hover {
           opacity: 0.8;
         }
-        height: 100%;
-        width: 22%;
+        margin: 0 1rem;
+        height: 90%;
+        width: 16vmax;
       }
     }
-  }
-  .page_nation_box {
-    padding: 0.5rem 0;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: row-reverse;
   }
 }
 </style>
