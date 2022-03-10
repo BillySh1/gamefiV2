@@ -51,6 +51,19 @@
             <img :src="qualityCost.img" />
             {{ qualityCost.cost }}
           </div>
+          <CommonButton
+            class="del"
+            v-if="qualityCost"
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                qualityCost = undefined;
+              }
+            "
+          >
+            清除
+          </CommonButton>
         </div>
         <div
           class="item"
@@ -66,6 +79,19 @@
             <img :src="attrCost.img" />
             {{ attrCost.cost }}
           </div>
+          <CommonButton
+            class="del"
+            v-if="attrCost"
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                attrCost = undefined;
+              }
+            "
+          >
+            清除
+          </CommonButton>
         </div>
       </div>
     </div>
@@ -513,6 +539,7 @@ export default {
       display: flex;
       align-items: center;
       .item {
+        position: relative;
         &:hover {
           opacity: 0.8;
         }
@@ -527,6 +554,12 @@ export default {
         justify-content: center;
         img {
           width: 50%;
+        }
+        .del {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          transform: translate(-50%, 150%);
         }
       }
     }
