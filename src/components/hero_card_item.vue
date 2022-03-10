@@ -5,9 +5,7 @@
       <div
         class="name"
         :style="
-          ['/heroDetail', '/orderDetail', '/sell', '/upgrade'].includes(
-            $route.path
-          )
+          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
             ? 'font-size:1.5rem;left:8%'
             : ''
         "
@@ -25,9 +23,7 @@
         v-if="info.native == 1"
         class="mix"
         :style="
-          ['/heroDetail', '/orderDetail', '/sell', '/upgrade'].includes(
-            $route.path
-          )
+          ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
             ? 'width:1.5rem'
             : ''
         "
@@ -72,7 +68,7 @@ import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
 export default {
   name: "hero_card_img",
-  props: ["info"],
+  props: ["info", "big"],
   setup(prop) {
     const data = reactive({});
     const borderImg = computed(() => {

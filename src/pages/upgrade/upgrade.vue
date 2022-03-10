@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="hero_card_big">
-        <HeroCardItem :info="info" />
+        <HeroCardItem :big="true" :info="info" />
       </div>
       <div class="operate_box">
         <ComUpgrade

@@ -176,7 +176,7 @@ export default {
     const modalBtnClick = async (isOneKey) => {
       data.btnDsiabled = true;
       if (data.modalStatus == 0) {
-        await approve();
+        await approveStock();
       } else if (data.modalStatus == 1) {
         await update(isOneKey);
       }
@@ -216,33 +216,7 @@ export default {
         data.loading = false;
       }
     };
-    const approve = async () => {
-      try {
-        proxy.$toast(`等待授权${props.info.name}`, store.state.toast_info);
-        const c = store.state.c_hero;
-        const addr = store.state.c_training.options.address;
-        const gasPrice = await data.web3.eth.getGasPrice();
-        const tokenId = props.info.tokenId;
-        const gas = await c.methods
-          .approve(addr, tokenId)
-          .estimateGas({ from: data.account });
-        data.loading = true;
-        const res = await c.methods.setApprovalForAll(addr, tokenId).send({
-          gas: gas,
-          gasPrice: gasPrice,
-          from: data.account,
-        });
-        if (res.status) {
-          proxy.$toast(`授权${props.info.name}成功`, store.state.toast_success);
-          await approveStock();
-        }
-      } catch (e) {
-        proxy.$toast(`授权${props.info.name}失败`, store.state.toast_error);
-        console.log(e);
-      } finally {
-        data.loading = false;
-      }
-    };
+   
     const update = async (isOneKey) => {
       try {
         proxy.$toast("等待确认", store.state.toast_info);
