@@ -8,7 +8,7 @@
           ['/heroDetail', '/orderDetail', '/sell', '/upgrade'].includes(
             $route.path
           )
-            ? 'font-size:1.5rem'
+            ? 'font-size:1.5rem;left:8%'
             : ''
         "
       >
@@ -184,10 +184,10 @@ export default {
     z-index: 1;
   }
   .name {
-    @media screen and (max-height: 380px) {
+    @media screen and (max-height: 500px) {
       left: 7%;
       letter-spacing: 1px;
-      font-size: 1vmin;
+      font-size: 1rem;
     }
     position: absolute;
     top: 30%;
