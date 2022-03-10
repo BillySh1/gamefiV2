@@ -1,7 +1,14 @@
 <template>
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack />
+    <InjectGoBack :custom="true" @back="()=>{
+        $router.push({
+          name:'pack',
+          query:{
+            type: 0
+          }
+        })
+      }" />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="inner">
       <div class="hero_card_big">
@@ -24,11 +31,16 @@
           </div>
           <div class="bottom_box">
             <div v-if="curTabKey == 0" class="quick_info">
+              <div class="powers">战力: {{ Number(info.power) / 100 }}</div>
               <div class="infos">
-                <span>职业: {{ preferenceText }}</span>
+                <span :style="`color:${getRarityStyle}`"
+                  >稀有度: {{ rarityText }}</span
+                >
+                <span :style="`color:${getQualityStyle}`"
+                  >品质: {{ qualityText }}</span
+                >
                 <span>阵营: {{ campText }}</span>
-                <span>品质: {{ qualityText }}</span>
-                <span>稀有度: {{ rarityText }}</span>
+                <span>职业: {{ preferenceText }}</span>
                 <span>等级: {{ info.level }} 级</span>
                 <span>星级: {{ info.star }} 星</span>
               </div>
@@ -37,9 +49,9 @@
               </div>
               <div class="chain_info">
                 <span>Token ID: {{ info.tokenId }}</span>
-                <a class="view_on_chain" href="javascript:void(0)">
+                <div class="view_on_chain" @click="viewOnChain">
                   View on bscscan
-                </a>
+                </div>
               </div>
             </div>
             <div v-if="curTabKey == 1" class="quick_info">
@@ -148,9 +160,9 @@ export default {
     const route = useRoute();
     const store = useStore();
 
-    const rarityText = computed(()=>{
-      return useRarityName(data.info.rarity)
-    })
+    const rarityText = computed(() => {
+      return useRarityName(data.info.rarity);
+    });
     const qualityText = computed(() => {
       return useQualityText(data.info.quality);
     });
@@ -160,7 +172,12 @@ export default {
     const preferenceText = computed(() => {
       return usePreferenceText(data.info.preference);
     });
-
+    const getRarityStyle = computed(() => {
+      return ["white", "blue", "purple", "orange", "gold"][data.info.rarity];
+    });
+    const getQualityStyle = computed(() => {
+      return ["white", "blue", "purple", "orange"][data.info.quality];
+    });
     const heroAttrDetailMap = computed(() => {
       return data.info.properties.reduce((pre, cur, curIdx) => {
         pre.push({
@@ -209,6 +226,11 @@ export default {
       await getTokenInfo();
       data.loading = false;
     });
+    const viewOnChain = () => {
+      const c = store.state.c_hero.options.address;
+      const url = `https://testnet.bscscan.com/token/${c}?a=${data.info.tokenId}`;
+      window.open(url, "_blank");
+    };
     const getTokenInfo = async () => {
       const c = store.state.c_hero;
       const res = await c.methods.getHero(data.tokenId).call();
@@ -223,7 +245,10 @@ export default {
       campText,
       preferenceText,
       heroAttrDetailMap,
-      rarityText
+      rarityText,
+      viewOnChain,
+      getRarityStyle,
+      getQualityStyle,
     };
   },
 };
@@ -318,7 +343,11 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-
+            .powers {
+              place-self: baseline;
+              text-align: left;
+              font-size: 2rem;
+            }
             .infos {
               width: 100%;
               display: flex;
@@ -331,7 +360,7 @@ export default {
             }
             .intros {
               width: 100%;
-              max-height: 10rem;
+              max-height: 6rem;
               overflow-y: auto;
               text-align: left;
             }
@@ -343,6 +372,10 @@ export default {
               font-size: 1.2rem;
               color: rgba(255, 255, 255, 0.5);
               .view_on_chain {
+                &:hover {
+                  opacity: 0.8;
+                }
+                cursor: pointer;
                 font-size: 1.2rem;
                 color: #f2dbb9;
               }
