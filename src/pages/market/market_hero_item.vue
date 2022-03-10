@@ -92,7 +92,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transform: translateY(100%);
+    transform: translateY(125%);
     .title {
       margin-left: 1rem;
       color: rgba(255, 255, 255, 0.5);
@@ -100,12 +100,16 @@ export default {
     .value {
       font-family: SF Pro Text;
       margin-right: 1rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       font-style: italic;
       background: linear-gradient(48.4deg, #ffca7b 4.15%, #a67327 64.55%);
       color: transparent;
       background-clip: text;
+      max-width: 60%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .power_zone {
