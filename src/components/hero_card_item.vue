@@ -176,7 +176,7 @@ export default {
     height: auto;
     top: 50%;
     left: 50%;
-    transform: translate(-44%, -52%);
+    transform: translate(-43%, -52%);
     z-index: 1;
   }
   .name {
