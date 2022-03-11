@@ -4,7 +4,7 @@
     <img class="badge" src="../assets/common/hero_sit.png" alt="" />
     <img class="logo" src="../assets/common/logo.png" alt="" />
     <div class="text">
-      {{ "资源加载中,当前进度: " + Math.floor(preload.progress * 100) + "%" }}
+      {{ progressText }}
     </div>
     <div class="version">版本号 {{ version }}</div>
   </div>
@@ -31,6 +31,17 @@ export default {
       readFiles();
       startPreload();
     });
+    const progressText = computed(() => {
+      if (data.preload.progress) {
+        return (
+          "资源加载中,当前进度: " +
+          Math.floor(data.preload.progress * 100) +
+          "%"
+        );
+      } else {
+        return "资源加载出错，请检查网络环境并重试";
+      }
+    });
     const isMobile = computed(() => {
       if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
         return true;
@@ -48,6 +59,9 @@ export default {
       data.preload = new data.createjs.LoadQueue(true);
       const queue = data.preload;
       queue.on("complete", loadComplete);
+      queue.on("error", (e) => {
+        console.error(e);
+      });
       queue.loadManifest(data.manifest);
     };
     const readFiles = () => {
@@ -66,6 +80,7 @@ export default {
     return {
       ...refData,
       isMobile,
+      progressText,
       close,
     };
   },

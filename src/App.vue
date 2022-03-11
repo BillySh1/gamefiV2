@@ -86,7 +86,12 @@ export default {
       tp.close();
     },
     async judge() {
-      let chainId = await this.Web3.eth.getChainId();
+      let chainId;
+      if (window.ethereum) {
+        chainId = parseInt(window.ethereum.chainId, 16);
+      } else {
+        chainId = await this.Web3.eth.getChainId();
+      }
       if (!acceptNetWorks.includes(chainId)) {
         this.correctChainId = false;
       } else {
@@ -97,7 +102,6 @@ export default {
       } else {
         this.connected = true;
       }
-
     },
     async initWeb3Status() {
       await initWeb3.Init(
