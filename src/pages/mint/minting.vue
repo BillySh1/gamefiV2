@@ -225,7 +225,7 @@ export default {
       }
     };
     const curQuality = computed(() => {
-      return ["普通", "优秀", "史诗", "传说"][curInfo.value.quality];
+      return ["N", "R", "SR", "SSR"][curInfo.value.quality];
     });
     const refData = toRefs(data);
     return {

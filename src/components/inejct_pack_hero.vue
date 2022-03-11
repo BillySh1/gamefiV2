@@ -2,17 +2,20 @@
   <div v-if="showFilter" class="mask" @click="showFilter = false">
     <InjectGoBack :custom="true" @back="() => (showFilter = false)" />
     <div class="box">
-      <div
-        class="filter_item"
-        @click="
-          (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            triggerFilter(null);
-          }
-        "
-      >
-        <div class="left">重置</div>
+      <div class="filter_item">
+        <div
+          class="left"
+          @click="
+            (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              triggerFilter(null);
+            }
+          "
+        >
+          重置
+        </div>
+        <div class="left" @click="saveFilter">保存</div>
       </div>
       <div v-for="(item, index) in filters" :key="index" class="filter_item">
         <div class="left">
@@ -300,8 +303,15 @@ export default {
       );
       await getPack();
       filterTab({ key: 0 });
+      const remoteFilter = localStorage.getItem("filter");
+      if (remoteFilter) {
+        data.filters = JSON.parse(remoteFilter);
+      }
       data.loading = false;
     });
+    const saveFilter = () => {
+      localStorage.setItem("filter", JSON.stringify(data.filters));
+    };
     const triggerFilter = async (index, idx) => {
       data.curPage = 1;
       if (!index && !idx && index !== 0) {
@@ -376,6 +386,7 @@ export default {
       getCurShowItems,
       filterTab,
       triggerFilter,
+      saveFilter,
     };
   },
 };

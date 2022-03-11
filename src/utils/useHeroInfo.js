@@ -1,5 +1,5 @@
 const useQualityText = (x) => {
-  return ["普通", "优秀", "史诗", "传说"][x];
+  return ["N", "R", "SR", "SSR"][x];
 };
 
 const usePreferenceText = (x) => {
