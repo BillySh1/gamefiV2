@@ -143,7 +143,7 @@ export default {
       return ["授权英雄", "授权两仪石", "确认重生"][data.btnStatus];
     });
     const canDo = computed(() => {
-      return Number(data.stockBalance) > Number(data.cost);
+      return Number(data.stockBalance) >= Number(data.cost);
     });
     const handleAni1 = (ani) => {
       data.ani1 = ani;
