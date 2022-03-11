@@ -68,8 +68,7 @@
       class="cost_badge"
     >
       <div class="info">
-        需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }},
-        数量不足, 请前往商店
+        需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }}
       </div>
       <div class="extra">
         <div
