@@ -305,7 +305,7 @@ export default {
       filterTab({ key: 0 });
       const remoteFilter = localStorage.getItem("filter");
       if (remoteFilter) {
-        data.filters = JSON.parse(remoteFilter);
+        // data.filters = JSON.parse(remoteFilter);
       }
       data.loading = false;
     });
