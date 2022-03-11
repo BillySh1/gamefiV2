@@ -245,7 +245,6 @@ export default {
     }
   }
   .right {
-    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -277,7 +276,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      place-self: flex-end;
+      place-self: center;
       transform: translateX(3rem);
       .xs {
         width: 100%;
@@ -292,6 +291,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      place-self: center;
       font-size: 2rem;
       margin-bottom: 2rem;
       .icon {

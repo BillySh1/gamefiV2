@@ -216,7 +216,7 @@
 
     <InjectModal
       @close="() => (showModal = false)"
-      @confrim="() => (showModal = false)"
+      @confirm="() => (showModal = false)"
       :value="showModal"
       title="进阶提醒"
     >

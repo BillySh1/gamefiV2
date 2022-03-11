@@ -101,7 +101,7 @@ export default {
   .drop_down {
     display: none;
     position: absolute;
-    transform: translate(-1rem, 0.5rem);
+    transform: translate(-1rem, 1rem);
     background-color: rgba(0, 0, 0, 0.8);
     min-width: 10rem;
     border-radius: 1rem;

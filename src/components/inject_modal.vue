@@ -96,11 +96,11 @@ export default {
     left: 50%;
     transform: translate(-55%, 25%);
     bottom: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     .confirm_inner {
       position: relative;
       img {
-        width: 10rem;
+        width: 15rem;
       }
       .text {
         position: absolute;

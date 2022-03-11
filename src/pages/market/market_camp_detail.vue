@@ -237,19 +237,19 @@ export default {
           items: [
             {
               key: 0,
-              img: require("../../assets/pack/filter/quality/0.png"),
+              img: require("../../assets/cardImgs/hero/bg/q0.png"),
             },
             {
               key: 1,
-              img: require("../../assets/pack/filter/quality/1.png"),
+              img: require("../../assets/cardImgs/hero/bg/q1.png"),
             },
             {
               key: 2,
-              img: require("../../assets/pack/filter/quality/2.png"),
+              img: require("../../assets/cardImgs/hero/bg/q2.png"),
             },
             {
               key: 3,
-              img: require("../../assets/pack/filter/quality/3.png"),
+              img: require("../../assets/cardImgs/hero/bg/q3.png"),
             },
           ],
         },
