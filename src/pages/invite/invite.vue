@@ -60,7 +60,7 @@
       class="rule_modal"
       :title="'邀请规则'"
       :value="showRules"
-      @click="() => (shwoRules = false)"
+      @close="() => (showRules = false)"
       @confirm="() => (showRules = false)"
     >
       <div class="content">
@@ -116,7 +116,7 @@ export default {
         window.location.host +
         "/#/mint?invite=" +
         btoa(data.account);
-      console.log(data.encodeData,'gggg')
+      console.log(data.encodeData, "gggg");
       proxy.$toast("邀请链接已生成", store.state.toast_success);
       data.showModal = true;
     };

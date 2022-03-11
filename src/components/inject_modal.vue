@@ -12,7 +12,10 @@
         class="close"
         src="../assets/common/close.svg"
         alt=""
-        @click="()=>$emit('close')"
+        @click="(e)=>{
+          e.stopPropagation()
+          $emit('close')
+        }"
       />
 
       <img class="bg" src="../assets/common/modal_bg.png" alt="" />
