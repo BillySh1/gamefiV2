@@ -220,7 +220,9 @@
       :value="showModal"
       title="进阶提醒"
     >
-      <div class="modal_text">相同阵营， 相同稀有度的英雄才可以进阶</div>
+      <div class="modal_text">
+        相同阵营， 相同稀有度的英雄才可以进阶(橙卡进阶需满级满星切品质为传说)
+      </div>
       <div class="modal_text">进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
       <div class="modal_text">
         可选择使用宝石(例:
@@ -386,7 +388,8 @@ export default {
           return i == data.qualityCost.tokenId;
         });
         const gemId = temp == -1 ? 0 : temp;
-        const isUseAddvancedGem = !!data.attrCost.tokenId;
+        const isUseAddvancedGem =
+          data.attrCost && data.attrCost.tokenId ? !!data.attrCost.tokenId : false;
         console.log(
           "params",
           selected,
@@ -427,13 +430,17 @@ export default {
         .call();
     };
     const handleSelect = async (item) => {
-      console.log(item, "ggg");
       if (item.rarity == 4) {
         proxy.$toast("金卡无法进阶", store.state.toast_error);
         return;
       }
-      if (item.rarity == 3 && item.level != 5 && item.star != 5) {
-        proxy.$toast("橙卡进阶需满级满星", store.state.toast_error);
+      if (
+        item.rarity == 3 &&
+        item.level != 5 &&
+        item.star != 5 &&
+        item.quality != 3
+      ) {
+        proxy.$toast("橙卡进阶需满级满星且品质为传说", store.state.toast_error);
         return;
       }
       if (data.origin == 0 && data.leftInfo && !data.rightInfo) {
