@@ -10,10 +10,7 @@
             : ''
         "
       >
-        <span
-         
-          >{{ info.name }}</span
-        >
+        <span>{{ info.name }}</span>
       </div>
       <div
         v-if="info.native == 1"
@@ -50,7 +47,6 @@
       <div class="badge">
         <img :src="getBadgeImg" alt="" />
       </div>
-     
     </div>
     <img class="hero" :src="info.img" />
   </div>
@@ -118,11 +114,10 @@ export default {
         require("../assets/cardImgs/badge_1.png"),
         require("../assets/cardImgs/badge_2.png"),
         require("../assets/cardImgs/badge_3.png"),
-         require("../assets/cardImgs/badge_4.png"),
-          require("../assets/cardImgs/badge_5.png"),
+        require("../assets/cardImgs/badge_4.png"),
+        require("../assets/cardImgs/badge_5.png"),
       ][prop.info.preference];
     });
-  
 
     const refData = toRefs(data);
     return {
@@ -170,6 +165,10 @@ export default {
       letter-spacing: 1px;
       font-size: 1rem;
     }
+    @media screen and (max-height: 375px) {
+      left: 5%;
+      font-size: 0.8rem;
+    }
     position: absolute;
     top: 30%;
     left: 8.5%;
@@ -181,9 +180,18 @@ export default {
     letter-spacing: 2px;
   }
   .mix {
+    @media screen and (max-height: 500px) {
+      left: 7%;
+      letter-spacing: 1px;
+      font-size: 1rem;
+    }
+    @media screen and (max-height: 375px) {
+      left: 5%;
+      font-size: 0.8rem;
+    }
     position: absolute;
     top: 40%;
-    left: 9%;
+    left: 8.5%;
     z-index: 30;
     width: 1.1rem;
     img {
