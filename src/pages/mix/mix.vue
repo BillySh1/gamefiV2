@@ -352,6 +352,7 @@ export default {
           .isApprovedForAll(data.account, addr)
           .call();
         if (isApproved) {
+          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
           data.btnStatus = 2;
           return;
         }
@@ -389,7 +390,9 @@ export default {
         });
         const gemId = temp == -1 ? 0 : temp;
         const isUseAddvancedGem =
-          data.attrCost && data.attrCost.tokenId ? !!data.attrCost.tokenId : false;
+          data.attrCost && data.attrCost.tokenId
+            ? !!data.attrCost.tokenId
+            : false;
         console.log(
           "params",
           selected,

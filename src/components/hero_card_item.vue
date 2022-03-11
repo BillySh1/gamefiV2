@@ -181,12 +181,10 @@ export default {
   }
   .mix {
     @media screen and (max-height: 500px) and (max-width: 1024px) {
-      left: 7%;
-      letter-spacing: 1px;
-      font-size: 1rem;
+      left: 9%;
     }
     @media screen and (max-height: 375px) and (max-width: 768px) {
-      left: 5%;
+      left: 8%;
       font-size: 0.8rem;
     }
     position: absolute;

@@ -282,7 +282,7 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         font-size: 1.2rem;
       }
     }
@@ -290,7 +290,7 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       place-self: center;
       font-size: 2rem;
       margin-bottom: 2rem;
