@@ -17,7 +17,7 @@
         class="mix"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'width:1.5rem'
+            ? 'width:1.5rem;left:1.9rem'
             : ''
         "
       >
@@ -161,17 +161,13 @@ export default {
   }
   .name {
     @media screen and (max-height: 500px) and (max-width: 1024px) {
-      left: 7%;
+      left: 1rem;
       letter-spacing: 1px;
       font-size: 1rem;
     }
-    @media screen and (max-height: 375px) and (max-width: 768px) {
-      left: 5%;
-      font-size: 0.8rem;
-    }
     position: absolute;
     top: 30%;
-    left: 8.5%;
+    left: 1.3rem;
     transform: translate(0, -50%);
     z-index: 30;
     color: #300000;
@@ -180,16 +176,9 @@ export default {
     letter-spacing: 2px;
   }
   .mix {
-    @media screen and (max-height: 500px) and (max-width: 1024px) {
-      left: 9%;
-    }
-    @media screen and (max-height: 375px) and (max-width: 768px) {
-      left: 8%;
-      font-size: 0.8rem;
-    }
     position: absolute;
     top: 40%;
-    left: 8.5%;
+    left: 1.3rem;
     z-index: 30;
     width: 1.1rem;
     img {
