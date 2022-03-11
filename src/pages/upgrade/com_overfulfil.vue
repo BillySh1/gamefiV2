@@ -234,7 +234,7 @@ export default {
       }
       .pImg {
         img {
-          height: 2rem;
+          width: 2rem;
         }
       }
     }
@@ -261,7 +261,7 @@ export default {
       }
     }
     .sub_info {
-      width: 40%;
+      max-width: 60%;
       display: flex;
       align-items: center;
       justify-content: space-around;

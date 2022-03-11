@@ -67,7 +67,7 @@ export default {
       this.account = "";
       await this.judge();
     },
-    connect() {
+    async connect() {
       try {
         window.ethereum
           .request({ method: "eth_requestAccounts" })

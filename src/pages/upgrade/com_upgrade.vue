@@ -366,7 +366,7 @@ export default {
       }
       .pImg {
         img {
-          height: 2rem;
+          width: 2rem;
         }
       }
     }
