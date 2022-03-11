@@ -160,12 +160,12 @@ export default {
     z-index: 1;
   }
   .name {
-    @media screen and (max-height: 500px) {
+    @media screen and (max-height: 500px) and (max-width: 1024px) {
       left: 7%;
       letter-spacing: 1px;
       font-size: 1rem;
     }
-    @media screen and (max-height: 375px) {
+    @media screen and (max-height: 375px) and (max-width: 768px) {
       left: 5%;
       font-size: 0.8rem;
     }
