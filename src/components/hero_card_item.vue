@@ -50,10 +50,7 @@
       <div class="badge">
         <img :src="getBadgeImg" alt="" />
       </div>
-      <div class="badge_inner">
-        <img :src="getPreference[0]" />
-        {{ getPreference[1] }}
-      </div>
+     
     </div>
     <img class="hero" :src="info.img" />
   </div>
@@ -121,18 +118,11 @@ export default {
         require("../assets/cardImgs/badge_1.png"),
         require("../assets/cardImgs/badge_2.png"),
         require("../assets/cardImgs/badge_3.png"),
-      ][prop.info.camp];
-    });
-    const getPreference = computed(() => {
-      return [
-        [require("../assets/cardImgs/p_0.png"), "盾"],
-        [require("../assets/cardImgs/p_1.png"), "战"],
-        [require("../assets/cardImgs/p_2.png"), "谋"],
-        [require("../assets/cardImgs/p_3.png"), "刺"],
-        [require("../assets/cardImgs/p_4.png"), "辅"],
-        [require("../assets/cardImgs/p_4.png"), "主公"],
+         require("../assets/cardImgs/badge_4.png"),
+          require("../assets/cardImgs/badge_5.png"),
       ][prop.info.preference];
     });
+  
 
     const refData = toRefs(data);
     return {
@@ -144,7 +134,6 @@ export default {
       useHeroDetail,
       levels,
       getBadgeImg,
-      getPreference,
     };
   },
 };
@@ -265,8 +254,8 @@ export default {
     left: 0%;
     bottom: 0%;
     z-index: 30;
-    width: 53%;
-    transform: translate(23%, -15%);
+    width: 58%;
+    transform: translate(23%, -25%);
     img {
       width: 100%;
     }

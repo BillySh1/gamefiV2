@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoback />
+    <InjectGoback v-if="curShowType == undefined" />
     <div v-if="showDetailPack" class="content hero_pack">
       <InjectPackHero
         @back="() => (curShowType = undefined)"
