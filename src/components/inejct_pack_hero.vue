@@ -169,7 +169,7 @@ export default {
       loading: false,
       tabs: [
         { key: 0, name: "战力" },
-        { key: 1, name: "品级" },
+        { key: 1, name: "品质" },
         { key: 2, name: "稀有度" },
       ],
       curTab: 0,
@@ -227,7 +227,7 @@ export default {
           ],
         },
         {
-          name: "品级",
+          name: "品质",
           key: "quality",
           selected: null,
           items: [
