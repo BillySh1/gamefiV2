@@ -45,10 +45,7 @@
             />
           </div>
           <div class="right_c_price">
-            <img
-              style="margin-right: 2rem"
-              src="../../assets/common/mmc.png"
-            />
+            <img style="margin-right: 2rem" src="../../assets/common/mmc.png" />
             <span>{{ getprice }}</span>
           </div>
         </div>
@@ -197,22 +194,18 @@ export default {
         proxy.$toast("等待购买", store.state.toast_info);
         const c = store.state.c_recruit;
         const gasPrice = await data.web3.eth.getGasPrice();
+        let invite = "0x0000000000000000000000000000000000000000";
+        const _local = localStorage.getItem("invite");
+        if (_local && _local.toLowerCase() != data.account.toLowerCase()) {
+          invite = _local;
+        }
+
         const gas = await c.methods
-          .buy(
-            data.info.key,
-            data.buyValue,
-            "0x0000000000000000000000000000000000000000"
-          )
+          .buy(data.info.key, data.buyValue, invite)
           .estimateGas({ from: data.account });
-        setTimeout(() => {
-          data.minting = true;
-        }, 3000);
+        data.minting = true;
         const res = await c.methods
-          .buy(
-            data.info.key,
-            data.buyValue,
-            "0x0000000000000000000000000000000000000000"
-          )
+          .buy(data.info.key, data.buyValue, invite)
           .send({
             gasPrice: gasPrice,
             gas: Number.parseInt(gas, 10) + 50000,
@@ -377,7 +370,7 @@ export default {
   font-family: zihun129;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
-  img{
+  img {
     width: 2rem;
   }
 }

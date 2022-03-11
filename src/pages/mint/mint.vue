@@ -65,9 +65,10 @@ import { useStore } from "vuex";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import "swiper/swiper.less";
+import { useRoute } from "vue-router";
 export default {
   name: "mint",
   components: {
@@ -75,10 +76,11 @@ export default {
     CommonPageFooter,
     Swiper,
     SwiperSlide,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
     const data = reactive({
       activeIndex: 0,
       blindBoxes: [
@@ -128,6 +130,10 @@ export default {
           data.web3 = p;
         }
       );
+      if (route.query && route.query.invite) {
+        const temp = atob(route.query.invite);
+        localStorage.setItem("invite", temp);
+      }
       await getPrice();
     });
     const getPrice = async () => {
