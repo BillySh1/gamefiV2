@@ -1,14 +1,19 @@
 <template>
   <div class="hero_detail_box">
     <CommonPageHeader :title="pageTitle" />
-    <InjectGoBack :custom="true" @back="()=>{
-        $router.push({
-          name:'pack',
-          query:{
-            type: 0
-          }
-        })
-      }" />
+    <InjectGoBack
+      :custom="true"
+      @back="
+        () => {
+          $router.push({
+            name: 'pack',
+            query: {
+              type: 0,
+            },
+          });
+        }
+      "
+    />
     <Lottie v-if="loading" :options="lottie_options" />
     <div v-else class="inner">
       <div class="hero_card_big">
@@ -55,6 +60,19 @@
               </div>
             </div>
             <div v-if="curTabKey == 1" class="quick_info">
+              <div class="up">
+                潜力
+                <div class="stars">
+                  <div v-for="(item, index) in all_stars" :key="index">
+                    <img
+                      :class="item.active ? '' : 'disable'"
+                      style="width: 2rem"
+                      src="../../assets/cardImgs/hero/bg/star.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
               <div class="intros">
                 {{ info.intro }}
               </div>
@@ -187,6 +205,16 @@ export default {
         return pre;
       }, []);
     });
+    const all_stars = computed(() => {
+      const temp = [1, 3, 4, 5, 10][data.info.rarity];
+      const res = [];
+      for (let i = 0; i < temp; i++) {
+        res.push({
+          active: i < data.info.star ? true : false,
+        });
+      }
+      return res;
+    });
     const data = reactive({
       tokenId: 0,
       info: "",
@@ -249,6 +277,7 @@ export default {
       viewOnChain,
       getRarityStyle,
       getQualityStyle,
+      all_stars,
     };
   },
 };
@@ -343,6 +372,25 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            .up {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              text-align: left;
+              place-self: flex-start;
+              .stars {
+                max-height: 8rem;
+                display: flex;
+                align-items: center;
+                .disable {
+                  filter: grayscale(100);
+                }
+                img {
+                  width: 2rem;
+                  margin-right: 1rem;
+                }
+              }
+            }
             .powers {
               place-self: baseline;
               text-align: left;

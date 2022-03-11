@@ -41,7 +41,7 @@
       </div>
       <div
         :class="
-          (Number(updateInfo.breakGemUse) > Number(remainNum) || loading)
+          Number(updateInfo.breakGemUse) > Number(remainNum) || loading
             ? 'action_btn disable'
             : 'action_btn'
         "
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div v-else class="over_box">
-      <div class="empty">您未满级,无法突破</div>
+      <div class="empty">{{ emptyText }}</div>
     </div>
   </div>
 </template>
@@ -79,7 +79,7 @@ export default {
       remainNum: 0,
       canDo: false,
       btnStatus: 0,
-      loading: false
+      loading: false,
     });
     const store = useStore();
 
@@ -138,7 +138,7 @@ export default {
         data.loading = false;
       }
     };
-   
+
     const overfulfill = async () => {
       try {
         proxy.$toast("等待确认", store.state.toast_info);
@@ -176,8 +176,15 @@ export default {
         .getUpgradeStarDetails(props.info.tokenId)
         .call();
       data.canDo = data.updateInfo.canUpgradeStar;
-      console.log(data.updateInfo, "ggg", props.info.tokenId);
     };
+    const emptyText = computed(() => {
+      const stars = [1, 3, 4, 5, 10][props.info.rarity];
+      if (props.info.star < stars) {
+        return "您未满级,无法突破";
+      } else {
+        return "您已满星，请前往进阶";
+      }
+    });
     const btnText = computed(() => {
       return ["授权", "突破"][data.btnStatus];
     });
@@ -185,6 +192,7 @@ export default {
     return {
       ...refData,
       btnText,
+      emptyText,
       handleBtnClick,
     };
   },

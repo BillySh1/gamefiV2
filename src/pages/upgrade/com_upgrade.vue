@@ -54,7 +54,7 @@
       </div>
     </div>
     <div v-else class="property_box">
-      <div class="empty">无法继续升级，请前往突破</div>
+      <div class="empty">{{emptyText}}</div>
     </div>
     <div class="action_box" v-if="updateInfo.canLevelup">
       <div
@@ -174,6 +174,16 @@ export default {
     const modalBtnText = computed(() => {
       return ["授权", "升级"][data.modalStatus];
     });
+
+    const emptyText = computed(()=>{
+        const stars = [1,3,4,5,10][data.info.rarity];
+        if(data.info.star < stars){
+        return '无法继续升级，请前往突破'
+
+        }else{
+          return '您已满级，请前往进阶'
+        }
+    })
     const modalBtnClick = async (isOneKey) => {
       data.btnDsiabled = true;
       if (data.modalStatus == 0) {
@@ -316,6 +326,7 @@ export default {
       remainNum,
       curProperty,
       modalBtnText,
+      emptyText,
       handleClickUpgrade,
       handleClickOneKeyUpgrade,
       modalBtnClick,

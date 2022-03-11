@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack />
     <div class="content">排行榜系统正在开发中，敬请期待</div>
     <CommonPageFooter />
   </div>
@@ -10,11 +11,13 @@
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
+import InjectGoBack from '../../components/inject_go_back.vue';
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
+    InjectGoBack
   },
   setup() {
     const data = reactive({
