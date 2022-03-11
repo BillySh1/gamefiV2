@@ -54,7 +54,7 @@
       </div>
     </div>
     <div v-else class="property_box">
-      <div class="empty">{{emptyText}}</div>
+      <div class="empty">{{ emptyText }}</div>
     </div>
     <div class="action_box" v-if="updateInfo.canLevelup">
       <div
@@ -114,8 +114,8 @@
       >
         <div class="modal_inner_box">
           <div class="up">
-            您将使用 {{ costName }} x {{ oneKeyInfo.bookUse }} 对
-            {{ info.name }} 进行一键升级吗
+            升到满级共将花费 {{ costName }} x {{ oneKeyInfo.bookUse }}<br />
+            当背包道具数量不够时， 根据当前拥有道具数量智能升级
           </div>
           <div class="sub">当前拥有 {{ costName }} 数量 {{ remainNum }}</div>
           <div class="main">
@@ -175,15 +175,14 @@ export default {
       return ["授权", "升级"][data.modalStatus];
     });
 
-    const emptyText = computed(()=>{
-        const stars = [1,3,4,5,10][data.info.rarity];
-        if(data.info.star < stars){
-        return '无法继续升级，请前往突破'
-
-        }else{
-          return '您已满级，请前往进阶'
-        }
-    })
+    const emptyText = computed(() => {
+      const stars = [1, 3, 4, 5, 10][data.info.rarity];
+      if (data.info.star < stars) {
+        return "无法继续升级，请前往突破";
+      } else {
+        return "您已满级，请前往进阶";
+      }
+    });
     const modalBtnClick = async (isOneKey) => {
       data.btnDsiabled = true;
       if (data.modalStatus == 0) {
@@ -191,7 +190,7 @@ export default {
       } else if (data.modalStatus == 1) {
         await update(isOneKey);
       }
-      data.btnDsiabled = false
+      data.btnDsiabled = false;
     };
     const approveStock = async () => {
       try {
@@ -227,7 +226,7 @@ export default {
         data.loading = false;
       }
     };
-   
+
     const update = async (isOneKey) => {
       try {
         proxy.$toast("等待确认", store.state.toast_info);
@@ -490,7 +489,11 @@ export default {
   flex-direction: column;
   gap: 2rem;
   .up {
-    font-size: 2rem;
+    place-self: center;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-top: 2rem;
+    max-width: 60%;
   }
   .sub {
     font-size: 1.1rem;
@@ -500,6 +503,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    transform: translateY(-10%);
     .item {
       width: 15rem;
       img {
