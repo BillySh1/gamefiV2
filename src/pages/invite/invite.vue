@@ -38,7 +38,7 @@
               邀请排行榜
             </div>
           </div>
-          <div class="item">
+          <div class="item" @click="() => (showRules = true)">
             <img src="../../assets/invite/item_2.png" alt="" />
             <div class="inner">
               <img src="../../assets/invite/icons/3.svg" alt="" />
@@ -56,6 +56,17 @@
       </div>
     </div>
     <CommonPageFooter />
+    <InjectModal
+      class="rule_modal"
+      :title="'邀请规则'"
+      :value="showRules"
+      @click="() => (shwoRules = false)"
+      @confirm="() => (showRules = false)"
+    >
+      <div class="content">
+        玩家可以生成邀请码将邀请码发送给好友，好友通过邀请码进入并购买盲盒抽卡则邀请关系成立，邀请关系一共保持四代，四代可领取的收益分别是购买盲盒的5%，3%，1.5%，0.5%。
+      </div>
+    </InjectModal>
   </div>
 </template>
 
@@ -64,16 +75,18 @@ import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InviteModal from "./invite_modal.vue";
+import InjectModal from "../../components/inject_modal.vue";
 import initWeb3 from "../../utils/initWeb3";
 import InjectGoBack from "../../components/inject_go_back.vue";
 import { useStore } from "vuex";
 export default {
-  name: "store",
+  name: "invite",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     InviteModal,
     InjectGoBack,
+    InjectModal,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -84,6 +97,7 @@ export default {
       pageTitle: "呼朋唤友",
       encodeData: "",
       showModal: false,
+      showRules: false,
     });
 
     onBeforeMount(async () => {
@@ -114,6 +128,13 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  .rule_modal {
+    font-size: 2rem;
+    .content {
+      max-width: 60%;
+      margin: auto;
+    }
+  }
 }
 .content {
   position: relative;

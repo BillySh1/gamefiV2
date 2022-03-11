@@ -17,6 +17,40 @@
       :rarity="leftInfo.rarity"
       :quality="[leftInfo.quality, rightInfo.quality].map((i) => Number(i))"
     />
+    <InjectModal
+      :title="'重生'"
+      :value="showStockModal"
+      @close="() => (showStockModal = false)"
+      @confirm="() => (showStockModal = false)"
+    >
+      <div class="modal_inner_box">
+        <div class="up">
+          您将使用
+          <img
+            style="width: 4rem"
+            src="../../assets/store/item/jinjie.png"
+            alt=""
+          />
+          并尊盟约 x {{ costNum }} 对 {{ leftInfo.name }}和
+          {{ rightInfo.name }} 进行 进阶 吗
+        </div>
+        <div class="sub">当前拥有 并尊盟约 数量 {{ remainNum }}</div>
+        <CommonButton
+          class="btn"
+          @click="
+            () => {
+              $router.push({
+                name: 'storeDetail',
+                query: {
+                  info: 8,
+                },
+              });
+            }
+          "
+          >前往商店</CommonButton
+        >
+      </div>
+    </InjectModal>
 
     <Lottie v-if="mixing" :options="lottie_options" />
 
@@ -34,7 +68,8 @@
       class="cost_badge"
     >
       <div class="info">
-        需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }}
+        需要消耗 并尊盟约, 数量: {{ costNum }} ,当前拥有: {{ remainNum }},
+        数量不足, 请前往商店
       </div>
       <div class="extra">
         <div
@@ -172,11 +207,7 @@
         !mixing &&
         !showPack
       "
-      :class="
-        Number(remainNum) < Number(costNum)
-          ? 'action_btn disable'
-          : 'action_btn'
-      "
+      class="action_btn"
       @click="btnClick"
     >
       <CommonButton>{{ btnText }}</CommonButton>
@@ -260,6 +291,7 @@ export default {
       qualityCost: "",
       attrCost: "",
       packType: undefined,
+      showStockModal: false,
     });
     const btnText = computed(() => {
       return ["授权卡牌", "授权进阶道具", "确认进阶"][data.btnStatus];
@@ -283,6 +315,10 @@ export default {
     };
     const approve = async () => {
       try {
+        if (Number(data.costNum) > Number(data.remainNum)) {
+          data.showStockModal = true;
+          return;
+        }
         proxy.$toast(`等待授权`, store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_training.options.address;
@@ -392,6 +428,15 @@ export default {
         .call();
     };
     const handleSelect = async (item) => {
+      console.log(item, "ggg");
+      if (item.rarity == 4) {
+        proxy.$toast("金卡无法进阶", store.state.toast_error);
+        return;
+      }
+      if (item.rarity == 3 && item.level != 5 && item.star != 5) {
+        proxy.$toast("橙卡进阶需满级满星", store.state.toast_error);
+        return;
+      }
       if (data.origin == 0 && data.leftInfo && !data.rightInfo) {
         data.leftInfo = item;
         data.curRarity = item.rarity;
@@ -506,6 +551,41 @@ export default {
   height: 100%;
   background-size: 100%;
   background: black;
+  .modal_inner_box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .up {
+      font-size: 2rem;
+    }
+    .sub {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 1rem 0;
+    }
+    .btn {
+      place-self: center;
+    }
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      .item {
+        width: 15rem;
+        img {
+          width: 50%;
+        }
+      }
+      .middle {
+        width: 6rem;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
   .modal_text {
     font-size: 1.5rem;
     margin: 0.5rem 0;

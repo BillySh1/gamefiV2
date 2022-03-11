@@ -49,6 +49,29 @@
 
       <div v-if="curSelectedHero && !processing" class="cur_selected_cost">
         需要花费 {{ cost }} 枚两仪石, 当前数量 {{ stockBalance }}
+      </div>
+
+      <div
+        v-if="curSelectedHero && !processing"
+        class="action_btn"
+        @click="actionButtonClick"
+      >
+        <CommonButton>{{ btnText }}</CommonButton>
+      </div>
+    </div>
+    <CommonPageFooter />
+    <InjectModal
+      :title="'重生'"
+      :value="showModal"
+      @close="() => (showModal = false)"
+      @confirm="() => (showModal = false)"
+    >
+      <div class="modal_inner_box">
+        <div class="up">
+          您将使用 两仪石 x {{ cost }} 对
+          {{ curSelectedHero.name }} 进行升级吗,数量不足, 请前往商店
+        </div>
+        <div class="sub">当前拥有 两仪石 数量 {{ stockBalance }}</div>
         <CommonButton
           class="btn"
           @click="
@@ -61,20 +84,21 @@
               });
             }
           "
-          >前往商店购买</CommonButton
+          >前往商店</CommonButton
         >
+        <div class="main">
+          <div class="item">
+            <img src="../../assets/store/item/type_1_0.png" alt="" />
+          </div>
+          <div class="middle">
+            <img src="../../assets/upgrade/right.png" alt="" />
+          </div>
+          <div class="item">
+            <HeroCardItem :info="curSelectedHero" />
+          </div>
+        </div>
       </div>
-
-      <div
-        v-if="curSelectedHero && !processing"
-        :class="!canDo ? 'action_btn disable' : 'action_btn'"
-        @click="actionButtonClick"
-      >
-        <CommonButton>{{ btnText }}</CommonButton>
-        <span v-if="!canDo">道具不足</span>
-      </div>
-    </div>
-    <CommonPageFooter />
+    </InjectModal>
   </div>
 </template>
 
@@ -93,6 +117,7 @@ import CommonButton from "../../components/common_button.vue";
 import InejctPackHero from "../../components/inejct_pack_hero.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import InjectModal from "../../components/inject_modal.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 const openAni = require("../../assets/reborn/open.json");
@@ -106,6 +131,7 @@ export default {
     HeroCardItem,
     CommonButton,
     InjectGoBack,
+    InjectModal,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -137,6 +163,7 @@ export default {
       stockBalance: 0,
       processing: false,
       newMintedHero: "",
+      showModal: false,
     });
 
     const btnText = computed(() => {
@@ -151,7 +178,7 @@ export default {
     const handleSelectHero = async (item) => {
       if (item.rarity == 4) {
         proxy.$toast("金卡不支持重生,请重新选择", store.state.toast_info);
-        return
+        return;
       }
       try {
         data.loading = true;
@@ -183,6 +210,10 @@ export default {
     };
     const approve = async () => {
       try {
+        if (!canDo.value) {
+          data.showModal = true;
+          return;
+        }
         proxy.$toast(
           `等待授权 ${data.curSelectedHero.name} `,
           store.state.toast_info
@@ -226,6 +257,7 @@ export default {
           .isApprovedForAll(data.account, addr)
           .call();
         if (isApproved) {
+          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
           data.btnStatus = 2;
           return;
         }
@@ -352,6 +384,41 @@ export default {
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, #250606 0%, #02131f 100%);
+  .modal_inner_box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .up {
+      font-size: 2rem;
+    }
+    .sub {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 1rem 0;
+    }
+    .btn {
+      place-self: center;
+    }
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      .item {
+        width: 15rem;
+        img {
+          width: 50%;
+        }
+      }
+      .middle {
+        width: 6rem;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 .content {
   position: relative;
