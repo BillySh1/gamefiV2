@@ -112,7 +112,11 @@ export default {
     });
     const generate = () => {
       data.encodeData =
-        window.location.host + "/#/mint?invite=" + btoa(data.account);
+        "http://" +
+        window.location.host +
+        "/#/mint?invite=" +
+        btoa(data.account);
+      console.log(data.encodeData,'gggg')
       proxy.$toast("邀请链接已生成", store.state.toast_success);
       data.showModal = true;
     };
