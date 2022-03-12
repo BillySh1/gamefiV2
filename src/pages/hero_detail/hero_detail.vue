@@ -112,7 +112,8 @@
               </div>
               <img class="divider" src="../../assets/pack/divider.png" alt="" />
               <div class="attr_map">
-                <img src="../../assets/pack/radar.png" alt="" />
+                <!-- <DetailRadar :data="info.properties" /> -->
+                <img src="../../assets/pack/radar.png" alt="">
               </div>
             </div>
           </div>
@@ -165,6 +166,7 @@ import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import HeroCardItem from "../../components/hero_card_item";
 import InjectGoBack from "../../components/inject_go_back.vue";
+// import DetailRadar from './detail_radar.vue'
 import {
   useQualityText,
   usePreferenceText,
@@ -179,6 +181,7 @@ export default {
     CommonPageFooter,
     HeroCardItem,
     InjectGoBack,
+    // DetailRadar
   },
   setup() {
     const route = useRoute();

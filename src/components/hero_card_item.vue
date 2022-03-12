@@ -207,13 +207,13 @@ export default {
   .stars {
     position: absolute;
     top: 10%;
-    right: 0%;
+    right: -1%;
     z-index: 30;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 10%;
+    width: 6%;
     img {
       width: 100%;
       margin-bottom: 4px;

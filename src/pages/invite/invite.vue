@@ -112,7 +112,6 @@ export default {
     });
     const generate = () => {
       data.encodeData =
-        "http://" +
         window.location.host +
         "/#/mint?invite=" +
         btoa(data.account);
