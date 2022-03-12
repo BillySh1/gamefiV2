@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <img class="map" src="../../allstar_assets/main/test_map.png" alt="" />
+    <img class="map" src="../../allstar_assets/main/0_map.png" alt="" />
     <div class="main">
       <div class="inner">
         <div class="city_main">
