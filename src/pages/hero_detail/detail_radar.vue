@@ -35,7 +35,7 @@ export default {
       const mData = temp;
       const mCount = mData.length; //边数
       const mCenter = mW / 2; //中心点
-      const mRadius = mCenter - 20; //半径(减去的值用于给绘制的文本留空间)
+      const mRadius = mCenter - 30; //半径(减去的值用于给绘制的文本留空间)
       const mAngle = (Math.PI * 2) / mCount; //角度
       let mCtx = null;
       const mColorPolygon = "#FFF626"; //多边形颜色
@@ -51,6 +51,7 @@ export default {
         drawLines(mCtx);
         drawText(mCtx);
         drawRegion(mCtx);
+        drawCircle(mCtx);
       };
       const drawPolygon = (ctx) => {
         ctx.save();
@@ -138,6 +139,24 @@ export default {
         ctx.closePath();
         ctx.fillStyle = "rgba(217,134,10,0.7)";
         ctx.fill();
+
+        ctx.restore();
+      };
+      const drawCircle = (ctx) => {
+        ctx.save();
+
+        var r = mCenter / 30;
+        for (var i = 0; i < mCount; i++) {
+          var x =
+            mCenter + (mRadius * Math.cos(mAngle * i) * mData[i][1]) / 100;
+          var y =
+            mCenter + (mRadius * Math.sin(mAngle * i) * mData[i][1]) / 100;
+
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255, 0, 0, 0.8)";
+          ctx.fill();
+        }
 
         ctx.restore();
       };
