@@ -38,12 +38,18 @@
             <div v-if="curTabKey == 0" class="quick_info">
               <div class="powers">战力: {{ Number(info.power) / 100 }}</div>
               <div class="infos">
-                <span :style="`color:${getRarityStyle}`"
-                  >稀有度: {{ rarityText }}</span
-                >
-                <span :style="`color:${getQualityStyle}`"
-                  >品质: {{ qualityText }}</span
-                >
+                <span
+                  >稀有度:
+                  <span :style="`color:${getRarityStyle}; display:inline`">
+                    {{ rarityText }}</span
+                  >
+                </span>
+                <span
+                  >品质:
+                  <span :style="`color:${getQualityStyle}; display:inline`">{{
+                    qualityText
+                  }}</span>
+                </span>
                 <span>阵营: {{ campText }}</span>
                 <span>职业: {{ preferenceText }}</span>
                 <span>等级: {{ info.level }} 级</span>
@@ -191,10 +197,10 @@ export default {
       return usePreferenceText(data.info.preference);
     });
     const getRarityStyle = computed(() => {
-      return ["white", "blue", "purple", "orange", "gold"][data.info.rarity];
+      return ["white", "#4F7DFF", "#7622D4", "#BA5F0F", "#FFDF3C"][data.info.rarity];
     });
     const getQualityStyle = computed(() => {
-      return ["white", "blue", "purple", "orange"][data.info.quality];
+      return ["white", "#4F7DFF", "#7622D4", "#BA5F0F"][data.info.quality];
     });
     const heroAttrDetailMap = computed(() => {
       return data.info.properties.reduce((pre, cur, curIdx) => {

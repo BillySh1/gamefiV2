@@ -156,12 +156,12 @@ export default {
       return data.newMintedItems[data.curIndex];
     });
     const getRarityStyle = computed(() => {
-      return ["white", "blue", "purple", "orange", "gold"][
+      return ["white", "blue", "#7622D4", "#BA5F0F", "#FFDF3C"][
         curInfo.value.rarity
       ];
     });
     const getQualityStyle = computed(() => {
-      return ["white", "blue", "purple", "orange"][curInfo.value.quality];
+      return ["white", "blue", "#7622D4", "#BA5F0F"][curInfo.value.quality];
     });
     const getNewHero = async () => {
       try {

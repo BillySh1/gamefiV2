@@ -161,7 +161,7 @@ export default {
   }
   .name {
     @media screen and (max-height: 500px) and (max-width: 1024px) {
-      left: 1rem;
+      left: 1.2rem;
       letter-spacing: 1px;
       font-size: 1rem;
     }
