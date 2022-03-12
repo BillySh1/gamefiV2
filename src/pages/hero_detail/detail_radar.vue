@@ -18,7 +18,8 @@ export default {
       const p_2 = [40, 40, 90, 50, 60];
       const p_3 = [50, 70, 40, 80, 40];
       const p_4 = [50, 30, 60, 30, 80];
-      const preferences = [p_0, p_1, p_2, p_3, p_4];
+      const p_5 = [90, 90, 90, 90, 90];
+      const preferences = [p_0, p_1, p_2, p_3, p_4, p_5];
       const temp = [
         ["血量", preferences[prop.pre][0]],
         ["攻击力", preferences[prop.pre][1]],
