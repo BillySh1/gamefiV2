@@ -24,7 +24,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.0.2",
+      version: "1.0.3",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
