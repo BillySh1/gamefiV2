@@ -15,7 +15,7 @@
         >
           重置
         </div>
-        <div class="left" @click="saveFilter">保存</div>
+        <!-- <div class="left" @click="saveFilter">保存</div> -->
       </div>
       <div v-for="(item, index) in filters" :key="index" class="filter_item">
         <div class="left">
