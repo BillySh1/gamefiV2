@@ -30,6 +30,7 @@ const sell = () => import("../pages/market/sell.vue");
 const allStarsEntry = () => import("../pages/all_stars/entry.vue");
 const connect = () => import("../pages/error/connect.vue");
 const testCoin = () => import("../pages/test/test.vue");
+const search = () => import("../pages/search/search.vue");
 
 // 群英会战 start
 const bf_choose = () => import("../pages/all_stars/entry_choose_camp.vue");
@@ -189,6 +190,11 @@ const router = createRouter({
       path: "/bf_main",
       name: "bf_main",
       component: bf_main,
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: search,
     },
   ],
 });

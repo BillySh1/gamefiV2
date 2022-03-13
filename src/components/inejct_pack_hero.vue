@@ -61,7 +61,20 @@
         <div class="filter_box" @click="() => (showFilter = true)">
           <div class="text">筛选</div>
         </div>
-        <div class="search_box">
+        <div
+          class="search_box"
+          v-if="!hideSearch"
+          @click="
+            () => {
+              $router.push({
+                name: 'search',
+                query: {
+                  type: toSelect ? 2 : 0,
+                },
+              });
+            }
+          "
+        >
           <CommonSearch />
         </div>
       </div>
@@ -148,7 +161,7 @@ import useHeroDetail from "../utils/useHeroDetail.js";
 import InjectGoBack from "./inject_go_back.vue";
 export default {
   name: "inject_pack_hero",
-  props: ["value", "toSelect"],
+  props: ["value", "toSelect", "hideSearch"],
   components: {
     PackHeroItem,
     CommonSearch,

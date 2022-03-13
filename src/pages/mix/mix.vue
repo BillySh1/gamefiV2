@@ -134,6 +134,7 @@
         :value="showPack && packType == 2"
         @back="() => (showPack = false)"
         :toSelect="true"
+        :hideSearch="true"
         @select="(x) => handleSelect(x)"
       />
       <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />

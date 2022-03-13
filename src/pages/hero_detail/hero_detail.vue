@@ -5,12 +5,7 @@
       :custom="true"
       @back="
         () => {
-          $router.push({
-            name: 'pack',
-            query: {
-              type: 0,
-            },
-          });
+          $router.go(-1);
         }
       "
     />
@@ -165,7 +160,7 @@ import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import HeroCardItem from "../../components/hero_card_item";
 import InjectGoBack from "../../components/inject_go_back.vue";
-import DetailRadar from './detail_radar.vue'
+import DetailRadar from "./detail_radar.vue";
 import {
   useQualityText,
   usePreferenceText,
@@ -180,7 +175,7 @@ export default {
     CommonPageFooter,
     HeroCardItem,
     InjectGoBack,
-    DetailRadar
+    DetailRadar,
   },
   setup() {
     const route = useRoute();
@@ -199,7 +194,9 @@ export default {
       return usePreferenceText(data.info.preference);
     });
     const getRarityStyle = computed(() => {
-      return ["white", "#4F7DFF", "#7622D4", "#BA5F0F", "#FFDF3C"][data.info.rarity];
+      return ["white", "#4F7DFF", "#7622D4", "#BA5F0F", "#FFDF3C"][
+        data.info.rarity
+      ];
     });
     const getQualityStyle = computed(() => {
       return ["white", "#4F7DFF", "#7622D4", "#BA5F0F"][data.info.quality];

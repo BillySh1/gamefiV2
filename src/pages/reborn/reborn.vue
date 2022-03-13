@@ -29,6 +29,7 @@
         <InejctPackHero
           :toSelect="true"
           :value="showPack && step == 1"
+          :hideSearch="true"
           @back="
             () => {
               showPack = false;
@@ -68,8 +69,7 @@
     >
       <div class="modal_inner_box">
         <div class="up">
-          您将使用 两仪石 x {{ cost }} 对
-          {{ curSelectedHero.name }} 进行升级吗
+          您将使用 两仪石 x {{ cost }} 对 {{ curSelectedHero.name }} 进行升级吗
         </div>
         <div class="sub">当前拥有 两仪石 数量 {{ stockBalance }}</div>
         <CommonButton

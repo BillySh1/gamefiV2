@@ -8,13 +8,11 @@
 <script >
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
-  name: "",
+  name: "common_search",
   setup() {
     const data = reactive({});
-    onBeforeMount(() => {
-    });
-    onMounted(() => {
-    });
+    onBeforeMount(() => {});
+    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,

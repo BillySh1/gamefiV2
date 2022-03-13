@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFilter" class="mask" @click="showFilter = false" >
+  <div v-if="showFilter" class="mask" @click="showFilter = false">
     <InjectGoBack :custom="true" @back="() => (showFilter = false)" />
     <div class="box">
       <div
@@ -54,7 +54,19 @@
         <div class="filter_box" @click="() => (showFilter = true)">
           <div class="text">筛选</div>
         </div>
-        <div class="search_box">
+        <div
+          class="search_box"
+          @click="
+            () => {
+              $router.push({
+                name: 'search',
+                query: {
+                  type: 1,
+                },
+              });
+            }
+          "
+        >
           <CommonSearch />
         </div>
       </div>
@@ -304,8 +316,7 @@ export default {
       );
       await getList();
       if (route.query.type) {
-        triggerFilter(1,route.query.type)
-        
+        triggerFilter(1, route.query.type);
       }
       filterTab({ key: 0 });
       data.loading = false;
@@ -466,7 +477,11 @@ export default {
         font-size: 1.5rem;
       }
     }
-    .search_box{
+    .search_box {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
       transform: translate(-5rem);
     }
   }
