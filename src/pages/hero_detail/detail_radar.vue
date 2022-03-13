@@ -28,6 +28,7 @@ export default {
         ["防御", preferences[prop.pre][0]],
         ["精神力", preferences[prop.pre][4]],
       ];
+      const ratio = window.devicePixelRatio || 1;
       const width = document.getElementById("radar_box").offsetWidth;
       const height = document.getElementById("radar_box").offsetHeight;
 
@@ -45,9 +46,12 @@ export default {
 
       const init = () => {
         const canvas = document.getElementById("radar");
-        canvas.height = mH;
-        canvas.width = mW;
+        canvas.height = ratio * mH;
+        canvas.width = ratio * mW;
+        canvas.style.width = `${mW}px`; // 控制显示大小
+        canvas.style.height = `${mH}px`; // 控制显示大小
         mCtx = canvas.getContext("2d");
+        mCtx.scale(ratio, ratio)
         drawPolygon(mCtx);
         drawLines(mCtx);
         drawText(mCtx);
