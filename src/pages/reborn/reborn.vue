@@ -59,8 +59,25 @@
       >
         <CommonButton>{{ btnText }}</CommonButton>
       </div>
+      <div class="tip_badge" @click="() => (showRules = true)">
+        <div class="inner">
+          <img src="../../assets/common/tip_badge.svg" />
+          <div class="text">重生提醒</div>
+        </div>
+      </div>
     </div>
     <CommonPageFooter />
+
+    <InjectModal
+      @close="() => (showRules = false)"
+      @confirm="() => (showRules = false)"
+      :value="showRules"
+      title="重生提醒"
+    >
+      <div class="modal_text">重生可能会改变卡牌的阵营，英雄等信息</div>
+      <div class="modal_text">属性将会根据重生后的卡牌职业对应继承</div>
+      <div class="modal_text" style="color: red">注： 金卡不可重生</div>
+    </InjectModal>
     <InjectModal
       :title="'重生'"
       :value="showModal"
@@ -164,6 +181,7 @@ export default {
       processing: false,
       newMintedHero: "",
       showModal: false,
+      showRules: false,
     });
 
     const btnText = computed(() => {
@@ -426,6 +444,30 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  .tip_badge {
+    cursor: pointer;
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    white-space: nowrap;
+    .inner {
+      position: relative;
+      img {
+        width: 10rem;
+        opacity: 1;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
+  }
+  .modal_text {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+  }
 }
 .lottie {
   cursor: pointer;

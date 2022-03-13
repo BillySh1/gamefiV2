@@ -81,10 +81,8 @@ export default {
       };
       const drawLines = (ctx) => {
         ctx.save();
-
         ctx.beginPath();
         ctx.strokeStyle = mColorLines;
-
         for (var i = 0; i < mCount; i++) {
           var x = mCenter + mRadius * Math.cos(mAngle * i);
           var y = mCenter + mRadius * Math.sin(mAngle * i);
@@ -92,9 +90,7 @@ export default {
           ctx.moveTo(mCenter, mCenter);
           ctx.lineTo(x, y);
         }
-
         ctx.stroke();
-
         ctx.restore();
       };
       const drawText = (ctx) => {

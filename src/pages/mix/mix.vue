@@ -193,7 +193,7 @@
       <div class="tip_badge" @click="() => (showModal = true)">
         <div class="inner">
           <img src="../../assets/common/tip_badge.svg" />
-          <div class="text">进阶规则</div>
+          <div class="text">进阶提醒</div>
         </div>
       </div>
     </div>
