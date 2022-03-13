@@ -1,0 +1,10 @@
+.container {
+  background: url("../../assets/index/home_bg_1920.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+@media screen and (min-aspect-ratio: 16/9) {
+  .container {
+    background: url("../../assets/index/home_bg_2340.jpg") no-repeat;
+    background-size: 100% 100%;
+  }
+}

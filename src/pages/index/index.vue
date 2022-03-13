@@ -113,12 +113,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import url("./bg.css");
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/index/home_bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .content {
   width: 100%;
