@@ -7,7 +7,45 @@
     />
     <img class="logo" src="../../assets/common/logo.png" alt="" />
     <div class="container">
+      <Lottie
+        v-show="playing && cur.key == 0"
+        class="lottie"
+        :options="{
+          ...defaultOptions,
+          animationData: require('../../allstar_assets/main/choose/chose_0.json'),
+        }"
+        @animCreated="handleAni0"
+      />
+      <Lottie
+        v-show="playing && cur.key == 1"
+        class="lottie"
+        :options="{
+          ...defaultOptions,
+          animationData: require('../../allstar_assets/main/choose/chose_1.json'),
+        }"
+        @animCreated="handleAni1"
+      />
+      <Lottie
+        v-show="playing && cur.key == 2"
+        class="lottie"
+        :options="{
+          ...defaultOptions,
+          animationData: require('../../allstar_assets/main/choose/chose_2.json'),
+        }"
+        @animCreated="handleAni2"
+      />
+      <Lottie
+        v-show="playing && cur.key == 3"
+        class="lottie"
+        :options="{
+          ...defaultOptions,
+          animationData: require('../../allstar_assets/main/choose/chose_3.json'),
+        }"
+        @animCreated="handleAni3"
+      />
+
       <div
+        v-show="!playing"
         class="item"
         v-for="(item, index) in campMap"
         :key="index"
@@ -49,9 +87,10 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs, onBeforeUnmount } from "vue";
 import InjectModal from "../../components/inject_modal.vue";
 import { useRouter } from "vue-router";
+
 export default {
   name: "entry_choose_camp",
   components: {
@@ -78,25 +117,65 @@ export default {
           name: "群雄",
         },
       ],
-      cur: "",
+      cur: 0,
+
       showModal: false,
+      ani0: undefined,
+      ani1: undefined,
+      ani2: undefined,
+      ani3: undefined,
+      playing: false,
+      defaultOptions: {
+        autoplay: false,
+        loop: true,
+      },
     });
+
     const choose = (x) => {
       data.cur = x;
-      data.showModal = true;
+      data.playing = true;
+      const ani = data[`ani${x.key}`];
+      ani.play();
+      ani.addEventListener("loopComplete", () => {
+        ani.stop();
+        data.playing = false;
+        data.showModal = true;
+      });
     };
+
     const onConfirm = () => {
       data.showModal = false;
       router.push({
         name: "bf_main",
       });
     };
-    onBeforeMount(() => {});
+    const handleAni0 = (ani) => {
+      data.ani0 = ani;
+    };
+    const handleAni1 = (ani) => {
+      data.ani1 = ani;
+    };
+    const handleAni2 = (ani) => {
+      data.ani2 = ani;
+    };
+    const handleAni3 = (ani) => {
+      data.ani3 = ani;
+    };
+    onBeforeUnmount(() => {
+      data.ani0.destroy();
+      data.ani1.destroy();
+      data.ani2.destroy();
+      data.ani3.destroy();
+    });
     const refData = toRefs(data);
     return {
       ...refData,
       choose,
       onConfirm,
+      handleAni0,
+      handleAni1,
+      handleAni2,
+      handleAni3,
     };
   },
 };
@@ -113,6 +192,7 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
   .logo {
     width: 20rem;
     position: absolute;
@@ -134,6 +214,14 @@ export default {
     }
   }
 }
+.lottie {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 999;
+}
 .container {
   position: absolute;
   width: fit-content;
@@ -143,6 +231,9 @@ export default {
   z-index: 10;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50%;
   .item {
     cursor: pointer;
     &:hover {
