@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="index_container">
     <CommonPageHeader @exit="$emit('exit')" />
 
     <div class="content">
@@ -114,7 +114,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url("./bg.css");
-.container {
+.index_container {
   width: 100%;
   height: 100%;
 }
