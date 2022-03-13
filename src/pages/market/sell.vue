@@ -142,7 +142,6 @@ export default {
         proxy.$toast(`等待授权 ${data.info.name}`, store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_exchange.options.address;
-        console.log(store.state.c_exchange, "ggg");
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .approve(addr, data.info.tokenId)
@@ -172,7 +171,6 @@ export default {
         proxy.$toast("等待上架", store.state.toast_info);
         const c = store.state.c_exchange;
         const price = data.web3.utils.toWei(data.price.toString(), "ether");
-        console.log(price, "fff");
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .put(data.info.tokenId, price)

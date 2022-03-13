@@ -86,7 +86,6 @@ export default {
       data.showModal = true;
     };
     const onConfirm = () => {
-      console.log(data.cur);
       data.showModal = false;
       router.push({
         name: "bf_main",

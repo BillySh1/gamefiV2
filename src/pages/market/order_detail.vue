@@ -144,7 +144,6 @@ export default {
       try {
         proxy.$toast("等待下架", store.state.toast_info);
         const c = store.state.c_exchange;
-        console.log(c, "ggg");
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .pull(data.info.tokenId)
