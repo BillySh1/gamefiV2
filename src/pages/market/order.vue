@@ -19,9 +19,7 @@
             }
           "
         />
-        <div class="search_box">
-          <CommonSearch />
-        </div>
+      
       </div>
       <div class="content">
         <div class="badge">
@@ -112,7 +110,6 @@ import {
 } from "vue";
 import { useStore } from "vuex";
 import MarketHeroItem from "./market_hero_item.vue";
-import CommonSearch from "../../components/common_search";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
@@ -121,7 +118,6 @@ export default {
   name: "market_camp_detail",
   components: {
     MarketHeroItem,
-    CommonSearch,
     CommonPageHeader,
     CommonPageFooter,
   },
