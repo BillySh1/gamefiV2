@@ -94,7 +94,7 @@ export default {
       const c = store.state.c_hero;
       const list = await c.methods.cardList(data.account).call();
       data.power = list.reduce((pre, cur) => {
-        pre += Number(cur.power) / 100;
+        pre += Number((Number(cur.power) / 100).toFixed(0));
         return pre;
       }, 0);
     };
