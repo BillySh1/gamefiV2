@@ -222,7 +222,7 @@
       title="进阶提醒"
     >
       <div class="modal_text">
-        相同阵营， 相同稀有度的英雄才可以进阶(橙卡进阶需满级满星切品质为传说)
+        相同阵营， 相同稀有度的英雄才可以进阶
       </div>
       <div class="modal_text">进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
       <div class="modal_text">
@@ -231,6 +231,9 @@
       </div>
       <div class="modal_text">
         可选择使用金镶灵玉提升进阶后卡牌的初始属性，消耗数量视稀有度而定
+      </div>
+      <div class="modal_text" style="color: red">
+        注： 金卡不可进阶， 橙卡进阶金卡必须满级满星且品质为SSR
       </div>
     </InjectModal>
   </div>
