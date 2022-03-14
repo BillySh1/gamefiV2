@@ -207,7 +207,7 @@ export default {
   .stars {
     position: absolute;
     top: 10%;
-    right: -1%;
+    right: 1%;
     z-index: 30;
     display: flex;
     flex-direction: column;
