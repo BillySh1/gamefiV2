@@ -18,7 +18,7 @@
       :quality="[leftInfo.quality, rightInfo.quality].map((i) => Number(i))"
     />
     <InjectModal
-      :title="'重生'"
+      :title="'卡牌进阶'"
       :value="showStockModal"
       @close="() => (showStockModal = false)"
       @confirm="() => (showStockModal = false)"
