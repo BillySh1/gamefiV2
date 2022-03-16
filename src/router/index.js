@@ -35,6 +35,7 @@ const search = () => import("../pages/search/search.vue");
 // 群英会战 start
 const bf_choose = () => import("../pages/all_stars/entry_choose_camp.vue");
 const bf_main = () => import("../pages/all_stars/main.vue");
+const bf_store = ()=>import('../pages/all_stars/town/store.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -196,6 +197,11 @@ const router = createRouter({
       name: "search",
       component: search,
     },
+    {
+      path:'/bf_store',
+      name:'bf_store',
+      component:bf_store
+    }
   ],
 });
 
