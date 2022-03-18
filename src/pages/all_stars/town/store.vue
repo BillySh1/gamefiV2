@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="back">
+        <div class="back" @click="()=>$router.go(-1)" >
           <img src="../../../allstar_assets/store/back.png" alt="" />
           <div class="text">返回</div>
         </div>

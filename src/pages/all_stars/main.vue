@@ -1,9 +1,9 @@
 <template>
   <div class="box">
-    <img class="map" src="../../allstar_assets/main/0_map.png" alt="" />
+    <img class="map" :src="getMap" alt="" />
     <div class="main">
       <div class="inner">
-        <div class="city_main">
+        <div class="city_main" @click="() => $router.push({ name: 'bf_base' })">
           <div class="inner">
             <div class="up">
               {{ campText }}
@@ -33,7 +33,9 @@
           <div>90000000000</div>
         </div>
         <div class="pre_time_view">
-          <div>距离下一个据点 <span style="color:red" >{{ nextName }}</span> 还剩</div>
+          <div>
+            距离下一个据点 <span style="color: red">{{ nextName }}</span> 还剩
+          </div>
           <div class="time_row">
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ timing }}
@@ -72,11 +74,20 @@ export default {
         }
       );
     });
+    const getMap = computed(() => {
+      return [
+        require("../../allstar_assets/main/map_0.png"),
+        require("../../allstar_assets/main/map_1.png"),
+        require("../../allstar_assets/main/map_2.png"),
+        require("../../allstar_assets/main/map_3.png"),
+      ][data.curCamp];
+    });
     const refData = toRefs(data);
     return {
       ...refData,
       campText,
       timing,
+      getMap,
     };
   },
 };
