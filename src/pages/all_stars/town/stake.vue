@@ -23,9 +23,45 @@
       <div class="rule_modal_item">
         出征将收取一定的粮草和战鼓用以振奋军心,请各位指挥官提早准备
       </div>
+
       <div class="rule_modal_item" style="color: red">
         注意:
         一旦出征，卡牌在背包中将不可见，在此战役期间您将无法再对出征的卡牌做任何操作,战役结束卡牌自动归还
+      </div>
+    </InjectModal>
+    <InjectModal
+      :value="showDoubleCheck"
+      :title="'出征确认'"
+      @confirm="() => (showDoubleCheck = false)"
+      @close="() => (showDoubleCheck = false)"
+    >
+      <div class="rule_modal_item">
+        需要消耗粮草
+        <img
+          style="width: 4rem"
+          src="../../../assets/store/item/type_0_0.png"
+          alt=""
+        />
+        数量：
+        {{ cost[0] }}
+      </div>
+      <div class="rule_modal_item">
+        需要消耗衅鼓
+        <img
+          style="width: 4rem"
+          src="../../../assets/store/item/type_0_1.png"
+          alt=""
+        />
+        数量：
+        {{ cost[1] }}
+      </div>
+      <div class="rule_modal_item">武将队伍： {{ getWarrorNames }}</div>
+      <div class="rule_modal_item">主公队伍: {{ getKingNames }}</div>
+      <div class="rule_modal_item" style="color: red">
+        总战力： {{ totalPower }}
+      </div>
+      <div class="rule_modal_item" style="color: red">
+        注意:一旦出征，本此战役期间均无法更改，确认出征？
       </div>
     </InjectModal>
     <div class="topbar">
@@ -87,7 +123,7 @@
         <img src="../../../allstar_assets/store/back.png" alt="" />
         <div class="text">返回</div>
       </div>
-      <div class="stake">
+      <div class="stake" @click="doubleCheck">
         <img src="../../../allstar_assets/stake/stake_btn_bg.png" alt="" />
         <div class="text">出征</div>
       </div>
@@ -100,13 +136,14 @@ import {
   reactive,
   toRefs,
   onBeforeMount,
-  onMounted,
   computed,
   getCurrentInstance,
 } from "vue";
 import StakeItem from "./stake_item.vue";
 import InjectPackHero from "../../../components/inejct_pack_hero.vue";
 import InjectModal from "../../../components/inject_modal.vue";
+import initWeb3 from "../../../utils/initWeb3";
+import { useQualityText } from "../../../utils/useHeroInfo";
 import { useStore } from "vuex";
 export default {
   name: "bf_stake",
@@ -134,9 +171,13 @@ export default {
       activeTab: 0,
       selectedWarrior: [{}, {}, {}, {}, {}],
       selectedKing: [],
+      cost: [0, 10],
       curIdx: 0,
       showPack: false,
       showRuleModal: false,
+      showDoubleCheck: false,
+      account: "",
+      web3: "",
     });
 
     const curTotalPower = computed(() => {
@@ -148,6 +189,21 @@ export default {
         }
         return pre;
       }, 0);
+    });
+    const totalPower = computed(() => {
+      const temp1 = data.selectedWarrior.reduce((pre, cur) => {
+        if (cur && cur.power) {
+          pre += Number(cur.power);
+        }
+        return pre;
+      }, 0);
+      const temp2 = data.selectedKing.reduce((pre, cur) => {
+        if (cur && cur.power) {
+          pre += Number(cur.power);
+        }
+        return pre;
+      }, 0);
+      return temp1 + temp2;
     });
     const selectedTokenIds = computed(() => {
       const temp = [];
@@ -179,16 +235,68 @@ export default {
       }
       data.showPack = false;
     };
-
-    onBeforeMount(() => {});
-    onMounted(() => {});
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+    });
+    const doubleCheck = async () => {
+      await getCost();
+      data.showDoubleCheck = true;
+    };
+    const getCost = async () => {
+      const c = store.state.c_battle;
+      console.log(c, "gggg");
+      const tokenIds1 = data.selectedWarrior.reduce((pre, cur) => {
+        if (cur && cur.tokenId) pre.push(cur.tokenId);
+        return pre;
+      }, []);
+      const tokenIds2 = data.selectedKing.reduce((pre, cur) => {
+        if (cur && cur.tokenId) pre.push(cur.tokenId);
+        return pre;
+      }, []);
+      if (!tokenIds1.length && !tokenIds2.length) {
+        proxy.$toast(`请至少选择一张卡片`, store.state.toast_error);
+        return;
+      }
+      data.cost[0] = await c.methods.ticketAmount(tokenIds1, tokenIds2).call();
+      console.log(data.cost[0]);
+    };
+    const getWarrorNames = computed(() => {
+      const res = data.selectedWarrior.reduce((pre, cur) => {
+        if (cur && cur.tokenId) {
+          pre.push(`${cur.name} (${useQualityText(cur.quality)}) `);
+        }
+        return pre;
+      }, []);
+      return res.length > 0 ? res.join(",") : "无";
+    });
+    const getKingNames = computed(() => {
+      const res = data.selectedKing.reduce((pre, cur) => {
+        if (cur && cur.tokenId) {
+          pre.push(`${cur.name} (${useQualityText(cur.quality)}) `);
+        }
+        return pre;
+      }, []);
+      return res.length > 0 ? res.join(",") : "无";
+    });
     const refData = toRefs(data);
     return {
       ...refData,
       curTotalPower,
       selectedTokenIds,
+      getWarrorNames,
+      getKingNames,
+      totalPower,
       handleClickItem,
       handleSelectHero,
+      getCost,
+      doubleCheck,
     };
   },
 };

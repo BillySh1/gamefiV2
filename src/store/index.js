@@ -11,6 +11,7 @@ import RecruitABI from "../constants/Recruit.json";
 import RichHeroABI from "../constants/RichHero.json";
 import RichShopABI from "../constants/RichShop.json";
 import TrainingABI from "../constants/Training.json";
+import BattleABI from '../constants/Battle.json'
 
 const c_map = {
   c_airdrop: {
@@ -52,6 +53,11 @@ const c_map = {
   c_usdt:{
     abi: MMCTokenABI.abi,
     address: addressMap.usdt
+  },
+  // battle field
+  c_battle:{
+    abi:BattleABI.abi,
+    address: addressMap.battle,
   }
 };
 
