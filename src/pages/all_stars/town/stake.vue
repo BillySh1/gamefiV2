@@ -10,6 +10,23 @@
         }
       "
     />
+    <InjectModal
+      :value="showRuleModal"
+      :title="'出征规则'"
+      @confirm="() => (showRuleModal = false)"
+      @close="() => (showRuleModal = false)"
+    >
+      <div class="rule_modal_item">
+        至少抵押一张卡牌，最多抵押五张卡牌出征，金卡数量不限
+      </div>
+      <div class="rule_modal_item">
+        出征将收取一定的粮草和战鼓用以振奋军心,请各位指挥官提早准备
+      </div>
+      <div class="rule_modal_item" style="color: red">
+        注意:
+        一旦出征，卡牌在背包中将不可见，在此战役期间您将无法再对出征的卡牌做任何操作,战役结束卡牌自动归还
+      </div>
+    </InjectModal>
     <div class="topbar">
       <div class="title">
         <img src="../../../allstar_assets/store/title_bg.png" alt="" />
@@ -33,7 +50,7 @@
           <div class="bg_v">{{ curTotalPower }}</div>
         </div>
       </div>
-      <div class="rule">
+      <div class="rule" @click="() => (showRuleModal = true)">
         <img src="../../../allstar_assets/stake/rule_bg.png" alt="" />
         <div class="text">出征规则</div>
       </div>
@@ -65,11 +82,13 @@
 import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
 import StakeItem from "./stake_item.vue";
 import InjectPackHero from "../../../components/inejct_pack_hero.vue";
+import InjectModal from "../../../components/inject_modal.vue";
 export default {
   name: "bf_stake",
   components: {
     StakeItem,
     InjectPackHero,
+    InjectModal,
   },
   setup() {
     const data = reactive({
@@ -89,14 +108,17 @@ export default {
       selectedWarrior: [{}, {}, {}, {}, {}],
       curIdx: 0,
       showPack: false,
+      showRuleModal: false,
     });
 
     const curTotalPower = computed(() => {
       const dataMap = data.selectedWarrior;
-      return dataMap.reduce((pre, cur) => {
-        pre += Number(cur.power);
-        return pre;
-      }, 0);
+      return (
+        dataMap.reduce((pre, cur) => {
+          pre += Number(cur.power);
+          return pre;
+        }, 0) || 0
+      );
     });
     const handleClickItem = (idx) => {
       data.curIdx = idx;
@@ -129,6 +151,11 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.rule_modal_item {
+  max-width: 60%;
+  margin: 1rem auto;
+  font-size: 1.5rem;
 }
 .bg_v {
   font-size: 2rem;
@@ -190,6 +217,10 @@ export default {
     }
   }
   .rule {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
     position: relative;
     width: 12rem;
     img {
