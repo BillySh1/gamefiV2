@@ -39,7 +39,7 @@
         <div class="text">理事馆</div>
       </div>
     </div>
-    <div class="empty">
+    <div class="empty" @click="()=>$router.push({name:'bf_stake'})" >
       <img src="../../../allstar_assets/city/empty.png" alt="" />
     </div>
   </div>

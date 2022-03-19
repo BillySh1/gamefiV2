@@ -55,7 +55,7 @@
         <div class="text">出征规则</div>
       </div>
     </div>
-    <div class="main" v-show="!showPack">
+    <div class="main" v-show="!showPack && activeTab == 0">
       <div
         class="main_item"
         v-for="(item, index) in selectedWarrior"
@@ -63,6 +63,22 @@
         @click="() => handleClickItem(index)"
       >
         <StakeItem :info="item" />
+      </div>
+    </div>
+    <div class="main" v-show="!showPack && activeTab == 1">
+      <div
+        class="main_item"
+        v-for="(item, index) in selectedKing"
+        :key="index"
+        @click="() => handleClickItem(index)"
+      >
+        <StakeItem :info="item" />
+      </div>
+      <div
+        class="main_item"
+        @click="() => handleClickItem(selectedKing.length)"
+      >
+        <StakeItem :info="{}" />
       </div>
     </div>
     <div class="footer">
@@ -106,28 +122,35 @@ export default {
       ],
       activeTab: 0,
       selectedWarrior: [{}, {}, {}, {}, {}],
+      selectedKing: [],
       curIdx: 0,
       showPack: false,
       showRuleModal: false,
     });
 
     const curTotalPower = computed(() => {
-      const dataMap = data.selectedWarrior;
-      return (
-        dataMap.reduce((pre, cur) => {
+      const dataMap =
+        data.activeTab == 0 ? data.selectedWarrior : data.selectedKing;
+      return dataMap.reduce((pre, cur) => {
+        if (cur && cur.power) {
           pre += Number(cur.power);
-          return pre;
-        }, 0) || 0
-      );
+        }
+        return pre;
+      }, 0);
     });
     const handleClickItem = (idx) => {
       data.curIdx = idx;
       data.showPack = true;
     };
     const handleSelectHero = (item) => {
-      data.selectedWarrior[data.curIdx] = item;
+      if (data.activeTab == 0) {
+        data.selectedWarrior[data.curIdx] = item;
+      } else if (data.activeTab == 1) {
+        data.selectedKing[data.curIdx] = item;
+      }
       data.showPack = false;
     };
+
     onBeforeMount(() => {});
     onMounted(() => {});
     const refData = toRefs(data);
