@@ -57,6 +57,7 @@ export default {
           key: 0,
           name: "天策府",
           img: require("../../../allstar_assets/city/item_0.png"),
+          to:'bf_stake',
         },
         {
           key: 1,
