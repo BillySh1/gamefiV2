@@ -2,6 +2,8 @@
   <div class="box">
     <InjectPackHero
       :value="showPack"
+      :toSelect="true"
+      @select="(x) => handleSelectHero(x)"
       @back="
         () => {
           showPack = false;
@@ -41,7 +43,7 @@
         class="main_item"
         v-for="(item, index) in selectedWarrior"
         :key="index"
-        @click="handleClickItem"
+        @click="() => handleClickItem(index)"
       >
         <StakeItem :info="item" />
       </div>
@@ -60,7 +62,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
 import StakeItem from "./stake_item.vue";
 import InjectPackHero from "../../../components/inejct_pack_hero.vue";
 export default {
@@ -84,19 +86,34 @@ export default {
         },
       ],
       activeTab: 0,
-      curTotalPower: 0,
-      selectedWarrior: [1, 2, 3, 4, 5],
+      selectedWarrior: [{}, {}, {}, {}, {}],
+      curIdx: 0,
       showPack: false,
     });
-    const handleClickItem = () => {
+
+    const curTotalPower = computed(() => {
+      const dataMap = data.selectedWarrior;
+      return dataMap.reduce((pre, cur) => {
+        pre += Number(cur.power);
+        return pre;
+      }, 0);
+    });
+    const handleClickItem = (idx) => {
+      data.curIdx = idx;
       data.showPack = true;
+    };
+    const handleSelectHero = (item) => {
+      data.selectedWarrior[data.curIdx] = item;
+      data.showPack = false;
     };
     onBeforeMount(() => {});
     onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
+      curTotalPower,
       handleClickItem,
+      handleSelectHero,
     };
   },
 };
