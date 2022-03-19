@@ -1,5 +1,9 @@
 <template>
-  <div class="box">
+  <Lottie
+    v-if="loading"
+    :options="{ animationData: require('../../assets/common/loading.json') }"
+  />
+  <div v-else class="box">
     <img class="map" :src="getMap" alt="" />
     <div class="main">
       <div class="inner">
@@ -49,14 +53,17 @@
 <script >
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "bf_main",
   setup() {
+    const store = useStore();
     const data = reactive({
       account: "",
       web3: "",
       curCamp: 0,
       nextName: "合川",
+      loading: false,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -65,6 +72,7 @@ export default {
       return "4时20分30秒";
     });
     onBeforeMount(async () => {
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -73,7 +81,15 @@ export default {
           data.web3 = p;
         }
       );
+      await getPlayer();
+      data.loading = false;
     });
+    const getPlayer = async () => {
+      const c = store.state.c_battle;
+      const player = await c.methods.players(data.account).call();
+      data.player = player;
+      data.curCamp = player.camp;
+    };
     const getMap = computed(() => {
       return [
         require("../../allstar_assets/main/map_0.png"),

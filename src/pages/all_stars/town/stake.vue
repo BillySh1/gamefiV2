@@ -1,5 +1,10 @@
 <template>
-  <div class="box">
+  <ChooseRoad
+    @back="() => (showChoose = false)"
+    :camp="camp"
+    v-if="showChoose"
+  />
+  <div v-else class="box">
     <InjectPackHero
       :value="showPack"
       :toSelect="true"
@@ -32,8 +37,10 @@
     <InjectModal
       :value="showDoubleCheck"
       :title="'出征确认'"
-      @confirm="() => (showDoubleCheck = false)"
+      @confirm="onConfirm"
       @close="() => (showDoubleCheck = false)"
+      :btnText="btnText"
+      :btnDisable="btnDisable"
     >
       <div class="rule_modal_item">
         需要消耗粮草
@@ -142,6 +149,7 @@ import {
 import StakeItem from "./stake_item.vue";
 import InjectPackHero from "../../../components/inejct_pack_hero.vue";
 import InjectModal from "../../../components/inject_modal.vue";
+import ChooseRoad from "./choose_road.vue";
 import initWeb3 from "../../../utils/initWeb3";
 import { useQualityText } from "../../../utils/useHeroInfo";
 import { useStore } from "vuex";
@@ -151,6 +159,7 @@ export default {
     StakeItem,
     InjectPackHero,
     InjectModal,
+    ChooseRoad,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -178,6 +187,12 @@ export default {
       showDoubleCheck: false,
       account: "",
       web3: "",
+      showChoose: false,
+      camp: 0,
+      player: "",
+      btnText: "路线",
+      btnDisable: false,
+      btnStep: 0,
     });
 
     const curTotalPower = computed(() => {
@@ -244,10 +259,22 @@ export default {
           data.web3 = p;
         }
       );
+      await getPlayer();
     });
+    const getPlayer = async () => {
+      const c = store.state.c_battle;
+      const player = await c.methods.players(data.account).call();
+      data.player = player;
+      data.camp = player.camp;
+    };
     const doubleCheck = async () => {
       await getCost();
       data.showDoubleCheck = true;
+    };
+    const onConfirm = async () => {
+      if (data.btnStep == 0) {
+        data.showChoose = true;
+      }
     };
     const getCost = async () => {
       const c = store.state.c_battle;
@@ -297,6 +324,7 @@ export default {
       handleSelectHero,
       getCost,
       doubleCheck,
+      onConfirm,
     };
   },
 };

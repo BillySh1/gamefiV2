@@ -39,7 +39,7 @@
         <div class="text">理事馆</div>
       </div>
     </div>
-    <div class="empty" @click="()=>$router.push({name:'bf_stake'})" >
+    <div class="empty" @click="() => $router.push({ name: 'bf_stake' })">
       <img src="../../../allstar_assets/city/empty.png" alt="" />
     </div>
   </div>
@@ -47,10 +47,13 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount, onMounted, computed, ref } from "vue";
+import initWeb3 from "../../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "bf_base",
   setup() {
     const bg = ref(null);
+    const store = useStore();
     const data = reactive({
       menu: [
         {
@@ -72,6 +75,9 @@ export default {
         },
       ],
       camp: 0,
+      account: "",
+      web3: "",
+      player: "",
     });
     const campImg = computed(() => {
       return [
@@ -93,7 +99,25 @@ export default {
       ][data.camp];
       bg.value.style.background = `url(${img})`;
     };
-    onBeforeMount(() => {});
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPlayer();
+      data.loading = false;
+    });
+    const getPlayer = async () => {
+      const c = store.state.c_battle;
+      const player = await c.methods.players(data.account).call();
+      data.camp = player.camp;
+      data.player = player;
+    };
     onMounted(() => {
       getBgImg();
     });
