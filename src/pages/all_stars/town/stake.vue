@@ -3,6 +3,7 @@
     <InjectPackHero
       :value="showPack"
       :toSelect="true"
+      :selected="selectedTokenIds"
       @select="(x) => handleSelectHero(x)"
       @back="
         () => {
@@ -95,10 +96,18 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import StakeItem from "./stake_item.vue";
 import InjectPackHero from "../../../components/inejct_pack_hero.vue";
 import InjectModal from "../../../components/inject_modal.vue";
+import { useStore } from "vuex";
 export default {
   name: "bf_stake",
   components: {
@@ -107,6 +116,8 @@ export default {
     InjectModal,
   },
   setup() {
+    const { proxy } = getCurrentInstance();
+    const store = useStore();
     const data = reactive({
       tabs: [
         {
@@ -138,14 +149,32 @@ export default {
         return pre;
       }, 0);
     });
+    const selectedTokenIds = computed(() => {
+      const temp = [];
+      data.selectedWarrior.forEach((item) => {
+        if (item && item.tokenId) temp.push(item.tokenId);
+      });
+      data.selectedKing.forEach((item) => {
+        if (item && item.tokenId) temp.push(item.tokenId);
+      });
+      return temp;
+    });
     const handleClickItem = (idx) => {
       data.curIdx = idx;
       data.showPack = true;
     };
     const handleSelectHero = (item) => {
       if (data.activeTab == 0) {
+        if (item.rarity == 4) {
+          proxy.$toast(`当前位置不支持选择金卡`, store.state.toast_error);
+          return;
+        }
         data.selectedWarrior[data.curIdx] = item;
       } else if (data.activeTab == 1) {
+        if (item.rarity != 4) {
+          proxy.$toast(`当前位置只支持选择金卡`, store.state.toast_error);
+          return;
+        }
         data.selectedKing[data.curIdx] = item;
       }
       data.showPack = false;
@@ -157,6 +186,7 @@ export default {
     return {
       ...refData,
       curTotalPower,
+      selectedTokenIds,
       handleClickItem,
       handleSelectHero,
     };

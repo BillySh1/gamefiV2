@@ -117,7 +117,11 @@
           <div
             v-for="(item, index) in curItems"
             :key="index"
-            class="card_item"
+            :class="
+              selected && selected.includes(item.tokenId)
+                ? 'card_item disable'
+                : 'card_item'
+            "
             @click="
               () => {
                 if (toSelect) {
@@ -161,7 +165,7 @@ import useHeroDetail from "../utils/useHeroDetail.js";
 import InjectGoBack from "./inject_go_back.vue";
 export default {
   name: "inject_pack_hero",
-  props: ["value", "toSelect", "hideSearch"],
+  props: ["value", "toSelect", "hideSearch", "selected"],
   components: {
     PackHeroItem,
     CommonSearch,
@@ -560,6 +564,11 @@ export default {
         margin: 0 1rem;
         height: 90%;
         width: 16vmax;
+      }
+      .disable {
+        user-select: none;
+        pointer-events: none;
+        filter: grayscale(100);
       }
     }
   }
