@@ -10,7 +10,7 @@ const test = {
   training: "0xb69f1dE7BFC3ce0ca2b9b062589c59C1017e58Ad",
   title: "0x0dEb4961e70F86B401A3DAF07F764e0D12cDf47c",
   usdt: "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
-  battle: "0x4B214BE1b3e083224278d275827A879E6E91ef81",
+  battle: "0x090dF559BC70F372b7804Fa397C05adD6cFe6bcd",
 };
 
 // const main = {

@@ -6,7 +6,12 @@
       alt=""
     />
     <img class="logo" src="../../assets/common/logo.png" alt="" />
-    <div class="container">
+    <Lottie
+      v-if="loading"
+      class="lottie"
+      :options="{ animationData: require('../../assets/common/loading.json') }"
+    />
+    <div v-if="!loading" class="container">
       <Lottie
         v-show="playing && cur.key == 0"
         class="lottie"
@@ -75,8 +80,9 @@
       :title="'征战确认'"
       class="modal"
       :value="showModal"
+      :btnDisable="btnDisable"
       @close="() => (showModal = false)"
-      @confirm="onConfirm"
+      @confirm="bind"
     >
       <div class="up">
         确定要为 <span class="camp">{{ cur.name }}</span> 出战吗
@@ -87,9 +93,17 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeUnmount } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeUnmount,
+  onBeforeMount,
+  getCurrentInstance,
+} from "vue";
 import InjectModal from "../../components/inject_modal.vue";
 import { useRouter } from "vue-router";
+import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
 
 export default {
   name: "entry_choose_camp",
@@ -98,6 +112,8 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       campMap: [
         {
@@ -118,7 +134,6 @@ export default {
         },
       ],
       cur: 0,
-
       showModal: false,
       ani0: undefined,
       ani1: undefined,
@@ -129,6 +144,10 @@ export default {
         autoplay: false,
         loop: true,
       },
+      web3: "",
+      account: "",
+      loading: false,
+      btnDisable: false,
     });
 
     const choose = (x) => {
@@ -142,13 +161,35 @@ export default {
         data.showModal = true;
       });
     };
-
-    const onConfirm = () => {
-      data.showModal = false;
-      router.push({
-        name: "bf_main",
-      });
+    const bind = async () => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待确认", store.state.toast_info);
+        const c = store.state.c_battle;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .bond(data.cur.key)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.bond(data.cur.key).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("绑定成功，正在跳转...", store.state.toast_info);
+          data.showModal = false;
+          router.push({
+            name: "bf_main",
+          });
+        }
+      } catch (e) {
+        console.error(e);
+        proxy.$toast("选择阵营出错", store.state.toast_error);
+      } finally {
+        data.btnDisable = false;
+      }
     };
+
     const handleAni0 = (ani) => {
       data.ani0 = ani;
     };
@@ -161,6 +202,28 @@ export default {
     const handleAni3 = (ani) => {
       data.ani3 = ani;
     };
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPlayer();
+      data.loading = false;
+    });
+    const getPlayer = async () => {
+      const c = store.state.c_battle;
+      const player = await c.methods.players(data.account).call();
+      if (player.isBond) {
+        router.push({
+          name: "bf_main",
+        });
+      }
+    };
     onBeforeUnmount(() => {
       data.ani0.destroy();
       data.ani1.destroy();
@@ -171,7 +234,7 @@ export default {
     return {
       ...refData,
       choose,
-      onConfirm,
+      bind,
       handleAni0,
       handleAni1,
       handleAni2,
