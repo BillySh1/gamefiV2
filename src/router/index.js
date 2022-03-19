@@ -38,6 +38,7 @@ const bf_main = () => import("../pages/all_stars/main.vue");
 const bf_store = () => import("../pages/all_stars/town/store.vue");
 const bf_base = () => import("../pages/all_stars/town/city.vue");
 const bf_stake = () => import("../pages/all_stars/town/stake.vue");
+const bf_history = () => import("../pages/all_stars/history/history.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -213,6 +214,11 @@ const router = createRouter({
       path: "/bf_stake",
       name: "bf_stake",
       component: bf_stake,
+    },
+    {
+      path: "/bf_history",
+      name: "bf_history",
+      component: bf_history,
     },
   ],
 });

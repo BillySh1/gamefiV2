@@ -33,7 +33,7 @@
         <div class="text">{{ campText }}</div>
       </div>
     </div>
-    <div class="board">
+    <div class="board" @click="() => $router.push({ name: 'bf_history' })">
       <div class="inner">
         <img src="../../../allstar_assets/city/board.png" alt="" />
         <div class="text">理事馆</div>
@@ -57,7 +57,7 @@ export default {
           key: 0,
           name: "天策府",
           img: require("../../../allstar_assets/city/item_0.png"),
-          to:'bf_stake',
+          to: "bf_stake",
         },
         {
           key: 1,
