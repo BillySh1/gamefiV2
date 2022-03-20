@@ -34,10 +34,14 @@
         <div class="text">{{ campText }}</div>
       </div>
     </div>
-    <div class="board" @click="() => $router.push({ name: 'bf_history' })">
-      <div class="inner">
+    <div class="board">
+      <div class="inner" @click="() => $router.push({ name: 'bf_history' })">
         <img src="../../../allstar_assets/city/board.png" alt="" />
         <div class="text">理事馆</div>
+      </div>
+      <div class="inner" @click="() => $router.push({ name: 'bf_casio' })">
+        <img src="../../../allstar_assets/city/casio_bg.png" alt="" />
+        <div class="text">赌场</div>
       </div>
     </div>
     <div class="empty" @click="() => $router.push({ name: 'bf_stake' })">
@@ -212,15 +216,15 @@ export default {
   }
 }
 .board {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
   position: absolute;
   right: 5%;
   bottom: 5%;
   width: 30rem;
   .inner {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
     width: 100%;
     position: relative;
     img {

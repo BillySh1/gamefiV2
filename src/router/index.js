@@ -39,6 +39,7 @@ const bf_store = () => import("../pages/all_stars/town/store.vue");
 const bf_base = () => import("../pages/all_stars/town/city.vue");
 const bf_stake = () => import("../pages/all_stars/town/stake.vue");
 const bf_history = () => import("../pages/all_stars/history/history.vue");
+const bf_casio = () => import("../pages/all_stars/caiso/casio.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -219,6 +220,11 @@ const router = createRouter({
       path: "/bf_history",
       name: "bf_history",
       component: bf_history,
+    },
+    {
+      path: "/bf_casio",
+      name: "bf_casio",
+      component: bf_casio,
     },
   ],
 });
