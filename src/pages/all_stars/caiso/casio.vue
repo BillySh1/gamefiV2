@@ -74,6 +74,32 @@
       <img src="../../../allstar_assets/store/back.png" alt="" />
       <div class="text">返回</div>
     </div>
+    <div class="badge_box">
+      <div
+        class="item"
+        @click="
+          () =>
+            $router.push({
+              name: 'bf_casio_history',
+            })
+        "
+      >
+        <img src="../../../allstar_assets/casio/badge.png" alt="" />
+        <div class="text">历史战役</div>
+      </div>
+      <div
+        class="item"
+        @click="
+          () =>
+            $router.push({
+              name: 'bf_staked_his',
+            })
+        "
+      >
+        <img src="../../../allstar_assets/casio/badge.png" alt="" />
+        <div class="text">下注记录</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -267,6 +293,27 @@ export default {
       width: 10rem;
       color: #ffb74b;
       text-align: center;
+    }
+  }
+}
+.badge_box {
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  .item {
+    cursor: pointer;
+    position: relative;
+    margin: 1rem 0;
+    img {
+      height: 3rem;
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

@@ -40,6 +40,9 @@ const bf_base = () => import("../pages/all_stars/town/city.vue");
 const bf_stake = () => import("../pages/all_stars/town/stake.vue");
 const bf_history = () => import("../pages/all_stars/history/history.vue");
 const bf_casio = () => import("../pages/all_stars/caiso/casio.vue");
+const bf_staked_his = ()=>import('../pages/all_stars/caiso/bf_stake_his.vue')
+const bf_casio_history = () =>
+  import("../pages/all_stars/caiso/bf_history.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -225,6 +228,16 @@ const router = createRouter({
       path: "/bf_casio",
       name: "bf_casio",
       component: bf_casio,
+    },
+    {
+      path: "/bf_staked_his",
+      name: "bf_staked_his",
+      component: bf_staked_his,
+    },
+    {
+      path: "/casio_bf_his",
+      name: "bf_casio_history",
+      component: bf_casio_history,
     },
   ],
 });
