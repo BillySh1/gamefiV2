@@ -46,7 +46,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted, computed, ref } from "vue";
+import { reactive, toRefs, onBeforeMount, computed, ref } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import { useStore } from "vuex";
 export default {
@@ -91,16 +91,16 @@ export default {
       return ["魏", "蜀", "吴", "雄"][data.camp];
     });
     const getBgImg = () => {
-      const img = [
+      const campBg = [
         require("../../../allstar_assets/city/bg_0.png"),
         require("../../../allstar_assets/city/bg_1.png"),
         require("../../../allstar_assets/city/bg_2.png"),
         require("../../../allstar_assets/city/bg_3.png"),
       ][data.camp];
-      bg.value.style.background = `url(${img})`;
+      bg.value.style.background = `url(${campBg}) no-repeat`;
+      bg.value.style.backgroundSize = "100% 100%";
     };
     onBeforeMount(async () => {
-      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -110,17 +110,15 @@ export default {
         }
       );
       await getPlayer();
-      data.loading = false;
     });
     const getPlayer = async () => {
       const c = store.state.c_battle;
       const player = await c.methods.players(data.account).call();
       data.camp = player.camp;
+      getBgImg();
       data.player = player;
     };
-    onMounted(() => {
-      getBgImg();
-    });
+
     const refData = toRefs(data);
     return {
       ...refData,
@@ -136,8 +134,6 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 .back {
   cursor: pointer;

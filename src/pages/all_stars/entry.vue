@@ -1,5 +1,17 @@
 <template>
-  <div class="box">
+  <BfLoading
+    ref="battleFieldGlobalLoad"
+    v-show="loading"
+    @finish="
+      () => {
+        loading = false;
+        $router.push({
+          name: 'bf_choose',
+        });
+      }
+    "
+  />
+  <div v-show="!loading" class="box">
     <div class="mask">
       <div class="content">
         <img
@@ -37,22 +49,26 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount } from "vue";
-// import { useRouter } from "vue-router";
+import { reactive, toRefs, ref } from "vue";
+import BfLoading from "./bf_loading.vue";
 export default {
   name: "all_stars_entry",
+  components: {
+    BfLoading,
+  },
   setup() {
-    // const router = useRouter();
-    const data = reactive({});
+    const battleFieldGlobalLoad = ref(null);
+    const data = reactive({
+      loading: false,
+    });
     const jump = () => {
-      // router.push({
-        // name: "bf_choose",
-      // });
+      data.loading = true;
+      battleFieldGlobalLoad.value.startLoading();
     };
-    onBeforeMount(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
+      battleFieldGlobalLoad,
       jump,
     };
   },

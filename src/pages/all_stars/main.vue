@@ -34,7 +34,7 @@
         <div class="power_zone">
           <div>我军总战力</div>
           <img src="../../assets/pack/power_item.png" alt="" />
-          <div>90000000000</div>
+          <div>暂不可见</div>
         </div>
         <div class="pre_time_view">
           <div>
