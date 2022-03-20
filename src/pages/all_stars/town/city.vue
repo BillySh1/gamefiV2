@@ -20,6 +20,7 @@
         v-for="item in menu"
         :key="item.key"
         @click="() => $router.push({ name: item.to })"
+        :style="item.disable ? 'filter:grayscale(100);pointer-events:none' : ''"
       >
         <img :src="item.img" alt="" />
         <div class="text">
@@ -72,6 +73,7 @@ export default {
           key: 2,
           name: "名人堂",
           img: require("../../../allstar_assets/city/item_2.png"),
+          disable: true,
         },
       ],
       camp: 0,
