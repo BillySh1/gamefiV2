@@ -25,5 +25,11 @@ const map = {
   23: "千里湖",
   24: "鹿原",
 };
+const initRoads = [
+  [map[0], map[1]],
+  [map[0], map[1]],
+  [map[0], map[1]],
+  [map[0], map[1]],
+];
 
-export default map;
+export { map, initRoads };

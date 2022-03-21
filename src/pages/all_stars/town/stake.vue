@@ -2,7 +2,7 @@
   <ChooseRoad
     @back="() => (showChoose = false)"
     :camp="camp"
-    v-if="showChoose"
+    v-if="true"
   />
   <div v-else class="box">
     <InjectPackHero
