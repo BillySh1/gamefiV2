@@ -1,18 +1,36 @@
 <template>
   <div ref="mask" class="mask">
     <img :src="getMap" alt="" />
-    <div class="inner">
+    <img
+      v-if="!isShow"
+      class="show"
+      src="../../../allstar_assets/stake/road/show.png"
+      alt=""
+      @click="() => (isShow = true)"
+    />
+    <div v-if="isShow" class="inner">
       <div class="scroll">
         <div class="s_inner">
           <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
+          <div class="content">
+            <div class="title">故事情节</div>
+            <div class="c">
+              占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本
+            </div>
+          </div>
+
+          <div class="hide" @click="() => (isShow = false)">
+            <img src="../../../allstar_assets/stake/road/hide.png" alt="" />
+            <div class="text">点击收起 UI 观察地图</div>
+          </div>
         </div>
       </div>
       <div class="action_box">
-        <div class="item">
+        <div class="item" @click="choose(0)">
           <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
           <div class="text">{{ "路线一: " + roadText[0] }}</div>
         </div>
-        <div class="item">
+        <div class="item" @click="choose(1)">
           <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
           <div class="text">{{ "路线二: " + roadText[1] }}</div>
         </div>
@@ -29,9 +47,11 @@ export default {
   name: "choose_road",
   props: ["camp"],
   components: {},
-  setup(props) {
+  setup(props, ctx) {
     const mask = ref(null);
-    const data = reactive({});
+    const data = reactive({
+      isShow: true,
+    });
     const getMap = computed(() => {
       return [
         require("../../../allstar_assets/main/map_0.png"),
@@ -43,6 +63,10 @@ export default {
     const roadText = computed(() => {
       return initRoads[props.camp];
     });
+    const choose = (item) => {
+      ctx.emit("choose", item);
+      ctx.emit("back");
+    };
     onBeforeMount(() => {});
     onMounted(() => {});
     const refData = toRefs(data);
@@ -51,6 +75,7 @@ export default {
       getMap,
       mask,
       roadText,
+      choose,
     };
   },
 };
@@ -60,6 +85,14 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  .show {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 4rem;
+    width: 10rem;
+  }
   .back {
     cursor: pointer;
     &:hover {
@@ -101,9 +134,38 @@ export default {
         position: relative;
         width: 100%;
         height: auto;
-        background: red;
+        .hide {
+          cursor: pointer;
+          position: absolute;
+          right: 0;
+          top: 10%;
+          transform: translateX(120%);
+          display: flex;
+          align-items: center;
+          img {
+            height: 3rem;
+            width: 3rem;
+            margin-right: 2rem;
+          }
+          font-size: 1.5rem;
+        }
         img {
           width: 100%;
+        }
+        .content {
+          width: 80%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+          }
         }
       }
     }

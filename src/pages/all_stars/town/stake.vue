@@ -2,7 +2,13 @@
   <ChooseRoad
     @back="() => (showChoose = false)"
     :camp="camp"
-    v-if="true"
+    @choose="
+      (item) => {
+        road = item;
+        btnStep = 1;
+      }
+    "
+    v-if="showChoose"
   />
   <div v-else class="box">
     <InjectPackHero
@@ -64,9 +70,18 @@
       </div>
       <div class="rule_modal_item">武将队伍： {{ getWarrorNames }}</div>
       <div class="rule_modal_item">主公队伍: {{ getKingNames }}</div>
+      <div class="rule_modal_item">
+        路线: {{ roadText }}
+        <CommonButton
+          style="margin-left: 2rem"
+          @click="() => (showChoose = true)"
+          >更改</CommonButton
+        >
+      </div>
       <div class="rule_modal_item" style="color: red">
         总战力： {{ totalPower }}
       </div>
+
       <div class="rule_modal_item" style="color: red">
         注意:一旦出征，本此战役期间均无法更改，确认出征？
       </div>
@@ -152,6 +167,8 @@ import InjectModal from "../../../components/inject_modal.vue";
 import ChooseRoad from "./choose_road.vue";
 import initWeb3 from "../../../utils/initWeb3";
 import { useQualityText } from "../../../utils/useHeroInfo";
+import { initRoads } from "../../../utils/useRoutes";
+import CommonButton from "./../../../components/common_button.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_stake",
@@ -160,6 +177,7 @@ export default {
     InjectPackHero,
     InjectModal,
     ChooseRoad,
+    CommonButton,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -190,9 +208,9 @@ export default {
       showChoose: false,
       camp: 0,
       player: "",
-      btnText: "路线",
       btnDisable: false,
       btnStep: 0,
+      road: undefined,
     });
 
     const curTotalPower = computed(() => {
@@ -204,6 +222,12 @@ export default {
         }
         return pre;
       }, 0);
+    });
+    const btnText = computed(() => {
+      return ["路线", "授权", "出征"][data.btnStep];
+    });
+    const roadText = computed(() => {
+      return initRoads[data.camp][data.road] || "暂未选择路线";
     });
     const totalPower = computed(() => {
       const temp1 = data.selectedWarrior.reduce((pre, cur) => {
@@ -325,6 +349,8 @@ export default {
       getCost,
       doubleCheck,
       onConfirm,
+      roadText,
+      btnText,
     };
   },
 };
@@ -345,6 +371,9 @@ export default {
   max-width: 60%;
   margin: 1rem auto;
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .bg_v {
   font-size: 2rem;

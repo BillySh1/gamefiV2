@@ -26,16 +26,19 @@
         <div class="back_home" @click="() => $router.push({ name: 'home' })">
           返回主页
         </div>
-        <div class="day_step">
-          <div>第一日</div>
-          <div class="des">风和日丽</div>
-          <img src="../../allstar_assets/weather/sunny.png" alt="" />
+        <div class="right-top">
+          <div class="day_step">
+            <div>第一日</div>
+            <div class="des">风和日丽</div>
+            <img src="../../allstar_assets/weather/sunny.png" alt="" />
+          </div>
+          <div class="power_zone">
+            <div>我军总战力</div>
+            <img src="../../assets/pack/power_item.png" alt="" />
+            <div>暂不可见</div>
+          </div>
         </div>
-        <div class="power_zone">
-          <div>我军总战力</div>
-          <img src="../../assets/pack/power_item.png" alt="" />
-          <div>暂不可见</div>
-        </div>
+
         <div class="pre_time_view">
           <div>
             距离下一个据点 <span style="color: red">{{ nextName }}</span> 还剩
@@ -209,53 +212,54 @@ export default {
     white-space: nowrap;
   }
 }
-.day_step {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
+.right-top {
   position: absolute;
-  right: 1%;
   top: 1%;
-  min-width: 25rem;
-  padding: 0.5rem 0;
-  background: rgba(44, 3, 3, 0.6);
-  border-radius: 20px;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .des {
-    margin: 0 2rem;
-  }
-  img {
-    width: 3rem;
-  }
-}
-.power_zone {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-  position: absolute;
   right: 1%;
-  top: 10%;
-  min-width: 25rem;
-  padding: 0.5rem 0;
-  background: rgba(44, 3, 3, 0.6);
-  border-radius: 20px;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .des {
-    margin: 0 2rem;
+  .day_step {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    min-width: 25rem;
+    padding: 0.5rem 0;
+    background: rgba(44, 3, 3, 0.6);
+    border-radius: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    .des {
+      margin: 0 2rem;
+    }
+    img {
+      width: 3rem;
+    }
   }
-  img {
-    margin: 0 1rem;
-    width: 2rem;
+  .power_zone {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    min-width: 25rem;
+    padding: 0.5rem 0;
+    background: rgba(44, 3, 3, 0.6);
+    border-radius: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .des {
+      margin: 0 2rem;
+    }
+    img {
+      margin: 0 1rem;
+      width: 2rem;
+    }
   }
 }
+
 .pre_time_view {
   cursor: pointer;
   &:hover {
