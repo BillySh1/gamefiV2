@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="back" @click="()=>$router.go(-1)" >
+        <div class="back" @click="() => $router.go(-1)">
           <img src="../../../allstar_assets/store/back.png" alt="" />
           <div class="text">返回</div>
         </div>
@@ -38,6 +38,7 @@
             v-for="item in tabs"
             :key="item.key"
             @click="() => (curTab = item.key)"
+            :class="item.disable ? 'disable' : ''"
           >
             <img
               :src="
@@ -112,7 +113,7 @@ export default {
     const data = reactive({
       tabs: [
         { key: 0, name: "物资", title: "补给驿站" },
-        { key: 1, name: "回收", title: "回收商人" },
+        { key: 1, name: "回收", title: "回收商人", disable: true },
       ],
       curTab: 0,
       boxMap: [
@@ -281,6 +282,11 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        .disable {
+          user-select: none;
+          pointer-events: none;
+          filter: grayscale(100);
+        }
         .item {
           position: relative;
           z-index: 10;
