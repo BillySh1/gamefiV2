@@ -19,20 +19,26 @@
     <img class="map" :src="getMap" alt="" />
     <div class="main">
       <div class="inner">
-        <div class="city_main" @click="() => $router.push({ name: 'bf_base' })">
-          <div class="inner">
-            <div class="up">
-              {{ campText }}
+        <div class="top_left">
+          <div
+            class="city_main"
+            @click="() => $router.push({ name: 'bf_base' })"
+          >
+            <div class="inner">
+              <div class="up">
+                {{ campText }}
+              </div>
+              <img
+                class="p"
+                src="../../allstar_assets/main/city_img.png"
+                alt=""
+              />
+              <div class="txt">主城</div>
             </div>
-            <img
-              class="p"
-              src="../../allstar_assets/main/city_img.png"
-              alt=""
-            />
-            <div class="txt">主城</div>
           </div>
+          <div class="rules" @click="() => (showRuleModal = true)">规则</div>
         </div>
-        <div class="rules" @click="() => (showRuleModal = true)">规则</div>
+
         <div class="pack_btn" @click="() => (showPack = true)">
           <div class="text">行军背包</div>
         </div>
@@ -170,62 +176,67 @@ export default {
     }
   }
 }
-.city_main {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
+.top_left {
   position: absolute;
   left: 1%;
   top: 1%;
-  width: 9rem;
-  height: 18rem;
-  background: url("../../allstar_assets/main/main_camp.png") no-repeat;
-  background-size: 100% 100%;
-  .inner {
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .city_main {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    width: 9rem;
+    height: 18rem;
+    background: url("../../allstar_assets/main/main_camp.png") no-repeat;
+    background-size: 100% 100%;
+    margin-bottom: 2rem;
+    .inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .up {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3.5rem;
+      }
+      .p {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+      }
+      .txt {
+        white-space: nowrap;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+      }
+    }
+  }
+  .rules {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .up {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 3.5rem;
-    }
-    .p {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4rem;
-    }
-    .txt {
-      white-space: nowrap;
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 3rem;
-    }
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    background: rgba(44, 3, 3, 0.6);
+    border-radius: 16px;
   }
 }
-.rules {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-  position: absolute;
-  left: 1.5%;
-  top: 35%;
-  padding: 0.5rem 2rem;
-  background: rgba(44, 3, 3, 0.6);
-  border-radius: 16px;
-  font-size: 1.5rem;
-}
+
 .back_home {
   cursor: pointer;
   &:hover {
