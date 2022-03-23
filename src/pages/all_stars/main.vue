@@ -19,7 +19,10 @@
     <img class="map" :src="getMap" alt="" />
     <div class="main">
       <div class="inner">
-        <div class="top_left">
+        <div
+          class="top_left"
+          :style="[1, 3].includes(Number(curCamp)) ? 'left:90%' : ''"
+        >
           <div
             class="city_main"
             @click="() => $router.push({ name: 'bf_base' })"
@@ -45,7 +48,7 @@
         <div class="back_home" @click="() => $router.push({ name: 'home' })">
           返回主页
         </div>
-        <div class="right-top">
+        <div class="right-top"  :style="[1, 3].includes(Number(curCamp)) ? 'right:69%; align-items:flex-start' : ''">
           <div class="day_step">
             <div>第一日</div>
             <div class="des">风和日丽</div>

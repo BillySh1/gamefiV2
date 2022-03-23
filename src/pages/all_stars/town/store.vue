@@ -285,11 +285,9 @@ export default {
           data.web3 = p;
         }
       );
-      await getBeforePack()
+      await getBeforePack();
     });
-    const getBeforePack = async()=>{
-      
-    }
+    const getBeforePack = async () => {};
     const refData = toRefs(data);
     return {
       ...refData,
