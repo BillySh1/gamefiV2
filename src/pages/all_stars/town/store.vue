@@ -74,6 +74,16 @@
                   style="cursor: pointer"
                   class="img_action"
                   src="../../../assets/mint/minus.svg"
+                  @click="
+                    () => {
+                      const temp = buyNum - 1;
+                      if (temp < 0) {
+                        buyNum = 0;
+                        return;
+                      }
+                      buyNum = temp;
+                    }
+                  "
                 />
                 <div class="ipt_bg">
                   <img
@@ -81,12 +91,23 @@
                     src="../../../assets/mint/input.png"
                     alt=""
                   />
-                  <input v-model="buyNum" class="input" />
+                  <input
+                    v-model="buyNum"
+                    class="input"
+                    @input="
+                      buyNum = Number($event.target.value.replace(/\D+/, ''))
+                    "
+                  />
                 </div>
                 <img
                   class="img_action"
                   style="cursor: pointer"
                   src="../../../assets/mint/add.svg"
+                  @click="
+                    () => {
+                      buyNum += 1;
+                    }
+                  "
                 />
               </div>
               <div class="intro">可开出五种不同品质的道具</div>
@@ -94,7 +115,12 @@
               <div class="intro">得致胜先机的必备法宝</div>
             </div>
           </div>
-          <CommonButton class="btn">购买</CommonButton>
+          <CommonButton
+            @click="handleClick"
+            class="btn"
+            :disabled="btnDisable"
+            >{{ btnText }}</CommonButton
+          >
         </div>
       </div>
     </div>
@@ -102,14 +128,25 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import CommonButton from "../../../components/common_button.vue";
+import initWeb3 from "../../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "bf_store",
   components: {
     CommonButton,
   },
   setup() {
+    const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       tabs: [
         { key: 0, name: "物资", title: "补给驿站" },
@@ -156,6 +193,13 @@ export default {
         ["龙刻陨星", 5],
       ],
       buyNum: 1,
+      btnStatus: 0,
+      btnDisable: false,
+      web3: "",
+      account: "",
+    });
+    const btnText = computed(() => {
+      return ["授权", "购买"][data.btnStatus];
     });
     const curTabItem = computed(() => {
       return data.tabs[data.curTab];
@@ -167,9 +211,82 @@ export default {
       return "号令军旗";
     });
     const stockPrice = computed(() => {
-      return 10000;
+      return 500 * data.buyNum;
     });
-    onBeforeMount(() => {});
+    const handleClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await buy();
+      }
+    };
+
+    const approve = async () => {
+      try {
+        proxy.$toast("等待授权", store.state.toast_info);
+        data.btnDisable = true;
+        const c = store.state.c_mmc;
+        const value = data.web3.utils.toWei(
+          (500 * Number(data.buyNum)).toString(),
+          "ether"
+        );
+        const addr = store.state.c_battle_shop.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, value)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.approve(addr, value).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast("授权成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("授权失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
+    const buy = async () => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待购买", store.state.toast_info);
+        const c = store.state.c_battle_shop;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .buy(data.buyNum)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.buy(data.buyNum).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+
+        if (res.status) {
+          proxy.$toast("购买成功", store.state.toast_success);
+          data.btnStatus = 0;
+        }
+      } catch (e) {
+        proxy.$toast("购买失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+    });
     onMounted(() => {});
     const refData = toRefs(data);
     return {
@@ -178,6 +295,8 @@ export default {
       subText,
       stockName,
       stockPrice,
+      btnText,
+      handleClick,
     };
   },
 };

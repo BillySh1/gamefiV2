@@ -23,7 +23,7 @@
           <div class="up">{{ totalPool }} MMC</div>
           <div>总奖池子</div>
         </div>
-        <div class="total">
+        <div class="total" v-show="false">
           <div class="up">12000</div>
           <div>当前总玩家</div>
         </div>
@@ -199,7 +199,10 @@ export default {
     const getInfo = async () => {
       const c = store.state.c_bet;
       const odds = await c.methods.getOdds().call();
-      data.totalPool = data.web3.utils.fromWei(await c.methods.totalBetPool().call(),'ether');
+      data.totalPool = data.web3.utils.fromWei(
+        await c.methods.totalBetPool().call(),
+        "ether"
+      );
       for (let i = 0; i < data.winPoints.length; i++) {
         const item = data.winPoints[i];
         const staked = await c.methods.betInfos(data.account, i).call();
@@ -236,7 +239,7 @@ export default {
         console.log(e);
       } finally {
         data.btnDisable = false;
-        await getInfo()
+        await getInfo();
       }
     };
     const approve = async () => {
