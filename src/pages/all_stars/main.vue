@@ -1,6 +1,6 @@
 <template>
   <BfPack @close="() => (showPack = false)" :value="showPack" />
-
+  <RandomEvents :value="showEvents" @close="() => (showEvents = false)" />
   <Lottie
     v-if="loading"
     :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -22,6 +22,7 @@
             <div class="txt">主城</div>
           </div>
         </div>
+        <div class="rules">规则</div>
         <div class="pack_btn" @click="() => (showPack = true)">
           <div class="text">行军背包</div>
         </div>
@@ -59,11 +60,13 @@
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
+import RandomEvents from "./events/random_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_main",
   components: {
     BfPack,
+    RandomEvents,
   },
   setup() {
     const store = useStore();
@@ -74,6 +77,7 @@ export default {
       nextName: "合川",
       loading: false,
       showPack: false,
+      showEvents: false,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -184,6 +188,19 @@ export default {
       font-size: 3rem;
     }
   }
+}
+.rules {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  position: absolute;
+  left: 1.5%;
+  top: 35%;
+  padding: 0.5rem 2rem;
+  background: rgba(44, 3, 3, 0.6);
+  border-radius: 16px;
+  font-size: 1.5rem;
 }
 .back_home {
   cursor: pointer;
