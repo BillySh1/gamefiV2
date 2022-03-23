@@ -20,7 +20,7 @@
       />
       <div class="right">
         <div class="total">
-          <div class="up">9999 MMC</div>
+          <div class="up">{{ totalPool }} MMC</div>
           <div>总奖池子</div>
         </div>
         <div class="total">
@@ -28,7 +28,7 @@
           <div>当前总玩家</div>
         </div>
         <div class="total">
-          <div class="green">1:12</div>
+          <div class="green">1:{{ myOdd }}</div>
           <div>我的赔率</div>
         </div>
       </div>
@@ -67,7 +67,13 @@
           @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
         />
         <div style="margin-right: 1.5rem">MMC</div>
-        <CommonButton class="btn" :circle="true">{{ btnText }}</CommonButton>
+        <CommonButton
+          @click="handleClick"
+          class="btn"
+          :circle="true"
+          :disabled="btnDisable"
+          >{{ btnText }}</CommonButton
+        >
       </div>
     </div>
     <div class="back" @click="() => $router.go(-1)">
@@ -104,20 +110,30 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import CommonButton from "../../../components/common_button.vue";
+import initWeb3 from "../../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "bf_casio",
   components: {
     CommonButton,
   },
   setup() {
+    const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       winPoints: [
         {
           key: 0,
           point: 12,
-          staked: 30000,
+          staked: 0,
           img: require("../../../assets/cardImgs/hero/bg/c0.png"),
           selectImg: require("../../../allstar_assets/casio/camp_0.png"),
           name: "魏",
@@ -125,7 +141,7 @@ export default {
         {
           key: 1,
           point: 12,
-          staked: 30000,
+          staked: 0,
           img: require("../../../assets/cardImgs/hero/bg/c1.png"),
           selectImg: require("../../../allstar_assets/casio/camp_1.png"),
           name: "蜀",
@@ -133,7 +149,7 @@ export default {
         {
           key: 2,
           point: 12,
-          staked: 30000,
+          staked: 0,
           img: require("../../../assets/cardImgs/hero/bg/c2.png"),
           selectImg: require("../../../allstar_assets/casio/camp_2.png"),
           name: "吴",
@@ -141,25 +157,121 @@ export default {
         {
           key: 3,
           point: 12,
-          staked: 30000,
+          staked: 0,
           img: require("../../../assets/cardImgs/hero/bg/c3.png"),
           selectImg: require("../../../allstar_assets/casio/camp_3.png"),
           name: "群",
         },
       ],
       curSelect: undefined,
+      btnDisable: false,
       buyNum: 1000,
       btnStatus: 0,
+      totalPool: 0,
+      account: "",
+      web3: "",
+    });
+    const myOdd = computed(() => {
+      if (data.curSelect == undefined) return 1;
+      return data.winPoints[data.curSelect].point;
     });
     const btnText = computed(() => {
       return ["授权", "下注"][data.btnStatus];
     });
-    onBeforeMount(() => {});
-    onMounted(() => {});
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getInfo();
+    });
+    const handleClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await stake();
+      }
+    };
+    const getInfo = async () => {
+      const c = store.state.c_bet;
+      const odds = await c.methods.getOdds().call();
+      data.totalPool = data.web3.utils.fromWei(await c.methods.totalBetPool().call(),'ether');
+      for (let i = 0; i < data.winPoints.length; i++) {
+        const item = data.winPoints[i];
+        const staked = await c.methods.betInfos(data.account, i).call();
+        item.point = (Number(odds[i]) / 100).toFixed(0);
+        item.staked = data.web3.utils.fromWei(staked.toString());
+      }
+    };
+    const stake = async () => {
+      try {
+        if (data.curSelect == undefined) {
+          proxy.$toast("请选择下注阵营", store.state.toast_error);
+          return;
+        }
+        data.btnDisable = true;
+        proxy.$toast("等待下注", store.state.toast_info);
+        const c = store.state.c_bet;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const gas = await c.methods
+          .bet(data.curSelect, value)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.bet(data.curSelect, value).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+
+        if (res.status) {
+          proxy.$toast("下注成功", store.state.toast_success);
+          data.btnStatus = 0;
+        }
+      } catch (e) {
+        proxy.$toast("下注失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+        await getInfo()
+      }
+    };
+    const approve = async () => {
+      try {
+        proxy.$toast("等待授权", store.state.toast_info);
+        data.btnDisable = true;
+        const c = store.state.c_mmc;
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const addr = store.state.c_bet.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, value)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.approve(addr, value).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast("授权成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("授权失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
     const refData = toRefs(data);
     return {
       ...refData,
+      myOdd,
       btnText,
+      handleClick,
     };
   },
 };

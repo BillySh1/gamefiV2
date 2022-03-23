@@ -11,7 +11,9 @@ import RecruitABI from "../constants/Recruit.json";
 import RichHeroABI from "../constants/RichHero.json";
 import RichShopABI from "../constants/RichShop.json";
 import TrainingABI from "../constants/Training.json";
-import BattleABI from '../constants/Battle.json'
+import BattleABI from "../constants/Battle.json";
+import BattleShopABI from "../constants/BattleShop.json";
+import BetABI from "../constants/Bet.json";
 
 const c_map = {
   c_airdrop: {
@@ -50,15 +52,23 @@ const c_map = {
     abi: TrainingABI.abi,
     address: addressMap.training,
   },
-  c_usdt:{
+  c_usdt: {
     abi: MMCTokenABI.abi,
-    address: addressMap.usdt
+    address: addressMap.usdt,
   },
   // battle field
-  c_battle:{
-    abi:BattleABI.abi,
+  c_battle: {
+    abi: BattleABI.abi,
     address: addressMap.battle,
-  }
+  },
+  c_battle_shop: {
+    abi: BattleShopABI.abi,
+    address: addressMap.battleShop,
+  },
+  c_bet: {
+    abi: BetABI.abi,
+    address: addressMap.bet,
+  },
 };
 
 const store = createStore({
@@ -93,9 +103,7 @@ const store = createStore({
       },
     };
   },
-  mutations:{
-    
-  }
+  mutations: {},
 });
 
 let _web3;
