@@ -1,6 +1,16 @@
 <template>
   <BfPack @close="() => (showPack = false)" :value="showPack" />
   <RandomEvents :value="showEvents" @close="() => (showEvents = false)" />
+  <InjectModal
+    :value="showRuleModal"
+    :title="'群英会战'"
+    @close="() => (showRuleModal = false)"
+    @confirm="() => (showRuleModal = false)"
+  >
+    <div class="modal_text">
+      规则站位规则站位规则站位规则站位规则站位规则站位
+    </div>
+  </InjectModal>
   <Lottie
     v-if="loading"
     :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -22,7 +32,7 @@
             <div class="txt">主城</div>
           </div>
         </div>
-        <div class="rules">规则</div>
+        <div class="rules" @click="() => (showRuleModal = true)">规则</div>
         <div class="pack_btn" @click="() => (showPack = true)">
           <div class="text">行军背包</div>
         </div>
@@ -36,9 +46,16 @@
             <img src="../../allstar_assets/weather/sunny.png" alt="" />
           </div>
           <div class="power_zone">
-            <div>我军总战力</div>
-            <img src="../../assets/pack/power_item.png" alt="" />
-            <div>暂不可见</div>
+            <img src="../../allstar_assets/main/power_zone.png" alt="" />
+            <div class="power_inner">我军暂无战力</div>
+          </div>
+          <div
+            class="random_events"
+            v-for="item in randomEvents"
+            :key="item.key"
+          >
+            <img src="../../allstar_assets/main/clock.png" alt="" />
+            {{ item.name }}
           </div>
         </div>
 
@@ -61,12 +78,14 @@ import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import RandomEvents from "./events/random_events.vue";
+import InjectModal from "../../components/inject_modal.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_main",
   components: {
     BfPack,
     RandomEvents,
+    InjectModal,
   },
   setup() {
     const store = useStore();
@@ -78,6 +97,11 @@ export default {
       loading: false,
       showPack: false,
       showEvents: false,
+      showRuleModal: false,
+      randomEvents: [
+        { key: 0, name: "随机事件进行中", type: 0 },
+        { key: 1, name: "伏击进行中", type: 1 },
+      ],
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -214,7 +238,7 @@ export default {
   padding: 0.5rem 0;
   background: rgba(44, 3, 3, 0.6);
   border-radius: 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .pack_btn {
   cursor: pointer;
@@ -228,7 +252,7 @@ export default {
   height: 7rem;
   background: url("../../allstar_assets/main/pack_bg.png") no-repeat;
   background-size: 100% 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,20 +264,23 @@ export default {
   position: absolute;
   top: 1%;
   right: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   .day_step {
     cursor: pointer;
     &:hover {
       opacity: 0.8;
     }
-    min-width: 25rem;
-    padding: 0.5rem 0;
     background: rgba(44, 3, 3, 0.6);
+    border: 2px solid #edf129;
     border-radius: 20px;
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1.5rem;
+    min-width: 25rem;
     .des {
       margin: 0 2rem;
     }
@@ -262,24 +289,40 @@ export default {
     }
   }
   .power_zone {
+    position: relative;
+    cursor: pointer;
+    width: 30rem;
+    &:hover {
+      opacity: 0.8;
+    }
+    font-size: 1.5rem;
+    img {
+      width: 100%;
+    }
+    .power_inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .random_events {
     cursor: pointer;
     &:hover {
       opacity: 0.8;
     }
-    min-width: 25rem;
+    width: 15rem;
     padding: 0.5rem 0;
-    background: rgba(44, 3, 3, 0.6);
-    border-radius: 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    .des {
-      margin: 0 2rem;
-    }
+    justify-content: center;
+    background: rgba(63, 42, 18, 0.8);
+    border-radius: 4px;
+    margin-bottom: 2rem;
     img {
-      margin: 0 1rem;
-      width: 2rem;
+      width: 2.5rem;
+      margin-right: 1rem;
     }
   }
 }
@@ -296,7 +339,7 @@ export default {
   padding: 0.5rem 1rem;
   background: rgba(44, 3, 3, 0.6);
   border-radius: 20px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 
   .time_row {
@@ -304,7 +347,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 1rem;
     img {
       margin: 0 1rem;
