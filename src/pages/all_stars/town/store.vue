@@ -132,7 +132,6 @@ import {
   reactive,
   toRefs,
   onBeforeMount,
-  onMounted,
   computed,
   getCurrentInstance,
 } from "vue";
@@ -286,8 +285,11 @@ export default {
           data.web3 = p;
         }
       );
+      await getBeforePack()
     });
-    onMounted(() => {});
+    const getBeforePack = async()=>{
+      
+    }
     const refData = toRefs(data);
     return {
       ...refData,
