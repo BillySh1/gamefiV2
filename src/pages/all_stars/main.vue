@@ -85,7 +85,17 @@
             {{ item.name }}
           </div>
         </div>
-
+        <div class="fina_pool" @click="()=>{
+          $router.push({
+            name:'bf_pool'
+          })}" >
+          <div class="inner" >
+            <img src="../../allstar_assets/main/to_final.png" alt="">
+            <div class="text" >
+              前往鹿原
+            </div>
+          </div>
+        </div>
         <div class="pre_time_view">
           <div>
             距离下一个据点
@@ -183,7 +193,7 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
       const timeTicker = res[1];
-      console.log(timeTicker,'sss')
+      console.log(timeTicker, "sss");
     };
     const getPower = async () => {
       const c = store.state.c_battle;
@@ -260,6 +270,29 @@ export default {
       position: relative;
       width: 100%;
       height: 100%;
+    }
+  }
+}
+.fina_pool {
+  cursor: pointer;
+  &:hover{
+    opacity: .8;
+  }
+  position: absolute;
+  bottom: 20%;
+  right: 1%;
+  width: 6rem;
+  .inner {
+    position: relative;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }

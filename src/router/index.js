@@ -15,7 +15,7 @@ const reborn = () => import("../pages/reborn/reborn.vue");
 const leader_board = () => import("../pages/leader_board/board.vue");
 const swap = () => import("../pages/swap/swap.vue");
 const invite = () => import("../pages/invite/invite.vue");
-const my_invite = ()=> import('../pages/invite/my_invite.vue')
+const my_invite = () => import("../pages/invite/my_invite.vue");
 const airdrop = () => import("../pages/airdrop/airdrop.vue");
 const title = () => import("../pages/title/title.vue");
 const notice = () => import("../pages/notice/notice.vue");
@@ -41,7 +41,8 @@ const bf_base = () => import("../pages/all_stars/town/city.vue");
 const bf_stake = () => import("../pages/all_stars/town/stake.vue");
 const bf_history = () => import("../pages/all_stars/history/history.vue");
 const bf_casio = () => import("../pages/all_stars/caiso/casio.vue");
-const bf_staked_his = ()=>import('../pages/all_stars/caiso/bf_stake_his.vue')
+const bf_pool = () => import("../pages/all_stars/final_pool.vue");
+const bf_staked_his = () => import("../pages/all_stars/caiso/bf_stake_his.vue");
 const bf_casio_history = () =>
   import("../pages/all_stars/caiso/bf_history.vue");
 
@@ -121,8 +122,8 @@ const router = createRouter({
       component: invite,
     },
     {
-      path:'/myInvite',
-      name:'my_invite',
+      path: "/myInvite",
+      name: "my_invite",
       component: my_invite,
     },
     {
@@ -244,6 +245,11 @@ const router = createRouter({
       path: "/casio_bf_his",
       name: "bf_casio_history",
       component: bf_casio_history,
+    },
+    {
+      path: "/bf_pool",
+      name: "bf_pool",
+      component: bf_pool,
     },
   ],
 });
