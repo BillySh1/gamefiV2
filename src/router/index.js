@@ -15,6 +15,7 @@ const reborn = () => import("../pages/reborn/reborn.vue");
 const leader_board = () => import("../pages/leader_board/board.vue");
 const swap = () => import("../pages/swap/swap.vue");
 const invite = () => import("../pages/invite/invite.vue");
+const my_invite = ()=> import('../pages/invite/my_invite.vue')
 const airdrop = () => import("../pages/airdrop/airdrop.vue");
 const title = () => import("../pages/title/title.vue");
 const notice = () => import("../pages/notice/notice.vue");
@@ -118,6 +119,11 @@ const router = createRouter({
       path: "/invite",
       name: "invite",
       component: invite,
+    },
+    {
+      path:'/myInvite',
+      name:'my_invite',
+      component: my_invite,
     },
     {
       path: "/airdrop",

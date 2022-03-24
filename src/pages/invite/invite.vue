@@ -12,7 +12,15 @@
       <div class="invite_box">
         <div class="up">
           <img src="../../assets/invite/up_bg.png" alt="" />
-          <div class="info_box">
+          <div
+            class="info_box"
+            @click="
+              () =>
+                $router.push({
+                  name: 'my_invite',
+                })
+            "
+          >
             <div class="item title">
               <img src="../../assets/invite/icons/1.svg" alt="" />
               我的收益
@@ -112,9 +120,7 @@ export default {
     });
     const generate = () => {
       data.encodeData =
-        window.location.host +
-        "/#/mint?invite=" +
-        btoa(data.account);
+        window.location.host + "/#/mint?invite=" + btoa(data.account);
       proxy.$toast("邀请链接已生成", store.state.toast_success);
       data.showModal = true;
     };
