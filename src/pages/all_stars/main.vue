@@ -48,7 +48,14 @@
         <div class="back_home" @click="() => $router.push({ name: 'home' })">
           返回主页
         </div>
-        <div class="right-top"  :style="[1, 3].includes(Number(curCamp)) ? 'right:69%; align-items:flex-start' : ''">
+        <div
+          class="right-top"
+          :style="
+            [1, 3].includes(Number(curCamp))
+              ? 'right:69%; align-items:flex-start'
+              : ''
+          "
+        >
           <div class="day_step">
             <div>第一日</div>
             <div class="des">风和日丽</div>
@@ -83,12 +90,19 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import RandomEvents from "./events/random_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "bf_main",
   components: {
@@ -98,6 +112,8 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { proxy } = getCurrentInstance();
+    const router = useRouter();
     const data = reactive({
       account: "",
       web3: "",
@@ -134,6 +150,12 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_battle;
       const player = await c.methods.players(data.account).call();
+      if (!player.isBond) {
+        proxy.$toast("请先选择阵营", store.state.toast_error);
+        router.push({
+          name: "bf_choose",
+        });
+      }
       data.player = player;
       data.curCamp = player.camp;
     };
