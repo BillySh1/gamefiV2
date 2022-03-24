@@ -1,4 +1,10 @@
 <template>
+  <BfStakeBuySuccess
+    v-if="newMintedList.length > 0"
+    :value="showSuccess"
+    :newMintedItems="newMintedList"
+    @close="() => (showSuccess = false)"
+  />
   <div class="box">
     <div class="inner">
       <div class="left">
@@ -26,7 +32,7 @@
         </div>
         <div class="stockDetail">
           <div v-for="item in stockDetal" :key="item[0]">
-            {{ item[0] }}: + {{ item[1] }}速率
+            {{ item[0] }}: + {{ item[1] }} 速率
           </div>
         </div>
       </div>
@@ -137,11 +143,13 @@ import {
 } from "vue";
 import CommonButton from "../../../components/common_button.vue";
 import initWeb3 from "../../../utils/initWeb3";
+import BfStakeBuySuccess from "./bf_stake_buy_success.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_store",
   components: {
     CommonButton,
+    BfStakeBuySuccess,
   },
   setup() {
     const store = useStore();
@@ -185,11 +193,11 @@ export default {
         },
       ],
       stockDetal: [
-        ["青铜骏马", 1],
-        ["白金汗血", 2],
-        ["银狐牺尊", 3],
-        ["白神象彝", 4],
-        ["龙刻陨星", 5],
+        ["青铜骏马", "5 / h"],
+        ["白金汗血", "10 / h"],
+        ["银狐牺尊", "15 / h"],
+        ["白神象彝", "20 / h"],
+        ["龙刻陨星", "25 / h"],
       ],
       buyNum: 1,
       btnStatus: 0,
@@ -197,6 +205,7 @@ export default {
       web3: "",
       account: "",
       newMintedList: [],
+      showSuccess: false,
     });
     const btnText = computed(() => {
       return ["授权", "购买"][data.btnStatus];
@@ -223,9 +232,9 @@ export default {
 
     const approve = async () => {
       try {
-        await getBeforePack();
         proxy.$toast("等待授权", store.state.toast_info);
         data.btnDisable = true;
+        await getBeforePack();
         const c = store.state.c_mmc;
         const value = data.web3.utils.toWei(
           (2000 * Number(data.buyNum)).toString(),
@@ -271,9 +280,7 @@ export default {
         if (res.status) {
           proxy.$toast("购买成功", store.state.toast_success);
           data.btnStatus = 0;
-          setTimeout(async () => {
-            await getNewMinted();
-          }, 2000);
+          await getNewMinted();
         }
       } catch (e) {
         proxy.$toast("购买失败", store.state.toast_error);
@@ -297,7 +304,7 @@ export default {
       const newPack = await c.methods.ownList(data.account).call();
       const before = JSON.parse(localStorage.getItem("before_bf_pack"));
       data.newMintedList = [];
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         const newItem = newPack[i];
         const oldItem = before[i];
         const added = Number(newItem) - Number(oldItem);
@@ -310,13 +317,13 @@ export default {
           });
         }
       }
-      console.log(data.newMintedList, "ggg");
+      console.log(data.newMintedList, "newMinted");
+      data.showSuccess = true;
     };
     const getBeforePack = async () => {
       const c = store.state.c_battle_shop;
       const res = await c.methods.ownList(data.account).call();
       localStorage.setItem("before_bf_pack", JSON.stringify(res));
-      console.log(localStorage.getItem("before_bf_pack"), "ggg");
     };
     const refData = toRefs(data);
     return {
@@ -417,6 +424,7 @@ export default {
         position: absolute;
         right: 0;
         bottom: 0;
+        font-size: 1.2rem;
       }
     }
     .right {
