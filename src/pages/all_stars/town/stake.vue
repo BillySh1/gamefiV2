@@ -15,6 +15,7 @@
       :value="showPack"
       :toSelect="true"
       :selected="selectedTokenIds"
+      :camp="camp"
       @select="(x) => handleSelectHero(x)"
       @back="
         () => {

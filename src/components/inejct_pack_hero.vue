@@ -118,7 +118,7 @@
             v-for="(item, index) in curItems"
             :key="index"
             :class="
-              selected && selected.includes(item.tokenId)
+              (selected && selected.includes(item.tokenId)) || camp != item.camp
                 ? 'card_item disable'
                 : 'card_item'
             "
@@ -165,7 +165,7 @@ import useHeroDetail from "../utils/useHeroDetail.js";
 import InjectGoBack from "./inject_go_back.vue";
 export default {
   name: "inject_pack_hero",
-  props: ["value", "toSelect", "hideSearch", "selected"],
+  props: ["value", "toSelect", "hideSearch", "selected", "camp"],
   components: {
     PackHeroItem,
     CommonSearch,

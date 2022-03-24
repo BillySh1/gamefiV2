@@ -182,7 +182,8 @@ export default {
     const getTimes = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
-      console.log(res, "times");
+      const timeTicker = res[1];
+      console.log(timeTicker,'sss')
     };
     const getPower = async () => {
       const c = store.state.c_battle;
