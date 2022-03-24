@@ -8,7 +8,7 @@
     @confirm="() => (showRuleModal = false)"
   >
     <div class="modal_text">
-      规则站位规则站位规则站位规则站位规则站位规则站位
+      群英会战单个战役将为期7天，玩家一旦质押卡牌本次战役期间禁止更改，7天内到达总战场鹿原参加决战才有资格参与最终分红争夺，战役期间可能会触发随机事件影响玩家行军速率，可购买道具增加速率，行军决策快人一步， 最终分红规则将参考玩家抵达战场的先后，与玩家战力综合计算。
     </div>
   </InjectModal>
   <Lottie
@@ -63,7 +63,7 @@
           </div>
           <div class="power_zone">
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
-            <div class="power_inner">我军暂无战力</div>
+            <div class="power_inner">暂未出征</div>
           </div>
           <div
             class="random_events"
@@ -156,6 +156,7 @@ export default {
           name: "bf_choose",
         });
       }
+      console.log(player, "ggg");
       data.player = player;
       data.curCamp = player.camp;
     };
@@ -178,6 +179,12 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+.modal_text{
+  font-size: 1.5rem;
+  line-height: 1.5;
+  width: 70%;
+  margin: auto;
+}
 .box {
   position: relative;
   width: 100%;
