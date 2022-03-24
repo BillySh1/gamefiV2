@@ -12,7 +12,7 @@
         class="currency_item"
         v-for="(item, index) in list"
         :key="item.key"
-        :style="index == 0 || index == 1 || index == 3 ? 'width: 10rem' : ''"
+        :style="index != 2 ? 'width: 10rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
@@ -172,10 +172,10 @@ export default {
         .split(".")[0];
       data.list[2].value = cardNum.length;
       data.list[3].value = await shop.methods
-        .balanceOf(data.account, 11)
+        .balanceOf(data.account, 12)
         .call();
       data.list[4].value = await shop.methods
-        .balanceOf(data.account, 12)
+        .balanceOf(data.account, 11)
         .call();
     };
     const refData = toRefs(data);

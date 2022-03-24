@@ -96,7 +96,8 @@ export default {
     left: 50%;
     transform: translate(-55%, 25%);
     bottom: 0;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    white-space: nowrap;
     .confirm_inner {
       position: relative;
       img {

@@ -5,10 +5,12 @@ const combineMap = [
   ["乱世孽缘", "悬壶济世", "酒池肉林", "黄巾之乱"],
 ];
 
-const findCombineIndex = (camp,name)=>{
-  return combineMap[camp].findIndex(x=>{
-    return x == name
-  })
-}
+const findCombineIndex = (camp, name) => {
+  const res = combineMap[camp].findIndex((x) => {
+    return x == name;
+  });
+  if (res == -1) return 0;
+  return res;
+};
 
-export { combineMap,findCombineIndex };
+export { combineMap, findCombineIndex };

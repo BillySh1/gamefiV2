@@ -334,7 +334,6 @@ export default {
       const shop = store.state.c_richShop;
       data.stock[0] = await shop.methods.balanceOf(data.account, 11).call();
       data.stock[1] = await shop.methods.balanceOf(data.account, 12).call();
-      console.log(data.stock, "ggg");
     };
     const getPlayer = async () => {
       const c = store.state.c_battle;
@@ -503,7 +502,7 @@ export default {
         return;
       }
       data.cost[0] = await c.methods.ticketAmount(tokenIds1, tokenIds2).call();
-      console.log(data.cost[0]);
+      console.log(data.cost[0],'cost');
     };
     const getWarrorNames = computed(() => {
       const res = data.selectedWarrior.reduce((pre, cur) => {
@@ -543,6 +542,7 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+
 .box {
   padding: 2rem 4rem;
   width: 100%;
