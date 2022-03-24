@@ -119,7 +119,7 @@
         <img src="../../../allstar_assets/store/title_bg.png" alt="" />
         <div class="text">天策府</div>
       </div>
-      <div class="tabs" v-show="!player.baseSpeed">
+      <div class="tabs" v-show="player.baseSpeed == 0">
         <div
           class="tab_item"
           v-for="item in tabs"
@@ -142,7 +142,10 @@
         <div class="text">出征规则</div>
       </div>
     </div>
-    <div class="main" v-show="!showPack && activeTab == 0 && !player.baseSpeed">
+    <div
+      class="main"
+      v-show="!showPack && activeTab == 0 && player.baseSpeed == 0"
+    >
       <div
         class="main_item"
         v-for="(item, index) in selectedWarrior"
@@ -152,7 +155,10 @@
         <StakeItem :info="item" />
       </div>
     </div>
-    <div class="main" v-show="!showPack && activeTab == 1 && !player.baseSpeed">
+    <div
+      class="main"
+      v-show="!showPack && activeTab == 1 && player.baseSpeed == 0"
+    >
       <div
         class="main_item"
         v-for="(item, index) in selectedKing"
@@ -178,7 +184,7 @@
         触发了组合
         <span style="color: red">{{ isCombined }}</span> 战力更上一层楼
       </div>
-      <div class="stake" @click="doubleCheck" v-show="!player.baseSpeed">
+      <div class="stake" @click="doubleCheck" v-show="player.baseSpeed == 0">
         <img src="../../../allstar_assets/stake/stake_btn_bg.png" alt="" />
         <div class="text">出征</div>
       </div>
@@ -435,8 +441,8 @@ export default {
     };
     const combileInfo = async () => {
       const c = store.state.c_battle;
-      console.log(warriors.value, kings.value, "ggg");
       const res = await c.methods.isCombine(warriors.value, kings.value).call();
+      console.log(res,'raw')
       const idx = res.findIndex((x) => {
         return x == true;
       });
@@ -445,7 +451,7 @@ export default {
       } else {
         data.isCombined = combineMap[data.camp][idx];
       }
-      console.log(data.isCombined, "gggg");
+      console.log(data.isCombined, "name");
     };
     const go = async () => {
       try {
@@ -523,7 +529,7 @@ export default {
       }, []);
       return res.length > 0 ? res.join(",") : "无";
     });
-   
+
     const refData = toRefs(data);
     return {
       ...refData,

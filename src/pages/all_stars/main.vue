@@ -77,6 +77,7 @@
             class="random_events"
             v-for="item in randomEvents"
             :key="item.key"
+            v-show="false"
           >
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ item.name }}
