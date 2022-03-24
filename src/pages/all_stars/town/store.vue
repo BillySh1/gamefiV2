@@ -196,6 +196,7 @@ export default {
       btnDisable: false,
       web3: "",
       account: "",
+      newMintedList: [],
     });
     const btnText = computed(() => {
       return ["授权", "购买"][data.btnStatus];
@@ -210,7 +211,7 @@ export default {
       return "号令军旗";
     });
     const stockPrice = computed(() => {
-      return 500 * data.buyNum;
+      return 2000 * data.buyNum;
     });
     const handleClick = async () => {
       if (data.btnStatus == 0) {
@@ -222,11 +223,12 @@ export default {
 
     const approve = async () => {
       try {
+        await getBeforePack();
         proxy.$toast("等待授权", store.state.toast_info);
         data.btnDisable = true;
         const c = store.state.c_mmc;
         const value = data.web3.utils.toWei(
-          (500 * Number(data.buyNum)).toString(),
+          (2000 * Number(data.buyNum)).toString(),
           "ether"
         );
         const addr = store.state.c_battle_shop.options.address;
@@ -251,6 +253,7 @@ export default {
       }
     };
     const buy = async () => {
+      await getBeforePack();
       try {
         data.btnDisable = true;
         proxy.$toast("等待购买", store.state.toast_info);
@@ -261,13 +264,16 @@ export default {
           .estimateGas({ from: data.account });
         const res = await c.methods.buy(data.buyNum).send({
           gasPrice: gasPrice,
-          gas: gas,
+          gas: Number(gas) + 500000,
           from: data.account,
         });
 
         if (res.status) {
           proxy.$toast("购买成功", store.state.toast_success);
           data.btnStatus = 0;
+          setTimeout(async () => {
+            await getNewMinted();
+          }, 2000);
         }
       } catch (e) {
         proxy.$toast("购买失败", store.state.toast_error);
@@ -285,9 +291,33 @@ export default {
           data.web3 = p;
         }
       );
-      await getBeforePack();
     });
-    const getBeforePack = async () => {};
+    const getNewMinted = async () => {
+      const c = store.state.c_battle_shop;
+      const newPack = await c.methods.ownList(data.account).call();
+      const before = JSON.parse(localStorage.getItem("before_bf_pack"));
+      data.newMintedList = [];
+      for (let i = 0; i < 4; i++) {
+        const newItem = newPack[i];
+        const oldItem = before[i];
+        const added = Number(newItem) - Number(oldItem);
+        if (added > 0) {
+          data.newMintedList.push({
+            name: data.boxMap[i].name,
+            img: data.boxMap[i].img,
+            color: data.boxMap[i].color,
+            num: added,
+          });
+        }
+      }
+      console.log(data.newMintedList, "ggg");
+    };
+    const getBeforePack = async () => {
+      const c = store.state.c_battle_shop;
+      const res = await c.methods.ownList(data.account).call();
+      localStorage.setItem("before_bf_pack", JSON.stringify(res));
+      console.log(localStorage.getItem("before_bf_pack"), "ggg");
+    };
     const refData = toRefs(data);
     return {
       ...refData,

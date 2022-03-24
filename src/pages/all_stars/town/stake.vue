@@ -57,6 +57,20 @@
         />
         数量：
         {{ cost[0] }}
+        (当前拥有:{{ stock[0] }})
+        <CommonButton
+          style="margin-left: 2rem"
+          @click="
+            () =>
+              $router.push({
+                name: 'storeDetail',
+                query: {
+                  info: 11,
+                },
+              })
+          "
+          >购买</CommonButton
+        >
       </div>
       <div class="rule_modal_item">
         需要消耗衅鼓
@@ -67,6 +81,20 @@
         />
         数量：
         {{ cost[1] }}
+        (当前拥有:{{ stock[1] }})
+        <CommonButton
+          style="margin-left: 2rem"
+          @click="
+            () =>
+              $router.push({
+                name: 'storeDetail',
+                query: {
+                  info: 12,
+                },
+              })
+          "
+          >购买</CommonButton
+        >
       </div>
       <div class="rule_modal_item">武将队伍： {{ getWarrorNames }}</div>
       <div class="rule_modal_item">主公队伍: {{ getKingNames }}</div>
@@ -205,6 +233,7 @@ export default {
       activeTab: 0,
       selectedWarrior: [{}, {}, {}, {}, {}],
       selectedKing: [],
+      stock: [0, 0],
       cost: [0, 10],
       curIdx: 0,
       showPack: false,
@@ -298,7 +327,15 @@ export default {
         }
       );
       await getPlayer();
+      await getStock();
     });
+
+    const getStock = async () => {
+      const shop = store.state.c_richShop;
+      data.stock[0] = await shop.methods.balanceOf(data.account, 11).call();
+      data.stock[1] = await shop.methods.balanceOf(data.account, 12).call();
+      console.log(data.stock, "ggg");
+    };
     const getPlayer = async () => {
       const c = store.state.c_battle;
       const player = await c.methods.players(data.account).call();
@@ -422,25 +459,17 @@ export default {
           warriors.value,
           kings.value,
           !!data.isCombined,
-          findCombineIndex(data.camp, data.isCombined)
+          [findCombineIndex(data.camp, data.isCombined)]
         );
         const gas = await c.methods
-          .fight(
-            data.road,
-            warriors.value,
-            kings.value,
-            !!data.isCombined,
-            findCombineIndex(data.camp, data.isCombined)
-          )
+          .fight(data.road, warriors.value, kings.value, !!data.isCombined, [
+            findCombineIndex(data.camp, data.isCombined),
+          ])
           .estimateGas({ from: data.account });
         const res = await c.methods
-          .fight(
-            data.road,
-            warriors.value,
-            kings.value,
-            !!data.isCombined,
-            findCombineIndex(data.camp, data.isCombined)
-          )
+          .fight(data.road, warriors.value, kings.value, !!data.isCombined, [
+            findCombineIndex(data.camp, data.isCombined),
+          ])
           .send({
             gasPrice: gasPrice,
             gas: gas,

@@ -12,7 +12,7 @@
         class="currency_item"
         v-for="(item, index) in list"
         :key="item.key"
-        :style="index == 0 || index == 1 ? 'width: 10rem' : ''"
+        :style="index == 0 || index == 1 || index == 3 ? 'width: 10rem' : ''"
       >
         <img class="img_left" :src="item.img" alt="" />
         <div class="value">
