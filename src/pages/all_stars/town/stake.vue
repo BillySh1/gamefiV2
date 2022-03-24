@@ -119,7 +119,7 @@
         <img src="../../../allstar_assets/store/title_bg.png" alt="" />
         <div class="text">天策府</div>
       </div>
-      <div class="tabs">
+      <div class="tabs" v-show="!player.baseSpeed">
         <div
           class="tab_item"
           v-for="item in tabs"
@@ -142,7 +142,7 @@
         <div class="text">出征规则</div>
       </div>
     </div>
-    <div class="main" v-show="!showPack && activeTab == 0">
+    <div class="main" v-show="!showPack && activeTab == 0 && !player.baseSpeed">
       <div
         class="main_item"
         v-for="(item, index) in selectedWarrior"
@@ -152,7 +152,7 @@
         <StakeItem :info="item" />
       </div>
     </div>
-    <div class="main" v-show="!showPack && activeTab == 1">
+    <div class="main" v-show="!showPack && activeTab == 1 && !player.baseSpeed">
       <div
         class="main_item"
         v-for="(item, index) in selectedKing"
@@ -168,6 +168,7 @@
         <StakeItem :info="{}" />
       </div>
     </div>
+    <div class="main" v-show="Number(player.baseSpeed) > 0">您已出征</div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
         <img src="../../../allstar_assets/store/back.png" alt="" />
@@ -177,7 +178,7 @@
         触发了组合
         <span style="color: red">{{ isCombined }}</span> 战力更上一层楼
       </div>
-      <div class="stake" @click="doubleCheck">
+      <div class="stake" @click="doubleCheck" v-show="!player.baseSpeed">
         <img src="../../../allstar_assets/stake/stake_btn_bg.png" alt="" />
         <div class="text">出征</div>
       </div>
@@ -502,7 +503,7 @@ export default {
         return;
       }
       data.cost[0] = await c.methods.ticketAmount(tokenIds1, tokenIds2).call();
-      console.log(data.cost[0],'cost');
+      console.log(data.cost[0], "cost");
     };
     const getWarrorNames = computed(() => {
       const res = data.selectedWarrior.reduce((pre, cur) => {
@@ -522,6 +523,7 @@ export default {
       }, []);
       return res.length > 0 ? res.join(",") : "无";
     });
+   
     const refData = toRefs(data);
     return {
       ...refData,
@@ -542,7 +544,6 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-
 .box {
   padding: 2rem 4rem;
   width: 100%;

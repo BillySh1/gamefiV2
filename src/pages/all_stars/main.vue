@@ -8,7 +8,8 @@
     @confirm="() => (showRuleModal = false)"
   >
     <div class="modal_text">
-      群英会战单个战役将为期7天，玩家一旦质押卡牌本次战役期间禁止更改，7天内到达总战场鹿原参加决战才有资格参与最终分红争夺，战役期间可能会触发随机事件影响玩家行军速率，可购买道具增加速率，行军决策快人一步， 最终分红规则将参考玩家抵达战场的先后，与玩家战力综合计算。
+      群英会战单个战役将为期7天，玩家一旦质押卡牌本次战役期间禁止更改，7天内到达总战场鹿原参加决战才有资格参与最终分红争夺，战役期间可能会触发随机事件影响玩家行军速率，可购买道具增加速率，行军决策快人一步，
+      最终分红规则将参考玩家抵达战场的先后，与玩家战力综合计算。
     </div>
   </InjectModal>
   <Lottie
@@ -17,6 +18,13 @@
   />
   <div v-else class="box">
     <img class="map" :src="getMap" alt="" />
+    <img
+      v-if="player.isBond"
+      :style="getPos"
+      src="../../allstar_assets/main/pos.png"
+      alt=""
+    />
+
     <div class="main">
       <div class="inner">
         <div
@@ -101,6 +109,7 @@ import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import RandomEvents from "./events/random_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
+import { positions } from "../../utils/useRoutes";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 export default {
@@ -127,6 +136,8 @@ export default {
         { key: 0, name: "随机事件进行中", type: 0 },
         { key: 1, name: "伏击进行中", type: 1 },
       ],
+      player: "",
+      currentNode: undefined,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -145,6 +156,7 @@ export default {
         }
       );
       await getPlayer();
+      await getCurrentNode();
       data.loading = false;
     });
     const getPlayer = async () => {
@@ -156,9 +168,13 @@ export default {
           name: "bf_choose",
         });
       }
-      console.log(player, "ggg");
+      console.log(player, "player");
       data.player = player;
       data.curCamp = player.camp;
+    };
+    const getCurrentNode = async () => {
+      const c = store.state.c_battle;
+      data.currentNode = await c.methods.getCurrentNode(data.account).call();
     };
     const getMap = computed(() => {
       return [
@@ -168,18 +184,24 @@ export default {
         require("../../allstar_assets/main/map_3.png"),
       ][data.curCamp];
     });
+    const getPos = computed(() => {
+      const cur = positions[data.curCamp][data.player.road][data.currentNode];
+      console.log(cur, "ggg");
+      return `position:absolute;height:10rem;top:${cur[0]}%;left:${cur[1]}%`;
+    });
     const refData = toRefs(data);
     return {
       ...refData,
       campText,
       timing,
       getMap,
+      getPos,
     };
   },
 };
 </script>
 <style lang='less' scoped>
-.modal_text{
+.modal_text {
   font-size: 1.5rem;
   line-height: 1.5;
   width: 70%;
