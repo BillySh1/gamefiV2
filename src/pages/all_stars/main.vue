@@ -88,7 +88,8 @@
 
         <div class="pre_time_view">
           <div>
-            距离下一个据点 <span style="color: red">{{ nextName }}</span> 还剩
+            距离下一个据点
+            <span style="color: red">{{ nextNode.name }}</span> 还剩
           </div>
           <div class="time_row">
             <img src="../../allstar_assets/main/clock.png" alt="" />
@@ -112,7 +113,7 @@ import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import RandomEvents from "./events/random_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
-import { positions } from "../../utils/useRoutes";
+import { positions, map } from "../../utils/useRoutes";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 export default {
@@ -142,6 +143,10 @@ export default {
       player: "",
       currentNode: undefined,
       power: 0,
+      nextNode: {
+        id: 0,
+        name: "",
+      },
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -162,12 +167,27 @@ export default {
       await getPlayer();
       await getCurrentNode();
       await getPower();
+      await getTimes();
+      await getNextNode();
       data.loading = false;
     });
+    const getNextNode = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getNextNode(data.account).call();
+      data.nextNode = {
+        id: res,
+        name: map[res],
+      };
+    };
+    const getTimes = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getTimes(data.account).call();
+      console.log(res, "times");
+    };
     const getPower = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getCardsAndPower(data.account).call();
-      console.log(res, "raw");
+      console.log(res, "cards");
 
       data.power = Number(res[2] / 100).toFixed(0);
     };

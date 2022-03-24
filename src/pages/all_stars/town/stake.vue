@@ -574,7 +574,7 @@ export default {
   justify-content: space-between;
 }
 .rule_modal_item {
-  max-width: 60%;
+  max-width: 80%;
   margin: 1rem auto;
   font-size: 1.5rem;
   display: flex;
