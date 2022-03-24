@@ -13,9 +13,11 @@
         <div class="s_inner">
           <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
           <div class="content">
-            <div class="title">故事情节</div>
+            <!-- <div class="title">故事情节</div> -->
             <div class="c">
-              占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本占位文本
+              本战役纯属虚构<br />
+              东汉末年，天下三分<br />各族势力，暗流涌动<br />逐鹿中原，胜者为王<br />
+              选择合适的路线，让行军的路线更加畅通，减少兵力损耗并尽可能削弱敌军战力，才能使我军利于不败之地
             </div>
           </div>
 
@@ -28,11 +30,11 @@
       <div class="action_box">
         <div class="item" @click="choose(0)">
           <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
-          <div class="text">{{ "路线一: " + roadText[0] }}</div>
+          <div class="text">{{ roadText[0] }}</div>
         </div>
         <div class="item" @click="choose(1)">
           <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
-          <div class="text">{{ "路线二: " + roadText[1] }}</div>
+          <div class="text">{{ roadText[1] }}</div>
         </div>
       </div>
     </div>
@@ -166,6 +168,11 @@ export default {
             font-size: 2rem;
             margin-bottom: 2rem;
           }
+          .c {
+            width: 100%;
+            font-size: 1.5rem;
+            line-height: 1.5;
+          }
         }
       }
     }
@@ -185,6 +192,7 @@ export default {
           width: 100%;
         }
         .text {
+          width: 80%;
           position: absolute;
           top: 45%;
           left: 50%;
