@@ -132,9 +132,13 @@
       </div>
       <div class="power">
         <img src="../../../allstar_assets/stake/power_bg.png" alt="" />
-        <div class="text">
+        <div class="text" v-if="player.baseSpeed == 0">
           <div class="t">战力</div>
           <div class="bg_v">{{ curTotalPower }}</div>
+        </div>
+        <div class="text" v-else>
+          <div class="t">已出征战力</div>
+          <div class="bg_v">{{ power }}</div>
         </div>
       </div>
       <div class="rule" @click="() => (showRuleModal = true)">
@@ -174,7 +178,7 @@
         <StakeItem :info="{}" />
       </div>
     </div>
-    <div class="main" v-show="Number(player.baseSpeed) > 0">您已出征</div>
+    <div class="empty" v-show="Number(player.baseSpeed) > 0">您已出征</div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
         <img src="../../../allstar_assets/store/back.png" alt="" />
@@ -255,6 +259,7 @@ export default {
       btnStep: 0,
       road: undefined,
       isCombined: false,
+      power: 0,
     });
 
     const curTotalPower = computed(() => {
@@ -334,8 +339,15 @@ export default {
         }
       );
       await getPlayer();
+      await getPower();
       await getStock();
     });
+    const getPower = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getCardsAndPower(data.account).call();
+      console.log(res, "raw");
+      data.power = Number(res[2] / 100).toFixed(0);
+    };
 
     const getStock = async () => {
       const shop = store.state.c_richShop;
@@ -442,7 +454,7 @@ export default {
     const combileInfo = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.isCombine(warriors.value, kings.value).call();
-      console.log(res,'raw')
+      console.log(res, "raw");
       const idx = res.findIndex((x) => {
         return x == true;
       });
@@ -647,6 +659,14 @@ export default {
       white-space: nowrap;
     }
   }
+}
+.empty {
+  width: 100%;
+  height: 30rem;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .main {
   width: 100%;

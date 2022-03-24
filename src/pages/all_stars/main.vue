@@ -71,7 +71,9 @@
           </div>
           <div class="power_zone">
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
-            <div class="power_inner">暂未出征</div>
+            <div class="power_inner">
+              {{ power > 0 ? "我的战力:" + power : "暂未出征" }}
+            </div>
           </div>
           <div
             class="random_events"
@@ -139,6 +141,7 @@ export default {
       ],
       player: "",
       currentNode: undefined,
+      power: 0,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -158,8 +161,16 @@ export default {
       );
       await getPlayer();
       await getCurrentNode();
+      await getPower();
       data.loading = false;
     });
+    const getPower = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getCardsAndPower(data.account).call();
+      console.log(res, "raw");
+
+      data.power = Number(res[2] / 100).toFixed(0);
+    };
     const getPlayer = async () => {
       const c = store.state.c_battle;
       const player = await c.methods.players(data.account).call();

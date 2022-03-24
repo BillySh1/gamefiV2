@@ -44,7 +44,7 @@
         <div class="text">赌场</div>
       </div>
     </div>
-    <div class="empty" @click="() => $router.push({ name: 'bf_stake' })">
+    <div v-if="player.baseSpeed == 0" class="empty" @click="() => $router.push({ name: 'bf_stake' })">
       <img src="../../../allstar_assets/city/empty.png" alt="" />
     </div>
   </div>
