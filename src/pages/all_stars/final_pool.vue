@@ -31,7 +31,9 @@
           <div class="title">分红规则</div>
           <div class="" v-for="(item, index) in winAmount" :key="index">
             <div style="margin-bottom: 1rem">{{ item.name }}</div>
-            <div style="font-size: 1.8rem">{{ item.point + "%" }}</div>
+            <div style="font-size: 1.2rem">
+              {{ (totalAmount * (item.point / 100)).toFixed(0) }}
+            </div>
           </div>
         </div>
         <div class="item">
@@ -58,19 +60,19 @@ export default {
       winAmount: [
         {
           name: "第一名",
-          point: 70,
+          point: 50,
         },
         {
           name: "第二名",
-          point: 20,
+          point: 25,
         },
         {
           name: "第三名",
-          point: 8,
+          point: 15,
         },
         {
           name: "第四名",
-          point: 2,
+          point: 10,
         },
       ],
       account: "",

@@ -12,6 +12,24 @@
       最终分红规则将参考玩家抵达战场的先后，与玩家战力综合计算。
     </div>
   </InjectModal>
+  <InjectModal
+    :value="decisionShow"
+    :title="'选择策略'"
+    @close="() => (decisionShow = false)"
+  >
+    <div class="decision_conent">
+      <CommonButton
+        class="item"
+        v-for="(item, index) in decisions"
+        :key="index"
+        :disabled="btnDisable"
+        @click="() => march(index)"
+        v-show="item"
+      >
+        {{ getDecisionText(index) }}
+      </CommonButton>
+    </div>
+  </InjectModal>
   <Lottie
     v-if="loading"
     :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -85,25 +103,36 @@
             {{ item.name }}
           </div>
         </div>
-        <div class="fina_pool" @click="()=>{
-          $router.push({
-            name:'bf_pool'
-          })}" >
-          <div class="inner" >
-            <img src="../../allstar_assets/main/to_final.png" alt="">
-            <div class="text" >
-              前往鹿原
-            </div>
+        <div
+          class="fina_pool"
+          @click="
+            () => {
+              $router.push({
+                name: 'bf_pool',
+              });
+            }
+          "
+        >
+          <div class="inner">
+            <img src="../../allstar_assets/main/to_final.png" alt="" />
+            <div class="text">鹿原奖池</div>
           </div>
         </div>
-        <div class="pre_time_view">
+        <div class="pre_time_view" @click="showDecision">
           <div>
-            距离下一个据点
-            <span style="color: red">{{ nextNode.name }}</span> 还剩
+            <span v-if="!arriveNext">距离下一个据点</span>
+            <span v-else>即将到达据点</span>
+            <span style="color: red; margin: 0 1rem">{{ nextNode.name }}</span>
+
+            <span v-if="!arriveNext">还剩</span>
           </div>
-          <div class="time_row">
+          <div class="time_row" v-if="!arriveNext">
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ timing }}
+          </div>
+          <div class="time_row" v-else>
+            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <span style="color: red">请点击此处决策</span>
           </div>
         </div>
       </div>
@@ -118,11 +147,13 @@ import {
   onBeforeMount,
   computed,
   getCurrentInstance,
+  onBeforeUnmount,
 } from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import RandomEvents from "./events/random_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
+import CommonButton from "../../components/common_button.vue";
 import { positions, map } from "../../utils/useRoutes";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -132,6 +163,7 @@ export default {
     BfPack,
     RandomEvents,
     InjectModal,
+    CommonButton,
   },
   setup() {
     const store = useStore();
@@ -146,6 +178,7 @@ export default {
       showPack: false,
       showEvents: false,
       showRuleModal: false,
+      decisionShow: false,
       randomEvents: [
         { key: 0, name: "随机事件进行中", type: 0 },
         { key: 1, name: "伏击进行中", type: 1 },
@@ -157,13 +190,19 @@ export default {
         id: 0,
         name: "",
       },
+      timing: "0时0分0秒",
+      ticker: undefined,
+      decisions: [],
+      arriveNext: false,
+      btnDisable: false,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
     });
-    const timing = computed(() => {
-      return "4时20分30秒";
-    });
+    const getDecisionText = (idx) => {
+      return ["前进", "投降", "战斗", "进入鹿原"][idx];
+    };
+
     onBeforeMount(async () => {
       data.loading = true;
       await initWeb3.Init(
@@ -174,13 +213,44 @@ export default {
           data.web3 = p;
         }
       );
+      await init();
+      data.loading = false;
+    });
+    const init = async () => {
       await getPlayer();
       await getCurrentNode();
       await getPower();
       await getTimes();
       await getNextNode();
-      data.loading = false;
+      await getDecisions();
+    };
+    onBeforeUnmount(() => {
+      if (data.ticker) {
+        clearInterval(data.ticker);
+      }
     });
+    const getDecisions = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getMarchTactics(data.account).call();
+      data.decisions = res;
+    };
+    const showDecision = () => {
+      if (data.arriveNext) {
+        data.decisionShow = true;
+      }
+    };
+    const getRTime = (endTime) => {
+      // counting time next node
+      const now = new Date().getTime();
+      const delta = Number(endTime) - (Number(now) / 1000).toFixed(0);
+      let h = Math.floor((delta / 60 / 60) % 24);
+      let m = Math.floor((delta / 60) % 60);
+      let s = Math.floor(delta % 60);
+      if (parseInt(h, 10) < 10) h = "0";
+      if (parseInt(m, 10) < 10) m = "0";
+      if (parseInt(s, 10) < 10) s = "0";
+      data.timing = `${h}时${m}分${s}秒`;
+    };
     const getNextNode = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getNextNode(data.account).call();
@@ -192,8 +262,15 @@ export default {
     const getTimes = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
-      const timeTicker = res[1];
-      console.log(timeTicker, "sss");
+      const now = new Date().getTime();
+      const delta = Number(res[1]) - (Number(now) / 1000).toFixed(0);
+      if (delta < 0) {
+        data.arriveNext = true;
+        return;
+      }
+      data.ticker = setInterval(() => {
+        getRTime(res[1]);
+      }, 1000);
     };
     const getPower = async () => {
       const c = store.state.c_battle;
@@ -219,6 +296,32 @@ export default {
       const c = store.state.c_battle;
       data.currentNode = await c.methods.getCurrentNode(data.account).call();
     };
+    const march = async (idx) => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待决策确认", store.state.toast_info);
+        const c = store.state.c_battle;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .march(idx)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.march(idx).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("决策成功,正在行军...", store.state.toast_info);
+          data.decisionShow = false;
+          await init()
+        }
+      } catch (e) {
+        console.error(e);
+        proxy.$toast("决策出错", store.state.toast_error);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
     const getMap = computed(() => {
       return [
         require("../../allstar_assets/main/map_0.png"),
@@ -236,14 +339,28 @@ export default {
     return {
       ...refData,
       campText,
-      timing,
       getMap,
       getPos,
+      getDecisionText,
+      showDecision,
+      march,
     };
   },
 };
 </script>
 <style lang='less' scoped>
+.decision_conent {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+  .item {
+    width: 35%;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+  }
+}
 .modal_text {
   font-size: 1.5rem;
   line-height: 1.5;
@@ -275,8 +392,8 @@ export default {
 }
 .fina_pool {
   cursor: pointer;
-  &:hover{
-    opacity: .8;
+  &:hover {
+    opacity: 0.8;
   }
   position: absolute;
   bottom: 20%;
