@@ -81,7 +81,12 @@
                 src="../../../assets/mint/add.svg"
                 @click="
                   () => {
-                    num += 1;
+                    const temp = (num += 1);
+                    if (temp > pack[curItem]) {
+                      num = pack[curItem];
+                    } else {
+                      num = temp;
+                    }
                   }
                 "
               />
@@ -111,14 +116,14 @@ export default {
   setup() {
     const store = useStore();
     const data = reactive({
-      num: 1,
+      num: 0,
       account: "",
       web3: "",
       pack: [0, 0, 0, 0, 0],
       curItem: 0,
     });
     const totalSpeedAdd = computed(() => {
-      return 14400;
+      return [5, 10, 15, 20, 25][data.curItem] * data.num;
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
