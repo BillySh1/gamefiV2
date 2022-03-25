@@ -21,7 +21,16 @@
               class="inner_item"
               v-for="(item, index) in pack"
               :key="index"
-              @click="() => (curItem = index)"
+              @click="
+                () => {
+                  curItem = index;
+                  if (pack[curItem] == 0) {
+                    btnDisable = true;
+                  } else {
+                    btnDisable = false;
+                  }
+                }
+              "
               :style="curItem == index ? 'background: #93250d' : ''"
             >
               <img class="bg" :src="getItemDetail(index).img[0]" alt="" />
@@ -43,56 +52,20 @@
               </div>
             </div>
             <div class="intro">
-              {{ getItemDetail(curItem).name }} 数量 x
-              {{ pack[curItem] }}
+              {{ getItemDetail(curItem).name }}
             </div>
             <div class="intro">速率加成 {{ totalSpeedAdd }}</div>
-            <div class="input_box">
-              <img
-                style="cursor: pointer"
-                class="img_action"
-                src="../../../assets/mint/minus.svg"
-                @click="
-                  () => {
-                    const temp = num - 1;
-                    if (temp < 0) {
-                      num = 0;
-                      return;
-                    }
-                    num = temp;
-                  }
-                "
-              />
-              <div class="ipt_bg">
-                <img
-                  class="ipt_img"
-                  src="../../../assets/mint/input.png"
-                  alt=""
-                />
-                <input
-                  v-model="num"
-                  class="input"
-                  @input="num = Number($event.target.value.replace(/\D+/, ''))"
-                />
-              </div>
-              <img
-                class="img_action"
-                style="cursor: pointer"
-                src="../../../assets/mint/add.svg"
-                @click="
-                  () => {
-                    const temp = (num += 1);
-                    if (temp > pack[curItem]) {
-                      num = pack[curItem];
-                    } else {
-                      num = temp;
-                    }
-                  }
-                "
-              />
-            </div>
-            <CommonButton class="btn" :disabled="true" :circle="true"
-              >使用</CommonButton
+
+            <CommonButton
+              v-if="canUse"
+              class="btn"
+              :disabled="btnDisable"
+              :circle="true"
+              @click="handleClick"
+              >{{ btnText }}</CommonButton
+            >
+            <CommonButton v-else class="btn" :disabled="true" :circle="true"
+              >使用中</CommonButton
             >
           </div>
         </div>
@@ -103,7 +76,13 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import CommonButton from "../../../components/common_button.vue";
 import { useStore } from "vuex";
@@ -113,18 +92,93 @@ export default {
   components: {
     CommonButton,
   },
-  setup() {
+  setup(props, ctx) {
     const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
-      num: 0,
       account: "",
       web3: "",
       pack: [0, 0, 0, 0, 0],
       curItem: 0,
+      btnStatus: 0,
+      btnDisable: false,
+      canUse: true,
     });
     const totalSpeedAdd = computed(() => {
-      return [5, 10, 15, 20, 25][data.curItem] * data.num;
+      return [5, 10, 15, 20, 25][data.curItem];
     });
+    const btnText = computed(() => {
+      return ["授权", "使用"][data.btnStatus];
+    });
+    const handleClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await use();
+      }
+    };
+    const approve = async () => {
+      try {
+        data.btnDisable = true;
+        const c = store.state.c_battle_shop;
+        console.log(c, "sss");
+        const addr = store.state.c_battle.options.address;
+        const isApproved = await c.methods
+          .isApprovedForAll(data.account, addr)
+          .call();
+        if (isApproved) {
+          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
+          data.btnStatus = 1;
+          data.btnDisable = false;
+          return;
+        }
+        proxy.$toast(`等待授权道具`, store.state.toast_info);
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .setApprovalForAll(addr, true)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.setApprovalForAll(addr, true).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast(`授权成功`, store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(`授权失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
+    const use = async () => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待确认", store.state.toast_info);
+        const c = store.state.c_battle;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .useBuff(data.curItem)
+          .estimateGas({ from: data.account });
+
+        const res = await c.methods.useBuff(data.curItem).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("使用成功", store.state.toast_success);
+          ctx.emit("refresh");
+        }
+      } catch (e) {
+        proxy.$toast("使用失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
     onBeforeMount(async () => {
       await initWeb3.Init(
         (addr) => {
@@ -135,7 +189,17 @@ export default {
         }
       );
       await getPack();
+      await getTimes();
     });
+    const getTimes = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getTimes(data.account).call();
+      const now = new Date().getTime();
+      console.log(res, now, "sss");
+      if (Number(res[2]) * 1000 > Number(now)) {
+        data.canUse = false;
+      }
+    };
     const getItemDetail = (idx) => {
       return [
         {
@@ -185,6 +249,8 @@ export default {
     return {
       ...refData,
       totalSpeedAdd,
+      btnText,
+      handleClick,
       getItemDetail,
     };
   },
@@ -200,8 +266,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 40;
   display: flex;

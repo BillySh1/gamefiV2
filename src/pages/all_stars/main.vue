@@ -1,5 +1,14 @@
 <template>
-  <BfPack @close="() => (showPack = false)" :value="showPack" />
+  <BfPack
+    @refresh="
+      () => {
+        showPack = false;
+        init();
+      }
+    "
+    @close="() => (showPack = false)"
+    :value="showPack"
+  />
   <RandomEvents :value="showEvents" @close="() => (showEvents = false)" />
   <InjectModal
     :value="showRuleModal"
@@ -221,6 +230,7 @@ export default {
       data.loading = false;
     });
     const init = async () => {
+      clearInterval(data.ticker)
       await getPlayer();
       await getCurrentNode();
       await getPower();
