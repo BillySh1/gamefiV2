@@ -118,7 +118,8 @@
             v-for="(item, index) in curItems"
             :key="index"
             :class="
-              (selected && selected.includes(item.tokenId)) || camp != item.camp
+              (selected && selected.includes(item.tokenId)) ||
+              (camp && camp != item.camp)
                 ? 'card_item disable'
                 : 'card_item'
             "
