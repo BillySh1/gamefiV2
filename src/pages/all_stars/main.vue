@@ -118,7 +118,11 @@
             <div class="text">鹿原奖池</div>
           </div>
         </div>
-        <div class="pre_time_view" @click="showDecision">
+        <div
+          class="pre_time_view"
+          @click="showDecision"
+          v-if="player.baseSpeed != 0"
+        >
           <div>
             <span v-if="!arriveNext">距离下一个据点</span>
             <span v-else>即将到达据点</span>
