@@ -11,13 +11,11 @@ import { reactive, toRefs, onBeforeMount } from "vue";
 export default {
   name: "table_item",
   props: ["tableItem"],
-  setup(prop) {
+  setup() {
     const data = reactive({
       arrData: [],
     });
-    onBeforeMount(() => {
-        console.log(prop.tableItem,'sss')
-    });
+    onBeforeMount(() => {});
 
     const refData = toRefs(data);
     return {
