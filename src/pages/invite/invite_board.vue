@@ -6,7 +6,28 @@
       <div class="border">
         <img src="../../assets/notice/border.svg" alt="" />
         <div class="inner">
-          <CommonButton>邀请排行榜</CommonButton>
+          <div class="top">
+            <CommonButton
+              @click="
+                () => {
+                  curTab = 'all';
+                  switchData();
+                }
+              "
+              style="margin-right: 2rem"
+              >总排行榜</CommonButton
+            >
+            <CommonButton
+              @click="
+                () => {
+                  curTab = 'day';
+                  switchData();
+                }
+              "
+              >日排行榜</CommonButton
+            >
+          </div>
+
           <div class="table_content">
             <TableItem
               v-for="item in boardData"
@@ -44,8 +65,11 @@ export default {
     const data = reactive({
       pageTitle: "邀请排行榜",
       boardData: [],
+      dayData: [],
+      totalData: [],
       account: "",
       web3: "",
+      curTab: "all",
     });
 
     onBeforeMount(async () => {
@@ -58,7 +82,19 @@ export default {
         }
       );
       await getBoard();
+      await getDayBoard();
+      switchData();
     });
+    const switchData = () => {
+      data.boardData = [];
+      if (data.curTab == "all") {
+        data.boardData = data.totalData;
+        data.pageTitle = "总排行榜";
+      } else if (data.curTab == "day") {
+        data.boardData = data.dayData;
+        data.pageTitle = "日排行榜";
+      }
+    };
     const getBoard = async () => {
       const url = host + "/invite/getTotal";
       const res = await postData(url, {
@@ -68,11 +104,29 @@ export default {
       res.list.sort((a, b) => {
         return Number(b.amount) - Number(a.amount);
       });
-      console.log(res.list, "ggg");
-      data.boardData = [];
-      data.boardData.push(["排名", "地址", "收益"]);
+      data.totalData = [];
+      data.totalData.push(["排名", "地址", "收益"]);
       res.list.map((item, index) => {
-        data.boardData.push([
+        data.totalData.push([
+          index + 1,
+          item.inviter,
+          data.web3.utils.fromWei(item.amount, "ether"),
+        ]);
+      });
+    };
+    const getDayBoard = async () => {
+      const url = host + "/invite/getDay";
+      const res = await postData(url, {
+        page: 1,
+        limit_num: 30,
+      }).then((res) => res.data);
+      res.list.sort((a, b) => {
+        return Number(b.amount) - Number(a.amount);
+      });
+      data.dayData = [];
+      data.dayData.push(["排名", "地址", "收益"]);
+      res.list.map((item, index) => {
+        data.dayData.push([
           index + 1,
           item.inviter,
           data.web3.utils.fromWei(item.amount, "ether"),
@@ -83,6 +137,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      switchData,
     };
   },
 };
@@ -117,6 +172,10 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      .top {
+        display: flex;
+        align-items: center;
+      }
       .table_content {
         width: 100%;
         margin-top: 1rem;
