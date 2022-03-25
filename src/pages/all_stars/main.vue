@@ -246,9 +246,9 @@ export default {
       let h = Math.floor((delta / 60 / 60) % 24);
       let m = Math.floor((delta / 60) % 60);
       let s = Math.floor(delta % 60);
-      if (parseInt(h, 10) < 10) h = "0";
-      if (parseInt(m, 10) < 10) m = "0";
-      if (parseInt(s, 10) < 10) s = "0";
+      if (parseInt(h, 10) < 0) h = "0";
+      if (parseInt(m, 10) < 0) m = "0";
+      if (parseInt(s, 10) < 0) s = "0";
       data.timing = `${h}时${m}分${s}秒`;
     };
     const getNextNode = async () => {
@@ -313,7 +313,7 @@ export default {
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
           data.decisionShow = false;
-          await init()
+          await init();
         }
       } catch (e) {
         console.error(e);

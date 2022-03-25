@@ -87,7 +87,7 @@
       <div class="up">
         确定要为 <span class="camp">{{ cur.name }}</span> 出战吗
       </div>
-      <div class="warning">一旦选择阵营，本次战役其间不可更改</div>
+      <div class="warning">一旦选择阵营，本次战役期间不可更改</div>
     </InjectModal>
   </div>
 </template>
