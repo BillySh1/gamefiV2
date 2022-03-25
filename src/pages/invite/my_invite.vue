@@ -15,17 +15,25 @@
                 我的收益
               </div>
               <div class="item">
-                <div class="num">0 <span class="xs">MMC</span></div>
+                <div class="num">
+                  {{ inviteDay }} <span class="xs">MMC</span>
+                </div>
                 <div class="des">日收益</div>
               </div>
               <div class="item">
-                <div class="num">0 <span class="xs">MMC</span></div>
+                <div class="num">
+                  {{ inviteTotal }} <span class="xs">MMC</span>
+                </div>
                 <div class="des">总收益</div>
               </div>
             </div>
           </div>
-          <div v-for="item in inviteData" :key="item.key" class="inner_item">
-            222
+          <div class="inner_c">
+            <TableItem
+              v-for="item in inviteData"
+              :key="item.key"
+              :tableItem="item"
+            />
           </div>
         </div>
         <div v-else class="empty">暂无数据</div>
@@ -36,48 +44,59 @@
 </template>
 
 <script >
-import { reactive, toRefs } from "vue";
+const host = "http://54.151.194.138:8999";
+import { onBeforeMount, reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import initWeb3 from "../../utils/initWeb3";
+import TableItem from "../../components/table_item.vue";
+import postData from "../../utils/useFetch";
 export default {
   name: "notice",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     InjectGoBack,
+    TableItem,
   },
   setup() {
     const data = reactive({
       pageTitle: "我的收益",
-      inviteData: [
-        {
-          key: 0,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 1,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 2,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-        {
-          key: 3,
-          time: new Date(),
-          title: "富贾三国公测",
-          content: "这是内容这是内容",
-        },
-      ],
+      account: "",
+      web3: "",
+      inviteDay: 0,
+      inviteTotal: 0,
+      inviteData: [],
     });
-
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getAmount();
+    });
+    const getAmount = async () => {
+      const url = host + "/invite/getAmount";
+      const res = await postData(url, {
+        from: data.account,
+      }).then((res) => res.data);
+      data.inviteDay = data.web3.utils.fromWei(res.invite_day, "ether");
+      data.inviteTotal = data.web3.utils.fromWei(res.invite_total, "ether");
+      data.inviteData = [];
+      data.inviteData.push(["blockNumber", "地址", "收益"]);
+      res.list.map((item) => {
+        data.inviteData.push([
+          item.block_number,
+          item.buyer,
+          data.web3.utils.fromWei(item.amount, "ether"),
+        ]);
+      });
+    };
     const refData = toRefs(data);
     return {
       ...refData,
@@ -125,6 +144,7 @@ export default {
       .top {
         width: 100%;
         position: relative;
+        margin-bottom: 2rem;
         img {
           width: 100%;
         }
@@ -166,6 +186,11 @@ export default {
             }
           }
         }
+      }
+      .inner_c {
+        width: 100%;
+        max-height: 30rem;
+        overflow-y: auto;
       }
     }
     .empty {

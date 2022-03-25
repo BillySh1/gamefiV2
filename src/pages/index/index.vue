@@ -1,6 +1,6 @@
 <template>
   <div class="index_container">
-    <CommonPageHeader @exit="$emit('exit')" />
+    <CommonPageHeader @exit="exit" />
 
     <div class="content">
       <InjectUser :power="power" />
@@ -69,16 +69,17 @@ export default {
     InjectUser,
     InjectIcon,
   },
-  setup() {
+  setup(prop, { emit }) {
     const router = useRouter();
     const store = useStore();
-
     const data = reactive({
       account: "",
       web3: "",
       power: 0,
     });
-
+    const exit = () => {
+      emit("exit");
+    };
     onBeforeMount(async () => {
       await initWeb3.Init(
         (addr) => {
@@ -108,6 +109,7 @@ export default {
     return {
       ...refData,
       jump,
+      exit,
     };
   },
 };

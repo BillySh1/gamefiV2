@@ -26,11 +26,13 @@
               我的收益
             </div>
             <div class="item">
-              <div class="num">0 <span class="xs">MMC</span></div>
+              <div class="num">{{ inviteDay }} <span class="xs">MMC</span></div>
               <div class="des">日收益</div>
             </div>
             <div class="item">
-              <div class="num">0 <span class="xs">MMC</span></div>
+              <div class="num">
+                {{ inviteTotal }} <span class="xs">MMC</span>
+              </div>
               <div class="des">总收益</div>
             </div>
           </div>
@@ -79,6 +81,7 @@
 </template>
 
 <script >
+const host = "http://54.151.194.138:8999";
 import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -86,6 +89,7 @@ import InviteModal from "./invite_modal.vue";
 import InjectModal from "../../components/inject_modal.vue";
 import initWeb3 from "../../utils/initWeb3";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import postData from "../../utils/useFetch";
 import { useStore } from "vuex";
 export default {
   name: "invite",
@@ -106,6 +110,8 @@ export default {
       encodeData: "",
       showModal: false,
       showRules: false,
+      inviteDay: 0,
+      inviteTotal: 0,
     });
 
     onBeforeMount(async () => {
@@ -117,7 +123,16 @@ export default {
           data.web3 = p;
         }
       );
+      await getAmount();
     });
+    const getAmount = async () => {
+      const url = host + "/invite/getAmount";
+      const res = await postData(url, {
+        from: data.account,
+      }).then((res) => res.data);
+      data.inviteDay = data.web3.utils.fromWei(res.invite_day, "ether");
+      data.inviteTotal = data.web3.utils.fromWei(res.invite_total, "ether");
+    };
     const generate = () => {
       data.encodeData =
         window.location.host + "/#/mint?invite=" + btoa(data.account);
