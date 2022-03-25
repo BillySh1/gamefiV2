@@ -110,7 +110,7 @@ export default {
         data.totalData.push([
           index + 1,
           item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether"),
+          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
         ]);
       });
     };
@@ -129,7 +129,7 @@ export default {
         data.dayData.push([
           index + 1,
           item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether"),
+          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
         ]);
       });
     };

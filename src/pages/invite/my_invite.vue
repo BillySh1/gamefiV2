@@ -93,7 +93,7 @@ export default {
         data.inviteData.push([
           item.block_number,
           item.buyer,
-          data.web3.utils.fromWei(item.amount, "ether"),
+          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
         ]);
       });
     };
