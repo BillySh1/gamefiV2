@@ -58,7 +58,7 @@
         />
         数量：
         {{ cost[0] }}
-        (当前拥有:{{ stock[0] }})
+        (当前拥有:{{ stock[1] }})
         <CommonButton
           style="margin-left: 2rem"
           @click="
@@ -82,7 +82,7 @@
         />
         数量：
         {{ cost[1] }}
-        (当前拥有:{{ stock[1] }})
+        (当前拥有:{{ stock[0] }})
         <CommonButton
           style="margin-left: 2rem"
           @click="

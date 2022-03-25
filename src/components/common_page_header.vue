@@ -21,7 +21,15 @@
         <img
           class="img_right"
           src="../assets/common/currency_plus.png"
-          @click="() => $router.push({ name: item.href })"
+          @click="
+            () =>
+              $router.push({
+                name: item.href,
+                query: {
+                  info: item.tokenId,
+                },
+              })
+          "
         />
       </div>
     </div>
@@ -81,13 +89,15 @@ export default {
           key: "grain",
           img: require("../assets/common/grain.png"),
           value: 0,
-          href: "store",
+          href: "storeDetail",
+          tokenId: 12,
         },
         {
           key: "drum",
           img: require("../assets/common/drum.png"),
           value: 0,
-          href: "store",
+          href: "storeDetail",
+          tokenId: 11,
         },
       ],
       isFull: true,
