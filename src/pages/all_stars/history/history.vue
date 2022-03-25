@@ -70,7 +70,8 @@ export default {
 }
 .main {
   position: relative;
-  width: 100%;
+  width: 80%;
+  margin: auto;
   img {
     width: 100%;
   }
