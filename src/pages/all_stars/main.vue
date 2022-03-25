@@ -336,8 +336,7 @@ export default {
     });
     const getPos = computed(() => {
       const cur = positions[data.curCamp][data.player.road][data.currentNode];
-      console.log(cur, "ggg");
-      return `position:absolute;height:10rem;top:${cur[0]}%;left:${cur[1]}%`;
+      return `position:absolute;height:8rem;top:${cur[0]}%;left:${cur[1]}%`;
     });
     const refData = toRefs(data);
     return {

@@ -66,7 +66,7 @@
               $router.push({
                 name: 'storeDetail',
                 query: {
-                  info: 11,
+                  info: 12,
                 },
               })
           "
@@ -90,7 +90,7 @@
               $router.push({
                 name: 'storeDetail',
                 query: {
-                  info: 12,
+                  info: 11,
                 },
               })
           "
