@@ -9,7 +9,11 @@
     @close="() => (showPack = false)"
     :value="showPack"
   />
-  <RandomEvents :value="showEvents" @close="() => (showEvents = false)" />
+  <RandomEvents
+    :type="2"
+    :value="true"
+    @close="() => (showEvents = false)"
+  />
   <InjectModal
     :value="showRuleModal"
     :title="'群英会战'"
@@ -208,6 +212,7 @@ export default {
       decisions: [],
       arriveNext: false,
       btnDisable: false,
+      eventType: 0,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -230,7 +235,7 @@ export default {
       data.loading = false;
     });
     const init = async () => {
-      clearInterval(data.ticker)
+      clearInterval(data.ticker);
       await getPlayer();
       await getCurrentNode();
       await getPower();
@@ -246,6 +251,11 @@ export default {
     const getDecisions = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
+      const idx = res.findIndex((x) => x);
+      if (idx != -1) {
+        // 0前进 1投降 2战斗 3进入决战
+        data.eventType == idx;
+      }
       data.decisions = res;
     };
     const showDecision = () => {

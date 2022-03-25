@@ -1,5 +1,9 @@
 <template>
-  <div class="events_mask" v-if="value" @click="() => $emit('close')">
+  <div
+    class="events_mask"
+    v-if="value && [0, 3].includes(Number(type))"
+    @click="() => $emit('close')"
+  >
     <img
       style="width: 100%"
       src="../../../allstar_assets/popups/light_bg.png"
@@ -22,38 +26,104 @@
       <div class="inner">
         <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
         <div class="main">
-          <div class="title">故事情节</div>
+          <div class="title">
+            <div v-if="type == 0">继续前进</div>
+            <div v-if="type == 3">鹿原决战！</div>
+          </div>
           <div class="bottom">
             <div class="img_box">
               <img src="../../../allstar_assets/popups/img_bg.png" alt="" />
+              <div class="img_inner">
+                <img
+                  v-if="type == 0"
+                  src="../../../allstar_assets/popups/insert_0.png"
+                  alt=""
+                />
+                <img
+                  v-if="type == 3"
+                  src="../../../allstar_assets/popups/insert_3.png"
+                  alt=""
+                />
+              </div>
             </div>
             <div class="intro">
-              故事细节的占位故事细节的占位故事细节的占位故事细节的占位故事细节的占位故事细节的占位故事细节的占位故事细
+              <div v-if="type == 0">
+                您已抵达据点，军队正在据点休整，风声鹤唳，草木皆兵，此地不宜久留，耽误鹿原大计，请点击确定继续行军
+              </div>
+              <div v-if="type == 3">
+                您已抵达鹿原，军队正在修整。点击确认即可立即开拨进入决战之地，角逐最终的胜利，成为鹿原霸主！
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="confirm" @click="onConfirm">
-      <div class="inner">
+      <div :class="btnDisable ? 'inner' : 'inner disable'">
         <img src="../../../allstar_assets/popups/confirm_bg.png" alt="" />
         <div class="text">确认</div>
       </div>
     </div>
   </div>
+  <BattleEvents :type="type" v-if="value && [1, 2].includes(Number(type))" />
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
+import initWeb3 from "../../../utils/initWeb3";
+import BattleEvents from './battle_events.vue'
+import { useStore } from "vuex";
 export default {
   name: "random_events",
-  props: ["value"],
-  setup() {
-    const data = reactive({});
-    onBeforeMount(() => {});
-    onMounted(() => {});
-    const onConfirm = () => {
-      console.log("confirm");
+  props: ["value", "type"],
+  components: {
+    BattleEvents
+  },
+  setup(prop, ctx) {
+    const store = useStore();
+    const { proxy } = getCurrentInstance();
+    const data = reactive({
+      account: "",
+      web3: "",
+      btnDisable: false,
+    });
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+    });
+    const onConfirm = async () => {
+      await march(prop.type);
+    };
+    const march = async (idx) => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待决策确认", store.state.toast_info);
+        const c = store.state.c_battle;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .march(idx)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.march(idx).send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("决策成功,正在行军...", store.state.toast_info);
+          ctx.emit("close");
+        }
+      } catch (e) {
+        console.error(e);
+        proxy.$toast("决策出错", store.state.toast_error);
+      } finally {
+        ctx.emit("refresh");
+      }
     };
     const refData = toRefs(data);
     return {
@@ -116,20 +186,34 @@ export default {
       }
       .bottom {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         .img_box {
+          position: relative;
           width: 40%;
           img {
             width: 100%;
           }
+          .img_inner {
+            position: absolute;
+            width: 95%;
+            height: 95%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
         .intro {
-          width: 50%;
+          width: 55%;
+          line-height: 1.5;
           font-size: 1.5rem;
         }
       }
     }
+  }
+  .disable {
+    pointer-events: none;
+    filter: grayscale(100);
   }
 }
 .confirm {
