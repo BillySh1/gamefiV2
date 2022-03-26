@@ -246,19 +246,33 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
-
+      // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
       switch (res) {
         case [true, false, false, false]:
-          data.eventType = 0; // 纯前进
+          if (data.player.state == 0) {
+            data.eventType == 0; // 纯前进
+          } else {
+            data.eventType == 2; // 中断当前状态继续前进
+          }
           break;
         case [false, true, true, false]:
           data.eventType = 1; // 遭遇埋伏，可选投降
           break;
         case [true, false, true, false]:
-          data.eventType = 2; // 可选埋伏
+          if (data.player.state == 0) {
+            data.eventType = 2; // 可选埋伏 或  蹲点遭遇他人
+          }
+          if (data.player.state == 1) {
+            data.eventType = 2; // 战斗结束， 选择继续战斗或是离开
+          }
           break;
         case [false, false, false, true]:
           data.eventType = 3; // 进入鹿原
+          break;
+        case [false, false, true, false]:
+          if (data.player.state == 0) {
+            data.eventType = 5; // 遭遇战，必须战斗
+          }
           break;
         default:
           break;
