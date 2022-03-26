@@ -1,8 +1,8 @@
 <template>
   <BfPack @refresh="allInit" @close="allInit" :value="showPack" />
   <MarchEvents
-    :type="1"
-    :value="true"
+    :type="eventType"
+    :value="showEvents"
     :player="player"
     @close="() => (showEvents = false)"
     @refresh="allInit"
@@ -18,24 +18,7 @@
       最终分红规则将参考玩家抵达战场的先后，与玩家战力综合计算。
     </div>
   </InjectModal>
-  <InjectModal
-    :value="decisionShow"
-    :title="'选择策略'"
-    @close="() => (decisionShow = false)"
-  >
-    <div class="decision_conent">
-      <CommonButton
-        class="item"
-        v-for="(item, index) in decisions"
-        :key="index"
-        :disabled="btnDisable"
-        @click="() => march(index)"
-        v-show="item"
-      >
-        {{ getDecisionText(index) }}
-      </CommonButton>
-    </div>
-  </InjectModal>
+
   <Lottie
     v-if="loading"
     :options="{ animationData: require('../../assets/common/loading.json') }"
@@ -73,7 +56,6 @@
           </div>
           <div class="rules" @click="() => (showRuleModal = true)">规则</div>
         </div>
-
         <div class="pack_btn" @click="() => (showPack = true)">
           <div class="text">行军背包</div>
         </div>
@@ -103,7 +85,6 @@
             class="random_events"
             v-for="item in randomEvents"
             :key="item.key"
-            v-show="false"
           >
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ item.name }}
@@ -129,20 +110,23 @@
           @click="showDecision"
           v-if="player.baseSpeed != 0"
         >
-          <div>
+          <div v-if="!isBattleIng">
             <span v-if="!arriveNext">距离下一个据点</span>
             <span v-else>即将到达据点</span>
             <span style="color: red; margin: 0 1rem">{{ nextNode.name }}</span>
-
             <span v-if="!arriveNext">还剩</span>
           </div>
-          <div class="time_row" v-if="!arriveNext">
+          <div class="time_row" v-if="!arriveNext && !isBattleIng">
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ timing }}
           </div>
-          <div class="time_row" v-else>
+          <div class="time_row" v-if="arriveNext && !isBattleIng">
             <img src="../../allstar_assets/main/clock.png" alt="" />
             <span style="color: red">请点击此处决策</span>
+          </div>
+          <div class="timerow" v-if="isBattleIng">
+            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <span style="color: red">战斗进行中</span>
           </div>
         </div>
       </div>
@@ -163,7 +147,6 @@ import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
 import MarchEvents from "./events/march_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
-import CommonButton from "../../components/common_button.vue";
 import { positions, map } from "../../utils/useRoutes";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -173,7 +156,6 @@ export default {
     BfPack,
     MarchEvents,
     InjectModal,
-    CommonButton,
   },
   setup() {
     const store = useStore();
@@ -189,10 +171,7 @@ export default {
       showEvents: false,
       showRuleModal: false,
       decisionShow: false,
-      randomEvents: [
-        { key: 0, name: "随机事件进行中", type: 0 },
-        { key: 1, name: "伏击进行中", type: 1 },
-      ],
+      randomEvents: [],
       player: "",
       currentNode: undefined,
       power: 0,
@@ -206,6 +185,7 @@ export default {
       arriveNext: false,
       btnDisable: false,
       eventType: 0,
+      times: [],
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -237,6 +217,7 @@ export default {
       await getTimes();
       await getNextNode();
       await getDecisions();
+      console.log();
     };
     onBeforeUnmount(() => {
       if (data.ticker) {
@@ -247,6 +228,12 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
+
+      const isLock = await c.methods.nodeInfo(data.currentNode).call();
+      if (isLock.lock) {
+        data.eventType = "lock";
+        return;
+      }
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
       switch (res) {
         case [true, false, false, false]:
@@ -261,7 +248,7 @@ export default {
           break;
         case [true, false, true, false]:
           if (data.player.state == 0) {
-            data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人
+            data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人或离开
           }
           if (data.player.state == 1) {
             data.eventType = 4; // 战斗结束， 选择继续战斗或是离开
@@ -307,6 +294,7 @@ export default {
     const getTimes = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
+      data.times = res;
       const now = new Date().getTime();
       const delta = Number(res[1]) - (Number(now) / 1000).toFixed(0);
       if (delta < 0) {
@@ -341,6 +329,15 @@ export default {
       const c = store.state.c_battle;
       data.currentNode = await c.methods.getCurrentNode(data.account).call();
     };
+    const isBattleIng = computed(() => {
+      const last = data.times[3];
+      const now = new Date().getTime();
+      if (last * 1000 > now) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     const march = async (idx) => {
       try {
         data.btnDisable = true;
@@ -385,6 +382,7 @@ export default {
       campText,
       getMap,
       getPos,
+      isBattleIng,
       getDecisionText,
       showDecision,
       march,

@@ -26,7 +26,7 @@
         <div class="intro">
           {{ getIntroText }}
         </div>
-        <div class="info">
+        <div v-if="!type == 'lock'" class="info">
           <div class="item">
             <div class="red">{{ additionPower }}</div>
             <div>您将获得战力加成</div>
@@ -40,20 +40,36 @@
         </div>
         <div class="action">
           <div
-            v-if="false"
+            v-if="type == 2"
             :class="btnDisable ? 'btn disable' : 'btn'"
             @click="march(1)"
           >
             <img src="../../../allstar_assets/popups/btn_green.png" alt="" />
             <div class="text">投降</div>
           </div>
-          <div :class="btnDisable ? 'btn disable' : 'btn'" @click="march(0)">
+          <div
+            v-if="[1, 3, 4].includes(type)"
+            :class="btnDisable ? 'btn disable' : 'btn'"
+            @click="march(0)"
+          >
             <img src="../../../allstar_assets/popups/btn_green.png" alt="" />
             <div class="text">继续前进</div>
           </div>
-          <div :class="btnDisable ? 'btn disable' : 'btn'" @click="march(2)">
+          <div
+            v-if="[2, 3, 4, 6].includes(type)"
+            :class="btnDisable ? 'btn disable' : 'btn'"
+            @click="march(2)"
+          >
             <img src="../../../allstar_assets/popups/btn_orange.png" alt="" />
-            <div class="text">准备战斗</div>
+            <div class="text">战斗</div>
+          </div>
+          <div
+            v-if="type == 'lock'"
+            :class="btnDisable ? 'btn disable' : 'btn'"
+            @click="unlock"
+          >
+            <img src="../../../allstar_assets/popups/btn_orange.png" alt="" />
+            <div class="text">打扫战场</div>
           </div>
         </div>
       </div>
@@ -126,6 +142,8 @@ export default {
           return "激战间隙！";
         case 6:
           return "遭遇敌军！";
+        case "lock":
+          return "打扫战场";
         default:
           return "error";
       }
@@ -142,6 +160,9 @@ export default {
           return "战斗阶段性结束，我军正在休整，您可以选择继续留在此地战斗或继续前进。";
         case 6:
           return "遭遇敌军! 此处乃通往鹿原必经之地，必须在此战斗，停留不前将错失鹿原良机";
+        case "lock":
+          return "战斗阶段性结束，当前据点一片狼籍已被锁定，如果您需要现在作出决策，请先打扫战场,您也可以等待其他玩家打扫";
+
         default:
           return "error";
       }
@@ -153,6 +174,32 @@ export default {
         return "0%";
       }
     });
+    const unlock = async () => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待决策确认", store.state.toast_info);
+        const c = store.state.c_battle;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .unlockNode()
+          .estimateGas({ from: data.account });
+        const res = await c.methods.unlockNode().send({
+          gasPrice: gasPrice,
+          gas: gas,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("决策成功,正在行军...", store.state.toast_info);
+        }
+      } catch (e) {
+        console.error(e);
+        proxy.$toast("决策出错", store.state.toast_error);
+      } finally {
+        data.btnDisable = false;
+        ctx.emit("refresh");
+        ctx.emit("close");
+      }
+    };
     const march = async (idx) => {
       try {
         data.btnDisable = true;
@@ -169,7 +216,6 @@ export default {
         });
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
-          ctx.emit("close");
         }
       } catch (e) {
         console.error(e);
@@ -177,6 +223,7 @@ export default {
       } finally {
         data.btnDisable = false;
         ctx.emit("refresh");
+        ctx.emit("close");
       }
     };
     const refData = toRefs(data);
@@ -188,6 +235,7 @@ export default {
       additionPower,
       placeText,
       march,
+      unlock,
     };
   },
 };
@@ -307,7 +355,7 @@ export default {
     .action {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       .disable {
         pointer-events: none;
         filter: grayscale(100);
@@ -317,6 +365,7 @@ export default {
         &:hover {
           opacity: 0.8;
         }
+        margin: 0 1rem;
         position: relative;
         width: 45%;
         img {
