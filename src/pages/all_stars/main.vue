@@ -184,7 +184,7 @@ export default {
       decisions: [],
       arriveNext: false,
       btnDisable: false,
-      eventType: 0,
+      eventType: undefined,
       times: [],
     });
     const campText = computed(() => {
@@ -193,7 +193,6 @@ export default {
     const getDecisionText = (idx) => {
       return ["前进", "投降", "战斗", "进入鹿原"][idx];
     };
-
     onBeforeMount(async () => {
       data.loading = true;
       await initWeb3.Init(
@@ -217,7 +216,6 @@ export default {
       await getTimes();
       await getNextNode();
       await getDecisions();
-      console.log();
     };
     onBeforeUnmount(() => {
       if (data.ticker) {
@@ -228,10 +226,15 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
-
+      data.randomEvents = [];
       const isLock = await c.methods.nodeInfo(data.currentNode).call();
+
       if (isLock.lock) {
         data.eventType = "lock";
+        data.randomEvents.push({
+          key: "jdsd",
+          name: "据点锁定，打扫战场",
+        });
         return;
       }
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
@@ -241,17 +244,33 @@ export default {
             data.eventType == 0; // 纯前进
           } else {
             data.eventType == 1; // 战斗结束, 只能选择继续前进
+            data.randomEvents.push({
+              key: "jbzjsqj",
+              name: "局部战结束，前进",
+            });
           }
           break;
         case [false, true, true, false]:
           data.eventType = 2; // 遭遇埋伏，可选投降
+          data.randomEvents.push({
+            key: "zymf",
+            name: "遭遇埋伏",
+          });
           break;
         case [true, false, true, false]:
           if (data.player.state == 0) {
             data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人或离开
+            data.randomEvents.push({
+              key: "kxmf",
+              name: "可选埋伏",
+            });
           }
           if (data.player.state == 1) {
             data.eventType = 4; // 战斗结束， 选择继续战斗或是离开
+            data.randomEvents.push({
+              key: "jbzjsjz",
+              name: "局部战结束，抉择",
+            });
           }
           break;
         case [false, false, false, true]:
@@ -260,6 +279,10 @@ export default {
         case [false, false, true, false]:
           if (data.player.state == 0) {
             data.eventType = 6; // 遭遇战，必须战斗
+            data.randomEvents.push({
+              key: "zydjzd",
+              name: "遭遇敌军",
+            });
           }
           break;
         default:
