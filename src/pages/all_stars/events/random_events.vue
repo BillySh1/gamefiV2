@@ -75,7 +75,7 @@ import BattleEvents from "./battle_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "random_events",
-  props: ["value", "type"],
+  props: ["value", "type", "player"],
   components: {
     BattleEvents,
   },

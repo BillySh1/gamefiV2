@@ -67,9 +67,11 @@ export default {
     const readFiles = () => {
       const path = require("path");
       const files = require.context("../assets/", true).keys();
+      // const prefix = 'http://54.151.194.138:8080/ipns/k51qzi5uqu5dj5l6dlpf0k6tfwk1ke7yvlyrdgoxgz1fi9mq3c6c1znz7gzz3y/richimage/'
       files.map((i) => {
         const _relativePath = path.join("assets", i);
         const file = require(`../${_relativePath}`);
+        // const file = prefix + _relativePath
         data.manifest.push({
           src: file,
           id: _relativePath,
