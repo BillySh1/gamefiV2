@@ -82,6 +82,7 @@ import {
   onBeforeMount,
   computed,
   getCurrentInstance,
+  watch,
 } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import CommonButton from "../../../components/common_button.vue";
@@ -92,6 +93,7 @@ export default {
   components: {
     CommonButton,
   },
+  
   setup(props, ctx) {
     const store = useStore();
     const { proxy } = getCurrentInstance();
@@ -191,11 +193,18 @@ export default {
       await getPack();
       await getTimes();
     });
+     watch(
+      () => props.value,
+      async () => {
+        console.log('sss')
+        await getPack()
+        await getTimes()
+      }
+    );
     const getTimes = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
       const now = new Date().getTime();
-      console.log(res, now, "sss");
       if (Number(res[2]) * 1000 > Number(now)) {
         data.canUse = false;
       }

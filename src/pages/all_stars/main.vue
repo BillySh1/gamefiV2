@@ -171,7 +171,6 @@ export default {
       showPack: false,
       showEvents: false,
       showRuleModal: false,
-      decisionShow: false,
       randomEvents: [],
       player: "",
       currentNode: undefined,
@@ -217,6 +216,7 @@ export default {
       await getTimes();
       await getNextNode();
       await getDecisions();
+      await getRandomEvents();
     };
     onBeforeUnmount(() => {
       if (data.ticker) {
@@ -291,9 +291,15 @@ export default {
           break;
       }
     };
+    const getRandomEvents = async () => {
+      // const c = store.state.c_battle;
+      // console.log(c,'gggg')
+      // const res = await c.methods.getEvents(data.account).call();
+      // console.log(res,'sss')
+    };
     const showDecision = () => {
       if (data.arriveNext) {
-        data.decisionShow = true;
+        data.showEvents = true;
       }
     };
     const getRTime = (endTime) => {
@@ -379,7 +385,7 @@ export default {
         });
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
-          data.decisionShow = false;
+          data.showEvents = false;
           await allInit();
         }
       } catch (e) {
