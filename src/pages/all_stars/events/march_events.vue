@@ -68,6 +68,8 @@
   <BattleEvents
     :player="player"
     :type="type"
+    @refresh="() => $emit('refresh')"
+    @close="() => $emit('close')"
     v-if="value && ![0, 5].includes(Number(type))"
   />
 </template>

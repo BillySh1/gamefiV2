@@ -85,6 +85,7 @@
             class="random_events"
             v-for="item in randomEvents"
             :key="item.key"
+            @click="() => (showEvents = true)"
           >
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ item.name }}
@@ -227,6 +228,7 @@ export default {
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
       data.randomEvents = [];
+
       const isLock = await c.methods.nodeInfo(data.currentNode).call();
 
       if (isLock.lock) {
