@@ -1,8 +1,9 @@
 <template>
   <BfPack @refresh="allInit" @close="allInit" :value="showPack" />
-  <RandomEvents
-    :type="2"
+  <MarchEvents
+    :type="1"
     :value="true"
+    :player="player"
     @close="() => (showEvents = false)"
     @refresh="allInit"
   />
@@ -160,7 +161,7 @@ import {
 } from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import BfPack from "./town/bf_pack.vue";
-import RandomEvents from "./events/random_events.vue";
+import MarchEvents from "./events/march_events.vue";
 import InjectModal from "../../components/inject_modal.vue";
 import CommonButton from "../../components/common_button.vue";
 import { positions, map } from "../../utils/useRoutes";
@@ -170,7 +171,7 @@ export default {
   name: "bf_main",
   components: {
     BfPack,
-    RandomEvents,
+    MarchEvents,
     InjectModal,
     CommonButton,
   },
@@ -252,26 +253,26 @@ export default {
           if (data.player.state == 0) {
             data.eventType == 0; // 纯前进
           } else {
-            data.eventType == 2; // 中断当前状态继续前进
+            data.eventType == 1; // 战斗结束, 只能选择继续前进
           }
           break;
         case [false, true, true, false]:
-          data.eventType = 1; // 遭遇埋伏，可选投降
+          data.eventType = 2; // 遭遇埋伏，可选投降
           break;
         case [true, false, true, false]:
           if (data.player.state == 0) {
-            data.eventType = 2; // 可选埋伏 或  蹲点遭遇他人
+            data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人
           }
           if (data.player.state == 1) {
-            data.eventType = 2; // 战斗结束， 选择继续战斗或是离开
+            data.eventType = 4; // 战斗结束， 选择继续战斗或是离开
           }
           break;
         case [false, false, false, true]:
-          data.eventType = 3; // 进入鹿原
+          data.eventType = 5; // 进入鹿原
           break;
         case [false, false, true, false]:
           if (data.player.state == 0) {
-            data.eventType = 5; // 遭遇战，必须战斗
+            data.eventType = 6; // 遭遇战，必须战斗
           }
           break;
         default:

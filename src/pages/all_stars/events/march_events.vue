@@ -1,7 +1,7 @@
 <template>
   <div
     class="events_mask"
-    v-if="value && [0, 3].includes(Number(type))"
+    v-if="value && [0, 5].includes(Number(type))"
     @click="() => $emit('close')"
   >
     <img
@@ -40,7 +40,7 @@
                   alt=""
                 />
                 <img
-                  v-if="type == 3"
+                  v-if="type == 5"
                   src="../../../allstar_assets/popups/insert_3.png"
                   alt=""
                 />
@@ -50,7 +50,7 @@
               <div v-if="type == 0">
                 您已抵达据点，军队正在据点休整，风声鹤唳，草木皆兵，此地不宜久留，耽误鹿原大计，请点击确定继续行军
               </div>
-              <div v-if="type == 3">
+              <div v-if="type == 5">
                 您已抵达鹿原，军队正在修整。点击确认即可立即开拨进入决战之地，角逐最终的胜利，成为鹿原霸主！
               </div>
             </div>
@@ -65,7 +65,11 @@
       </div>
     </div>
   </div>
-  <BattleEvents :type="type" v-if="value && [1, 2].includes(Number(type))" />
+  <BattleEvents
+    :player="player"
+    :type="type"
+    v-if="value && ![0, 5].includes(Number(type))"
+  />
 </template>
 
 <script >

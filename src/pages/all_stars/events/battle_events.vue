@@ -15,7 +15,7 @@
       <div class="top">
         <div class="place">
           <img src="../../../allstar_assets/popups/place_bg.png" alt="" />
-          <div class="text">地点</div>
+          <div class="text">{{ placeText }}</div>
         </div>
         <div class="status">
           <img src="../../../allstar_assets/popups/alert_icon.png" alt="" />
@@ -24,16 +24,17 @@
       </div>
       <div class="inner">
         <div class="intro">
-          此处属于敌军前往鹿原的必经之地，我军提前在此设伏可大量消耗敌军的有生力量从而在鹿原取得先机。伏击可获得战力加成，
+          {{ getIntroText }}
         </div>
         <div class="info">
           <div class="item">
-            <div class="red">5%</div>
+            <div class="red">{{ additionPower }}</div>
             <div>您将获得战力加成</div>
           </div>
           <img src="../../../allstar_assets/popups/divider.png" alt="" />
           <div class="item">
-            <img class="green" :src="getCampImg" alt="" />
+            <!-- <img class="green" :src="getCampImg" alt="" /> -->
+            <div class="green">未知</div>
             <div>敌对阵营</div>
           </div>
         </div>
@@ -70,6 +71,7 @@ import {
 } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import { useStore } from "vuex";
+import { map } from "../../../utils/useRoutes";
 export default {
   name: "battleEvents",
   props: ["value", "type", "player"],
@@ -81,6 +83,7 @@ export default {
       account: "",
       web3: "",
       btnDisable: false,
+      curNode: 0,
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -91,10 +94,18 @@ export default {
           data.web3 = p;
         }
       );
+      console.log(prop.player, "battle p");
+      await getCurrentNode();
     });
-    const onConfirm = async () => {
-      await march(prop.type);
+    const getCurrentNode = async () => {
+      const c = store.state.c_battle;
+      const res = await c.methods.getCurrentNode(data.account).call();
+      data.curNode = res;
     };
+    const placeText = computed(() => {
+      return map[data.curNode];
+    });
+
     const getCampImg = computed(() => {
       return [
         require("../../../assets/cardImgs/hero/bg/c0.png"),
@@ -104,7 +115,43 @@ export default {
       ][0];
     });
     const getStatusText = computed(() => {
-      return ["准备设伏！", "中埋伏了！", "遭遇敌军！", "战斗结束"][0];
+      switch (prop.type) {
+        case 1:
+          return "准备战斗!";
+        case 2:
+          return "被埋伏了！";
+        case 3:
+          return "准备埋伏！";
+        case 4:
+          return "激战间隙！";
+        case 6:
+          return "遭遇敌军！";
+        default:
+          return "error";
+      }
+    });
+    const getIntroText = computed(() => {
+      switch (prop.type) {
+        case 1:
+          return "暂未遇到敌军，如果选择继续前进将行军前往下一据点，您也可以继续等待与敌军激战";
+        case 2:
+          return "遭遇敌军在此设伏! 您可以选择投降直接通过或在此与敌军激战，设伏方将享受战力加成，战斗失败方将会折损兵力";
+        case 3:
+          return "此处属于敌军前往鹿原的必经之地，我军提前在此设伏可大量消耗敌军的有生力量从而在鹿原取得先机。伏击可获得战力加成";
+        case 4:
+          return "战斗阶段性结束，我军正在休整，您可以选择继续留在此地战斗或继续前进。";
+        case 6:
+          return "遭遇敌军! 此处乃通往鹿原必经之地，必须在此战斗，停留不前将错失鹿原良机";
+        default:
+          return "error";
+      }
+    });
+    const additionPower = computed(() => {
+      if ([1, 3, 4].includes(Number(prop.type))) {
+        return "5%";
+      } else {
+        return "0%";
+      }
     });
     const march = async (idx) => {
       try {
@@ -136,9 +183,11 @@ export default {
     return {
       ...refData,
       getStatusText,
+      getIntroText,
       getCampImg,
+      additionPower,
+      placeText,
       march,
-      onConfirm,
     };
   },
 };
@@ -248,6 +297,8 @@ export default {
           margin-bottom: 1.5rem;
         }
         .green {
+          font-size: 4rem;
+          color: #199b6c;
           height: 5rem;
           margin-bottom: 1.5rem;
         }
