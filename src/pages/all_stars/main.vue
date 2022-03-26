@@ -1,18 +1,10 @@
 <template>
-  <BfPack
-    @refresh="
-      () => {
-        showPack = false;
-        init();
-      }
-    "
-    @close="() => (showPack = false)"
-    :value="showPack"
-  />
+  <BfPack @refresh="allInit" @close="allInit" :value="showPack" />
   <RandomEvents
     :type="2"
     :value="true"
     @close="() => (showEvents = false)"
+    @refresh="allInit"
   />
   <InjectModal
     :value="showRuleModal"
@@ -231,10 +223,12 @@ export default {
           data.web3 = p;
         }
       );
-      await init();
+      await allInit();
       data.loading = false;
     });
-    const init = async () => {
+    const allInit = async () => {
+      data.showPack = false;
+      data.showEvents = false;
       clearInterval(data.ticker);
       await getPlayer();
       await getCurrentNode();
@@ -251,12 +245,24 @@ export default {
     const getDecisions = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
-      const idx = res.findIndex((x) => x);
-      if (idx != -1) {
-        // 0前进 1投降 2战斗 3进入决战
-        data.eventType == idx;
-      }
       data.decisions = res;
+
+      switch (res) {
+        case [true, false, false, false]:
+          data.eventType = 0; // 纯前进
+          break;
+        case [false, true, true, false]:
+          data.eventType = 1; // 遭遇埋伏，可选投降
+          break;
+        case [true, false, true, false]:
+          data.eventType = 2; // 可选埋伏
+          break;
+        case [false, false, false, true]:
+          data.eventType = 3; // 进入鹿原
+          break;
+        default:
+          break;
+      }
     };
     const showDecision = () => {
       if (data.arriveNext) {
@@ -337,7 +343,7 @@ export default {
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
           data.decisionShow = false;
-          await init();
+          await allInit();
         }
       } catch (e) {
         console.error(e);
@@ -367,6 +373,7 @@ export default {
       getDecisionText,
       showDecision,
       march,
+      allInit,
     };
   },
 };

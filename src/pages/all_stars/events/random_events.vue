@@ -58,8 +58,8 @@
         </div>
       </div>
     </div>
-    <div class="confirm" @click="onConfirm">
-      <div :class="btnDisable ? 'inner' : 'inner disable'">
+    <div :class="btnDisable ? 'confirm disable' : 'confirm'" @click="onConfirm">
+      <div class="inner">
         <img src="../../../allstar_assets/popups/confirm_bg.png" alt="" />
         <div class="text">确认</div>
       </div>
@@ -71,13 +71,13 @@
 <script >
 import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
-import BattleEvents from './battle_events.vue'
+import BattleEvents from "./battle_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "random_events",
   props: ["value", "type"],
   components: {
-    BattleEvents
+    BattleEvents,
   },
   setup(prop, ctx) {
     const store = useStore();
@@ -122,6 +122,7 @@ export default {
         console.error(e);
         proxy.$toast("决策出错", store.state.toast_error);
       } finally {
+        data.btnDisable = false;
         ctx.emit("refresh");
       }
     };
@@ -211,10 +212,10 @@ export default {
       }
     }
   }
-  .disable {
-    pointer-events: none;
-    filter: grayscale(100);
-  }
+}
+.disable {
+  pointer-events: none;
+  filter: grayscale(100);
 }
 .confirm {
   cursor: pointer;
@@ -226,6 +227,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   width: 10rem;
+
   .inner {
     position: relative;
     width: 100%;
