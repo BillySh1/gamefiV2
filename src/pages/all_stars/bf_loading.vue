@@ -1,15 +1,13 @@
 <template>
   <div class="progress">
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
-    <img class="badge" src="../../assets/common/hero_sit.png" alt="" />
-    <img
-      class="logo"
-      src="../../allstar_assets/all_stars/entry/logo.png"
-      alt=""
-    />
-    <div class="text">
-      {{ progressText }}
+    <div class="p_content">
+      <img src="../../allstar_assets/all_stars/entry/loading_logo.png" />
+      <div class="text">
+        {{ progressText }}
+      </div>
     </div>
+
     <div class="version">版本号 {{ version }}</div>
   </div>
 </template>
@@ -28,7 +26,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "群英会战 0.0.1 beta",
+      version: "群英会战 1.0.0 封测",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
@@ -108,28 +106,26 @@ export default {
     width: 100%;
     transform: translate(-50%, -50%);
   }
-
-  .logo {
+  .p_content {
     position: absolute;
-    width: 40rem;
-    height: auto;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  .text {
-    white-space: nowrap;
-    position: absolute;
-    font-size: 2rem;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
+    width: 50vmax;
     display: flex;
     flex-direction: column;
     align-items: center;
+    img {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    .text {
+      white-space: nowrap;
+      font-size: 2rem;
+      color: white;
+    }
   }
+
   .version {
     position: absolute;
     right: 0%;
