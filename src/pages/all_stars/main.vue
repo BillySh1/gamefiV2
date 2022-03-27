@@ -97,7 +97,16 @@
             </div>
             <div v-if="player.baseSpeed == 0" class="des">暂未出征</div>
           </div>
-          <div class="power_zone">
+          <div
+            class="power_zone"
+            @click="
+              () => {
+                $router.push({
+                  name: 'bf_stake',
+                });
+              }
+            "
+          >
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
             <div class="power_inner">
               {{ power > 0 ? "我的战力:" + power : "暂未出征" }}
