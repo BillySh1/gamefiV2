@@ -36,7 +36,10 @@
             <img v-if="item.key != 'preference'" :src="i.img" alt="" />
             <div v-else class="text">{{ i.name }}</div>
             <div class="selected" v-if="item.selected == i.key">
-              <img src="../assets/pack/filter/selected.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/selected.png"
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -50,7 +53,7 @@
         <img
           class="back"
           style="width: 2.5rem"
-          src="../assets/common/back.svg"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/back.svg"
           @click="
             (e) => {
               e.stopPropagation();
@@ -82,7 +85,10 @@
         <div class="badge">
           <div class="tabs">
             <div class="title">
-              <img src="../assets/pack/tab_title_bg.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/tab_title_bg.png"
+                alt=""
+              />
               <div class="inner">武将</div>
             </div>
             <div
@@ -96,7 +102,7 @@
           </div>
           <img
             class="divider"
-            src="../assets/market/order/divider.svg"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/divider.svg"
             alt=""
           />
         </div>
@@ -111,7 +117,10 @@
               }
             "
           >
-            <img src="../assets/store/left.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png"
+              alt=""
+            />
           </div>
           <div class="empty" v-if="!curItems.length">暂无武将</div>
           <div
@@ -148,7 +157,10 @@
               }
             "
           >
-            <img src="../assets/store/right.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -204,23 +216,23 @@ export default {
           items: [
             {
               key: 0,
-              img: require("../assets/pack/filter/rarity/0.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/rarity/0.png",
             },
             {
               key: 1,
-              img: require("../assets/pack/filter/rarity/1.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/rarity/1.png",
             },
             {
               key: 2,
-              img: require("../assets/pack/filter/rarity/2.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/rarity/2.png",
             },
             {
               key: 3,
-              img: require("../assets/pack/filter/rarity/3.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/rarity/3.png",
             },
             {
               key: 4,
-              img: require("../assets/pack/filter/rarity/4.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/rarity/4.png",
             },
           ],
         },
@@ -231,19 +243,19 @@ export default {
           items: [
             {
               key: 0,
-              img: require("../assets/cardImgs/hero/bg/c0.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c0.png",
             },
             {
               key: 1,
-              img: require("../assets/cardImgs/hero/bg/c1.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c1.png",
             },
             {
               key: 2,
-              img: require("../assets/cardImgs/hero/bg/c2.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c2.png",
             },
             {
               key: 3,
-              img: require("../assets/cardImgs/hero/bg/c3.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c3.png",
             },
           ],
         },
@@ -254,19 +266,19 @@ export default {
           items: [
             {
               key: 0,
-              img: require("../assets/cardImgs/hero/bg/q0.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q0.png",
             },
             {
               key: 1,
-              img: require("../assets/cardImgs/hero/bg/q1.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q1.png",
             },
             {
               key: 2,
-              img: require("../assets/cardImgs/hero/bg/q2.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q2.png",
             },
             {
               key: 3,
-              img: require("../assets/cardImgs/hero/bg/q3.png"),
+              img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q3.png",
             },
           ],
         },
@@ -516,7 +528,8 @@ export default {
           margin: 1rem 0;
         }
         .active {
-          background: url("../assets/pack/active_tab.png") no-repeat;
+          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+            no-repeat;
           background-size: 100% 100%;
         }
       }

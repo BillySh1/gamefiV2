@@ -1,8 +1,12 @@
 <template>
   <div class="progress">
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
-    <img class="badge" src="../assets/common/hero_sit.png" alt="" />
-    <img class="logo" src="../assets/common/logo.png" alt="" />
+    <img
+      class="badge"
+      :src="resolveAssets('/assets/common/hero_sit.png')"
+      alt=""
+    />
+    <img class="logo" :src="resolveAssets('/assets/common/logo.png')" alt="" />
     <div class="text">
       {{ progressText }}
     </div>
@@ -67,17 +71,19 @@ export default {
     const readFiles = () => {
       const path = require("path");
       const files = require.context("../assets/", true).keys();
-      // const prefix = 'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/'
+      const prefix =
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
       files.map((i) => {
         const _relativePath = path.join("assets", i);
-        const file = require(`../${_relativePath}`);
-        // const file = prefix + _relativePath
+        // const file = require(`../${_relativePath}`);
+        const file = prefix + _relativePath;
         data.manifest.push({
           src: file,
           id: _relativePath,
         });
       });
     };
+
     const refData = toRefs(data);
     return {
       ...refData,

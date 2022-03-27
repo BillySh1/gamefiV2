@@ -1,18 +1,20 @@
 <template>
   <div class="search_box">
-    <img style="width: 2rem" src="../assets/pack/search.svg" alt="" />
+    <img
+      style="width: 2rem"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/search.svg"
+      alt=""
+    />
     <div class="text">搜索</div>
   </div>
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs } from "vue";
 export default {
   name: "common_search",
   setup() {
     const data = reactive({});
-    onBeforeMount(() => {});
-    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,

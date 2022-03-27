@@ -20,7 +20,11 @@
       <div class="text">Faucet</div>
     </div>
     <div class="swap" @click="$router.push({ name: 'swap' })">
-      <img class="img" src="../assets/common/mmc_logo.svg" alt="" />
+      <img
+        class="img"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc_logo.svg"
+        alt=""
+      />
       <div class="text">Swap</div>
     </div>
     <div class="menu">
@@ -40,11 +44,14 @@
       <img
         v-if="$route.name == 'home'"
         class="img"
-        src="../assets/common/call.png"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/call.png"
         alt=""
       />
       <div v-else class="common_call">
-        <img src="../assets/common/common_call.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/common_call.png"
+          alt=""
+        />
         <div class="text">招贤纳士</div>
       </div>
     </div>
@@ -52,7 +59,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs } from "vue";
 export default {
   name: "common_page_footer",
   setup() {
@@ -60,44 +67,42 @@ export default {
       menuList: [
         {
           key: "pack",
-          img: require("../assets/common/pack.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/pack.png",
           href: "pack",
           text: "背包",
         },
         {
           key: "market",
-          img: require("../assets/common/market.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/market.png",
           href: "market",
           text: "市场",
         },
         {
           key: "exchange",
-          img: require("../assets/common/exchange.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/exchange.png",
           href: "exchange",
           text: "兑换",
         },
         {
           key: "store",
-          img: require("../assets/common/store.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/store.png",
           href: "store",
           text: "战备",
         },
         {
           key: "reborn",
-          img: require("../assets/common/reborn.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/reborn.png",
           href: "reborn",
           text: "重生",
         },
         {
           key: "mix",
-          img: require("../assets/common/mix.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mix.png",
           href: "mix",
           text: "进阶",
         },
       ],
     });
-    onBeforeMount(() => {});
-    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,

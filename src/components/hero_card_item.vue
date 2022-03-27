@@ -21,7 +21,7 @@
             : ''
         "
       >
-        <img src="../assets/cardImgs/mix.png" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/mix.png" alt="" />
       </div>
       <div class="quality">
         <img :src="qualityImg" alt="" />
@@ -30,14 +30,14 @@
         <img
           v-for="(item, index) in stars"
           :key="index"
-          src="../assets/cardImgs/hero/bg/star.png"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/star.png"
         />
       </div>
       <div class="levels">
         <img
           v-for="(item, index) in levels"
           :key="index"
-          src="../assets/cardImgs/level.png"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/level.png"
           alt=""
         />
       </div>
@@ -63,29 +63,29 @@ export default {
     const borderImg = computed(() => {
       return (
         [
-          require("../assets/cardImgs/hero/bg/r0.png"),
-          require("../assets/cardImgs/hero/bg/r1.png"),
-          require("../assets/cardImgs/hero/bg/r2.png"),
-          require("../assets/cardImgs/hero/bg/r3.png"),
-          require("../assets/cardImgs/hero/bg/r4.png"),
-        ][prop.info.rarity] || require("../assets/cardImgs/hero/bg/r4.png")
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r0.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r1.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r2.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r3.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r4.png",
+        ][prop.info.rarity] || "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/r4.png"
       );
     });
     const qualityImg = computed(() => {
       return [
-        require("../assets/cardImgs/hero/bg/q0.png"),
-        require("../assets/cardImgs/hero/bg/q1.png"),
-        require("../assets/cardImgs/hero/bg/q2.png"),
-        require("../assets/cardImgs/hero/bg/q3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/q3.png",
       ][prop.info.quality];
     });
     const campImg = computed(() => {
       return {
         img: [
-          require("../assets/cardImgs/hero/bg/c0.png"),
-          require("../assets/cardImgs/hero/bg/c1.png"),
-          require("../assets/cardImgs/hero/bg/c2.png"),
-          require("../assets/cardImgs/hero/bg/c3.png"),
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c0.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c1.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c2.png",
+          "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c3.png",
         ][prop.info.camp],
       };
     });
@@ -110,12 +110,12 @@ export default {
 
     const getBadgeImg = computed(() => {
       return [
-        require("../assets/cardImgs/badge_0.png"),
-        require("../assets/cardImgs/badge_1.png"),
-        require("../assets/cardImgs/badge_2.png"),
-        require("../assets/cardImgs/badge_3.png"),
-        require("../assets/cardImgs/badge_4.png"),
-        require("../assets/cardImgs/badge_5.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_3.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_4.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/badge_5.png",
       ][prop.info.preference];
     });
 

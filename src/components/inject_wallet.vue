@@ -1,7 +1,7 @@
 <template>
   <div class="wallet_box">
     <div class="chain_icon_box">
-      <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
+      <img class="chain_icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/chainIcon/bsc.svg" alt="" />
     </div>
     <div class="wallet_address">
       {{ walletValue }}

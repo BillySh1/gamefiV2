@@ -4,7 +4,11 @@
       <InjectWallet @exit="$emit('exit')" />
     </div>
     <div v-else class="page_title">
-      <img class="title_badge" src="../assets/common/active_title.png" alt="" />
+      <img
+        class="title_badge"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/active_title.png"
+        alt=""
+      />
       {{ title }}
     </div>
     <div class="currency_menu">
@@ -20,7 +24,7 @@
         </div>
         <img
           class="img_right"
-          src="../assets/common/currency_plus.png"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/currency_plus.png"
           @click="
             () =>
               $router.push({
@@ -37,10 +41,14 @@
       <img
         @click="$router.push({ name: 'notice' })"
         class="icon"
-        src="../assets/common/notice.svg"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/notice.svg"
         alt=""
       />
-      <img class="icon" src="../assets/common/lang.svg" alt="" />
+      <img
+        class="icon"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/lang.svg"
+        alt=""
+      />
       <img
         v-if="isMobile"
         @click="exitFullScreen"
@@ -70,31 +78,31 @@ export default {
       list: [
         {
           key: "mmc",
-          img: require("../assets/common/mmc.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png",
           value: 0,
         },
         {
           key: "m3t",
-          img: require("../assets/exchange/coin.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png",
           value: 0,
           href: "exchange",
         },
         {
           key: "card",
-          img: require("../assets/common/card.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/card.png",
           value: 0,
           href: "mint",
         },
         {
           key: "grain",
-          img: require("../assets/common/grain.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/grain.png",
           value: 0,
           href: "storeDetail",
           tokenId: 12,
         },
         {
           key: "drum",
-          img: require("../assets/common/drum.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/drum.png",
           value: 0,
           href: "storeDetail",
           tokenId: 11,
@@ -110,8 +118,8 @@ export default {
     });
     const getScreenAciton = computed(() => {
       return data.isFull
-        ? require("../assets/common/exitFullScreen.png")
-        : require("../assets/common/fullScreen.png");
+        ? "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/exitFullScreen.png"
+        : "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/fullScreen.png";
     });
     const exitFullScreen = () => {
       const tp = require("tp-js-sdk");
@@ -129,30 +137,6 @@ export default {
         sessionStorage.setItem("fullScreen", "1");
         data.isFull = true;
       }
-      // const isPcFull = document.webkitIsFullScreen || document.isFullScreen;
-      // if (isMobile.value) {
-      //   const tp = require("tp-js-sdk");
-      //   if (sessionStorage.getItem("fullScreen")) {
-      //     tp.fullScreen({
-      //       fullScreen: 0,
-      //     });
-      //     sessionStorage.setItem("fullScreen", false);
-      //   } else {
-      //     tp.fullScreen({
-      //       fullScreen: 1,
-      //     });
-      //     sessionStorage.setItem("fullScreen", true);
-      //   }
-      // } else {
-      //   if (!isPcFull) {
-      //     document.documentElement.requestFullscreen();
-      //     sessionStorage.setItem("fullScreen", true);
-      //   } else {
-      //     document.exitFullscreen();
-      //     sessionStorage.setItem("fullScreen", false);
-      //   }
-      // }
-      // data.isFull = sessionStorage.getItem("fullScreen");
     };
     onBeforeMount(async () => {
       await initWeb3.Init(

@@ -37,7 +37,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs } from "vue";
 export default {
   name: "connect_wallet_modal",
   props: ["value", "mobile"],
@@ -46,34 +46,32 @@ export default {
       walletMaps: [
         {
           name: "Metamask",
-          img: require("../assets/wallets/meta_mask.svg"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assetss/wallets/meta_mask.svg",
           display: !prop.mobile,
         },
         {
           name: "TokenPocket",
-          img: require("../assets/wallets/token_pocket.svg"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assetss/wallets/token_pocket.svg",
           display: prop.mobile,
         },
         {
           name: "Trust Wallet",
-          img: require("../assets/wallets/trust_wallet.svg"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assetss/wallets/trust_wallet.svg",
           display: !prop.mobile,
         },
         {
           name: "Coin 98",
-          img: require("../assets/wallets/coin_98.svg"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assetss/wallets/coin_98.svg",
           display: !prop.mobile,
         },
         {
           name: "WalletConnect",
-          img: require("../assets/wallets/wallet_connect.svg"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assetss/wallets/wallet_connect.svg",
           display: true,
           disable: true,
         },
       ],
     });
-    onBeforeMount(() => {});
-    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,

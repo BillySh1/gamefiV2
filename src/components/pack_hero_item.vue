@@ -6,11 +6,11 @@
     <div class="power_zone">
       <div class="zone_inner">
         <div class="value_box">
-          <img class="part" src="../assets/pack/power_text_left.svg" alt="" />
+          <img class="part" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/power_text_left.svg" alt="" />
           <div class="text">
-            <img class="power_img" src="../assets/pack/power_item.png" />
+            <img class="power_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/power_item.png" />
           </div>
-          <img class="part" src="../assets/pack/power_text_right.svg" alt="" />
+          <img class="part" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/power_text_right.svg" alt="" />
         </div>
 
         <div class="power_value">

@@ -1,4 +1,5 @@
 <template>
+  <InjectGoBack />
   <div class="box">
     <img
       class="bg"
@@ -103,12 +104,14 @@ import {
 import InjectModal from "../../components/inject_modal.vue";
 import { useRouter } from "vue-router";
 import initWeb3 from "../../utils/initWeb3";
+import InjectGoBack from "../../components/inject_go_back.vue";
 import { useStore } from "vuex";
 
 export default {
   name: "entry_choose_camp",
   components: {
     InjectModal,
+    InjectGoBack,
   },
   setup() {
     const router = useRouter();
