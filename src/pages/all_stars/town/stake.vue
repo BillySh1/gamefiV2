@@ -183,7 +183,56 @@
         <StakeItem :info="{}" />
       </div>
     </div>
-    <div class="empty" v-show="Number(player.baseSpeed) > 0">您已出征</div>
+    <div class="main_already" v-show="Number(player.baseSpeed) > 0">
+      <div class="already_item">
+        <div class="top">
+          <img
+            style="height: 6rem"
+            src="../../../allstar_assets/stake/wujiang.png"
+            alt=""
+          />
+          <div>总战力值</div>
+          <div>
+            {{
+              alreadyWarriors.reduce((sum, x) => {
+                sum += Number(x.power);
+                return sum;
+              }, 0)
+            }}
+          </div>
+        </div>
+        <div class="top" v-for="item in alreadyWarriors" :key="item.tokenId">
+          <div>{{ item.name }}</div>
+          <div>{{ item.qualityName }}</div>
+          <div>战力值</div>
+          <div>{{ item.power }}</div>
+        </div>
+      </div>
+      <div class="already_item">
+        <div class="top">
+          <img
+            style="height: 6rem"
+            src="../../../allstar_assets/stake/zhugong.png"
+            alt=""
+          />
+          <div>总战力值</div>
+          <div>
+            {{
+              alreadyKings.reduce((sum, x) => {
+                sum += Number(x.power);
+                return sum;
+              }, 0)
+            }}
+          </div>
+        </div>
+        <div class="top" v-for="item in alreadyKings" :key="item.tokenId">
+          <div>{{ item.name }}</div>
+          <div>{{ item.qualityName }}</div>
+          <div>战力值</div>
+          <div>{{ item.power }}</div>
+        </div>
+      </div>
+    </div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
         <img src="../../../allstar_assets/store/back.png" alt="" />
@@ -220,6 +269,7 @@ import { combineMap, findCombineIndex } from "../../../utils/useCombine";
 import CommonButton from "./../../../components/common_button.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import useHeroDetail from "../../../utils/useHeroDetail.js";
 export default {
   name: "bf_stake",
   components: {
@@ -265,6 +315,8 @@ export default {
       road: undefined,
       isCombined: false,
       power: 0,
+      alreadyWarriors: [],
+      alreadyKings: [],
     });
 
     const curTotalPower = computed(() => {
@@ -375,9 +427,41 @@ export default {
     };
     const getPower = async () => {
       const c = store.state.c_battle;
+      const hero = store.state.c_hero;
       const res = await c.methods.getCardsAndPower(data.account).call();
       console.log(res, "raw");
       data.power = Number(res[2] / 100).toFixed(0);
+      if (res[0].length > 0) {
+        for (let i = 0; i < res[0].length; i++) {
+          const tokenId = res[0][i];
+          const x = await hero.methods.getHero(tokenId).call();
+          const uid =
+            x.camp.toString() + x.rarity.toString() + x.heroId.toString();
+          const heroItem = {
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+            uid: uid,
+            ...useHeroDetail(uid, x.preference),
+            qualityName: useQualityText(x.quality),
+          };
+          if (heroItem.rarity == 4) {
+            data.alreadyKings.push(heroItem);
+          } else {
+            data.alreadyWarriors.push(heroItem);
+          }
+        }
+      }
     };
 
     const getStock = async () => {
@@ -710,6 +794,32 @@ export default {
     min-width: 20vmax;
     height: 100%;
     margin-right: 2rem;
+  }
+}
+.main_already {
+  width: 100%;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .already_item {
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      #5c0b0b 0%,
+      #350606 42.71%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    .top {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: 1.5rem;
+    }
   }
 }
 .footer {
