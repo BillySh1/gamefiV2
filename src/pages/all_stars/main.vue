@@ -89,6 +89,7 @@
             >
               <div class="des">狂风暴雨, 行军困难</div>
             </div>
+            <div v-if="additionEvents[2] == 0" class="des">暂未出征</div>
           </div>
           <div class="power_zone">
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
@@ -331,8 +332,8 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getEvent(data.account).call();
       console.log(res, "rdm events");
+      data.additionEvents = res;
       if (res[2] != 0) {
-        data.additionEvents = res;
         data.curEventsText = eventsTextMap[res[0]][res[1]];
         data.randomEvents.push({
           key: "rdmevts",

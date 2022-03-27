@@ -131,6 +131,10 @@
           <img :src="item.img" alt="" />
         </div>
       </div>
+      <CommonButton v-if="player.baseSpeed == 0" @click="clear"
+        >清除</CommonButton
+      >
+
       <div class="power">
         <img src="../../../allstar_assets/stake/power_bg.png" alt="" />
         <div class="text" v-if="player.baseSpeed == 0">
@@ -326,9 +330,26 @@ export default {
         }
         data.selectedKing[data.curIdx] = item;
       }
-
+      setPackBefore();
       await combileInfo();
       data.showPack = false;
+    };
+    const setPackBefore = () => {
+      localStorage.setItem(
+        "before_warriors",
+        JSON.stringify(data.selectedWarrior)
+      );
+      localStorage.setItem("before_king", JSON.stringify(data.selectedKing));
+    };
+    const getPackBefore = () => {
+      const warrior_storages = localStorage.getItem("before_warriors");
+      if (warrior_storages && warrior_storages.length > 0) {
+        data.selectedWarrior = JSON.parse(warrior_storages);
+      }
+      const king_storages = localStorage.getItem("before_king");
+      if (king_storages && king_storages.length > 0) {
+        data.selectedKing = JSON.parse(king_storages);
+      }
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -339,10 +360,19 @@ export default {
           data.web3 = p;
         }
       );
+      getPackBefore();
       await getPlayer();
       await getPower();
       await getStock();
     });
+    const clear = () => {
+      if (data.activeTab == 0) {
+        data.selectedWarrior = [{}, {}, {}, {}, {}];
+      } else if (data.activeTab == 1) {
+        data.selectedKing = [];
+      }
+      setPackBefore();
+    };
     const getPower = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getCardsAndPower(data.account).call();
@@ -551,13 +581,14 @@ export default {
       getWarrorNames,
       getKingNames,
       totalPower,
+      roadText,
+      btnText,
       handleClickItem,
       handleSelectHero,
       getCost,
       doubleCheck,
       onConfirm,
-      roadText,
-      btnText,
+      clear,
     };
   },
 };
