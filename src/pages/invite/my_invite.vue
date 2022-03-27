@@ -3,15 +3,28 @@
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
     <div class="content">
-      <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
+      <img
+        class="bg_badge"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+        alt=""
+      />
       <div class="border">
-        <img src="../../assets/notice/border.svg" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg"
+          alt=""
+        />
         <div v-if="inviteData.length > 0" class="inner">
           <div class="top">
-            <img src="../../assets/invite/my_top_bg.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/my_top_bg.png"
+              alt=""
+            />
             <div class="info_box">
               <div class="item title">
-                <img src="../../assets/invite/icons/1.svg" alt="" />
+                <img
+                  src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg"
+                  alt=""
+                />
                 我的收益
               </div>
               <div class="item">

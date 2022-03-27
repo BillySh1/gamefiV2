@@ -15,7 +15,11 @@
         <HeroCardItem :info="info" />
       </div>
       <dir class="info_box">
-        <img class="bg" src="../../assets/pack/detial_bg.png" alt="" />
+        <img
+          class="bg"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/detial_bg.png"
+          alt=""
+        />
         <div class="inner">
           <div class="up_box">
             <div
@@ -68,7 +72,7 @@
                     <img
                       :class="item.active ? '' : 'disable'"
                       style="width: 2rem"
-                      src="../../assets/cardImgs/hero/bg/star.png"
+                      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/star.png"
                       alt=""
                     />
                   </div>
@@ -83,7 +87,9 @@
                   v-for="(item, index) in abilities"
                   :key="index"
                 >
-                  <img src="../../assets/pack/ab_box.png" />
+                  <img
+                    src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/ab_box.png"
+                  />
                   <div class="text">技能</div>
                 </div>
               </div>
@@ -96,7 +102,7 @@
                   :key="index"
                 >
                   <img
-                    :src="require(`../../assets/pack/p_${index}.png`)"
+                    :src="`http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/p_${index}.png`"
                     alt=""
                   />
                   <div class="title">{{ item.title }}</div>
@@ -105,7 +111,11 @@
                   </div>
                 </div>
               </div>
-              <img class="divider" src="../../assets/pack/divider.png" alt="" />
+              <img
+                class="divider"
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/divider.png"
+                alt=""
+              />
               <div class="attr_map">
                 <DetailRadar :data="info.properties" :pre="info.preference" />
               </div>
@@ -125,7 +135,10 @@
             })
           "
         >
-          <img src="../../assets/pack/yellow.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/yellow.png"
+            alt=""
+          />
           <div class="text">出售</div>
         </div>
         <div
@@ -140,13 +153,19 @@
               })
           "
         >
-          <img src="../../assets/pack/blue.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/blue.png"
+            alt=""
+          />
           <div class="text">升级</div>
         </div>
       </div>
     </div>
     <CommonPageFooter />
-    <img class="bg_badge" src="../../assets/pack/bg_badge.svg" />
+    <img
+      class="bg_badge"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+    />
   </div>
 </template>
 
@@ -292,7 +311,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("../../assets/hero_detail/hero_detail_bg.png");
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/hero_detail/hero_detail_bg.png");
   background-size: cover;
   .bg_badge {
     position: absolute;
@@ -355,7 +374,8 @@ export default {
             margin: 0.2rem 0;
           }
           .active_tab {
-            background: url("../../assets/pack/active_tab.png") no-repeat;
+            background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+              no-repeat;
             background-size: 100% 100%;
           }
         }

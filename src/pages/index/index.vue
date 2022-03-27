@@ -8,18 +8,18 @@
         <div class="flex">
           <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
-              :src="require('../../assets/index/airdrop.png')"
+              :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/airdrop.png'"
               text="空投"
             />
           </div>
           <div class="float_item">
             <!-- <InjectIcon
-            :src="require('../../assets/index/title.png')"
+            :src="require('http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/title.png')"
             text="称号"
           /> -->
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
-                :src="require('../../assets/index/invite.png')"
+                :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/invite.png'"
                 text="邀请"
               />
             </div>
@@ -28,22 +28,22 @@
       </div>
       <div class="float_left_box">
         <div class="leader_board_box" @click="jump('leader')">
-          <img src="../../assets/index/Leader_board.svg" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/Leader_board.svg" alt="" />
           <div class="leader_board_text">排行榜</div>
         </div>
       </div>
 
       <div class="float_action_buttons">
-        <!-- <img class="up" src="../../assets/index/ac_bottom.png" alt="" /> -->
+        <!-- <img class="up" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/ac_bottom.png" alt="" /> -->
         <div class="actions_inner">
           <div class="left">
-            <img src="../../assets/index/left.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/left.png" alt="" />
           </div>
           <div class="middle" @click="jump('allStarsEntry')">
-            <img src="../../assets/index/middle.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/middle.png" alt="" />
           </div>
           <div class="right">
-            <img src="../../assets/index/right.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/right.png" alt="" />
           </div>
         </div>
       </div>

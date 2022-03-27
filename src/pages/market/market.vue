@@ -16,7 +16,7 @@
     </div>
     <div class="tip_badge" @click="()=>$router.push({name:'order'})" >
       <div class="inner">
-        <img src="../../assets/common/tip_badge.svg" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
         <div class="text">我的订单</div>
       </div>
     </div>
@@ -42,19 +42,19 @@ export default {
       campBox: [
         {
           name: "魏",
-          img: require("../../assets/market/camp/0.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/0.png",
         },
         {
           name: "蜀",
-          img: require("../../assets/market/camp/1.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/1.png",
         },
         {
           name: "吴",
-          img: require("../../assets/market/camp/2.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/2.png",
         },
         {
           name: "群",
-          img: require("../../assets/market/camp/3.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/3.png",
         },
       ],
     });
@@ -73,7 +73,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("../../assets/market/bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png") no-repeat;
   background-size: cover;
   .tip_badge {
     cursor: pointer;

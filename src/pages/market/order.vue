@@ -12,7 +12,7 @@
         <img
           class="back"
           style="width: 2.5rem"
-          src="../../assets/common/back.svg"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/back.svg"
           @click="
             (e) => {
               $router.go(-1);
@@ -35,7 +35,7 @@
           </div>
           <img
             class="divider"
-            src="../../assets/market/order/divider.svg"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/divider.svg"
             alt=""
           />
         </div>
@@ -50,9 +50,9 @@
               }
             "
           >
-            <img src="../../assets/store/left.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png" alt="" />
           </div>
-          <div class="empty" v-if="!rawData.length">市场中暂无卡牌</div>
+          <div class="empty" v-if="!rawData.length">暂无订单</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
@@ -78,7 +78,7 @@
               }
             "
           >
-            <img src="../../assets/store/right.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png" alt="" />
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
       @click="() => $router.push({ name: 'order' })"
     >
       <div class="inner">
-        <img src="../../assets/common/tip_badge.svg" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
         <div class="text">我的订单</div>
       </div>
     </div>
@@ -234,7 +234,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("../../assets/market/bg.png");
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png");
   .tip_badge {
     cursor: pointer;
     position: absolute;
@@ -352,7 +352,7 @@ export default {
           margin: 1rem 0;
         }
         .active {
-          background: url("../../assets/pack/active_tab.png") no-repeat;
+          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png") no-repeat;
           background-size: 100% 100%;
         }
       }

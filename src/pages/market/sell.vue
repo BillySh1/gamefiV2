@@ -24,7 +24,7 @@
             {{ info.title }}
             <img
               class="right_c_title_badge"
-              src="../../assets/common/active_title.png"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/active_title.png"
             />
           </div>
         </div>
@@ -37,7 +37,7 @@
             <img
               style="cursor: pointer"
               class="img_action"
-              src="../../assets/mint/minus.svg"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/minus.svg"
               @click="
                 () => {
                   const temp = price - 100;
@@ -50,7 +50,11 @@
               "
             />
             <div class="ipt_bg">
-              <img class="ipt_img" src="../../assets/mint/input.png" alt="" />
+              <img
+                class="ipt_img"
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png"
+                alt=""
+              />
               <input
                 v-model="price"
                 class="input"
@@ -60,7 +64,7 @@
             <img
               class="img_action"
               style="cursor: pointer"
-              src="../../assets/mint/add.svg"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/add.svg"
               @click="
                 () => {
                   price += 100;
@@ -70,7 +74,11 @@
           </div>
 
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="../../assets/mint/btn.png" alt="" />
+            <img
+              class="btn_img"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png"
+              alt=""
+            />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>
@@ -95,7 +103,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 
 export default {
   name: "sell",
@@ -103,7 +111,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     HeroCardItem,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const route = useRoute();
@@ -237,7 +245,8 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/market/bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png")
+    no-repeat;
   background-size: 100% 100%;
 }
 .content {

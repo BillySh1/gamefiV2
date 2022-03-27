@@ -23,12 +23,12 @@
         <div v-if="!loading" class="balance_box">
           <div class="item title">余额</div>
           <div class="item">
-            <img class="icon" src="../../assets/exchange/coin.png" />
+            <img class="icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png" />
             <span class="name">铜钱</span>
             <span>{{ m3t_balance }}</span>
           </div>
           <div class="item">
-            <img class="icon" src="../../assets/exchange/usdt.png" />
+            <img class="icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png" />
             <span class="name">USDT</span>
             <span>{{ usdt_balance }}</span>
           </div>
@@ -36,7 +36,7 @@
         <div class="up_box">
           <div class="buy_num">
             <div class="icon">
-              <img src="../../assets/exchange/usdt.png" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png" />
             </div>
             <input
               class="ipt"
@@ -214,7 +214,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("../../assets/exchange/ex_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/ex_bg.png") no-repeat;
   background-size: 100% 100%;
 }
 .content {

@@ -8,7 +8,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from '../../components/inject_go_back.vue';
@@ -24,7 +24,6 @@ export default {
       pageTitle: "排行榜",
     });
 
-    onBeforeMount(() => {});
 
     const refData = toRefs(data);
     return {

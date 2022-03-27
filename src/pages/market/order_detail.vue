@@ -22,13 +22,19 @@
         <div class="right_c_title">
           <div class="right_c_title_value">
             <div class="name_zone">
-              <img src="../../assets/market/order/name_divider.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/name_divider.png"
+                alt=""
+              />
               <div class="inner">
                 {{ info.name }}
               </div>
             </div>
             <div class="price_zone">
-              <img src="../../assets/common/mmc.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+                alt=""
+              />
               {{ getPrice }}
             </div>
           </div>
@@ -41,7 +47,11 @@
         </div>
         <div class="right_c_action">
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="../../assets/mint/btn.png" alt="" />
+            <img
+              class="btn_img"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png"
+              alt=""
+            />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>
@@ -298,7 +308,8 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/market/bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png")
+    no-repeat;
   background-size: 100% 100%;
 }
 .content {

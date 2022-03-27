@@ -8,10 +8,10 @@
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
     <div class="content">
-      <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
+      <img class="bg_badge" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg" alt="" />
       <div class="invite_box">
         <div class="up">
-          <img src="../../assets/invite/up_bg.png" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/up_bg.png" alt="" />
           <div
             class="info_box"
             @click="
@@ -22,7 +22,7 @@
             "
           >
             <div class="item title">
-              <img src="../../assets/invite/icons/1.svg" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg" alt="" />
               我的收益
             </div>
             <div class="item">
@@ -42,23 +42,23 @@
             class="item"
             @click="() => $router.push({ name: 'inviteBoard' })"
           >
-            <img src="../../assets/invite/item_1.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_1.png" alt="" />
             <div class="inner">
-              <img src="../../assets/invite/icons/2.svg" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/2.svg" alt="" />
               邀请排行榜
             </div>
           </div>
           <div class="item" @click="() => (showRules = true)">
-            <img src="../../assets/invite/item_2.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_2.png" alt="" />
             <div class="inner">
-              <img src="../../assets/invite/icons/3.svg" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/3.svg" alt="" />
               邀请规则
             </div>
           </div>
           <div class="item" @click="generate">
-            <img src="../../assets/invite/item_3.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_3.png" alt="" />
             <div class="inner">
-              <img src="../../assets/invite/icons/4.svg" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/4.svg" alt="" />
               生成我的邀请码
             </div>
           </div>

@@ -3,7 +3,11 @@
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
     <div class="content">
-      <img class="bg_badge" src="../../assets/pack/bg_badge.svg" alt="" />
+      <img
+        class="bg_badge"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+        alt=""
+      />
       <div v-if="quality" class="main">
         <Lottie :options="lottie_options" />
       </div>
@@ -17,13 +21,13 @@
 import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const data = reactive({

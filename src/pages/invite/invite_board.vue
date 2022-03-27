@@ -4,7 +4,7 @@
     <InjectGoBack />
     <div class="content">
       <div class="border">
-        <img src="../../assets/notice/border.svg" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg" alt="" />
         <div class="inner">
           <div class="top">
             <CommonButton
