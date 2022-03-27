@@ -1,9 +1,12 @@
 <template>
   <div class="stake_item">
     <div v-if="!info || !info.tokenId" class="empty">
-      <img src="../../../allstar_assets/stake/add.png" alt="" />
+      <img
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/add.png"
+        alt=""
+      />
     </div>
-    <div class="stake_item_card"  v-if="info && info.tokenId">
+    <div class="stake_item_card" v-if="info && info.tokenId">
       <HeroCardItem :big="true" :info="info" />
     </div>
   </div>
@@ -14,7 +17,7 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs } from "vue";
 import HeroCardItem from "../../../components/hero_card_item.vue";
 export default {
   name: "stake_item",
@@ -24,8 +27,6 @@ export default {
   props: ["info"],
   setup() {
     const data = reactive({});
-    onBeforeMount(() => {});
-    onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
@@ -42,7 +43,8 @@ export default {
   position: relative;
   width: 100%;
   height: 90%;
-  background: url("../../../allstar_assets/stake/stake_item_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_item_bg.png")
+    no-repeat;
   background-size: 100% 100%;
   .empty {
     position: absolute;
@@ -54,12 +56,12 @@ export default {
       width: 100%;
     }
   }
-  .stake_item_card{
-      position: absolute;
-      width: 95%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
+  .stake_item_card {
+    position: absolute;
+    width: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 

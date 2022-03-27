@@ -2,13 +2,13 @@
   <div class="events_mask" v-if="value" @click="() => $emit('close')">
     <img
       style="width: 100%"
-      src="../../../allstar_assets/popups/light_bg.png"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/light_bg.png"
       alt=""
     />
     <img
       @click="() => $emit('close')"
       class="close"
-      src="../../../allstar_assets/popups/close.svg"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/close.svg"
       alt=""
     />
     <div
@@ -20,7 +20,10 @@
       "
     >
       <div class="inner">
-        <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/scroll_bg.png"
+          alt=""
+        />
         <div class="main">
           <div class="title">
             {{ text }}
@@ -30,7 +33,10 @@
     </div>
     <div class="confirm" @click="onConfirm">
       <div class="inner">
-        <img src="../../../allstar_assets/popups/confirm_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/confirm_bg.png"
+          alt=""
+        />
         <div class="text">确认</div>
       </div>
     </div>

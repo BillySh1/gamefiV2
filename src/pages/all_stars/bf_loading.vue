@@ -2,7 +2,9 @@
   <div class="progress">
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
     <div class="p_content">
-      <img src="../../allstar_assets/all_stars/entry/loading_logo.png" />
+      <img
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/loading_logo.png"
+      />
       <div class="text">
         {{ progressText }}
       </div>

@@ -29,7 +29,7 @@
     <img
       v-if="player.isBond"
       :style="getPos"
-      src="../../allstar_assets/main/pos.gif"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pos.gif"
       alt=""
     />
 
@@ -49,7 +49,7 @@
               </div>
               <img
                 class="p"
-                src="../../allstar_assets/main/city_img.png"
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/city_img.png"
                 alt=""
               />
               <div class="txt">主城</div>
@@ -103,13 +103,19 @@
               }
             "
           >
-            <img src="../../allstar_assets/main/power_zone.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/power_zone.png"
+              alt=""
+            />
             <div class="power_inner">
               {{ power > 0 ? "我的战力:" + power : "暂未出征" }}
             </div>
           </div>
           <div v-if="player.baseSpeed != 0" class="random_events">
-            <img src="../../allstar_assets/main/speed.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/speed.png"
+              alt=""
+            />
             当前速度 {{ curSpeed }}
           </div>
           <div
@@ -118,7 +124,10 @@
             :key="item.key"
             @click="() => clickEventBar(item)"
           >
-            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
+              alt=""
+            />
             {{ item.name }}
           </div>
         </div>
@@ -133,7 +142,10 @@
           "
         >
           <div class="inner">
-            <img src="../../allstar_assets/main/to_final.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
+              alt=""
+            />
             <div class="text">鹿原奖池</div>
           </div>
         </div>
@@ -149,15 +161,24 @@
             <span v-if="!arriveNext">还剩</span>
           </div>
           <div class="time_row" v-if="!arriveNext && !isBattleIng">
-            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
+              alt=""
+            />
             {{ timing }}
           </div>
           <div class="time_row" v-if="arriveNext && !isBattleIng">
-            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
+              alt=""
+            />
             <span style="color: red">请点击此处决策</span>
           </div>
           <div class="timerow" v-if="isBattleIng">
-            <img src="../../allstar_assets/main/clock.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
+              alt=""
+            />
             <span style="color: red">战斗进行中</span>
           </div>
         </div>
@@ -470,10 +491,10 @@ export default {
     };
     const getMap = computed(() => {
       return [
-        require("../../allstar_assets/main/map_0.png"),
-        require("../../allstar_assets/main/map_1.png"),
-        require("../../allstar_assets/main/map_2.png"),
-        require("../../allstar_assets/main/map_3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_3.png",
       ][data.curCamp];
     });
     const getPos = computed(() => {
@@ -576,7 +597,8 @@ export default {
     }
     width: 9rem;
     height: 18rem;
-    background: url("../../allstar_assets/main/main_camp.png") no-repeat;
+    background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/main_camp.png")
+      no-repeat;
     background-size: 100% 100%;
     margin-bottom: 2rem;
     .inner {
@@ -647,7 +669,8 @@ export default {
   bottom: 15%;
   width: 7rem;
   height: 7rem;
-  background: url("../../allstar_assets/main/pack_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pack_bg.png")
+    no-repeat;
   background-size: 100% 100%;
   font-size: 1.5rem;
   display: flex;

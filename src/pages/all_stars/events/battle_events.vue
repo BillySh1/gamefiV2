@@ -3,22 +3,28 @@
     <img
       @click="() => $emit('close')"
       class="close"
-      src="../../../allstar_assets/popups/close.svg"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/close.svg"
       alt=""
     />
     <div class="content">
       <img
         class="c_bg"
-        src="../../../allstar_assets/popups/scroll_vertical.png"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/scroll_vertical.png"
         alt=""
       />
       <div class="top">
         <div class="place">
-          <img src="../../../allstar_assets/popups/place_bg.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/place_bg.png"
+            alt=""
+          />
           <div class="text">{{ placeText }}</div>
         </div>
         <div class="status">
-          <img src="../../../allstar_assets/popups/alert_icon.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/alert_icon.png"
+            alt=""
+          />
           <div>{{ getStatusText }}</div>
         </div>
       </div>
@@ -31,7 +37,10 @@
             <div class="red">{{ additionPower }}</div>
             <div>您将获得战力加成</div>
           </div>
-          <img src="../../../allstar_assets/popups/divider.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/divider.png"
+            alt=""
+          />
           <div class="item">
             <!-- <img class="green" :src="getCampImg" alt="" /> -->
             <div class="green">未知</div>
@@ -44,7 +53,10 @@
             :class="btnDisable ? 'btn disable' : 'btn'"
             @click="march(1)"
           >
-            <img src="../../../allstar_assets/popups/btn_green.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_green.png"
+              alt=""
+            />
             <div class="text">投降</div>
           </div>
           <div
@@ -52,7 +64,10 @@
             :class="btnDisable ? 'btn disable' : 'btn'"
             @click="march(0)"
           >
-            <img src="../../../allstar_assets/popups/btn_green.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_green.png"
+              alt=""
+            />
             <div class="text">继续前进</div>
           </div>
           <div
@@ -60,7 +75,10 @@
             :class="btnDisable ? 'btn disable' : 'btn'"
             @click="march(2)"
           >
-            <img src="../../../allstar_assets/popups/btn_orange.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_orange.png"
+              alt=""
+            />
             <div class="text">战斗</div>
           </div>
           <div
@@ -68,7 +86,10 @@
             :class="btnDisable ? 'btn disable' : 'btn'"
             @click="unlock"
           >
-            <img src="../../../allstar_assets/popups/btn_orange.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_orange.png"
+              alt=""
+            />
             <div class="text">打扫战场</div>
           </div>
         </div>
@@ -123,10 +144,10 @@ export default {
 
     const getCampImg = computed(() => {
       return [
-        require("../../../assets/cardImgs/hero/bg/c0.png"),
-        require("../../../assets/cardImgs/hero/bg/c1.png"),
-        require("../../../assets/cardImgs/hero/bg/c2.png"),
-        require("../../../assets/cardImgs/hero/bg/c3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c3.png",
       ][0];
     });
     const getStatusText = computed(() => {

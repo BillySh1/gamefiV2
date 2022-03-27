@@ -4,14 +4,17 @@
     <img
       v-if="!isShow"
       class="show"
-      src="../../../allstar_assets/stake/road/show.png"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/show.png"
       alt=""
       @click="() => (isShow = true)"
     />
     <div v-if="isShow" class="inner">
       <div class="scroll">
         <div class="s_inner">
-          <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/scroll_bg.png"
+            alt=""
+          />
           <div class="content">
             <!-- <div class="title">故事情节</div> -->
             <div class="c">
@@ -22,18 +25,27 @@
           </div>
 
           <div class="hide" @click="() => (isShow = false)">
-            <img src="../../../allstar_assets/stake/road/hide.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/hide.png"
+              alt=""
+            />
             <div class="text">点击收起 UI 观察地图</div>
           </div>
         </div>
       </div>
       <div class="action_box">
         <div class="item" @click="choose(0)">
-          <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/btn_bg.png"
+            alt=""
+          />
           <div class="text">{{ roadText[0] }}</div>
         </div>
         <div class="item" @click="choose(1)">
-          <img src="../../../allstar_assets/stake/road/btn_bg.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/btn_bg.png"
+            alt=""
+          />
           <div class="text">{{ roadText[1] }}</div>
         </div>
       </div>
@@ -56,10 +68,10 @@ export default {
     });
     const getMap = computed(() => {
       return [
-        require("../../../allstar_assets/main/map_0.png"),
-        require("../../../allstar_assets/main/map_1.png"),
-        require("../../../allstar_assets/main/map_2.png"),
-        require("../../../allstar_assets/main/map_3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_3.png",
       ][props.camp];
     });
     const roadText = computed(() => {

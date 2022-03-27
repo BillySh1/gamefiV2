@@ -2,19 +2,28 @@
   <div class="box">
     <div class="topbar">
       <div class="title">
-        <img src="../../../allstar_assets/store/title_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png"
+          alt=""
+        />
         <div class="text">理事馆</div>
       </div>
     </div>
     <div class="main">
-      <img src="../../../allstar_assets/history/history_ctx_bg.png" alt="" />
+      <img
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/history/history_ctx_bg.png"
+        alt=""
+      />
       <div class="content">
         <div class="empty">维护中</div>
       </div>
     </div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
-        <img src="../../../allstar_assets/store/back.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png"
+          alt=""
+        />
         <div class="text">返回</div>
       </div>
     </div>
@@ -46,7 +55,8 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background: url("../../../allstar_assets/history/history_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/history/history_bg.png")
+    no-repeat;
   background-size: 100% 100%;
 }
 .topbar {

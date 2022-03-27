@@ -9,7 +9,7 @@
     <div class="inner">
       <div class="left">
         <div class="title">
-          <img src="../../../allstar_assets/store/title_bg.png" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png" alt="" />
           <div class="text">{{ curTabItem.title }}</div>
         </div>
         <div class="subText">
@@ -19,7 +19,7 @@
           <div class="item" v-for="item in boxMap" :key="item.key">
             <img class="item_img" :src="item.img" alt="" />
             <div class="intro">
-              <img src="../../../allstar_assets/store/0_bg.png" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_bg.png" alt="" />
               <div class="text" :style="`color:${item.color}`">
                 {{ item.name }}
               </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="back" @click="() => $router.go(-1)">
-          <img src="../../../allstar_assets/store/back.png" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png" alt="" />
           <div class="text">返回</div>
         </div>
         <div class="stockDetail">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="right">
-        <img src="../../../allstar_assets/store/right_bg.png" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/right_bg.png" alt="" />
         <div class="tab_box">
           <div
             class="item"
@@ -49,8 +49,8 @@
             <img
               :src="
                 item.key == curTab
-                  ? require('../../../allstar_assets/store/active_tab.png')
-                  : require('../../../allstar_assets/store/inactive_tab.png')
+                  ? 'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/active_tab.png'
+                  : 'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/inactive_tab.png'
               "
               alt=""
             />
@@ -61,7 +61,7 @@
         </div>
         <div class="inner">
           <div class="title_img">
-            <img src="../../../allstar_assets/store/box.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/box.png" alt="" />
           </div>
           <div class="name_price">
             <div class="name">
@@ -73,7 +73,7 @@
             </div>
           </div>
           <div class="action">
-            <img src="../../../allstar_assets/store/right_d_bg.png" alt="" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/right_d_bg.png" alt="" />
             <div class="ac_inner">
               <div class="input_box">
                 <img
@@ -163,31 +163,31 @@ export default {
       boxMap: [
         {
           key: 0,
-          img: require("../../../allstar_assets/store/0_0.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_0.png",
           name: "青铜骏马",
           color: "#B5B5B5",
         },
         {
           key: 1,
-          img: require("../../../allstar_assets/store/0_1.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_1.png",
           name: "白金汗血",
           color: "#3F63C7",
         },
         {
           key: 2,
-          img: require("../../../allstar_assets/store/0_2.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_2.png",
           name: "银狐牺尊",
           color: "#5D17AC",
         },
         {
           key: 3,
-          img: require("../../../allstar_assets/store/0_3.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_3.png",
           name: "白神象彝",
           color: "#BA5F0F",
         },
         {
           key: 4,
-          img: require("../../../allstar_assets/store/0_4.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/0_4.png",
           name: "龙刻陨星",
           color: "#FFDF3C",
         },
@@ -344,7 +344,7 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: url("../../../allstar_assets/store/bf_store_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/bf_store_bg.png") no-repeat;
   background-size: 100% 100%;
   .inner {
     width: 100%;

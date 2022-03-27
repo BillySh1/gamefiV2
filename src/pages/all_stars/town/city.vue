@@ -10,7 +10,7 @@
       class="back"
     >
       <div class="inner">
-        <img src="../../../allstar_assets/city/back.png" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/back.png" alt="" />
         <div class="text">返回</div>
       </div>
     </div>
@@ -36,16 +36,16 @@
     </div>
     <div class="board">
       <div class="inner" @click="() => $router.push({ name: 'bf_history' })">
-        <img src="../../../allstar_assets/city/board.png" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/board.png" alt="" />
         <div class="text">理事馆</div>
       </div>
       <div class="inner" @click="() => $router.push({ name: 'bf_casio' })">
-        <img src="../../../allstar_assets/city/casio_bg.png" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/casio_bg.png" alt="" />
         <div class="text">赌场</div>
       </div>
     </div>
     <div v-if="player.baseSpeed == 0" class="empty" @click="() => $router.push({ name: 'bf_stake' })">
-      <img src="../../../allstar_assets/city/empty.png" alt="" />
+      <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/empty.png" alt="" />
     </div>
   </div>
 </template>
@@ -64,19 +64,19 @@ export default {
         {
           key: 0,
           name: "天策府",
-          img: require("../../../allstar_assets/city/item_0.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/item_0.png",
           to: "bf_stake",
         },
         {
           key: 1,
           name: "驿站",
-          img: require("../../../allstar_assets/city/item_1.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/item_1.png",
           to: "bf_store",
         },
         {
           key: 2,
           name: "名人堂",
-          img: require("../../../allstar_assets/city/item_2.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/item_2.png",
           disable: true,
         },
       ],
@@ -87,10 +87,10 @@ export default {
     });
     const campImg = computed(() => {
       return [
-        require("../../../allstar_assets/all_stars/entry/camp/c_0.png"),
-        require("../../../allstar_assets/all_stars/entry/camp/c_1.png"),
-        require("../../../allstar_assets/all_stars/entry/camp/c_2.png"),
-        require("../../../allstar_assets/all_stars/entry/camp/c_3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/camp/c_0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/camp/c_1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/camp/c_2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/camp/c_3.png",
       ][data.camp];
     });
     const campText = computed(() => {
@@ -98,10 +98,10 @@ export default {
     });
     const getBgImg = () => {
       const campBg = [
-        require("../../../allstar_assets/city/bg_0.png"),
-        require("../../../allstar_assets/city/bg_1.png"),
-        require("../../../allstar_assets/city/bg_2.png"),
-        require("../../../allstar_assets/city/bg_3.png"),
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/bg_0.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/bg_1.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/bg_2.png",
+        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/city/bg_3.png",
       ][data.camp];
       bg.value.style.background = `url(${campBg}) no-repeat`;
       bg.value.style.backgroundSize = "100% 100%";
