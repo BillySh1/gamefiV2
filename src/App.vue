@@ -26,11 +26,17 @@
       <div v-show="!correctChainId && connected">请切换至正确的网络</div>
 
       <div class="btn" v-show="!connected">
-        <img src="./allstar_assets/all_stars/entry/btn_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+          alt=""
+        />
         <div class="inner" @click="() => (modalShow = true)">连接钱包</div>
       </div>
       <div class="btn" v-show="isMobile && !correctChainId && connected">
-        <img src="./allstar_assets/all_stars/entry/btn_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+          alt=""
+        />
 
         <div class="inner" @click="switchNetWork">切换网络</div>
       </div>
