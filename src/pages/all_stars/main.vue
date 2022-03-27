@@ -24,11 +24,7 @@
     </div>
   </InjectModal>
 
-  <Lottie
-    v-if="loading"
-    :options="{ animationData: require('../../assets/common/loading.json') }"
-  />
-  <div v-else class="box">
+  <div class="box">
     <img class="map" :src="getMap" alt="" />
     <img
       v-if="player.isBond"
@@ -205,7 +201,6 @@ export default {
       web3: "",
       curCamp: 0,
       nextName: "合川",
-      loading: false,
       showPack: false,
       showMarchEvents: false,
       showRuleModal: false,
@@ -245,7 +240,6 @@ export default {
       return ["前进", "投降", "战斗", "进入鹿原"][idx];
     };
     onBeforeMount(async () => {
-      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -255,7 +249,6 @@ export default {
         }
       );
       await allInit();
-      data.loading = false;
     });
     const allInit = async () => {
       data.showPack = false;
@@ -292,7 +285,6 @@ export default {
         });
         return;
       }
-      console.log("decision switch", res, data.player.state);
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
       switch (res) {
         case [true, false, false, false]:
@@ -352,8 +344,8 @@ export default {
       console.log(
         res,
         "decision res",
-        data.player,
-        "player",
+        data.player.state,
+        "player.state",
         data.eventType,
         "event type"
       );
