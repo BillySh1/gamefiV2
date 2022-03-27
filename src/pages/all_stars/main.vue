@@ -283,12 +283,12 @@ export default {
         });
         return;
       }
-
+      console.log("decision switch", res, data.player.state);
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
       switch (res) {
         case [true, false, false, false]:
           if (data.player.state == 0) {
-            data.eventType == 0; // 纯前进
+            data.eventType = 0; // 纯前进
           } else {
             data.eventType == 1; // 战斗结束, 只能选择继续前进
             data.randomEvents.push({
