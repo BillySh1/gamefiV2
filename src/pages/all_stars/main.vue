@@ -87,9 +87,15 @@
               v-if="additionEvents[1] == 0 && additionEvents[2] != 0"
               style="display: flex; align-items: center"
             >
-              <div class="des">狂风暴雨, 行军困难</div>
+              <div class="des">狂风暴雨, 行军受阻</div>
             </div>
-            <div v-if="additionEvents[2] == 0" class="des">暂未出征</div>
+            <div
+              v-if="player.baseSpeed != 0 && additionEvents[2] == 0"
+              class="des"
+            >
+              和风煦日，无事发生
+            </div>
+            <div v-if="player.baseSpeed == 0" class="des">暂未出征</div>
           </div>
           <div class="power_zone">
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
