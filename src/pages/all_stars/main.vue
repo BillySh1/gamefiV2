@@ -2,10 +2,15 @@
   <BfPack @refresh="allInit" @close="allInit" :value="showPack" />
   <MarchEvents
     :type="eventType"
-    :value="showEvents"
+    :value="showMarchEvents"
     :player="player"
-    @close="() => (showEvents = false)"
+    @close="() => (showMarchEvents = false)"
     @refresh="allInit"
+  />
+  <RandomEvents
+    :value="showRandomEvents"
+    :text="curEventsText"
+    @close="() => (showRandomEvents = false)"
   />
   <InjectModal
     :value="showRuleModal"
@@ -71,9 +76,19 @@
           "
         >
           <div class="day_step">
-            <div>第一日</div>
-            <div class="des">风和日丽</div>
-            <img src="../../allstar_assets/weather/sunny.png" alt="" />
+            <div>第{{ dayNum }}日</div>
+            <div
+              v-if="additionEvents[0] == 0"
+              style="display: flex; align-items: center"
+            >
+              <div class="des">风和日丽, 快马加鞭</div>
+            </div>
+            <div
+              v-if="additionEvents[1] == 0"
+              style="display: flex; align-items: center"
+            >
+              <div class="des">狂风暴雨, 行军困难</div>
+            </div>
           </div>
           <div class="power_zone">
             <img src="../../allstar_assets/main/power_zone.png" alt="" />
@@ -85,7 +100,15 @@
             class="random_events"
             v-for="item in randomEvents"
             :key="item.key"
-            @click="() => (showEvents = true)"
+            @click="
+              () => {
+                if (item.type == 0) {
+                  showRandomEvents = true;
+                } else if (item.type == 1) {
+                  showMarchEvents = true;
+                }
+              }
+            "
           >
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ item.name }}
@@ -151,12 +174,15 @@ import InjectModal from "../../components/inject_modal.vue";
 import { positions, map } from "../../utils/useRoutes";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { eventsTextMap } from "../../utils/useRandomEvents";
+import RandomEvents from "./events/random_events.vue";
 export default {
   name: "bf_main",
   components: {
     BfPack,
     MarchEvents,
     InjectModal,
+    RandomEvents,
   },
   setup() {
     const store = useStore();
@@ -169,7 +195,7 @@ export default {
       nextName: "合川",
       loading: false,
       showPack: false,
-      showEvents: false,
+      showMarchEvents: false,
       showRuleModal: false,
       randomEvents: [],
       player: "",
@@ -186,6 +212,10 @@ export default {
       btnDisable: false,
       eventType: undefined,
       times: [],
+      dayNum: 1,
+      additionEvents: [],
+      curEventsText: "",
+      showRandomEvents: false,
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -208,13 +238,15 @@ export default {
     });
     const allInit = async () => {
       data.showPack = false;
-      data.showEvents = false;
+      data.showMarchEvents = false;
+      data.randomEvents = [];
       clearInterval(data.ticker);
       await getPlayer();
       await getCurrentNode();
+      await getNextNode();
       await getPower();
       await getTimes();
-      await getNextNode();
+      await getStartTime();
       await getDecisions();
       await getRandomEvents();
     };
@@ -227,7 +259,6 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
-      data.randomEvents = [];
 
       const isLock = await c.methods.nodeInfo(data.currentNode).call();
 
@@ -236,6 +267,7 @@ export default {
         data.randomEvents.push({
           key: "jdsd",
           name: "据点锁定，打扫战场",
+          type: 1,
         });
         return;
       }
@@ -249,6 +281,7 @@ export default {
             data.randomEvents.push({
               key: "jbzjsqj",
               name: "局部战结束，前进",
+              type: 1,
             });
           }
           break;
@@ -257,6 +290,7 @@ export default {
           data.randomEvents.push({
             key: "zymf",
             name: "遭遇埋伏",
+            type: 1,
           });
           break;
         case [true, false, true, false]:
@@ -265,6 +299,7 @@ export default {
             data.randomEvents.push({
               key: "kxmf",
               name: "可选埋伏",
+              type: 1,
             });
           }
           if (data.player.state == 1) {
@@ -272,6 +307,7 @@ export default {
             data.randomEvents.push({
               key: "jbzjsjz",
               name: "局部战结束，抉择",
+              type: 1,
             });
           }
           break;
@@ -284,6 +320,7 @@ export default {
             data.randomEvents.push({
               key: "zydjzd",
               name: "遭遇敌军",
+              type: 1,
             });
           }
           break;
@@ -292,14 +329,19 @@ export default {
       }
     };
     const getRandomEvents = async () => {
-      // const c = store.state.c_battle;
-      // console.log(c,'gggg')
-      // const res = await c.methods.getEvents(data.account).call();
-      // console.log(res,'sss')
+      const c = store.state.c_battle;
+      const res = await c.methods.getEvent(data.account).call();
+      data.additionEvents = res;
+      data.curEventsText = eventsTextMap[res[0]][res[1]];
+      data.randomEvents.push({
+        key: "rdmevts",
+        name: "触发随机事件!",
+        type: 0,
+      });
     };
     const showDecision = () => {
       if (data.arriveNext) {
-        data.showEvents = true;
+        data.showMarchEvents = true;
       }
     };
     const getRTime = (endTime) => {
@@ -335,6 +377,14 @@ export default {
       data.ticker = setInterval(() => {
         getRTime(res[1]);
       }, 1000);
+    };
+    const getStartTime = async () => {
+      const c = store.state.c_battle;
+      const start_time = await c.methods.battleStartTime().call();
+      const now = new Date().getTime();
+      data.dayNum =
+        Math.ceil((Number(now) - start_time * 1000) / (24 * 60 * 60 * 1000)) ||
+        1;
     };
     const getPower = async () => {
       const c = store.state.c_battle;
@@ -385,7 +435,7 @@ export default {
         });
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
-          data.showEvents = false;
+          data.showMarchEvents = false;
           await allInit();
         }
       } catch (e) {
@@ -604,7 +654,7 @@ export default {
     margin-bottom: 1.5rem;
     min-width: 25rem;
     .des {
-      margin: 0 2rem;
+      margin: 1rem 2rem;
     }
     img {
       width: 3rem;
