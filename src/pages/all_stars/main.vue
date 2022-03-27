@@ -271,8 +271,10 @@ export default {
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
 
-      const isLock = await c.methods.nodeInfo(data.currentNode).call();
-      if (isLock.lock) {
+      const nodeInfo = await c.methods.nodeInfo(data.currentNode).call();
+      const canUnlock =
+        Number(new Date().getTime()) >= nodeInfo.nowConflictEndTime;
+      if (nodeInfo.lock && canUnlock) {
         data.eventType = "lock";
         data.randomEvents.push({
           key: "jdsd",
