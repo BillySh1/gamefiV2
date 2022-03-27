@@ -120,6 +120,7 @@ export default {
       margin-bottom: 2rem;
     }
     .text {
+      margin-top: 2rem;
       white-space: nowrap;
       font-size: 2rem;
       color: white;
