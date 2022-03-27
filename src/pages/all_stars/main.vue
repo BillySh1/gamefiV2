@@ -33,7 +33,7 @@
     <img
       v-if="player.isBond"
       :style="getPos"
-      src="../../allstar_assets/main/pos.png"
+      src="../../allstar_assets/main/pos.gif"
       alt=""
     />
 
@@ -253,7 +253,6 @@ export default {
       data.decisions = res;
 
       const isLock = await c.methods.nodeInfo(data.currentNode).call();
-
       if (isLock.lock) {
         data.eventType = "lock";
         data.randomEvents.push({
@@ -263,6 +262,7 @@ export default {
         });
         return;
       }
+
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
       switch (res) {
         case [true, false, false, false]:
@@ -319,6 +319,14 @@ export default {
         default:
           break;
       }
+      console.log(
+        res,
+        "decision res",
+        data.player,
+        "player",
+        data.eventType,
+        "event type"
+      );
     };
     const getRandomEvents = async () => {
       const c = store.state.c_battle;
@@ -454,7 +462,7 @@ export default {
     });
     const getPos = computed(() => {
       const cur = positions[data.curCamp][data.player.road][data.currentNode];
-      return `position:absolute;height:8rem;top:${cur[0]}%;left:${cur[1]}%`;
+      return `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
     });
     const refData = toRefs(data);
     return {
