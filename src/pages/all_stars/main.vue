@@ -103,6 +103,10 @@
               {{ power > 0 ? "我的战力:" + power : "暂未出征" }}
             </div>
           </div>
+          <div v-if="player.baseSpeed != 0" class="random_events">
+            <img src="../../allstar_assets/main/speed.png" alt="" />
+            当前速度 {{ curSpeed }}
+          </div>
           <div
             class="random_events"
             v-for="item in randomEvents"
@@ -215,6 +219,15 @@ export default {
       additionEvents: [],
       curEventsText: "",
       showRandomEvents: false,
+    });
+    const curSpeed = computed(() => {
+      const now = new Date().getTime();
+      if (Number(data.times[2]) * 1000 > Number(now)) {
+        return (
+          Number(data.player.baseSpeed) + Number(data.player.additionSpeed)
+        );
+      }
+      return data.player.baseSpeed;
     });
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
@@ -478,6 +491,7 @@ export default {
       getMap,
       getPos,
       isBattleIng,
+      curSpeed,
       getDecisionText,
       showDecision,
       march,
