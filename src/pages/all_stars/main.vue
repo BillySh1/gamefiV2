@@ -100,15 +100,7 @@
             class="random_events"
             v-for="item in randomEvents"
             :key="item.key"
-            @click="
-              () => {
-                if (item.type == 0) {
-                  showRandomEvents = true;
-                } else if (item.type == 1) {
-                  showMarchEvents = true;
-                }
-              }
-            "
+            @click="() => clickEventBar(item)"
           >
             <img src="../../allstar_assets/main/clock.png" alt="" />
             {{ item.name }}
@@ -339,6 +331,13 @@ export default {
         type: 0,
       });
     };
+    const clickEventBar = (item) => {
+      if (item.type == 0) {
+        data.showRandomEvents = true;
+      } else if (item.type == 1) {
+        data.showMarchEvents = true;
+      }
+    };
     const showDecision = () => {
       if (data.arriveNext) {
         data.showMarchEvents = true;
@@ -468,6 +467,7 @@ export default {
       showDecision,
       march,
       allInit,
+      clickEventBar,
     };
   },
 };

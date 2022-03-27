@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="events_mask"
-    v-if="value && [0, 5].includes(Number(type))"
-    @click="() => $emit('close')"
-  >
+  <div class="events_mask" v-if="value" @click="() => $emit('close')">
     <img
       style="width: 100%"
       src="../../../allstar_assets/popups/light_bg.png"
@@ -24,75 +20,40 @@
       "
     >
       <div class="inner">
-       
+        <img src="../../../allstar_assets/stake/road/scroll_bg.png" alt="" />
+        <div class="main">
+          <div class="title">
+            {{ text }}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="'confirm" @click="onConfirm">
+    <div class="confirm" @click="onConfirm">
       <div class="inner">
         <img src="../../../allstar_assets/popups/confirm_bg.png" alt="" />
         <div class="text">确认</div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
-import initWeb3 from "../../../utils/initWeb3";
-import { useStore } from "vuex";
+import { reactive, toRefs } from "vue";
 export default {
   name: "random_events",
-  props: ["value", "type", "player"],
-  components: {
-  },
+  props: ["value", "text"],
+  components: {},
   setup(prop, ctx) {
-    const store = useStore();
-    const { proxy } = getCurrentInstance();
     const data = reactive({
       account: "",
       web3: "",
       btnDisable: false,
     });
-    onBeforeMount(async () => {
-      await initWeb3.Init(
-        (addr) => {
-          data.account = addr;
-        },
-        (p) => {
-          data.web3 = p;
-        }
-      );
-    });
+
     const onConfirm = async () => {
-      await march(prop.type);
+      ctx.emit("close");
     };
-    const march = async (idx) => {
-      try {
-        data.btnDisable = true;
-        proxy.$toast("等待决策确认", store.state.toast_info);
-        const c = store.state.c_battle;
-        const gasPrice = await data.web3.eth.getGasPrice();
-        const gas = await c.methods
-          .march(idx)
-          .estimateGas({ from: data.account });
-        const res = await c.methods.march(idx).send({
-          gasPrice: gasPrice,
-          gas: gas,
-          from: data.account,
-        });
-        if (res.status) {
-          proxy.$toast("决策成功,正在行军...", store.state.toast_info);
-        }
-      } catch (e) {
-        console.error(e);
-        proxy.$toast("决策出错", store.state.toast_error);
-      } finally {
-        data.btnDisable = false;
-        ctx.emit("refresh");
-        ctx.emit("close");
-      }
-    };
+
     const refData = toRefs(data);
     return {
       ...refData,
@@ -152,38 +113,10 @@ export default {
         font-size: 2rem;
         margin-bottom: 2rem;
       }
-      .bottom {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        .img_box {
-          position: relative;
-          width: 40%;
-          img {
-            width: 100%;
-          }
-          .img_inner {
-            position: absolute;
-            width: 95%;
-            height: 95%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-          }
-        }
-        .intro {
-          width: 55%;
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-      }
     }
   }
 }
-.disable {
-  pointer-events: none;
-  filter: grayscale(100);
-}
+
 .confirm {
   cursor: pointer;
   &:hover {
