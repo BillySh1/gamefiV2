@@ -59,7 +59,7 @@
             <CommonButton
               v-if="canUse"
               class="btn"
-              :disabled="btnDisable"
+              :disabled="btnDisable || pack[curItem] == 0"
               :circle="true"
               @click="handleClick"
               >{{ btnText }}</CommonButton
@@ -93,7 +93,7 @@ export default {
   components: {
     CommonButton,
   },
-  
+
   setup(props, ctx) {
     const store = useStore();
     const { proxy } = getCurrentInstance();
@@ -193,12 +193,11 @@ export default {
       await getPack();
       await getTimes();
     });
-     watch(
+    watch(
       () => props.value,
       async () => {
-        console.log('sss')
-        await getPack()
-        await getTimes()
+        await getPack();
+        await getTimes();
       }
     );
     const getTimes = async () => {

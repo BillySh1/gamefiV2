@@ -76,15 +76,15 @@
           "
         >
           <div class="day_step">
-            <div>第{{ dayNum }}日</div>
+            <div class="des">第{{ dayNum }}日</div>
             <div
-              v-if="additionEvents[0] == 0"
+              v-if="additionEvents[0] == 0 && additionEvents[2] != 0"
               style="display: flex; align-items: center"
             >
               <div class="des">风和日丽, 快马加鞭</div>
             </div>
             <div
-              v-if="additionEvents[1] == 0"
+              v-if="additionEvents[1] == 0 && additionEvents[2] != 0"
               style="display: flex; align-items: center"
             >
               <div class="des">狂风暴雨, 行军困难</div>
@@ -234,8 +234,7 @@ export default {
       data.randomEvents = [];
       clearInterval(data.ticker);
       await getPlayer();
-      await getCurrentNode();
-      await getNextNode();
+      await getNode();
       await getPower();
       await getTimes();
       await getStartTime();
@@ -331,13 +330,16 @@ export default {
     const getRandomEvents = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getEvent(data.account).call();
-      data.additionEvents = res;
-      data.curEventsText = eventsTextMap[res[0]][res[1]];
-      data.randomEvents.push({
-        key: "rdmevts",
-        name: "触发随机事件!",
-        type: 0,
-      });
+      console.log(res, "rdm events");
+      if (res[2] != 0) {
+        data.additionEvents = res;
+        data.curEventsText = eventsTextMap[res[0]][res[1]];
+        data.randomEvents.push({
+          key: "rdmevts",
+          name: "触发随机事件!",
+          type: 0,
+        });
+      }
     };
     const clickEventBar = (item) => {
       if (item.type == 0) {
@@ -363,14 +365,7 @@ export default {
       if (parseInt(s, 10) < 0) s = "0";
       data.timing = `${h}时${m}分${s}秒`;
     };
-    const getNextNode = async () => {
-      const c = store.state.c_battle;
-      const res = await c.methods.getNextNode(data.account).call();
-      data.nextNode = {
-        id: res,
-        name: map[res],
-      };
-    };
+
     const getTimes = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getTimes(data.account).call();
@@ -413,9 +408,14 @@ export default {
       data.player = player;
       data.curCamp = player.camp;
     };
-    const getCurrentNode = async () => {
+    const getNode = async () => {
       const c = store.state.c_battle;
-      data.currentNode = await c.methods.getCurrentNode(data.account).call();
+      data.currentNode = await c.methods.getNode(data.account, 0).call();
+      const res1 = await c.methods.getNode(data.account, 1).call();
+      data.nextNode = {
+        id: res1,
+        name: map[res1],
+      };
     };
     const isBattleIng = computed(() => {
       const last = data.times[3];
@@ -659,8 +659,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1.5rem;
-    min-width: 25rem;
     .des {
       margin: 1rem 2rem;
     }
