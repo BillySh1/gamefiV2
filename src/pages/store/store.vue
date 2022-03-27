@@ -25,20 +25,20 @@
           <img
             v-show="showLeft"
             class="left"
-            src="../../assets/store/left.png"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png"
             @click="changeGoodsIndex(-1)"
           />
-          <img class="store_img" src="../../assets/store/store.png" />
+          <img class="store_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/store.png" />
           <img
             v-show="showRight"
             class="right"
-            src="../../assets/store/right.png"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png"
             @click="changeGoodsIndex(1)"
           />
           <div class="goods" @click="goodsClick">
             <div class="goods_inner">
               <div class="goods_text">
-                <img src="../../assets/store/item/text_bg.svg" alt="" />
+                <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/text_bg.svg" alt="" />
                 <div class="value">{{ curCurgoods.name }}</div>
               </div>
               <img class="goods_img" :src="curCurgoods.img" alt="" />
@@ -74,17 +74,17 @@ export default {
         {
           key: 0,
           name: "战备",
-          img: require("../../assets/store/type0.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/type0.png",
         },
         {
           key: 1,
           name: "神谕",
-          img: require("../../assets/store/type1.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/type1.png",
         },
         {
           key: 2,
           name: "奇珍",
-          img: require("../../assets/store/type2.png"),
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/type2.png",
         },
       ],
       goodsIndex: 0,
@@ -94,7 +94,7 @@ export default {
       return ["战备", "神谕", "奇珍"][data.curType];
     });
     const mainImg = computed(() => {
-      return require(`../../assets/store/type${data.curType}.png`);
+      return `http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/type${data.curType}.png`;
     });
     const curCurgoods = computed(() => {
       return data.buyItems[data.curType][data.goodsIndex];
@@ -142,7 +142,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/store/store_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/store_bg.png") no-repeat;
   background-size: cover;
 }
 .content {

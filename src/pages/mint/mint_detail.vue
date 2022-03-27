@@ -4,7 +4,7 @@
     <InjectGoBack v-if="!loading && !minting" />
     <img
       class="badge"
-      src="../../assets/mint/mint_detail_bg_badge.png"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/mint_detail_bg_badge.png"
       alt=""
     />
     <div v-if="minting || loading" class="content">
@@ -35,17 +35,17 @@
         </div>
       </div>
       <div class="right_c">
-        <img class="blood" src="../../assets/mint/blood.png" alt="" />
+        <img class="blood" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/blood.png" alt="" />
         <div class="right_c_title">
           <div class="right_c_title_value">
             {{ info.title }}
             <img
               class="right_c_title_badge"
-              src="../../assets/common/active_title.png"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/active_title.png"
             />
           </div>
           <div class="right_c_price">
-            <img style="margin-right: 2rem" src="../../assets/common/mmc.png" />
+            <img style="margin-right: 2rem" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png" />
             <span>{{ getprice }}</span>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <img
               style="cursor: pointer"
               class="img_action"
-              src="../../assets/mint/minus.svg"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/minus.svg"
               @click="
                 () => {
                   const temp = buyValue - 1;
@@ -73,7 +73,7 @@
               "
             />
             <div class="ipt_bg">
-              <img class="ipt_img" src="../../assets/mint/input.png" alt="" />
+              <img class="ipt_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png" alt="" />
               <input
                 v-model="buyValue"
                 class="input"
@@ -85,7 +85,7 @@
             <img
               class="img_action"
               style="cursor: pointer"
-              src="../../assets/mint/add.svg"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/add.svg"
               @click="
                 () => {
                   buyValue += 1;
@@ -95,7 +95,7 @@
           </div>
 
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="../../assets/mint/btn.png" alt="" />
+            <img class="btn_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png" alt="" />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>

@@ -1,11 +1,11 @@
 <template>
   <div v-if="value" class="detail_container">
-    <img class="bg" src="../../assets/pack/pack_container.svg" alt="" />
+    <img class="bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_container.svg" alt="" />
 
     <div class="inner">
       <div class="inner_box">
         <div class="detail_back" @click="$emit('back')">
-          <img src="../../assets/pack/pack_back.svg" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_back.svg" alt="" />
         </div>
         <div class="tab_box">
           <div
@@ -15,7 +15,7 @@
           >
             <img
               class="active"
-              src="../../assets/pack/active_tab_item.png"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab_item.png"
               alt=""
             />
             <div class="text active_text">
@@ -39,7 +39,7 @@
               "
               :style="curItemIndex == index ? 'opacity:1' : ''"
             >
-              <img src="../../assets/pack/common_pack_item_bg.svg" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/common_pack_item_bg.svg" alt="" />
               <div class="inner_item_zone">
                 <CommonPackItem :info="item" />
               </div>
@@ -51,7 +51,7 @@
           <div class="inner">
             <div class="up">
               <div class="left">
-                <img src="../../assets/pack/detail_stock_box.png" alt="" />
+                <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/detail_stock_box.png" alt="" />
                 <img
                   v-if="curItemShow && curItemShow.img"
                   class="content"

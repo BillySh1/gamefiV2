@@ -28,7 +28,7 @@
           您将使用
           <img
             style="width: 4rem"
-            src="../../assets/store/item/jinjie.png"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/jinjie.png"
             alt=""
           />
           并尊盟约 x {{ costNum }} 对 {{ leftInfo.name }}和
@@ -80,7 +80,7 @@
             }
           "
         >
-          <img v-if="!qualityCost" src="../../assets/mix/item_add.png" alt="" />
+          <img v-if="!qualityCost" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png" alt="" />
           <div v-else>
             <img :src="qualityCost.img" />
             {{ qualityCost.cost }}
@@ -108,7 +108,7 @@
             }
           "
         >
-          <img v-if="!attrCost" src="../../assets/mix/item_add.png" alt="" />
+          <img v-if="!attrCost" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png" alt="" />
           <div v-else>
             <img :src="attrCost.img" />
             {{ attrCost.cost }}
@@ -137,10 +137,10 @@
         :hideSearch="true"
         @select="(x) => handleSelect(x)"
       />
-      <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />
+      <img class="mix_mist" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png" alt="" />
     </div>
     <div v-if="!showPack && !loading" class="content">
-      <img class="mix_mist" src="../../assets/mix/mix_mist.png" alt="" />
+      <img class="mix_mist" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png" alt="" />
       <div class="inner">
         <div
           class="mix_item"
@@ -152,20 +152,20 @@
             }
           "
         >
-          <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
+          <img class="mix_item_bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="leftInfo">
             <HeroCardItem :info="leftInfo" />
           </div>
           <img
             v-if="leftInfo"
             class="ready"
-            src="../../assets/mix/ready.png"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">请选择卡牌</div>
         </div>
         <div class="mix_swirl">
-          <img src="../../assets/mix/swirl.png" alt="" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/swirl.png" alt="" />
         </div>
         <div
           class="mix_item right"
@@ -177,14 +177,14 @@
             }
           "
         >
-          <img class="mix_item_bg" src="../../assets/mix/mix_item.png" alt="" />
+          <img class="mix_item_bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png" alt="" />
           <div class="hero_selected" v-if="rightInfo">
             <HeroCardItem v-if="rightInfo" :info="rightInfo" />
           </div>
           <img
             v-if="rightInfo"
             class="ready"
-            src="../../assets/mix/ready.png"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">请选择卡牌</div>
@@ -192,7 +192,7 @@
       </div>
       <div class="tip_badge" @click="() => (showModal = true)">
         <div class="inner">
-          <img src="../../assets/common/tip_badge.svg" />
+          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
           <div class="text">进阶提醒</div>
         </div>
       </div>
@@ -639,7 +639,7 @@ export default {
         cursor: pointer;
         width: 5rem;
         height: 5rem;
-        background: url("../../assets/mix/item_bg.png") no-repeat;
+        background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_bg.png") no-repeat;
         background-size: 100% 100%;
         margin: 0 1rem;
         display: flex;

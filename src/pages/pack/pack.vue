@@ -28,7 +28,11 @@
         </div>
       </div>
       <div class="bg_badge">
-        <img class="badge" src="../../assets/pack/bg_badge.svg" alt="" />
+        <img
+          class="badge"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+          alt=""
+        />
       </div>
     </div>
 
@@ -43,7 +47,7 @@ import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import CommonPackDetail from "./common_pack_detail";
-import InjectGoback from '../../components/inject_go_back.vue'
+import InjectGoback from "../../components/inject_go_back.vue";
 export default {
   name: "pack",
   components: {
@@ -51,16 +55,28 @@ export default {
     CommonPageFooter,
     InjectPackHero,
     CommonPackDetail,
-    InjectGoback
+    InjectGoback,
   },
   setup() {
     const route = useRoute();
     const data = reactive({
       pageTitle: "我的背包",
       routerItems: [
-        { key: 0, name: "武将", img: require("../../assets/pack/0.png") },
-        { key: 1, name: "装备", img: require("../../assets/pack/1.png") },
-        { key: 2, name: "珍宝", img: require("../../assets/pack/2.png") },
+        {
+          key: 0,
+          name: "武将",
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/0.png",
+        },
+        {
+          key: 1,
+          name: "装备",
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/1.png",
+        },
+        {
+          key: 2,
+          name: "珍宝",
+          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/2.png",
+        },
       ],
       curShowType: undefined,
     });
@@ -97,7 +113,8 @@ export default {
   background: #280505;
 }
 .hero_pack {
-  background: url("../../assets/pack/pack_hero_bg.svg") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_hero_bg.svg")
+    no-repeat;
   background-size: cover;
 }
 .type_bpx {

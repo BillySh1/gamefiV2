@@ -42,7 +42,7 @@
         />
         <ComOverfulfil v-if="curTab == 1" :info="info" @refresh="refresh" />
         <ComSkill v-if="curTab == 2" />
-        <img class="divider" src="../../assets/upgrade/divider_tab.png" />
+        <img class="divider" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/upgrade/divider_tab.png" />
 
         <div class="tabs_box">
           <div
@@ -57,7 +57,7 @@
               }
             "
           >
-            <img src="../../assets/upgrade/tab_bg.png" />
+            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/upgrade/tab_bg.png" />
             <div class="inner">
               {{ item }}
             </div>
@@ -79,11 +79,11 @@
       "
     >
       <div class="inner">
-        <img src="../../assets/common/tip_badge.svg" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
         <div class="text">前往商城</div>
       </div>
     </div>
-    <img class="bg_badge" src="../../assets/pack/bg_badge.svg" />
+    <img class="bg_badge" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg" />
   </div>
 </template>
 

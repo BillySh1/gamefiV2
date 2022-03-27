@@ -61,7 +61,9 @@
       </div>
       <div class="tip_badge" @click="() => (showRules = true)">
         <div class="inner">
-          <img src="../../assets/common/tip_badge.svg" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+          />
           <div class="text">重生提醒</div>
         </div>
       </div>
@@ -105,10 +107,16 @@
         >
         <div class="main">
           <div class="item">
-            <img src="../../assets/store/item/type_1_0.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/type_1_0.png"
+              alt=""
+            />
           </div>
           <div class="middle">
-            <img src="../../assets/upgrade/right.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/upgrade/right.png"
+              alt=""
+            />
           </div>
           <div class="item">
             <HeroCardItem :info="curSelectedHero" />
@@ -460,7 +468,7 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
       }
     }
   }

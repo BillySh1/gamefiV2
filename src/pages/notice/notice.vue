@@ -4,7 +4,7 @@
     <InjectGoBack />
     <div class="content">
       <div class="border">
-        <img src="../../assets/notice/border.svg" alt="" />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg" alt="" />
         <div v-if="noticeData.length > 0" class="inner">
           <div v-for="item in noticeData" :key="item.key" class="inner_item">
             <NoticeItem :info="item" />
@@ -85,7 +85,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("../../assets/notice/notice_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/notice_bg.png") no-repeat;
   background-size: cover;
 }
 .content {
