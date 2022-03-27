@@ -90,7 +90,7 @@ import { useStore } from "vuex";
 import { map } from "../../../utils/useRoutes";
 export default {
   name: "battleEvents",
-  props: ["value", "type", "player"],
+  props: ["value", "type"],
   components: {},
   setup(prop, ctx) {
     const store = useStore();
@@ -110,7 +110,6 @@ export default {
           data.web3 = p;
         }
       );
-      console.log(prop.player, "battle p");
       await getCurrentNode();
     });
     const getCurrentNode = async () => {

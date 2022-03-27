@@ -66,7 +66,6 @@
     </div>
   </div>
   <BattleEvents
-    :player="player"
     :type="type"
     @refresh="() => $emit('refresh')"
     @close="() => $emit('close')"
@@ -81,7 +80,7 @@ import BattleEvents from "./battle_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "random_events",
-  props: ["value", "type", "player"],
+  props: ["value", "type"],
   components: {
     BattleEvents,
   },
