@@ -11,8 +11,16 @@
   />
   <GlobalLoading v-if="loading" @finish="() => (loading = false)" />
   <div class="mask black" v-if="(!connected || !correctChainId) && !loading">
-    <img class="badge" src="./assets/common/hero_sit.png" alt="" />
-    <img class="logo" src="./assets/common/logo.png" alt="" />
+    <img
+      class="badge"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
+      alt=""
+    />
+    <img
+      class="logo"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png"
+      alt=""
+    />
     <div class="text">
       <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
       <div v-show="!correctChainId && connected">请切换至正确的网络</div>

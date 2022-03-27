@@ -68,7 +68,7 @@
               {{ stockName }}
             </div>
             <div class="price">
-              <img src="../../../assets/common/mmc.png" alt="" />
+              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png" alt="" />
               {{ stockPrice }}
             </div>
           </div>
@@ -79,7 +79,7 @@
                 <img
                   style="cursor: pointer"
                   class="img_action"
-                  src="../../../assets/mint/minus.svg"
+                  src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/minus.svg"
                   @click="
                     () => {
                       const temp = buyNum - 1;
@@ -94,7 +94,7 @@
                 <div class="ipt_bg">
                   <img
                     class="ipt_img"
-                    src="../../../assets/mint/input.png"
+                    src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png"
                     alt=""
                   />
                   <input
@@ -108,7 +108,7 @@
                 <img
                   class="img_action"
                   style="cursor: pointer"
-                  src="../../../assets/mint/add.svg"
+                  src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/add.svg"
                   @click="
                     () => {
                       buyNum += 1;

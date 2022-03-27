@@ -6,7 +6,7 @@
       src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/choose_camp.png"
       alt=""
     />
-    <img class="logo" src="../../assets/common/logo.png" alt="" />
+    <img class="logo" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png" alt="" />
     <Lottie
       v-if="loading"
       class="lottie"
@@ -69,7 +69,7 @@
         />
         <img
           class="p"
-          :src="require(`../../assets/cardImgs/hero/bg/c${item.key}.png`)"
+          :src="`http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/c${item.key}.png`"
           alt=""
         />
         <div class="text">{{ item.name }}</div>

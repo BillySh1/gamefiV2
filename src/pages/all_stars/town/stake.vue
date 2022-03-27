@@ -53,7 +53,7 @@
         需要消耗粮草
         <img
           style="width: 4rem"
-          src="../../../assets/store/item/type_0_0.png"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/type_0_0.png"
           alt=""
         />
         数量：
@@ -77,7 +77,7 @@
         需要消耗衅鼓
         <img
           style="width: 4rem"
-          src="../../../assets/store/item/type_0_1.png"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/type_0_1.png"
           alt=""
         />
         数量：
@@ -117,10 +117,7 @@
     </InjectModal>
     <div class="topbar">
       <div class="title">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png"
-          alt=""
-        />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png" alt="" />
         <div class="text">天策府</div>
       </div>
       <div class="tabs" v-show="player.baseSpeed == 0">
@@ -139,10 +136,7 @@
       >
 
       <div class="power">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/power_bg.png"
-          alt=""
-        />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/power_bg.png" alt="" />
         <div class="text" v-if="player.baseSpeed == 0">
           <div class="t">战力</div>
           <div class="bg_v">{{ curTotalPower }}</div>
@@ -153,10 +147,7 @@
         </div>
       </div>
       <div class="rule" @click="() => (showRuleModal = true)">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/rule_bg.png"
-          alt=""
-        />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/rule_bg.png" alt="" />
         <div class="text">出征规则</div>
       </div>
     </div>
@@ -244,10 +235,7 @@
     </div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png"
-          alt=""
-        />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png" alt="" />
         <div class="text">返回</div>
       </div>
       <div v-if="isCombined" class="combine">
@@ -255,10 +243,7 @@
         <span style="color: red">{{ isCombined }}</span> 战力更上一层楼
       </div>
       <div class="stake" @click="doubleCheck" v-show="player.baseSpeed == 0">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png"
-          alt=""
-        />
+        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png" alt="" />
         <div class="text">出征</div>
       </div>
     </div>
@@ -698,8 +683,7 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_bg.png")
-    no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_bg.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
