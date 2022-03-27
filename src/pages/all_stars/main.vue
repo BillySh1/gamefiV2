@@ -217,7 +217,7 @@ export default {
       decisions: [],
       arriveNext: false,
       btnDisable: false,
-      eventType: undefined,
+      eventType: null,
       times: [],
       dayNum: 1,
       additionEvents: [],
@@ -251,7 +251,7 @@ export default {
       await allInit();
     });
     const allInit = async () => {
-      data.showPack = false;
+      (data.arriveNext = false), (data.showPack = false);
       data.showMarchEvents = false;
       data.randomEvents = [];
       clearInterval(data.ticker);
@@ -272,7 +272,6 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
-
       const nodeInfo = await c.methods.nodeInfo(data.currentNode).call();
       const canUnlock =
         Number(new Date().getTime()) >= nodeInfo.nowConflictEndTime;
@@ -286,69 +285,63 @@ export default {
         return;
       }
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
-      switch (res) {
-        case [true, false, false, false]:
-          if (data.player.state == 0) {
-            data.eventType = 0; // 纯前进
-          } else {
-            data.eventType == 1; // 战斗结束, 只能选择继续前进
-            data.randomEvents.push({
-              key: "jbzjsqj",
-              name: "局部战结束，前进",
-              type: 1,
-            });
-          }
-          break;
-        case [false, true, true, false]:
-          data.eventType = 2; // 遭遇埋伏，可选投降
+
+      if (res[0] && !res[1] && !res[2] && !res[3]) {
+        if (data.player.state == 0) {
+          data.eventType = 0; // 纯前进
+        } else {
+          data.eventType == 1; // 战斗结束, 只能选择继续前进
           data.randomEvents.push({
-            key: "zymf",
-            name: "遭遇埋伏",
+            key: "jbzjsqj",
+            name: "局部战结束，前进",
             type: 1,
           });
-          break;
-        case [true, false, true, false]:
-          if (data.player.state == 0) {
-            data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人或离开
-            data.randomEvents.push({
-              key: "kxmf",
-              name: "可选埋伏",
-              type: 1,
-            });
-          }
-          if (data.player.state == 1) {
-            data.eventType = 4; // 战斗结束， 选择继续战斗或是离开
-            data.randomEvents.push({
-              key: "jbzjsjz",
-              name: "局部战结束，抉择",
-              type: 1,
-            });
-          }
-          break;
-        case [false, false, false, true]:
-          data.eventType = 5; // 进入鹿原
-          break;
-        case [false, false, true, false]:
-          if (data.player.state == 0) {
-            data.eventType = 6; // 遭遇战，必须战斗
-            data.randomEvents.push({
-              key: "zydjzd",
-              name: "遭遇敌军",
-              type: 1,
-            });
-          }
-          break;
-        default:
-          break;
+        }
+        return;
       }
-      console.log(
-        res,
-        "decision res",
-        data.player.state,
-        "player.state",
-        data.eventType,
-        "event type"
-      );
+      if (!res[0] && res[1] && res[2] && !res[3]) {
+        data.eventType = 2; // 遭遇埋伏，可选投降
+        data.randomEvents.push({
+          key: "zymf",
+          name: "遭遇埋伏",
+          type: 1,
+        });
+        return;
+      }
+      if (res[0] && !res[1] && res[2] && !res[3]) {
+        if (data.player.state == 0) {
+          data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人或离开
+          data.randomEvents.push({
+            key: "kxmf",
+            name: "可选埋伏",
+            type: 1,
+          });
+        }
+        if (data.player.state == 1) {
+          data.eventType = 4; // 战斗结束， 选择继续战斗或是离开
+          data.randomEvents.push({
+            key: "jbzjsjz",
+            name: "局部战结束，抉择",
+            type: 1,
+          });
+        }
+        return;
+      }
+      if (res[3]) {
+        data.eventType = 5; // 进入鹿原
+        return;
+      }
+      if (!res[0] && !res[1] && res[2] && !res[3]) {
+        if (data.player.state == 0) {
+          data.eventType = 6; // 遭遇战，必须战斗
+          data.randomEvents.push({
+            key: "zydjzd",
+            name: "遭遇敌军",
+            type: 1,
+          });
+        }
+        return;
+      }
     };
     const getRandomEvents = async () => {
       const c = store.state.c_battle;

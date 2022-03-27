@@ -114,7 +114,7 @@ export default {
     });
     const getCurrentNode = async () => {
       const c = store.state.c_battle;
-      const res = await c.methods.getCurrentNode(data.account).call();
+      const res = await c.methods.getNode(data.account, 1).call();
       data.curNode = res;
     };
     const placeText = computed(() => {
