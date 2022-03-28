@@ -9,7 +9,7 @@
         }
       "
     >
-      <div class="status">
+      <div class="status" @click="() => $emit('close')">
         <img
           src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pack/active.png"
           alt=""
@@ -77,7 +77,6 @@
         </div>
       </div>
     </div>
-    <div class="back_home" @click="() => $emit('close')">返回</div>
   </div>
 </template>
 
@@ -307,6 +306,7 @@ export default {
   width: 85%;
   height: 40rem;
   .status {
+    cursor: pointer;
     position: absolute;
     top: 0%;
     right: 0%;

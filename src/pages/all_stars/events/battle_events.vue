@@ -171,7 +171,7 @@ export default {
     const getIntroText = computed(() => {
       switch (prop.type) {
         case 1:
-          return "暂未遇到敌军，如果选择继续前进将行军前往下一据点，您也可以继续等待与敌军激战";
+          return "暂未发生战斗，如果选择继续前进将行军前往下一据点，您也可以继续等待与敌军激战";
         case 2:
           return "遭遇敌军在此设伏! 您可以选择投降直接通过或在此与敌军激战，设伏方将享受战力加成，战斗失败方将会折损兵力";
         case 3:

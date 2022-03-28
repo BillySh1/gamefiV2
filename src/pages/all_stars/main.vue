@@ -262,9 +262,9 @@ export default {
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
-        () => {
-          // data.account = addr;
-          data.account = "0xAAd1f995F6994BEf38Cadc711f533F9629e4839c";
+        (addr) => {
+          data.account = addr;
+          // data.account = "0xf6Ebe43b1Be0ba7491E21aD4199e59937dAA2F2A"; // TEST
         },
         (p) => {
           data.web3 = p;
@@ -300,9 +300,7 @@ export default {
     });
     const getDecisions = async () => {
       const c = store.state.c_battle;
-      const res = await c.methods
-        .getMarchTactics("0xAAd1f995F6994BEf38Cadc711f533F9629e4839c")
-        .call();
+      const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
       const nodeInfo = await c.methods.nodeInfo(data.currentNode).call();
       const canUnlock =
@@ -326,7 +324,7 @@ export default {
           data.eventType = 1; // 战斗结束, 只能选择继续前进
           data.randomEvents.push({
             key: "jbzjsqj",
-            name: "局部战结束，前进",
+            name: "暂未发生战斗，可前进",
             type: 1,
           });
         }
