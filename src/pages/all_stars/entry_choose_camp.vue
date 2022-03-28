@@ -219,6 +219,7 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_battle;
       const player = await c.methods.players(data.account).call();
+      console.log(player,'player')
       if (player.isBond) {
         router.push({
           name: "bf_main",
