@@ -34,7 +34,7 @@
     <img class="map" :src="getMap" alt="" />
     <img
       v-if="player.isBond"
-      :style="getPos"
+      :style="curPosition"
       src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pos.gif"
       alt=""
     />
@@ -264,6 +264,7 @@ export default {
       showRandomEvents: false,
       curNodeInfo: "",
       nextNodeInfo: "",
+      curPosition: `position:absolute;height:6rem;top:0%;left:0%`,
     });
     const curSpeed = computed(() => {
       const now = new Date().getTime();
@@ -458,12 +459,13 @@ export default {
       data.times = res;
       const now = new Date().getTime();
       const delta = Number(res[1]) * 1000 - Number(now);
-      if (delta < 0) {
-        data.arriveNext = true;
-        return;
-      }
+
       data.ticker = setInterval(() => {
-        getRTime(res[1]);
+        if (delta < 0) {
+          data.arriveNext = true;
+          getRTime(res[1]);
+        }
+        getPos(now, res[1] * 1000);
       }, 1000);
     };
     const getStartTime = async () => {
@@ -492,7 +494,7 @@ export default {
       }
       console.log(player, "player");
       data.player = player;
-      data.curCamp = 3;
+      data.curCamp = player.camp;
     };
     const getNode = async () => {
       const c = store.state.c_battle;
@@ -550,21 +552,27 @@ export default {
         "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/map_3.png",
       ][data.curCamp];
     });
-    const getPos = computed(() => {
+    const getPos = (now, arriveTime) => {
       const cur =
         positions[data.curCamp][data.player.road][data.currentNode.id];
-      if (cur) {
-        return `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
-      } else {
-        return `position:absolute;height:6rem;top:0%;left:0%`;
+      const next = positions[data.curCamp][data.player.road][data.nextNode.id];
+      if (!arriveTime || data.player.state != 0) {
+        data.curPosition = `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
+        return;
       }
-    });
+      if (now >= arriveTime && data.player.state == 0) {
+        data.curPosition = `position:absolute;height:6rem;top:${next[0]}%;left:${next[1]}%`;
+      } else {
+        const deltaX = (cur[0] + next[0]) / 2;
+        const deltaY = (cur[1] + next[1]) / 2;
+        data.curPosition = `position:absolute;height:6rem;top:${deltaX}%;left:${deltaY}%`;
+      }
+    };
     const refData = toRefs(data);
     return {
       ...refData,
       campText,
       getMap,
-      getPos,
       isBattleIng,
       curSpeed,
       getDecisionText,
