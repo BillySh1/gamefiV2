@@ -492,7 +492,7 @@ export default {
       }
       console.log(player, "player");
       data.player = player;
-      data.curCamp = player.camp;
+      data.curCamp = 3;
     };
     const getNode = async () => {
       const c = store.state.c_battle;
