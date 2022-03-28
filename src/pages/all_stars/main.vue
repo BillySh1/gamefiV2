@@ -262,8 +262,9 @@ export default {
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
-        (addr) => {
-          data.account = addr;
+        () => {
+          // data.account = addr;
+          data.account = "0xAAd1f995F6994BEf38Cadc711f533F9629e4839c";
         },
         (p) => {
           data.web3 = p;
@@ -283,6 +284,14 @@ export default {
       await getStartTime();
       await getDecisions();
       await getRandomEvents();
+      console.log(
+        "raw",
+        data.decisions,
+        "player",
+        data.player,
+        "type",
+        data.eventType
+      );
     };
     onBeforeUnmount(() => {
       if (data.ticker) {
@@ -291,7 +300,9 @@ export default {
     });
     const getDecisions = async () => {
       const c = store.state.c_battle;
-      const res = await c.methods.getMarchTactics(data.account).call();
+      const res = await c.methods
+        .getMarchTactics("0xAAd1f995F6994BEf38Cadc711f533F9629e4839c")
+        .call();
       data.decisions = res;
       const nodeInfo = await c.methods.nodeInfo(data.currentNode).call();
       const canUnlock =
@@ -305,13 +316,14 @@ export default {
         });
         return;
       }
+
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
 
       if (res[0] && !res[1] && !res[2] && !res[3]) {
         if (data.player.state == 0) {
           data.eventType = 0; // 纯前进
         } else {
-          data.eventType == 1; // 战斗结束, 只能选择继续前进
+          data.eventType = 1; // 战斗结束, 只能选择继续前进
           data.randomEvents.push({
             key: "jbzjsqj",
             name: "局部战结束，前进",
