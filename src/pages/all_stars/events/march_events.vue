@@ -62,7 +62,7 @@
               </div>
               <div v-if="type == 'ing'">
                 您的军队在该据点遭遇敌军，正在死战，请在
-                <span>{{ timing }}</span>
+                <span>{{ getEndTime }}</span>
                 后查看战斗结果
               </div>
             </div>
@@ -94,7 +94,7 @@ import {
   toRefs,
   onBeforeMount,
   getCurrentInstance,
-  onBeforeUnmount,
+  computed,
 } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import BattleEvents from "./battle_events.vue";
@@ -126,10 +126,13 @@ export default {
       );
       getTicker();
     });
-    onBeforeUnmount(() => {
-      if (data.ticker) {
-        clearInterval(data.ticker);
-      }
+    // onBeforeUnmount(() => {
+    //   if (data.ticker) {
+    //     clearInterval(data.ticker);
+    //   }
+    // });
+    const getEndTime = computed(() => {
+      return data.timing;
     });
     const getRTime = (endTime) => {
       // counting time next node
@@ -153,7 +156,6 @@ export default {
 
     const onConfirm = async () => {
       if (prop.type == "ing") {
-        ctx.emit("close");
         console.log(prop.endTime);
         return;
       }
@@ -188,6 +190,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      getEndTime,
       onConfirm,
     };
   },
