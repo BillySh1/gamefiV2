@@ -1,5 +1,5 @@
 <template>
-  <BfPack @refresh="allInit" @close="allInit" :value="showPack" />
+  <BfPack :disable="isBattleIng" @refresh="allInit" @close="allInit" :value="showPack" />
   <MarchEvents
     :type="eventType"
     :value="showMarchEvents"

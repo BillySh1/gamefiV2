@@ -145,9 +145,6 @@ export default {
     };
     const getTicker = () => {
       if (prop.type == "ing") {
-        if(data.ticker != undefined){
-          clearInterval(data.ticker)
-        }
         data.ticker = setInterval(() => {
           getRTime(prop.endTime);
         }, 1000);

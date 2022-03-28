@@ -63,16 +63,23 @@
             <div class="intro">速率加成 {{ totalSpeedAdd }}</div>
 
             <CommonButton
-              v-if="canUse"
+              v-if="canUse && !disable"
               class="btn"
               :disabled="btnDisable || pack[curItem] == 0"
               :circle="true"
               @click="handleClick"
               >{{ btnText }}</CommonButton
             >
-            <CommonButton v-else class="btn" :disabled="true" :circle="true"
-              >使用中</CommonButton
+            <CommonButton
+              v-if="!canUse && !disable"
+              class="btn"
+              :disabled="true"
             >
+              使用中
+            </CommonButton>
+            <CommonButton v-if="disable" class="btn" :disabled="true">
+              禁止使用
+            </CommonButton>
           </div>
         </div>
       </div>
@@ -94,7 +101,7 @@ import CommonButton from "../../../components/common_button.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_pack",
-  props: ["value"],
+  props: ["value", "disable"],
   components: {
     CommonButton,
   },
