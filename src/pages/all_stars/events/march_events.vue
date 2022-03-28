@@ -1,7 +1,7 @@
 <template>
   <div
     class="events_mask"
-    v-if="value && [0, 5].includes(Number(type))"
+    v-if="value && [0, 5, 'ing'].includes(type)"
     @click="() => $emit('close')"
   >
     <img
@@ -24,15 +24,22 @@
       "
     >
       <div class="inner">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/scroll_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/scroll_bg.png"
+          alt=""
+        />
         <div class="main">
           <div class="title">
             <div v-if="type == 0">继续前进</div>
             <div v-if="type == 3">鹿原决战！</div>
+            <div v-if="type == 'ing'">死战中！</div>
           </div>
           <div class="bottom">
             <div class="img_box">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/img_bg.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/img_bg.png"
+                alt=""
+              />
               <div class="img_inner">
                 <img
                   v-if="type == 0"
@@ -40,7 +47,7 @@
                   alt=""
                 />
                 <img
-                  v-if="type == 5"
+                  v-if="type == 5 || type == 'ing'"
                   src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/insert_3.png"
                   alt=""
                 />
@@ -53,6 +60,11 @@
               <div v-if="type == 5">
                 您已抵达鹿原，军队正在修整。点击确认即可立即开拨进入决战之地，角逐最终的胜利，成为鹿原霸主！
               </div>
+              <div v-if="type == 'ing'">
+                您的军队在该据点遭遇敌军，正在死战，请在
+                <span>{{ timing }}</span>
+                后查看战斗结果
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +72,10 @@
     </div>
     <div :class="btnDisable ? 'confirm disable' : 'confirm'" @click="onConfirm">
       <div class="inner">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/confirm_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/confirm_bg.png"
+          alt=""
+        />
         <div class="text">确认</div>
       </div>
     </div>
@@ -69,18 +84,24 @@
     :type="type"
     @refresh="() => $emit('refresh')"
     @close="() => $emit('close')"
-    v-if="value && ![0, 5].includes(Number(type))"
+    v-if="value && ![0, 5, 'ing'].includes(type)"
   />
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  getCurrentInstance,
+  onBeforeUnmount,
+} from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import BattleEvents from "./battle_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "random_events",
-  props: ["value", "type"],
+  props: ["value", "type", "endTime"],
   components: {
     BattleEvents,
   },
@@ -91,6 +112,8 @@ export default {
       account: "",
       web3: "",
       btnDisable: false,
+      ticker: undefined,
+      timing: "0时0分0秒",
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -101,8 +124,42 @@ export default {
           data.web3 = p;
         }
       );
+      getTicker();
     });
+    onBeforeUnmount(() => {
+      if (data.ticker) {
+        clearInterval(data.ticker);
+      }
+    });
+    const getRTime = (endTime) => {
+      // counting time next node
+      const now = new Date().getTime();
+      const delta = Number(endTime) - (Number(now) / 1000).toFixed(0);
+      let h = Math.floor((delta / 60 / 60) % 24);
+      let m = Math.floor((delta / 60) % 60);
+      let s = Math.floor(delta % 60);
+      if (parseInt(h, 10) < 0) h = "0";
+      if (parseInt(m, 10) < 0) m = "0";
+      if (parseInt(s, 10) < 0) s = "0";
+      data.timing = `${h}时${m}分${s}秒`;
+    };
+    const getTicker = () => {
+      if (prop.type == "ing") {
+        if(data.ticker != undefined){
+          clearInterval(data.ticker)
+        }
+        data.ticker = setInterval(() => {
+          getRTime(prop.endTime);
+        }, 1000);
+      }
+    };
+
     const onConfirm = async () => {
+      if (prop.type == "ing") {
+        ctx.emit("close");
+        console.log(prop.endTime);
+        return;
+      }
       await march(prop.type);
     };
     const march = async (idx) => {

@@ -3,6 +3,7 @@
   <MarchEvents
     :type="eventType"
     :value="showMarchEvents"
+    :endTime="times[3]"
     :player="player"
     @close="() => (showMarchEvents = false)"
     @refresh="allInit"
@@ -160,6 +161,10 @@
             <span style="color: red; margin: 0 1rem">{{ nextNode.name }}</span>
             <span v-if="!arriveNext">还剩</span>
           </div>
+          <div v-else>
+            <span>据点 {{ currentNode.name }}</span>
+          </div>
+
           <div class="time_row" v-if="!arriveNext && !isBattleIng">
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
@@ -174,7 +179,7 @@
             />
             <span style="color: red">请点击此处决策</span>
           </div>
-          <div class="timerow" v-if="isBattleIng">
+          <div class="time_row" v-if="isBattleIng">
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/clock.png"
               alt=""
@@ -227,7 +232,10 @@ export default {
       showRuleModal: false,
       randomEvents: [],
       player: "",
-      currentNode: undefined,
+      currentNode: {
+        id: 0,
+        name: "",
+      },
       power: 0,
       nextNode: {
         id: 0,
@@ -264,7 +272,7 @@ export default {
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
-          // data.account = "0xf6Ebe43b1Be0ba7491E21aD4199e59937dAA2F2A"; // TEST
+          // data.account = "0x1C63eCF336070F71c33AD055EbEC3C332311C5B4"; // TEST
         },
         (p) => {
           data.web3 = p;
@@ -302,10 +310,11 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
-      const nodeInfo = await c.methods.nodeInfo(data.currentNode).call();
+      const nodeInfo = await c.methods.nodeInfo(data.currentNode.id).call();
       const canUnlock =
-        Number(new Date().getTime()) >= nodeInfo.nowConflictEndTime;
-      if (nodeInfo.lock && canUnlock) {
+        Number(new Date().getTime()) >=
+        Number(nodeInfo.nowConflictEndTime) * 1000;
+      if (nodeInfo.lock && canUnlock && data.player.state == 1) {
         data.eventType = "lock";
         data.randomEvents.push({
           key: "jdsd",
@@ -313,6 +322,15 @@ export default {
           type: 1,
         });
         return;
+      }
+
+      if (nodeInfo.lock && !canUnlock && data.player.state == 1) {
+        data.eventType = "ing";
+        data.randomEvents.push({
+          key: "szz",
+          name: "死战中",
+          type: 1,
+        });
       }
 
       // player.state 0前进中 1战斗中 2准备战斗 3抵达鹿原
@@ -397,6 +415,7 @@ export default {
     };
     const showDecision = () => {
       if (data.arriveNext) {
+        // console.log(data.eventType, data.player, "ggg");
         data.showMarchEvents = true;
       }
     };
@@ -457,7 +476,11 @@ export default {
     };
     const getNode = async () => {
       const c = store.state.c_battle;
-      data.currentNode = await c.methods.getNode(data.account, 0).call();
+      const res0 = await c.methods.getNode(data.account, 0).call();
+      data.currentNode = {
+        id: res0,
+        name: map[res0],
+      };
       const res1 = await c.methods.getNode(data.account, 1).call();
       data.nextNode = {
         id: res1,
@@ -508,8 +531,13 @@ export default {
       ][data.curCamp];
     });
     const getPos = computed(() => {
-      const cur = positions[data.curCamp][data.player.road][data.currentNode];
-      return `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
+      const cur =
+        positions[data.curCamp][data.player.road][data.currentNode.id];
+      if (cur) {
+        return `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
+      } else {
+        return `position:absolute;height:6rem;top:0%;left:0%`;
+      }
     });
     const refData = toRefs(data);
     return {
