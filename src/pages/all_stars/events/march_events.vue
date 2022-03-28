@@ -95,6 +95,7 @@ import {
   onBeforeMount,
   getCurrentInstance,
   computed,
+  watch,
 } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import BattleEvents from "./battle_events.vue";
@@ -115,6 +116,12 @@ export default {
       ticker: undefined,
       timing: "0时0分0秒",
     });
+    watch(
+      () => prop.value,
+      async () => {
+        getTicker();
+      }
+    );
     onBeforeMount(async () => {
       await initWeb3.Init(
         (addr) => {
@@ -124,7 +131,6 @@ export default {
           data.web3 = p;
         }
       );
-      getTicker();
     });
     // onBeforeUnmount(() => {
     //   if (data.ticker) {
@@ -148,6 +154,9 @@ export default {
     };
     const getTicker = () => {
       if (prop.type == "ing") {
+        if (data.ticker === undefined) {
+          clearInterval(data.ticker);
+        }
         data.ticker = setInterval(() => {
           getRTime(prop.endTime);
         }, 1000);
