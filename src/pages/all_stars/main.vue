@@ -1,5 +1,10 @@
 <template>
-  <BfPack :disable="isBattleIng" @refresh="allInit" @close="allInit" :value="showPack" />
+  <BfPack
+    :disable="isBattleIng"
+    @refresh="allInit"
+    @close="allInit"
+    :value="showPack"
+  />
   <MarchEvents
     :type="eventType"
     :value="showMarchEvents"
@@ -157,8 +162,13 @@
         >
           <div v-if="!isBattleIng">
             <span v-if="!arriveNext">距离下一个据点</span>
-            <span v-else>即将到达据点</span>
-            <span style="color: red; margin: 0 1rem">{{ nextNode.name }}</span>
+            <span v-else>当前据点</span>
+            <span v-if="!arriveNext" style="color: red; margin: 0 1rem">{{
+              nextNode.name
+            }}</span>
+            <span v-else style="color: red; margin: 0 1rem">{{
+              currentNode.name
+            }}</span>
             <span v-if="!arriveNext">还剩</span>
           </div>
           <div v-else>
@@ -252,6 +262,8 @@ export default {
       additionEvents: [],
       curEventsText: "",
       showRandomEvents: false,
+      curNodeInfo: "",
+      nextNodeInfo: "",
     });
     const curSpeed = computed(() => {
       const now = new Date().getTime();
@@ -272,7 +284,7 @@ export default {
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
-          // data.account = "0x1C63eCF336070F71c33AD055EbEC3C332311C5B4"; // TEST
+          // data.account = "0xAAd1f995F6994BEf38Cadc711f533F9629e4839c"; // TEST
         },
         (p) => {
           data.web3 = p;
@@ -293,12 +305,18 @@ export default {
       await getDecisions();
       await getRandomEvents();
       console.log(
-        "raw",
+        "raw decisions",
         data.decisions,
         "player",
         data.player,
         "type",
-        data.eventType
+        data.eventType,
+        "times",
+        data.times,
+        "currentNode",
+        data.curNodeInfo,
+        "nextNode",
+        data.nextNodeInfo
       );
     };
     onBeforeUnmount(() => {
@@ -311,6 +329,8 @@ export default {
       const res = await c.methods.getMarchTactics(data.account).call();
       data.decisions = res;
       const nodeInfo = await c.methods.nodeInfo(data.currentNode.id).call();
+      data.curNodeInfo = nodeInfo;
+      data.nextNodeInfo = await c.methods.nodeInfo(data.nextNode.id).call();
       const canUnlock =
         Number(new Date().getTime()) >=
         Number(nodeInfo.nowConflictEndTime) * 1000;
@@ -437,7 +457,7 @@ export default {
       const res = await c.methods.getTimes(data.account).call();
       data.times = res;
       const now = new Date().getTime();
-      const delta = Number(res[1]) - (Number(now) / 1000).toFixed(0);
+      const delta = Number(res[1]) * 1000 - Number(now);
       if (delta < 0) {
         data.arriveNext = true;
         return;
