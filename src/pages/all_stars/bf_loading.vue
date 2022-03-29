@@ -28,7 +28,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "群英会战 1.0.2 封测",
+      version: "群英会战 1.0.3 封测",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
