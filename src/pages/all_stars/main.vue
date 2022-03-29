@@ -363,7 +363,7 @@ export default {
           data.eventType = 1; // 战斗结束, 只能选择继续前进
           data.randomEvents.push({
             key: "jbzjsqj",
-            name: "暂未发生战斗，可前进",
+            name: "暂未发生战斗",
             type: 1,
           });
         }
