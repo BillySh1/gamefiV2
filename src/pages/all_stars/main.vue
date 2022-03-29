@@ -580,6 +580,9 @@ export default {
       const cur =
         positions[data.curCamp][data.player.road][data.currentNode.id];
       const next = positions[data.curCamp][data.player.road][data.nextNode.id];
+      if (!cur || !next) {
+        return;
+      }
       if (!arriveTime || data.player.state != 0) {
         data.curPosition = `position:absolute;height:6rem;top:${cur[0]}%;left:${cur[1]}%`;
         return;
