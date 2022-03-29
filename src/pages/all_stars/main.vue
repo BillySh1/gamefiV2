@@ -87,13 +87,13 @@
               <div class="des">风和日丽, 快马加鞭</div>
             </div>
             <div
-              v-if="additionEvents[1] == 0 && additionEvents[2] != 0"
+              v-if="additionEvents[0] == 1 && additionEvents[2] != 0"
               style="display: flex; align-items: center"
             >
               <div class="des">狂风暴雨, 行军受阻</div>
             </div>
             <div
-              v-if="player.baseSpeed != 0 && additionEvents[2] == 0"
+              v-if="player.baseSpeed !== 0 && additionEvents[2] == 0"
               class="des"
             >
               和风煦日，无事发生
@@ -470,7 +470,6 @@ export default {
       const delta = Number(res[1]) * 1000 - Number(now);
       if (delta <= 0) {
         data.arriveNext = true;
-        return;
       }
       data.ticker = setInterval(() => {
         getRTime(res[1]);
@@ -576,6 +575,7 @@ export default {
         const deltaY = (cur[1] + next[1]) / 2;
         data.curPosition = `position:absolute;height:6rem;top:${deltaX}%;left:${deltaY}%`;
       }
+      console.log(data.curPosition, "ggg");
     };
     const refData = toRefs(data);
     return {

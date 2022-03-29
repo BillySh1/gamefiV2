@@ -227,7 +227,7 @@ export default {
           .estimateGas({ from: data.account });
         const res = await c.methods.march(idx).send({
           gasPrice: gasPrice,
-          gas: gas,
+          gas: Number(gas) + 100000,
           from: data.account,
         });
         if (res.status) {
