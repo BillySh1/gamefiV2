@@ -172,6 +172,7 @@ export default {
       await march(prop.type);
     };
     const march = async (idx) => {
+      if (idx == 5) idx = 3;
       try {
         data.btnDisable = true;
         proxy.$toast("等待决策确认", store.state.toast_info);

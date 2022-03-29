@@ -165,10 +165,12 @@
             <div class="text">鹿原奖池</div>
           </div>
         </div>
+        <div class="pre_time_view" v-if="times[4]">您已抵达战场</div>
+
         <div
           class="pre_time_view"
           @click="showDecision"
-          v-if="player.baseSpeed != 0"
+          v-if="player.baseSpeed != 0 && !times[4]"
         >
           <div v-if="!isBattleIng">
             <span v-if="!arriveNext">距离下一个据点</span>
@@ -246,7 +248,7 @@ export default {
       account: "",
       web3: "",
       curCamp: 0,
-      nextName: "合川",
+      nextName: "",
       showPack: false,
       showMarchEvents: false,
       showRuleModal: false,
@@ -317,9 +319,12 @@ export default {
       await getNode();
       await getPower();
       await getTimes();
+      await getRandomEvents();
+      if (data.times[4]) {
+        return;
+      }
       await getStartTime();
       await getDecisions();
-      await getRandomEvents();
       console.log(
         "raw decisions",
         data.decisions,
@@ -580,6 +585,9 @@ export default {
       const cur =
         positions[data.curCamp][data.player.road][data.currentNode.id];
       const next = positions[data.curCamp][data.player.road][data.nextNode.id];
+      const final = positions[data.curCamp][data.player.road][24];
+      if (data.times[4])
+        return (data.curPosition = `position:absolute;height:6rem;top:${final[0]}%;left:${final[1]}%`);
       if (!cur || !next) {
         return;
       }
