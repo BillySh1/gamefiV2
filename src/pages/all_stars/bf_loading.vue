@@ -74,7 +74,9 @@ export default {
     };
     const readFiles = () => {
       const path = require("path");
-      const files = require.context("../../allstar_assets/", true, /\.png$/).keys();
+      const files = require
+        .context("../../allstar_assets/", true, /\.svg$/)
+        .keys();
       const prefix =
         "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
       files.map((i) => {
