@@ -506,7 +506,6 @@ export default {
       const c = store.state.c_battle;
       const res = await c.methods.getCardsAndPower(data.account).call();
       console.log(res, "cards");
-
       data.power = Number(res[2] / 100);
     };
     const getPlayer = async () => {
@@ -518,7 +517,6 @@ export default {
           name: "bf_choose",
         });
       }
-      console.log(player, "player");
       data.player = player;
       data.curCamp = player.camp;
     };
@@ -593,7 +591,6 @@ export default {
         const deltaY = (cur[1] + next[1]) / 2;
         data.curPosition = `position:absolute;height:6rem;top:${deltaX}%;left:${deltaY}%`;
       }
-      console.log(data.curPosition, "ggg");
     };
     const refData = toRefs(data);
     return {
@@ -663,6 +660,7 @@ export default {
   bottom: 20%;
   right: 1%;
   width: 6rem;
+  white-space: nowrap;
   .inner {
     position: relative;
     width: 100%;
@@ -686,6 +684,7 @@ export default {
   bottom: 35%;
   right: 1%;
   width: 6rem;
+  white-space: nowrap;
   .inner {
     position: relative;
     width: 100%;
