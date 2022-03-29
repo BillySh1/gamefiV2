@@ -387,18 +387,18 @@ export default {
       data.showPack = false;
     };
     const setPackBefore = () => {
-      localStorage.setItem(
+      sessionStorage.setItem(
         "before_warriors",
         JSON.stringify(data.selectedWarrior)
       );
-      localStorage.setItem("before_king", JSON.stringify(data.selectedKing));
+      sessionStorage.setItem("before_king", JSON.stringify(data.selectedKing));
     };
     const getPackBefore = () => {
-      const warrior_storages = localStorage.getItem("before_warriors");
+      const warrior_storages = sessionStorage.getItem("before_warriors");
       if (warrior_storages && warrior_storages.length > 0) {
         data.selectedWarrior = JSON.parse(warrior_storages);
       }
-      const king_storages = localStorage.getItem("before_king");
+      const king_storages = sessionStorage.getItem("before_king");
       if (king_storages && king_storages.length > 0) {
         data.selectedKing = JSON.parse(king_storages);
       }

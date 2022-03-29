@@ -332,10 +332,13 @@ export default {
       const nodeInfo = await c.methods.nodeInfo(data.currentNode.id).call();
       data.curNodeInfo = nodeInfo;
       data.nextNodeInfo = await c.methods.nodeInfo(data.nextNode.id).call();
+      const isLock = await c.methods
+        .isLock(data.currentNode.id, data.account)
+        .call();
       const canUnlock =
         Number(new Date().getTime()) >=
         Number(nodeInfo.nowConflictEndTime) * 1000;
-      if (nodeInfo.lock && canUnlock && data.player.state == 1) {
+      if (isLock && canUnlock && data.player.state == 1) {
         data.eventType = "lock";
         data.randomEvents.push({
           key: "jdsd",
@@ -345,7 +348,7 @@ export default {
         return;
       }
 
-      if (nodeInfo.lock && !canUnlock && data.player.state == 1) {
+      if (isLock && !canUnlock && data.player.state == 1) {
         data.eventType = "ing";
         data.randomEvents.push({
           key: "szz",
@@ -459,12 +462,12 @@ export default {
       data.times = res;
       const now = new Date().getTime();
       const delta = Number(res[1]) * 1000 - Number(now);
-
+      if (delta <= 0) {
+        data.arriveNext = true;
+        return;
+      }
       data.ticker = setInterval(() => {
-        if (delta < 0) {
-          data.arriveNext = true;
-          getRTime(res[1]);
-        }
+        getRTime(res[1]);
         getPos(now, res[1] * 1000);
       }, 1000);
     };
