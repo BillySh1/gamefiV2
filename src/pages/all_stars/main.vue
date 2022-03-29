@@ -93,7 +93,7 @@
               <div class="des">狂风暴雨, 行军受阻</div>
             </div>
             <div
-              v-if="player.baseSpeed !== 0 && additionEvents[2] == 0"
+              v-if="player.baseSpeed != 0 && additionEvents[2] == 0"
               class="des"
             >
               和风煦日，无事发生
