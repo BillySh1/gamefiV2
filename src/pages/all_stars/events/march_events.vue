@@ -187,14 +187,14 @@ export default {
         });
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
+          ctx.emit("refresh");
+          ctx.emit("close");
         }
       } catch (e) {
         console.error(e);
         proxy.$toast("决策出错", store.state.toast_error);
       } finally {
         data.btnDisable = false;
-        ctx.emit("refresh");
-        ctx.emit("close");
       }
     };
     const refData = toRefs(data);

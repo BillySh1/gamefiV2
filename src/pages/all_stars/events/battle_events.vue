@@ -110,7 +110,7 @@ import initWeb3 from "../../../utils/initWeb3";
 import { useStore } from "vuex";
 export default {
   name: "battleEvents",
-  props: ["value", "type","placeText"],
+  props: ["value", "type", "placeText"],
   components: {},
   setup(prop, ctx) {
     const store = useStore();
@@ -137,7 +137,6 @@ export default {
       const res = await c.methods.getNode(data.account, 1).call();
       data.curNode = res;
     };
- 
 
     const getCampImg = computed(() => {
       return [
@@ -233,14 +232,14 @@ export default {
         });
         if (res.status) {
           proxy.$toast("决策成功,正在行军...", store.state.toast_info);
+          ctx.emit("refresh");
+          ctx.emit("close");
         }
       } catch (e) {
         console.error(e);
         proxy.$toast("决策出错", store.state.toast_error);
       } finally {
         data.btnDisable = false;
-        ctx.emit("refresh");
-        ctx.emit("close");
       }
     };
     const refData = toRefs(data);

@@ -490,7 +490,7 @@ export default {
       const res = await c.methods.getCardsAndPower(data.account).call();
       console.log(res, "cards");
 
-      data.power = Number(res[2] / 100).toFixed(0);
+      data.power = Number(res[2] / 100);
     };
     const getPlayer = async () => {
       const c = store.state.c_battle;
