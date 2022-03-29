@@ -108,10 +108,9 @@ import {
 } from "vue";
 import initWeb3 from "../../../utils/initWeb3";
 import { useStore } from "vuex";
-import { map } from "../../../utils/useRoutes";
 export default {
   name: "battleEvents",
-  props: ["value", "type"],
+  props: ["value", "type","placeText"],
   components: {},
   setup(prop, ctx) {
     const store = useStore();
@@ -135,12 +134,10 @@ export default {
     });
     const getCurrentNode = async () => {
       const c = store.state.c_battle;
-      const res = await c.methods.getNode(data.account, 0).call();
+      const res = await c.methods.getNode(data.account, 1).call();
       data.curNode = res;
     };
-    const placeText = computed(() => {
-      return map[data.curNode];
-    });
+ 
 
     const getCampImg = computed(() => {
       return [
@@ -253,7 +250,6 @@ export default {
       getIntroText,
       getCampImg,
       additionPower,
-      placeText,
       march,
       unlock,
     };

@@ -10,6 +10,7 @@
     :value="showMarchEvents"
     :endTime="times[3]"
     :player="player"
+    :placeText="nodePlaceName"
     @close="() => (showMarchEvents = false)"
     @refresh="allInit"
   />
@@ -164,15 +165,15 @@
             <span v-if="!arriveNext">距离下一个据点</span>
             <span v-else>当前据点</span>
             <span v-if="!arriveNext" style="color: red; margin: 0 1rem">{{
-              nextNode.name
+              nodePlaceName
             }}</span>
             <span v-else style="color: red; margin: 0 1rem">{{
-              currentNode.name
+              nodePlaceName
             }}</span>
             <span v-if="!arriveNext">还剩</span>
           </div>
           <div v-else>
-            <span>据点 {{ currentNode.name }}</span>
+            <span>据点 {{ nodePlaceName }}</span>
           </div>
 
           <div class="time_row" v-if="!arriveNext && !isBattleIng">
@@ -292,6 +293,11 @@ export default {
         }
       );
       await allInit();
+    });
+    const nodePlaceName = computed(() => {
+      if (!data.arriveNext) return data.nextNode.name;
+      if (data.player.state != 0) return data.currentNode.name;
+      return data.nextNode.name;
     });
     const allInit = async () => {
       (data.arriveNext = false), (data.showPack = false);
@@ -578,6 +584,7 @@ export default {
       getMap,
       isBattleIng,
       curSpeed,
+      nodePlaceName,
       getDecisionText,
       showDecision,
       march,

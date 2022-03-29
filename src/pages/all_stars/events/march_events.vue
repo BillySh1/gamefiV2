@@ -82,6 +82,7 @@
   </div>
   <BattleEvents
     :type="type"
+    :placeText="placeText"
     @refresh="() => $emit('refresh')"
     @close="() => $emit('close')"
     v-if="value && ![0, 5, 'ing'].includes(type)"
@@ -102,7 +103,7 @@ import BattleEvents from "./battle_events.vue";
 import { useStore } from "vuex";
 export default {
   name: "random_events",
-  props: ["value", "type", "endTime"],
+  props: ["value", "type", "endTime", "placeText"],
   components: {
     BattleEvents,
   },
