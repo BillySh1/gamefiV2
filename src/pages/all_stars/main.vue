@@ -388,6 +388,15 @@ export default {
         return;
       }
       if (res[0] && !res[1] && res[2] && !res[3]) {
+        if (nodeInfo.lock) {
+          data.eventType = "wait";
+          data.randomEvents.push({
+            key: "ddjs",
+            name: "等待解锁",
+            type: 1,
+          });
+          return;
+        }
         if (data.player.state == 0) {
           data.eventType = 3; // 首次抵达, 可选埋伏或蹲点遭遇他人或离开
           data.randomEvents.push({

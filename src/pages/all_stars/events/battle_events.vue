@@ -160,6 +160,8 @@ export default {
           return "遭遇敌军！";
         case "lock":
           return "打扫战场";
+        case "wait":
+          return "等待打扫战场";
         default:
           return "error";
       }
@@ -178,7 +180,8 @@ export default {
           return "遭遇敌军! 此处乃通往鹿原必经之地，必须在此战斗，停留不前将错失鹿原良机";
         case "lock":
           return "战斗阶段性结束，当前据点一片狼籍已被锁定，如果您需要现在作出决策，请先打扫战场,您也可以等待其他玩家打扫";
-
+        case "wait":
+          return "前方据点刚经历战事，正在锁定状态，如果您要在此战斗请等待其他玩家打扫战场，或您可以选择继续前进";
         default:
           return "error";
       }
