@@ -138,6 +138,15 @@
             {{ item.name }}
           </div>
         </div>
+        <div class="refresh_field" @click="allInit">
+          <div class="inner">
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
+              alt=""
+            />
+            <div class="text">刷新战场</div>
+          </div>
+        </div>
         <div
           class="fina_pool"
           @click="
@@ -652,6 +661,29 @@ export default {
   }
   position: absolute;
   bottom: 20%;
+  right: 1%;
+  width: 6rem;
+  .inner {
+    position: relative;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+.refresh_field {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  position: absolute;
+  bottom: 35%;
   right: 1%;
   width: 6rem;
   .inner {
