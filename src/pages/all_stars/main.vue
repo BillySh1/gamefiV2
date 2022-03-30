@@ -1,4 +1,8 @@
 <template>
+  <BattleRecod
+    :value="showBattleRecord"
+    @close="() => (showBattleRecord = false)"
+  />
   <BfPack
     :disable="isBattleIng"
     @refresh="allInit"
@@ -63,6 +67,9 @@
             </div>
           </div>
           <div class="rules" @click="() => (showRuleModal = true)">规则</div>
+          <div class="rules" @click="() => (showBattleRecord = true)">
+            战斗日志
+          </div>
         </div>
         <div class="pack_btn" @click="() => (showPack = true)">
           <div class="text">行军背包</div>
@@ -232,6 +239,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { eventsTextMap } from "../../utils/useRandomEvents";
 import RandomEvents from "./events/random_events.vue";
+import BattleRecod from "./town/battle_record.vue";
 export default {
   name: "bf_main",
   components: {
@@ -239,6 +247,7 @@ export default {
     MarchEvents,
     InjectModal,
     RandomEvents,
+    BattleRecod,
   },
   setup() {
     const store = useStore();
@@ -274,6 +283,7 @@ export default {
       additionEvents: [],
       curEventsText: "",
       showRandomEvents: false,
+      showBattleRecord: false,
       curNodeInfo: "",
       nextNodeInfo: "",
       curPosition: `position:absolute;height:6rem;top:0%;left:0%`,
@@ -491,12 +501,18 @@ export default {
       data.times = res;
       const now = new Date().getTime();
       const delta = Number(res[1]) * 1000 - Number(now);
+      getPos(now, res[1] * 1000);
       if (delta <= 0) {
         data.arriveNext = true;
+        if (data.ticker) {
+          clearInterval(data.ticker);
+          await allInit();
+        }
+
+        return;
       }
       data.ticker = setInterval(() => {
         getRTime(res[1]);
-        getPos(now, res[1] * 1000);
       }, 1000);
     };
     const getStartTime = async () => {
@@ -510,7 +526,6 @@ export default {
     const getPower = async () => {
       const c = store.state.c_battle;
       const res = await c.methods.getCardsAndPower(data.account).call();
-      console.log(res, "cards");
       data.power = Number(res[2] / 100);
     };
     const getPlayer = async () => {
@@ -767,6 +782,7 @@ export default {
     width: 100%;
     font-size: 1.2rem;
     padding: 0.5rem 0;
+    margin-bottom: 2rem;
     background: rgba(44, 3, 3, 0.6);
     border-radius: 16px;
   }
