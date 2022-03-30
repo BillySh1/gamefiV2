@@ -26,29 +26,92 @@
         alt=""
       />
       <div class="title">战斗日志</div>
-      <div class="content">2222</div>
+      <div class="content">
+        <div class="table">
+          <TableItem
+            v-for="item in battleData"
+            :key="item.key"
+            :tableItem="item"
+          />
+        </div>
+        <div class="pageNation">
+          <img
+            :class="page <= 1 ? 'disable' : ''"
+            @click="
+              () => {
+                page--;
+                getRemoteData();
+              }
+            "
+            src="../../../allstar_assets/popups/left.svg"
+            alt=""
+          />
+          {{ page + "/" + total }}
+          <img
+            :class="page >= total ? 'disable' : ''"
+            @click="
+              () => {
+                page++;
+                getRemoteData();
+              }
+            "
+            src="../../../allstar_assets/popups/right.svg"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script >
-import { reactive, toRefs, onBeforeMount, onMounted,watch } from "vue";
+<script>
+const host = "http://54.151.194.138:8999";
+import { reactive, toRefs, watch } from "vue";
+import postData from "../../../utils/useFetch";
+import TableItem from "../../../components/table_item.vue";
 export default {
   name: "inject_modal",
-  props: ["value", "title", "btnText", "btnDisable"],
+  props: ["value", "title", "btnText", "btnDisable", "player"],
+  components: {
+    TableItem,
+  },
   setup(prop) {
-    const data = reactive({});
+    const data = reactive({
+      battleData: [],
+      total: 0,
+      page: 1,
+      limit: 5,
+    });
     watch(
-        ()=> prop.value,
-        async()=>{
-           await getRemoteData(0)
+      () => prop.value,
+      async (v) => {
+        if (v) {
+          getRemoteData();
         }
-    )
-    const getRemoteData = async ()=>{
-        console.log('gggg')
-    }
-    onBeforeMount(() => {});
-    onMounted(() => {});
+      }
+    );
+    const getRemoteData = async () => {
+      const url = host + "/conflict/list";
+      const res = await postData(url, {
+        page: data.page,
+        limit_num: 4,
+        player: prop.player,
+      }).then((res) => res.data);
+      data.total = res.paginate.total;
+      data.battleData.push([
+        "敌方阵营",
+        "战斗结束时间",
+        "敌军战力削减",
+        "状态",
+      ]);
+      res.list.map((item, index) => {
+        data.battleData.push([
+          index + 1,
+          item.inviter,
+          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
+        ]);
+      });
+    };
     const refData = toRefs(data);
     return {
       ...refData,
@@ -102,6 +165,32 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    .table {
+      width: 70%;
+      min-height: 15rem;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+    .pageNation {
+      width: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 1.5rem;
+      margin: auto;
+      .disable {
+        pointer-events: none;
+        filter: grayscale(100);
+      }
+      img {
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+          opacity: 0.8;
+        }
+        height: 4rem;
+      }
+    }
   }
 }
 </style>

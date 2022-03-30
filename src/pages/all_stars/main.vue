@@ -2,6 +2,7 @@
   <BattleRecod
     :value="showBattleRecord"
     @close="() => (showBattleRecord = false)"
+    :player="account"
   />
   <BfPack
     :disable="isBattleIng"
