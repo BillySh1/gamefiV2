@@ -98,6 +98,7 @@ export default {
         player: prop.player,
       }).then((res) => res.data);
       data.total = res.paginate.total;
+      data.battleData = []
       data.battleData.push([
         "敌方阵营",
         "战斗结束时间",

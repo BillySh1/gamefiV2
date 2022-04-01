@@ -502,8 +502,8 @@ export default {
       const now = new Date().getTime();
       const delta = Number(res[1]) * 1000 - Number(now);
       getPos(now, res[1] * 1000);
-      if(data.ticker){
-        clearInterval(data.ticker)
+      if (data.ticker) {
+        clearInterval(data.ticker);
       }
       if (delta <= 0) {
         data.arriveNext = true;
@@ -511,7 +511,6 @@ export default {
           clearInterval(data.ticker);
           await allInit();
         }
-
         return;
       }
       data.ticker = setInterval(() => {
