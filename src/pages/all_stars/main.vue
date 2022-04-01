@@ -325,7 +325,6 @@ export default {
       (data.arriveNext = false), (data.showPack = false);
       data.showMarchEvents = false;
       data.randomEvents = [];
-      clearInterval(data.ticker);
       await getPlayer();
       await getNode();
       await getPower();
@@ -503,6 +502,9 @@ export default {
       const now = new Date().getTime();
       const delta = Number(res[1]) * 1000 - Number(now);
       getPos(now, res[1] * 1000);
+      if(data.ticker){
+        clearInterval(data.ticker)
+      }
       if (delta <= 0) {
         data.arriveNext = true;
         if (data.ticker) {

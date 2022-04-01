@@ -142,7 +142,7 @@
           <div class="bg_v">{{ curTotalPower }}</div>
         </div>
         <div class="text" v-else>
-          <div class="t">已出征战力</div>
+          <div class="t">当前战力</div>
           <div class="bg_v">{{ power }}</div>
         </div>
       </div>
