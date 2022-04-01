@@ -40,6 +40,7 @@
   <div class="box">
     <img class="map" :src="getMap" alt="" />
     <img
+    :class="getPosDirection"
       v-if="player.isBond"
       :style="curPosition"
       src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pos.gif"
@@ -50,7 +51,7 @@
       <div class="inner">
         <div
           class="top_left"
-          :style="[1, 3].includes(Number(curCamp)) ? 'left:90%' : ''"
+          :style="[1, 3].includes(Number(curCamp)) ? 'left:92%' : ''"
         >
           <div
             class="city_main"
@@ -83,7 +84,7 @@
           class="right-top"
           :style="
             [1, 3].includes(Number(curCamp))
-              ? 'right:69%; align-items:flex-start'
+              ? 'right:74%; align-items:flex-start'
               : ''
           "
         >
@@ -147,33 +148,36 @@
             {{ item.name }}
           </div>
         </div>
-        <div class="refresh_field" @click="allInit">
-          <div class="inner">
-            <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
-              alt=""
-            />
-            <div class="text">刷新战场</div>
+        <div class="right_bottom">
+          <div class="refresh_field" @click="allInit">
+            <div class="inner">
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
+                alt=""
+              />
+              <div class="text">刷新战场</div>
+            </div>
+          </div>
+          <div
+            class="fina_pool"
+            @click="
+              () => {
+                $router.push({
+                  name: 'bf_pool',
+                });
+              }
+            "
+          >
+            <div class="inner">
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
+                alt=""
+              />
+              <div class="text">鹿原奖池</div>
+            </div>
           </div>
         </div>
-        <div
-          class="fina_pool"
-          @click="
-            () => {
-              $router.push({
-                name: 'bf_pool',
-              });
-            }
-          "
-        >
-          <div class="inner">
-            <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
-              alt=""
-            />
-            <div class="text">鹿原奖池</div>
-          </div>
-        </div>
+
         <div class="forage_zone">
           <img src="../../assets/store/item/type_0_0.png" alt="" />
           当前随军粮草 {{ player.nowForages }}
@@ -305,6 +309,17 @@ export default {
       }
       return data.player.baseSpeed;
     });
+    const getPosDirection = computed(()=>{
+      if(data.curCamp){
+        if([0,2].includes(Number(data.curCamp))){
+          return ''
+        }
+        if([1,3].includes(Number(data.curCamp))){
+          return 'reversePos'
+        }
+      }
+      return ''
+    })
     const campText = computed(() => {
       return ["魏", "蜀", "吴", "群"][data.curCamp];
     });
@@ -638,6 +653,7 @@ export default {
       isBattleIng,
       curSpeed,
       nodePlaceName,
+      getPosDirection,
       getDecisionText,
       showDecision,
       march,
@@ -670,6 +686,9 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  .reversePos{
+    transform: rotateY(180deg);
+  }
   .map {
     width: 100%;
     height: 100%;
@@ -689,30 +708,56 @@ export default {
     }
   }
 }
-.fina_pool {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
+.right_bottom {
   position: absolute;
-  bottom: 20%;
+  bottom: 10%;
   right: 1%;
-  width: 6rem;
+  display: flex;
+  flex-direction: column;
   white-space: nowrap;
-  .inner {
-    position: relative;
-    width: 100%;
-    img {
-      width: 100%;
+  .fina_pool {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
     }
-    .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    width: 5.5rem;
+    .inner {
+      position: relative;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .refresh_field {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    width: 5.5rem;
+    margin-bottom: 1rem;
+    .inner {
+      position: relative;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
+
 .forage_zone {
   position: absolute;
   top: 1%;
@@ -722,36 +767,13 @@ export default {
   align-items: center;
   background: rgba(44, 3, 3, 0.6);
   border-radius: 8px;
-  padding: 0 2rem;
+  padding: 0 1rem;
   img {
-    height: 3rem;
+    height: 2.5rem;
     margin-right: 2rem;
   }
 }
-.refresh_field {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-  position: absolute;
-  bottom: 35%;
-  right: 1%;
-  width: 6rem;
-  white-space: nowrap;
-  .inner {
-    position: relative;
-    width: 100%;
-    img {
-      width: 100%;
-    }
-    .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-}
+
 .top_left {
   position: absolute;
   left: 1%;
@@ -764,12 +786,12 @@ export default {
     &:hover {
       opacity: 0.8;
     }
-    width: 9rem;
-    height: 18rem;
+    width: 7rem;
+    height: 15rem;
     background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/main_camp.png")
       no-repeat;
     background-size: 100% 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     .inner {
       position: relative;
       width: 100%;
@@ -782,7 +804,7 @@ export default {
         top: 20%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 3.5rem;
+        font-size: 3rem;
       }
       .p {
         position: absolute;
@@ -797,7 +819,7 @@ export default {
         bottom: 10%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 3rem;
+        font-size: 2rem;
       }
     }
   }
@@ -807,9 +829,9 @@ export default {
       opacity: 0.8;
     }
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1;
     padding: 0.5rem 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     background: rgba(44, 3, 3, 0.6);
     border-radius: 16px;
   }
@@ -823,11 +845,11 @@ export default {
   position: absolute;
   left: 1%;
   bottom: 1%;
-  width: 20rem;
+  width: 15rem;
   padding: 0.5rem 0;
   background: rgba(44, 3, 3, 0.6);
   border-radius: 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .pack_btn {
   cursor: pointer;
@@ -837,12 +859,12 @@ export default {
   position: absolute;
   left: 2%;
   bottom: 15%;
-  width: 7rem;
-  height: 7rem;
+  width: 5rem;
+  height: 5rem;
   background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/pack_bg.png")
     no-repeat;
   background-size: 100% 100%;
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -852,7 +874,7 @@ export default {
 }
 .right-top {
   position: absolute;
-  top: 1%;
+  top: 2%;
   right: 1%;
   display: flex;
   flex-direction: column;
@@ -863,14 +885,13 @@ export default {
       opacity: 0.8;
     }
     background: rgba(44, 3, 3, 0.6);
-    border: 2px solid #edf129;
-    border-radius: 20px;
-    font-size: 1.5rem;
+    border: 1px solid #edf129;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     .des {
-      margin: 1rem 2rem;
+      margin: 0.5rem 2rem;
     }
     img {
       width: 3rem;
@@ -879,18 +900,17 @@ export default {
   .power_zone {
     position: relative;
     cursor: pointer;
-    width: 30rem;
+    width: 25rem;
     &:hover {
       opacity: 0.8;
     }
-    font-size: 1.5rem;
     img {
       width: 100%;
     }
     .power_inner {
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 55%;
       transform: translate(-50%, -50%);
     }
   }
@@ -900,16 +920,15 @@ export default {
       opacity: 0.8;
     }
     width: 15rem;
-    padding: 0.5rem 0;
-    font-size: 1.2rem;
+    padding: 0.3rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(63, 42, 18, 0.8);
     border-radius: 4px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     img {
-      width: 2.5rem;
+      height: 2rem;
       margin-right: 1rem;
     }
   }
@@ -927,7 +946,7 @@ export default {
   padding: 0.5rem 1rem;
   background: rgba(44, 3, 3, 0.6);
   border-radius: 20px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
 
   .time_row {
@@ -935,11 +954,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 1rem;
     img {
       margin: 0 1rem;
-      width: 2.5rem;
+      height: 2rem;
     }
   }
 }
