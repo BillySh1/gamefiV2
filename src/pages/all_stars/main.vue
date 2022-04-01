@@ -173,6 +173,10 @@
             <div class="text">鹿原奖池</div>
           </div>
         </div>
+        <div class="forage_zone">
+          <img src="../../assets/store/item/type_0_0.png" alt="" />
+          当前随军粮草 {{ player.nowForages }}
+        </div>
         <div class="pre_time_view" v-if="times[4] != 0">您已抵达战场</div>
 
         <div
@@ -288,6 +292,7 @@ export default {
       curNodeInfo: "",
       nextNodeInfo: "",
       curPosition: `position:absolute;height:6rem;top:0%;left:0%`,
+      forage:[0,0]
     });
     const curSpeed = computed(() => {
       const now = new Date().getTime();
@@ -701,6 +706,21 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+}
+.forage_zone {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  align-items: center;
+  background: rgba(44, 3, 3, 0.6);
+  border-radius: 8px;
+  padding: 0 2rem;
+  img{
+    height: 3rem;
+    margin-right: 2rem;
   }
 }
 .refresh_field {
