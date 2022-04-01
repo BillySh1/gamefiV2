@@ -1,6 +1,6 @@
 <template>
   <div class="index_container">
-    <CommonPageHeader @exit="exit" />
+    <CommonPageHeader @exit="disconnect" />
 
     <div class="content">
       <InjectUser :power="power" />
@@ -91,6 +91,9 @@ export default {
       );
       await getPower();
     });
+    const disconnect = ()=>{
+      window.dispatchEvent(new Event('disconnet_wlt'))
+    }
     const getPower = async () => {
       const c = store.state.c_hero;
       const list = await c.methods.cardList(data.account).call();
@@ -108,6 +111,7 @@ export default {
     };
     return {
       ...refData,
+      disconnect,
       jump,
       exit,
     };

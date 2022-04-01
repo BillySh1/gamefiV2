@@ -1,8 +1,5 @@
 <template>
-  <router-view
-    @exit="() => disconnect()"
-    v-if="correctChainId && connected && !loading"
-  ></router-view>
+  <router-view v-if="correctChainId && connected && !loading"></router-view>
   <ConnectWalletModal
     :value="modalShow"
     :mobile="isMobile"
@@ -135,7 +132,11 @@ export default {
       });
     },
   },
+  beforeUnmount() {
+    window.removeEventListener("disconnet_wlt", true);
+  },
   async mounted() {
+    window.addEventListener("disconnet_wlt", this.disconnect);
     await this.init();
     this.watchChain();
     this.judge();

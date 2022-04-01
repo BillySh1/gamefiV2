@@ -61,9 +61,7 @@
               {{ getItemDetail(curItem).name }}
             </div>
             <div class="intro">速率加成 {{ totalSpeedAdd }}</div>
-            <div v-if="rideTimging" class="intro">
-              生效时间{{ timing }}
-            </div>
+            <div v-if="timing" class="intro">生效时间{{ timing }}</div>
 
             <CommonButton
               v-if="canUse && !disable"
@@ -437,36 +435,9 @@ export default {
           }
         }
         .intro {
-          font-size: 2rem;
+          font-size: 1.5rem;
         }
-        .input_box {
-          display: flex;
-          align-items: center;
-          .img_action {
-            width: 2rem;
-          }
-          .ipt_img {
-            margin: 0 1rem;
-            width: 12.5rem;
-          }
-        }
-        .ipt_bg {
-          position: relative;
-          margin: 0 1rem;
-        }
-        .input {
-          width: 60%;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -55%);
-          outline: none;
-          background: transparent;
-          border: none;
-          text-align: center;
-          font-size: 2.5rem;
-          color: #f2dbb9;
-        }
+
         .btn {
           font-size: 1.5rem;
           padding: 1rem 4rem;
