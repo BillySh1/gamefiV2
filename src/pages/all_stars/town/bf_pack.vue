@@ -61,6 +61,9 @@
               {{ getItemDetail(curItem).name }}
             </div>
             <div class="intro">速率加成 {{ totalSpeedAdd }}</div>
+            <div v-if="rideTimging" class="intro">
+              生效时间{{ timing }}
+            </div>
 
             <CommonButton
               v-if="canUse && !disable"
@@ -101,7 +104,7 @@ import CommonButton from "../../../components/common_button.vue";
 import { useStore } from "vuex";
 export default {
   name: "bf_pack",
-  props: ["value", "disable"],
+  props: ["value", "disable", "timing"],
   components: {
     CommonButton,
   },

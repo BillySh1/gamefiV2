@@ -9,6 +9,7 @@
     @refresh="allInit"
     @close="allInit"
     :value="showPack"
+    :timing="rideTimging"
   />
   <MarchEvents
     :type="eventType"
@@ -292,7 +293,8 @@ export default {
       curNodeInfo: "",
       nextNodeInfo: "",
       curPosition: `position:absolute;height:6rem;top:0%;left:0%`,
-      forage:[0,0]
+      forage: [0, 0],
+      rideTimging: null,
     });
     const curSpeed = computed(() => {
       const now = new Date().getTime();
@@ -497,7 +499,7 @@ export default {
       if (parseInt(h, 10) < 0) h = "0";
       if (parseInt(m, 10) < 0) m = "0";
       if (parseInt(s, 10) < 0) s = "0";
-      data.timing = `${h}时${m}分${s}秒`;
+      return `${h}时${m}分${s}秒`;
     };
 
     const getTimes = async () => {
@@ -519,7 +521,10 @@ export default {
         return;
       }
       data.ticker = setInterval(() => {
-        getRTime(res[1]);
+        data.timing = getRTime(res[1]);
+        if (Number(res[2]) * 1000 - Number(now) > 0) {
+          data.rideTimging = getRTime(res[2]);
+        }
       }, 1000);
     };
     const getStartTime = async () => {
@@ -718,7 +723,7 @@ export default {
   background: rgba(44, 3, 3, 0.6);
   border-radius: 8px;
   padding: 0 2rem;
-  img{
+  img {
     height: 3rem;
     margin-right: 2rem;
   }
