@@ -28,7 +28,10 @@
       </div>
       <div class="float_left_box">
         <div class="leader_board_box" @click="jump('leader')">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/Leader_board.svg" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/Leader_board.svg"
+            alt=""
+          />
           <div class="leader_board_text">排行榜</div>
         </div>
       </div>
@@ -36,14 +39,20 @@
       <div class="float_action_buttons">
         <!-- <img class="up" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/ac_bottom.png" alt="" /> -->
         <div class="actions_inner">
-          <div class="left">
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/left.png" alt="" />
+          <div class="left" @click="jump('stk_entry')">
+            <img src="../../assets/index/left.png" alt="" />
           </div>
           <div class="middle" @click="jump('allStarsEntry')">
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/middle.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/middle.png"
+              alt=""
+            />
           </div>
           <div class="right">
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/right.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/right.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -91,9 +100,9 @@ export default {
       );
       await getPower();
     });
-    const disconnect = ()=>{
-      window.dispatchEvent(new Event('disconnet_wlt'))
-    }
+    const disconnect = () => {
+      window.dispatchEvent(new Event("disconnet_wlt"));
+    };
     const getPower = async () => {
       const c = store.state.c_hero;
       const list = await c.methods.cardList(data.account).call();
@@ -178,9 +187,11 @@ export default {
   .actions_inner {
     display: flex;
     margin-top: 2rem;
+
     .left {
-      user-select: none;
-      pointer-events: none;
+      &:hover {
+        opacity: 0.6;
+      }
       cursor: pointer;
       position: relative;
       transform: translateX(2rem);

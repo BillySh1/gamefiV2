@@ -46,6 +46,9 @@ const bf_staked_his = () => import("../pages/all_stars/caiso/bf_stake_his.vue");
 const bf_casio_history = () =>
   import("../pages/all_stars/caiso/bf_history.vue");
 
+// 攻城略地 start
+const stk_entry = () => import("../pages/stake/entry.vue");
+
 const router = createRouter({
   history: routerHistory,
   base: process.env.BASE_URL,
@@ -250,6 +253,11 @@ const router = createRouter({
       path: "/bf_pool",
       name: "bf_pool",
       component: bf_pool,
+    },
+    {
+      path: "/stk_entry",
+      name: "stk_entry",
+      component: stk_entry,
     },
   ],
 });
