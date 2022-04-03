@@ -5,7 +5,7 @@
 <script>
 import { reactive,toRefs,onBeforeMount,onMounted} from 'vue'
 export default {
-    name: 'stk_detail',
+    name: '',
       setup() {
           const data = reactive({
 
