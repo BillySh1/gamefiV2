@@ -40,7 +40,7 @@ export default {
         {
           key: 0,
           name: "黄巾之乱",
-          apy: "40.5%",
+          apy: "暂未开放",
           time: 7,
           img: require("../../assets/stake/p_0.png"),
           diff: require("../../assets/stake/h0.png"),
@@ -48,7 +48,7 @@ export default {
         {
           key: 1,
           name: "夷陵之战",
-          apy: "40.5%",
+          apy: "暂未开放",
           time: 15,
           img: require("../../assets/stake/p_1.png"),
           diff: require("../../assets/stake/h1.png"),
@@ -56,7 +56,7 @@ export default {
         {
           key: 2,
           name: "决战虎牢关",
-          apy: "40.5%",
+          apy: "暂未开放",
           time: 30,
           img: require("../../assets/stake/p_2.png"),
           diff: require("../../assets/stake/h2.png"),
