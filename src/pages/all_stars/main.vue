@@ -415,10 +415,10 @@ export default {
         if (data.player.state == 0) {
           data.eventType = 0; // 纯前进
         } else {
-          data.eventType = 1; // 战斗结束, 只能选择继续前进
+          data.eventType = 2; // 战斗结束, 只能选择继续前进
           data.randomEvents.push({
             key: "jbzjsqj",
-            name: "暂未发生战斗",
+            name: "集结中",
             type: 1,
           });
         }
