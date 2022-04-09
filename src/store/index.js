@@ -13,6 +13,7 @@ import RichShopABI from "../constants/RichShop.json";
 import TrainingABI from "../constants/Training.json";
 import BattleABI from "../constants/Battle.json";
 import BattleShopABI from "../constants/BattleShop.json";
+import StakingABI from "../constants/Staking.json";
 import BetABI from "../constants/Bet.json";
 
 const c_map = {
@@ -68,6 +69,10 @@ const c_map = {
   c_bet: {
     abi: BetABI.abi,
     address: addressMap.bet,
+  },
+  c_staking: {
+    abi: StakingABI.abi,
+    address: addressMap.staking,
   },
 };
 
