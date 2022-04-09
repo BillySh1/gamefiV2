@@ -85,22 +85,18 @@
       :value="showModal"
       @close="() => (showModal = false)"
       @confirm="() => (showModal = false)"
+      :btnDisable="Number(cost) > Number(stockBalance)"
     >
       <div class="modal_inner_box">
         <div class="up">
-          您将使用 两仪石 x {{ cost }} 对 {{ curSelectedHero.name }} 进行升级吗
+          您将使用 两仪石 x {{ cost }} 对 {{ curSelectedHero.name }} 进行重生吗
         </div>
         <div class="sub">当前拥有 两仪石 数量 {{ stockBalance }}</div>
         <CommonButton
           class="btn"
           @click="
             () => {
-              $router.push({
-                name: 'storeDetail',
-                query: {
-                  info: 10,
-                },
-              });
+              toShop();
             }
           "
           >前往商店</CommonButton
@@ -274,7 +270,18 @@ export default {
         data.loading = false;
       }
     };
-
+    const toShop = () => {
+      sessionStorage.setItem(
+        "buffer_hero",
+        JSON.stringify(data.curSelectedHero)
+      );
+      router.push({
+        name: "storeDetail",
+        query: {
+          info: 10,
+        },
+      });
+    };
     const approveStock = async () => {
       try {
         const c = store.state.c_richShop;
@@ -389,6 +396,11 @@ export default {
           data.web3 = p;
         }
       );
+      if (sessionStorage.getItem("buffer_hero")) {
+        const info = sessionStorage.getItem("buffer_hero");
+        data.curSelectedHero = JSON.parse(info);
+        sessionStorage.setItem("buffer_hero", null);
+      }
       await getBeforePack();
     });
 
@@ -399,6 +411,7 @@ export default {
       handleClickReborn,
       handleSelectHero,
       actionButtonClick,
+      toShop,
       btnText,
       canDo,
     };
