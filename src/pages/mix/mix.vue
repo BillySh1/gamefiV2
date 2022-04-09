@@ -80,7 +80,11 @@
             }
           "
         >
-          <img v-if="!qualityCost" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png" alt="" />
+          <img
+            v-if="!qualityCost"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png"
+            alt=""
+          />
           <div v-else>
             <img :src="qualityCost.img" />
             {{ qualityCost.cost }}
@@ -108,7 +112,11 @@
             }
           "
         >
-          <img v-if="!attrCost" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png" alt="" />
+          <img
+            v-if="!attrCost"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png"
+            alt=""
+          />
           <div v-else>
             <img :src="attrCost.img" />
             {{ attrCost.cost }}
@@ -137,10 +145,18 @@
         :hideSearch="true"
         @select="(x) => handleSelect(x)"
       />
-      <img class="mix_mist" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png" alt="" />
+      <img
+        class="mix_mist"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png"
+        alt=""
+      />
     </div>
     <div v-if="!showPack && !loading" class="content">
-      <img class="mix_mist" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png" alt="" />
+      <img
+        class="mix_mist"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png"
+        alt=""
+      />
       <div class="inner">
         <div
           class="mix_item"
@@ -152,7 +168,11 @@
             }
           "
         >
-          <img class="mix_item_bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png" alt="" />
+          <img
+            class="mix_item_bg"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png"
+            alt=""
+          />
           <div class="hero_selected" v-if="leftInfo">
             <HeroCardItem :info="leftInfo" />
           </div>
@@ -165,7 +185,10 @@
           <div v-else class="no_selected">请选择卡牌</div>
         </div>
         <div class="mix_swirl">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/swirl.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/swirl.png"
+            alt=""
+          />
         </div>
         <div
           class="mix_item right"
@@ -177,7 +200,11 @@
             }
           "
         >
-          <img class="mix_item_bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png" alt="" />
+          <img
+            class="mix_item_bg"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png"
+            alt=""
+          />
           <div class="hero_selected" v-if="rightInfo">
             <HeroCardItem v-if="rightInfo" :info="rightInfo" />
           </div>
@@ -192,7 +219,9 @@
       </div>
       <div class="tip_badge" @click="() => (showModal = true)">
         <div class="inner">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+          />
           <div class="text">进阶提醒</div>
         </div>
       </div>
@@ -221,9 +250,7 @@
       :value="showModal"
       title="进阶提醒"
     >
-      <div class="modal_text">
-        相同阵营， 相同稀有度的英雄才可以进阶
-      </div>
+      <div class="modal_text">相同阵营， 相同稀有度的英雄才可以进阶</div>
       <div class="modal_text">进阶卡牌固定消耗并尊盟约，数量视稀有度而定</div>
       <div class="modal_text">
         可选择使用宝石(例:
@@ -452,6 +479,8 @@ export default {
       }
       if (data.origin == 0 && data.leftInfo && !data.rightInfo) {
         data.leftInfo = item;
+        sessionStorage.setItem("left_info", JSON.stringify(item));
+
         data.curRarity = item.rarity;
         data.curCamp = item.camp;
         data.showPack = false;
@@ -459,6 +488,8 @@ export default {
       }
       if (data.origin == 1 && data.rightInfo && !data.leftInfo) {
         data.rightInfo = item;
+        sessionStorage.setItem("right_info", JSON.stringify(item));
+
         data.curRarity = item.rarity;
         data.curCamp = item.camp;
         data.showPack = false;
@@ -490,6 +521,8 @@ export default {
           );
           return;
         }
+        sessionStorage.setItem("left_info", JSON.stringify(item));
+
         data.leftInfo = item;
       } else if (data.origin == 1) {
         if (data.leftInfo && data.leftInfo.tokenId == item.tokenId) {
@@ -499,8 +532,11 @@ export default {
           );
           return;
         }
+        sessionStorage.setItem("right_info", JSON.stringify(item));
+
         data.rightInfo = item;
       }
+
       data.showPack = false;
     };
     onBeforeMount(async () => {
@@ -512,6 +548,16 @@ export default {
           data.web3 = p;
         }
       );
+      const left = sessionStorage.getItem("left_info");
+      const right = sessionStorage.getItem("right_info");
+      if (left != 'null') {
+        data.leftInfo = JSON.parse(left);
+        sessionStorage.setItem("left_info", 'null');
+      }
+      if (right != 'null' ) {
+        data.right = JSON.parse(right);
+        sessionStorage.setItem("right_info", 'null');
+      }
       await getBeforePack();
     });
     const getRemainNum = async () => {
@@ -639,7 +685,8 @@ export default {
         cursor: pointer;
         width: 5rem;
         height: 5rem;
-        background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_bg.png") no-repeat;
+        background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_bg.png")
+          no-repeat;
         background-size: 100% 100%;
         margin: 0 1rem;
         display: flex;
