@@ -10,6 +10,11 @@
       "
     />
     <div class="help_text">请选择 {{ curPlace }} 开始挑战</div>
+    <div class="float_city" >
+        <div class="inner">
+          
+        </div>
+    </div>
   </div>
 </template>
 

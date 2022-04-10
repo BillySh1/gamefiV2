@@ -117,7 +117,10 @@
     </InjectModal>
     <div class="topbar">
       <div class="title">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/title_bg.png"
+          alt=""
+        />
         <div class="text">天策府</div>
       </div>
       <div class="tabs" v-show="player.baseSpeed == 0">
@@ -136,7 +139,10 @@
       >
 
       <div class="power">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/power_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/power_bg.png"
+          alt=""
+        />
         <div class="text" v-if="player.baseSpeed == 0">
           <div class="t">战力</div>
           <div class="bg_v">{{ curTotalPower }}</div>
@@ -147,7 +153,10 @@
         </div>
       </div>
       <div class="rule" @click="() => (showRuleModal = true)">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/rule_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/rule_bg.png"
+          alt=""
+        />
         <div class="text">出征规则</div>
       </div>
     </div>
@@ -235,7 +244,10 @@
     </div>
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/store/back.png"
+          alt=""
+        />
         <div class="text">返回</div>
       </div>
       <div v-if="isCombined" class="combine">
@@ -243,7 +255,10 @@
         <span style="color: red">{{ isCombined }}</span> 战力更上一层楼
       </div>
       <div class="stake" @click="doubleCheck" v-show="player.baseSpeed == 0">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png"
+          alt=""
+        />
         <div class="text">出征</div>
       </div>
     </div>
@@ -397,10 +412,12 @@ export default {
       const warrior_storages = sessionStorage.getItem("before_warriors");
       if (warrior_storages && warrior_storages.length > 0) {
         data.selectedWarrior = JSON.parse(warrior_storages);
+        sessionStorage.setItem("before_warriors", "");
       }
       const king_storages = sessionStorage.getItem("before_king");
       if (king_storages && king_storages.length > 0) {
         data.selectedKing = JSON.parse(king_storages);
+        sessionStorage.setItem("before_king", "");
       }
     };
     onBeforeMount(async () => {
@@ -683,7 +700,8 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_bg.png")
+    no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
