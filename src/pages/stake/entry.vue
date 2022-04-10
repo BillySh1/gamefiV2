@@ -15,6 +15,9 @@
       v-for="item in citys"
       :key="item.key"
       :style="`left:${item.x}%;top:${item.y}%`"
+      @click="()=>$router.push({
+        name:'stk_main'
+      })"
     >
       <div class="inner">
         <div :class="item.active ? 'name' : 'name disable'">
@@ -82,7 +85,9 @@ export default {
 }
 .float_city {
   position: absolute;
-
+  &:hover {
+    opacity: 0.8;
+  }
   cursor: pointer;
   .inner {
     position: relative;
@@ -103,7 +108,7 @@ export default {
         }
       }
     }
-    .disable{
+    .disable {
       pointer-events: none;
       filter: grayscale(100);
     }

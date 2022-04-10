@@ -48,6 +48,8 @@ const bf_casio_history = () =>
 
 // 攻城略地 start
 const stk_entry = () => import("../pages/stake/entry.vue");
+const stk_detail = ()=>import ('../pages/stake/entry_detail.vue');
+const stk_main = ()=>import('../pages/stake/main.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -259,6 +261,16 @@ const router = createRouter({
       name: "stk_entry",
       component: stk_entry,
     },
+    {
+      path:'/stk_story',
+      name:'stk_story',
+      component: stk_detail,
+    },
+    {
+      path:'/stk_main',
+      name:'stk_main',
+      component:stk_main
+    }
   ],
 });
 
