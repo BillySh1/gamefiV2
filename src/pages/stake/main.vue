@@ -1,6 +1,10 @@
 <template>
   <div class="box">
-    <StkBtn class="check_map" :text="'查看地图'" />
+    <StkBtn class="check_map" :text="'查看地图'" @click="()=>{
+            $router.push({
+                name:'stk_entry'
+            })
+        }" />
     <div class="right_top">
       <div class="item">
         <img src="../../assets/stake/main_item.png" alt="" />
