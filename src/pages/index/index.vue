@@ -39,7 +39,7 @@
       <div class="float_action_buttons">
         <!-- <img class="up" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/ac_bottom.png" alt="" /> -->
         <div class="actions_inner">
-          <div class="left" @click="jump('stk_entry')">
+          <div class="left" >
             <img src="../../assets/index/left.png" alt="" />
           </div>
           <div class="middle" @click="jump('allStarsEntry')">

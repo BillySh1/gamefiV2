@@ -104,7 +104,7 @@ export default {
         "战斗结束时间",
         "敌军战力削减",
         "状态",
-        '粮草'
+        '粮草掉落'
       ]);
       res.list.map((item, index) => {
         data.battleData.push([
