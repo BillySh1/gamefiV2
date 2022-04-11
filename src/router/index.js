@@ -50,6 +50,7 @@ const bf_casio_history = () =>
 const stk_entry = () => import("../pages/stake/entry.vue");
 const stk_detail = ()=>import ('../pages/stake/entry_detail.vue');
 const stk_main = ()=>import('../pages/stake/main.vue')
+const stk_choose = ()=> import('../pages/stake/choose_mission.vue')
 
 const router = createRouter({
   history: routerHistory,
@@ -270,6 +271,11 @@ const router = createRouter({
       path:'/stk_main',
       name:'stk_main',
       component:stk_main
+    },
+    {
+      path:'/stk_choose',
+      name:'stk_choose',
+      component: stk_choose
     }
   ],
 });
