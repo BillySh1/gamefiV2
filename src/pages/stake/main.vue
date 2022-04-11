@@ -36,11 +36,11 @@
       </div>
     </div>
     <div class="left_bottom">
-      <div class="btn_item">
+      <div class="btn_item" @click="()=>$router.push({name:'stk_go'})">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div class="btn">查看部队</div>
       </div>
-      <div class="btn_item">
+      <div class="btn_item" @click="()=>$router.push({name:'stk_income'})">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div class="btn">查看收益</div>
       </div>

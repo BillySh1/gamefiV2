@@ -48,9 +48,11 @@ const bf_casio_history = () =>
 
 // 攻城略地 start
 const stk_entry = () => import("../pages/stake/entry.vue");
-const stk_detail = ()=>import ('../pages/stake/entry_detail.vue');
-const stk_main = ()=>import('../pages/stake/main.vue')
-const stk_choose = ()=> import('../pages/stake/choose_mission.vue')
+const stk_detail = () => import("../pages/stake/entry_detail.vue");
+const stk_main = () => import("../pages/stake/main.vue");
+const stk_choose = () => import("../pages/stake/choose_mission.vue");
+const stk_go = () => import("../pages/stake/stake_go.vue");
+const stk_income = () => import("../pages/stake/income.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -263,20 +265,30 @@ const router = createRouter({
       component: stk_entry,
     },
     {
-      path:'/stk_story',
-      name:'stk_story',
+      path: "/stk_story",
+      name: "stk_story",
       component: stk_detail,
     },
     {
-      path:'/stk_main',
-      name:'stk_main',
-      component:stk_main
+      path: "/stk_main",
+      name: "stk_main",
+      component: stk_main,
     },
     {
-      path:'/stk_choose',
-      name:'stk_choose',
-      component: stk_choose
-    }
+      path: "/stk_choose",
+      name: "stk_choose",
+      component: stk_choose,
+    },
+    {
+      path: "/stk_go",
+      name: "stk_go",
+      component: stk_go,
+    },
+    {
+      path: "/stk_income",
+      name: "stk_income",
+      component: stk_income,
+    },
   ],
 });
 
