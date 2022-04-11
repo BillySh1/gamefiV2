@@ -1,7 +1,16 @@
 <template>
   <div class="box">
     <div class="bottom">
-      <StkBtn :text="'考虑一下'" />
+      <StkBtn
+        @click="
+          () => {
+            $router.push({
+              name: 'stk_entry',
+            });
+          }
+        "
+        :text="'考虑一下'"
+      />
       <img src="../../assets/stake/divider.png" alt="" />
     </div>
     <div class="place_zone">
@@ -14,14 +23,25 @@
       <div class="text">154892734</div>
     </div>
     <div class="main_body">
-      <div class="item" v-for="(item, index) in map" :key="index">
+      <div
+        class="item"
+        v-for="(item, index) in map"
+        :key="index"
+        @click="
+          () => {
+            $router.push({
+              name: 'stk_main',
+            });
+          }
+        "
+      >
         <div class="mask">
           <img src="../../assets/stake/detail/select_bg.png" alt="" />
         </div>
         <div class="scroll">
           <img src="../../assets/stake/detail/scroll_bg.png" alt="" />
           <div class="intro_text">
-            {{item.intro}}
+            {{ item.intro }}
           </div>
         </div>
         <img class="icon" :src="item.img" alt="" />
@@ -49,21 +69,21 @@ export default {
           time: 7,
           apy: 15,
           img: require("../../assets/stake/detail/m_0.png"),
-          intro:'占位文案占位文案占位文案占位文案占位文案'
+          intro: "占位文案占位文案占位文案占位文案占位文案",
         },
         {
           name: "扫荡",
           time: 15,
           apy: 15,
           img: require("../../assets/stake/detail/m_1.png"),
-          intro:'占位文案占位文案占位文案占位文案占位文案'
+          intro: "占位文案占位文案占位文案占位文案占位文案",
         },
         {
           name: "驻扎",
           time: 30,
           apy: 15,
           img: require("../../assets/stake/detail/m_2.png"),
-          intro:'占位文案占位文案占位文案占位文案占位文案'
+          intro: "占位文案占位文案占位文案占位文案占位文案",
         },
       ],
     });
@@ -152,8 +172,8 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
       width: 33rem;
-      img{
-          width: 100%;
+      img {
+        width: 100%;
       }
     }
     &:hover {

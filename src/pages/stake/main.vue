@@ -42,7 +42,7 @@
       </div>
       <div class="btn_item">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
-        <div class="btn">查看部队</div>
+        <div class="btn">查看收益</div>
       </div>
     </div>
     <div class="place_zone">

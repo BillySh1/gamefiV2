@@ -16,7 +16,7 @@
       :key="item.key"
       :style="`left:${item.x}%;top:${item.y}%`"
       @click="()=>$router.push({
-        name:'stk_main'
+        name:'stk_choose'
       })"
     >
       <div class="inner">
