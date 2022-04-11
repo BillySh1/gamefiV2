@@ -1,10 +1,16 @@
 <template>
   <div class="box">
-    <StkBtn class="check_map" :text="'查看地图'" @click="()=>{
-            $router.push({
-                name:'stk_entry'
-            })
-        }" />
+    <StkBtn
+      class="check_map"
+      :text="'查看地图'"
+      @click="
+        () => {
+          $router.push({
+            name: 'stk_entry',
+          });
+        }
+      "
+    />
     <div class="right_top">
       <div class="item">
         <img src="../../assets/stake/main_item.png" alt="" />
@@ -39,11 +45,18 @@
         <div class="btn">查看部队</div>
       </div>
     </div>
-    <div class="place_zone" >
-        <div class="text" >
-            浮育城
-        </div>
-        <img class="img" src="../../assets/stake/city.png" alt="">
+    <div class="place_zone">
+      <div class="text">浮育城</div>
+      <img class="img" src="../../assets/stake/city.png" alt="" />
+    </div>
+    <div class="middle_bottom">
+      <div class="ing">
+        <img :src="require(`../../assets/stake/detail/m_${type}.png`)" alt="" />
+        <div class="text">正在执行 斥候 任务</div>
+      </div>
+     <div class="progress" >
+        <Progress :value='30'  />
+     </div>
     </div>
   </div>
 </template>
@@ -51,13 +64,17 @@
 <script>
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import StkBtn from "./components/stk_btn.vue";
+import Progress from './components/progress.vue'
 export default {
   name: "stk_main",
   components: {
     StkBtn,
+    Progress
   },
   setup() {
-    const data = reactive({});
+    const data = reactive({
+      type: 0,
+    });
     onBeforeMount(() => {});
     onMounted(() => {});
     const refData = toRefs(data);
@@ -144,26 +161,56 @@ export default {
     }
   }
 }
-.place_zone{
-    position: absolute;
-    bottom: 3%;
-    right: 3%;
+.place_zone {
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .text {
+    background: url("../../assets/stake/place_text_bg.png") no-repeat;
+    background-size: 100% 100%;
+    width: 15rem;
+    padding: 0.5rem 0;
+    font-size: 1.3rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    .text{
-        background: url('../../assets/stake/place_text_bg.png') no-repeat;
-        background-size: 100% 100%;
-        width: 15rem;
-        padding: 0.5rem 0;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .img {
+    width: 10rem;
+  }
+}
+.middle_bottom {
+  position: absolute;
+  left: 50%;
+  bottom: calc(3% + 2rem);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .ing {
+    background: linear-gradient(
+      180deg,
+      rgba(45, 43, 43, 0.7) 0%,
+      rgba(28, 57, 67, 0.7) 67.71%,
+      rgba(52, 58, 61, 0.7) 100%
+    );
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    img {
+      width: 3rem;
+      margin-right: 2rem;
     }
-    .img{
-        width: 10rem;
-    }
+    margin-bottom: 2rem;
+  }
+  .progress{
+    width: 23rem;
+  }
 }
 </style>
