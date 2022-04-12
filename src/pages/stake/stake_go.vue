@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="top">
-      <StkBtn :text="'返回'" />
+      <StkBtn :text="'返回'" @click="()=>$router.go(-1)" />
       <div class="power">当前战力 2555000000</div>
     </div>
     <div class="stake_zone">
