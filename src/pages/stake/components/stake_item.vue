@@ -37,7 +37,7 @@ export default {
   }
   position: relative;
   width: 100%;
-  height: 90%;
+  height: 92%;
   background: url("../../../assets/stake/stake/stake_item.png") no-repeat;
   background-size: 100% 100%;
   .empty {

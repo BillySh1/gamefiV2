@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="top">
-      <StkBtn :text="'返回'" @click="()=>$router.go(-1)" />
+      <StkBtn :text="'返回'" @click="() => $router.go(-1)" />
       <div class="power">当前战力 2555000000</div>
     </div>
     <div class="stake_zone">
@@ -76,11 +76,11 @@ export default {
   },
   setup() {
     const data = reactive({
-      selected: [{}, {}, {}, {}],
+      selected: [{}, {}, {}, {}, {}],
       curPage: 1,
     });
     const selectedShow = computed(() => {
-      return data.selected.slice(data.curPage * 4 - 4, data.curPage * 4 - 1);
+      return data.selected.slice(data.curPage * 5 - 5, data.curPage * 5 - 1);
     });
     const pageNum = computed(() => {
       const res = [];
@@ -110,7 +110,7 @@ export default {
   height: 100%;
   background: url("../../assets/stake/stake/stake_bg.png") no-repeat;
   background-size: 100% 100%;
-  padding: 2rem 4rem;
+  padding: 1rem 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -138,7 +138,7 @@ export default {
   overflow-x: hidden;
   margin: 2rem 0;
   .item {
-    min-width: 16vmax;
+    min-width: 15vmax;
     height: 100%;
     margin-right: 4rem;
   }
@@ -148,7 +148,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
   .page {
     display: flex;
     align-items: center;

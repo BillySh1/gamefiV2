@@ -1,6 +1,39 @@
 <template>
   <div class="box">
-    <StkBtn class="back" :text="'返回'" />
+    <StkBtn class="back" :text="'返回'" @click="()=>$router.go(-1)" />
+    <div class="main">
+      <div class="main_top">
+        <div class="cur_mission">
+          <img src="../../assets/stake/detail/m_0.png" alt="" />
+          <div class="intro">执行斥候任务</div>
+        </div>
+        <div class="income">收益 每周15%</div>
+      </div>
+      <div class="main_info">
+        <div class="item">
+          任务剩余时间 <span style="font-size: 2rem">09:08:32</span>
+        </div>
+        <div class="white">
+          当前已累计收益 <span style="font-size: 1.5rem">152223333</span>
+        </div>
+        <div class="white">
+          继续探索的收益为 <span style="font-size: 1.5rem">152223333</span>
+        </div>
+      </div>
+      <div class="main_action">
+        <div class="left">
+          <div class="income_info">
+            <img src="../../assets/stake/coin.png" alt="" />
+            <div>
+              <div class="item">当前可领取</div>
+              <div class="item">263834 MMC</div>
+            </div>
+          </div>
+          <div>累计收益自动招募雇佣兵提升战力</div>
+        </div>
+        <div class="btn">召回部队</div>
+      </div>
+    </div>
     <div class="bottom_bar">
       <div class="progress">
         <Progress :value="23" />
@@ -129,24 +162,106 @@ export default {
         margin-bottom: 1rem;
       }
     }
-    .power{
-        .total{
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
+    .power {
+      .total {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+      }
+      .common {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+      .mar {
+        margin-right: 2rem;
+      }
+      .item {
+        margin-right: 2rem;
+      }
+    }
+  }
+}
+.main {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .main_top {
+    display: flex;
+    align-items: center;
+    .cur_mission {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 2rem;
+      background: linear-gradient(
+        180deg,
+        rgba(45, 43, 43, 0.7) 0%,
+        rgba(28, 57, 67, 0.7) 67.71%,
+        rgba(52, 58, 61, 0.7) 100%
+      );
+      border-radius: 1rem;
+      img {
+        width: 3rem;
+        margin-right: 1rem;
+      }
+      .intro {
+        font-size: 1.3rem;
+      }
+    }
+    .income {
+      margin-left: 2rem;
+      color: white;
+    }
+  }
+  .main_info {
+    margin-top: 1.5rem;
+    span {
+      margin-left: 2rem;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+    .white {
+      margin-top: 1rem;
+      text-align: left;
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+  .main_action {
+    display: flex;
+    align-items: center;
+    margin-top: 4rem;
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .income_info {
+        display: flex;
+        align-items: center;
+        img {
+          width: 5rem;
+          margin-right: 3rem;
         }
-        .common{
-            display: flex;
-            align-items: center;
-            font-size: 1.2rem;
-            margin-top: 1rem;
+        .item {
+          margin-bottom: 2rem;
+          font-size: 2rem;
         }
-        .mar{
-            margin-right: 2rem;
-        }
-        .item{
-            margin-right: 2rem;
-        }
+      }
+    }
+    .btn {
+      cursor: pointer;
+      padding: 0.7rem 2rem;
+      box-sizing: border-box;
+      background: url("../../assets/stake/stake/btn_bg.png") no-repeat;
+      background-size: 100% 100%;
+      margin-right: 4rem;
+      font-size: 2rem;
+      margin-left: 8rem;
     }
   }
 }
