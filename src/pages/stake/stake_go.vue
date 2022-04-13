@@ -1,4 +1,22 @@
 <template>
+  <InjectPackHero
+    :value="showPack"
+    :toSelect="true"
+    :selected="
+      selected.reduce((arr, cur) => {
+        arr.push(cur.tokenId);
+        return arr;
+      }, [])
+    "
+    :camp="camp"
+    :hideName="true"
+    @select="(x) => handleSelectHero(x)"
+    @back="
+      () => {
+        showPack = false;
+      }
+    "
+  />
   <div class="box">
     <div class="top">
       <StkBtn :text="'返回'" @click="() => $router.go(-1)" />
@@ -9,21 +27,31 @@
         class="item"
         v-for="(item, index) in selectedShow"
         :key="index"
-        @click="() => handleClickItem(index)"
+        @click="() => handleClickStake(index)"
       >
         <StakeItem :info="item" />
       </div>
-      <div class="item">
+      <div class="item" @click="() => handleClickStake(index)">
         <StakeItem :info="{}" />
       </div>
     </div>
     <div class="action">
       <div class="page">
-        <div class="btn">上一页</div>
-        <div class="btn">下一页</div>
+        <div
+          :class="curPage > 1 ? 'btn' : 'btn disable'"
+          @click="() => curPage--"
+        >
+          上一页
+        </div>
+        <div
+          :class="curPage < pageNum ? 'btn' : 'btn disable'"
+          @click="() => curPage++"
+        >
+          下一页
+        </div>
       </div>
       <div class="pagnation">
-        <div class="page_item" v-for="item in pageNum" :key="item">
+        <div class="page_item" v-for="item in pageNum" :key="item" @click="()=>curPage = index+1">
           {{ item }}
         </div>
       </div>
@@ -68,16 +96,20 @@
 import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
 import StkBtn from "./components/stk_btn.vue";
 import StakeItem from "./components/stake_item.vue";
+import InjectPackHero from "../../components/inejct_pack_hero.vue";
 export default {
   name: "stake_go",
   components: {
     StkBtn,
     StakeItem,
+    InjectPackHero,
   },
   setup() {
     const data = reactive({
       selected: [{}, {}, {}, {}, {}],
+      curIdx: 0,
       curPage: 1,
+      showPack: false,
     });
     const selectedShow = computed(() => {
       return data.selected.slice(data.curPage * 5 - 5, data.curPage * 5 - 1);
@@ -92,6 +124,14 @@ export default {
       }
       return res;
     });
+    const handleClickStake = (index) => {
+      data.curIdx = index;
+      data.showPack = true;
+    };
+    const handleSelectHero = (info) => {
+      data.selected[data.curIdx] = info;
+      data.showPack = false;
+    };
     onBeforeMount(() => {});
     onMounted(() => {});
     const refData = toRefs(data);
@@ -99,6 +139,8 @@ export default {
       ...refData,
       selectedShow,
       pageNum,
+      handleClickStake,
+      handleSelectHero,
     };
   },
 };
@@ -152,6 +194,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .disable {
+      pointer-events: none;
+      filter: grayscale(100);
+    }
     .btn {
       cursor: pointer;
       width: 8rem;

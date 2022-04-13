@@ -90,11 +90,6 @@ export default {
       });
     };
     onBeforeMount(async () => {
-      if (localStorage.getItem("stake_diff") != "") {
-        router.push({
-          name: "stk_go",
-        });
-      }
     });
     onMounted(() => {});
     const refData = toRefs(data);

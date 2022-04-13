@@ -2,7 +2,7 @@
   <div class="stake_item">
     <div v-if="!info || !info.tokenId" class="empty">点击出征</div>
     <div class="stake_item_card" v-if="info && info.tokenId">
-      <HeroCardItem :big="true" :info="info" />
+      <HeroCardItem :hideName="true" :big="true" :info="info" />
     </div>
   </div>
   <div class="power_box">

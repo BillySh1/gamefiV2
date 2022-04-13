@@ -1,7 +1,7 @@
 <template>
   <div class="power_box">
     <div class="card_content">
-      <HeroCardItem :info="info" />
+      <HeroCardItem  :info="info" />
     </div>
     <div class="power_zone">
       <div class="zone_inner">

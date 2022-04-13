@@ -3,6 +3,7 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
       <div
+      v-show="!hideName"
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
@@ -57,7 +58,7 @@ import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
 export default {
   name: "hero_card_img",
-  props: ["info", "big"],
+  props: ["info", "big",'hideName'],
   setup(prop) {
     const data = reactive({});
     const borderImg = computed(() => {
