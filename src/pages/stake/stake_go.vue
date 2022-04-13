@@ -31,7 +31,7 @@
       >
         <StakeItem :info="item" />
       </div>
-      <div class="item" @click="() => handleClickStake(index)">
+      <div class="item">
         <StakeItem :info="{}" />
       </div>
     </div>
@@ -51,7 +51,12 @@
         </div>
       </div>
       <div class="pagnation">
-        <div class="page_item" v-for="item in pageNum" :key="item" @click="()=>curPage = index+1">
+        <div
+          class="page_item"
+          v-for="(item, idx) in pageNum"
+          :key="item"
+          @click="() => (curPage = idx + 1)"
+        >
           {{ item }}
         </div>
       </div>
