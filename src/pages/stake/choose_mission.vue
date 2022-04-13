@@ -27,13 +27,7 @@
         class="item"
         v-for="(item, index) in map"
         :key="index"
-        @click="
-          () => {
-            $router.push({
-              name: 'stk_main',
-            });
-          }
-        "
+        @click="() => clickMission(index)"
       >
         <div class="mask">
           <img src="../../assets/stake/detail/select_bg.png" alt="" />
@@ -56,12 +50,14 @@
 <script>
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import StkBtn from "./components/stk_btn.vue";
+import { useRouter } from "vue-router";
 export default {
   name: "choose_mission",
   components: {
     StkBtn,
   },
   setup() {
+    const router = useRouter();
     const data = reactive({
       map: [
         {
@@ -87,11 +83,24 @@ export default {
         },
       ],
     });
-    onBeforeMount(() => {});
+    const clickMission = (idx) => {
+      localStorage.setItem("stake_diff", idx);
+      router.push({
+        name: "stk_go",
+      });
+    };
+    onBeforeMount(async () => {
+      if (localStorage.getItem("stake_diff") != "") {
+        router.push({
+          name: "stk_go",
+        });
+      }
+    });
     onMounted(() => {});
     const refData = toRefs(data);
     return {
       ...refData,
+      clickMission,
     };
   },
 };
