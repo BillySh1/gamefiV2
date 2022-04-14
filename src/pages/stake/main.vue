@@ -15,8 +15,10 @@
       <div class="item">
         <img src="../../assets/stake/main_item.png" alt="" />
         <div class="inner">
-          <div class="title">总奖池</div>
-          <div style="font-size: 1.2rem; margin: 0 1.5rem">154283929</div>
+          <div class="title">累计收益</div>
+          <div style="font-size: 1.2rem; margin: 0 1.5rem">
+            {{ player.totalReward }}
+          </div>
           <img class="coin" src="../../assets/stake/coin.png" alt="" />
         </div>
       </div>
@@ -24,23 +26,23 @@
         <img src="../../assets/stake/main_item.png" alt="" />
         <div class="inner">
           <div class="title">累计时间</div>
-          <div class="str">09:08:23</div>
+          <div class="str">{{ stakedTime }}</div>
         </div>
       </div>
       <div class="item">
         <img src="../../assets/stake/main_item.png" alt="" />
         <div class="inner">
-          <div class="title">累计收益</div>
-          <div class="str">1515255</div>
+          <div class="title">剩余时间</div>
+          <div class="str">{{ remainTime }}</div>
         </div>
       </div>
     </div>
     <div class="left_bottom">
-      <div class="btn_item" @click="()=>$router.push({name:'stk_go'})">
+      <div class="btn_item" @click="() => $router.push({ name: 'stk_go' })">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div class="btn">查看部队</div>
       </div>
-      <div class="btn_item" @click="()=>$router.push({name:'stk_income'})">
+      <div class="btn_item" @click="() => $router.push({ name: 'stk_income' })">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div class="btn">查看收益</div>
       </div>
@@ -52,34 +54,83 @@
     <div class="middle_bottom">
       <div class="ing">
         <img :src="require(`../../assets/stake/detail/m_${type}.png`)" alt="" />
-        <div class="text">正在执行 斥候 任务</div>
+        <div class="text">正在执行 {{ getDiffName }} 任务</div>
       </div>
-     <div class="progress" >
-        <Progress :value='30'  />
-     </div>
+      <div class="progress">
+        <Progress :value="100 * Number(player.percent)" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import StkBtn from "./components/stk_btn.vue";
-import Progress from './components/progress.vue'
+import Progress from "./components/progress.vue";
+import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "stk_main",
   components: {
     StkBtn,
-    Progress
+    Progress,
   },
   setup() {
+    const store = useStore();
     const data = reactive({
       type: 0,
+      account: "",
+      web3: "",
+      player: "",
+      stakedTime: 0,
+      remainTime: 0,
+      ticker: "",
     });
-    onBeforeMount(() => {});
-    onMounted(() => {});
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPlayer();
+    });
+
+    const getRTime = (startTime, endTime) => {
+      const delta = Number(endTime) - Number(startTime);
+      let d = Math.floor(delta / (60 * 60 * 24));
+      let h = Math.floor((delta / 60 / 60) % 24);
+      let m = Math.floor((delta / 60) % 60);
+      if (parseInt(h, 10) < 0) h = "0";
+      if (parseInt(m, 10) < 0) m = "0";
+      if (parseInt(d, 10) < 0) d = "0";
+      return `${d}天${h}时${m}分`;
+    };
+    const getTime = () => {
+      const now = (Number(new Date().getTime()) / 1000).toFixed(0);
+      const startStaked = data.player.stakingInfo.stakingStartTime;
+      const endStaked = data.player.stakingInfo.stakingEndTime;
+      data.stakedTime = getRTime(startStaked, now);
+      data.remainTime = getRTime(now, endStaked);
+    };
+    const getPlayer = async () => {
+      const c = store.state.c_staking;
+      const res = await c.methods.players(data.account).call();
+      data.player = res;
+      getTime();
+      console.log(data.player, "ggg");
+    };
+    const getDiffName = computed(() => {
+      return ["斥候", "扫荡", "驻扎"][
+        data.player.stakingInfo.stakingDifficulty
+      ];
+    });
     const refData = toRefs(data);
     return {
       ...refData,
+      getDiffName,
     };
   },
 };
@@ -209,7 +260,7 @@ export default {
     }
     margin-bottom: 2rem;
   }
-  .progress{
+  .progress {
     width: 23rem;
   }
 }
