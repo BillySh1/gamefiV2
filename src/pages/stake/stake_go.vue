@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="middle_info">
-            <div class="com_item" style="color:white">触发羁绊</div>
+            <div class="com_item" style="color: white">触发羁绊</div>
             <div class="com_item">五子良将</div>
           </div>
           <div class="bottom_info">
@@ -182,7 +182,7 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          data.btnStep = 1;
+          data.btnStatus = 1;
           proxy.$toast("授权成功", store.state.toast_success);
         }
       } catch (e) {
@@ -198,9 +198,15 @@ export default {
         proxy.$toast("等待确认", store.state.toast_info);
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
+        const selectedTokenId = data.selected.reduce((res, x) => {
+          if (x && x.tokenId) {
+            res.push(x.tokenId);
+          }
+          return res
+        }, []);
         console.log(
           "params",
-          data.selected,
+          selectedTokenId,
           data.combineInfo.combine,
           data.combineInfo.combineCamp,
           data.combineInfo.combineId,
@@ -208,7 +214,7 @@ export default {
         );
         const gas = await c.methods
           .staking(
-            data.selected,
+            selectedTokenId,
             data.combineInfo.combine,
             data.combineInfo.combineCamp,
             data.combineInfo.combineId,
@@ -217,7 +223,7 @@ export default {
           .estimateGas({ from: data.account });
         const res = await c.methods
           .staking(
-            data.selected,
+            selectedTokenId,
             data.combineInfo.combine,
             data.combineInfo.combineCamp,
             data.combineInfo.combineId,
@@ -476,7 +482,7 @@ export default {
         text-align: left;
         color: rgba(255, 153, 0, 1);
         margin: 1rem 0;
-        .com_item{
+        .com_item {
           margin-right: 1rem;
         }
       }
