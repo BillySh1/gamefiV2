@@ -9,6 +9,12 @@
         }
       "
     />
+    <div v-if="player.inStaking" class="ing">
+      <div class="inner">
+        <img src="../../assets/stake/map/ing.png" alt="" />
+        <div class="text">探索中</div>
+      </div>
+    </div>
     <div v-if="!player.inStaking" class="help_text">
       请选择 {{ curPlace }} 开始挑战
     </div>
@@ -35,6 +41,9 @@
       "
     >
       <div class="inner">
+        <div class="spin" v-if="item.active">
+          <img src="../../assets/stake/map/spin.png" alt="" />
+        </div>
         <div :class="item.active ? 'name' : 'name disable'">
           <div class="inner">
             <img src="../../assets/stake/map/place_bg.png" alt="" />
@@ -112,6 +121,27 @@ export default {
   background: url("../../assets/stake/map_entry.png") no-repeat;
   background-size: 100% 100%;
 }
+.ing {
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  width: 5rem;
+  .inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    width: 100%;
+  }
+  .text {
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 .help_text {
   position: absolute;
   bottom: 10%;
@@ -131,6 +161,26 @@ export default {
   }
   cursor: pointer;
   .inner {
+    .spin {
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: round 2s linear infinite;
+      @keyframes round {
+        0% {
+          transform: translate(-40%, 0);
+        }
+        50% {
+          transform: translate(-40%, -30%);
+        }
+        100% {
+          transform: translate(-40%, 0);
+        }
+      }
+      img {
+        width: 4rem;
+      }
+    }
     position: relative;
     .name {
       position: absolute;
