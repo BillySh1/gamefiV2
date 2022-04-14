@@ -41,14 +41,14 @@
         <img class="icon" :src="item.img" alt="" />
         <div class="text">执行 {{ item.name }} 任务</div>
         <div class="text">为期 {{ item.time }} 天</div>
-        <div class="text">收益 {{ item.apy }}%</div>
+        <div class="text">收益 {{ item.apy }} 战力天/MMC</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs} from "vue";
 import StkBtn from "./components/stk_btn.vue";
 import { useRouter } from "vue-router";
 export default {
@@ -63,21 +63,21 @@ export default {
         {
           name: "斥候",
           time: 7,
-          apy: 15,
+          apy: 1000,
           img: require("../../assets/stake/detail/m_0.png"),
           intro: "占位文案占位文案占位文案占位文案占位文案",
         },
         {
           name: "扫荡",
           time: 15,
-          apy: 15,
+          apy: 900,
           img: require("../../assets/stake/detail/m_1.png"),
           intro: "占位文案占位文案占位文案占位文案占位文案",
         },
         {
           name: "驻扎",
           time: 30,
-          apy: 15,
+          apy: 800,
           img: require("../../assets/stake/detail/m_2.png"),
           intro: "占位文案占位文案占位文案占位文案占位文案",
         },
@@ -89,9 +89,8 @@ export default {
         name: "stk_go",
       });
     };
-    onBeforeMount(async () => {
-    });
-    onMounted(() => {});
+  
+
     const refData = toRefs(data);
     return {
       ...refData,
