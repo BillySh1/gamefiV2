@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <Lottie :options="{animationData:require('../../assets/stake/map/cloud.json')}" />
     <BackToHome
       @click="
         () => {

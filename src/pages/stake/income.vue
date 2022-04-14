@@ -1,24 +1,28 @@
 <template>
   <div class="box">
-    <StkBtn class="back" :text="'返回'" @click="()=>$router.go(-1)" />
+    <StkBtn class="back" :text="'返回'" @click="() => $router.go(-1)" />
     <div class="main">
       <div class="main_top">
         <div class="cur_mission">
-          <img src="../../assets/stake/detail/m_0.png" alt="" />
-          <div class="intro">执行斥候任务</div>
+          <img :src="curDiffInfo.img" alt="" />
+          <div class="intro">执行{{ curDiffInfo.name }}任务</div>
         </div>
-        <div class="income">收益 每周15%</div>
+        <div class="income">收益 {{ curDiffInfo.apy }} 战力天/MMC</div>
       </div>
       <div class="main_info">
         <div class="item">
-          任务剩余时间 <span style="font-size: 2rem">09:08:32</span>
+          任务剩余时间 <span style="font-size: 2rem">{{ remainTime }}</span>
         </div>
         <div class="white">
-          当前已累计收益 <span style="font-size: 1.5rem">152223333</span>
+          当前已累计收益
+          <span style="font-size: 1.5rem">{{ player.totalReward }} MMC</span>
         </div>
-        <div class="white">
-          继续探索的收益为 <span style="font-size: 1.5rem">152223333</span>
-        </div>
+        <!-- <div class="white">
+          继续探索将享受战力加成
+          <span style="font-size: 1.5rem">
+            {{ 10 * Number(player.stakingInfo.power) }}
+          </span>
+        </div> -->
       </div>
       <div class="main_action">
         <div class="left">
@@ -26,7 +30,7 @@
             <img src="../../assets/stake/coin.png" alt="" />
             <div>
               <div class="item">当前可领取</div>
-              <div class="item">263834 MMC</div>
+              <div class="item">{{ player.canClaimReward }} MMC</div>
             </div>
           </div>
           <div>累计收益自动招募雇佣兵提升战力</div>
@@ -36,7 +40,7 @@
     </div>
     <div class="bottom_bar">
       <div class="progress">
-        <Progress :value="23" />
+        <Progress :value="100*Number(player.percent)" />
       </div>
       <div class="info">
         <div class="check">
@@ -47,11 +51,11 @@
           <div class="total">
             <div class="item">
               <span class="mar">总战力</span>
-              <span>14529999</span>
+              <span>{{ player.stakingInfo.power }}</span>
             </div>
             <div>
               <span class="mar">累计时间</span>
-              <span>09:08:32</span>
+              <span>{{ stakedTime }}</span>
             </div>
           </div>
           <div class="common">
@@ -85,9 +89,11 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import StkBtn from "./components/stk_btn";
 import Progress from "./components/progress.vue";
+import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
 export default {
   name: "income",
   components: {
@@ -95,11 +101,79 @@ export default {
     Progress,
   },
   setup() {
-    const data = reactive({});
-    onBeforeMount(() => {});
-    onMounted(() => {});
+    const store = useStore();
+    const data = reactive({
+      account: "",
+      web3: "",
+      stakedTime: 0,
+      remainTime: 0,
+      player: "",
+      map: [
+        {
+          name: "斥候",
+          apy: 1000,
+          img: require("../../assets/stake/detail/m_0.png"),
+        },
+        {
+          name: "扫荡",
+          apy: 900,
+          img: require("../../assets/stake/detail/m_1.png"),
+        },
+        {
+          name: "驻扎",
+          apy: 800,
+          img: require("../../assets/stake/detail/m_2.png"),
+        },
+      ],
+    });
+    const curDiffInfo = computed(() => {
+      if (data.player) {
+        return data.map[data.player.stakingInfo.stakingDifficulty];
+      }
+      return {
+        name: "err",
+        apy: "err",
+        img: require("../../assets/stake/detail/m_2.png"),
+      };
+    });
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPlayer();
+    });
+    const getRTime = (startTime, endTime) => {
+      const delta = Number(endTime) - Number(startTime);
+      let d = Math.floor(delta / (60 * 60 * 24));
+      let h = Math.floor((delta / 60 / 60) % 24);
+      let m = Math.floor((delta / 60) % 60);
+      if (parseInt(h, 10) < 0) h = "0";
+      if (parseInt(m, 10) < 0) m = "0";
+      if (parseInt(d, 10) < 0) d = "0";
+      return `${d}天${h}时${m}分`;
+    };
+    const getTime = () => {
+      const now = (Number(new Date().getTime()) / 1000).toFixed(0);
+      const startStaked = data.player.stakingInfo.stakingStartTime;
+      const endStaked = data.player.stakingInfo.stakingEndTime;
+      data.stakedTime = getRTime(startStaked, now);
+      data.remainTime = getRTime(now, endStaked);
+    };
+    const getPlayer = async () => {
+      const c = store.state.c_staking;
+      const res = await c.methods.players(data.account).call();
+      data.player = res;
+      console.log(data.player, "ggg");
+      getTime();
+    };
     const refData = toRefs(data);
     return {
+      curDiffInfo,
       ...refData,
     };
   },

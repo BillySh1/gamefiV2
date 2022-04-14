@@ -120,12 +120,15 @@ export default {
       const res = await c.methods.players(data.account).call();
       data.player = res;
       getTime();
-      console.log(data.player, "ggg");
     };
     const getDiffName = computed(() => {
-      return ["斥候", "扫荡", "驻扎"][
+      if(data.player){
+         return ["斥候", "扫荡", "驻扎"][
         data.player.stakingInfo.stakingDifficulty
-      ];
+      ] ;
+      }
+      return 'err'
+     
     });
     const refData = toRefs(data);
     return {
