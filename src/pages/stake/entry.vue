@@ -9,18 +9,30 @@
         }
       "
     />
-    <div v-if="!player.inStaking" class="help_text">请选择 {{ curPlace }} 开始挑战</div>
-    <div v-else class="help_text progress" >
-      <Progress :value="100*Number(player.percent)" />
+    <div v-if="!player.inStaking" class="help_text">
+      请选择 {{ curPlace }} 开始挑战
+    </div>
+    <div v-else class="help_text progress">
+      <Progress :value="100 * Number(player.percent)" />
     </div>
     <div
       class="float_city"
       v-for="item in citys"
       :key="item.key"
       :style="`left:${item.x}%;top:${item.y}%`"
-      @click="()=>$router.push({
-        name:'stk_choose'
-      })"
+      @click="
+        () => {
+          if (player.inStaking) {
+            $router.push({
+              name: 'stk_main',
+            });
+          } else {
+            $router.push({
+              name: 'stk_choose',
+            });
+          }
+        }
+      "
     >
       <div class="inner">
         <div :class="item.active ? 'name' : 'name disable'">
@@ -43,18 +55,18 @@
 
 <script>
 import { reactive, toRefs, onBeforeMount } from "vue";
-import {useStore} from 'vuex'
-import initWeb3 from '../../utils/initWeb3'
+import { useStore } from "vuex";
+import initWeb3 from "../../utils/initWeb3";
 import BackToHome from "./back_to_home";
-import Progress from './components/progress.vue'
+import Progress from "./components/progress.vue";
 export default {
   name: "entry",
   components: {
     BackToHome,
-    Progress
+    Progress,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     const data = reactive({
       curPlace: "浮育",
       citys: [
@@ -65,9 +77,9 @@ export default {
         { key: 5, name: "凝关", size: 1, x: 68, y: 45 },
         { key: 6, name: "泊寨", size: 0, x: 60, y: 60 },
       ],
-      account:'',
-      web3:'',
-      player:''
+      account: "",
+      web3: "",
+      player: "",
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -78,13 +90,13 @@ export default {
           data.web3 = p;
         }
       );
-      await getPlayer()
+      await getPlayer();
     });
-    const getPlayer = async()=>{
+    const getPlayer = async () => {
       const c = store.state.c_staking;
       const res = await c.methods.players(data.account).call();
       data.player = res;
-    }
+    };
     const refData = toRefs(data);
     return {
       ...refData,
@@ -108,8 +120,8 @@ export default {
   font-size: 1.5rem;
   color: white;
 }
-.progress{
-  width: 23rem
+.progress {
+  width: 23rem;
 }
 
 .float_city {
