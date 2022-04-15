@@ -1,6 +1,9 @@
 <template>
   <div class="box">
-    <Lottie :options="{animationData:require('../../assets/stake/map/cloud.json')}" />
+    <Lottie
+      class="lottie"
+      :options="{ animationData: require('../../assets/stake/map/cloud.json'),speed:0.5 }"
+    />
     <BackToHome
       @click="
         () => {
