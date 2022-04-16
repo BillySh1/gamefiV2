@@ -26,12 +26,12 @@
           当前已累计收益
           <span style="font-size: 1.5rem">{{ player.totalReward }} MMC</span>
         </div>
-        <!-- <div class="white">
+        <div class="white" v-if="!player.inStaking">
           继续探索将享受战力加成
           <span style="font-size: 1.5rem">
-            {{ 10 * Number(player.stakingInfo.power) }}
+            {{ 10 * Number(player.canClaimReward) }}
           </span>
-        </div> -->
+        </div>
       </div>
       <div class="main_action">
         <div class="left">
@@ -45,13 +45,23 @@
           <div>累计收益自动招募雇佣兵提升战力</div>
         </div>
         <div class="btn_box" v-if="player.inStaking">
-          <div class="btn">召回部队</div>
+          <div :class="btnDisable ? 'btn disable' : 'btn'" @click="unlock">
+            召回部队
+          </div>
         </div>
         <div v-else class="btn_box">
-          <div class="btn" @click="() => $router.push({ name: 'stk_go' })">
+          <div
+            :class="btnDisable ? 'btn_flex disable' : 'btn_flex'"
+            @click="() => $router.push({ name: 'stk_go' })"
+          >
             继续探索
           </div>
-          <div class="btn">领取收益</div>
+          <div
+            :class="btnDisable ? 'btn_flex disable' : 'btn_flex'"
+            @click="claim"
+          >
+            领取收益
+          </div>
         </div>
       </div>
     </div>
@@ -108,7 +118,13 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import StkBtn from "./components/stk_btn";
 import Progress from "./components/progress.vue";
 import initWeb3 from "../../utils/initWeb3";
@@ -120,12 +136,14 @@ export default {
     Progress,
   },
   setup() {
+    const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
       account: "",
       web3: "",
       stakedTime: 0,
       remainTime: 0,
+      btnDisable: false,
       player: "",
       map: [
         {
@@ -158,6 +176,54 @@ export default {
     const additionPower = computed(() => {
       return Number(data.player.canClaimReward || 0) * 10;
     });
+    const claim = async () => {
+      try {
+        proxy.$toast("等待确认", store.state.toast_info);
+        data.btnDisable = true;
+        const c = store.state.c_staking;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .claimReward()
+          .estimateGas({ from: data.account });
+        const res = await c.methods.claimReward().send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("领取奖励成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("领取奖励失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
+    const unlock = async () => {
+      try {
+        proxy.$toast("等待确认", store.state.toast_info);
+        data.btnDisable = true;
+        const c = store.state.c_staking;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .claimHero()
+          .estimateGas({ from: data.account });
+        const res = await c.methods.claimHero().send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("解除质押成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("解除质押失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
     onBeforeMount(async () => {
       await initWeb3.Init(
         (addr) => {
@@ -197,6 +263,8 @@ export default {
     return {
       curDiffInfo,
       additionPower,
+      unlock,
+      claim,
       ...refData,
     };
   },
@@ -360,10 +428,23 @@ export default {
       box-sizing: border-box;
       background: url("../../assets/stake/stake/btn_bg.png") no-repeat;
       background-size: 100% 100%;
-      margin-right: 4rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
       margin-left: 8rem;
       margin-right: 2rem;
+    }
+    .btn_flex {
+      cursor: pointer;
+      padding: 0.7rem 2rem;
+      box-sizing: border-box;
+      background: url("../../assets/stake/stake/btn_bg.png") no-repeat;
+      background-size: 100% 100%;
+      font-size: 1.5rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+    .disable {
+      pointer-events: none;
+      filter: grayscale(1);
     }
   }
 }
