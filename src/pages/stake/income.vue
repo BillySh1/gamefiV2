@@ -44,7 +44,15 @@
           </div>
           <div>累计收益自动招募雇佣兵提升战力</div>
         </div>
-        <div class="btn">召回部队</div>
+        <div class="btn_box" v-if="player.inStaking">
+          <div class="btn">召回部队</div>
+        </div>
+        <div v-else class="btn_box">
+          <div class="btn" @click="() => $router.push({ name: 'stk_go' })">
+            继续探索
+          </div>
+          <div class="btn">领取收益</div>
+        </div>
       </div>
     </div>
     <div class="bottom_bar">
@@ -342,6 +350,10 @@ export default {
         }
       }
     }
+    .btn_box {
+      display: flex;
+      align-items: center;
+    }
     .btn {
       cursor: pointer;
       padding: 0.7rem 2rem;
@@ -351,6 +363,7 @@ export default {
       margin-right: 4rem;
       font-size: 2rem;
       margin-left: 8rem;
+      margin-right: 2rem;
     }
   }
 }
