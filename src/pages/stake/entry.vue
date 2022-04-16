@@ -2,7 +2,7 @@
   <div class="box">
     <Lottie
       class="lottie"
-      :options="{ animationData: require('../../assets/stake/map/cloud.json'),speed:0.5 }"
+      :options="{ animationData: require('../../assets/stake/map/cloud.json') }"
     />
     <BackToHome
       @click="
@@ -124,6 +124,10 @@ export default {
   height: 100%;
   background: url("../../assets/stake/map_entry.png") no-repeat;
   background-size: 100% 100%;
+}
+.lottie{
+  width:100vw;
+  height:100vh
 }
 .ing {
   position: absolute;
