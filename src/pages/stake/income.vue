@@ -1,6 +1,15 @@
 <template>
   <div class="box">
-    <StkBtn class="back" :text="'返回'" @click="() => $router.go(-1)" />
+    <StkBtn
+      class="back"
+      :text="'返回'"
+      @click="
+        () =>
+          $router.push({
+            name: 'stk_main',
+          })
+      "
+    />
     <div class="main">
       <div class="main_top">
         <div class="cur_mission">
@@ -40,7 +49,7 @@
     </div>
     <div class="bottom_bar">
       <div class="progress">
-        <Progress :value="100*Number(player.percent)" />
+        <Progress :value="100 * Number(player.percent)" />
       </div>
       <div class="info">
         <div class="check">
@@ -51,7 +60,7 @@
           <div class="total">
             <div class="item">
               <span class="mar">总战力</span>
-              <span>{{ player.stakingInfo.power }}</span>
+              <span>{{ Number(player.stakingInfo.power) / 100 }}</span>
             </div>
             <div>
               <span class="mar">累计时间</span>
@@ -61,21 +70,23 @@
           <div class="common">
             <div class="item">
               <span class="mar">原部队战力</span>
-              <span>14529999</span>
+              <span>{{
+                Number(player.stakingInfo.power) / 100 - additionPower
+              }}</span>
             </div>
             <div>
               <span class="mar">累计收益增长</span>
-              <span>09:08:32</span>
+              <span>{{ stakedTime }}</span>
             </div>
           </div>
           <div class="common">
             <div class="item">
               <span class="mar">雇佣兵战力</span>
-              <span>14529999</span>
+              <span>{{ additionPower }}</span>
             </div>
             <div>
               <span class="mar">累计收益增长</span>
-              <span>09:08:32</span>
+              <span>{{ stakedTime }}</span>
             </div>
           </div>
         </div>
@@ -136,6 +147,9 @@ export default {
         img: require("../../assets/stake/detail/m_2.png"),
       };
     });
+    const additionPower = computed(() => {
+      return Number(data.player.canClaimReward || 0) * 10;
+    });
     onBeforeMount(async () => {
       await initWeb3.Init(
         (addr) => {
@@ -174,6 +188,7 @@ export default {
     const refData = toRefs(data);
     return {
       curDiffInfo,
+      additionPower,
       ...refData,
     };
   },

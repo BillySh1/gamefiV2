@@ -20,7 +20,7 @@
     <div class="top_right">
       <img src="../../assets/stake/coin.png" alt="" />
       <div class="text">总奖池</div>
-      <div class="text">154892734</div>
+      <div class="text">100,0000 MMC</div>
     </div>
     <div class="main_body">
       <div
@@ -65,21 +65,21 @@ export default {
           time: 7,
           apy: 1000,
           img: require("../../assets/stake/detail/m_0.png"),
-          intro: "占位文案占位文案占位文案占位文案占位文案",
+          intro: "派遣部分精锐执行短期任务",
         },
         {
           name: "扫荡",
           time: 15,
           apy: 900,
           img: require("../../assets/stake/detail/m_1.png"),
-          intro: "占位文案占位文案占位文案占位文案占位文案",
+          intro: "号召士兵进行长期攻坚作战",
         },
         {
           name: "驻扎",
           time: 30,
           apy: 800,
           img: require("../../assets/stake/detail/m_2.png"),
-          intro: "占位文案占位文案占位文案占位文案占位文案",
+          intro: "携带大量辎重驻扎进行持久战",
         },
       ],
     });

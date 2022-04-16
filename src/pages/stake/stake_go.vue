@@ -95,7 +95,7 @@
           </div>
           <div class="middle_info">
             <div class="com_item" style="color: white">触发羁绊</div>
-            <div class="com_item">五子良将</div>
+            <div class="com_item">{{ combineName }}</div>
           </div>
           <div class="bottom_info">
             仅可触发一种羁绊，羁绊所加战力各不相同，征集多国武将，触发强大的羁绊将会使征战效率大幅提升
@@ -120,6 +120,7 @@ import StkBtn from "./components/stk_btn.vue";
 import StakeItem from "./components/stake_item.vue";
 import InjectPackHero from "../../components/inejct_pack_hero.vue";
 import initWeb3 from "../../utils/initWeb3";
+import { combineMap } from "../../utils/useCombine";
 export default {
   name: "stake_go",
   components: {
@@ -148,6 +149,14 @@ export default {
     });
     const selectedShow = computed(() => {
       return data.selected.slice(data.curPage * 5 - 5, data.curPage * 5);
+    });
+    const combineName = computed(() => {
+      if (!data.combineInfo || !data.combineInfo.combine)
+        return "暂未触发组合羁绊";
+      return (
+        combineMap[data.combineInfo.combineCamp][data.combineInfo.combineId] ||
+        "暂未触发组合羁绊"
+      );
     });
     const pageNum = computed(() => {
       const res = [];
@@ -202,7 +211,7 @@ export default {
           if (x && x.tokenId) {
             res.push(x.tokenId);
           }
-          return res
+          return res;
         }, []);
         console.log(
           "params",
@@ -311,6 +320,7 @@ export default {
       btnText,
       totalPowers,
       curDiff,
+      combineName,
       onConfirm,
       handleClickStake,
       handleSelectHero,
@@ -351,11 +361,11 @@ export default {
   display: flex;
   align-items: center;
   overflow-x: hidden;
-  margin: 2rem 0;
   .item {
-    min-width: 15vmax;
+    width: 15vmax;
     height: 100%;
-    margin-right: 4rem;
+    margin-right: 2rem;
+    transform: translateY(1.5rem);
   }
 }
 .action {

@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="left_bottom">
-      <div class="btn_item" @click="() => $router.push({ name: 'stk_go' })">
+      <div class="btn_item" @click="() => $router.push({ name: 'stk_view' })">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div class="btn">查看部队</div>
       </div>
@@ -122,13 +122,12 @@ export default {
       getTime();
     };
     const getDiffName = computed(() => {
-      if(data.player){
-         return ["斥候", "扫荡", "驻扎"][
-        data.player.stakingInfo.stakingDifficulty
-      ] ;
+      if (data.player) {
+        return ["斥候", "扫荡", "驻扎"][
+          data.player.stakingInfo.stakingDifficulty
+        ];
       }
-      return 'err'
-     
+      return "err";
     });
     const refData = toRefs(data);
     return {
