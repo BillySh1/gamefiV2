@@ -42,11 +42,11 @@
               <div class="item">{{ player.canClaimReward }} MMC</div>
             </div>
           </div>
-          <div>累计收益自动招募雇佣兵提升战力</div>
+          <div>累计收益自动招募佣兵提升战力</div>
         </div>
         <div class="btn_box" v-if="player.inStaking">
           <div :class="btnDisable ? 'btn disable' : 'btn'" @click="unlock">
-            召回部队
+            召回军队
           </div>
         </div>
         <div v-else class="btn_box">
@@ -87,7 +87,7 @@
           </div>
           <div class="common">
             <div class="item">
-              <span class="mar">原部队战力</span>
+              <span class="mar">原军队战力</span>
               <span>{{
                 Number(player.stakingInfo.power) / 100 - additionPower
               }}</span>
@@ -99,7 +99,7 @@
           </div>
           <div class="common">
             <div class="item">
-              <span class="mar">雇佣兵战力</span>
+              <span class="mar">佣兵战力</span>
               <span>{{ additionPower }}</span>
             </div>
             <div>

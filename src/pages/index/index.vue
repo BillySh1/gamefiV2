@@ -13,10 +13,6 @@
             />
           </div>
           <div class="float_item">
-            <!-- <InjectIcon
-            :src="require('http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/title.png')"
-            text="称号"
-          /> -->
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
                 :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/invite.png'"
@@ -24,6 +20,14 @@
               />
             </div>
           </div>
+        </div>
+        <div class="flex" >
+           <div class="float_item" @click="jump('obtain')">
+              <InjectIcon
+                :src="require('../../assets/index/lingqu.png')"
+                text="领取"
+              />
+            </div>
         </div>
       </div>
       <div class="float_left_box">

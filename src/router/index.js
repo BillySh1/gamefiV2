@@ -32,6 +32,7 @@ const allStarsEntry = () => import("../pages/all_stars/entry.vue");
 const connect = () => import("../pages/error/connect.vue");
 const testCoin = () => import("../pages/test/test.vue");
 const search = () => import("../pages/search/search.vue");
+const obtain = () => import("../pages/obtain/obtain.vue");
 
 // 群英会战 start
 const bf_choose = () => import("../pages/all_stars/entry_choose_camp.vue");
@@ -124,6 +125,11 @@ const router = createRouter({
       path: "/swap",
       name: "swap",
       component: swap,
+    },
+    {
+      path: "/obtain",
+      name: "obtain",
+      component: obtain,
     },
     {
       path: "/invite",

@@ -40,7 +40,7 @@
     <div class="left_bottom">
       <div class="btn_item" @click="() => $router.push({ name: 'stk_view' })">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
-        <div class="btn">查看部队</div>
+        <div class="btn">查看军队</div>
       </div>
       <div class="btn_item" @click="() => $router.push({ name: 'stk_income' })">
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />

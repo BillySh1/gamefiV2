@@ -47,12 +47,12 @@
   <div class="right">
     <div class="inner">
       <img src="../../assets/stake/map/ing.png" alt="" />
-      <div class="text">我的部队</div>
+      <div class="text">我的军队</div>
     </div>
   </div>
   <div class="bottom_left">
     <img src="../../assets/stake/staked_view/addition_icon.png" alt="" />
-    <div class="intro">雇佣兵详情</div>
+    <div class="intro">佣兵详情</div>
   </div>
 </template>
 
