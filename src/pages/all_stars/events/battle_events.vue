@@ -1,7 +1,22 @@
 <template>
-  <Event1View v-if="type == 1" :placeText="placeText" />
-  <Event2View v-if="type == 2" :placeText="placeText" />
-  <EventLockView v-if="type == 'lock'" :placeText="placeText" @unlock="unlock" />
+  <Event1View
+    v-if="type == 1"
+    :placeText="placeText"
+    @close="() => $emit('close')"
+    @march="(v) => march(v)"
+  />
+  <Event2View
+    v-if="type == 2"
+    :placeText="placeText"
+    @close="() => $emit('close')"
+    @march="(v) => march(v)"
+  />
+  <EventLockView
+    v-if="type == 'lock'"
+    @close="() => $emit('close')"
+    :placeText="placeText"
+    @unlock="unlock"
+  />
 </template>
 
 <script >
@@ -16,14 +31,14 @@ import initWeb3 from "../../../utils/initWeb3";
 import { useStore } from "vuex";
 import Event1View from "./event_1_view.vue";
 import Event2View from "./event_2_view.vue";
-import EventLockView from './event_lock_view.vue'
+import EventLockView from "./event_lock_view.vue";
 export default {
   name: "battleEvents",
   props: ["value", "type", "placeText"],
   components: {
     Event1View,
     Event2View,
-    EventLockView
+    EventLockView,
   },
   setup(prop, ctx) {
     const store = useStore();

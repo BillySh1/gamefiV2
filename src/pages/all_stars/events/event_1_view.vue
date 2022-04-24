@@ -60,7 +60,7 @@
           <div
             v-if="type == 2"
             :class="btnDisable ? 'btn disable' : 'btn'"
-            @click="march(1)"
+            @click="() => $emit('march', 1)"
           >
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_green.png"
@@ -68,7 +68,10 @@
             />
             <div class="text">投降</div>
           </div>
-          <div :class="btnDisable ? 'btn disable' : 'btn'" @click="march(0)">
+          <div
+            :class="btnDisable ? 'btn disable' : 'btn'"
+            @click="() => $emit('march', 0)"
+          >
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_green.png"
               alt=""
@@ -78,7 +81,7 @@
           <div
             v-if="[2, 3, 4, 6].includes(type)"
             :class="btnDisable ? 'btn disable' : 'btn'"
-            @click="march(2)"
+            @click="() => $emit('march', 2)"
           >
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/btn_orange.png"
@@ -361,7 +364,6 @@ export default {
     font-size: 1.5rem;
     .text {
       color: rgba(25, 155, 108, 1);
-
       font-size: 2rem;
     }
   }
