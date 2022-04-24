@@ -11,6 +11,7 @@
       {{ walletValue }}
       <div class="drop_down">
         <div class="item" @click="$emit('exit')">断开连接</div>
+        <div class="item" @click="controlAudio">{{ audioText }}</div>
         <div class="item" @click="jump2Swap">MemorySwap ></div>
       </div>
     </div>
@@ -26,6 +27,7 @@ export default {
     const data = reactive({
       wallet: "连接钱包",
       web3: "",
+      type: '',
     });
     const walletValue = computed(() => {
       const wallet = data.wallet;
@@ -39,7 +41,20 @@ export default {
       }
       return "连接钱包";
     });
-    const jump2Swap = () => {};
+    const controlAudio = () => {
+      const item = document.querySelector("audio");
+      if (data.type) {
+        item.pause();
+        item.currentTime = 0;
+        data.type = false
+      } else {
+        item.play();
+        data.type = data.type = true
+      }
+    };
+    const audioText = computed(() => {
+      return data.type ? "关闭音乐" : "打开音乐";
+    });
     const watchAcc = () => {
       if (!window.ethereum) return;
       window.ethereum.on("accountsChanged", function (a) {
@@ -58,7 +73,8 @@ export default {
       );
     };
     onBeforeMount(async () => {
-      watchAcc;
+      data.type = sessionStorage.getItem('audio')
+      watchAcc();
       await connect();
     });
 
@@ -66,8 +82,9 @@ export default {
     return {
       ...refData,
       walletValue,
+      audioText,
       watchAcc,
-      jump2Swap,
+      controlAudio,
     };
   },
 };
