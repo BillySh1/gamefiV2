@@ -1,5 +1,6 @@
 <template>
   <CommonPageHeader :title="pageTitle" />
+  <InjectGoBack />
   <div class="center">
     <div class="item">
       当前累计收益
@@ -21,7 +22,7 @@
       </div>
     </div>
     <div class="item item_center" >
-        <CommonButton :circle="true">领取</CommonButton>
+        <CommonButton class="btn" :circle="true">领 取</CommonButton>
     </div>
   </div>
   <CommonPageFooter />
@@ -32,12 +33,14 @@ import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import CommonButton from '../../components/common_button.vue'
+import InjectGoBack from '../../components/inject_go_back.vue'
 export default {
   name: "obtain",
   components: {
     CommonPageHeader,
     CommonPageFooter,
-    CommonButton
+    CommonButton,
+    InjectGoBack
   },
   setup() {
     const data = reactive({
@@ -69,6 +72,10 @@ export default {
     justify-content: space-between;
     font-size: 2rem;
     margin-bottom: 2rem;
+    .btn{
+        font-size: 2rem;
+        width: 25%;
+    }
   }
   .squze {
     display: flex;
