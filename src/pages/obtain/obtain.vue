@@ -21,9 +21,16 @@
         <div>126341 MMC</div>
       </div>
     </div>
-    <div class="item item_center" >
-        <CommonButton class="btn" :circle="true">领 取</CommonButton>
+    <div class="item item_center">
+      <CommonButton class="btn" :circle="true">领 取</CommonButton>
     </div>
+  </div>
+  <div class="bg_badge">
+    <img
+      class="badge"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+      alt=""
+    />
   </div>
   <CommonPageFooter />
 </template>
@@ -32,15 +39,15 @@
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
-import CommonButton from '../../components/common_button.vue'
-import InjectGoBack from '../../components/inject_go_back.vue'
+import CommonButton from "../../components/common_button.vue";
+import InjectGoBack from "../../components/inject_go_back.vue";
 export default {
   name: "obtain",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     CommonButton,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
     const data = reactive({
@@ -57,6 +64,7 @@ export default {
 </script>
 <style lang='less' scoped>
 .center {
+  z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -72,9 +80,9 @@ export default {
     justify-content: space-between;
     font-size: 2rem;
     margin-bottom: 2rem;
-    .btn{
-        font-size: 2rem;
-        width: 25%;
+    .btn {
+      font-size: 2rem;
+      width: 25%;
     }
   }
   .squze {
@@ -84,8 +92,19 @@ export default {
     justify-content: unset;
     margin-right: 1.5rem;
   }
-  .item_center{
-      justify-content: center;
+  .item_center {
+    justify-content: center;
+  }
+}
+.bg_badge {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  .badge {
+    width: 100%;
+  }
+  .top {
+    transform: translateY(-1.5rem);
   }
 }
 </style>

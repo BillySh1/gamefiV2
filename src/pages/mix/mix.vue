@@ -550,11 +550,11 @@ export default {
       );
       const left = sessionStorage.getItem("left_info");
       const right = sessionStorage.getItem("right_info");
-      if (left != 'null') {
+      if (left && left != 'null') {
         data.leftInfo = JSON.parse(left);
         sessionStorage.setItem("left_info", 'null');
       }
-      if (right != 'null' ) {
+      if (right && right != 'null' ) {
         data.right = JSON.parse(right);
         sessionStorage.setItem("right_info", 'null');
       }

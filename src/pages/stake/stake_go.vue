@@ -1,5 +1,6 @@
 <template>
-  <InjectPackHero
+<div v-if="showPack"  class="pack_mask">
+   <InjectPackHero
     :value="showPack"
     :toSelect="true"
     :selected="
@@ -17,6 +18,8 @@
       }
     "
   />
+</div>
+ 
   <div class="box">
     <div class="top">
       <StkBtn :text="'返回'" @click="() => $router.go(-1)" />
@@ -341,6 +344,17 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+}
+.pack_mask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 100,
 }
 .top {
   width: 70%;

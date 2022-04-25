@@ -32,14 +32,16 @@
       :style="`left:${item.x}%;top:${item.y}%`"
       @click="
         () => {
-          if (player.inStaking) {
-            $router.push({
-              name: 'stk_main',
-            });
-          } else {
-            $router.push({
-              name: 'stk_choose',
-            });
+          if (item.active) {
+            if (player.inStaking) {
+              $router.push({
+                name: 'stk_main',
+              });
+            } else {
+              $router.push({
+                name: 'stk_choose',
+              });
+            }
           }
         }
       "
@@ -125,9 +127,9 @@ export default {
   background: url("../../assets/stake/map_entry.png") no-repeat;
   background-size: 100% 100%;
 }
-.lottie{
-  width:100vw;
-  height:100vh
+.lottie {
+  width: 100vw;
+  height: 100vh;
 }
 .ing {
   position: absolute;
