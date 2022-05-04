@@ -23,8 +23,9 @@ import lottie from "vue-lottie";
 import store from "./store/index";
 import { createToast } from "mosha-vue-toastify";
 import "./style/toast.less";
+import i18n from './i18n'
 
-const _app = createApp(App);
+const _app = createApp(App).use(i18n).use(i18n);
 _app.config.globalProperties.$toast = createToast;
 _app.config.globalProperties.resolveAssets = (path) => {
   const ipfs_host =

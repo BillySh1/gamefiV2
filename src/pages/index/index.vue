@@ -9,7 +9,7 @@
           <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
               :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/airdrop.png'"
-              text="空投"
+              :text="t('airdrop')"
             />
           </div>
           <div class="float_item">
@@ -74,6 +74,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import InjectUser from "../../components/inject_user";
 import InjectIcon from "../../components/inject_icon";
 import initWeb3 from "../../utils/initWeb3";
+import { useI18n } from 'vue-i18n'
 export default {
   name: "home",
   components: {
@@ -83,6 +84,10 @@ export default {
     InjectIcon,
   },
   setup(prop, { emit }) {
+     const { t } = useI18n({
+      inheritLocale: true,
+      useScope: 'local'
+    })
     const router = useRouter();
     const store = useStore();
     const data = reactive({
@@ -90,6 +95,7 @@ export default {
       web3: "",
       power: 0,
     });
+
     const exit = () => {
       emit("exit");
     };
@@ -123,6 +129,7 @@ export default {
       });
     };
     return {
+      t,
       ...refData,
       disconnect,
       jump,
