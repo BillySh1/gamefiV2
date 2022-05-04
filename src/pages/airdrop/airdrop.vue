@@ -11,17 +11,18 @@
       <div v-if="quality" class="main">
         <Lottie :options="lottie_options" />
       </div>
-      <div v-else class="empty">暂无可领取的盲盒</div>
+      <div v-else class="empty">{{t('airdrop_no_valid')}}</div>
     </div>
     <CommonPageFooter />
   </div>
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import { reactive, toRefs, computed } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "store",
   components: {
@@ -30,8 +31,12 @@ export default {
     InjectGoBack,
   },
   setup() {
+     const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
-      pageTitle: "空 投",
+      pageTitle: t('airdrop_space'),
 
       quality: false,
     });
@@ -40,10 +45,10 @@ export default {
         animationData: require(`../../assets/aridrop/after2.json`),
       };
     });
-    onBeforeMount(() => {});
 
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       lottie_options,
     };

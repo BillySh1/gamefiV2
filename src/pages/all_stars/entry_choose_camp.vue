@@ -169,7 +169,7 @@ export default {
     const bind = async () => {
       try {
         data.btnDisable = true;
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_battle;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods

@@ -260,7 +260,7 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast("等待授权", store.state.toast_info);
+        proxy.$toast("t('common_wait_approve')", store.state.toast_info);
         data.btnDisable = true;
         const c = store.state.c_mmc;
         const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");

@@ -16,18 +16,18 @@
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
                 :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/invite.png'"
-                text="邀请"
+                :text="t('invite')"
               />
             </div>
           </div>
         </div>
-        <div class="flex" >
-           <div class="float_item" @click="jump('obtain')">
-              <InjectIcon
-                :src="require('../../assets/index/lingqu.png')"
-                text="领取"
-              />
-            </div>
+        <div class="flex">
+          <div class="float_item" @click="jump('obtain')">
+            <InjectIcon
+              :src="require('../../assets/index/lingqu.png')"
+              :text="t('obtain')"
+            />
+          </div>
         </div>
       </div>
       <div class="float_left_box">
@@ -36,7 +36,7 @@
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/Leader_board.svg"
             alt=""
           />
-          <div class="leader_board_text">排行榜</div>
+          <div class="leader_board_text">{{ t("board") }}</div>
         </div>
       </div>
 
@@ -74,7 +74,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import InjectUser from "../../components/inject_user";
 import InjectIcon from "../../components/inject_icon";
 import initWeb3 from "../../utils/initWeb3";
-import { useI18n } from 'vue-i18n'
+import { useI18n } from "vue-i18n";
 export default {
   name: "home",
   components: {
@@ -84,10 +84,10 @@ export default {
     InjectIcon,
   },
   setup(prop, { emit }) {
-     const { t } = useI18n({
+    const { t } = useI18n({
       inheritLocale: true,
-      useScope: 'local'
-    })
+      useScope: "local",
+    });
     const router = useRouter();
     const store = useStore();
     const data = reactive({

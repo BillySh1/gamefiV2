@@ -7,17 +7,22 @@
         alt=""
       />
 
-      <div class="empty">请先连接钱包</div>
+      <div class="empty">{{ t("wallet_error_connect") }}</div>
     </div>
   </div>
 </template>
 
 <script >
 import { reactive, toRefs, computed } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "connect",
   components: {},
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
       account: "",
     });
@@ -29,6 +34,7 @@ export default {
 
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       lottie_options,
     };

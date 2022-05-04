@@ -351,7 +351,7 @@ export default {
           data.showStockModal = true;
           return;
         }
-        proxy.$toast(`等待授权`, store.state.toast_info);
+        proxy.$toast(`t('common_wait_approve')`, store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_training.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -411,7 +411,7 @@ export default {
     };
     const mix = async () => {
       try {
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];

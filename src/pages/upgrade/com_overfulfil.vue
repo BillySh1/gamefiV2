@@ -141,7 +141,7 @@ export default {
 
     const overfulfill = async () => {
       try {
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = props.info.tokenId;

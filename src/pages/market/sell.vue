@@ -147,7 +147,7 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast(`等待授权 ${data.info.name}`, store.state.toast_info);
+        proxy.$toast(`t('common_wait_approve') ${data.info.name}`, store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_exchange.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();

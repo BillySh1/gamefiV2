@@ -237,7 +237,7 @@ export default {
           return;
         }
         proxy.$toast(
-          `等待授权 ${data.curSelectedHero.name} `,
+          `t('common_wait_approve') ${data.curSelectedHero.name} `,
           store.state.toast_info
         );
         const c = store.state.c_hero;
@@ -318,7 +318,7 @@ export default {
     };
     const reborn = async () => {
       try {
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = data.curSelectedHero.tokenId;

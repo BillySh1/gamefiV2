@@ -6,11 +6,16 @@
 
 <script >
 import { reactive, toRefs, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "detail_radar",
   props: ["data", "pre"],
   setup(prop) {
     const radar = ref(null);
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({});
     const initCanvas = () => {
       const p_0 = [88, 80, 30, 30, 40];
@@ -21,12 +26,12 @@ export default {
       const p_5 = [78, 90, 88, 70, 70];
       const preferences = [p_0, p_1, p_2, p_3, p_4, p_5];
       const temp = [
-        ["血量", preferences[prop.pre][0]],
-        ["攻击力", preferences[prop.pre][1]],
-        ["计谋", preferences[prop.pre][2]],
-        ["暴击", preferences[prop.pre][3]],
-        ["防御", preferences[prop.pre][0]],
-        ["精神力", preferences[prop.pre][4]],
+        [t("property_0"), preferences[prop.pre][0]],
+        [t("property_1"), preferences[prop.pre][1]],
+        [t("property_2"), preferences[prop.pre][2]],
+        [t("property_3"), preferences[prop.pre][3]],
+        [t("property_4"), preferences[prop.pre][0]],
+        [t("property_5"), preferences[prop.pre][4]],
       ];
       const ratio = window.devicePixelRatio || 1;
       const width = document.getElementById("radar_box").offsetWidth;
@@ -51,7 +56,7 @@ export default {
         canvas.style.width = `${mW}px`; // 控制显示大小
         canvas.style.height = `${mH}px`; // 控制显示大小
         mCtx = canvas.getContext("2d");
-        mCtx.scale(ratio, ratio)
+        mCtx.scale(ratio, ratio);
         drawPolygon(mCtx);
         drawLines(mCtx);
         drawText(mCtx);
@@ -62,11 +67,9 @@ export default {
         ctx.save();
         ctx.strokeStyle = mColorPolygon;
         var r = mRadius / mCount; //单位半径
-        //画6个圈
         for (var i = 0; i < mCount; i++) {
           ctx.beginPath();
           var currR = r * (i + 1); //当前半径
-          //画6条边
           for (var j = 0; j < mCount; j++) {
             var x = mCenter + currR * Math.cos(mAngle * j);
             var y = mCenter + currR * Math.sin(mAngle * j);

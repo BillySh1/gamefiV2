@@ -35,24 +35,24 @@
           </div>
           <div class="bottom_box">
             <div v-if="curTabKey == 0" class="quick_info">
-              <div class="powers">战力: {{ Number(info.power) / 100 }}</div>
+              <div class="powers">{{t('power')}}: {{ Number(info.power) / 100 }}</div>
               <div class="infos">
                 <span
-                  >稀有度:
+                  >{{t('rarity')}}:
                   <span :style="`color:${getRarityStyle}; display:inline`">
                     {{ rarityText }}</span
                   >
                 </span>
                 <span
-                  >品质:
+                  >{{t('quality')}}:
                   <span :style="`color:${getQualityStyle}; display:inline`">{{
                     qualityText
                   }}</span>
                 </span>
-                <span>阵营: {{ campText }}</span>
-                <span>职业: {{ preferenceText }}</span>
-                <span>等级: {{ info.level }} 级</span>
-                <span>星级: {{ info.star }} 星</span>
+                <span>{{t('camp')}}: {{ campText }}</span>
+                <span>{{t('job')}}: {{ preferenceText }}</span>
+                <span>{{t('level')}}: {{ info.level }} 级</span>
+                <span>{{t('star')}}: {{ info.star }} 星</span>
               </div>
               <div class="intros">
                 {{ info.intro }}
@@ -66,7 +66,7 @@
             </div>
             <div v-if="curTabKey == 1" class="quick_info">
               <div class="up">
-                潜力
+                {{t('addition')}}
                 <div class="stars">
                   <div v-for="(item, index) in all_stars" :key="index">
                     <img
@@ -90,7 +90,7 @@
                   <img
                     src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/ab_box.png"
                   />
-                  <div class="text">技能</div>
+                  <div class="text">{{t('skill')}}</div>
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/yellow.png"
             alt=""
           />
-          <div class="text">出售</div>
+          <div class="text">{{t('sell')}}</div>
         </div>
         <div
           class="action_item"
@@ -157,7 +157,7 @@
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/blue.png"
             alt=""
           />
-          <div class="text">升级</div>
+          <div class="text">{{t('upgrade')}}</div>
         </div>
       </div>
     </div>

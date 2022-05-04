@@ -6,29 +6,35 @@
     <div v-if="!loading" class="content">
       <div class="left">
         <div class="intro">
-          <div>铜钱是富甲三国中流通的货币</div>
-          <div>您需要在钱庄中兑换一定数额的铜钱才能</div>
-          <div>在商店中正常购买商品</div>
+          <div>{{ t("ex_title_1") }}</div>
+          <div>{{ t("ex_title_2") }}</div>
+          <div>{{ t("ex_title_3") }}</div>
         </div>
         <div class="rate">
-          <div>董卓当前给出的汇率为</div>
+          <div>{{ t("ex_rate") }}</div>
           <div class="rate_detail">
             <div>1 USDT</div>
             <div style="margin: 0 4rem">:</div>
-            <div>{{ 25 }} 铜钱</div>
+            <div>{{ 25 }} {{ t("coin") }}</div>
           </div>
         </div>
       </div>
       <div class="right">
         <div v-if="!loading" class="balance_box">
-          <div class="item title">余额</div>
+          <div class="item title">{{ t("balance") }}</div>
           <div class="item">
-            <img class="icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png" />
-            <span class="name">铜钱</span>
+            <img
+              class="icon"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png"
+            />
+            <span class="name">{{ t("coin") }}</span>
             <span>{{ m3t_balance }}</span>
           </div>
           <div class="item">
-            <img class="icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png" />
+            <img
+              class="icon"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
+            />
             <span class="name">USDT</span>
             <span>{{ usdt_balance }}</span>
           </div>
@@ -36,7 +42,9 @@
         <div class="up_box">
           <div class="buy_num">
             <div class="icon">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
+              />
             </div>
             <input
               class="ipt"
@@ -46,23 +54,17 @@
             <div class="text">USDT</div>
           </div>
           <div class="xs">
-            <div>当前可置换</div>
+            <div>{{ t("ex_can_ex") }}</div>
             <div style="margin: 0 1rem">{{ 25 * buyNum }}</div>
-            <div>铜钱</div>
+            <div>{{ t("coin") }}</div>
           </div>
         </div>
 
         <div class="action_button">
-          <div class="badge">请在上方输入您需要置换的USDT</div>
+          <div class="badge">{{ t("ex_ex_input") }}</div>
           <CommonButton class="btn" @click="btnClick">
             {{ btnText }}
           </CommonButton>
-          <!-- <CommonButton
-            class="btn"
-            @click="() => $router.push({ name: 'testCoin' })"
-          >
-            领取测试币
-          </CommonButton> -->
         </div>
       </div>
     </div>
@@ -85,6 +87,7 @@ import CommonButton from "../../components/common_button";
 import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 export default {
   name: "exchange",
   components: {
@@ -94,10 +97,14 @@ export default {
     InjectGoBack,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const data = reactive({
-      pageTitle: "钱庄兑换",
+      pageTitle: t("ex_page_title"),
       buyNum: 1000,
       btnStatus: 0,
       m3t_balance: 0,
@@ -110,7 +117,7 @@ export default {
       loading: false,
     });
     const btnText = computed(() => {
-      return ["授权 USDT", "兑换成铜钱"][data.btnStatus];
+      return [t("approve_usdt"), t("ex_to_coin")][data.btnStatus];
     });
     const btnClick = async () => {
       if (data.btnStatus === 0) {
@@ -121,7 +128,7 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast("等待授权", store.state.toast_info);
+        proxy.$toast(t('common_wait_approve'), store.state.toast_info);
         const c = store.state.c_usdt;
         const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
         const addr = store.state.c_m3t.options.address;
@@ -137,7 +144,7 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast("授权成功", store.state.toast_success);
+          proxy.$toast(t('common_wait_approve'), store.state.toast_success);
         }
       } catch (e) {
         proxy.$toast("授权失败", store.state.toast_error);
@@ -148,7 +155,7 @@ export default {
     };
     const exchange = async () => {
       try {
-        proxy.$toast("等待兑换确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_m3t;
         const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -163,10 +170,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast("兑换成功", store.state.toast_success);
+          proxy.$toast(t('ex_success'), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast("兑换失败", store.state.toast_error);
+        proxy.$toast(t('ex_failed'), store.state.toast_error);
         console.log(e);
       } finally {
         await getBalanceInfo();
@@ -202,6 +209,7 @@ export default {
 
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       btnText,
       btnClick,
@@ -214,7 +222,8 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/ex_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/ex_bg.png")
+    no-repeat;
   background-size: 100% 100%;
 }
 .content {

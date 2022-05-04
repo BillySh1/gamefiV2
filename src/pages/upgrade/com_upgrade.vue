@@ -194,7 +194,7 @@ export default {
     };
     const approveStock = async () => {
       try {
-        proxy.$toast(`等待授权 ${costName.value}`, store.state.toast_info);
+        proxy.$toast(`t('common_wait_approve') ${costName.value}`, store.state.toast_info);
         const c = store.state.c_richShop;
         const addr = store.state.c_training.options.address;
         const isApproved = await c.methods
@@ -229,7 +229,7 @@ export default {
 
     const update = async (isOneKey) => {
       try {
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = props.info.tokenId;
