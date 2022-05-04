@@ -3,98 +3,105 @@
     <CommonPageHeader :title="pageTitle" />
     <Lottie v-if="loading" :options="lottie_options" />
 
-     <div class="pack_container">
-    <CommonPageHeader :title="pageTitle" />
-    <Lottie v-if="loading" :options="lottie_options" />
+    <div class="pack_container">
+      <CommonPageHeader :title="pageTitle" />
+      <Lottie v-if="loading" :options="lottie_options" />
 
-    <div class="pack_main">
-      <div class="top_box">
-        <img
-          class="back"
-          style="width: 2.5rem"
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/back.svg"
-          @click="
-            (e) => {
-              $router.go(-1);
-            }
-          "
-        />
-      
-      </div>
-      <div class="content">
-        <div class="badge">
-          <div class="tabs">
-            <div
-              v-for="(item, index) in tabs"
-              :key="index"
-              @click="() => (curTab = item.key)"
-              :class="curTab == item.key ? 'item active' : 'item'"
-            >
-              {{ item.name }}
-            </div>
-          </div>
+      <div class="pack_main">
+        <div class="top_box">
           <img
-            class="divider"
-            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/divider.svg"
-            alt=""
+            class="back"
+            style="width: 2.5rem"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/back.svg"
+            @click="
+              (e) => {
+                $router.go(-1);
+              }
+            "
           />
         </div>
-        <div class="card_content">
-          <div
-            class="left"
-            v-show="curPage > 1"
-            @click="
-              () => {
-                curPage--;
-                getCurShowItems();
-              }
-            "
-          >
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png" alt="" />
+        <div class="content">
+          <div class="badge">
+            <div class="tabs">
+              <div
+                v-for="(item, index) in tabs"
+                :key="index"
+                @click="() => (curTab = item.key)"
+                :class="curTab == item.key ? 'item active' : 'item'"
+              >
+                {{ item.name }}
+              </div>
+            </div>
+            <img
+              class="divider"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/divider.svg"
+              alt=""
+            />
           </div>
-          <div class="empty" v-if="!rawData.length">暂无订单</div>
-          <div
-            v-for="(item, index) in curItems"
-            :key="index"
-            class="card_item"
-            @click="
-              () => {
-                $router.push({
-                  name: 'orderDetail',
-                  query: { tokenId: item.tokenId },
-                });
-              }
-            "
-          >
-            <MarketHeroItem :info="item" />
-          </div>
-          <div
-            class="right"
-            v-show="curPage < total"
-            @click="
-              () => {
-                curPage++;
-                getCurShowItems();
-              }
-            "
-          >
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png" alt="" />
+          <div class="card_content">
+            <div
+              class="left"
+              v-show="curPage > 1"
+              @click="
+                () => {
+                  curPage--;
+                  getCurShowItems();
+                }
+              "
+            >
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png"
+                alt=""
+              />
+            </div>
+            <div class="empty" v-if="!rawData.length">{{ t("no_order") }}</div>
+            <div
+              v-for="(item, index) in curItems"
+              :key="index"
+              class="card_item"
+              @click="
+                () => {
+                  $router.push({
+                    name: 'orderDetail',
+                    query: { tokenId: item.tokenId },
+                  });
+                }
+              "
+            >
+              <MarketHeroItem :info="item" />
+            </div>
+            <div
+              class="right"
+              v-show="curPage < total"
+              @click="
+                () => {
+                  curPage++;
+                  getCurShowItems();
+                }
+              "
+            >
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="tip_badge"
-      v-if="!loading"
-      @click="() => $router.push({ name: 'order' })"
-    >
-      <div class="inner">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
-        <div class="text">我的订单</div>
+      <div
+        class="tip_badge"
+        v-if="!loading"
+        @click="() => $router.push({ name: 'order' })"
+      >
+        <div class="inner">
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+          />
+          <div class="text">{{ t("my_order") }}</div>
+        </div>
       </div>
+      <CommonPageFooter />
     </div>
-    <CommonPageFooter />
-  </div>
 
     <CommonPageFooter />
   </div>
@@ -114,6 +121,7 @@ import CommonPageHeader from "../../components/common_page_header.vue";
 import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
+import { useI18n } from "vue-i18n";
 export default {
   name: "market_camp_detail",
   components: {
@@ -122,10 +130,14 @@ export default {
     CommonPageFooter,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const data = reactive({
-      pageTitle: "我的订单",
+      pageTitle: t("no_order"),
       curItems: [],
       web3: "",
       account: "",
@@ -137,9 +149,9 @@ export default {
       },
       loading: false,
       tabs: [
-        { key: 0, name: "挂单中" },
-        { key: 1, name: "已购买" },
-        { key: 2, name: "已售出" },
+        { key: 0, name: t("order_status_0") },
+        { key: 1, name: t("order_status_1") },
+        { key: 2, name: t("order_status_2") },
       ],
       curTab: 0,
     });
@@ -202,7 +214,7 @@ export default {
         getCurShowItems();
       } catch (e) {
         console.log(e);
-        proxy.$toast("获取市场失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       } finally {
         data.loading = false;
       }
@@ -223,6 +235,7 @@ export default {
     );
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       getCurShowItems,
     };
@@ -296,7 +309,7 @@ export default {
         font-size: 1.5rem;
       }
     }
-    .search_box{
+    .search_box {
       transform: translate(-5rem);
     }
   }
@@ -352,7 +365,8 @@ export default {
           margin: 1rem 0;
         }
         .active {
-          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png") no-repeat;
+          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+            no-repeat;
           background-size: 100% 100%;
         }
       }

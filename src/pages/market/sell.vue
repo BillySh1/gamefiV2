@@ -31,7 +31,7 @@
         <div class="right_c_content">
           {{ info.intro }}
         </div>
-        <div class="right_c_content">请在下方输入价格，授权并上架</div>
+        <div class="right_c_content">{{ t("sell_order_intro") }}</div>
         <div class="right_c_action">
           <div class="input_box">
             <img
@@ -104,6 +104,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "sell",
@@ -114,6 +115,10 @@ export default {
     InjectGoBack,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
@@ -121,7 +126,7 @@ export default {
     const data = reactive({
       info: "",
       price: 1000,
-      pageTitle: "出售卡牌",
+      pageTitle: t("sell_card"),
       web3: "",
       account: "",
       btnStatus: 0,
@@ -147,7 +152,10 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast(`t('common_wait_approve') ${data.info.name}`, store.state.toast_info);
+        proxy.$toast(
+          `${t("common_wait_approve")} ${data.info.name}`,
+          store.state.toast_info
+        );
         const c = store.state.c_hero;
         const addr = store.state.c_exchange.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -163,12 +171,15 @@ export default {
         if (res.status) {
           data.btnStatus = 1;
           proxy.$toast(
-            `授权 ${data.info.name} 成功`,
+            `approve ${data.info.name} susscce`,
             store.state.toast_success
           );
         }
       } catch (e) {
-        proxy.$toast(`授权 ${data.info.name} 失败`, store.state.toast_error);
+        proxy.$toast(
+          `approve ${data.info.name} error`,
+          store.state.toast_error
+        );
         console.log(e);
       } finally {
         data.loading = false;
@@ -176,7 +187,7 @@ export default {
     };
     const push = async () => {
       try {
-        proxy.$toast("等待上架", store.state.toast_info);
+        proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_exchange;
         const price = data.web3.utils.toWei(data.price.toString(), "ether");
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -191,7 +202,7 @@ export default {
         });
 
         if (res.status) {
-          proxy.$toast("上架成功", store.state.toast_success);
+          proxy.$toast(t("common_tip_success"), store.state.toast_success);
           router.push({
             name: "marketDetail",
             query: {
@@ -200,7 +211,7 @@ export default {
           });
         }
       } catch (e) {
-        proxy.$toast("上架失败", store.state.toast_error);
+        proxy.$toast(e, store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -208,7 +219,7 @@ export default {
     };
 
     const btnText = computed(() => {
-      return ["授权", "上架"][data.btnStatus];
+      return [t("approve"), t("push")][data.btnStatus];
     });
     const getHeroInfo = async () => {
       const c = store.state.c_hero;

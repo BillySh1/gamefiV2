@@ -41,7 +41,7 @@
         </div>
 
         <div class="right_c_content">
-          <div class="creator">(上架者: {{ info.creator }})</div>
+          <div class="creator">({{ t("seller") }}: {{ info.creator }})</div>
 
           {{ info.intro }}
         </div>
@@ -77,6 +77,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "order_detail",
@@ -87,6 +88,10 @@ export default {
     InjectGoBack,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
@@ -94,7 +99,7 @@ export default {
     const data = reactive({
       info: "",
       price: 1000,
-      pageTitle: "订单详情",
+      pageTitle: t("order_detail"),
       web3: "",
       account: "",
       btnStatus: 0,
@@ -125,7 +130,7 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast(`t('common_wait_approve')`, store.state.toast_info);
+        proxy.$toast(t("common_wait_approve"), store.state.toast_info);
         const c = store.state.c_mmc;
         const addr = store.state.c_exchange.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -141,10 +146,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast(`授权成功`, store.state.toast_success);
+          proxy.$toast(t("common_approve_success"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(`授权失败`, store.state.toast_error);
+        proxy.$toast(t("common_wait_failed"), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -152,7 +157,7 @@ export default {
     };
     const pull = async () => {
       try {
-        proxy.$toast("等待下架", store.state.toast_info);
+        proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_exchange;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -165,13 +170,13 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("下架成功", store.state.toast_success);
+          proxy.$toast(t("common_tip_success"), store.state.toast_success);
           router.push({
             name: "minting",
           });
         }
       } catch (e) {
-        proxy.$toast("下架失败", store.state.toast_error);
+        proxy.$toast(e, store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -179,7 +184,7 @@ export default {
     };
     const push = async () => {
       try {
-        proxy.$toast("等待购买", store.state.toast_info);
+        proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_exchange;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -192,13 +197,13 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("购买成功", store.state.toast_success);
+          proxy.$toast(t("common_tip_success"), store.state.toast_success);
           router.push({
             name: "minting",
           });
         }
       } catch (e) {
-        proxy.$toast("购买失败", store.state.toast_error);
+        proxy.$toast(e, store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -206,7 +211,7 @@ export default {
     };
 
     const btnText = computed(() => {
-      return ["授权", "购买", "下架"][data.btnStatus];
+      return [t("approve"), t("buy"), t("pull")][data.btnStatus];
     });
     const getCurInfo = async () => {
       try {
@@ -247,7 +252,7 @@ export default {
         });
       } catch (e) {
         console.log(e);
-        proxy.$toast("获取订单详情失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       }
     };
     onBeforeMount(async () => {
@@ -290,11 +295,12 @@ export default {
         });
         sessionStorage.setItem("before_pack", JSON.stringify(data.beforePack));
       } catch (e) {
-        proxy.$toast("购买成功", store.state.toast_success);
+        proxy.$toast(t("common_tip_success"), store.state.toast_success);
       }
     };
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       btnText,
       btnClick,

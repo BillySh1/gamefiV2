@@ -14,10 +14,12 @@
         <img :src="item.img" alt="" />
       </div>
     </div>
-    <div class="tip_badge" @click="()=>$router.push({name:'order'})" >
+    <div class="tip_badge" @click="() => $router.push({ name: 'order' })">
       <div class="inner">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
-        <div class="text">我的订单</div>
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+        />
+        <div class="text">{{ t("my_order") }}</div>
       </div>
     </div>
     <CommonPageFooter />
@@ -25,10 +27,11 @@
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount } from "vue";
+import { reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "store",
   components: {
@@ -37,32 +40,35 @@ export default {
     InjectGoBack,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
-      pageTitle: "交易市场",
+      pageTitle: t("market_page_title"),
       campBox: [
         {
-          name: "魏",
+          name: t("camp_0"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/0.png",
         },
         {
-          name: "蜀",
+          name: t("camp_1"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/1.png",
         },
         {
-          name: "吴",
+          name: t("camp_2"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/2.png",
         },
         {
-          name: "群",
+          name: t("camp_3"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/camp/3.png",
         },
       ],
     });
 
-    onBeforeMount(() => {});
-
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
     };
   },
@@ -73,14 +79,15 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png")
+    no-repeat;
   background-size: cover;
   .tip_badge {
     cursor: pointer;
     position: absolute;
     bottom: 8rem;
     left: 0;
-     white-space: nowrap;
+    white-space: nowrap;
     .inner {
       position: relative;
       img {

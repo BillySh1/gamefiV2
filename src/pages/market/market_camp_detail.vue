@@ -12,7 +12,7 @@
           }
         "
       >
-        <div class="left">重置</div>
+        <div class="left">{{ t("reset") }}</div>
       </div>
       <div v-for="(item, index) in filters" :key="index" class="filter_item">
         <div class="left">
@@ -28,7 +28,10 @@
             <img v-if="item.key != 'preference'" :src="i.img" alt="" />
             <div v-else class="text">{{ i.name }}</div>
             <div class="selected" v-if="item.selected == i.key">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/selected.png" alt="" />
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/filter/selected.png"
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -52,7 +55,7 @@
           "
         />
         <div class="filter_box" @click="() => (showFilter = true)">
-          <div class="text">筛选</div>
+          <div class="text">{{ t("filter") }}</div>
         </div>
         <div
           class="search_box"
@@ -99,9 +102,14 @@
               }
             "
           >
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png"
+              alt=""
+            />
           </div>
-          <div class="empty" v-if="!rawData.length">市场中暂无卡牌</div>
+          <div class="empty" v-if="!rawData.length">
+            {{ t("no_card_in_market") }}
+          </div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
@@ -127,7 +135,10 @@
               }
             "
           >
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -138,8 +149,10 @@
       @click="() => $router.push({ name: 'order' })"
     >
       <div class="inner">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg" />
-        <div class="text">我的订单</div>
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+        />
+        <div class="text">{{ t("my_order") }}</div>
       </div>
     </div>
     <CommonPageFooter />
@@ -157,6 +170,7 @@ import CommonPageFooter from "../../components/common_page_footer.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 export default {
   name: "market_camp_detail",
   components: {
@@ -167,11 +181,15 @@ export default {
     InjectGoBack,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const route = useRoute();
     const data = reactive({
-      pageTitle: "卡牌市场",
+      pageTitle: t("card_market"),
       curItems: [],
       web3: "",
       account: "",
@@ -183,17 +201,17 @@ export default {
       },
       loading: false,
       tabs: [
-        { key: 0, name: "战力" },
-        { key: 1, name: "品质" },
-        { key: 2, name: "稀有度" },
-        { key: 3, name: "价格" },
+        { key: 0, name: t("power") },
+        { key: 1, name: t("quality") },
+        { key: 2, name: t("rarity") },
+        { key: 3, name: t("price") },
       ],
       curTab: 0,
       showFilter: false,
       filteredData: [],
       filters: [
         {
-          name: "稀有度",
+          name: t("rairty"),
           key: "rarity",
           selected: null,
           items: [
@@ -220,7 +238,7 @@ export default {
           ],
         },
         {
-          name: "阵营",
+          name: t("camp"),
           key: "camp",
           selected: null,
           items: [
@@ -243,7 +261,7 @@ export default {
           ],
         },
         {
-          name: "品质",
+          name: t("quality"),
           key: "quality",
           selected: null,
           items: [
@@ -266,29 +284,29 @@ export default {
           ],
         },
         {
-          name: "职业",
+          name: t("job"),
           key: "preference",
           selected: null,
           items: [
             {
               key: 0,
-              name: "盾",
+              name: t('job_0'),
             },
             {
               key: 1,
-              name: "战",
+              name: t('job_1'),
             },
             {
               key: 2,
-              name: "谋",
+              name: t('job_2'),
             },
             {
               key: 3,
-              name: "刺",
+              name: t('job_3'),
             },
             {
               key: 4,
-              name: "辅",
+              name: t('job_4'),
             },
           ],
         },
@@ -397,11 +415,12 @@ export default {
         data.total = Math.ceil(data.filteredData.length / 4);
       } catch (e) {
         console.log(e);
-        proxy.$toast("获取市场失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       }
     };
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       getCurShowItems,
       filterTab,
@@ -537,7 +556,8 @@ export default {
           margin: 1rem 0;
         }
         .active {
-          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png") no-repeat;
+          background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+            no-repeat;
           background-size: 100% 100%;
         }
       }

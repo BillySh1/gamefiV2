@@ -4,7 +4,10 @@
     <InjectGoBack />
     <div class="content">
       <div class="border">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg"
+          alt=""
+        />
         <div class="inner">
           <div class="top">
             <CommonButton
@@ -15,7 +18,7 @@
                 }
               "
               style="margin-right: 2rem"
-              >单卡战力排行</CommonButton
+              >{{ t("single_card_board") }}</CommonButton
             >
             <CommonButton
               @click="
@@ -24,7 +27,7 @@
                   switchData();
                 }
               "
-              >总战力排行</CommonButton
+              >{{ t("all_card_board") }}</CommonButton
             >
           </div>
 
@@ -52,6 +55,7 @@ import InjectGoBack from "../../components/inject_go_back.vue";
 import TableItem from "../../components/table_item.vue";
 import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
+import { useI18n } from "vue-i18n";
 export default {
   name: "store",
   components: {
@@ -62,8 +66,12 @@ export default {
     TableItem,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
-      pageTitle: "排行榜",
+      pageTitle: t("board"),
       boardData: [],
       dayData: [],
       totalData: [],
@@ -89,10 +97,10 @@ export default {
       data.boardData = [];
       if (data.curTab == "all") {
         data.boardData = data.totalData;
-        data.pageTitle = "总排行榜";
+        data.pageTitle = t("all_board");
       } else if (data.curTab == "day") {
         data.boardData = data.dayData;
-        data.pageTitle = "日排行榜";
+        data.pageTitle = t("day_board");
       }
     };
     const getBoard = async () => {
@@ -105,7 +113,7 @@ export default {
         return Number(b.amount) - Number(a.amount);
       });
       data.totalData = [];
-      data.totalData.push(["排名", "地址", "战力"]);
+      data.totalData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
         data.totalData.push([
           index + 1,
@@ -124,7 +132,7 @@ export default {
         return Number(b.amount) - Number(a.amount);
       });
       data.dayData = [];
-      data.dayData.push(["排名", "地址", "战力"]);
+      data.dayData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
         data.dayData.push([
           index + 1,
@@ -136,6 +144,7 @@ export default {
 
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       switchData,
     };

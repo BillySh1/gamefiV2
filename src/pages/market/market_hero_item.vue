@@ -22,7 +22,7 @@
         </div>
 
         <div class="power_value">
-          <div class="text">战力</div>
+          <div class="text">{{t('power')}}</div>
           <div class="value">{{ Number(info.power) / 100 }}</div>
         </div>
       </div>
@@ -38,6 +38,7 @@
 import { computed, onBeforeMount, reactive, toRefs } from "vue";
 import HeroCardItem from "../../components/hero_card_item";
 import initWeb3 from "../../utils/initWeb3";
+import { useI18n } from "vue-i18n";
 export default {
   name: "pack_hero_item",
   components: {
@@ -45,6 +46,10 @@ export default {
   },
   props: ["info"],
   setup(prop) {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
       web3: "",
       account: "",
@@ -64,6 +69,7 @@ export default {
     });
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       getPrice,
     };
