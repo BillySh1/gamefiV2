@@ -8,10 +8,17 @@
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
     <div class="content">
-      <img class="bg_badge" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg" alt="" />
+      <img
+        class="bg_badge"
+        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+        alt=""
+      />
       <div class="invite_box">
         <div class="up">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/up_bg.png" alt="" />
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/up_bg.png"
+            alt=""
+          />
           <div
             class="info_box"
             @click="
@@ -22,18 +29,21 @@
             "
           >
             <div class="item title">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg" alt="" />
-              我的收益
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg"
+                alt=""
+              />
+              {{ t("my_income") }}
             </div>
             <div class="item">
               <div class="num">{{ inviteDay }} <span class="xs">MMC</span></div>
-              <div class="des">日收益</div>
+              <div class="des">{{ t("day_income") }}</div>
             </div>
             <div class="item">
               <div class="num">
                 {{ inviteTotal }} <span class="xs">MMC</span>
               </div>
-              <div class="des">总收益</div>
+              <div class="des">{{ t("all_income") }}</div>
             </div>
           </div>
         </div>
@@ -42,24 +52,42 @@
             class="item"
             @click="() => $router.push({ name: 'inviteBoard' })"
           >
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_1.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_1.png"
+              alt=""
+            />
             <div class="inner">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/2.svg" alt="" />
-              邀请排行榜
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/2.svg"
+                alt=""
+              />
+              {{ t("invite_board") }}
             </div>
           </div>
           <div class="item" @click="() => (showRules = true)">
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_2.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_2.png"
+              alt=""
+            />
             <div class="inner">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/3.svg" alt="" />
-              邀请规则
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/3.svg"
+                alt=""
+              />
+              {{ t("invite_rule") }}
             </div>
           </div>
           <div class="item" @click="generate">
-            <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_3.png" alt="" />
+            <img
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_3.png"
+              alt=""
+            />
             <div class="inner">
-              <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/4.svg" alt="" />
-              生成我的邀请码
+              <img
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/4.svg"
+                alt=""
+              />
+              {{ t("generate_invite") }}
             </div>
           </div>
         </div>
@@ -68,13 +96,13 @@
     <CommonPageFooter />
     <InjectModal
       class="rule_modal"
-      :title="'邀请规则'"
+      :title="t('invite_rule')"
       :value="showRules"
       @close="() => (showRules = false)"
       @confirm="() => (showRules = false)"
     >
       <div class="content">
-        玩家可以生成邀请码将邀请码发送给好友，好友通过邀请码进入并购买盲盒抽卡则邀请关系成立，邀请关系一共保持四代，四代可领取的收益分别是购买盲盒的5%，3%，1.5%，0.5%。
+        {{ t("invite_content") }}
       </div>
     </InjectModal>
   </div>
@@ -91,6 +119,7 @@ import initWeb3 from "../../utils/initWeb3";
 import InjectGoBack from "../../components/inject_go_back.vue";
 import postData from "../../utils/useFetch";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 export default {
   name: "invite",
   components: {
@@ -101,12 +130,16 @@ export default {
     InjectModal,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
       account: "",
       web3: "",
-      pageTitle: "呼朋唤友",
+      pageTitle: t("call_friends"),
       encodeData: "",
       showModal: false,
       showRules: false,
@@ -141,6 +174,7 @@ export default {
     };
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       generate,
     };

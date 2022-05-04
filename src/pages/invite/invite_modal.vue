@@ -10,13 +10,16 @@
       "
     >
       <div class="innerContent">
-        <CommonButton class="title">生成我的邀请码</CommonButton>
+        <CommonButton class="title">{{ t("generate_invite") }}</CommonButton>
         <div class="data">
           {{ data }}
         </div>
         <div class="btn" @click="copy">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/button_round.png" alt="" />
-          <div class="text">复制</div>
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/button_round.png"
+            alt=""
+          />
+          <div class="text">{{ t("copy") }}</div>
         </div>
       </div>
     </div>
@@ -27,6 +30,7 @@
 import { reactive, toRefs, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import CommonButton from "../../components/common_button.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "invite_modal",
   props: ["value", "data"],
@@ -34,6 +38,10 @@ export default {
     CommonButton,
   },
   setup(prop, ctx) {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({});
@@ -46,11 +54,12 @@ export default {
       aux.select();
       document.execCommand("copy");
       document.body.removeChild(aux);
-      proxy.$toast("复制成功", store.state.toast_success);
+      proxy.$toast(t("common_tip_success"), store.state.toast_success);
       ctx.emit("close");
     };
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
       copy,
     };

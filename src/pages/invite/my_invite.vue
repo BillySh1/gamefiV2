@@ -25,19 +25,19 @@
                   src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg"
                   alt=""
                 />
-                我的收益
+                {{ t("my_income") }}
               </div>
               <div class="item">
                 <div class="num">
                   {{ inviteDay }} <span class="xs">MMC</span>
                 </div>
-                <div class="des">日收益</div>
+                <div class="des">{{ t("day_income") }}</div>
               </div>
               <div class="item">
                 <div class="num">
                   {{ inviteTotal }} <span class="xs">MMC</span>
                 </div>
-                <div class="des">总收益</div>
+                <div class="des">{{ t("day_income") }}</div>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
             />
           </div>
         </div>
-        <div v-else class="empty">暂无数据</div>
+        <div v-else class="empty">{{ t("no_data") }}</div>
       </div>
     </div>
     <CommonPageFooter />
@@ -65,6 +65,7 @@ import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3";
 import TableItem from "../../components/table_item.vue";
 import postData from "../../utils/useFetch";
+import { useI18n } from "vue-i18n";
 export default {
   name: "notice",
   components: {
@@ -74,8 +75,12 @@ export default {
     TableItem,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const data = reactive({
-      pageTitle: "我的收益",
+      pageTitle: t("my_income"),
       account: "",
       web3: "",
       inviteDay: 0,
@@ -101,7 +106,7 @@ export default {
       data.inviteDay = data.web3.utils.fromWei(res.invite_day, "ether");
       data.inviteTotal = data.web3.utils.fromWei(res.invite_total, "ether");
       data.inviteData = [];
-      data.inviteData.push(["blockNumber", "地址", "收益"]);
+      data.inviteData.push(["blockNumber", t("address"), t("income")]);
       res.list.map((item) => {
         data.inviteData.push([
           item.block_number,
@@ -112,6 +117,7 @@ export default {
     };
     const refData = toRefs(data);
     return {
+      t,
       ...refData,
     };
   },
