@@ -178,7 +178,7 @@ export default {
     });
     const claim = async () => {
       try {
-        proxy.$toast(t('common_wait_check'), store.state.toast_info);
+        proxy.$toast('wait', store.state.toast_info);
         data.btnDisable = true;
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -202,7 +202,7 @@ export default {
     };
     const unlock = async () => {
       try {
-        proxy.$toast(t('common_wait_check'), store.state.toast_info);
+        proxy.$toast('wait', store.state.toast_info);
         data.btnDisable = true;
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();

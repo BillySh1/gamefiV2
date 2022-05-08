@@ -600,7 +600,7 @@ export default {
     const go = async () => {
       try {
         data.btnDisable = true;
-        proxy.$toast(t('common_wait_check'), store.state.toast_info);
+        proxy.$toast('wait', store.state.toast_info);
         const c = store.state.c_battle;
         const gasPrice = await data.web3.eth.getGasPrice();
         console.log(

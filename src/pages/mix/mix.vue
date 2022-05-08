@@ -411,7 +411,7 @@ export default {
     };
     const mix = async () => {
       try {
-        proxy.$toast(t('common_wait_check'), store.state.toast_info);
+        proxy.$toast('wait', store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
