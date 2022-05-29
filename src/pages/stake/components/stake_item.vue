@@ -1,24 +1,15 @@
 <template>
   <div class="stake_item">
-    <div v-if="!info || !info.tokenId" class="empty">点击出征</div>
-    <div class="stake_item_card" v-if="info && info.tokenId">
-      <HeroCardItem :hideName="true" :big="true" :info="info" />
-    </div>
-  </div>
-  <div class="power_box">
-    <div>战力值</div>
-    <div>{{ info.power || 0 }}</div>
+    <img class="bg" src="../../../assets/stake/stk_btn_bg.png" alt="" />
+    2
   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from "vue";
-import HeroCardItem from "../../../components/hero_card_item.vue";
 export default {
   name: "stake_item",
-  components: {
-    HeroCardItem,
-  },
+  components: {},
   props: ["info"],
   setup() {
     const data = reactive({});
@@ -32,14 +23,15 @@ export default {
 <style lang='less' scoped>
 .stake_item {
   cursor: pointer;
+  width: 100%;
   &:hover {
     opacity: 0.8;
   }
   position: relative;
-  width: 100%;
-  height: 92%;
-  background: url("../../../assets/stake/stake/stake_item.png") no-repeat;
-  background-size: 100% 100%;
+  .bg {
+    width: 100%;
+    height: auto;
+  }
   .empty {
     position: absolute;
     top: 50%;

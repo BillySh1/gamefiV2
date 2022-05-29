@@ -46,7 +46,7 @@
           <div class="left" @click="jump('stk_entry')">
             <img src="../../assets/index/left.png" alt="" />
           </div>
-          <div class="middle" @click="jump('allStarsEntry')">
+          <div class="middle" >
             <img
               src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/middle.png"
               alt=""
@@ -212,10 +212,13 @@ export default {
       }
     }
     .middle {
-      &:hover {
-        opacity: 0.6;
-      }
-      cursor: pointer;
+      user-select: none;
+      pointer-events: none;
+      filter: grayscale(1);
+      // &:hover {
+      //   opacity: 0.6;
+      // }
+      // cursor: pointer;
       position: relative;
       transform: translateY(-2.5rem);
       img {
