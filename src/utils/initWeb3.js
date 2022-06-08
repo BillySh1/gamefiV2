@@ -7,7 +7,7 @@ export default {
       this.provider = window.web3.currentProvider;
     } else {
       this.provider = new Web3.providers.HttpProvider(
-        "https://bsc-dataseed.binance.org/"
+        "https://rpc-testnet.kcc.network/"
       );
     }
     const web3 = new Web3(this.provider);

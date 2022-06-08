@@ -49,7 +49,6 @@ const bf_casio_history = () =>
 
 // 攻城略地 start
 const stk_entry = () => import("../pages/stake/entry.vue");
-const stk_detail = () => import("../pages/stake/entry_detail.vue");
 const stk_main = () => import("../pages/stake/main.vue");
 const stk_choose = () => import("../pages/stake/choose_mission.vue");
 const stk_go = () => import("../pages/stake/stake_go.vue");
@@ -270,11 +269,6 @@ const router = createRouter({
       path: "/stk_entry",
       name: "stk_entry",
       component: stk_entry,
-    },
-    {
-      path: "/stk_story",
-      name: "stk_story",
-      component: stk_detail,
     },
     {
       path: "/stk_main",

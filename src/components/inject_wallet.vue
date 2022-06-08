@@ -3,7 +3,7 @@
     <div class="chain_icon_box">
       <img
         class="chain_icon"
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/chainIcon/bsc.svg"
+        src="../assets/index/chainIcon/kcc.png"
         alt=""
       />
     </div>
@@ -99,7 +99,6 @@ export default {
   width: 3rem;
   height: 3rem;
   border-radius: 100%;
-  background: black;
   margin-right: 0.5rem;
   img {
     width: 2rem;

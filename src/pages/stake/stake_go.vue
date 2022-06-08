@@ -2,8 +2,9 @@
   <div class="box">
     <div class="left">1</div>
     <div class="scroll">
-      <div class="hero_item" v-for="item in rawData" :key="item.key">
-        <StakeItem />
+      <div class="hero_item" v-for="(item, index) in rawData" :key="index">
+      2
+        <StakeItem :info="item" />
       </div>
     </div>
     <div class="right">3</div>
@@ -39,7 +40,6 @@ export default {
         }
       );
       await getPack();
-      console.log(data.rawData,'gggg')
     });
 
     const getPack = async () => {
@@ -68,8 +68,8 @@ export default {
             ...useHeroDetail(uid, x.preference),
           });
         });
-        data.filteredData = JSON.parse(JSON.stringify(data.rawData));
-        data.total = Math.ceil(data.filteredData.length / 4);
+        // data.filteredData = JSON.parse(JSON.stringify(data.rawData));
+        // data.total = Math.ceil(data.filteredData.length / 4);
       } catch (e) {
         proxy.$toast("获取武将背包失败", store.state.toast_error);
       }
@@ -88,14 +88,21 @@ export default {
   box-sizing: border-box;
   height: 100%;
   display: flex;
+
+  background: url("../../assets/stake/stake/stake_bg.png") no-repeat;
+  background-size: 100% 100%;
 }
 .left {
   width: 10%;
 }
 .scroll {
   width: 60%;
-  .hero_item{
-    width: 10rem
+  display: flex;
+  flex-wrap: wrap;
+  .hero_item {
+    width: 10rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
   }
 }
 

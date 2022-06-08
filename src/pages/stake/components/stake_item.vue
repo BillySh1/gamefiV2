@@ -1,7 +1,7 @@
 <template>
   <div class="stake_item">
     <img class="bg" src="../../../assets/stake/stk_btn_bg.png" alt="" />
-    2
+    2222
   </div>
 </template>
 
