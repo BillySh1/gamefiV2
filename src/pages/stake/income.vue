@@ -52,7 +52,7 @@
         <div v-else class="btn_box">
           <div
             :class="btnDisable ? 'btn_flex disable' : 'btn_flex'"
-            @click="() => $router.push({ name: 'stk_go' })"
+       
           >
             继续探索
           </div>
