@@ -29,13 +29,7 @@
           <div class="str">{{ stakedTime }}</div>
         </div>
       </div>
-      <div class="item">
-        <img src="../../assets/stake/main_item.png" alt="" />
-        <div class="inner">
-          <div class="title">剩余时间</div>
-          <div class="str">{{ remainTime }}</div>
-        </div>
-      </div>
+     
     </div>
     <div class="left_bottom">
       <div class="btn_item" @click="() => $router.push({ name: 'stk_view' })">
@@ -155,7 +149,6 @@ export default {
   top: 3%;
   right: 3%;
   display: flex;
-  flex-direction: column;
   .item {
     position: relative;
     margin-bottom: 1rem;
