@@ -1,15 +1,16 @@
 <template>
   <div class="stake_item">
     <img class="bg" src="../../../assets/stake/stk_btn_bg.png" alt="" />
-    2222
+    <div>
+      222
+    </div>
   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from "vue";
 export default {
-  name: "stake_item",
-  components: {},
+  name: "stake_pack_item",
   props: ["info"],
   setup() {
     const data = reactive({});

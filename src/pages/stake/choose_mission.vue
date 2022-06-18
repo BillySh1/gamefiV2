@@ -93,7 +93,7 @@ export default {
     const clickMission = (idx) => {
       localStorage.setItem("stake_diff", idx);
       router.push({
-        name: "stk_main",
+        name: "stk_go",
       });
     };
 

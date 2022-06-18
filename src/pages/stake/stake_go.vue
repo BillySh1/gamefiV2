@@ -3,8 +3,7 @@
     <div class="left">1</div>
     <div class="scroll">
       <div class="hero_item" v-for="(item, index) in rawData" :key="index">
-      2
-        <StakeItem :info="item" />
+        <stake_pack_item :info="item"  />
       </div>
     </div>
     <div class="right">3</div>
@@ -16,11 +15,11 @@ import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
-import StakeItem from "./components/stake_item.vue";
+import stake_pack_item from "./components/stake_pack_item.vue";
 export default {
   name: "stk_go",
   coomponents: {
-    StakeItem,
+    stake_pack_item,
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -68,8 +67,6 @@ export default {
             ...useHeroDetail(uid, x.preference),
           });
         });
-        // data.filteredData = JSON.parse(JSON.stringify(data.rawData));
-        // data.total = Math.ceil(data.filteredData.length / 4);
       } catch (e) {
         proxy.$toast("获取武将背包失败", store.state.toast_error);
       }
