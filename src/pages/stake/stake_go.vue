@@ -1,6 +1,8 @@
 <template>
   <div class="box">
-    <div class="left">1</div>
+    <div class="left">
+      <img src="" alt="">
+    </div>
     <div class="scroll">
       <div class="hero_item" v-for="(item, index) in rawData" :key="index">
         <stake_pack_item :info="item"  />
@@ -18,7 +20,7 @@ import initWeb3 from "../../utils/initWeb3";
 import stake_pack_item from "./components/stake_pack_item.vue";
 export default {
   name: "stk_go",
-  coomponents: {
+  components: {
     stake_pack_item,
   },
   setup() {
