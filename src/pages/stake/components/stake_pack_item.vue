@@ -1,7 +1,7 @@
 <template>
   <div class="stake_item">
-    <img class="bg" src="../../../assets/stake/stk_btn_bg.png" alt="" />
-    <div>
+    <img class="bg" src="../../../assets/stake/stake/stk_itm_bg.png" alt="" />
+    <div class="stake_item_card" >
       222
     </div>
   </div>
@@ -33,29 +33,17 @@ export default {
     width: 100%;
     height: auto;
   }
-  .empty {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    font-size: 1.5rem;
-  }
   .stake_item_card {
     position: absolute;
     width: 95%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    
   }
 }
 
-.power_box {
-  width: 100%;
-  height: 10%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.5rem;
-}
+
 </style>
