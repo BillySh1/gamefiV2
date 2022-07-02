@@ -2,16 +2,20 @@
   <div class="stake_item">
     <img class="bg" src="../../../assets/stake/stake/stk_itm_bg.png" alt="" />
     <div class="stake_item_card" >
-      222
+        <HeroAvatar :item="info" />
     </div>
   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from "vue";
+import HeroAvatar from './hero_avatar.vue'
 export default {
   name: "stake_pack_item",
   props: ["info"],
+  components:{
+    HeroAvatar
+  },
   setup() {
     const data = reactive({});
     const refData = toRefs(data);
@@ -38,7 +42,7 @@ export default {
     width: 95%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
     display: flex;
     align-items: center;
     

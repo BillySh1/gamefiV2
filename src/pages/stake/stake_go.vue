@@ -98,8 +98,11 @@ export default {
   width: 60%;
   display: flex;
   flex-wrap: wrap;
+  max-height: 100vh;
+  overflow-y: auto;
+  justify-content: space-around;
   .hero_item {
-    width: 10rem;
+    width: 15rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
   }
