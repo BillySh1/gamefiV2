@@ -7,7 +7,7 @@ export default {
       this.provider = window.web3.currentProvider;
     } else {
       this.provider = new Web3.providers.HttpProvider(
-        "https://rpc-testnet.kcc.network/"
+        "https://data-seed-prebsc-1-s1.binance.org:8545"
       );
     }
     const web3 = new Web3(this.provider);
