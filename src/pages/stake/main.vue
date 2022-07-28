@@ -20,7 +20,7 @@
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ Number(totalPower) / 100 || 0 }}
             </div>
-            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+            <img class="coin" src="../../assets/stake/totalpower.png" alt="" />
           </div>
         </div>
         <div class="item">
@@ -30,12 +30,69 @@
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ totalIncome }}
             </div>
-            <img class="coin" src="../../assets/stake/totalpower.png" alt="" />
+            <img class="coin" src="../../assets/stake/coin.png" alt="" />
           </div>
         </div>
       </div>
     </div>
-
+    <div class="main_body">
+      <div class="left">
+        <div class="item">
+          <div class="badge">
+            <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
+            <div class="text">剩余时间</div>
+          </div>
+          <div class="detail">
+            <div class="lg">任务剩余时间 9天18小时30分25秒</div>
+            <div class="sm">中途中止作战会衰减出征收益</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="badge">
+            <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
+            <div class="text">累计收益</div>
+          </div>
+          <div class="detail">
+            <div class="white lg" style="margin-bottom: 1rem">
+              当前历史累计收益 2000000MDAO
+            </div>
+            <div class="lg white">每区块奖励 9999MDAO</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="badge">
+            <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
+            <div class="text">额外收益</div>
+          </div>
+          <div class="detail">
+            <div class="lg">1587 MDAO</div>
+          </div>
+        </div>
+      </div>
+      <img class="divider" src="../../assets/stake/stake/divider.png" alt="" />
+      <div class="right">
+        <div class="top">
+          <div class="dia">
+            <img
+              :src="
+                player
+                  ? require('../../assets/stake/stake/pre-mdao/active_dia.png')
+                  : require('../../assets/stake/stake/pre-mdao/inavtive_dia.png')
+              "
+              alt=""
+            />
+          </div>
+          <div class="cur">当前可质押 300000 MDAO</div>
+          <div class="rule">规则说明</div>
+          <div class="stk_btn">
+            <img src="../../assets/stake/stake/stk_btn_bg.png" alt="" />
+            <div class="text">质押</div>
+          </div>
+        </div>
+        <div class="middle"></div>
+        <div class="bottom"></div>
+      </div>
+    </div>
     <div class="bottom_bar">
       <img class="dia" src="../../assets/stake/diamond.png" alt="" />
       <div class="info">
@@ -78,10 +135,10 @@
         <div class="ing">
           <img :src="require('../../assets/stake/bonus.png')" alt="" />
           <div class="detail">
-            <div class="title" >复利进行中</div>
+            <div class="title">复利进行中</div>
             <div>奖励余额</div>
             <div>156781239 MDAO</div>
-            <div>剩余天数  28天</div>
+            <div>剩余天数 28天</div>
           </div>
         </div>
       </div>
@@ -227,7 +284,103 @@ export default {
 
 .main_body {
   display: flex;
-  min-height: 50rem;
+  height: 25rem;
+  justify-content: flex-end;
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 45%;
+    .item {
+      display: flex;
+      width: 100%;
+      height: 6rem;
+      .badge {
+        height: 100%;
+        position: relative;
+        margin-right: 4rem;
+        .bg {
+          height: 100%;
+        }
+        .text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.5rem;
+          white-space: nowrap;
+        }
+      }
+      .detail {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .lg {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .sm {
+          font-size: 0.85rem;
+        }
+        .white {
+          color: white;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .right {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .top {
+      width: 80%;
+      padding: 1rem 2rem;
+      background: linear-gradient(
+        180deg,
+        rgba(45, 43, 43, 0.7) 0%,
+        rgba(28, 57, 67, 0.7) 67.71%,
+        rgba(52, 58, 61, 0.7) 100%
+      );
+      border-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .dia {
+        width: 3.5rem;
+        img {
+          width: 100%;
+        }
+      }
+      .cur {
+        font-size: 1.2rem;
+      }
+      .rule {
+        cursor: pointer;
+      }
+      .stk_btn {
+        width: 4rem;
+        position: relative;
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+        .text {
+          font-size: 0.5rem;
+          position: absolute;
+          top: 44%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+  .divider {
+    height: 100%;
+    margin: 0 1.5rem;
+  }
 }
 .bottom_bar {
   width: 100%;
@@ -299,7 +452,6 @@ export default {
     }
   }
 }
-
 .mission_zone {
   height: 7rem;
   display: flex;
@@ -328,7 +480,6 @@ export default {
     width: 23rem;
   }
 }
-
 .bonus_zone {
   height: 7rem;
   display: flex;
@@ -351,8 +502,8 @@ export default {
       width: 4rem;
       margin-right: 1rem;
     }
-    .detail{
-      .title{
+    .detail {
+      .title {
         font-size: 1.5rem;
       }
     }
