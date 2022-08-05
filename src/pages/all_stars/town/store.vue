@@ -235,7 +235,7 @@ export default {
         proxy.$toast("t('common_wait_approve')", store.state.toast_info);
         data.btnDisable = true;
         await getBeforePack();
-        const c = store.state.c_mmc;
+        const c = store.state.c_mdao;
         const value = data.web3.utils.toWei(
           (2000 * Number(data.buyNum)).toString(),
           "ether"

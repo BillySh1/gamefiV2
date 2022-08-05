@@ -262,7 +262,7 @@ export default {
       try {
         proxy.$toast("t('common_wait_approve')", store.state.toast_info);
         data.btnDisable = true;
-        const c = store.state.c_mmc;
+        const c = store.state.c_mdao;
         const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
         const addr = store.state.c_bet.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();

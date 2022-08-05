@@ -177,7 +177,7 @@ export default {
     const approve = async () => {
       try {
         proxy.$toast("t('common_wait_approve')", store.state.toast_info);
-        const c = data.payment == 1 ? store.state.c_m3t : store.state.c_mmc;
+        const c = data.payment == 1 ? store.state.c_m3t : store.state.c_mdao;
         const value = data.web3.utils.toWei(
           totalPrice.value.toString(),
           "ether"

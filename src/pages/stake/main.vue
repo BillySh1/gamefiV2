@@ -54,9 +54,13 @@
           </div>
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
-              当前历史累计收益 2000000MDAO
+              当前历史累计收益
+              {{
+                Number(player.pendingAmount) + Number(player.rewardDebt) || 0
+              }}
+              MDAO
             </div>
-            <div class="lg white">每区块奖励 9999MDAO</div>
+            <div class="lg white">每区块奖励 {{ rewardPerblock }} MDAO</div>
           </div>
         </div>
         <div class="item">
@@ -82,11 +86,24 @@
               alt=""
             />
           </div>
-          <div class="cur">当前可质押 300000 MDAO</div>
+          <div class="cur">当前可质押 {{ mdaoToDeposit }} MDAO</div>
           <div class="rule">规则说明</div>
-          <div class="stk_btn">
+          <div
+            class="stk_btn"
+            @click="
+              () => {
+                if (mdaoStkBtnStatus == 0) {
+                  approveMdao();
+                } else {
+                  depositMdao();
+                }
+              }
+            "
+          >
             <img src="../../assets/stake/stake/stk_btn_bg.png" alt="" />
-            <div class="text">质押</div>
+            <div class="text">
+              {{ mdaoStkBtnStatus == 1 ? "质押" : "授权" }}
+            </div>
           </div>
         </div>
         <div class="middle"></div>
@@ -104,19 +121,21 @@
           <div class="total">
             <div class="item">
               <span class="mar">总战力</span>
-              <span>200000</span>
+              <span>{{ Number(player.buffedPower) / 100 || 0 }}</span>
             </div>
           </div>
           <div class="common">
             <div class="item">
               <span class="mar">原军队战力</span>
-              <span>{{ 22222 }}</span>
+              <span>{{ Number(player.realPower) / 100 || 0 }}</span>
             </div>
           </div>
           <div class="common">
             <div class="item">
               <span class="mar">追加增幅</span>
-              <span>{{ 2222 }}</span>
+              <span>{{
+                Number(player.buffedPower - player.realPower) / 100 || 0
+              }}</span>
             </div>
           </div>
         </div>
@@ -151,7 +170,13 @@
 </template>
 
 <script>
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import StkBtn from "./components/stk_btn.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
@@ -162,6 +187,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       type: 0,
       account: "",
@@ -172,6 +198,9 @@ export default {
       ticker: "",
       totalPower: 0,
       totalIncome: 0,
+      rewardPerblock: 0,
+      mdaoToDeposit: 0,
+      mdaoStkBtnStatus: 0,
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -182,8 +211,8 @@ export default {
           data.web3 = p;
         }
       );
-      await getGlobalPower();
       await getPlayer();
+      await getGlobalPower();
     });
 
     // const getRTime = (startTime, endTime) => {
@@ -206,7 +235,58 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
-      console.log(data.player, "player");
+      data.rewardPerblock =
+        data.web3.utils.fromWei(
+          await c.methods.rewardPerBlock().call(),
+          "ether"
+        ) || 0;
+      console.log(data.player, "player", data.player.buffedPower);
+    };
+    const approveMdao = async () => {
+      try {
+        proxy.$toast("等到授权mdao", store.state.toast_info);
+        const c = store.state.c_mdao;
+        const addr = store.state.c_staking.options.address;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, 300000)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.approve(addr, 30000).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.mdaoStkBtnStatus = 1;
+          proxy.$toast("授权成功", store.state.toast_success);
+        }
+      } catch (e) {
+        console.error(e);
+        proxy.$toast("授权失败", store.state.toast_error);
+      }
+    };
+    const depositMdao = async () => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待mdao 确认", store.state.toast_info);
+        const c = store.state.c_staking;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .depositMdao()
+          .estimateGas({ from: data.account });
+        const res = await c.methods.depositMdao().send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("质押成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("质押失败", store.state.toast_error);
+      } finally {
+        data.btnDisable = false;
+      }
     };
     const getGlobalPower = async () => {
       const c = store.state.c_staking;
@@ -215,9 +295,7 @@ export default {
     };
     const getDiffName = computed(() => {
       if (data.player) {
-        return ["斥候", "扫荡", "驻扎"][
-          data.player.stakingInfo.stakingDifficulty
-        ];
+        return ["斥候", "扫荡", "驻扎"][data.player.difficulty];
       }
       return "err";
     });
@@ -225,6 +303,8 @@ export default {
     return {
       ...refData,
       getDiffName,
+      approveMdao,
+      depositMdao,
     };
   },
 };

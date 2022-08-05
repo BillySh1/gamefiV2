@@ -58,14 +58,14 @@ export default {
       data.loading = false;
     });
     const judge = async () => {
-      const _mmc = store.state.c_mmc;
+      const _mmc = store.state.c_mdao;
       const _m3t = store.state.c_m3t;
       data.canMMC = !(await _mmc.methods.canGetTestToken(data.account).call());
       data.canM3t = !(await _m3t.methods.canGetTestToken(data.account).call());
     };
     const getTestToken = async (type) => {
       try {
-        const _mmc = store.state.c_mmc;
+        const _mmc = store.state.c_mdao;
         const _m3t = store.state.c_m3t;
         const c = type == 1 ? _mmc : _m3t;
         const gasPrice = await data.web3.eth.getGasPrice();

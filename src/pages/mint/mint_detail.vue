@@ -165,7 +165,7 @@ export default {
     const approve = async () => {
       try {
         proxy.$toast("t('common_wait_approve')", store.state.toast_info);
-        const c = store.state.c_mmc;
+        const c = store.state.c_mdao;
         const value = data.web3.utils.toWei(getprice.value.toString(), "ether");
         const addr = store.state.c_recruit.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();

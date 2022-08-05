@@ -151,7 +151,7 @@ export default {
       await getInfo();
     });
     const getInfo = async () => {
-      const mmc = store.state.c_mmc;
+      const mmc = store.state.c_mdao;
       const shop = store.state.c_richShop;
       const hero = store.state.c_hero;
       const m3t = store.state.c_m3t;

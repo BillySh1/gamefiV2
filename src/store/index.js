@@ -33,7 +33,7 @@ const c_map = {
     abi: M3TTokenABI.abi,
     address: addressMap.m3t,
   },
-  c_mmc: {
+  c_mdao: {
     abi: MMCTokenABI.abi,
     address: addressMap.mmc,
   },
