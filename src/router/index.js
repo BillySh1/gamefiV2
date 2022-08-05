@@ -54,6 +54,7 @@ const stk_choose = () => import("../pages/stake/choose_mission.vue");
 const stk_go = () => import("../pages/stake/stake_go.vue");
 const stk_income = () => import("../pages/stake/income.vue");
 const stk_view = () => import("../pages/stake/staked_view.vue");
+const stk_go_detail = () => import("../pages/stake/stake_go_detail.vue");
 
 const router = createRouter({
   history: routerHistory,
@@ -284,6 +285,11 @@ const router = createRouter({
       path: "/stk_go",
       name: "stk_go",
       component: stk_go,
+    },
+    {
+      path: "/stk_go_detail",
+      name: "stk_go_detail",
+      component: stk_go_detail,
     },
     {
       path: "/stk_income",
