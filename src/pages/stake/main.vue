@@ -230,7 +230,11 @@ export default {
       mdaoToDeposit: 0,
       mdaoStkBtnStatus: 0,
       pendingReward: 0,
-      actionType: 1,
+    });
+    const actionType = computed(() => {
+      if (!data.palyer || !data.palyer.inFarm) return 0;
+      if (data.player.isUnClaim) return 2;
+      return 1;
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -265,6 +269,8 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
+      console.log(data.player, "player", data.player.buffedPower);
+
       data.rewardPerblock =
         data.web3.utils.fromWei(
           await c.methods.rewardPerBlock().call(),
@@ -284,7 +290,6 @@ export default {
             "ether"
           )
         ) || 0;
-      console.log(data.player, "player", data.player.buffedPower);
     };
     const approveMdao = async () => {
       try {
@@ -375,6 +380,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      actionType,
       getDiffName,
       approveMdao,
       depositMdao,
@@ -431,6 +437,7 @@ export default {
       }
       .coin {
         width: 3rem;
+        transform: translateX(0.9rem);
       }
     }
   }
@@ -489,6 +496,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-around;
     .top {
       width: 80%;
       padding: 1rem 2rem;
