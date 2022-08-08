@@ -55,7 +55,7 @@
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
               当前历史累计收益
-              {{ pendingReward + Number(player.rewardDebt) || 0 }}
+              {{ (pendingReward + Number(player.rewardDebt)).toFixed(2) || 0 }}
               MDAO
             </div>
             <div class="lg white">每区块奖励 {{ rewardPerblock }} MDAO</div>
@@ -100,7 +100,8 @@
           >
             <img src="../../assets/stake/stake/stk_btn_bg.png" alt="" />
             <div class="text">
-              {{ mdaoStkBtnStatus == 1 ? "质押" : "授权" }}
+              <div v-if="mdaoStkBtnStatus == 0">授权</div>
+              <div v-else>质押</div>
             </div>
           </div>
         </div>
@@ -117,6 +118,24 @@
             <div class="text">去出征</div>
           </div>
         </div>
+        <div class="action_zone_2" v-if="actionType == 1">
+          <div class="income">
+            <img src="../../assets/stake/stake/empty_mission.png" alt="" />
+            <div>
+              <p>当前任务奖励</p>
+              <p>
+                {{
+                  (pendingReward + Number(player.rewardDebt)).toFixed(2) || 0
+                }}MDAO
+              </p>
+            </div>
+          </div>
+          <div class="big_btn" @click="releaseHero">
+            <img src="../../assets/stake/choose/btn_bg.png" alt="" />
+            <div class="text">取回卡牌</div>
+          </div>
+        </div>
+        <div class="action_zone_2" v-if="actionType == 2"></div>
       </div>
     </div>
     <div class="bottom_bar">
@@ -211,7 +230,7 @@ export default {
       mdaoToDeposit: 0,
       mdaoStkBtnStatus: 0,
       pendingReward: 0,
-      actionType: 0,
+      actionType: 1,
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -258,7 +277,8 @@ export default {
             "ether"
           )
         ) || 0;
-      data.mdaoToDeposit =  Math.ceil(
+      data.mdaoToDeposit =
+        Math.ceil(
           data.web3.utils.fromWei(
             await c.methods.canDepositMdao(data.account).call(),
             "ether"
@@ -273,16 +293,25 @@ export default {
         const addr = store.state.c_staking.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .approve(addr, 30000)
+          .approve(
+            addr,
+            data.web3.utils.toWei(data.mdaoToDeposit.toString(), "ether")
+          )
           .estimateGas({ from: data.account });
-        const res = await c.methods.approve(addr, 30000).send({
-          gas: gas,
-          gasPrice: gasPrice,
-          from: data.account,
-        });
+        const res = await c.methods
+          .approve(
+            addr,
+            data.web3.utils.toWei(data.mdaoToDeposit.toString(), "ether")
+          )
+          .send({
+            gas: gas,
+            gasPrice: gasPrice,
+            from: data.account,
+          });
         if (res.status) {
           data.mdaoStkBtnStatus = 1;
           proxy.$toast("授权成功", store.state.toast_success);
+          console.log("success");
         }
       } catch (e) {
         console.error(e);
@@ -312,10 +341,30 @@ export default {
         data.btnDisable = false;
       }
     };
+    const releaseHero = async () => {
+      try {
+        proxy.$toast("等待取出卡牌", store.state.toast_info);
+        const c = store.state.c_staking;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .claimHero()
+          .estimateGas({ from: data.account });
+        const res = await c.methods.claimHero().send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("取回成功", store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast("取回失败", store.state.toast_error);
+      }
+    };
     const getGlobalPower = async () => {
       const c = store.state.c_staking;
-      data.totalPower = await c.methods.totalPowers.call();
-      data.totalIncome = await c.methods.paidOut.call();
+      data.totalPower = await c.methods.totalPowers().call();
+      data.totalIncome = await c.methods.paidOut().call();
     };
     const getDiffName = computed(() => {
       if (data.player) {
@@ -329,6 +378,7 @@ export default {
       getDiffName,
       approveMdao,
       depositMdao,
+      releaseHero,
     };
   },
 };
@@ -480,12 +530,37 @@ export default {
         }
       }
     }
-    .action_zone{
+    .action_zone {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 4rem;
+    }
+    .action_zone_2 {
+      .income {
+        display: flex;
+        align-items: center;
+        img {
+          width: 4rem;
+          margin-right: 1.5rem;
+        }
+      }
+      .big_btn {
+        width: 10rem;
+        position: relative;
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+        .text {
+          font-size: 1rem;
+          position: absolute;
+          top: 44%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
     }
   }
   .divider {
