@@ -66,7 +66,7 @@ export default {
         const gas = await c.methods
           .deposit([1,2], 1)
           .estimateGas({ from: data.account });
-        const res = await c.methods.deposit([1,2], 1).send({
+        const res = await c.methods.deposit([3], 1).send({
           gas: gas,
           gasPrice: gasPrice,
           from: data.account,

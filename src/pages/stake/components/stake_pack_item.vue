@@ -4,6 +4,9 @@
     <div class="stake_item_card" >
         <HeroAvatar :item="info" />
     </div>
+    <div class="stake_item_info" >
+        222
+    </div>
   </div>
 </template>
 

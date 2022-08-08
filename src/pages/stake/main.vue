@@ -55,9 +55,7 @@
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
               当前历史累计收益
-              {{
-                Number(player.pendingAmount) + Number(player.rewardDebt) || 0
-              }}
+              {{ pendingReward + Number(player.rewardDebt) || 0 }}
               MDAO
             </div>
             <div class="lg white">每区块奖励 {{ rewardPerblock }} MDAO</div>
@@ -106,8 +104,19 @@
             </div>
           </div>
         </div>
-        <div class="middle"></div>
-        <div class="bottom"></div>
+        <div class="action_zone" v-if="actionType == 0">
+          <img src="../../assets/stake/stake/empty_mission.png" alt="" />
+          <p>未选择任务</p>
+
+          <div class="btn_wrapper">
+            <img
+              class="btn_bg"
+              src="../../assets/stake/choose/btn_bg.png"
+              alt=""
+            />
+            <div class="text">去出征</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bottom_bar">
@@ -201,6 +210,8 @@ export default {
       rewardPerblock: 0,
       mdaoToDeposit: 0,
       mdaoStkBtnStatus: 0,
+      pendingReward: 0,
+      actionType: 0,
     });
     onBeforeMount(async () => {
       await initWeb3.Init(
@@ -240,6 +251,19 @@ export default {
           await c.methods.rewardPerBlock().call(),
           "ether"
         ) || 0;
+      data.pendingReward =
+        Math.ceil(
+          data.web3.utils.fromWei(
+            await c.methods.pending(data.account).call(),
+            "ether"
+          )
+        ) || 0;
+      data.mdaoToDeposit =  Math.ceil(
+          data.web3.utils.fromWei(
+            await c.methods.canDepositMdao(data.account).call(),
+            "ether"
+          )
+        ) || 0;
       console.log(data.player, "player", data.player.buffedPower);
     };
     const approveMdao = async () => {
@@ -249,7 +273,7 @@ export default {
         const addr = store.state.c_staking.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .approve(addr, 300000)
+          .approve(addr, 30000)
           .estimateGas({ from: data.account });
         const res = await c.methods.approve(addr, 30000).send({
           gas: gas,
@@ -456,6 +480,13 @@ export default {
         }
       }
     }
+    .action_zone{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4rem;
+    }
   }
   .divider {
     height: 100%;
@@ -587,6 +618,21 @@ export default {
         font-size: 1.5rem;
       }
     }
+  }
+}
+.btn_wrapper {
+  position: relative;
+  width: 15rem;
+  cursor: pointer;
+  .btn_bg {
+    width: 100%;
+  }
+  .text {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>
