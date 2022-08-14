@@ -1,7 +1,15 @@
 <template>
   <div class="box">
     <div class="left">
-      <div class="back">
+      <div
+        class="back"
+        @click="
+          () =>
+            $router.push({
+              name: 'stk_choose',
+            })
+        "
+      >
         <img src="../../assets/stake/stake/back.png" alt="" />
         <div class="text">返回</div>
       </div>
@@ -57,7 +65,7 @@ import { useStore } from "vuex";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
 import stake_pack_item from "./components/stake_pack_item.vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default {
   name: "stk_go",
   components: {
@@ -66,6 +74,7 @@ export default {
   setup() {
     const { proxy } = getCurrentInstance();
     const router = useRouter();
+    const route = useRoute();
     const store = useStore();
     const data = reactive({
       account: "",
@@ -82,7 +91,13 @@ export default {
           data.web3 = p;
         }
       );
+
       await getPack();
+      if (route.query.selected) {
+        data.selected = data.rawData.filter((x) =>
+          JSON.parse(route.query.selected).includes(x.tokenId)
+        );
+      }
     });
     const next = () => {
       router.push({
@@ -169,6 +184,10 @@ export default {
     left: 0;
     bottom: 4rem;
     transform: translateX(-3rem);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
     img {
       width: 80%;
     }

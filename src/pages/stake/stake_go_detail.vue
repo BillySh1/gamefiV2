@@ -68,32 +68,56 @@
           <div class="detail">
             <div style="margin-bottom: 1rem">
               当前出战人数
-              <span style="color: rgba(252, 98, 98, 1)">{{
+              <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem">{{
                 heroes.length
               }}</span>
             </div>
             <div>
-              触发羁绊 <span style="color: rgba(252, 98, 98, 1)">五虎上将</span>
+              触发羁绊
+              <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem"
+                >五虎上将</span
+              >
             </div>
           </div>
         </div>
       </div>
       <div class="action">
-        <div class="btn_wrapper" @click="next">
+        <div
+          class="btn_wrapper"
+          @click="
+            () =>
+              $router.push({
+                name: 'stk_go',
+                query: {
+                  selected: JSON.stringify(selected),
+                },
+              })
+          "
+        >
           <img
             class="btn_bg"
             src="../../assets/stake/stake/detail/addBtn.png"
-            alt=""
           />
           <div class="text">继续添加</div>
         </div>
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
-        <div class="stake">
+        <div
+          class="stake"
+          @click="
+            () => {
+              if (btnStatus == 1) {
+                deposit();
+              } else {
+                approve();
+              }
+            }
+          "
+        >
           <img
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png"
             alt=""
           />
-          <div class="text">出征</div>
+          <div class="text">{{ btnStatus == 1 ? "出征" : "授权" }}</div>
         </div>
       </div>
     </div>
@@ -137,6 +161,8 @@ export default {
       heroes: [],
       chosen: "",
       type: 0,
+      btnStatus: 0,
+      diff: undefined,
     });
     const selectedHero = computed(() => {
       return data.heroes[data.chosen] || data.heroes[0];
@@ -153,11 +179,15 @@ export default {
       const index = data.heroes.findIndex((x) => {
         return x.tokenId == selectedHero.value.tokenId;
       });
+      const idx = data.selected.findIndex((x) => {
+        return x.tokenId == selectedHero.value.tokenId;
+      });
       if (data.heroes.length == 1) {
         router.push({
           name: "stk_go",
         });
       }
+      data.selected.splice(idx, 1);
       data.heroes.splice(index, 1);
     };
     const getDiffName = computed(() => {
@@ -174,9 +204,13 @@ export default {
           name: "驻扎",
           time: 30,
         },
+        {
+          name: "error",
+          time: "???",
+        },
       ];
 
-      return arr[localStorage.getItem("stake_diff")] || arr[0];
+      return arr[data.diff] || arr[3];
     });
     const curTotalPower = computed(() => {
       return data.heroes.reduce((pre, cur) => {
@@ -187,6 +221,8 @@ export default {
       }, 0);
     });
     onBeforeMount(async () => {
+      data.selected = JSON.parse(route.query.selected) || [];
+      data.diff = localStorage.getItem("stake_diff");
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -195,12 +231,12 @@ export default {
           data.web3 = p;
         }
       );
-      data.selected = JSON.parse(route.query.selected) || [];
       await getTokenInfo();
     });
     const getTokenInfo = async () => {
       const c = store.state.c_hero;
       const loop = async () => {
+        if (data.heroes.length > 0) return;
         for (let i = 0; i < data.selected.length; i++) {
           const x = data.selected[i];
           const res = await c.methods.getHero(x).call();
@@ -212,12 +248,11 @@ export default {
             power: (res.power / 100).toFixed(0),
             uid: uid,
           };
-          if (
-            data.heroes.findIndex((j) => {
-              return j.tokenId == x.tokenId;
-            }) == -1
-          ) {
-            console.log("push");
+          console.log(data.heroes, data.selected);
+          const idx = data.heroes.findIndex((j) => {
+            return j.tokenId == x.tokenId;
+          });
+          if (idx == -1) {
             data.heroes.push(obj);
           }
         }
@@ -241,6 +276,7 @@ export default {
         });
         if (res.status) {
           proxy.$toast("授权成功", store.state.toast_success);
+          data.btnStatus = 1;
         }
       } catch (e) {
         proxy.$toast("授权失败", store.state.toast_error);
@@ -255,9 +291,9 @@ export default {
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .deposit([4, 5], 1)
+          .deposit(data.selected, 1)
           .estimateGas({ from: data.account });
-        const res = await c.methods.deposit([4, 5], 1).send({
+        const res = await c.methods.deposit(data.selected, 1).send({
           gas: gas,
           gasPrice: gasPrice,
           from: data.account,
@@ -450,7 +486,7 @@ export default {
         width: 100%;
       }
       .text {
-        font-size: 1rem;
+        font-size: 1.2rem;
         position: absolute;
         top: 50%;
         left: 50%;
