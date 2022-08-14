@@ -50,11 +50,11 @@ export default {
     background: #291707;
     color: #f2dbb9;
     font-size: 1rem;
-    padding: 2px 1.5rem;
+    padding: 2px 1rem;
     white-space: nowrap;
     bottom: 0;
     right: 0;
-    transform: translate(50%, 50%);
+    transform: translate(25%, 50%);
   }
   .hero_rarity_zone {
     position: absolute;
