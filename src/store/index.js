@@ -6,7 +6,7 @@ import AirDropABI from "../constants/AirDrop.json";
 import ExchangeABI from "../constants/Exchange.json";
 import InviteABI from "../constants/Invite.json";
 import M3TTokenABI from "../constants/M3tToken.json";
-import MMCTokenABI from "../constants/MemoryToken.json";
+import MDAOTokenABI from "../constants/MemoryToken.json";
 import RecruitABI from "../constants/Recruit.json";
 import RichHeroABI from "../constants/RichHero.json";
 import RichShopABI from "../constants/RichShop.json";
@@ -34,7 +34,7 @@ const c_map = {
     address: addressMap.m3t,
   },
   c_mdao: {
-    abi: MMCTokenABI.abi,
+    abi: MDAOTokenABI.abi,
     address: addressMap.mmc,
   },
   c_recruit: {
@@ -54,7 +54,7 @@ const c_map = {
     address: addressMap.training,
   },
   c_usdt: {
-    abi: MMCTokenABI.abi,
+    abi: MDAOTokenABI.abi,
     address: addressMap.usdt,
   },
   // battle field

@@ -29,13 +29,13 @@
               </div>
               <div class="item">
                 <div class="num">
-                  {{ inviteDay }} <span class="xs">MMC</span>
+                  {{ inviteDay }} <span class="xs">MDAO</span>
                 </div>
                 <div class="des">{{ t("day_income") }}</div>
               </div>
               <div class="item">
                 <div class="num">
-                  {{ inviteTotal }} <span class="xs">MMC</span>
+                  {{ inviteTotal }} <span class="xs">MDAO</span>
                 </div>
                 <div class="des">{{ t("day_income") }}</div>
               </div>
@@ -111,7 +111,7 @@ export default {
         data.inviteData.push([
           item.block_number,
           item.buyer,
-          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
+          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
         ]);
       });
     };

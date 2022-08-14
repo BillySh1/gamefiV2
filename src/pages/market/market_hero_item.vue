@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="priceZone">
-      <div class="title">MMC</div>
+      <div class="title">MDAO</div>
       <div class="value">{{ getPrice }}</div>
     </div>
   </div>

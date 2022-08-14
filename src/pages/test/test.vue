@@ -3,10 +3,10 @@
     <InjectGoBack />
     <img class="badge" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png" alt="" />
     <img class="logo" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png" alt="" />
-    <div v-if="!canMMC && !canM3t" class="text">您暂无领取资格或者已领取</div>
+    <div v-if="!canMDAO && !canM3t" class="text">您暂无领取资格或者已领取</div>
     <div v-else class="btnBox">
-      <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canMMC"
-        >领取MMC</CommonButton
+      <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canMDAO"
+        >领取MDAO</CommonButton
       >
       <CommonButton class="btn" @click="() => getTestToken(0)" v-if="canM3t"
         >领取M3T</CommonButton
@@ -38,7 +38,7 @@ export default {
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const data = reactive({
-      canMMC: false,
+      canMDAO: false,
       canM3t: false,
       account: "",
       web3: "",
@@ -60,7 +60,7 @@ export default {
     const judge = async () => {
       const _mmc = store.state.c_mdao;
       const _m3t = store.state.c_m3t;
-      data.canMMC = !(await _mmc.methods.canGetTestToken(data.account).call());
+      data.canMDAO = !(await _mmc.methods.canGetTestToken(data.account).call());
       data.canM3t = !(await _m3t.methods.canGetTestToken(data.account).call());
     };
     const getTestToken = async (type) => {

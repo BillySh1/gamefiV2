@@ -16,7 +16,7 @@
           <img :src="curDiffInfo.img" alt="" />
           <div class="intro">执行{{ curDiffInfo.name }}任务</div>
         </div>
-        <div class="income">收益 {{ curDiffInfo.apy }} 战力天/MMC</div>
+        <div class="income">收益 {{ curDiffInfo.apy }} 战力天/MDAO</div>
       </div>
       <div class="main_info">
         <div class="item">
@@ -24,7 +24,7 @@
         </div>
         <div class="white">
           当前已累计收益
-          <span style="font-size: 1.5rem">{{ player.totalReward }} MMC</span>
+          <span style="font-size: 1.5rem">{{ player.totalReward }} MDAO</span>
         </div>
         <div class="white" v-if="!player.inStaking">
           继续探索将享受战力加成
@@ -39,7 +39,7 @@
             <img src="../../assets/stake/coin.png" alt="" />
             <div>
               <div class="item">当前可领取</div>
-              <div class="item">{{ player.canClaimReward }} MMC</div>
+              <div class="item">{{ player.canClaimReward }} MDAO</div>
             </div>
           </div>
           <div>累计收益自动招募佣兵提升战力</div>

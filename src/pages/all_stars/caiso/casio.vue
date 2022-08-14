@@ -10,7 +10,7 @@
               <div>赔率 1:{{ item.point }}</div>
             </div>
           </div>
-          <div class="bottom">已质押MMC {{ item.staked }}</div>
+          <div class="bottom">已质押MDAO {{ item.staked }}</div>
         </div>
       </div>
       <img
@@ -20,7 +20,7 @@
       />
       <div class="right">
         <div class="total">
-          <div class="up">{{ totalPool }} MMC</div>
+          <div class="up">{{ totalPool }} MDAO</div>
           <div>总奖池子</div>
         </div>
         <div class="total" v-show="false">
@@ -69,7 +69,7 @@
           v-model="buyNum"
           @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
         />
-        <div style="margin-right: 1.5rem">MMC</div>
+        <div style="margin-right: 1.5rem">MDAO</div>
         <CommonButton
           @click="handleClick"
           class="btn"

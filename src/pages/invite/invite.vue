@@ -36,12 +36,12 @@
               {{ t("my_income") }}
             </div>
             <div class="item">
-              <div class="num">{{ inviteDay }} <span class="xs">MMC</span></div>
+              <div class="num">{{ inviteDay }} <span class="xs">MDAO</span></div>
               <div class="des">{{ t("day_income") }}</div>
             </div>
             <div class="item">
               <div class="num">
-                {{ inviteTotal }} <span class="xs">MMC</span>
+                {{ inviteTotal }} <span class="xs">MDAO</span>
               </div>
               <div class="des">{{ t("all_income") }}</div>
             </div>

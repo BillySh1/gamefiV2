@@ -4,7 +4,7 @@
   <div class="center">
     <div class="item">
       当前累计收益
-      <div>11,332,223 MMC</div>
+      <div>11,332,223 MDAO</div>
       <img
         style="width: 8rem"
         src="../../assets/exchange/baoxiang.png"
@@ -17,8 +17,8 @@
         <div>15天6时51分</div>
       </div>
       <div class="squze">
-        可领取的MMC
-        <div>126341 MMC</div>
+        可领取的MDAO
+        <div>126341 MDAO</div>
       </div>
     </div>
     <div class="item item_center">

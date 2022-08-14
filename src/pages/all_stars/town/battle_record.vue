@@ -110,7 +110,7 @@ export default {
         data.battleData.push([
           index + 1,
           item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether") + " MMC",
+          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
         ]);
       });
     };

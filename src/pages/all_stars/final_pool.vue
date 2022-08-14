@@ -22,7 +22,7 @@
       <div class="top">已有 {{ arriveNum }} 人， 到达鹿原战场</div>
       <div class="c">
         <div class="title">当前累计奖池</div>
-        <div>{{ totalAmount }} MMC</div>
+        <div>{{ totalAmount }} MDAO</div>
         <img
           style="height: 8rem"
           src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/final/gold.png"

@@ -19,7 +19,7 @@
     >
       <div class="text">Faucet</div>
     </div>
-    <div class="swap" @click="$router.push({ name: 'swap' })">
+    <div class="swap" @click="toSwap">
       <img
         class="img"
         src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc_logo.svg"
@@ -103,9 +103,13 @@ export default {
         },
       ],
     });
+    const toSwap = () => {
+      window.open("http://www.mdaoswap.xyz/", "_blank");
+    };
     const refData = toRefs(data);
     return {
       ...refData,
+      toSwap,
     };
   },
 };
