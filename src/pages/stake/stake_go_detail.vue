@@ -1,7 +1,25 @@
 <template>
   <div class="box">
     <div class="hero_card_big">
-      <HeroCardItem :info="selectedHero" :big="true" />
+      <img class="mask" src="../../assets/stake/stake/detail/mask.png" alt="" />
+      <div class="hero">
+        <HeroCardItem :info="selectedHero" :big="true" />
+      </div>
+      <div class="detail">
+        <div class="flex">
+          <div style="margin-right: 2rem; display: flex; align-items: center">
+            {{ selectedHero.name }}
+            <img class="quality" :src="qualityImg" alt="" />
+          </div>
+          <div>
+            战力值
+            <span style="margin-bottom: 1rem; color: rgba(252, 98, 98, 1)">{{
+              selectedHero.power
+            }}</span>
+          </div>
+        </div>
+        <StkBtn class="cancel" :text="'取消上阵'" @click="onCancelHero" />
+      </div>
     </div>
     <div class="main">
       <div class="window">
@@ -47,6 +65,17 @@
             </div>
             <div>当前出战总战力</div>
           </div>
+          <div class="detail">
+            <div style="margin-bottom: 1rem">
+              当前出战人数
+              <span style="color: rgba(252, 98, 98, 1)">{{
+                heroes.length
+              }}</span>
+            </div>
+            <div>
+              触发羁绊 <span style="color: rgba(252, 98, 98, 1)">五虎上将</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="action">
@@ -86,17 +115,20 @@ import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import HeroAvatar from "./components/hero_avatar.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import StkBtn from "./components/stk_btn.vue";
 export default {
   name: "stk_go_detail",
   components: {
     HeroCardItem,
     HeroAvatar,
+    StkBtn,
   },
   setup() {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
     const data = reactive({
       account: "",
       web3: "",
@@ -109,6 +141,25 @@ export default {
     const selectedHero = computed(() => {
       return data.heroes[data.chosen] || data.heroes[0];
     });
+    const qualityImg = computed(() => {
+      return [
+        require("../../assets/stake/stake/quality/n.png"),
+        require("../../assets/stake/stake/quality/R.png"),
+        require("../../assets/stake/stake/quality/sr.png"),
+        require("../../assets/stake/stake/quality/ssr.png"),
+      ][selectedHero.value.quality];
+    });
+    const onCancelHero = () => {
+      const index = data.heroes.findIndex((x) => {
+        return x.tokenId == selectedHero.value.tokenId;
+      });
+      if (data.heroes.length == 1) {
+        router.push({
+          name: "stk_go",
+        });
+      }
+      data.heroes.splice(index, 1);
+    };
     const getDiffName = computed(() => {
       const arr = [
         {
@@ -158,6 +209,7 @@ export default {
           const obj = {
             ...res,
             ...useHeroDetail(uid, res.preference),
+            power: (res.power / 100).toFixed(0),
             uid: uid,
           };
           if (
@@ -235,6 +287,8 @@ export default {
       selectedHero,
       getDiffName,
       curTotalPower,
+      qualityImg,
+      onCancelHero,
       onSelect,
       deposit,
       approve,
@@ -252,10 +306,49 @@ export default {
   justify-content: space-between;
   background: url("../../assets/stake/stake/detail/detail_bg.png") no-repeat;
   background-size: 100% 100%;
+  align-items: center;
 }
 .hero_card_big {
+  position: relative;
   width: 25%;
-  height: 100%;
+  .hero {
+    position: absolute;
+    top: 39%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+  }
+  .mask {
+    width: 100%;
+    opacity: 0.3;
+    transform: scale(1.2);
+  }
+  .detail {
+    margin-top: 2rem;
+    width: 100%;
+    height: 5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    background: linear-gradient(
+      180deg,
+      rgba(45, 43, 43, 0.7) 0%,
+      rgba(28, 57, 67, 0.7) 67.71%,
+      rgba(52, 58, 61, 0.7) 100%
+    );
+    padding: 1rem;
+    .quality {
+      height: 1.5rem;
+      margin: 0 2rem;
+    }
+    .flex {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  }
 }
 .main {
   width: 65%;
@@ -274,6 +367,8 @@ export default {
       border-radius: 1rem;
       height: fit-content;
       cursor: pointer;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
     }
     .active {
       background: linear-gradient(180deg, #5e4040 0%, #3f3333 100%),
@@ -301,7 +396,7 @@ export default {
       .ing {
         height: 100%;
         border-radius: 0.8rem;
-        font-size: 1.2rem;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         img {
@@ -327,7 +422,14 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        font-size: 1.5rem;
+        font-size: 1rem;
+        margin-right: 2rem;
+      }
+      .detail {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1rem;
       }
     }
   }
@@ -348,7 +450,7 @@ export default {
         width: 100%;
       }
       .text {
-        font-size: 1.5rem;
+        font-size: 1rem;
         position: absolute;
         top: 50%;
         left: 50%;

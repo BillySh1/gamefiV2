@@ -28,7 +28,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "群英会战 1.0.3 封测",
+      version: "1.1.0 攻城略地 beta",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
