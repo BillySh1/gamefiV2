@@ -46,7 +46,6 @@ export default {
   },
   setup(props) {
     const data = reactive({});
-    console.log(props.info, "info");
     const resolveStarsNum = computed(() => {
       return [1, 3, 4, 5, 10][props.info.rarity];
     });

@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="btn_wrapper" @click="clickMission">
+      <div class="btn_wrapper" @click="next">
         <img class="btn_bg" src="../../assets/stake/choose/btn_bg.png" alt="" />
         <div class="text">下一步</div>
       </div>
@@ -57,6 +57,7 @@ import { useStore } from "vuex";
 import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
 import stake_pack_item from "./components/stake_pack_item.vue";
+import { useRouter } from "vue-router";
 export default {
   name: "stk_go",
   components: {
@@ -64,6 +65,7 @@ export default {
   },
   setup() {
     const { proxy } = getCurrentInstance();
+    const router = useRouter();
     const store = useStore();
     const data = reactive({
       account: "",
@@ -82,6 +84,14 @@ export default {
       );
       await getPack();
     });
+    const next = () => {
+      router.push({
+        name: "stk_go_detail",
+        query: {
+          selected: JSON.stringify(data.selected.map((x) => x.tokenId)),
+        },
+      });
+    };
     const curTotalPower = computed(() => {
       return data.selected.reduce((pre, cur) => {
         if (cur && cur.power) {
@@ -134,6 +144,7 @@ export default {
     return {
       ...refData,
       curTotalPower,
+      next,
       onSelect,
     };
   },

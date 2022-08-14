@@ -14,7 +14,7 @@
       <div class="hero_card_big">
         <HeroCardItem :info="info" />
       </div>
-      <dir class="info_box">
+      <div class="info_box">
         <img
           class="bg"
           src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/detial_bg.png"
@@ -122,7 +122,7 @@
             </div>
           </div>
         </div>
-      </dir>
+      </div>
       <div class="action_box">
         <div
           class="action_item"
