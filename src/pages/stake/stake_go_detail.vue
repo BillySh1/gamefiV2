@@ -73,9 +73,12 @@
               }}</span>
             </div>
             <div>
-              触发羁绊
-              <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem"
-                >五虎上将</span
+              <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem">
+                {{
+                  heroes.includes((x) => x.rarity == 5)
+                    ? "触发金卡加成"
+                    : "未触发金卡加成"
+                }}</span
               >
             </div>
           </div>
@@ -135,7 +138,6 @@ import {
   computed,
 } from "vue";
 import { useStore } from "vuex";
-import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import HeroAvatar from "./components/hero_avatar.vue";
@@ -231,34 +233,11 @@ export default {
           data.web3 = p;
         }
       );
-      await getTokenInfo();
+      if(localStorage.getItem('stk_selected')){
+        data.heroes = JSON.parse(localStorage.getItem('stk_selected'))
+      }
     });
-    const getTokenInfo = async () => {
-      const c = store.state.c_hero;
-      const loop = async () => {
-        if (data.heroes.length > 0) return;
-        for (let i = 0; i < data.selected.length; i++) {
-          const x = data.selected[i];
-          const res = await c.methods.getHero(x).call();
-          const uid =
-            res.camp.toString() + res.rarity.toString() + res.heroId.toString();
-          const obj = {
-            ...res,
-            ...useHeroDetail(uid, res.preference),
-            power: (res.power / 100).toFixed(0),
-            uid: uid,
-          };
-          console.log(data.heroes, data.selected);
-          const idx = data.heroes.findIndex((j) => {
-            return j.tokenId == x.tokenId;
-          });
-          if (idx == -1) {
-            data.heroes.push(obj);
-          }
-        }
-      };
-      await loop();
-    };
+  
     const approve = async () => {
       try {
         data.btnDisable = true;
@@ -396,6 +375,9 @@ export default {
   .window {
     width: 100%;
     height: 50%;
+    max-height: 50%;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     .hero_item {

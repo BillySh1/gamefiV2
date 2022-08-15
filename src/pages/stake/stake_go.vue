@@ -100,6 +100,7 @@ export default {
       }
     });
     const next = () => {
+      localStorage.setItem("stk_selected", JSON.stringify(data.selected));
       router.push({
         name: "stk_go_detail",
         query: {
