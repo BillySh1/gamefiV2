@@ -26,7 +26,7 @@
         <div class="item">
           <img src="../../assets/stake/main_item.png" alt="" />
           <div class="inner">
-            <div class="title">全网累计收益</div>
+            <div class="title">全网有效收益</div>
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ totalIncome }}
             </div>
@@ -106,7 +106,11 @@
           </div>
         </div>
         <div class="action_zone" v-if="actionType == 0">
-          <img src="../../assets/stake/stake/empty_mission.png" alt="" />
+          <img
+            class="coin"
+            src="../../assets/stake/stake/empty_mission.png"
+            alt=""
+          />
           <p>未选择任务</p>
 
           <div class="btn_wrapper">
@@ -118,7 +122,7 @@
             <div class="text">去出征</div>
           </div>
         </div>
-        <div class="action_zone_2" v-if="actionType == 1">
+        <div class="action_zone_2" v-else>
           <div class="income">
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
@@ -130,12 +134,29 @@
               </p>
             </div>
           </div>
-          <div class="big_btn" @click="releaseHero">
-            <img src="../../assets/stake/choose/btn_bg.png" alt="" />
-            <div class="text">取回卡牌</div>
+          <div style="display: flex; align-items: center">
+            <div class="big_btn" @click="releaseHero" v-if="player.inFarm">
+              <img src="../../assets/stake/choose/btn_bg.png" alt="" />
+              <div class="text">取回卡牌</div>
+            </div>
+            <div
+              class="big_btn"
+              v-if="player.isUnClaim"
+              @click="() => obtain(0)"
+            >
+              <img src="../../assets/stake/choose/btn_bg.png" alt="" />
+              <div class="text">{{ player.inFarm ? "提前领取" : "领取" }}</div>
+            </div>
+            <div
+              class="big_btn"
+              v-if="player.isUnClaim"
+              @click="() => obtain(1)"
+            >
+              <img src="../../assets/stake/choose/btn_bg.png" alt="" />
+              <div class="text">复利领取</div>
+            </div>
           </div>
         </div>
-        <div class="action_zone_2" v-if="actionType == 2"></div>
       </div>
     </div>
     <div class="bottom_bar">
@@ -232,8 +253,7 @@ export default {
       pendingReward: 0,
     });
     const actionType = computed(() => {
-      if (!data.palyer || !data.palyer.inFarm) return 0;
-      if (data.player.isUnClaim) return 2;
+      if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
       return 1;
     });
     onBeforeMount(async () => {
@@ -245,9 +265,37 @@ export default {
           data.web3 = p;
         }
       );
-      await getPlayer();
       await getGlobalPower();
+      await getPlayer();
     });
+    const refresh = async () => {
+      await getGlobalPower();
+      await getPlayer();
+    };
+    const obtain = async (type) => {
+      try {
+        data.btnDisable = true;
+        proxy.$toast("等待确认", store.state.toast_info);
+        const c = store.state.c_staking;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .decideClaimForm(!!type)
+          .estimateGas({ from: data.account });
+        const res = await c.methods.decideClaimForm(!!type).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          proxy.$toast("领取成功", store.state.toast_success);
+          await refresh();
+        }
+      } catch (e) {
+        proxy.$toast("领取失败", store.state.toast_error);
+      } finally {
+        data.btnDisable = false;
+      }
+    };
 
     // const getRTime = (startTime, endTime) => {
     //   const delta = Number(endTime) - Number(startTime);
@@ -269,20 +317,15 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
-      console.log(data.player, "player", data.player.buffedPower);
-
+      console.log(data.player, "player");
       data.rewardPerblock =
         data.web3.utils.fromWei(
           await c.methods.rewardPerBlock().call(),
           "ether"
         ) || 0;
       data.pendingReward =
-        Math.ceil(
-          data.web3.utils.fromWei(
-            await c.methods.pending(data.account).call(),
-            "ether"
-          )
-        ) || 0;
+        Math.ceil((await c.methods.pending(data.account).call()) / 10 ** 18) ||
+        0;
       data.mdaoToDeposit =
         Math.ceil(
           data.web3.utils.fromWei(
@@ -316,7 +359,6 @@ export default {
         if (res.status) {
           data.mdaoStkBtnStatus = 1;
           proxy.$toast("授权成功", store.state.toast_success);
-          console.log("success");
         }
       } catch (e) {
         console.error(e);
@@ -385,6 +427,7 @@ export default {
       approveMdao,
       depositMdao,
       releaseHero,
+      obtain,
     };
   },
 };
@@ -433,7 +476,7 @@ export default {
       justify-content: center;
       white-space: nowrap;
       .title {
-        font-size: 1.3rem;
+        font-size: 1.3vmin;
       }
       .coin {
         width: 3rem;
@@ -544,6 +587,9 @@ export default {
       align-items: center;
       justify-content: space-between;
       margin-top: 4rem;
+      .coin {
+        width: 4rem;
+      }
     }
     .action_zone_2 {
       .income {
@@ -593,7 +639,7 @@ export default {
       background-size: 100% 100%;
       width: 15rem;
       padding: 0.5rem 0;
-      font-size: 1.3rem;
+      font-size: 1.3vmin;
       display: flex;
       align-items: center;
       justify-content: center;
