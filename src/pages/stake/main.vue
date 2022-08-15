@@ -43,7 +43,7 @@
             <div class="text">剩余时间</div>
           </div>
           <div class="detail">
-            <div class="lg">任务剩余时间 9天18小时30分25秒</div>
+            <div class="lg">任务剩余时间 {{ remainTime }}</div>
             <div class="sm">中途中止作战会衰减出征收益</div>
           </div>
         </div>
@@ -67,7 +67,13 @@
             <div class="text">额外收益</div>
           </div>
           <div class="detail">
-            <div class="lg">1587 MDAO</div>
+            <div class="lg">
+              {{
+                Number(player.buffedPower / player.realPower).toFixed(2) *
+                player.rewardDebt
+              }}
+              MDAO
+            </div>
           </div>
         </div>
       </div>
@@ -244,13 +250,13 @@ export default {
       player: "",
       stakedTime: 0,
       remainTime: 0,
-      ticker: "",
       totalPower: 0,
       totalIncome: 0,
       rewardPerblock: 0,
       mdaoToDeposit: 0,
       mdaoStkBtnStatus: 0,
       pendingReward: 0,
+      ticker: undefined,
     });
     const actionType = computed(() => {
       if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
@@ -267,6 +273,9 @@ export default {
       );
       await getGlobalPower();
       await getPlayer();
+      if (data.player.endTime) {
+        getTicker();
+      }
     });
     const refresh = async () => {
       await getGlobalPower();
@@ -296,24 +305,31 @@ export default {
         data.btnDisable = false;
       }
     };
+    const getTicker = () => {
+      if (data.ticker === undefined) {
+        clearInterval(data.ticker);
+      }
+      data.ticker = setInterval(() => {
+        getRTime(
+          (Number(new Date().getTime()) / 1000).toFixed(0),
+          data.player.endTime
+        );
+      }, 1000);
+    };
+    const getRTime = (startTime, endTime) => {
+      const delta = Number(endTime) - Number(startTime);
+      let d = Math.floor(delta / (60 * 60 * 24));
+      let h = Math.floor((delta / 60 / 60) % 24);
+      let m = Math.floor((delta / 60) % 60);
+      if (parseInt(h, 10) < 0) h = "0";
+      if (parseInt(m, 10) < 0) m = "0";
+      if (parseInt(d, 10) < 0) d = "0";
+      data.remainTime = `${d}天${h}时${m}分`;
+      if (d == 0 && m == 0 && h == 0) {
+        clearInterval(data.ticker);
+      }
+    };
 
-    // const getRTime = (startTime, endTime) => {
-    //   const delta = Number(endTime) - Number(startTime);
-    //   let d = Math.floor(delta / (60 * 60 * 24));
-    //   let h = Math.floor((delta / 60 / 60) % 24);
-    //   let m = Math.floor((delta / 60) % 60);
-    //   if (parseInt(h, 10) < 0) h = "0";
-    //   if (parseInt(m, 10) < 0) m = "0";
-    //   if (parseInt(d, 10) < 0) d = "0";
-    //   return `${d}天${h}时${m}分`;
-    // };
-    // const getTime = () => {
-    //   const now = (Number(new Date().getTime()) / 1000).toFixed(0);
-    //   const startStaked = data.player.stakingInfo.stakingStartTime;
-    //   const endStaked = data.player.stakingInfo.stakingEndTime;
-    //   data.stakedTime = getRTime(startStaked, now);
-    //   data.remainTime = getRTime(now, endStaked);
-    // };
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
