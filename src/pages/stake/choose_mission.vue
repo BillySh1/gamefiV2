@@ -1,5 +1,8 @@
 <template>
-  <div class="box">
+  <div v-if="loading" class="box">
+    <Lottie :options="lottie_options" />
+  </div>
+  <div v-else class="box">
     <div class="bottom">
       <StkBtn
         @click="
@@ -57,9 +60,11 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, onBeforeMount } from "vue";
+import initWeb3 from "../../utils/initWeb3";
 import StkBtn from "./components/stk_btn.vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   name: "choose_mission",
   components: {
@@ -67,6 +72,7 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const store = useStore();
     const data = reactive({
       map: [
         {
@@ -89,7 +95,36 @@ export default {
         },
       ],
       activeIndex: 0,
+      account: "",
+      web3: "",
+      player: "",
+      loading: false,
+      lottie_options: {
+        animationData: require("../../assets/common/loading.json"),
+      },
     });
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      await getPlayer();
+    });
+    const getPlayer = async () => {
+      data.loading = true;
+      const c = store.state.c_staking;
+      data.player = await c.methods.getUserInfo(data.account).call();
+      if (data.player.inFarm || data.player.isUnClaim) {
+        router.push({
+          name: "stk_main",
+        });
+      }
+      data.loading = false;
+    };
     const clickMission = (idx) => {
       localStorage.setItem("stake_diff", idx);
       router.push({

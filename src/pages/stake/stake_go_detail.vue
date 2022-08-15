@@ -279,6 +279,9 @@ export default {
         });
         if (res.status) {
           proxy.$toast("质押成功", store.state.toast_success);
+          router.push({
+            name:'stk_main'
+          })
         }
       } catch (e) {
         console.error(e);
