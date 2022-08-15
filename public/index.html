@@ -44,6 +44,12 @@
       font-size: 1vw;
       font-size: 1vmax;
     }
+    @media screen and(max-width: 414px) {
+      html {
+        font-size: 1.875vmin;
+      }
+    }
+
     body {
       position: fixed;
       width: 100%;
@@ -70,9 +76,8 @@
       overflow: hidden;
       z-index: 0;
       background: radial-gradient(50% 50% at 50% 50%, #563003 0%, #280505 100%);
-      
     }
-   
+
     @media screen and (orientation: portrait) {
       #app {
         position: absolute;

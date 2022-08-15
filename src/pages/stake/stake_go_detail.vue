@@ -362,7 +362,7 @@ export default {
   .detail {
     margin-top: 2rem;
     width: 100%;
-    height: 5rem;
+
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -416,7 +416,6 @@ export default {
     display: flex;
     margin: 2rem 0;
     .mission_zone {
-      height: 5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -432,7 +431,7 @@ export default {
       .ing {
         height: 100%;
         border-radius: 0.8rem;
-        font-size: 1rem;
+        font-size: 1.3vmin;
         display: flex;
         align-items: center;
         img {
@@ -442,7 +441,6 @@ export default {
       }
     }
     .info_zone {
-      height: 5rem;
       flex: 1;
       display: flex;
       align-items: center;
@@ -458,20 +456,20 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        font-size: 1rem;
+        font-size: 1vmin;
         margin-right: 2rem;
       }
       .detail {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        font-size: 1rem;
+        font-size: 1vmin;
       }
     }
   }
   .action {
     width: 100%;
-    height: 5rem;
+
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -486,7 +484,7 @@ export default {
         width: 100%;
       }
       .text {
-        font-size: 1.2rem;
+        font-size: 1.5vmin;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -512,7 +510,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 2rem;
+        font-size: 2vmin;
       }
     }
   }

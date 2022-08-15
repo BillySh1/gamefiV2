@@ -35,8 +35,7 @@ export default {
     opacity: 0.8;
   }
   position: relative;
-  width: 13rem;
-  font-size: 1.2rem;
+  width: 18rem;
   color: white;
   img {
     width: 100%;

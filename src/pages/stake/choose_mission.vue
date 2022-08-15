@@ -124,13 +124,13 @@ export default {
   justify-content: space-between;
   .btn_wrapper {
     position: relative;
-    width: 15rem;
+    width: 18rem;
     cursor: pointer;
     .btn_bg {
       width: 100%;
     }
     .text {
-      font-size: 1.5rem;
+      font-size: 1rem;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -188,9 +188,8 @@ export default {
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin: 0 3rem;
+    margin: 0 2rem;
     .img_box {
-      width: 16rem;
       position: relative;
       &:hover {
         .img_bg {
@@ -229,13 +228,13 @@ export default {
         margin: 1rem 0;
       }
       .md {
-        font-size: 1.8rem;
-      }
-      .sm {
         font-size: 1.3rem;
       }
-      .xs {
+      .sm {
         font-size: 1rem;
+      }
+      .xs {
+        font-size: 0.8rem;
       }
     }
   }
