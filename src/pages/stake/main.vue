@@ -118,8 +118,16 @@
             alt=""
           />
           <p>未选择任务</p>
-
-          <div class="btn_wrapper">
+          <div
+            class="btn_wrapper"
+            @click="
+              () => {
+                $router.push({
+                  name: 'stk_choose',
+                });
+              }
+            "
+          >
             <img
               class="btn_bg"
               src="../../assets/stake/choose/btn_bg.png"

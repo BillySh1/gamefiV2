@@ -187,6 +187,7 @@ import {
   usePropertyName,
   useRarityName,
 } from "../../utils/useHeroInfo";
+import { useI18n } from "vue-i18n";
 export default {
   name: "hero_detail",
   components: {
@@ -199,7 +200,10 @@ export default {
   setup() {
     const route = useRoute();
     const store = useStore();
-
+      const { t } = useI18n({
+      inheritLocale: true,
+      useScope: 'local'
+    })
     const rarityText = computed(() => {
       return useRarityName(data.info.rarity);
     });
@@ -302,6 +306,7 @@ export default {
       getRarityStyle,
       getQualityStyle,
       all_stars,
+      t,
     };
   },
 };
