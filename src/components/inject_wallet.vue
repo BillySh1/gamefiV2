@@ -1,11 +1,7 @@
 <template>
   <div class="wallet_box">
     <div class="chain_icon_box">
-      <img
-        class="chain_icon"
-        src="../assets/index/chainIcon/bsc.svg"
-        alt=""
-      />
+      <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
     </div>
     <div class="wallet_address">
       {{ walletValue }}
@@ -13,22 +9,36 @@
         <div class="item" @click="$emit('exit')">断开连接</div>
         <div class="item" @click="controlAudio">{{ audioText }}</div>
         <div class="item" @click="jump2Swap">MemorySwap ></div>
+        <div class="item" @click="switchLang">
+          {{ curLang == 0 ? "简体中文" : "English" }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script >
-import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  computed,
+  getCurrentInstance,
+} from "vue";
 import initWeb3 from "../utils/initWeb3.js";
+import { useStore } from "vuex";
 export default {
   name: "inject_wallet",
   setup() {
+    const { proxy } = getCurrentInstance();
+    const store = useStore();
     const data = reactive({
       wallet: "连接钱包",
       web3: "",
-      type: '',
+      type: "",
+      curLang: 0,
     });
+
     const walletValue = computed(() => {
       const wallet = data.wallet;
       let res = wallet;
@@ -41,15 +51,19 @@ export default {
       }
       return "连接钱包";
     });
+    const switchLang = () => {
+      data.curLang == 0 ? (data.curLang = 1) : (data.curLang = 0);
+      proxy.$toast("error", store.state.toast_error);
+    };
     const controlAudio = () => {
       const item = document.querySelector("audio");
       if (data.type) {
         item.pause();
         item.currentTime = 0;
-        data.type = false
+        data.type = false;
       } else {
         item.play();
-        data.type = data.type = true
+        data.type = data.type = true;
       }
     };
     const audioText = computed(() => {
@@ -73,7 +87,7 @@ export default {
       );
     };
     onBeforeMount(async () => {
-      data.type = sessionStorage.getItem('audio')
+      data.type = sessionStorage.getItem("audio");
       watchAcc();
       await connect();
     });
@@ -83,6 +97,7 @@ export default {
       ...refData,
       walletValue,
       audioText,
+      switchLang,
       watchAcc,
       controlAudio,
     };
@@ -100,7 +115,7 @@ export default {
   height: 3rem;
   border-radius: 100%;
   margin-right: 0.5rem;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   img {
     width: 2rem;
     height: 2rem;
