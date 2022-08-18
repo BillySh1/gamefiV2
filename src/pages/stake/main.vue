@@ -55,7 +55,7 @@
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
               当前历史累计收益
-              {{ (pendingReward + Number(player.rewardDebt)).toFixed(2) || 0 }}
+              {{ pendingReward }}
               MDAO
             </div>
             <div class="lg white">每区块奖励 {{ rewardPerblock }} MDAO</div>
@@ -70,7 +70,9 @@
             <div class="lg">
               {{
                 Number(player.buffedPower / player.realPower).toFixed(2) *
-                player.rewardDebt
+                Number.parseFloat(
+                  fromWei(player.rewardDebt || 0, "ether")
+                ).toFixed(2)
               }}
               MDAO
             </div>
@@ -90,9 +92,14 @@
               alt=""
             />
           </div>
-          <div class="cur">当前可质押 {{ mdaoToDeposit }} MDAO</div>
+          <div v-if="Number(player.mdao) > 0">
+            当前已质押 {{ fromWei(player.mdao, "ether") }} MDAO
+          </div>
+          <div v-else class="cur">当前可质押 {{ mdaoToDeposit }} MDAO</div>
+
           <div class="rule">规则说明</div>
           <div
+            v-if="Number(mdaoToDeposit > 0)"
             class="stk_btn"
             @click="
               () => {
@@ -141,11 +148,7 @@
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
               <p>当前任务奖励</p>
-              <p>
-                {{
-                  (pendingReward + Number(player.rewardDebt)).toFixed(2) || 0
-                }}MDAO
-              </p>
+              <p>{{ pendingReward }}MDAO</p>
             </div>
           </div>
           <div style="display: flex; align-items: center">
@@ -155,12 +158,21 @@
             </div>
             <div
               class="big_btn"
+              @click="() => $router.push({ name: 'stk_go' })"
+              v-if="player.inFarm"
+            >
+              <img src="../../assets/stake/choose/btn_bg.png" alt="" />
+              <div class="text">继续质押</div>
+            </div>
+            <div
+              class="big_btn"
               v-if="player.isUnClaim"
               @click="() => obtain(0)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
               <div class="text">{{ player.inFarm ? "提前领取" : "领取" }}</div>
             </div>
+
             <div
               class="big_btn"
               v-if="player.isUnClaim"
@@ -213,14 +225,18 @@
         </div>
       </div>
 
-      <div class="bonus_zone">
+      <div
+        v-if="Number(player.mdao) > 0"
+        class="bonus_zone"
+        @click="jumpToList"
+      >
         <div class="ing">
           <img :src="require('../../assets/stake/bonus.png')" alt="" />
           <div class="detail">
             <div class="title">复利进行中</div>
             <div>奖励余额</div>
-            <div>156781239 MDAO</div>
-            <div>剩余天数 28天</div>
+            <div>??? MDAO</div>
+            <div>剩余天数 ??天</div>
           </div>
         </div>
       </div>
@@ -228,6 +244,13 @@
         <div class="text">浮育城</div>
         <img class="img" src="../../assets/stake/city.png" alt="" />
       </div>
+    </div>
+    <div class="fire">
+      <Lottie
+        :options="{
+          animationData: require('../../allstar_assets/all_stars/entry/fire.json'),
+        }"
+      />
     </div>
   </div>
 </template>
@@ -243,6 +266,8 @@ import {
 import StkBtn from "./components/stk_btn.vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
+import { fromWei } from "web3-utils";
+import { useRouter } from "vue-router";
 export default {
   name: "stk_main",
   components: {
@@ -251,6 +276,7 @@ export default {
   setup() {
     const store = useStore();
     const { proxy } = getCurrentInstance();
+    const router = useRouter();
     const data = reactive({
       type: 0,
       account: "",
@@ -347,16 +373,13 @@ export default {
           await c.methods.rewardPerBlock().call(),
           "ether"
         ) || 0;
-      data.pendingReward =
-        Math.ceil((await c.methods.pending(data.account).call()) / 10 ** 18) ||
-        0;
+      const resPending = await c.methods.pending(data.account).call();
+      data.pendingReward = Number.parseFloat(
+        fromWei(resPending, "ether")
+      ).toFixed(2);
       data.mdaoToDeposit =
-        Math.ceil(
-          data.web3.utils.fromWei(
-            await c.methods.canDepositMdao(data.account).call(),
-            "ether"
-          )
-        ) || 0;
+        fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
+        0;
     };
     const approveMdao = async () => {
       try {
@@ -389,6 +412,11 @@ export default {
         proxy.$toast("授权失败", store.state.toast_error);
       }
     };
+    const jumpToList = () => {
+      router.push({
+        name: "stk_income",
+      });
+    };
     const depositMdao = async () => {
       try {
         data.btnDisable = true;
@@ -405,6 +433,7 @@ export default {
         });
         if (res.status) {
           proxy.$toast("质押成功", store.state.toast_success);
+          await refresh();
         }
       } catch (e) {
         proxy.$toast("质押失败", store.state.toast_error);
@@ -427,6 +456,7 @@ export default {
         });
         if (res.status) {
           proxy.$toast("取回成功", store.state.toast_success);
+          await refresh();
         }
       } catch (e) {
         proxy.$toast("取回失败", store.state.toast_error);
@@ -448,10 +478,12 @@ export default {
       ...refData,
       actionType,
       getDiffName,
+      jumpToList,
       approveMdao,
       depositMdao,
       releaseHero,
       obtain,
+      fromWei,
     };
   },
 };
@@ -468,6 +500,15 @@ export default {
   justify-content: space-between;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  .fire {
+    position: absolute;
+    bottom: 0%;
+    z-index: 0;
+    opacity:.3;
+    pointer-events: none;
+    user-select: none;
+    width: 120%;
+  }
 }
 .check_map {
   display: flex;
@@ -619,6 +660,8 @@ export default {
       .income {
         display: flex;
         align-items: center;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
         img {
           width: 4rem;
           margin-right: 1.5rem;
@@ -627,12 +670,13 @@ export default {
       .big_btn {
         width: 10rem;
         position: relative;
+        margin-right: 1rem;
         cursor: pointer;
         img {
           width: 100%;
         }
         .text {
-          font-size: 1rem;
+          font-size: 1.2rem;
           position: absolute;
           top: 44%;
           left: 50%;
@@ -756,6 +800,7 @@ export default {
   );
   padding: 1rem 2rem;
   border-radius: 1rem;
+  cursor: pointer;
   .ing {
     height: 100%;
     border-radius: 20px;

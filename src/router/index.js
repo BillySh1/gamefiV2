@@ -52,7 +52,7 @@ const stk_entry = () => import("../pages/stake/entry.vue");
 const stk_main = () => import("../pages/stake/main.vue");
 const stk_choose = () => import("../pages/stake/choose_mission.vue");
 const stk_go = () => import("../pages/stake/stake_go.vue");
-const stk_income = () => import("../pages/stake/income.vue");
+const stk_income = () => import("../pages/stake/income_list.vue");
 const stk_view = () => import("../pages/stake/staked_view.vue");
 const stk_go_detail = () => import("../pages/stake/stake_go_detail.vue");
 
