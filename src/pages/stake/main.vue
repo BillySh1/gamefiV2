@@ -1,5 +1,28 @@
 <template>
-  <div class="box">
+  <div v-if="loading" class="box">
+    <Lottie :options="lottie_options" />
+  </div>
+  <div v-else class="box">
+    <InjectModal
+      :title="'提前领取'"
+      :value="showWarningModal"
+      @close="() => (showWarningModal = false)"
+      @confirm="
+        () => {
+          showWarningModal = false;
+          obtain(0);
+        }
+      "
+    >
+      <div class="rule_modal_item">确认提前领取收益吗？</div>
+      <div class="rule_modal_item" style="color: red">
+        提前领取将导致70%收益衰减
+      </div>
+
+      <div class="rule_modal_item" style="color: red">
+        您当前可领取收益为 {{ 2000 }} MDAO
+      </div>
+    </InjectModal>
     <div class="topbar">
       <StkBtn
         class="check_map"
@@ -70,9 +93,9 @@
             <div class="lg">
               {{
                 Number(player.buffedPower / player.realPower).toFixed(2) *
-                Number.parseFloat(
-                  fromWei(player.rewardDebt || 0, "ether")
-                ).toFixed(2)
+                  Number.parseFloat(
+                    fromWei(player.rewardDebt || 0, "ether")
+                  ).toFixed(2) || 0
               }}
               MDAO
             </div>
@@ -268,15 +291,22 @@ import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
 import { fromWei } from "web3-utils";
 import { useRouter } from "vue-router";
+import InjectModal from ".././../components/inject_modal";
 export default {
   name: "stk_main",
   components: {
     StkBtn,
+    InjectModal,
   },
   setup() {
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const router = useRouter();
+    const lottie_options = computed(() => {
+      return {
+        animationData: require(`../../assets/common/loading.json`),
+      };
+    });
     const data = reactive({
       type: 0,
       account: "",
@@ -291,12 +321,15 @@ export default {
       mdaoStkBtnStatus: 0,
       pendingReward: 0,
       ticker: undefined,
+      showWarningModal: false,
+      loading: false,
     });
     const actionType = computed(() => {
       if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
       return 1;
     });
     onBeforeMount(async () => {
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -310,12 +343,17 @@ export default {
       if (data.player.endTime) {
         getTicker();
       }
+      data.loading = false;
     });
     const refresh = async () => {
       await getGlobalPower();
       await getPlayer();
     };
     const obtain = async (type) => {
+      if (data.player.inFarm) {
+        data.showWarningModal = true;
+        return;
+      }
       try {
         data.btnDisable = true;
         proxy.$toast("等待确认", store.state.toast_info);
@@ -478,6 +516,7 @@ export default {
       ...refData,
       actionType,
       getDiffName,
+      lottie_options,
       jumpToList,
       approveMdao,
       depositMdao,
@@ -500,11 +539,19 @@ export default {
   justify-content: space-between;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  .rule_modal_item {
+    max-width: 80%;
+    margin: 1rem auto;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .fire {
     position: absolute;
     bottom: 0%;
     z-index: 0;
-    opacity:.3;
+    opacity: 0.3;
     pointer-events: none;
     user-select: none;
     width: 120%;
@@ -514,7 +561,7 @@ export default {
   display: flex;
   align-items: center;
   .text {
-    top: 28%;
+    top: 23%;
   }
 }
 .topbar {
