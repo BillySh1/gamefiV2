@@ -87,16 +87,11 @@
         <div class="item">
           <div class="badge">
             <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
-            <div class="text">额外收益</div>
+            <div class="text">推广收益</div>
           </div>
           <div class="detail">
             <div class="lg">
-              {{
-                Number(player.buffedPower / player.realPower).toFixed(2) *
-                  Number.parseFloat(
-                    fromWei(player.rewardDebt || 0, "ether")
-                  ).toFixed(2) || 0
-              }}
+              {{ fromWei(player.inviteReward, "ether") }}
               MDAO
             </div>
           </div>
@@ -171,7 +166,7 @@
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
               <p>当前任务奖励</p>
-              <p>{{ pendingReward }}MDAO</p>
+              <p>{{ pendingReward }} MDAO</p>
             </div>
           </div>
           <div style="display: flex; align-items: center">
@@ -397,6 +392,7 @@ export default {
       if (parseInt(m, 10) < 0) m = "0";
       if (parseInt(d, 10) < 0) d = "0";
       data.remainTime = `${d}天${h}时${m}分`;
+
       if (d == 0 && m == 0 && h == 0) {
         clearInterval(data.ticker);
       }
@@ -405,7 +401,7 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
-      localStorage.setItem('stake_diff',data.player.difficulty)
+      localStorage.setItem("stake_diff", data.player.difficulty);
       console.log(data.player, "player");
       data.rewardPerblock =
         data.web3.utils.fromWei(
@@ -593,7 +589,9 @@ export default {
       }
       .coin {
         width: 3rem;
-        transform: translateX(0.9rem);
+        position: absolute;
+        right: 0;
+        transform: translateX(3rem);
       }
     }
   }

@@ -52,9 +52,9 @@
                 任务
               </div>
               <div class="text">为期 {{ getDiffName.time }} 天</div>
-              <div class="text" style="color: rgba(252, 98, 98, 1)">
+              <!-- <div class="text" style="color: rgba(252, 98, 98, 1)">
                 已质押MDAO
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
