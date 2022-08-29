@@ -105,9 +105,10 @@
         </div>
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div
-          class="stake"
+          :class="btnDisable ? 'stake disable' : 'stake'"
           @click="
             () => {
+              if (btnDisable) return;
               if (btnStatus == 1) {
                 deposit();
               } else {
@@ -165,6 +166,7 @@ export default {
       type: 0,
       btnStatus: 0,
       diff: undefined,
+      btnDisable: false
     });
     const selectedHero = computed(() => {
       return data.heroes[data.chosen] || data.heroes[0];
@@ -233,14 +235,14 @@ export default {
           data.web3 = p;
         }
       );
-      if(localStorage.getItem('stk_selected')){
-        data.heroes = JSON.parse(localStorage.getItem('stk_selected'))
+      if (localStorage.getItem("stk_selected")) {
+        data.heroes = JSON.parse(localStorage.getItem("stk_selected"));
       }
     });
-  
+
     const approve = async () => {
+      data.btnDisable = true;
       try {
-        data.btnDisable = true;
         proxy.$toast("等到授权英雄", store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_staking.options.address;
@@ -280,8 +282,8 @@ export default {
         if (res.status) {
           proxy.$toast("质押成功", store.state.toast_success);
           router.push({
-            name:'stk_main'
-          })
+            name: "stk_main",
+          });
         }
       } catch (e) {
         console.error(e);
@@ -497,6 +499,9 @@ export default {
         transform: translate(-50%, -50%);
         font-size: 2vmin;
       }
+    }
+    .disable{
+      filter: grayscale(1);
     }
   }
 }

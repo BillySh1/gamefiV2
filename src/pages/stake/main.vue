@@ -23,6 +23,19 @@
         您当前可领取收益为 {{ 2000 }} MDAO
       </div>
     </InjectModal>
+    <InjectModal
+      :title="'追加质押'"
+      :value="showRuleModal"
+      @close="() => (showRuleModal = false)"
+      @confirm="
+        () => {
+          showRuleModal = false;
+        }
+      "
+    >
+      <div class="rule_modal_item">追加质押MDAO 规则</div>
+      <div class="rule_modal_item" style="color: red">1MDAO = 10 战力</div>
+    </InjectModal>
     <div class="topbar">
       <StkBtn
         class="check_map"
@@ -115,7 +128,7 @@
           </div>
           <div v-else class="cur">当前可质押 {{ mdaoToDeposit }} MDAO</div>
 
-          <div class="rule">规则说明</div>
+          <div class="rule" @click="() => (showRuleModal = true)">规则说明</div>
           <div
             v-if="Number(mdaoToDeposit > 0)"
             class="stk_btn"
@@ -318,6 +331,7 @@ export default {
       ticker: undefined,
       showWarningModal: false,
       loading: false,
+      showRuleModal: false,
     });
     const actionType = computed(() => {
       if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
@@ -394,6 +408,7 @@ export default {
       data.remainTime = `${d}天${h}时${m}分`;
 
       if (d == 0 && m == 0 && h == 0) {
+        data.remainTime = "任务已完成";
         clearInterval(data.ticker);
       }
     };

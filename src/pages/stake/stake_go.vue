@@ -1,5 +1,8 @@
 <template>
-  <div class="box">
+  <div v-if="loading" class="box">
+    <Lottie :options="lottie_options" />
+  </div>
+  <div v-else class="box">
     <div class="left">
       <div
         class="back"
@@ -81,8 +84,15 @@ export default {
       web3: "",
       rawData: [],
       selected: [],
+      loading: false,
+    });
+    const lottie_options = computed(() => {
+      return {
+        animationData: require(`../../assets/common/loading.json`),
+      };
     });
     onBeforeMount(async () => {
+      data.loading = true;
       await initWeb3.Init(
         (addr) => {
           data.account = addr;
@@ -98,6 +108,7 @@ export default {
           JSON.parse(route.query.selected).includes(x.tokenId)
         );
       }
+      data.loading = false;
     });
     const next = () => {
       localStorage.setItem("stk_selected", JSON.stringify(data.selected));
@@ -159,6 +170,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      lottie_options,
       curTotalPower,
       next,
       onSelect,
