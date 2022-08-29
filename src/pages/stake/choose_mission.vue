@@ -125,8 +125,8 @@ export default {
       }
       data.loading = false;
     };
-    const clickMission = (idx) => {
-      localStorage.setItem("stake_diff", idx);
+    const clickMission = () => {
+      localStorage.setItem("stake_diff", data.activeIndex);
       router.push({
         name: "stk_go",
       });

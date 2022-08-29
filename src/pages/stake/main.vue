@@ -405,6 +405,7 @@ export default {
     const getPlayer = async () => {
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
+      localStorage.setItem('stake_diff',data.player.difficulty)
       console.log(data.player, "player");
       data.rewardPerblock =
         data.web3.utils.fromWei(
