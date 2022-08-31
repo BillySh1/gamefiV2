@@ -2,12 +2,11 @@
   <div class="box">
     <div
       class="back_to_home"
-      v-show="$route.name != 'home'"
       @click="() => $router.push({ name: 'home' })"
     >
       <div class="text">主页</div>
     </div>
-    <div
+    <!-- <div
       class="back_to_home"
       v-show="$route.name == 'home'"
       @click="
@@ -18,7 +17,7 @@
       "
     >
       <div class="text">Faucet</div>
-    </div>
+    </div> -->
     <div class="swap" @click="toSwap">
       <img
         class="img"
@@ -41,18 +40,15 @@
       </div>
     </div>
     <div class="call" @click="() => $router.push({ name: 'mint' })">
-      <img
-        v-if="$route.name == 'home'"
-        class="img"
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/call.png"
-        alt=""
-      />
-      <div v-else class="common_call">
+      <div class="common_call">
         <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/common_call.png"
+          :src="
+            locale.value == 'zh'
+              ? require('../assets/Lang/draw_zh.png')
+              : require('../assets/Lang/draw_en.png')
+          "
           alt=""
         />
-        <div class="text">招贤纳士</div>
       </div>
     </div>
   </div>
@@ -60,9 +56,11 @@
 
 <script >
 import { reactive, toRefs } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "common_page_footer",
   setup() {
+    const { locale } = useI18n();
     const data = reactive({
       menuList: [
         {
@@ -109,6 +107,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      locale,
       toSwap,
     };
   },
@@ -220,7 +219,7 @@ export default {
 .call {
   position: relative;
   margin-right: 4rem;
-  width: 15rem;
+  width: 20rem;
   cursor: pointer;
   .img {
     position: absolute;

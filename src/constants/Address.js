@@ -13,7 +13,7 @@ const test = {
   battle: "0x36B1df93D28D1b10D01DcbC0e16Ba77BEe195B1C",
   battleShop: "0xDa68BDB409D905C375856cb835d087421f054d5e",
   bet: "0x2CB721c6a96197CaCF20FF066A35f610b8b34C67",
-  staking:'0xcFc46c3FD9C5f92eCd0F84fa18c5c5798a598E72'
+  staking:'0xDEb9d029FAC4C2Ce174aD602bd6B5c690fc877f8'
 };
 
 // const main = {

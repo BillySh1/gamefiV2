@@ -1,15 +1,14 @@
 <template>
   <div class="progress">
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
-    <img
-      class="badge"
-      :src="resolveAssets('/assets/common/hero_sit.png')"
-      alt=""
-    />
-    <img class="logo" :src="resolveAssets('/assets/common/logo.png')" alt="" />
-    <div class="text">
-      {{ progressText }}
+    <div class="logo">
+      <img class="logo_img" src="../assets/loading/logo.svg" alt="" />
+      <img class="divider" src="../assets/loading/divider.png" alt="" />
+      <div class="text">
+        {{ progressText }}
+      </div>
     </div>
+
     <div class="version">版本号 {{ version }}</div>
   </div>
 </template>
@@ -28,7 +27,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.2.0 攻城略地",
+      version: "1.2.1 攻城略地",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
@@ -38,7 +37,7 @@ export default {
     const progressText = computed(() => {
       if (data.preload.progress) {
         return (
-          "资源加载中,当前进度: " +
+          "Loading...  " +
           Math.floor(data.preload.progress * 100) +
           "%"
         );
@@ -100,34 +99,34 @@ export default {
   background: black;
   width: 100%;
   height: 100%;
-  .badge {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-  }
+  background: url(../assets/loading/loadingBg.png) no-repeat;
+  background-size: cover;
 
   .logo {
     position: absolute;
-    width: 80rem;
-    height: auto;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  .text {
-    white-space: nowrap;
-    position: absolute;
-    font-size: 2rem;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    .logo_img {
+      width: 40rem;
+    }
+    .divider {
+      width: 60rem;
+      margin: 2rem 0;
+    }
+    .text {
+      white-space: nowrap;
+      font-size: 2rem;
+      color: #C7C775;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
+
   .version {
     position: absolute;
     right: 0%;

@@ -41,23 +41,23 @@
       </div>
 
       <div class="float_action_buttons">
-        <!-- <img class="up" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/ac_bottom.png" alt="" /> -->
-        <div class="actions_inner">
-          <div class="left" @click="jump('stk_entry')">
-            <img src="../../assets/index/left.png" alt="" />
-          </div>
-          <div class="middle" >
-            <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/middle.png"
-              alt=""
-            />
-          </div>
-          <div class="right">
-            <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/right.png"
-              alt=""
-            />
-          </div>
+        <div class="actions_inner_zh">
+          <img
+            @click="jump('stk_entry')"
+            class="left"
+            :src="require(`../../assets/Lang/left_${curLang}.png`)"
+          />
+          <img
+            class="middle"
+            :src="require(`../../assets/Lang/middle_${curLang}.png`)"
+            alt=""
+          />
+          <img
+            class="right"
+            :src="require(`../../assets/Lang/right_${curLang}.png`)"
+            alt=""
+          />
+          {{ locale }}
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
 </template>
 
 <script >
-import { onBeforeMount, reactive, toRefs } from "vue";
+import { computed, onBeforeMount, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import CommonPageHeader from "../../components/common_page_header";
@@ -84,10 +84,7 @@ export default {
     InjectIcon,
   },
   setup(prop, { emit }) {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
+    const { t, locale } = useI18n();
     const router = useRouter();
     const store = useStore();
     const data = reactive({
@@ -95,7 +92,9 @@ export default {
       web3: "",
       power: 0,
     });
-
+    const curLang = computed(() => {
+      return locale.value || "en";
+    });
     const exit = () => {
       emit("exit");
     };
@@ -131,6 +130,7 @@ export default {
     return {
       t,
       ...refData,
+      curLang,
       disconnect,
       jump,
       exit,
@@ -187,6 +187,7 @@ export default {
       font-weight: 400;
       letter-spacing: 0.5rem;
       text-shadow: 1px 1px 4px #000;
+      writing-mode: vertical-lr;
     }
   }
 }
@@ -194,11 +195,10 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10%;
-  .actions_inner {
+  bottom: 15%;
+  .actions_inner_zh {
     display: flex;
     margin-top: 2rem;
-
     .left {
       &:hover {
         opacity: 0.6;
@@ -207,9 +207,7 @@ export default {
       position: relative;
       transform: translateX(2rem);
       white-space: nowrap;
-      img {
-        width: 16rem;
-      }
+      width: 16rem;
     }
     .middle {
       user-select: none;
@@ -221,9 +219,7 @@ export default {
       cursor: pointer;
       position: relative;
       transform: translateY(-2.5rem);
-      img {
-        width: 22rem;
-      }
+      width: 22rem;
     }
     .right {
       user-select: none;
@@ -231,9 +227,7 @@ export default {
       cursor: pointer;
       position: relative;
       transform: translateX(-1.4rem);
-      img {
-        width: 18rem;
-      }
+      width: 18rem;
     }
   }
 }

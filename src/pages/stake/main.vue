@@ -183,7 +183,7 @@
             </div>
           </div>
           <div style="display: flex; align-items: center">
-            <div class="big_btn" @click="releaseHero" v-if="player.inFarm">
+            <div  class="big_btn" @click="releaseHero" v-if="player.inFarm && canRelease">
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
               <div class="text">取回卡牌</div>
             </div>
@@ -332,6 +332,7 @@ export default {
       showWarningModal: false,
       loading: false,
       showRuleModal: false,
+      canRelease:false,
     });
     const actionType = computed(() => {
       if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
@@ -354,9 +355,14 @@ export default {
       }
       data.loading = false;
     });
+    const canRelease = async()=>{
+      const c = store.state.c_staking;
+      data.canRelease = await c.methods.canRelease().call();
+    }
     const refresh = async () => {
       await getGlobalPower();
       await getPlayer();
+      await canRelease()
     };
     const obtain = async (type) => {
       if (data.player.inFarm) {

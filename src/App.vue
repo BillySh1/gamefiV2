@@ -1,5 +1,5 @@
 <template>
-  <!-- <AudioBox /> -->
+  <AudioBox />
   <router-view v-if="correctChainId && connected && !loading"></router-view>
   <ConnectWalletModal
     :value="modalShow"
@@ -14,29 +14,31 @@
       src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
       alt=""
     />
-    <img
-      class="logo"
-      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png"
-      alt=""
-    />
-    <div class="text">
-      <div v-show="!connected">未监测到钱包地址 请先连接钱包</div>
-      <div v-show="!correctChainId && connected">请切换至正确的网络</div>
+    <div class="logo">
+      <img class="logo_img" src="./assets/loading/logo.svg" alt="" />
+      <img class="divider" src="./assets/loading/divider.png" alt="" />
 
-      <div class="btn" v-show="!connected">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
-          alt=""
-        />
-        <div class="inner" @click="() => (modalShow = true)">连接钱包</div>
-      </div>
-      <div class="btn" v-show="isMobile && !correctChainId && connected">
-        <img
-          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
-          alt=""
-        />
+      <div class="text">
+        <div v-show="!connected">Please connect your wallet first</div>
+        <div v-show="!correctChainId && connected">Network Error</div>
 
-        <div class="inner" @click="switchNetWork">切换网络</div>
+        <div class="btn" v-show="!connected">
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            alt=""
+          />
+          <div class="inner" @click="() => (modalShow = true)">
+            Connect Wallet
+          </div>
+        </div>
+        <div class="btn" v-show="isMobile && !correctChainId && connected">
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            alt=""
+          />
+
+          <div class="inner" @click="switchNetWork">Switch Network</div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,14 +48,14 @@
 import initWeb3 from "./utils/initWeb3";
 import GlobalLoading from "./components/global_loading.vue";
 import ConnectWalletModal from "./components/connect_wallet_modal.vue";
-// import AudioBox from "./components/audio.vue";
+import AudioBox from "./components/audio.vue";
 const acceptNetWorks = [97];
 export default {
   name: "app",
   components: {
     GlobalLoading,
     ConnectWalletModal,
-    // AudioBox,
+    AudioBox,
   },
   data() {
     return {
@@ -167,47 +169,47 @@ export default {
   }
   .logo {
     position: absolute;
-    width: 80rem;
     height: auto;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  img {
-    position: absolute;
-    top: 40%;
-    width: 100%;
-  }
-  .text {
-    position: absolute;
-    font-size: 1.5rem;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    div {
-      margin-bottom: 1rem;
+    .logo_img {
+      width: 40rem;
     }
-    .btn {
-      display: block;
-      position: relative;
-      width: 12rem;
-      height: auto;
-      img {
-        display: block;
-        width: 100%;
-        height: auto;
+    .divider {
+      width: 60rem;
+      margin: 2rem 0;
+    }
+    .text {
+      font-size: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      div {
+        margin-bottom: 1rem;
       }
-      .inner {
-        cursor: pointer;
-        position: absolute;
-        top: 1rem;
-        left: 50%;
-        transform: translate(-50%, 0);
-        white-space: nowrap;
+      .btn {
+        display: block;
+        position: relative;
+        width: 12rem;
+        height: auto;
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+        .inner {
+          cursor: pointer;
+          position: absolute;
+          top: 1rem;
+          left: 50%;
+          transform: translate(-50%, 0);
+          white-space: nowrap;
+        }
       }
     }
   }
