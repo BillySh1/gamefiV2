@@ -29,7 +29,7 @@
       >
         <div class="confirm_inner">
           <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_confirm_bg.svg" alt="" />
-          <div class="text">{{ btnText || "确认" }}</div>
+          <div class="text">{{ btnText || $t('confirm') }}</div>
         </div>
       </div>
     </div>

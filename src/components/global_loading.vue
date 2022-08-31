@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="version">版本号 {{ version }}</div>
+    <div class="version">version {{ version }}</div>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.2.1 攻城略地",
+      version: "1.2.2 Siege",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
@@ -42,7 +42,7 @@ export default {
           "%"
         );
       } else {
-        return "资源加载出错，请检查网络环境并重试";
+        return "Loading Error";
       }
     });
     const isMobile = computed(() => {

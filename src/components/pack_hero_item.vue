@@ -14,7 +14,7 @@
         </div>
 
         <div class="power_value">
-          <div class="text" >战力</div>
+          <div class="text" >{{$t('power')}}</div>
           <div class="value">{{ info.power }}</div>
         </div>
       </div>

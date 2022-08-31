@@ -6,7 +6,7 @@
     <div class="wallet_address">
       {{ walletValue }}
       <div class="drop_down">
-        <div class="item" @click="$emit('exit')">断开连接</div>
+        <div class="item" @click="$emit('exit')">{{$t('disconnect')}}</div>
         <div class="item" @click="controlAudio">{{ audioText }}</div>
         <div class="item" @click="jump2Swap">MemorySwap ></div>
         <div class="item" @click="switchLang">
@@ -84,7 +84,7 @@ export default {
       }
     };
     const audioText = computed(() => {
-      return data.type ? "关闭音乐" : "打开音乐";
+      return data.type ? "Close" : "Open Music";
     });
     const watchAcc = () => {
       if (!window.ethereum) return;

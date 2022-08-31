@@ -11,7 +11,7 @@
     >
       <div class="content">
         <div class="header">
-          <div class="text">连接钱包</div>
+          <div class="text">Connect Wallet</div>
           <div class="close" @click="() => $emit('close')">x</div>
         </div>
         <div class="wallets">

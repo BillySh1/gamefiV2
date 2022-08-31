@@ -13,7 +13,7 @@
             }
           "
         >
-          重置
+          {{$t('reset')}}
         </div>
         <!-- <div class="left" @click="saveFilter">保存</div> -->
       </div>
@@ -62,7 +62,7 @@
           "
         />
         <div class="filter_box" @click="() => (showFilter = true)">
-          <div class="text">筛选</div>
+          <div class="text">{{$t('filter')}}</div>
         </div>
         <div
           class="search_box"
@@ -89,7 +89,7 @@
                 src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/tab_title_bg.png"
                 alt=""
               />
-              <div class="inner">武将</div>
+              <div class="inner">{{$t('hero')}}</div>
             </div>
             <div
               v-for="(item, index) in tabs"
@@ -122,7 +122,7 @@
               alt=""
             />
           </div>
-          <div class="empty" v-if="!curItems.length">暂无武将</div>
+          <div class="empty" v-if="!curItems.length">{{$t('empty')}}</div>
           <div
             v-for="(item, index) in curItems"
             :key="index"
@@ -176,6 +176,7 @@ import CommonSearch from "./common_search";
 import initWeb3 from "../utils/initWeb3.js";
 import useHeroDetail from "../utils/useHeroDetail.js";
 import InjectGoBack from "./inject_go_back.vue";
+import { useI18n } from 'vue-i18n';
 export default {
   name: "inject_pack_hero",
   props: ["value", "toSelect", "hideSearch", "selected", "camp"],
@@ -187,8 +188,9 @@ export default {
   setup() {
     const store = useStore();
     const proxy = getCurrentInstance();
+    const {t} = useI18n()
     const data = reactive({
-      pageTitle: "我的背包",
+      pageTitle: t('myPack'),
       allItems: [],
       curItems: [],
       web3: "",
@@ -201,16 +203,16 @@ export default {
       },
       loading: false,
       tabs: [
-        { key: 0, name: "战力" },
-        { key: 1, name: "品质" },
-        { key: 2, name: "稀有度" },
+        { key: 0, name: t('power') },
+        { key: 1, name: t('quality') },
+        { key: 2, name: t('rarity') },
       ],
       curTab: 0,
       showFilter: false,
       filteredData: [],
       filters: [
         {
-          name: "稀有度",
+          name: t('rarity'),
           key: "rarity",
           selected: null,
           items: [
@@ -237,7 +239,7 @@ export default {
           ],
         },
         {
-          name: "阵营",
+          name: t('camp'),
           key: "camp",
           selected: null,
           items: [
@@ -260,7 +262,7 @@ export default {
           ],
         },
         {
-          name: "品质",
+          name: t('quality'),
           key: "quality",
           selected: null,
           items: [
@@ -283,29 +285,29 @@ export default {
           ],
         },
         {
-          name: "职业",
+          name: t('job'),
           key: "preference",
           selected: null,
           items: [
             {
               key: 0,
-              name: "盾",
+              name: t('job_0'),
             },
             {
               key: 1,
-              name: "战",
+              name: t('job_1'),
             },
             {
               key: 2,
-              name: "谋",
+              name: t('job_2'),
             },
             {
               key: 3,
-              name: "刺",
+              name: t('job_3'),
             },
             {
               key: 4,
-              name: "辅",
+              name: t('job_4'),
             },
           ],
         },
@@ -407,7 +409,7 @@ export default {
         data.filteredData = JSON.parse(JSON.stringify(data.rawData));
         data.total = Math.ceil(data.filteredData.length / 4);
       } catch (e) {
-        proxy.$toast("获取武将背包失败", store.state.toast_error);
+        proxy.$toast(t('common_tip_error'), store.state.toast_error);
       }
     };
     const refData = toRefs(data);

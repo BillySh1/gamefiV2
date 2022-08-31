@@ -2,12 +2,20 @@
   <div class="box">
     <div class="inner">
       <div class="avatar_box">
-        <img class="avatar" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/default_avatar.png" alt="" />
+        <img
+          class="avatar"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/default_avatar.png"
+          alt=""
+        />
       </div>
       <div class="info_box">
         <div class="power_box">
-          <img class="power_bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/power_bg.png" alt="" />
-          <div class="power_value">战力 {{ power }}</div>
+          <img
+            class="power_bg"
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/power_bg.png"
+            alt=""
+          />
+          <div class="power_value">{{ $t("power") }} {{ power }}</div>
         </div>
         <div
           class="title_box"
@@ -18,8 +26,11 @@
               })
           "
         >
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/title_bg.png" alt="" />
-          <div class="title_value">暂无称号</div>
+          <img
+            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/title_bg.png"
+            alt=""
+          />
+          <div class="title_value">{{ $t("emptyTitle") }}</div>
         </div>
       </div>
     </div>

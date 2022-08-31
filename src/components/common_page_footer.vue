@@ -1,10 +1,7 @@
 <template>
   <div class="box">
-    <div
-      class="back_to_home"
-      @click="() => $router.push({ name: 'home' })"
-    >
-      <div class="text">主页</div>
+    <div class="back_to_home" @click="() => $router.push({ name: 'home' })">
+      <div class="text">{{ $t("home") }}</div>
     </div>
     <!-- <div
       class="back_to_home"
@@ -43,11 +40,10 @@
       <div class="common_call">
         <img
           :src="
-            locale.value == 'zh'
+            curLang == 'zh'
               ? require('../assets/Lang/draw_zh.png')
               : require('../assets/Lang/draw_en.png')
           "
-          alt=""
         />
       </div>
     </div>
@@ -55,52 +51,54 @@
 </template>
 
 <script >
-import { reactive, toRefs } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 export default {
   name: "common_page_footer",
   setup() {
-    const { locale } = useI18n();
-    const data = reactive({
-      menuList: [
-        {
-          key: "pack",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/pack.png",
-          href: "pack",
-          text: "背包",
-        },
-        {
-          key: "market",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/market.png",
-          href: "market",
-          text: "市场",
-        },
-        {
-          key: "exchange",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/exchange.png",
-          href: "exchange",
-          text: "兑换",
-        },
-        {
-          key: "store",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/store.png",
-          href: "store",
-          text: "战备",
-        },
-        {
-          key: "reborn",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/reborn.png",
-          href: "reborn",
-          text: "重生",
-        },
-        {
-          key: "mix",
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mix.png",
-          href: "mix",
-          text: "进阶",
-        },
-      ],
+    const { locale, t } = useI18n({
+      useScope: "local",
     });
+    const curLang = computed(() => locale.value);
+    const menuList = computed(() => [
+      {
+        key: "pack",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/pack.png",
+        href: "pack",
+        text: t("pack"),
+      },
+      {
+        key: "market",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/market.png",
+        href: "market",
+        text: t("market"),
+      },
+      {
+        key: "exchange",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/exchange.png",
+        href: "exchange",
+        text: t("exchange"),
+      },
+      {
+        key: "store",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/store.png",
+        href: "store",
+        text: t("store"),
+      },
+      {
+        key: "reborn",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/reborn.png",
+        href: "reborn",
+        text: t("reborn"),
+      },
+      {
+        key: "mix",
+        img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mix.png",
+        href: "mix",
+        text: t("mix"),
+      },
+    ]);
+    const data = reactive({});
     const toSwap = () => {
       window.open("http://www.mdaoswap.xyz/", "_blank");
     };
@@ -108,6 +106,8 @@ export default {
     return {
       ...refData,
       locale,
+      menuList,
+      curLang,
       toSwap,
     };
   },
