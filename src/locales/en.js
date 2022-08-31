@@ -104,6 +104,6 @@ export default {
   order_status_2: "Sold",
   sell_order_intro: "Please enter the price below, authorize and list",
   sell_card: "Sell Card",
-  equipment:'Equipment',
-  treasure:'Treasure'
+  equipment: "Equipment",
+  treasure: "Treasure",
 };
