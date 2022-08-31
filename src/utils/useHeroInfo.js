@@ -3,7 +3,7 @@ const useQualityText = (x) => {
 };
 
 const usePreferenceText = (x) => {
-  return ["盾", "战", "谋", "刺", "辅",'主公'][x];
+  return ["盾", "战", "谋", "刺", "辅", "主公"][x];
 };
 
 const useCampText = (x) => {

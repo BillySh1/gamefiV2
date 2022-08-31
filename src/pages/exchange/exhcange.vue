@@ -147,7 +147,7 @@ export default {
           proxy.$toast(t('common_wait_approve'), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast("授权失败", store.state.toast_error);
+        proxy.$toast(t('common_approve_failed'), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;

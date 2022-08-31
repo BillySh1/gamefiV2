@@ -48,6 +48,7 @@ import CommonPageFooter from "../../components/common_page_footer";
 import InjectPackHero from "../../components/inejct_pack_hero";
 import CommonPackDetail from "./common_pack_detail";
 import InjectGoback from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "pack",
   components: {
@@ -59,22 +60,23 @@ export default {
   },
   setup() {
     const route = useRoute();
+    const { t } = useI18n();
     const data = reactive({
       pageTitle: "我的背包",
       routerItems: [
         {
           key: 0,
-          name: "武将",
+          name: t("hero"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/0.png",
         },
         {
           key: 1,
-          name: "装备",
+          name: t("equipment"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/1.png",
         },
         {
           key: 2,
-          name: "珍宝",
+          name: t("treasure"),
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/2.png",
         },
       ],

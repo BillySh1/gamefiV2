@@ -103,4 +103,5 @@ export default {
   order_status_2: "已售出",
   sell_order_intro: "请在下方输入价格，授权并上架",
   sell_card: "出售卡牌",
+  equipment:'装备'
 };
