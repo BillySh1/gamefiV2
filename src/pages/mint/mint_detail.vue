@@ -384,7 +384,6 @@ export default {
   display: flex;
   align-items: center;
   margin-left: 3rem;
-  font-family: zihun129;
   font-size: 2.5rem;
   letter-spacing: 0.1em;
   img {

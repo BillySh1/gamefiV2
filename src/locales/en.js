@@ -9,6 +9,9 @@ export default {
   beforeCard: "Last",
   nextCard: "Next",
   cardDetail: "Card Detail",
+  intro: "Intro",
+  raiders: "Raiders",
+  attributes: "Attributes",
   putInPack: "Put in pack",
   mintDetail1:
     "Randomly open cards of different rarities, the cards have a total of four qualities, completely random",
