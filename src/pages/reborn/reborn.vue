@@ -64,7 +64,7 @@
           <img
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
           />
-          <div class="text">重生提醒</div>
+          <div class="text">{{ $t("rebornTips") }}</div>
         </div>
       </div>
     </div>
@@ -74,14 +74,14 @@
       @close="() => (showRules = false)"
       @confirm="() => (showRules = false)"
       :value="showRules"
-      title="重生提醒"
+      :title="$t('rebornTips')"
     >
-      <div class="modal_text">重生可能会改变卡牌的阵营，英雄等信息</div>
-      <div class="modal_text">属性将会根据重生后的卡牌职业对应继承</div>
-      <div class="modal_text" style="color: red">注： 金卡不可重生</div>
+      <div class="modal_text">{{ $t("rebornTip1") }}</div>
+      <div class="modal_text">{{ $t("rebornTip2") }}</div>
+      <div class="modal_text" style="color: red">{{ $t("rebornTip3") }}</div>
     </InjectModal>
     <InjectModal
-      :title="'重生'"
+      :title="$t('reborn')"
       :value="showModal"
       @close="() => (showModal = false)"
       @confirm="() => (showModal = false)"
@@ -318,7 +318,7 @@ export default {
     };
     const reborn = async () => {
       try {
-        proxy.$toast('wait', store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = data.curSelectedHero.tokenId;

@@ -35,7 +35,11 @@
         </div>
       </div>
       <div class="right_c">
-        <img class="blood" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/blood.png" alt="" />
+        <img
+          class="blood"
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/blood.png"
+          alt=""
+        />
         <div class="right_c_title">
           <div class="right_c_title_value">
             {{ info.title }}
@@ -45,15 +49,18 @@
             />
           </div>
           <div class="right_c_price">
-            <img style="margin-right: 2rem" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png" />
+            <img
+              style="margin-right: 2rem"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+            />
             <span>{{ getprice }}</span>
           </div>
         </div>
         <div class="right_c_content">
-          随机开出不同稀有度的卡牌, 卡牌共具有四种品质，完全随机
+          {{ $t("mintDetail1") }}
         </div>
         <div class="right_c_content">
-          卡牌的共有五种职业，盾，战，谋，刺，辅，每种职业的特性不尽相同
+          {{ $t("mintDetail2") }}
         </div>
         <div class="right_c_action">
           <div class="input_box">
@@ -73,7 +80,11 @@
               "
             />
             <div class="ipt_bg">
-              <img class="ipt_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png" alt="" />
+              <img
+                class="ipt_img"
+                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png"
+                alt=""
+              />
               <input
                 v-model="buyValue"
                 class="input"
@@ -95,7 +106,11 @@
           </div>
 
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png" alt="" />
+            <img
+              class="btn_img"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png"
+              alt=""
+            />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>
@@ -119,6 +134,7 @@ import initWeb3 from "../../utils/initWeb3.js";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "mint_detail",
@@ -132,10 +148,11 @@ export default {
     const router = useRouter();
     const store = useStore();
     const { proxy } = getCurrentInstance();
+    const { t } = useI18n();
     const data = reactive({
       info: "",
       buyValue: 1,
-      pageTitle: "招贤纳士",
+      pageTitle: t("draw"),
       web3: "",
       account: "",
       price: 0,
@@ -164,7 +181,7 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast("t('common_wait_approve')", store.state.toast_info);
+        proxy.$toast(t("common_wait_approve"), store.state.toast_info);
         const c = store.state.c_mdao;
         const value = data.web3.utils.toWei(getprice.value.toString(), "ether");
         const addr = store.state.c_recruit.options.address;
@@ -180,10 +197,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast("授权成功", store.state.toast_success);
+          proxy.$toast(t('common_approve_success'), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast("授权失败", store.state.toast_error);
+        proxy.$toast(t('common_approve_failed'), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -191,7 +208,7 @@ export default {
     };
     const buy = async () => {
       try {
-        proxy.$toast("等待购买", store.state.toast_info);
+        proxy.$toast(t('common_wait_check'), store.state.toast_info);
         const c = store.state.c_recruit;
         const gasPrice = await data.web3.eth.getGasPrice();
         let invite = "0x0000000000000000000000000000000000000000";
@@ -254,7 +271,7 @@ export default {
     };
 
     const btnText = computed(() => {
-      return ["授权", "购买"][data.btnStatus];
+      return [t("approve"), t("buy")][data.btnStatus];
     });
 
     onBeforeMount(async () => {

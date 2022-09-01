@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <CommonPageHeader title="招贤纳士" />
+    <CommonPageHeader :title="$t('draw')" />
     <InjectGoBack />
     <div class="content">
       <Swiper
@@ -47,7 +47,11 @@
           </div>
 
           <div class="price_box" v-show="activeIndex == item.key">
-            <img class="price_icon" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png" alt="" />
+            <img
+              class="price_icon"
+              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+              alt=""
+            />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
               item.price
             }}</span>
@@ -69,6 +73,7 @@ import InjectGoBack from "../../components/inject_go_back.vue";
 import initWeb3 from "../../utils/initWeb3.js";
 import "swiper/swiper.less";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 export default {
   name: "mint",
   components: {
@@ -81,6 +86,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const { t } = useI18n();
     const data = reactive({
       activeIndex: 0,
       blindBoxes: [
@@ -88,7 +94,7 @@ export default {
           key: 0,
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_0.png",
           price: 5000,
-          title: "校尉腰牌",
+          title: t("drawQuality1"),
           bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type0_bg.png",
           maxWidth: 180,
           maxHeight: 344,
@@ -99,7 +105,7 @@ export default {
           key: 1,
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_1.png",
           price: 10000,
-          title: "鎏金虎符",
+          title: t("drawQuality2"),
           bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type1_bg.png",
           maxWidth: 430,
           maxHeight: 157,
@@ -110,7 +116,7 @@ export default {
           key: 2,
           img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_2.png",
           price: 30000,
-          title: "传国玉玺",
+          title: t("drawQuality1"),
           bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type2_bg.png",
           maxWidth: 311,
           maxHeight: 337,

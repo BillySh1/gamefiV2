@@ -62,7 +62,7 @@ export default {
     const route = useRoute();
     const { t } = useI18n();
     const data = reactive({
-      pageTitle: "我的背包",
+      pageTitle: t('myPack'),
       routerItems: [
         {
           key: 0,

@@ -1,6 +1,19 @@
 export default {
   home: "Home",
   draw: "Draw",
+  drawQuality1: "Colonel waist badge",
+  drawQuality2: "Gilt Tiger Talisman",
+  drawQuality3: "Chuan Guoyu Seal",
+  cardReborn: "Card Reborn",
+  mintingTip: "Congratulations",
+  beforeCard: "Last",
+  nextCard: "Next",
+  cardDetail: "Card Detail",
+  putInPack: "Put in pack",
+  mintDetail1:
+    "Randomly open cards of different rarities, the cards have a total of four qualities, completely random",
+  mintDetail2:
+    "There are five occupations in the card, shield, battle, plot, thorn, and auxiliary, and the characteristics of each occupation are different.",
   airdrop: "AirDrop",
   pack: "Pack",
   myPack: "My Pack",
@@ -11,6 +24,13 @@ export default {
   exchange: "Bank",
   store: "Store",
   reborn: "Reborn",
+  rebornTips: "RebornTips",
+  rebornTip1:
+    "Rebirth may change the faction, hero and other information of the card",
+  rebornTip2:
+    "Attributes will be inherited according to the card class after rebirth",
+  rebornTip3: "Note: Gold cards cannot be regenerated",
+  pleaseSelectCard: "Please select a card",
   mix: "Mix",
   confirm: "Confirm",
   disconnect: "Disconnect",

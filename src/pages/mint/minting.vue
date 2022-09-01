@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
-    <img class="badge" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png" alt="">
+    <img
+      class="badge"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
+      alt=""
+    />
     <img
       v-if="!loading"
       class="light"
@@ -11,14 +15,14 @@
     <div class="content">
       <Lottie v-if="loading" :options="lottie_options" />
       <div v-else class="main">
-        <div class="title">恭喜您获得了</div>
+        <div class="title">{{ $t("mintingTip") }}</div>
         <div class="up_box">
           <div :style="`color:${getRarityStyle};margin-right:1rem`">
             {{ curInfo.name }}
           </div>
           <div>
             <span :style="`color:${getQualityStyle}`">{{ curQuality }}</span>
-            品质
+            {{ $t("quality") }}
           </div>
         </div>
 
@@ -44,7 +48,7 @@
               }
             "
             class="left"
-            >上一张</CommonButton
+            >{{ $t("beforeCard") }}</CommonButton
           >
           <HeroCardItem :info="curInfo" />
 
@@ -60,7 +64,7 @@
               }
             "
             class="right"
-            >下一张</CommonButton
+            >{{ $t("nextCard") }}</CommonButton
           >
         </div>
         <div class="bottom">
@@ -75,7 +79,7 @@
                   },
                 })
             "
-            >放入背包</CommonButton
+            >{{ $t("putInPack") }}</CommonButton
           >
           <CommonButton
             class="btn"
@@ -88,7 +92,7 @@
                   },
                 })
             "
-            >卡牌详情</CommonButton
+            >{{ $t("cardDetail") }}</CommonButton
           >
         </div>
       </div>
@@ -107,6 +111,7 @@ import initWeb3 from "../../utils/initWeb3.js";
 import HeroCardItem from "../../components/hero_card_item.vue";
 import useHeroDetail from "../../utils/useHeroDetail";
 import CommonButton from "../../components/common_button.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "minging",
   components: {
@@ -118,9 +123,10 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const { t } = useI18n();
     const data = reactive({
       jsonData: "",
-      pageTitle: "招贤纳士",
+      pageTitle: t("draw"),
       cardList: [],
       newMintedItems: [],
       curIndex: 0,
@@ -136,7 +142,7 @@ export default {
     onBeforeMount(async () => {
       data.loading = true;
       if (route.query && route.query.fromReborn) {
-        data.pageTitle = "卡牌重生";
+        data.pageTitle = t("cardReborn");
       }
       await initWeb3.Init(
         (addr) => {
@@ -248,12 +254,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  .badge{
+  .badge {
     position: absolute;
     top: 50%;
-    left:50%;
+    left: 50%;
     width: 100%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
   @keyframes spin {
     0% {

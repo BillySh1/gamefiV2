@@ -182,7 +182,7 @@
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
             alt=""
           />
-          <div v-else class="no_selected">请选择卡牌</div>
+          <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
         </div>
         <div class="mix_swirl">
           <img
@@ -214,7 +214,7 @@
             src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
             alt=""
           />
-          <div v-else class="no_selected">请选择卡牌</div>
+          <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
         </div>
       </div>
       <div class="tip_badge" @click="() => (showModal = true)">
@@ -411,7 +411,7 @@ export default {
     };
     const mix = async () => {
       try {
-        proxy.$toast('wait', store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const selected = [data.leftInfo.tokenId, data.rightInfo.tokenId];
@@ -550,13 +550,13 @@ export default {
       );
       const left = sessionStorage.getItem("left_info");
       const right = sessionStorage.getItem("right_info");
-      if (left && left != 'null') {
+      if (left && left != "null") {
         data.leftInfo = JSON.parse(left);
-        sessionStorage.setItem("left_info", 'null');
+        sessionStorage.setItem("left_info", "null");
       }
-      if (right && right != 'null' ) {
+      if (right && right != "null") {
         data.right = JSON.parse(right);
-        sessionStorage.setItem("right_info", 'null');
+        sessionStorage.setItem("right_info", "null");
       }
       await getBeforePack();
     });
