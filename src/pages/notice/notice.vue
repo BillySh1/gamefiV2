@@ -4,13 +4,16 @@
     <InjectGoBack />
     <div class="content">
       <div class="border">
-        <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg" alt="" />
+        <img
+          src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg"
+          alt=""
+        />
         <div v-if="noticeData.length > 0" class="inner">
           <div v-for="item in noticeData" :key="item.key" class="inner_item">
             <NoticeItem :info="item" />
           </div>
         </div>
-        <div v-else class="empty">暂无公告</div>
+        <div v-else class="empty">{{ $t("empty") }}</div>
       </div>
     </div>
     <CommonPageFooter />
@@ -21,19 +24,21 @@
 import { reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
 import NoticeItem from "./notice_item";
+import { useI18n } from "vue-i18n";
 export default {
   name: "notice",
   components: {
     CommonPageHeader,
     CommonPageFooter,
     NoticeItem,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
+    const { t } = useI18n();
     const data = reactive({
-      pageTitle: "公告栏",
+      pageTitle: t("notice"),
       noticeData: [
         // {
         //   key: 0,
@@ -85,7 +90,8 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/notice_bg.png") no-repeat;
+  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/notice_bg.png")
+    no-repeat;
   background-size: cover;
 }
 .content {

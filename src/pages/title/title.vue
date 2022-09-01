@@ -2,7 +2,7 @@
   <div class="container">
     <InjectGoBack />
     <CommonPageHeader :title="pageTitle" />
-    <div class="content">称号系统正在开发中，敬请期待</div>
+    <div class="content">{{ $t("title_developing") }}</div>
     <CommonPageFooter />
   </div>
 </template>
@@ -11,17 +11,19 @@
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
-import InjectGoBack from '../../components/inject_go_back.vue'
+import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "store",
   components: {
     CommonPageHeader,
     CommonPageFooter,
-    InjectGoBack
+    InjectGoBack,
   },
   setup() {
+    const { t } = useI18n(0);
     const data = reactive({
-      pageTitle: "我的称号",
+      pageTitle: t("myTitle"),
     });
 
     onBeforeMount(() => {});

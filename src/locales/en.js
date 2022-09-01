@@ -9,6 +9,7 @@ export default {
   beforeCard: "Last",
   nextCard: "Next",
   cardDetail: "Card Detail",
+  title_developing: "The title system is developing",
   intro: "Intro",
   raiders: "Raiders",
   attributes: "Attributes",
@@ -20,6 +21,7 @@ export default {
   airdrop: "AirDrop",
   pack: "Pack",
   myPack: "My Pack",
+  myTitle: "My Title",
   empty: "Empty Data",
   search: "Search",
   emptyTitle: "Empty Title",
@@ -27,6 +29,7 @@ export default {
   exchange: "Bank",
   store: "Store",
   reborn: "Reborn",
+  notice: "Notice Board",
   rebornTips: "RebornTips",
   rebornTip1:
     "Rebirth may change the faction, hero and other information of the card",
