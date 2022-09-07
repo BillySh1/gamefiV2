@@ -266,7 +266,7 @@ export default {
         });
         sessionStorage.setItem("before_pack", JSON.stringify(data.beforePack));
       } catch (e) {
-        proxy.$toast("购买成功", store.state.toast_success);
+        console.log('error')
       }
     };
 

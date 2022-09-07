@@ -199,6 +199,9 @@ export default {
   .actions_inner_zh {
     display: flex;
     margin-top: 2rem;
+    user-select: none;
+    pointer-events: none;
+    filter: grayscale(1);
     .left {
       &:hover {
         opacity: 0.6;
