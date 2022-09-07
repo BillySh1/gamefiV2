@@ -13,7 +13,7 @@
 </template>
 
 <script >
-import { reactive, toRefs, computed } from "vue";
+import { reactive, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 export default {
   name: "connect",
@@ -26,17 +26,12 @@ export default {
     const data = reactive({
       account: "",
     });
-    const lottie_options = computed(() => {
-      return {
-        animationData: require(`../../assets/aridrop/after2.json`),
-      };
-    });
+  
 
     const refData = toRefs(data);
     return {
       t,
       ...refData,
-      lottie_options,
     };
   },
 };
