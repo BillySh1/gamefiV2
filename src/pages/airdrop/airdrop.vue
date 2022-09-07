@@ -2,13 +2,14 @@
   <div class="container">
     <CommonPageHeader :title="pageTitle" />
     <InjectGoBack />
+    <img
+      class="bg_badge"
+      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+      alt=""
+    />
     <Lottie v-if="loading" :options="loading_options" />
+
     <div v-else class="content">
-      <img
-        class="bg_badge"
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
-        alt=""
-      />
       <div v-if="quality" class="main">
         <Lottie :options="lottie_options" />
         <div class="claim_btn_box">
@@ -62,6 +63,7 @@ export default {
       account: "",
       web3: "",
       loading: false,
+      beforePack: [],
     });
     onBeforeMount(async () => {
       data.loading = true;
@@ -159,8 +161,17 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
+  .bg_badge {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    bottom: 20%;
+    opacity: 0.8;
+    transform: translateX(-50%);
+  }
 }
 .content {
   position: relative;
@@ -168,13 +179,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  .bg_badge {
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-    bottom: 15%;
-    opacity: 0.8;
-  }
 
   .claim_btn_box {
     position: absolute;
