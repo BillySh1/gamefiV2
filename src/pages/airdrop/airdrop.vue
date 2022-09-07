@@ -11,7 +11,7 @@
 
     <div v-else class="content">
       <div v-if="quality" class="main">
-        <Lottie :options="lottie_options" />
+        <Lottie class="airdrop_box" :options="lottie_options" />
         <div class="claim_btn_box">
           <CommonButton :disabled="true" class="btn"> Cliam </CommonButton>
           <CommonButton @click="Claim" class="btn">
@@ -144,7 +144,7 @@ export default {
     });
     const lottie_options = computed(() => {
       return {
-        animationData: require(`../../assets/common/loading.json`),
+        animationData: require(`../../assets/aridrop/airdrop.json`),
       };
     });
 
@@ -179,7 +179,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  .airdrop_box {
+    width: 50% !important;
+  }
   .claim_btn_box {
     position: absolute;
     left: 50%;

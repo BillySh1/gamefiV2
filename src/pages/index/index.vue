@@ -21,14 +21,14 @@
             </div>
           </div>
         </div>
-        <div class="flex">
+        <!-- <div class="flex">
           <div class="float_item" @click="jump('obtain')">
             <InjectIcon
               :src="require('../../assets/index/lingqu.png')"
               :text="t('obtain')"
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="float_left_box">
         <div class="leader_board_box" @click="jump('leader')">
