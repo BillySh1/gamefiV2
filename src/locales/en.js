@@ -24,6 +24,7 @@ export default {
   myTitle: "My Title",
   empty: "Empty Data",
   search: "Search",
+  search_placeholder:'Please enter name to search',
   emptyTitle: "Empty Title",
   market: "Market",
   exchange: "Bank",

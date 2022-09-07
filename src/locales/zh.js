@@ -18,6 +18,7 @@ export default {
   mintDetail2: "卡牌的共有五种职业，盾，战，谋，刺，辅，每种职业的特性不尽相同",
   airdrop: "空投",
   search: "搜索",
+  search_placeholder: "请输入英雄名称搜索",
   pack: "背包",
   myPack: "我的背包",
   myTitle: "我的称号",

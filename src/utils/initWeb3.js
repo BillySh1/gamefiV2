@@ -7,7 +7,8 @@ export default {
       this.provider = window.web3.currentProvider;
     } else {
       this.provider = new Web3.providers.HttpProvider(
-        "https://data-seed-prebsc-1-s1.binance.org:8545"
+        // "https://data-seed-prebsc-1-s1.binance.org:8545"
+        "https://bsc-dataseed1.binance.org/"
       );
     }
     const web3 = new Web3(this.provider);

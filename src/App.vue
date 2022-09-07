@@ -49,7 +49,7 @@ import initWeb3 from "./utils/initWeb3";
 import GlobalLoading from "./components/global_loading.vue";
 import ConnectWalletModal from "./components/connect_wallet_modal.vue";
 import AudioBox from "./components/audio.vue";
-const acceptNetWorks = [97];
+const acceptNetWorks = [56];
 export default {
   name: "app",
   components: {

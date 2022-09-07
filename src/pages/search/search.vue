@@ -57,7 +57,7 @@
       <div class="search_box">
         <input
           class="input"
-          placeholder="请输入英雄名称搜索"
+          :placeholder="$t('search_placeholder')"
           v-model="value"
           @keyup.enter="onSearch"
           type="text"
