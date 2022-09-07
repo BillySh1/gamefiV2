@@ -1,3 +1,6 @@
+import i18n from "../i18n";
+
+const t = i18n.global.t;
 const heroMap = {
   "040": {
     name: "曹操",
@@ -14,7 +17,7 @@ const heroMap = {
     avatar: require("../assets/avatar/0/030.jpg"),
   },
   "031": {
-    name: "典韦",
+    name: t("draw"),
     img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/0/031.png",
     intro:
       "典韦（2世纪－197年），陈留己吾（今河南宁陵县黄岗乡己吾城村）人，东汉末年群雄曹操麾下侍卫武将，因保护曹操而战死。小说《三国演义》中称典韦为“古之恶来”。",
@@ -144,7 +147,7 @@ const heroMap = {
     img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/1/133.png",
     intro:
       "赵云（2世纪－229年），字子龙，是中国三国时期的蜀汉武将，生于常山真定（今河北省正定县），身高八尺，姿颜雄伟。初从公孙瓒，后归刘备、刘禅。历任牙门将军，偏将军、领桂阳太守，翊军将军，领中护军、征南将军，封永昌亭侯，镇东将军。",
-    avatar: require('../assets/avatar/1/133.jpg')
+    avatar: require("../assets/avatar/1/133.jpg"),
   },
   120: {
     name: "黄忠",

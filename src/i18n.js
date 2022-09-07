@@ -9,7 +9,7 @@ import { createI18n } from "vue-i18n";
 import zh from "./locales/zh";
 import en from "./locales/en";
 
-export default createI18n({
+const i18n = createI18n({
   globalInjection: true,
   legacy: false,
   locale: localStorage.getItem("language") || "en",
@@ -19,3 +19,5 @@ export default createI18n({
     en,
   },
 });
+
+export default i18n;

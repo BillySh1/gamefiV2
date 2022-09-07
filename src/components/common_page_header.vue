@@ -67,6 +67,7 @@ import initWeb3 from "../utils/initWeb3";
 import { useStore } from "vuex";
 import { getCurrentInstance } from "vue";
 import { useI18n } from "vue-i18n";
+import i18n from '../i18n'
 export default {
   name: "common_page_header",
   props: ["title"],
@@ -75,7 +76,6 @@ export default {
   },
   setup() {
     const { proxy } = getCurrentInstance();
-    const { locale } = useI18n();
     const { t } = useI18n({
       inheritLocale: true,
       useScope: "local",
@@ -184,11 +184,11 @@ export default {
     const switchLang = () => {
       if (data.curLang == "en") {
         data.curLang = "zh";
-        locale.value = "zh";
+        i18n.global.locale.value = "zh";
         localStorage.setItem("lang", "zh");
       } else {
         data.curLang = "en";
-        locale.value = "en";
+        i18n.global.locale.value = "en";
         localStorage.setItem("lang", "en");
       }
 
