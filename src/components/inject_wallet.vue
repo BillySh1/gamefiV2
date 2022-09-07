@@ -6,47 +6,29 @@
     <div class="wallet_address">
       {{ walletValue }}
       <div class="drop_down">
-        <div class="item" @click="$emit('exit')">{{$t('disconnect')}}</div>
+        <div class="item" @click="$emit('exit')">{{ $t("disconnect") }}</div>
         <div class="item" @click="controlAudio">{{ audioText }}</div>
         <div class="item" @click="jump2Swap">MemorySwap ></div>
-        <div class="item" @click="switchLang">
-          {{ curLang == "en" ? "简体中文" : "English" }}
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script >
-import {
-  reactive,
-  toRefs,
-  onBeforeMount,
-  computed,
-  getCurrentInstance,
-} from "vue";
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
 import initWeb3 from "../utils/initWeb3.js";
-import { useStore } from "vuex";
-import { useI18n } from "vue-i18n";
 export default {
   name: "inject_wallet",
   setup() {
-    const { proxy } = getCurrentInstance();
-    const { locale } = useI18n();
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
-    const store = useStore();
     const data = reactive({
       wallet: "连接钱包",
       web3: "",
       type: "",
       curLang: "en",
     });
-    const jump2Swap = ()=>{
-      window.open('http://www.mdaoswap.xyz','_blank')
-    }
+    const jump2Swap = () => {
+      window.open("http://www.mdaoswap.xyz", "_blank");
+    };
     const walletValue = computed(() => {
       const wallet = data.wallet;
       let res = wallet;
@@ -59,19 +41,7 @@ export default {
       }
       return "连接钱包";
     });
-    const switchLang = () => {
-      if (data.curLang == "en") {
-        data.curLang = "zh";
-        locale.value = "zh";
-        localStorage.setItem("lang", "zh");
-      } else {
-        data.curLang = "en";
-        locale.value = "en";
-        localStorage.setItem("lang", "en");
-      }
 
-      proxy.$toast(t("common_tip_success"), store.state.toast_success);
-    };
     const controlAudio = () => {
       const item = document.querySelector("audio");
       if (data.type) {
@@ -115,7 +85,6 @@ export default {
       ...refData,
       walletValue,
       audioText,
-      switchLang,
       watchAcc,
       controlAudio,
       jump2Swap,

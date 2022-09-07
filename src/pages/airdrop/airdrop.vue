@@ -11,17 +11,18 @@
       <div v-if="quality" class="main">
         <Lottie :options="lottie_options" />
       </div>
-      <div v-else class="empty">{{t('airdrop_no_valid')}}</div>
+      <div v-else class="empty">{{ t("airdrop_no_valid") }}</div>
     </div>
     <CommonPageFooter />
   </div>
 </template>
 
 <script >
-import { reactive, toRefs, computed } from "vue";
+import { reactive, toRefs, computed, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import initWeb3 from "../../utils/initWeb3";
 import { useI18n } from "vue-i18n";
 export default {
   name: "store",
@@ -31,14 +32,28 @@ export default {
     InjectGoBack,
   },
   setup() {
-     const { t } = useI18n({
+    const { t } = useI18n({
       inheritLocale: true,
       useScope: "local",
     });
-    const data = reactive({
-      pageTitle: t('airdrop_space'),
 
+    const data = reactive({
+      pageTitle: t("airdrop_space"),
       quality: false,
+      account: "",
+      web3: "",
+    });
+    onBeforeMount(async () => {
+      data.loading = true;
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      data.loading = false;
     });
     const lottie_options = computed(() => {
       return {

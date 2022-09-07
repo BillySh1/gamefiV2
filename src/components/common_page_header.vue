@@ -45,6 +45,7 @@
         alt=""
       />
       <img
+        @click="switchLang"
         class="icon"
         src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/lang.svg"
         alt=""
@@ -64,6 +65,8 @@ import { reactive, toRefs, computed, onBeforeMount } from "vue";
 import InjectWallet from "./inject_wallet.vue";
 import initWeb3 from "../utils/initWeb3";
 import { useStore } from "vuex";
+import { getCurrentInstance } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "common_page_header",
   props: ["title"],
@@ -71,6 +74,12 @@ export default {
     InjectWallet,
   },
   setup() {
+    const { proxy } = getCurrentInstance();
+    const { locale } = useI18n();
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     const store = useStore();
     const data = reactive({
       account: "",
@@ -172,10 +181,24 @@ export default {
         .balanceOf(data.account, 11)
         .call();
     };
+    const switchLang = () => {
+      if (data.curLang == "en") {
+        data.curLang = "zh";
+        locale.value = "zh";
+        localStorage.setItem("lang", "zh");
+      } else {
+        data.curLang = "en";
+        locale.value = "en";
+        localStorage.setItem("lang", "en");
+      }
+
+      proxy.$toast(t("common_tip_success"), store.state.toast_success);
+    };
     const refData = toRefs(data);
     return {
       ...refData,
       exitFullScreen,
+      switchLang,
       isMobile,
       getScreenAciton,
     };
