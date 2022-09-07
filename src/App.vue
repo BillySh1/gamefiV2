@@ -98,8 +98,8 @@ export default {
       }
     },
     switchNetWork() {
-      const tp = require("tp-js-sdk");
-      tp.close();
+      // const tp = require("tp-js-sdk");
+      // tp.close();
     },
     async judge() {
       let chainId;

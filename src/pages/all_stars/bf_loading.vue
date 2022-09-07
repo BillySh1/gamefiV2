@@ -57,8 +57,8 @@ export default {
       return false;
     });
     const close = () => {
-      const tp = require("tp-js-sdk");
-      tp.close();
+      // const tp = require("tp-js-sdk");
+      // tp.close();
     };
     const loadComplete = () => {
       ctx.emit("finish");

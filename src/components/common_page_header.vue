@@ -131,21 +131,21 @@ export default {
         : "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/fullScreen.png";
     });
     const exitFullScreen = () => {
-      const tp = require("tp-js-sdk");
-      const isF = sessionStorage.getItem("fullScreen");
-      if (isF == 1) {
-        tp.fullScreen({
-          fullScreen: 0,
-        });
-        sessionStorage.setItem("fullScreen", "0");
-        data.isFull = false;
-      } else {
-        tp.fullScreen({
-          fullScreen: 1,
-        });
-        sessionStorage.setItem("fullScreen", "1");
-        data.isFull = true;
-      }
+      // const tp = require("tp-js-sdk");
+      // const isF = sessionStorage.getItem("fullScreen");
+      // if (isF == 1) {
+      //   tp.fullScreen({
+      //     fullScreen: 0,
+      //   });
+      //   sessionStorage.setItem("fullScreen", "0");
+      //   data.isFull = false;
+      // } else {
+      //   tp.fullScreen({
+      //     fullScreen: 1,
+      //   });
+      //   sessionStorage.setItem("fullScreen", "1");
+      //   data.isFull = true;
+      // }
     };
     onBeforeMount(async () => {
       await initWeb3.Init(
