@@ -13,9 +13,9 @@
       <div v-if="quality" class="main">
         <Lottie class="airdrop_box" :options="lottie_options" />
         <div class="claim_btn_box">
-          <CommonButton :disabled="true" class="btn"> Cliam </CommonButton>
+          <CommonButton :disabled="true" class="btn"> Claim </CommonButton>
           <CommonButton @click="Claim" class="btn">
-            Special Cliam
+            Special Claim
           </CommonButton>
         </div>
       </div>
@@ -127,7 +127,7 @@ export default {
           proxy.$toast(t("common_tip_success"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(t("common_tip_failed"), store.state.toast_error);
+        proxy.$toast(t("common_tip_error"), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
