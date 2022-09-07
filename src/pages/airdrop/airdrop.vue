@@ -109,14 +109,13 @@ export default {
       try {
         proxy.$toast(t("waiting..."), store.state.toast_info);
         const c = store.state.c_airdrop;
-
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .claimSpecialAirDrop()
           .estimateGas({ from: data.account });
         data.loading = true;
         const res = await c.methods.claimSpecialAirDrop().send({
-          gas: gas,
+          gas: gas + 200000,
           gasPrice: gasPrice,
           from: data.account,
         });
