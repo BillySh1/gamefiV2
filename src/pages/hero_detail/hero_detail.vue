@@ -129,7 +129,7 @@
       </div>
       <div class="action_box">
         <div
-          class="action_item"
+          class="action_item disable"
           @click="
             $router.push({
               name: 'sell',
@@ -146,7 +146,7 @@
           <div class="text">{{ t("sell") }}</div>
         </div>
         <div
-          class="action_item"
+          class="action_item disable"
           @click="
             () =>
               $router.push({
@@ -322,6 +322,11 @@ export default {
   height: 100%;
   background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/hero_detail/hero_detail_bg.png");
   background-size: cover;
+  .disable {
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(100);
+  }
   .bg_badge {
     position: absolute;
     width: 100%;
@@ -416,9 +421,7 @@ export default {
                 max-height: 8rem;
                 display: flex;
                 align-items: center;
-                .disable {
-                  filter: grayscale(100);
-                }
+
                 img {
                   width: 2rem;
                   margin-right: 1rem;

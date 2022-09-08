@@ -27,7 +27,7 @@
       <div
         v-for="item in menuList"
         :key="item.key"
-        class="menu_item"
+        :class="item.disable ? 'menu_item disable' : 'menu_item'"
         @click="() => $router.push({ name: item.href })"
       >
         <img class="img" :src="item.img" alt="" />
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="call" @click="() => $router.push({ name: 'mint' })">
+    <div class="call disable" @click="() => $router.push({ name: 'mint' })">
       <div class="common_call">
         <img
           :src="
@@ -72,30 +72,35 @@ export default {
         img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/market.png",
         href: "market",
         text: t("market"),
+        disable: true,
       },
       {
         key: "exchange",
         img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/exchange.png",
         href: "exchange",
         text: t("exchange"),
+        disable: true,
       },
       {
         key: "store",
         img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/store.png",
         href: "store",
         text: t("store"),
+        disable: true,
       },
       {
         key: "reborn",
         img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/reborn.png",
         href: "reborn",
         text: t("reborn"),
+        disable: true,
       },
       {
         key: "mix",
         img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mix.png",
         href: "mix",
         text: t("mix"),
+        disable: true,
       },
     ]);
     const data = reactive({});
@@ -138,6 +143,11 @@ export default {
     1;
   border-top: 1px solid;
   z-index: 100;
+  .disable {
+    user-select: none;
+    pointer-events: none;
+    filter: grayscale();
+  }
 }
 .back_to_home {
   cursor: pointer;
@@ -195,7 +205,7 @@ export default {
   border-image-slice: 1;
   transform: skewX(-15deg);
   padding: 0 4rem;
-
+ 
   .menu_item {
     &:hover {
       opacity: 0.6;

@@ -28,7 +28,7 @@
             alt=""
           />
           <div class="inner" @click="() => (modalShow = true)">
-            Connect Wallet
+            Connect
           </div>
         </div>
         <div class="btn" v-show="isMobile && !correctChainId && connected">

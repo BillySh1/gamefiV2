@@ -12,14 +12,14 @@
               :text="t('airdrop')"
             />
           </div>
-          <div class="float_item">
+          <!-- <div class="float_item">
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
                 :src="'http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/invite.png'"
                 :text="t('invite')"
               />
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="flex">
           <div class="float_item" @click="jump('obtain')">
@@ -155,7 +155,7 @@ export default {
 }
 .float_right_box {
   position: absolute;
-  right: 1rem;
+  right: 2rem;
   top: 6rem;
   display: flex;
   flex-direction: column;
