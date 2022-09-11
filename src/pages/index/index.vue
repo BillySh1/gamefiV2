@@ -211,6 +211,7 @@ export default {
       transform: translateX(2rem);
       white-space: nowrap;
       width: 16rem;
+      height: auto;
     }
     .middle {
       user-select: none;
@@ -223,6 +224,7 @@ export default {
       position: relative;
       transform: translateY(-2.5rem);
       width: 22rem;
+      height: auto;
     }
     .right {
       user-select: none;
@@ -231,6 +233,7 @@ export default {
       position: relative;
       transform: translateX(-1.4rem);
       width: 18rem;
+      height: auto;
     }
   }
 }

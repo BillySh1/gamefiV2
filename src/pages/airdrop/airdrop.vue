@@ -10,7 +10,7 @@
     <Lottie v-if="loading" :options="loading_options" />
 
     <div v-else class="content">
-      <div v-if="quality" class="main">
+      <div v-if="!quality" class="main">
         <Lottie class="airdrop_box" :options="lottie_options" />
         <div class="claim_btn_box">
           <CommonButton :disabled="true" class="btn"> Claim </CommonButton>
@@ -179,7 +179,7 @@ export default {
   align-items: center;
   justify-content: center;
   .airdrop_box {
-    width: 50% !important;
+    width: 20rem !important;
   }
   .claim_btn_box {
     position: absolute;
