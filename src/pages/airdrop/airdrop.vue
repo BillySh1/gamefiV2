@@ -10,7 +10,7 @@
     <Lottie v-if="loading" :options="loading_options" />
 
     <div v-else class="content">
-      <div v-if="!quality" class="main">
+      <div v-if="quality" class="main">
         <Lottie class="airdrop_box" :options="lottie_options" />
         <div class="claim_btn_box">
           <CommonButton :disabled="true" class="btn"> Claim </CommonButton>
@@ -111,10 +111,10 @@ export default {
         const c = store.state.c_airdrop;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .claimSpecialAirDrop()
+          .claimNormalAirDrop()
           .estimateGas({ from: data.account });
         data.loading = true;
-        const res = await c.methods.claimSpecialAirDrop().send({
+        const res = await c.methods.claimNormalAirDrop().send({
           gas: gas + 200000,
           gasPrice: gasPrice,
           from: data.account,

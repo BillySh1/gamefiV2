@@ -27,7 +27,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.2.2 Siege",
+      version: "1.2.3 Airdrop beta",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;

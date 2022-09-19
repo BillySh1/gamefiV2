@@ -28,7 +28,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.2.1 攻城略地",
+      version: "1.2.3 Airdrop beta",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
