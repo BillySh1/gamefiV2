@@ -2,7 +2,7 @@
   <div class="stake_item">
     <div v-if="!info || !info.tokenId" class="empty">
       <img
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/add.png"
+        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/add.png"
         alt=""
       />
     </div>
@@ -43,7 +43,7 @@ export default {
   position: relative;
   width: 100%;
   height: 90%;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_item_bg.png")
+  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_item_bg.png")
     no-repeat;
   background-size: 100% 100%;
   .empty {

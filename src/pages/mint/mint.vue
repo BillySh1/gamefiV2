@@ -49,7 +49,7 @@
           <div class="price_box" v-show="activeIndex == item.key">
             <img
               class="price_icon"
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
               alt=""
             />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
@@ -92,10 +92,10 @@ export default {
       blindBoxes: [
         {
           key: 0,
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_0.png",
+          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_0.png",
           price: 5000,
           title: t("drawQuality1"),
-          bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type0_bg.png",
+          bg: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type0_bg.png",
           maxWidth: 180,
           maxHeight: 344,
           offsetX: "-45%",
@@ -103,10 +103,10 @@ export default {
         },
         {
           key: 1,
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_1.png",
+          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_1.png",
           price: 10000,
           title: t("drawQuality2"),
-          bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type1_bg.png",
+          bg: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type1_bg.png",
           maxWidth: 430,
           maxHeight: 157,
           offsetX: "-50%",
@@ -114,10 +114,10 @@ export default {
         },
         {
           key: 2,
-          img: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_2.png",
+          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type_2.png",
           price: 30000,
           title: t("drawQuality1"),
-          bg: "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type2_bg.png",
+          bg: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/type2_bg.png",
           maxWidth: 311,
           maxHeight: 337,
           offsetX: "-60%",

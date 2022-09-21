@@ -16,7 +16,7 @@
         </div>
         <div class="btn" @click="copy">
           <img
-            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/button_round.png"
+            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/button_round.png"
             alt=""
           />
           <div class="text">{{ t("copy") }}</div>

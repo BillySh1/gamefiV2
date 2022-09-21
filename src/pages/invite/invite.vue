@@ -10,13 +10,13 @@
     <div class="content">
       <img
         class="bg_badge"
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
         alt=""
       />
       <div class="invite_box">
         <div class="up">
           <img
-            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/up_bg.png"
+            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/up_bg.png"
             alt=""
           />
           <div
@@ -30,7 +30,7 @@
           >
             <div class="item title">
               <img
-                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg"
+                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/1.svg"
                 alt=""
               />
               {{ t("my_income") }}
@@ -53,12 +53,12 @@
             @click="() => $router.push({ name: 'inviteBoard' })"
           >
             <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_1.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_1.png"
               alt=""
             />
             <div class="inner">
               <img
-                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/2.svg"
+                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/2.svg"
                 alt=""
               />
               {{ t("invite_board") }}
@@ -66,12 +66,12 @@
           </div>
           <div class="item" @click="() => (showRules = true)">
             <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_2.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_2.png"
               alt=""
             />
             <div class="inner">
               <img
-                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/3.svg"
+                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/3.svg"
                 alt=""
               />
               {{ t("invite_rule") }}
@@ -79,12 +79,12 @@
           </div>
           <div class="item" @click="generate">
             <img
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_3.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/item_3.png"
               alt=""
             />
             <div class="inner">
               <img
-                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/4.svg"
+                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/invite/icons/4.svg"
                 alt=""
               />
               {{ t("generate_invite") }}

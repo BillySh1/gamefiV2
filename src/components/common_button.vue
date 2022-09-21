@@ -13,7 +13,7 @@ export default {
     const btn = ref(null);
     onMounted(() => {
       if (prop.circle) {
-        btn.value.style.background = `url(http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/circle_btn.png) no-repeat`;
+        btn.value.style.background = `url(https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/circle_btn.png) no-repeat`;
         btn.value.style.backgroundSize = "100% 100%";
       }
     });
@@ -32,7 +32,7 @@ export default {
   position: relative;
   width: fit-content;
   padding: 0.5rem 1rem;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
     no-repeat;
   background-size: 100% 100%;
   font-size: 1.2rem;

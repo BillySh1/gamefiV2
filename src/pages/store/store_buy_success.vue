@@ -3,7 +3,7 @@
     <InjectGoBack />
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
-      <img class="bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/success_bg.png" alt="" />
+      <img class="bg" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/success_bg.png" alt="" />
       <img class="item" :src="info.img" alt="" />
       <div class="text">
         数量: {{ num }} <br />

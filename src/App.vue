@@ -11,7 +11,7 @@
   <div class="mask black" v-if="(!connected || !correctChainId) && !loading">
     <img
       class="badge"
-      src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
+      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
       alt=""
     />
     <div class="logo">
@@ -24,7 +24,7 @@
 
         <div class="btn" v-show="!connected">
           <img
-            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
             alt=""
           />
           <div class="inner" @click="() => (modalShow = true)">
@@ -33,7 +33,7 @@
         </div>
         <div class="btn" v-show="isMobile && !correctChainId && connected">
           <img
-            src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/btn_bg.png"
             alt=""
           />
 

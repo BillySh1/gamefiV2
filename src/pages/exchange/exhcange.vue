@@ -25,7 +25,7 @@
           <div class="item">
             <img
               class="icon"
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png"
             />
             <span class="name">{{ t("coin") }}</span>
             <span>{{ m3t_balance }}</span>
@@ -33,7 +33,7 @@
           <div class="item">
             <img
               class="icon"
-              src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
+              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
             />
             <span class="name">USDT</span>
             <span>{{ usdt_balance }}</span>
@@ -43,7 +43,7 @@
           <div class="buy_num">
             <div class="icon">
               <img
-                src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
+                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/usdt.png"
               />
             </div>
             <input
@@ -222,7 +222,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/ex_bg.png")
+  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/ex_bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

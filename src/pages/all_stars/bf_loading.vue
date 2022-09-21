@@ -3,7 +3,7 @@
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
     <div class="p_content">
       <img
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/loading_logo.png"
+        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/all_stars/entry/loading_logo.png"
       />
       <div class="text">
         {{ progressText }}
@@ -78,7 +78,7 @@ export default {
         .context("../../allstar_assets/", true, /\.svg$/)
         .keys();
       const prefix =
-        "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
+        "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
       files.map((i) => {
         const _relativePath = path.join("allstar_assets", i);
         // const file = require(`../${_relativePath}`);

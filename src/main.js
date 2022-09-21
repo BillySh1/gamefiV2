@@ -33,7 +33,7 @@ const _app = createApp(App).use(i18n)
 _app.config.globalProperties.$toast = createToast;
 _app.config.globalProperties.resolveAssets = (path) => {
   const ipfs_host =
-    "http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
+    "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/";
   return ipfs_host + path;
 };
 _app.component("Lottie", lottie);

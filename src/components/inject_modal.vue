@@ -10,7 +10,7 @@
     >
       <img
         class="close"
-        src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/close.svg"
+        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/close.svg"
         alt=""
         @click="(e)=>{
           e.stopPropagation()
@@ -18,7 +18,7 @@
         }"
       />
 
-      <img class="bg" src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_bg.png" alt="" />
+      <img class="bg" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>
       <div class="content">
         <slot></slot>
@@ -28,7 +28,7 @@
         @click="$emit('confirm')"
       >
         <div class="confirm_inner">
-          <img src="http://118.195.233.125:8080/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_confirm_bg.svg" alt="" />
+          <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_confirm_bg.svg" alt="" />
           <div class="text">{{ btnText || $t('confirm') }}</div>
         </div>
       </div>
