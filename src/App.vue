@@ -20,7 +20,7 @@
 
       <div class="text">
         <div v-show="!connected">Please connect your wallet first</div>
-        <div v-show="!correctChainId && connected">Network Error</div>
+        <div v-show="!correctChainId && connected">Wrong Network</div>
 
         <div class="btn" v-show="!connected">
           <img
@@ -104,7 +104,7 @@ export default {
     async judge() {
       let chainId;
       if (window.ethereum) {
-        chainId = parseInt(window.ethereum.chainId, 16);
+        chainId = window.ethereum.chainId || window.ethereum.eth_chainId();
       } else {
         chainId = await this.Web3.eth.getChainId();
       }
