@@ -2,12 +2,12 @@
   <div v-if="value" class="container" @click="() => $emit('close')">
     <img
       class="badge"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/hero_sit.png"
       alt=""
     />
     <img
       class="light"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/success_bg.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/success_bg.png"
       alt=""
     />
     <div

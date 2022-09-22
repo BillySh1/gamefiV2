@@ -30,7 +30,7 @@
       <div class="bg_badge">
         <img
           class="badge"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/bg_badge.svg"
           alt=""
         />
       </div>
@@ -67,17 +67,17 @@ export default {
         {
           key: 0,
           name: t("hero"),
-          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/0.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/0.png",
         },
         {
           key: 1,
           name: t("equipment"),
-          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/1.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/1.png",
         },
         {
           key: 2,
           name: t("treasure"),
-          img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/2.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/2.png",
         },
       ],
       curShowType: undefined,
@@ -115,7 +115,7 @@ export default {
   background: #280505;
 }
 .hero_pack {
-  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_hero_bg.svg")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/pack_hero_bg.svg")
     no-repeat;
   background-size: cover;
 }

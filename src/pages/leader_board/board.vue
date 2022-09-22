@@ -5,7 +5,7 @@
     <div class="content">
       <div class="border">
         <img
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/notice/border.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/notice/border.svg"
           alt=""
         />
         <div class="inner">

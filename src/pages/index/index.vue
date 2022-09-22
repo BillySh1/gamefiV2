@@ -8,14 +8,14 @@
         <div class="flex">
           <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
-              :src="'https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/airdrop.png'"
+              :src="'https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/airdrop.png'"
               :text="t('airdrop')"
             />
           </div>
           <!-- <div class="float_item">
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
-                :src="'https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/invite.png'"
+                :src="'https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/invite.png'"
                 :text="t('invite')"
               />
             </div>
@@ -33,7 +33,7 @@
       <div class="float_left_box">
         <div class="leader_board_box" @click="jump('leader')">
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/Leader_board.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/Leader_board.svg"
             alt=""
           />
           <div class="leader_board_text">{{ t("board") }}</div>

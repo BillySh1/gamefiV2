@@ -118,7 +118,7 @@
           "
         >
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/stake_btn_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/stake/stake_btn_bg.png"
             alt=""
           />
           <div class="text">{{ btnStatus == 1 ? "出征" : "授权" }}</div>

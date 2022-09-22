@@ -4,7 +4,7 @@
     <InjectGoBack v-if="!loading" />
     <img
       class="badge"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/mint_detail_bg_badge.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/mint_detail_bg_badge.png"
       alt=""
     />
     <Lottie v-if="loading" :options="lottie_options" />
@@ -18,17 +18,17 @@
             class="img_c"
             :src="info.img"
           />
-          <img class="img_bg" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/buy_item_bg.png" />
+          <img class="img_bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/buy_item_bg.png" />
         </div>
       </div>
       <div class="right_c">
-        <img class="blood" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/blood.png" alt="" />
+        <img class="blood" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/blood.png" alt="" />
         <div class="right_c_title">
           <div class="right_c_title_value">
             {{ info.name }}
             <img
               class="right_c_title_badge"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/active_title.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/active_title.png"
             />
           </div>
           <div class="right_c_price">
@@ -36,8 +36,8 @@
               style="margin-right: 2rem"
               :src="
                 payment == 1
-                  ? 'https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/exchange/coin.png'
-                  : 'https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png'
+                  ? 'https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/exchange/coin.png'
+                  : 'https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/mmc.png'
               "
             />
             <span>{{ totalPrice }}</span>
@@ -52,7 +52,7 @@
             <img
               style="cursor: pointer"
               class="img_action"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/minus.svg"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/minus.svg"
               @click="
                 () => {
                   const temp = buyValue - 1;
@@ -65,7 +65,7 @@
               "
             />
             <div class="ipt_bg">
-              <img class="ipt_img" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png" alt="" />
+              <img class="ipt_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/input.png" alt="" />
               <input
                 v-model="buyValue"
                 class="input"
@@ -77,7 +77,7 @@
             <img
               class="img_action"
               style="cursor: pointer"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/add.svg"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/add.svg"
               @click="
                 () => {
                   buyValue += 1;
@@ -87,7 +87,7 @@
           </div>
 
           <div class="right_c_btn" @click="btnClick">
-            <img class="btn_img" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png" alt="" />
+            <img class="btn_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/btn.png" alt="" />
             <div class="richt_c_btn_value">{{ btnText }}</div>
           </div>
         </div>

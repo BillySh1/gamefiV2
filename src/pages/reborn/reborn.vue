@@ -62,7 +62,7 @@
       <div class="tip_badge" @click="() => (showRules = true)">
         <div class="inner">
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/tip_badge.svg"
           />
           <div class="text">{{ $t("rebornTips") }}</div>
         </div>
@@ -104,13 +104,13 @@
         <div class="main">
           <div class="item">
             <img
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/type_1_0.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/item/type_1_0.png"
               alt=""
             />
           </div>
           <div class="middle">
             <img
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/upgrade/right.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/upgrade/right.png"
               alt=""
             />
           </div>

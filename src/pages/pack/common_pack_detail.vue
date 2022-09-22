@@ -1,11 +1,11 @@
 <template>
   <div v-if="value" class="detail_container">
-    <img class="bg" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_container.svg" alt="" />
+    <img class="bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/pack_container.svg" alt="" />
 
     <div class="inner">
       <div class="inner_box">
         <div class="detail_back" @click="$emit('back')">
-          <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_back.svg" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/pack_back.svg" alt="" />
         </div>
         <div class="tab_box">
           <div
@@ -17,13 +17,13 @@
             <img
               class="active"
               v-show="item.key == curTab"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab_item.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/active_tab_item.png"
               alt=""
             />
             <img
               class="in_active"
               v-show="item.key != curTab"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/common_tab_item.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/common_tab_item.png"
               alt=""
             />
             <div>
@@ -50,7 +50,7 @@
               "
               :style="curItemIndex == index ? 'opacity:1' : ''"
             >
-              <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/common_pack_item_bg.svg" alt="" />
+              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/common_pack_item_bg.svg" alt="" />
               <div class="inner_item_zone">
                 <CommonPackItem :info="item" />
               </div>
@@ -62,7 +62,7 @@
           <div class="inner">
             <div class="up">
               <div class="left">
-                <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/detail_stock_box.png" alt="" />
+                <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/detail_stock_box.png" alt="" />
                 <img
                   v-if="curItemShow"
                   class="content"

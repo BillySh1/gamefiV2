@@ -28,7 +28,7 @@
           您将使用
           <img
             style="width: 4rem"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/item/jinjie.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/item/jinjie.png"
             alt=""
           />
           并尊盟约 x {{ costNum }} 对 {{ leftInfo.name }}和
@@ -82,7 +82,7 @@
         >
           <img
             v-if="!qualityCost"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/item_add.png"
             alt=""
           />
           <div v-else>
@@ -114,7 +114,7 @@
         >
           <img
             v-if="!attrCost"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_add.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/item_add.png"
             alt=""
           />
           <div v-else>
@@ -147,14 +147,14 @@
       />
       <img
         class="mix_mist"
-        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/mix_mist.png"
         alt=""
       />
     </div>
     <div v-if="!showPack && !loading" class="content">
       <img
         class="mix_mist"
-        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_mist.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/mix_mist.png"
         alt=""
       />
       <div class="inner">
@@ -170,7 +170,7 @@
         >
           <img
             class="mix_item_bg"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/mix_item.png"
             alt=""
           />
           <div class="hero_selected" v-if="leftInfo">
@@ -179,14 +179,14 @@
           <img
             v-if="leftInfo"
             class="ready"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
         </div>
         <div class="mix_swirl">
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/swirl.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/swirl.png"
             alt=""
           />
         </div>
@@ -202,7 +202,7 @@
         >
           <img
             class="mix_item_bg"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/mix_item.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/mix_item.png"
             alt=""
           />
           <div class="hero_selected" v-if="rightInfo">
@@ -211,7 +211,7 @@
           <img
             v-if="rightInfo"
             class="ready"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/ready.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
@@ -220,7 +220,7 @@
       <div class="tip_badge" @click="() => (showModal = true)">
         <div class="inner">
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/tip_badge.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/tip_badge.svg"
           />
           <div class="text">进阶提醒</div>
         </div>
@@ -685,7 +685,7 @@ export default {
         cursor: pointer;
         width: 5rem;
         height: 5rem;
-        background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mix/item_bg.png")
+        background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mix/item_bg.png")
           no-repeat;
         background-size: 100% 100%;
         margin: 0 1rem;

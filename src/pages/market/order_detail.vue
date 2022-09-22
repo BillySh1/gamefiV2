@@ -23,7 +23,7 @@
           <div class="right_c_title_value">
             <div class="name_zone">
               <img
-                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/order/name_divider.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/market/order/name_divider.png"
                 alt=""
               />
               <div class="inner">
@@ -32,7 +32,7 @@
             </div>
             <div class="price_zone">
               <img
-                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/mmc.png"
                 alt=""
               />
               {{ getPrice }}
@@ -49,7 +49,7 @@
           <div class="right_c_btn" @click="btnClick">
             <img
               class="btn_img"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/btn.png"
               alt=""
             />
             <div class="richt_c_btn_value">{{ btnText }}</div>
@@ -314,7 +314,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/market/bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/market/bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

@@ -2,13 +2,13 @@
   <div class="events_mask" v-if="value" @click="() => $emit('close')">
     <img
       style="width: 100%"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/light_bg.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/light_bg.png"
       alt=""
     />
     <img
       @click="() => $emit('close')"
       class="close"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/close.svg"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/close.svg"
       alt=""
     />
     <div
@@ -21,7 +21,7 @@
     >
       <div class="inner">
         <img
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/stake/road/scroll_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/stake/road/scroll_bg.png"
           alt=""
         />
         <div class="main">
@@ -34,7 +34,7 @@
     <div class="confirm" @click="onConfirm">
       <div class="inner">
         <img
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/popups/confirm_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/confirm_bg.png"
           alt=""
         />
         <div class="text">确认</div>

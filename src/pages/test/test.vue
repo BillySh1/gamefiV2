@@ -1,8 +1,8 @@
 <template>
   <div v-if="!loading" class="box">
     <InjectGoBack />
-    <img class="badge" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png" alt="" />
-    <img class="logo" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png" alt="" />
+    <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/hero_sit.png" alt="" />
+    <img class="logo" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/logo.png" alt="" />
     <div v-if="!canMDAO && !canM3t" class="text">您暂无领取资格或者已领取</div>
     <div v-else class="btnBox">
       <CommonButton class="btn" @click="() => getTestToken(1)" v-if="canMDAO"
@@ -14,8 +14,8 @@
     </div>
   </div>
   <div v-else class="box">
-    <img class="badge" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/hero_sit.png" alt="" />
-    <img class="logo" src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/logo.png" alt="" />
+    <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/hero_sit.png" alt="" />
+    <img class="logo" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/logo.png" alt="" />
     <Lottie
       :options="{ animationData: require('../../assets/common/loading.json') }"
     />

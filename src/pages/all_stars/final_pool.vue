@@ -12,7 +12,7 @@
     >
       <div class="inner">
         <img
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/main/to_final.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/main/to_final.png"
           alt=""
         />
         <div class="text">回到地图</div>
@@ -25,7 +25,7 @@
         <div>{{ totalAmount }} MDAO</div>
         <img
           style="height: 8rem"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/final/gold.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/final/gold.png"
           alt=""
         />
       </div>
@@ -118,7 +118,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/allstar_assets/final/bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/final/bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

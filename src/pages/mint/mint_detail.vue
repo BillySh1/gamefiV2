@@ -4,7 +4,7 @@
     <InjectGoBack v-if="!loading && !minting" />
     <img
       class="badge"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/mint_detail_bg_badge.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/mint_detail_bg_badge.png"
       alt=""
     />
     <div v-if="minting || loading" class="content">
@@ -37,7 +37,7 @@
       <div class="right_c">
         <img
           class="blood"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/blood.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/blood.png"
           alt=""
         />
         <div class="right_c_title">
@@ -45,13 +45,13 @@
             {{ info.title }}
             <img
               class="right_c_title_badge"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/active_title.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/active_title.png"
             />
           </div>
           <div class="right_c_price">
             <img
               style="margin-right: 2rem"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/mmc.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/mmc.png"
             />
             <span>{{ getprice }}</span>
           </div>
@@ -67,7 +67,7 @@
             <img
               style="cursor: pointer"
               class="img_action"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/minus.svg"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/minus.svg"
               @click="
                 () => {
                   const temp = buyValue - 1;
@@ -82,7 +82,7 @@
             <div class="ipt_bg">
               <img
                 class="ipt_img"
-                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/input.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/input.png"
                 alt=""
               />
               <input
@@ -96,7 +96,7 @@
             <img
               class="img_action"
               style="cursor: pointer"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/add.svg"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/add.svg"
               @click="
                 () => {
                   buyValue += 1;
@@ -108,7 +108,7 @@
           <div class="right_c_btn" @click="btnClick">
             <img
               class="btn_img"
-              src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/mint/btn.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/mint/btn.png"
               alt=""
             />
             <div class="richt_c_btn_value">{{ btnText }}</div>

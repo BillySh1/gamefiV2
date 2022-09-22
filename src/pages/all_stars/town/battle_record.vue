@@ -10,7 +10,7 @@
     >
       <img
         class="close"
-        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/close.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/close.svg"
         alt=""
         @click="
           (e) => {
@@ -22,7 +22,7 @@
 
       <img
         class="bg"
-        src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/modal_bg.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/modal_bg.png"
         alt=""
       />
       <div class="title">战斗日志</div>

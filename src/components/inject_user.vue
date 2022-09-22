@@ -4,7 +4,7 @@
       <div class="avatar_box">
         <img
           class="avatar"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/default_avatar.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/default_avatar.png"
           alt=""
         />
       </div>
@@ -12,7 +12,7 @@
         <div class="power_box">
           <img
             class="power_bg"
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/power_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/power_bg.png"
             alt=""
           />
           <div class="power_value">{{ $t("power") }} {{ power }}</div>
@@ -27,7 +27,7 @@
           "
         >
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/index/title_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/index/title_bg.png"
             alt=""
           />
           <div class="title_value">{{ $t("emptyTitle") }}</div>

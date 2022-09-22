@@ -17,7 +17,7 @@
       <div class="info_box">
         <img
           class="bg"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/detial_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/detial_bg.png"
           alt=""
         />
         <div class="inner">
@@ -76,7 +76,7 @@
                     <img
                       :class="item.active ? '' : 'disable'"
                       style="width: 2rem"
-                      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/bg/star.png"
+                      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/star.png"
                       alt=""
                     />
                   </div>
@@ -92,7 +92,7 @@
                   :key="index"
                 >
                   <img
-                    src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/ab_box.png"
+                    src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/ab_box.png"
                   />
                   <div class="text">{{ t("skill") }}</div>
                 </div>
@@ -106,7 +106,7 @@
                   :key="index"
                 >
                   <img
-                    :src="`https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/p_${index}.png`"
+                    :src="`https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/p_${index}.png`"
                     alt=""
                   />
                   <div class="title">{{ item.title }}</div>
@@ -117,7 +117,7 @@
               </div>
               <img
                 class="divider"
-                src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/divider.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/divider.png"
                 alt=""
               />
               <div class="attr_map">
@@ -140,7 +140,7 @@
           "
         >
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/yellow.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/yellow.png"
             alt=""
           />
           <div class="text">{{ t("sell") }}</div>
@@ -158,7 +158,7 @@
           "
         >
           <img
-            src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/blue.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/blue.png"
             alt=""
           />
           <div class="text">{{ t("upgrade") }}</div>
@@ -168,7 +168,7 @@
     <CommonPageFooter />
     <img
       class="bg_badge"
-      src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/bg_badge.svg"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/bg_badge.svg"
     />
   </div>
 </template>
@@ -320,7 +320,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/hero_detail/hero_detail_bg.png");
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/hero_detail/hero_detail_bg.png");
   background-size: cover;
   .disable {
     pointer-events: none;
@@ -388,7 +388,7 @@ export default {
             margin: 0.2rem 0;
           }
           .active_tab {
-            background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/active_tab.png")
+            background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/active_tab.png")
               no-repeat;
             background-size: 100% 100%;
           }

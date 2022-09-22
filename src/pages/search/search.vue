@@ -7,7 +7,7 @@
         <img
           @click="() => (showValue = false)"
           class="close"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/common/close.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/close.svg"
           alt=""
         />
         <div class="info">
@@ -26,7 +26,7 @@
               }
             "
           >
-            <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/left.png" alt="" />
+            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/left.png" alt="" />
           </div>
           <div class="empty" v-if="!curItems.length">暂无武将</div>
           <div
@@ -48,7 +48,7 @@
               }
             "
           >
-            <img src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/store/right.png" alt="" />
+            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/right.png" alt="" />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <img
           @click="onSearch()"
           style="width: 2rem"
-          src="https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/search.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/search.svg"
           alt=""
         />
       </div>
@@ -236,7 +236,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/pack/pack_hero_bg.svg") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/pack_hero_bg.svg") no-repeat;
   background-size: cover;
 }
 .res_inner {
