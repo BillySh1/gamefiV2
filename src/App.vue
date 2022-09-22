@@ -37,7 +37,7 @@
             alt=""
           />
 
-          <div class="inner" @click="switchNetWork">Switch Network</div>
+          <div class="inner" @click="switchNetWork">Switch</div>
         </div>
       </div>
     </div>
