@@ -103,8 +103,9 @@ export default {
     },
     async judge() {
       let chainId;
+    
       if (window.ethereum) {
-        chainId = window.ethereum.chainId || window.ethereum.eth_chainId();
+        chainId = parseInt(window.ethereum.chainId || window.ethereum.eth_chainId(),16);
       } else {
         chainId = await this.Web3.eth.getChainId();
       }
