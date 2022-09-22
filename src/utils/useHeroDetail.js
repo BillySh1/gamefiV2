@@ -177,18 +177,18 @@ const heroMap = {
     avatar: require("../assets/avatar/1/110.jpg"),
   },
   111: {
-    name: "关兴",
+    name: "曹植",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/1/111.png",
     intro:
-      "关兴是关羽之子，在关羽死后继承了汉寿亭侯的爵位。关兴年少时就有名声，风评颇高，诸葛亮对他十分器重。弱冠后，曾担任侍中、中监军，可惜数年后便死去。明神宗万历二十四年（公元1569年）封显忠王。",
+      "煮豆燃豆萁",
     avatar: require("../assets/avatar/1/111.jpg"),
   },
   112: {
-    name: "马良",
+    name: "何太后",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/1/112.png",
 
     intro:
-      "马良（187年－222年），字季常，荆州襄阳宜城（今湖北宜城）人，三国蜀汉时期是刘备的侍中；因在马氏兄弟五人中，眉中带白毛，能力也是最出色，所以有马氏五常，白眉最良的赞誉。",
+      "何太后。",
     avatar: require("../assets/avatar/1/112.jpg"),
   },
   113: {
@@ -199,14 +199,14 @@ const heroMap = {
     avatar: require("../assets/avatar/1/113.jpg"),
   },
   114: {
-    name: "杨仪",
+    name: "糜夫人",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/1/114.png",
     intro:
       "杨仪（2世纪－235年），字威公，襄阳人。三国时蜀汉文臣，北伐时期诸葛亮部属。虽才干敏达，但心胸狭隘，诸葛亮殁后，成功除掉政敌魏延，后因升迁受阻而心怀怨怼，口出反逆之言而下狱，终在狱中自尽。",
     avatar: require("../assets/avatar/1/114.jpg"),
   },
   115: {
-    name: "马谡",
+    name: "祝融",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/1/115.png",
     intro:
       "马谡sù（190年－228年），字幼常，荆州襄阳宜城（今湖北宜城）人。蜀汉参军，也是侍中马良之弟。初以荆州从事跟随刘备取蜀入川，曾任绵竹、成都令、越嶲太守。",
@@ -290,17 +290,17 @@ const heroMap = {
     avatar: require("../assets/avatar/2/210.jpg"),
   },
   211: {
-    name: "丁奉",
+    name: "伏皇后",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/2/211.png",
     intro:
-      "丁奉（2世纪－271年），字承渊，扬州庐江安丰（今河南固始）人，三国时期孙权麾下后期重要将领；是江东十二虎臣之一。",
+      "伏皇后",
     avatar: require("../assets/avatar/2/211.jpg"),
   },
   212: {
-    name: "诸葛瑾",
+    name: "糜芳",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/2/212.png",
     intro:
-      "诸葛瑾（174年－241年），字子瑜，琅琊阳都（今山东省沂南县）人。东汉末年三国时期东吴的政治家和武将，诸葛瑾胞弟是仕于蜀汉的诸葛亮，族弟是仕于魏的诸葛诞；官至太傅和大将军，其子诸葛恪也在东吴官至太傅及丞相。",
+      "糜芳",
     avatar: require("../assets/avatar/2/212.jpg"),
   },
   213: {
@@ -393,9 +393,9 @@ const heroMap = {
     avatar: require("../assets/avatar/3/324.jpg"),
   },
   310: {
-    name: "张宝",
+    name: "花鬟",
     img: "https://www.rich3kingdoms.xyz/ipns/k51qzi5uqu5dgrl028jw0vu9g92no96w74irny1skee8oaok5jezrpkq4idajv/rich/assets/cardImgs/hero/3/310.png",
-    intro: "张宝（？－184年），张角二弟，钜鹿人，东汉末黄巾起义领导人之一。",
+    intro: "花鬟",
     avatar: require("../assets/avatar/3/310.jpg"),
   },
   311: {
