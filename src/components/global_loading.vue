@@ -27,7 +27,7 @@ export default {
       manifest: [],
       createjs: null,
       preload: "",
-      version: "1.2.3 Airdrop beta",
+      version: "1.2.5 Airdrop beta",
     });
     onBeforeMount(() => {
       data.createjs = createjs || window.createjs;
