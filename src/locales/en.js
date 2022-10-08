@@ -182,4 +182,15 @@ export default {
   name_015: "Cao ren",
   intro_015:
     "魏文帝曹丕（187年－226年），字子桓，沛国谯县（今属安徽省亳州市）人。三国时期曹魏名义上和正式的开国皇帝，是为曹操第三子，曹操和武宣卞皇后的嫡长子，之后继承父亲的魏王封号与丞相的大权",
+  rarity_0: "white",
+  rarity_1: "blue",
+  rarity_2: "purple",
+  rarity_3: "orange",
+  rarity_4: "gold",
+  rarity_5: "red",
+  pro_0: "endurance",
+  pro_1: "power",
+  pro_2: "intelligence",
+  pro_3: "agile",
+  pro_4: "Spirit",
 };

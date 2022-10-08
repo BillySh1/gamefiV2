@@ -1,13 +1,15 @@
+import i18n from "../i18n";
+const t = i18n.global.t;
 const useQualityText = (x) => {
   return ["N", "R", "SR", "SSR"][x];
 };
 
 const usePreferenceText = (x) => {
-  return ["盾", "战", "谋", "刺", "辅", "主公"][x];
+  return [t('job_0'), t('job_1'), t('job_2'), t('job_3'), t('job_4'), "主公"][x];
 };
 
 const useCampText = (x) => {
-  return ["魏国", "蜀国", "吴国", "群雄"][x];
+  return [t('camp_0'), t('camp_1'), t('camp_2'), t('camp_3')][x];
 };
 const usePropertyName = (x) => {
   return ["耐力", "力量", "智力", "敏捷", "精神"][x];
