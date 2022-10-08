@@ -12,7 +12,7 @@ const useCampText = (x) => {
   return [t('camp_0'), t('camp_1'), t('camp_2'), t('camp_3')][x];
 };
 const usePropertyName = (x) => {
-  return ["耐力", "力量", "智力", "敏捷", "精神"][x];
+  return [t('pro_0'), t('pro_1'), t('pro_2'), t('pro_3'), t('pro_4')][x];
 };
 const useRarityName = (x) => {
   return [t('rarity_0'), t('rarity_1'), t('rarity_2'), t('rarity_3'), t('rarity_4'), t('rarity_5')][x];
