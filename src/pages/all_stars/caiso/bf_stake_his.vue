@@ -3,7 +3,7 @@
     <InjectGoBack />
     <div class="content">
       <div class="border">
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/notice/border.svg" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/notice/border.svg" alt="" />
         <div class="inner">
           <CommonButton>我的下注</CommonButton>
           <div class="table_content"></div>
@@ -39,7 +39,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/casio/bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/casio/bg.png") no-repeat;
   background-size: 100% 100%;
 }
 .content {

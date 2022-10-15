@@ -10,7 +10,7 @@
     >
       <img
         class="close"
-        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/close.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/close.svg"
         alt=""
         @click="(e)=>{
           e.stopPropagation()
@@ -18,7 +18,7 @@
         }"
       />
 
-      <img class="bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/modal_bg.png" alt="" />
+      <img class="bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/modal_bg.png" alt="" />
       <div class="title">{{ title }}</div>
       <div class="content">
         <slot></slot>
@@ -28,7 +28,7 @@
         @click="$emit('confirm')"
       >
         <div class="confirm_inner">
-          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/modal_confirm_bg.svg" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/modal_confirm_bg.svg" alt="" />
           <div class="text">{{ btnText || $t('confirm') }}</div>
         </div>
       </div>

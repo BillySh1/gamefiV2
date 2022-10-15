@@ -3,13 +3,13 @@
     <CommonPageHeader :title="pageTitle" />
     <img
       class="badge"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/common/hero_sit.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/hero_sit.png"
       alt=""
     />
     <img
       v-if="!loading"
       class="light"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/store/success_bg.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/success_bg.png"
       alt=""
     />
     <div class="content">

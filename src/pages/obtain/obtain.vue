@@ -28,7 +28,7 @@
   <div class="bg_badge">
     <img
       class="badge"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/bg_badge.svg"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/bg_badge.svg"
       alt=""
     />
   </div>

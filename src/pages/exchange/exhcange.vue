@@ -25,7 +25,7 @@
           <div class="item">
             <img
               class="icon"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/exchange/coin.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/exchange/coin.png"
             />
             <span class="name">{{ t("coin") }}</span>
             <span>{{ m3t_balance }}</span>
@@ -33,7 +33,7 @@
           <div class="item">
             <img
               class="icon"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/exchange/usdt.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/exchange/usdt.png"
             />
             <span class="name">USDT</span>
             <span>{{ usdt_balance }}</span>
@@ -43,7 +43,7 @@
           <div class="buy_num">
             <div class="icon">
               <img
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/exchange/usdt.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/exchange/usdt.png"
               />
             </div>
             <input
@@ -222,7 +222,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/exchange/ex_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/exchange/ex_bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

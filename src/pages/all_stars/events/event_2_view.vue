@@ -4,25 +4,25 @@
       <img
         @click="() => $emit('close')"
         class="close"
-        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/close.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/close.svg"
         alt=""
       />
       <img
         class="c_bg"
-        src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/scroll_vertical.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/scroll_vertical.png"
         alt=""
       />
       <div class="top">
         <div class="place">
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/place_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/place_bg.png"
             alt=""
           />
           <div class="text">{{ placeText }}</div>
         </div>
         <div class="status">
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/alert_icon.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/alert_icon.png"
             alt=""
           />
           <div>{{ type == 2 ? "遭遇埋伏" : "埋伏" }}</div>
@@ -36,7 +36,7 @@
           <div>您已在此埋伏了</div>
           <div class="clock">
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/main/clock.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/clock.png"
               alt=""
             />
             <div>00:00:00</div>
@@ -48,7 +48,7 @@
             <div>您将获得战力加成</div>
           </div>
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/divider.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/divider.png"
             alt=""
           />
           <div class="item">
@@ -63,7 +63,7 @@
             @click="() => $emit('march', 1)"
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/btn_green.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/btn_green.png"
               alt=""
             />
             <div class="text">投降</div>
@@ -73,7 +73,7 @@
             @click="() => $emit('march', 0)"
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/btn_green.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/btn_green.png"
               alt=""
             />
             <div class="text">继续前进</div>
@@ -84,7 +84,7 @@
             @click="() => $emit('march', 2)"
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/btn_orange.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/btn_orange.png"
               alt=""
             />
             <div class="text">战斗</div>
@@ -95,7 +95,7 @@
             @click="unlock"
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/allstar_assets/popups/btn_orange.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/btn_orange.png"
               alt=""
             />
             <div class="text">打扫战场</div>

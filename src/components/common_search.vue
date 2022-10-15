@@ -2,7 +2,7 @@
   <div class="search_box">
     <img
       style="width: 2rem"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/pack/search.svg"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/search.svg"
       alt=""
     />
     <div class="text">{{$t('search')}}</div>
