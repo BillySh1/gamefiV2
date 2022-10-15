@@ -3,11 +3,11 @@
     <div class="border">
       <img class="border_img" :src="borderImg" />
       <div
-      v-show="!hideName"
+        v-show="!hideName"
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'font-size:1.5rem;left:8%'
+            ? 'bottom:23%'
             : ''
         "
       >
@@ -18,11 +18,14 @@
         class="mix"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'width:1.5rem;left:1.9rem'
+            ? ''
             : ''
         "
       >
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/mix.png" alt="" />
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/mix.png"
+          alt=""
+        />
       </div>
       <div class="quality">
         <img :src="qualityImg" alt="" />
@@ -58,19 +61,19 @@ import { reactive, toRefs, computed } from "vue";
 import useHeroDetail from "../utils/useHeroDetail.js";
 export default {
   name: "hero_card_img",
-  props: ["info", "big",'hideName'],
+  props: ["info", "big", "hideName"],
   setup(prop) {
     const data = reactive({});
     const borderImg = computed(() => {
       return (
         [
-          require('../assets/cardImgs/hero/bg/r0.svg'),
-          require('../assets/cardImgs/hero/bg/r1.svg'),
-          require('../assets/cardImgs/hero/bg/r2.svg'),
-          require('../assets/cardImgs/hero/bg/r3.svg'),
-          require('../assets/cardImgs/hero/bg/r4.svg'),
-        ][prop.info.rarity] ||  require('../assets/cardImgs/hero/bg/r0.svg')
-      )
+          require("../assets/cardImgs/hero/bg/r0.svg"),
+          require("../assets/cardImgs/hero/bg/r1.svg"),
+          require("../assets/cardImgs/hero/bg/r2.svg"),
+          require("../assets/cardImgs/hero/bg/r3.svg"),
+          require("../assets/cardImgs/hero/bg/r4.svg"),
+        ][prop.info.rarity] || require("../assets/cardImgs/hero/bg/r0.svg")
+      );
     });
     const qualityImg = computed(() => {
       return [
@@ -164,24 +167,23 @@ export default {
     @media screen and (max-height: 500px) and (max-width: 1024px) {
       left: 1.2rem;
       letter-spacing: 1px;
-      font-size: 1rem;
+      font-size: 1vmin;
     }
     position: absolute;
-    top: 30%;
-    left: 1.3rem;
+    bottom: 22%;
+    left: 39%;
     transform: translate(0, -50%);
     z-index: 30;
-    color: #300000;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    writing-mode: vertical-lr;
+    text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     letter-spacing: 2px;
+    font-size: 1vmin;
   }
   .mix {
     position: absolute;
-    top: 40%;
-    left: 1.3rem;
+    bottom: 23%;
+    right: 18%;
     z-index: 30;
-    width: 1.1rem;
+    width: 1.3rem;
     img {
       width: 100%;
     }
@@ -196,9 +198,9 @@ export default {
   }
   .quality {
     position: absolute;
-    top: 2%;
-    right: 15%;
-    width: 15%;
+    top: 0;
+    right: 2%;
+    width: 20%;
     z-index: 30;
     img {
       width: 100%;
@@ -246,11 +248,10 @@ export default {
   }
   .badge {
     position: absolute;
-    left: 0%;
-    top: 0%;
+    left: 2%;
+    top: 1%;
     z-index: 30;
-    width: 58%;
-    transform: translate(10%, -25%);
+    width: 43%;
     img {
       width: 100%;
     }
