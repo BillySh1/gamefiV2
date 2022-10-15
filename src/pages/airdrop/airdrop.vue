@@ -10,12 +10,29 @@
     <Lottie v-if="loading" :options="loading_options" />
 
     <div v-else class="content">
-      <div v-if="quality" class="main">
+      <div v-if="quality1 || quality2 || quality3" class="main">
         <Lottie class="airdrop_box" :options="lottie_options" />
         <div class="claim_btn_box">
-          <CommonButton :disabled="true" class="btn"> Claim </CommonButton>
-          <CommonButton @click="Claim" class="btn">
-            Special Claim
+          <CommonButton
+            :disabled="!quality1"
+            @click="() => Claim(0)"
+            class="btn"
+          >
+            Normal
+          </CommonButton>
+          <CommonButton
+            :disabled="!quality2"
+            @click="() => Claim(1)"
+            class="btn"
+          >
+            Advanced
+          </CommonButton>
+          <CommonButton
+            :disabled="!quality3"
+            @click="() => Claim(2)"
+            class="btn"
+          >
+            Special
           </CommonButton>
         </div>
       </div>
@@ -59,7 +76,9 @@ export default {
     const store = useStore();
     const data = reactive({
       pageTitle: t("airdrop_space"),
-      quality: false,
+      quality1: false,
+      quality2: false,
+      quality3: false,
       account: "",
       web3: "",
       loading: false,
@@ -105,16 +124,21 @@ export default {
         console.log("error");
       }
     };
-    const Claim = async () => {
+    const Claim = async (type) => {
+      const methodsName = [
+        "claimNormalAirDrop",
+        "claimMiddleAirDrop",
+        "claimSpecialAirDrop",
+      ][type];
       try {
         proxy.$toast(t("waiting..."), store.state.toast_info);
         const c = store.state.c_airdrop;
         const gasPrice = await data.web3.eth.getGasPrice();
-        const gas = await c.methods
-          .claimNormalAirDrop()
-          .estimateGas({ from: data.account });
+        const gas = await c.methods[methodsName]().estimateGas({
+          from: data.account,
+        });
         data.loading = true;
-        const res = await c.methods.claimNormalAirDrop().send({
+        const res = await c.methods[methodsName]().send({
           gas: gas + 200000,
           gasPrice: gasPrice,
           from: data.account,
@@ -134,7 +158,9 @@ export default {
     };
     const getAirdropInfo = async () => {
       const c = store.state.c_airdrop;
-      data.quality = await c.methods.isInWhiteList(data.account).call();
+      data.quality1 = await c.methods.isInWhiteList(data.account).call();
+      data.quality2 = await c.methods.isInWhiteList2(data.account).call();
+      data.quality3 = await c.methods.isInWhiteList2(data.account).call();
     };
     const loading_options = computed(() => {
       return {
