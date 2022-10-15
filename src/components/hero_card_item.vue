@@ -64,13 +64,13 @@ export default {
     const borderImg = computed(() => {
       return (
         [
-          "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r0.png",
-          "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r1.png",
-          "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r2.png",
-          "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r3.png",
-          "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r4.png",
-        ][prop.info.rarity] || "https://cryptorich3.mypinata.cloud/ipfs/QmcFsLUaLoDqCKoQsHompg1stZheKthySUPkbndKTBPs1y/rich/assets/cardImgs/hero/bg/r4.png"
-      );
+          require('../assets/cardImgs/hero/bg/r0.svg'),
+          require('../assets/cardImgs/hero/bg/r1.svg'),
+          require('../assets/cardImgs/hero/bg/r2.svg'),
+          require('../assets/cardImgs/hero/bg/r3.svg'),
+          require('../assets/cardImgs/hero/bg/r4.svg'),
+        ][prop.info.rarity] ||  require('../assets/cardImgs/hero/bg/r0.svg')
+      )
     });
     const qualityImg = computed(() => {
       return [
@@ -236,11 +236,10 @@ export default {
   }
   .camp {
     position: absolute;
-    right: 0%;
-    bottom: 0%;
-    transform: translate(-23%, -17%);
+    left: 14%;
+    bottom: 20%;
     z-index: 30;
-    width: 20%;
+    width: 15%;
     img {
       width: 100%;
     }
@@ -248,10 +247,10 @@ export default {
   .badge {
     position: absolute;
     left: 0%;
-    bottom: 0%;
+    top: 0%;
     z-index: 30;
     width: 58%;
-    transform: translate(23%, -25%);
+    transform: translate(10%, -25%);
     img {
       width: 100%;
     }
