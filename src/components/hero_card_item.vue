@@ -52,7 +52,15 @@
         <img :src="getBadgeImg" alt="" />
       </div>
     </div>
-    <img class="hero" :src="info.img" />
+    <img
+      class="hero"
+      :src="
+        info.img
+          .slice(0, info.img.length - 4)
+          .concat(info.quality, info.img.slice(info.img.length - 4))
+          .replace('.png', '.jpg')
+      "
+    />
   </div>
 </template>
 
@@ -156,10 +164,10 @@ export default {
   }
   .hero {
     position: absolute;
-    width: 69%;
+    width: 80%;
     height: auto;
-    top: 50%;
-    left: 50%;
+    top: 41%;
+    left: 47%;
     transform: translate(-43%, -52%);
     z-index: 1;
   }
