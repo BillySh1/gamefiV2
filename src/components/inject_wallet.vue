@@ -1,7 +1,7 @@
 <template>
   <div class="wallet_box">
     <div class="chain_icon_box">
-      <img class="chain_icon" src="../assets/index/chainIcon/bsc.svg" alt="" />
+      <img class="chain_icon" src="https://www.gate.io/images/coin_icon/64/ethf.png" alt="" />
     </div>
     <div class="wallet_address">
       {{ walletValue }}
@@ -110,6 +110,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
+    border-radius: 100%;
     transform: translate(-50%, -50%);
   }
 }
