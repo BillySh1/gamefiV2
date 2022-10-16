@@ -28,7 +28,6 @@
         v-for="item in menuList"
         :key="item.key"
         :class="item.disable ? 'menu_item disable' : 'menu_item'"
-        @click="() => $router.push({ name: item.href })"
       >
         <img class="img" :src="item.img" alt="" />
         <div class="text">

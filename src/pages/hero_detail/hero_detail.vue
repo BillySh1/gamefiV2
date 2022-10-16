@@ -64,7 +64,7 @@
               <div class="chain_info">
                 <span>Token ID: {{ info.tokenId }}</span>
                 <div class="view_on_chain" @click="viewOnChain">
-                  View on bscscan
+                  View on ETHFScan
                 </div>
               </div>
             </div>
@@ -288,7 +288,7 @@ export default {
     });
     const viewOnChain = () => {
       const c = store.state.c_hero.options.address;
-      const url = `https://testnet.bscscan.com/token/${c}?a=${data.info.tokenId}`;
+      const url = `https://www.oklink.com/en/ethf/assets/${c}/${data.info.tokenId}`
       window.open(url, "_blank");
     };
     const getTokenInfo = async () => {
