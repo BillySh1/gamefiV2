@@ -1,7 +1,11 @@
 <template>
   <div class="wallet_box">
     <div class="chain_icon_box">
-      <img class="chain_icon" src="https://www.gate.io/images/coin_icon/64/ethf.png" alt="" />
+      <img
+        class="chain_icon"
+        src="https://www.gate.io/images/coin_icon/64/ethf.png"
+        alt=""
+      />
     </div>
     <div class="wallet_address">
       {{ walletValue }}
@@ -27,7 +31,7 @@ export default {
       curLang: "en",
     });
     const jump2Swap = () => {
-      window.open("http://www.mdaoswap.xyz", "_blank");
+      window.open("https://ethf.mdaoswap.com/", "_blank");
     };
     const walletValue = computed(() => {
       const wallet = data.wallet;
