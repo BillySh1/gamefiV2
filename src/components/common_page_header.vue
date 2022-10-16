@@ -25,15 +25,7 @@
         <img
           class="img_right"
           src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/currency_plus.png"
-          @click="
-            () =>
-              $router.push({
-                name: item.href,
-                query: {
-                  info: item.tokenId,
-                },
-              })
-          "
+       
         />
       </div>
     </div>

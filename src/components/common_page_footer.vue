@@ -28,6 +28,7 @@
         v-for="item in menuList"
         :key="item.key"
         :class="item.disable ? 'menu_item disable' : 'menu_item'"
+        @click="() => $router.push({ name: item.href })"
       >
         <img class="img" :src="item.img" alt="" />
         <div class="text">
@@ -181,6 +182,8 @@ export default {
   font-size: 1.5rem;
   font-weight: 400;
   margin-left: 1rem;
+  pointer-events: none;
+  filter: grayscale(1);
   .text {
     margin-left: 1rem;
   }
