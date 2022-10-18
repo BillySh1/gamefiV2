@@ -160,7 +160,7 @@ export default {
       const c = store.state.c_airdrop;
       data.quality1 = await c.methods.isInWhiteList(data.account).call();
       data.quality2 = await c.methods.isInWhiteList2(data.account).call();
-      data.quality3 = await c.methods.isInWhiteList2(data.account).call();
+      data.quality3 = await c.methods.isInWhiteList3(data.account).call();
     };
     const loading_options = computed(() => {
       return {
