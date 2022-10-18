@@ -7,7 +7,7 @@
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'bottom:22%'
+            ? 'bottom:22%;font-size:1rem;left:45%'
             : ''
         "
       >
@@ -173,17 +173,15 @@ export default {
   }
   .name {
     @media screen and (max-height: 500px) and (max-width: 1024px) {
-      letter-spacing: 1px;
-      font-size: 1vmin;
+      font-size: 0.8rem;
     }
     position: absolute;
-    bottom: 22%;
-    left: 39%;
+    bottom: 20.5%;
+    left: 42%;
     transform: translate(0, -50%);
     z-index: 30;
     text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    letter-spacing: 2px;
-    font-size: 1vmin;
+    font-size: 1rem;
   }
   .mix {
     position: absolute;
