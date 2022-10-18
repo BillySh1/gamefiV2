@@ -42,7 +42,7 @@ export default {
           "%"
         );
       } else {
-        return "Loading Error";
+        return "Waiting...";
       }
     });
     const isMobile = computed(() => {
