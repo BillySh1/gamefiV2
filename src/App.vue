@@ -11,7 +11,7 @@
   <div class="mask black" v-if="(!connected || !correctChainId) && !loading">
     <img
       class="badge"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/hero_sit.png"
+      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/hero_sit.png"
       alt=""
     />
     <div class="logo">
@@ -24,7 +24,7 @@
 
         <div class="btn" v-show="!connected">
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/btn_bg.png"
             alt=""
           />
           <div class="inner" @click="() => (modalShow = true)">
@@ -33,7 +33,7 @@
         </div>
         <div class="btn" v-show="isMobile && !correctChainId && connected">
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/all_stars/entry/btn_bg.png"
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/btn_bg.png"
             alt=""
           />
 

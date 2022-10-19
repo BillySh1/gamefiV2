@@ -35,7 +35,7 @@ const _app = createApp(App).use(i18n);
 _app.config.globalProperties.$toast = createToast;
 _app.config.globalProperties.resolveAssets = (path) => {
   const ipfs_host =
-    "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/";
+    "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/";
   return ipfs_host + path;
 };
 _app.component("Lottie", lottie);

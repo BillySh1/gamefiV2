@@ -42,7 +42,7 @@
         />
         <ComOverfulfil v-if="curTab == 1" :info="info" @refresh="refresh" />
         <ComSkill v-if="curTab == 2" />
-        <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/divider_tab.png" />
+        <img class="divider" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/divider_tab.png" />
 
         <div class="tabs_box">
           <div
@@ -57,7 +57,7 @@
               }
             "
           >
-            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/tab_bg.png" />
+            <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/tab_bg.png" />
             <div class="inner">
               {{ item }}
             </div>
@@ -79,11 +79,11 @@
       "
     >
       <div class="inner">
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/tip_badge.svg" />
+        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/tip_badge.svg" />
         <div class="text">前往商城</div>
       </div>
     </div>
-    <img class="bg_badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/bg_badge.svg" />
+    <img class="bg_badge" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/bg_badge.svg" />
   </div>
 </template>
 

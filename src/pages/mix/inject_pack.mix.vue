@@ -1,11 +1,11 @@
 <template>
   <div v-if="value" class="detail_container">
-    <img class="bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/pack_container.svg" alt="" />
+    <img class="bg" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/pack_container.svg" alt="" />
 
     <div class="inner">
       <div class="inner_box">
         <div class="detail_back" @click="$emit('back')">
-          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/pack_back.svg" alt="" />
+          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/pack_back.svg" alt="" />
         </div>
         <div class="tab_box">
           <div
@@ -15,7 +15,7 @@
           >
             <img
               class="active"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/active_tab_item.png"
+              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/active_tab_item.png"
               alt=""
             />
             <div class="text active_text">
@@ -39,7 +39,7 @@
               "
               :style="curItemIndex == index ? 'opacity:1' : ''"
             >
-              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/common_pack_item_bg.svg" alt="" />
+              <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/common_pack_item_bg.svg" alt="" />
               <div class="inner_item_zone">
                 <CommonPackItem :info="item" />
               </div>
@@ -51,7 +51,7 @@
           <div class="inner">
             <div class="up">
               <div class="left">
-                <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/detail_stock_box.png" alt="" />
+                <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/detail_stock_box.png" alt="" />
                 <img
                   v-if="curItemShow && curItemShow.img"
                   class="content"

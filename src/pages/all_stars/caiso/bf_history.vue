@@ -4,7 +4,7 @@
     <div class="content">
       <div class="border">
         <img
-          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/notice/border.svg"
+          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/notice/border.svg"
           alt=""
         />
         <div class="inner">
@@ -42,7 +42,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/casio/bg.png")
+  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/casio/bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

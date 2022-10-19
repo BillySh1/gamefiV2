@@ -7,7 +7,7 @@
         <img
           @click="() => (showValue = false)"
           class="close"
-          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/close.svg"
+          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/close.svg"
           alt=""
         />
         <div class="info">
@@ -26,7 +26,7 @@
               }
             "
           >
-            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/left.png" alt="" />
+            <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/left.png" alt="" />
           </div>
           <div class="empty" v-if="!curItems.length">暂无武将</div>
           <div
@@ -48,7 +48,7 @@
               }
             "
           >
-            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/right.png" alt="" />
+            <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/right.png" alt="" />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <img
           @click="onSearch()"
           style="width: 2rem"
-          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/search.svg"
+          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/search.svg"
           alt=""
         />
       </div>
@@ -236,7 +236,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/pack_hero_bg.svg") no-repeat;
+  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/pack_hero_bg.svg") no-repeat;
   background-size: cover;
 }
 .res_inner {

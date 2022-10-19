@@ -16,7 +16,7 @@
         </div>
         <div class="btn" @click="copy">
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/button_round.png"
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/button_round.png"
             alt=""
           />
           <div class="text">{{ t("copy") }}</div>

@@ -4,7 +4,7 @@
       <div class="avatar_box">
         <img
           class="avatar"
-          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/index/default_avatar.png"
+          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/index/default_avatar.png"
           alt=""
         />
       </div>
@@ -12,7 +12,7 @@
         <div class="power_box">
           <img
             class="power_bg"
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/index/power_bg.png"
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/index/power_bg.png"
             alt=""
           />
           <div class="power_value">{{ $t("power") }} {{ power }}</div>
@@ -27,7 +27,7 @@
           "
         >
           <img
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/index/title_bg.png"
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/index/title_bg.png"
             alt=""
           />
           <div class="title_value">{{ $t("emptyTitle") }}</div>

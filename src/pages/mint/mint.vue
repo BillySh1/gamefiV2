@@ -49,7 +49,7 @@
           <div class="price_box" v-show="activeIndex == item.key">
             <img
               class="price_icon"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/mmc.png"
+              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc.png"
               alt=""
             />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
@@ -92,10 +92,10 @@ export default {
       blindBoxes: [
         {
           key: 0,
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type_0.png",
+          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_0.png",
           price: 5000,
           title: t("drawQuality1"),
-          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type0_bg.png",
+          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type0_bg.png",
           maxWidth: 180,
           maxHeight: 344,
           offsetX: "-45%",
@@ -103,10 +103,10 @@ export default {
         },
         {
           key: 1,
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type_1.png",
+          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_1.png",
           price: 10000,
           title: t("drawQuality2"),
-          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type1_bg.png",
+          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type1_bg.png",
           maxWidth: 430,
           maxHeight: 157,
           offsetX: "-50%",
@@ -114,10 +114,10 @@ export default {
         },
         {
           key: 2,
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type_2.png",
+          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_2.png",
           price: 30000,
           title: t("drawQuality1"),
-          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/type2_bg.png",
+          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type2_bg.png",
           maxWidth: 311,
           maxHeight: 337,
           offsetX: "-60%",
