@@ -1,0 +1,553 @@
+<template>
+  <div class="container">
+    <CommonPageHeader :title="pageTitle" />
+    <InjectGoBack v-if="!showPack && !loading" />
+    <Lottie
+      v-if="loading"
+      :options="{ animationData: require('../../assets/common/loading.json') }"
+    />
+    <div v-else class="content">
+      <Lottie
+        class="lottie"
+        v-show="(step == 0 || step == 1) && !showPack"
+        :options="step0Options"
+        @click="handleClickReborn"
+      />
+      <Lottie
+        class="lottie"
+        v-show="step == 2"
+        @animCreated="handleAni1"
+        :options="step1Options"
+        @click="handleClickReborn"
+      />
+      <Lottie
+        class="lottit_badge"
+        v-show="processing"
+        :options="{ animationData: require('../../assets/reborn/badge.json') }"
+      />
+      <div class="pack_inject_box" v-if="showPack">
+        <InejctPackHero
+          :toSelect="true"
+          :value="showPack && step == 1"
+          :hideSearch="true"
+          @back="
+            () => {
+              showPack = false;
+              step = 0;
+              isOpen = false;
+            }
+          "
+          @select="(i) => handleSelectHero(i)"
+        />
+      </div>
+      <div
+        v-if="curSelectedHero && !processing"
+        class="cur_selected_item"
+        @click="handleClickReborn"
+      >
+        <HeroCardItem :info="curSelectedHero" />
+      </div>
+
+      <div v-if="curSelectedHero && !processing" class="cur_selected_cost">
+        需要花费 {{ cost }} 枚两仪石, 当前数量 {{ stockBalance }}
+      </div>
+
+      <div
+        v-if="curSelectedHero && !processing"
+        class="action_btn"
+        @click="actionButtonClick"
+      >
+        <CommonButton>{{ btnText }}</CommonButton>
+      </div>
+      <div class="tip_badge" @click="() => (showRules = true)">
+        <div class="inner">
+          <img
+            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/tip_badge.svg"
+          />
+          <div class="text">{{ $t("rebornTips") }}</div>
+        </div>
+      </div>
+    </div>
+    <CommonPageFooter />
+
+    <InjectModal
+      @close="() => (showRules = false)"
+      @confirm="() => (showRules = false)"
+      :value="showRules"
+      :title="$t('rebornTips')"
+    >
+      <div class="modal_text">{{ $t("rebornTip1") }}</div>
+      <div class="modal_text">{{ $t("rebornTip2") }}</div>
+      <div class="modal_text" style="color: red">{{ $t("rebornTip3") }}</div>
+    </InjectModal>
+    <InjectModal
+      :title="$t('reborn')"
+      :value="showModal"
+      @close="() => (showModal = false)"
+      @confirm="() => (showModal = false)"
+      :btnDisable="Number(cost) > Number(stockBalance)"
+    >
+      <div class="modal_inner_box">
+        <div class="up">
+          您将使用 两仪石 x {{ cost }} 对 {{ curSelectedHero.name }} 进行重生吗
+        </div>
+        <div class="sub">当前拥有 两仪石 数量 {{ stockBalance }}</div>
+        <CommonButton
+          class="btn"
+          @click="
+            () => {
+              toShop();
+            }
+          "
+          >前往商店</CommonButton
+        >
+        <div class="main">
+          <div class="item">
+            <img
+              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/item/type_1_0.png"
+              alt=""
+            />
+          </div>
+          <div class="middle">
+            <img
+              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/right.png"
+              alt=""
+            />
+          </div>
+          <div class="item">
+            <HeroCardItem :info="curSelectedHero" />
+          </div>
+        </div>
+      </div>
+    </InjectModal>
+  </div>
+</template>
+
+<script >
+import {
+  reactive,
+  toRefs,
+  onBeforeMount,
+  getCurrentInstance,
+  computed,
+} from "vue";
+import { useRouter } from "vue-router";
+import CommonPageHeader from "../../components/common_page_header";
+import CommonPageFooter from "../../components/common_page_footer";
+import CommonButton from "../../components/common_button.vue";
+import InejctPackHero from "../../components/inejct_pack_hero.vue";
+import HeroCardItem from "../../components/hero_card_item.vue";
+import InjectGoBack from "../../components/inject_go_back.vue";
+import InjectModal from "../../components/inject_modal.vue";
+import initWeb3 from "../../utils/initWeb3";
+import { useStore } from "vuex";
+const openAni = require("../../assets/reborn/open.json");
+const closeAni = require("../../assets/reborn/close.json");
+export default {
+  name: "reborn",
+  components: {
+    CommonPageHeader,
+    CommonPageFooter,
+    InejctPackHero,
+    HeroCardItem,
+    CommonButton,
+    InjectGoBack,
+    InjectModal,
+  },
+  setup() {
+    const { proxy } = getCurrentInstance();
+    const store = useStore();
+    const router = useRouter();
+    const data = reactive({
+      account: "",
+      web3: "",
+      pageTitle: "卡牌重生",
+      step: 0,
+      step0Options: {
+        animationData: openAni,
+        autoplay: true,
+        loop: false,
+      },
+      step1Options: {
+        animationData: closeAni,
+        autoplay: true,
+        loop: true,
+      },
+      ani0: undefined,
+      ani1: undefined,
+      showPack: false,
+      isOpen: false,
+      curSelectedHero: undefined,
+      loading: false,
+      btnStatus: 0,
+      cost: 0,
+      stockBalance: 0,
+      processing: false,
+      newMintedHero: "",
+      showModal: false,
+      showRules: false,
+    });
+
+    const btnText = computed(() => {
+      return ["授权英雄", "授权两仪石", "确认重生"][data.btnStatus];
+    });
+    const canDo = computed(() => {
+      return Number(data.stockBalance) >= Number(data.cost);
+    });
+    const handleAni1 = (ani) => {
+      data.ani1 = ani;
+    };
+    const handleSelectHero = async (item) => {
+      if (item.rarity == 4) {
+        proxy.$toast("金卡不支持重生,请重新选择", store.state.toast_info);
+        return;
+      }
+      try {
+        data.loading = true;
+        const cTraing = store.state.c_training;
+        const cShop = store.state.c_richShop;
+        data.cost = await cTraing.methods.gemsCost(item.rarity).call();
+        data.stockBalance = await cShop.methods
+          .balanceOf(data.account, "10")
+          .call();
+
+        data.showPack = false;
+        setTimeout(() => {
+          data.curSelectedHero = item;
+        }, 1000);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const actionButtonClick = async () => {
+      if (data.btnStatus == 0) {
+        await approve();
+      } else if (data.btnStatus == 1) {
+        await approveStock();
+      } else if (data.btnStatus == 2) {
+        await reborn();
+      }
+    };
+    const approve = async () => {
+      try {
+        if (!canDo.value) {
+          data.showModal = true;
+          return;
+        }
+        proxy.$toast(
+          `t('common_wait_approve') ${data.curSelectedHero.name} `,
+          store.state.toast_info
+        );
+        const c = store.state.c_hero;
+        const addr = store.state.c_training.options.address;
+        const tokenId = data.curSelectedHero.tokenId;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .approve(addr, tokenId)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.approve(addr, tokenId).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 1;
+          proxy.$toast(
+            `授权 ${data.curSelectedHero.name} 成功`,
+            store.state.toast_success
+          );
+        }
+      } catch (e) {
+        proxy.$toast(
+          `授权 ${data.curSelectedHero.name} 失败`,
+          store.state.toast_error
+        );
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const toShop = () => {
+      sessionStorage.setItem(
+        "buffer_hero",
+        JSON.stringify(data.curSelectedHero)
+      );
+      router.push({
+        name: "storeDetail",
+        query: {
+          info: 10,
+        },
+      });
+    };
+    const approveStock = async () => {
+      try {
+        const c = store.state.c_richShop;
+        const addr = store.state.c_training.options.address;
+        const isApproved = await c.methods
+          .isApprovedForAll(data.account, addr)
+          .call();
+        if (isApproved) {
+          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
+          data.btnStatus = 2;
+          return;
+        }
+        proxy.$toast(`等待授权两仪石`, store.state.toast_info);
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .setApprovalForAll(addr, true)
+          .estimateGas({ from: data.account });
+        data.loading = true;
+        const res = await c.methods.setApprovalForAll(addr, true).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+        });
+        if (res.status) {
+          data.btnStatus = 2;
+          proxy.$toast(`授权成功`, store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(`授权失败`, store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.loading = false;
+      }
+    };
+    const reborn = async () => {
+      try {
+        proxy.$toast("wait", store.state.toast_info);
+        const c = store.state.c_training;
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const tokenId = data.curSelectedHero.tokenId;
+        const gas = await c.methods
+          .rebirth(tokenId)
+          .estimateGas({ from: data.account });
+        setTimeout(() => {
+          data.step = 2;
+          data.ani1.play();
+          data.processing = true;
+        }, 3000);
+        const res = await c.methods.rebirth(tokenId).send({
+          gasPrice: gasPrice,
+          gas: Number.parseInt(gas, 10) + 50000,
+          from: data.account,
+        });
+
+        if (res.status) {
+          data.step = 0;
+          proxy.$toast("重生成功", store.state.toast_success);
+          router.push({
+            name: "minting",
+            query: {
+              tokenId: data.curSelectedHero.tokenId,
+              fromReborn: 1,
+            },
+          });
+        }
+      } catch (e) {
+        proxy.$toast("重生失败", store.state.toast_error);
+        console.log(e);
+      } finally {
+        data.processing = false;
+      }
+    };
+    const getBeforePack = async () => {
+      const temp = [];
+      try {
+        const c = store.state.c_hero;
+        const res = await c.methods.cardList(data.account).call();
+        res.map((x) => {
+          temp.push({
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+          });
+        });
+        sessionStorage.setItem("before_pack", JSON.stringify(temp));
+      } catch (e) {
+        console.log(e);
+        proxy.$toast("获取背包列表失败", store.state.toast_error);
+      }
+    };
+    const handleClickReborn = () => {
+      data.step = 1;
+      data.showPack = true;
+      data.curSelectedHero = undefined;
+    };
+    onBeforeMount(async () => {
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      if (sessionStorage.getItem("buffer_hero")) {
+        const info = sessionStorage.getItem("buffer_hero");
+        data.curSelectedHero = JSON.parse(info);
+        sessionStorage.setItem("buffer_hero", null);
+      }
+      await getBeforePack();
+    });
+
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      handleAni1,
+      handleClickReborn,
+      handleSelectHero,
+      actionButtonClick,
+      toShop,
+      btnText,
+      canDo,
+    };
+  },
+};
+</script>
+<style lang="less" scoped>
+.container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #250606 0%, #02131f 100%);
+  .modal_inner_box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .up {
+      font-size: 2rem;
+    }
+    .sub {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 1rem 0;
+    }
+    .btn {
+      place-self: center;
+    }
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      .item {
+        width: 15rem;
+        img {
+          width: 50%;
+        }
+      }
+      .middle {
+        width: 6rem;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .tip_badge {
+    cursor: pointer;
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    white-space: nowrap;
+    .inner {
+      position: relative;
+      img {
+        width: 10rem;
+        opacity: 1;
+      }
+      .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .modal_text {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+  }
+}
+.lottie {
+  cursor: pointer;
+  max-width: 80%;
+  z-index: 0;
+}
+.lottit_badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pack_inject_box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+.cur_selected_item {
+  cursor: pointer;
+  position: fixed;
+  width: 15rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.action_btn {
+  &:hover {
+    opacity: 0.8;
+  }
+  position: fixed;
+  cursor: pointer;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+}
+.disable {
+  user-select: none;
+  pointer-events: none;
+  filter: grayscale(100);
+}
+.cur_selected_cost {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  .btn {
+    margin-top: 1rem;
+  }
+}
+</style>

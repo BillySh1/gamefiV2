@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "FangZhengYzq";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: url("./fonts/FZYanZQKSJF.ttf");
+}
+
+@font-face {
+  font-family: zihun129;
+  font-display: auto;
+  src: url('./fonts/字魂129号-白鹤新风体.ttf');
+}

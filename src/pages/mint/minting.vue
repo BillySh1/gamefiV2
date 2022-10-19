@@ -1,0 +1,330 @@
+<template>
+  <div class="container">
+    <CommonPageHeader :title="pageTitle" />
+    <img
+      class="badge"
+      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/hero_sit.png"
+      alt=""
+    />
+    <img
+      v-if="!loading"
+      class="light"
+      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/success_bg.png"
+      alt=""
+    />
+    <div class="content">
+      <Lottie v-if="loading" :options="lottie_options" />
+      <div v-else class="main">
+        <div class="title">{{ $t("mintingTip") }}</div>
+        <div class="up_box">
+          <div :style="`color:${getRarityStyle};margin-right:1rem`">
+            {{ curInfo.name }}
+          </div>
+          <div>
+            <span :style="`color:${getQualityStyle}`">{{ curQuality }}</span>
+            {{ $t("quality") }}
+          </div>
+        </div>
+
+        <div
+          class="card"
+          @click="
+            () =>
+              $router.push({
+                name: 'heroDetail',
+                query: {
+                  tokenId: curInfo.tokenId,
+                },
+              })
+          "
+        >
+          <CommonButton
+            v-if="newMintedItems.length > 1 && curIndex > 0"
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                curIndex--;
+              }
+            "
+            class="left"
+            >{{ $t("beforeCard") }}</CommonButton
+          >
+          <HeroCardItem :info="curInfo" />
+
+          <CommonButton
+            v-if="
+              newMintedItems.length > 1 && curIndex < newMintedItems.length - 1
+            "
+            @click="
+              (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                curIndex++;
+              }
+            "
+            class="right"
+            >{{ $t("nextCard") }}</CommonButton
+          >
+        </div>
+        <div class="bottom">
+          <CommonButton
+            class="btn"
+            @click="
+              () =>
+                $router.push({
+                  name: 'pack',
+                  query: {
+                    type: 0,
+                  },
+                })
+            "
+            >{{ $t("putInPack") }}</CommonButton
+          >
+          <CommonButton
+            class="btn"
+            @click="
+              () =>
+                $router.push({
+                  name: 'heroDetail',
+                  query: {
+                    tokenId: curInfo.tokenId,
+                  },
+                })
+            "
+            >{{ $t("cardDetail") }}</CommonButton
+          >
+        </div>
+      </div>
+    </div>
+    <CommonPageFooter />
+  </div>
+</template>
+
+<script>
+import { reactive, toRefs, onBeforeMount, computed } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import CommonPageFooter from "../../components/common_page_footer";
+import CommonPageHeader from "../../components/common_page_header";
+import initWeb3 from "../../utils/initWeb3.js";
+import HeroCardItem from "../../components/hero_card_item.vue";
+import useHeroDetail from "../../utils/useHeroDetail";
+import CommonButton from "../../components/common_button.vue";
+import { useI18n } from "vue-i18n";
+export default {
+  name: "minging",
+  components: {
+    CommonPageFooter,
+    CommonPageHeader,
+    HeroCardItem,
+    CommonButton,
+  },
+  setup() {
+    const store = useStore();
+    const route = useRoute();
+    const { t } = useI18n();
+    const data = reactive({
+      jsonData: "",
+      pageTitle: t("draw"),
+      cardList: [],
+      newMintedItems: [],
+      curIndex: 0,
+      loading: false,
+      account: "",
+      web3: "",
+    });
+    const lottie_options = computed(() => {
+      return {
+        animationData: require(`../../assets/common/loading.json`),
+      };
+    });
+    onBeforeMount(async () => {
+      data.loading = true;
+      if (route.query && route.query.fromReborn) {
+        data.pageTitle = t("cardReborn");
+      }
+      await initWeb3.Init(
+        (addr) => {
+          data.account = addr;
+        },
+        (p) => {
+          data.web3 = p;
+        }
+      );
+      if (route.query && route.query.tokenId) {
+        await getNewHero();
+      }
+      await getCardList();
+      data.loading = false;
+    });
+    const curInfo = computed(() => {
+      return data.newMintedItems[data.curIndex];
+    });
+    const getRarityStyle = computed(() => {
+      return ["white", "blue", "#7622D4", "#BA5F0F", "#FFDF3C"][
+        curInfo.value.rarity
+      ];
+    });
+    const getQualityStyle = computed(() => {
+      return ["white", "blue", "#7622D4", "#BA5F0F"][curInfo.value.quality];
+    });
+    const getNewHero = async () => {
+      try {
+        data.curIndex = 0;
+        const c = store.state.c_hero;
+        const res = await c.methods.getHero(route.query.tokenId).call();
+        const uid =
+          res.camp.toString() + res.rarity.toString() + res.heroId.toString();
+        data.newMintedItems.push({
+          ...res,
+          uid,
+          ...useHeroDetail(uid, res.preference),
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const getCardList = async () => {
+      try {
+        data.curIndex = 0;
+        const c = store.state.c_hero;
+        const res = await c.methods.cardList(data.account).call();
+        res.map((x) => {
+          data.cardList.push({
+            tokenId: x.tokenId,
+            heroId: x.heroId,
+            rarity: x.rarity,
+            quality: x.quality,
+            properties: x.properties.map((x) => Number(x) / 100),
+            power: Number(x.power) / 100,
+            star: x.star,
+            rebirthTimes: x.rebirthTimes,
+            preference: x.preference,
+            native: x.native,
+            level: x.level,
+            camp: x.camp,
+            addition: x.addition,
+          });
+        });
+        const before = JSON.parse(sessionStorage.getItem("before_pack")).map(
+          (x) => x.tokenId
+        );
+        const newList = data.cardList.map((x) => x.tokenId);
+        const newCards = newList.filter((item) => {
+          if (!before.includes(item)) return item;
+        });
+        newCards.map((item) => {
+          const res = data.cardList.find((i) => {
+            return item === i.tokenId;
+          });
+          const uid =
+            res.camp.toString() + res.rarity.toString() + res.heroId.toString();
+          data.newMintedItems.push({
+            ...res,
+            uid,
+            ...useHeroDetail(uid, res.preference),
+          });
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const curQuality = computed(() => {
+      return ["N", "R", "SR", "SSR"][curInfo.value.quality];
+    });
+    const refData = toRefs(data);
+    return {
+      ...refData,
+      lottie_options,
+      curInfo,
+      curQuality,
+      getRarityStyle,
+      getQualityStyle,
+    };
+  },
+};
+</script>
+<style lang="less" scoped>
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .light {
+    width: 35rem;
+    animation: spin 3s ease-in-out infinite;
+  }
+}
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      font-size: 2rem;
+    }
+    .up_box {
+      display: flex;
+      font-size: 2rem;
+      margin: 1.5rem 0;
+    }
+    .bottom {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      .btn {
+        cursor: pointer;
+        margin-right: 1rem;
+      }
+    }
+    .card {
+      position: relative;
+      cursor: pointer;
+      width: 15rem;
+      height: 18rem;
+      .left {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-200%, -50%);
+      }
+      .right {
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        transform: translate(200%, -50%);
+      }
+    }
+  }
+}
+</style>

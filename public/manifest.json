@@ -1,0 +1,13 @@
+{
+    "short_name": "富贾三国",
+    "name": "富贾三国",
+    "description":"rich-nft",
+    "icons": [
+      {
+        "src": "./favico.ico",
+        "sizes": "48x48"
+      }
+    ],
+    "display": "standalone",
+    "orientation": "landscape"
+  }

@@ -1,0 +1,122 @@
+<template>
+  <div class="power_box">
+    <div class="card_content">
+      <HeroCardItem  :info="info" />
+    </div>
+    <div class="power_zone">
+      <div class="zone_inner">
+        <div class="value_box">
+          <img class="part" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/power_text_left.svg" alt="" />
+          <div class="text">
+            <img class="power_img" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/power_item.png" />
+          </div>
+          <img class="part" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/power_text_right.svg" alt="" />
+        </div>
+
+        <div class="power_value">
+          <div class="text" >{{$t('power')}}</div>
+          <div class="value">{{ info.power }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { reactive, toRefs } from "vue";
+import HeroCardItem from "./hero_card_item";
+export default {
+  name: "pack_hero_item",
+  components: {
+    HeroCardItem,
+  },
+  props: ["info"],
+  setup() {
+    const data = reactive({});
+
+    const refData = toRefs(data);
+    return {
+      ...refData,
+    };
+  },
+};
+</script>
+<style lang="less" scoped>
+.power_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #946e36;
+  border-radius: 1rem;
+  .card_content {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+  }
+  .power_zone {
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(41, 22, 22, 0) -20.99%,
+      rgba(37, 2, 2, 0.8) 100%
+    );
+    height: 10%;
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    .zone_inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      place-self: flex-end;
+      justify-content: space-around;
+      .value_box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1vmax;
+        .part {
+          display: block;
+          width: 35%;
+        }
+        .text {
+          width: 1.8rem;
+          margin: 0 1rem;
+          white-space: nowrap;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .power_img {
+      width: 1.5rem;
+    }
+    .power_value {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      .text{
+        margin-left: 1rem;
+        color: rgba(255, 255, 255, .7);
+      }
+      .value {
+        margin-right: 1rem;
+        font-family: SF Pro Text;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+    }
+  }
+}
+</style>
