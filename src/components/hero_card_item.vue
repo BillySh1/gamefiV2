@@ -55,10 +55,12 @@
     <img
       class="hero"
       :src="
-        info.img
-          .slice(0, info.img.length - 4)
-          .concat(info.quality, info.img.slice(info.img.length - 4))
-          .replace('.png', '.jpg')
+        info.rarity == 0
+          ? info.img
+          : info.img
+              .slice(0, info.img.length - 4)
+              .concat(info.quality, info.img.slice(info.img.length - 4))
+              .replace('.png', '.jpg')
       "
     />
   </div>

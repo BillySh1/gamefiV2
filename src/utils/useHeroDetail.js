@@ -420,7 +420,7 @@ const heroMap = {
   },
   err: {
     name: t("name_err"),
-    img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/0/010.png",
+    img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/0/s1.png",
     intro: t("intro_err"),
     avatar: require("../assets/avatar/4/s4.jpg"),
   },

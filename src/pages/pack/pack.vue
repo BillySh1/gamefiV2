@@ -18,7 +18,7 @@
         <div
           v-for="item in routerItems"
           :key="item.key"
-          class="item"
+          :class="item.disable ? 'item disable' : 'item'"
           @click="() => (curShowType = item.key)"
         >
           <img :src="item.img" alt="" />
@@ -62,7 +62,7 @@ export default {
     const route = useRoute();
     const { t } = useI18n();
     const data = reactive({
-      pageTitle: t('myPack'),
+      pageTitle: t("myPack"),
       routerItems: [
         {
           key: 0,
@@ -73,11 +73,13 @@ export default {
           key: 1,
           name: t("equipment"),
           img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/1.png",
+          disable: true,
         },
         {
           key: 2,
           name: t("treasure"),
           img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/2.png",
+          disable: true,
         },
       ],
       curShowType: undefined,
@@ -125,6 +127,11 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   z-index: 100;
+  .disable{
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(1);
+  }
   .item {
     &:hover {
       opacity: 0.8;
