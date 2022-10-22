@@ -7,7 +7,7 @@
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'bottom:22%;font-size:1rem;left:45%'
+            ? 'bottom:21%;font-size:1.5rem;left:45%'
             : ''
         "
       >
@@ -54,6 +54,7 @@
     </div>
     <img
       class="hero"
+      :style="info.rarity == 0 ? 'width: 68%;top: 53%;left: 45%;' : ''"
       :src="
         info.rarity == 0
           ? info.img
