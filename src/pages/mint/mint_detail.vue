@@ -50,10 +50,14 @@
           </div>
           <div class="right_c_price">
             <img
-              style="margin-right: 2rem"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc.png"
+              style="margin-right: 2rem; border-radius: 99%"
+              :src="
+                payFrom == 0
+                  ? 'https://www.gate.io/images/coin_icon/64/ethf.png'
+                  : 'https://ethf.mdaoswap.com/rmn.jpg'
+              "
             />
-            <span>{{ getprice }}</span>
+            <span>{{ showPrice }}</span>
           </div>
         </div>
         <div class="right_c_content">
@@ -63,46 +67,90 @@
           {{ $t("mintDetail2") }}
         </div>
         <div class="right_c_action">
-          <div class="input_box">
-            <img
-              style="cursor: pointer"
-              class="img_action"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/minus.svg"
-              @click="
-                () => {
-                  const temp = buyValue - 1;
-                  if (temp < 0) {
-                    buyValue = 0;
-                    return;
-                  }
-                  buyValue = temp;
-                }
-              "
-            />
-            <div class="ipt_bg">
+          <div>
+            <div class="input_box">
               <img
-                class="ipt_img"
-                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/input.png"
-                alt=""
+                style="cursor: pointer"
+                class="img_action"
+                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/minus.svg"
+                @click="
+                  () => {
+                    if (payFrom == 0) {
+                      payFrom = 1;
+                    } else {
+                      payFrom = 0;
+                    }
+                    getCost();
+                  }
+                "
               />
-              <input
-                v-model="buyValue"
-                class="input"
-                @input="
-                  buyValue = Number($event.target.value.replace(/\D+/, ''))
+              <div class="ipt_bg">
+                <img
+                  class="ipt_img"
+                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/input.png"
+                  alt=""
+                />
+                <div class="input">
+                  {{ payFrom == 0 ? "ETHF" : "RM" }}
+                </div>
+              </div>
+              <img
+                class="img_action"
+                style="cursor: pointer"
+                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/add.svg"
+                @click="
+                  () => {
+                    if (payFrom == 0) {
+                      payFrom = 1;
+                    } else {
+                      payFrom = 0;
+                    }
+                    getCost();
+                  }
                 "
               />
             </div>
-            <img
-              class="img_action"
-              style="cursor: pointer"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/add.svg"
-              @click="
-                () => {
-                  buyValue += 1;
-                }
-              "
-            />
+            <div class="input_box">
+              <img
+                style="cursor: pointer"
+                class="img_action"
+                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/minus.svg"
+                @click="
+                  () => {
+                    const temp = buyValue - 1;
+                    if (temp < 0) {
+                      buyValue = 0;
+                      return;
+                    }
+                    buyValue = temp;
+                  }
+                "
+              />
+              <div class="ipt_bg">
+                <img
+                  class="ipt_img"
+                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/input.png"
+                  alt=""
+                />
+                <input
+                  v-model="buyValue"
+                  class="input"
+                  @input="
+                    buyValue = Number($event.target.value.replace(/\D+/, ''))
+                  "
+                />
+              </div>
+              <img
+                class="img_action"
+                style="cursor: pointer"
+                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/add.svg"
+                @click="
+                  () => {
+                    buyValue += 1;
+                  }
+                "
+              />
+            </div>
           </div>
 
           <div class="right_c_btn" @click="btnClick">
@@ -127,6 +175,7 @@ import {
   onBeforeMount,
   computed,
   getCurrentInstance,
+  watch,
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -163,27 +212,51 @@ export default {
       lottie_options: {
         animationData: require("../../assets/common/loading.json"),
       },
+      payFrom: 0,
+      showPrice: 0,
+      rawPrice: 0,
     });
+    watch(
+      () => data.buyValue,
+      async () => {
+        await getCost();
+      }
+    );
     const lottie_minting_options = computed(() => {
       return {
         animationData: require(`../../assets/mint/type${data.info.key}.json`),
       };
     });
-    const getprice = computed(() => {
-      return data.buyValue * Number(data.info.price);
-    });
+
+    const getCost = async () => {
+      const c = store.state.c_recruit;
+      data.rawPrice = (
+        await c.methods
+          .getCost(data.info.key, data.buyValue, data.payFrom)
+          .call()
+      ).toString();
+
+      data.showPrice = Number(
+        data.web3.utils.fromWei(data.rawPrice, "ether")
+      ).toFixed(0);
+    };
+
     const btnClick = async () => {
       if (data.btnStatus == 0) {
         await approve();
-      } else if (data.btnStatus === 1) {
+      } else if (data.btnStatus == 1) {
         await buy();
       }
     };
     const approve = async () => {
       try {
         proxy.$toast(t("common_wait_approve"), store.state.toast_info);
-        const c = store.state.c_mdao;
-        const value = data.web3.utils.toWei(getprice.value.toString(), "ether");
+        const c = data.payFrom == 0 ? store.state.c_ethf : store.state.c_rm;
+        const value = data.web3.utils.toWei(
+          (data.showPrice * 1.1).toString(),
+          "ether"
+        );
+        console.log(data.rawPrice, "raw");
         const addr = store.state.c_recruit.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -191,16 +264,16 @@ export default {
           .estimateGas({ from: data.account });
         data.loading = true;
         const res = await c.methods.approve(addr, value).send({
-          gas: gas,
+          gas: gas + 500000,
           gasPrice: gasPrice,
           from: data.account,
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast(t('common_approve_success'), store.state.toast_success);
+          proxy.$toast(t("common_approve_success"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(t('common_approve_failed'), store.state.toast_error);
+        proxy.$toast(t("common_approve_failed"), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -208,7 +281,7 @@ export default {
     };
     const buy = async () => {
       try {
-        proxy.$toast(t('common_wait_check'), store.state.toast_info);
+        proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_recruit;
         const gasPrice = await data.web3.eth.getGasPrice();
         let invite = "0x0000000000000000000000000000000000000000";
@@ -216,13 +289,12 @@ export default {
         if (_local && _local.toLowerCase() != data.account.toLowerCase()) {
           invite = _local;
         }
-
         const gas = await c.methods
-          .buy(data.info.key, data.buyValue, invite)
+          .buy(data.info.key, data.buyValue, invite, data.payFrom)
           .estimateGas({ from: data.account });
         data.minting = true;
         const res = await c.methods
-          .buy(data.info.key, data.buyValue, invite)
+          .buy(data.info.key, data.buyValue, invite, data.payFrom)
           .send({
             gasPrice: gasPrice,
             gas: Number.parseInt(gas, 10) + 50000,
@@ -266,7 +338,7 @@ export default {
         });
         sessionStorage.setItem("before_pack", JSON.stringify(data.beforePack));
       } catch (e) {
-        console.log('error')
+        console.log("error");
       }
     };
 
@@ -286,6 +358,7 @@ export default {
       );
       data.info = JSON.parse(route.query.info);
       await getBeforePack();
+      await getCost();
       data.loading = false;
     });
 
@@ -294,7 +367,7 @@ export default {
       ...refData,
       btnText,
       btnClick,
-      getprice,
+      getCost,
       lottie_minting_options,
     };
   },

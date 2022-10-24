@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="call disable" @click="() => $router.push({ name: 'mint' })">
+    <div class="call" @click="() => $router.push({ name: 'mint' })">
       <div class="common_call">
         <img
           :src="
@@ -79,7 +79,6 @@ export default {
         img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/exchange.png",
         href: "exchange",
         text: t("exchange"),
-        disable: true,
       },
       {
         key: "store",
