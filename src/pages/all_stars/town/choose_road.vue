@@ -4,7 +4,7 @@
     <img
       v-if="!isShow"
       class="show"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/show.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/show.png"
       alt=""
       @click="() => (isShow = true)"
     />
@@ -12,7 +12,7 @@
       <div class="scroll">
         <div class="s_inner">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/scroll_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/scroll_bg.png"
             alt=""
           />
           <div class="content">
@@ -26,7 +26,7 @@
 
           <div class="hide" @click="() => (isShow = false)">
             <img
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/hide.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/hide.png"
               alt=""
             />
             <div class="text">点击收起 UI 观察地图</div>
@@ -36,14 +36,14 @@
       <div class="action_box">
         <div class="item" @click="choose(0)">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/btn_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/btn_bg.png"
             alt=""
           />
           <div class="text">{{ roadText[0] }}</div>
         </div>
         <div class="item" @click="choose(1)">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/btn_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/btn_bg.png"
             alt=""
           />
           <div class="text">{{ roadText[1] }}</div>
@@ -68,10 +68,10 @@ export default {
     });
     const getMap = computed(() => {
       return [
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/main/map_0.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/main/map_1.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/main/map_2.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/main/map_3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_3.png",
       ][props.camp];
     });
     const roadText = computed(() => {

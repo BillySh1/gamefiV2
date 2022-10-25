@@ -46,17 +46,17 @@ export default {
       walletMaps: [
         {
           name: "Metamask",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/wallets/meta_mask.svg",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/wallets/meta_mask.svg",
           display: true,
         },
         {
           name: "TokenPocket",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/wallets/token_pocket.svg",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/wallets/token_pocket.svg",
           display: true,
         },
         {
           name: "Trust Wallet",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/wallets/trust_wallet.svg",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/wallets/trust_wallet.svg",
           display: true,
         },
         {
@@ -67,7 +67,7 @@ export default {
         },
         {
           name: "WalletConnect",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/wallets/wallet_connect.svg",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/wallets/wallet_connect.svg",
           display: true,
           disable: true,
         },

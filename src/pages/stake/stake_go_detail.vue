@@ -118,7 +118,7 @@
           "
         >
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/stake_btn_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/stake_btn_bg.png"
             alt=""
           />
           <div class="text">{{ btnStatus == 1 ? "出征" : "授权" }}</div>

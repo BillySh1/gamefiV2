@@ -1,12 +1,12 @@
 <template>
   <div class="com_box">
     <div class="power_box">
-      <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/power_bg.png" />
+      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/power_bg.png" />
       <div class="inner">
         <div class="text">战力值</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
-          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/power_item.png" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/power_item.png" alt="" />
         </div>
       </div>
     </div>
@@ -27,11 +27,11 @@
           >数量不足</span
         >
       </div>
-      <img class="divider" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/divider.png" />
+      <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/divider.png" />
     </div>
     <div class="property_box" v-if="updateInfo.canLevelup">
-      <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/properties_bg.png" alt="" />
-      <img class="badge" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/proper_badge.png" />
+      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/properties_bg.png" alt="" />
+      <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/proper_badge.png" />
       <div class="inner">
         <div class="item">
           <div class="title">当前属性</div>
@@ -65,7 +65,7 @@
         "
         @click="handleClickUpgrade"
       >
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/action_bg.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/action_bg.png" alt="" />
         <div class="inner">升级</div>
       </div>
       <div
@@ -73,7 +73,7 @@
         @click="handleClickOneKeyUpgrade"
       >
         <div class="inner">一键升级</div>
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/action_bg_1.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/action_bg_1.png" alt="" />
       </div>
     </div>
     <div class="injection" v-if="showUpgradeModal || showOneKeyModal">
@@ -96,7 +96,7 @@
               <img :src="costImg" alt="" />
             </div>
             <div class="middle">
-              <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/right.png" alt="" />
+              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/right.png" alt="" />
             </div>
             <div class="item">
               <HeroCardItem :info="info" />
@@ -123,7 +123,7 @@
               <img :src="costImg" alt="" />
             </div>
             <div class="middle">
-              <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/right.png" alt="" />
+              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/right.png" alt="" />
             </div>
             <div class="item">
               <HeroCardItem :info="info" />
@@ -337,7 +337,7 @@ export default {
 .com_box {
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/over_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/upgrade/over_bg.png") no-repeat;
   background-size: 100% 100%;
 
   .power_box {

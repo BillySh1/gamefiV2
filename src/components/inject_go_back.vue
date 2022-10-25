@@ -1,6 +1,6 @@
 <template>
   <div class="back_box" @click="back">
-      <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/back.svg" >
+      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/back.svg" >
   </div>
 </template>
 

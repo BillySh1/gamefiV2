@@ -2,7 +2,7 @@
   <div class="stake_item">
     <div v-if="!info || !info.tokenId" class="empty">
       <img
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/add.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/add.png"
         alt=""
       />
     </div>
@@ -43,7 +43,7 @@ export default {
   position: relative;
   width: 100%;
   height: 90%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/stake_item_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/stake_item_bg.png")
     no-repeat;
   background-size: 100% 100%;
   .empty {

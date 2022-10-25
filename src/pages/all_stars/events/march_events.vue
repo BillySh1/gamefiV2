@@ -6,13 +6,13 @@
   >
     <img
       style="width: 100%"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/light_bg.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/light_bg.png"
       alt=""
     />
     <img
       @click="() => $emit('close')"
       class="close"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/close.svg"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/close.svg"
       alt=""
     />
     <div
@@ -25,7 +25,7 @@
     >
       <div class="inner">
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/stake/road/scroll_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/stake/road/scroll_bg.png"
           alt=""
         />
         <div class="main">
@@ -37,18 +37,18 @@
           <div class="bottom">
             <div class="img_box">
               <img
-                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/img_bg.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/img_bg.png"
                 alt=""
               />
               <div class="img_inner">
                 <img
                   v-if="type == 0"
-                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/insert_0.png"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/insert_0.png"
                   alt=""
                 />
                 <img
                   v-if="type == 5 || type == 'ing'"
-                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/insert_3.png"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/insert_3.png"
                   alt=""
                 />
               </div>
@@ -73,7 +73,7 @@
     <div :class="btnDisable ? 'confirm disable' : 'confirm'" @click="onConfirm">
       <div class="inner">
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/confirm_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/popups/confirm_bg.png"
           alt=""
         />
         <div class="text">确认</div>
