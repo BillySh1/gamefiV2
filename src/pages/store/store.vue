@@ -25,20 +25,20 @@
           <img
             v-show="showLeft"
             class="left"
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/left.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/left.png"
             @click="changeGoodsIndex(-1)"
           />
-          <img class="store_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/store.png" />
+          <img class="store_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/store.png" />
           <img
             v-show="showRight"
             class="right"
-            src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/right.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/right.png"
             @click="changeGoodsIndex(1)"
           />
           <div class="goods" @click="goodsClick">
             <div class="goods_inner">
               <div class="goods_text">
-                <img src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/item/text_bg.svg" alt="" />
+                <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/text_bg.svg" alt="" />
                 <div class="value">{{ curCurgoods.name }}</div>
               </div>
               <img class="goods_img" :src="curCurgoods.img" alt="" />
@@ -74,17 +74,17 @@ export default {
         {
           key: 0,
           name: "战备",
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/type0.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/type0.png",
         },
         {
           key: 1,
           name: "神谕",
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/type1.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/type1.png",
         },
         {
           key: 2,
           name: "奇珍",
-          img: "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/type2.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/type2.png",
         },
       ],
       goodsIndex: 0,
@@ -94,7 +94,7 @@ export default {
       return ["战备", "神谕", "奇珍"][data.curType];
     });
     const mainImg = computed(() => {
-      return `https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/type${data.curType}.png`;
+      return `https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/type${data.curType}.png`;
     });
     const curCurgoods = computed(() => {
       return data.buyItems[data.curType][data.goodsIndex];
@@ -142,7 +142,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/store/store_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/store_bg.png") no-repeat;
   background-size: cover;
 }
 .content {

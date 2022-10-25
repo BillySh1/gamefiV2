@@ -43,7 +43,7 @@
     :class="getPosDirection"
       v-if="player.isBond"
       :style="curPosition"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/pos.gif"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/pos.gif"
       alt=""
     />
 
@@ -63,7 +63,7 @@
               </div>
               <img
                 class="p"
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/city_img.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/city_img.png"
                 alt=""
               />
               <div class="txt">主城</div>
@@ -121,7 +121,7 @@
             "
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/power_zone.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/power_zone.png"
               alt=""
             />
             <div class="power_inner">
@@ -130,7 +130,7 @@
           </div>
           <div v-if="player.baseSpeed != 0" class="random_events">
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/speed.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/speed.png"
               alt=""
             />
             当前速度 {{ curSpeed }}
@@ -142,7 +142,7 @@
             @click="() => clickEventBar(item)"
           >
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/clock.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/clock.png"
               alt=""
             />
             {{ item.name }}
@@ -152,7 +152,7 @@
           <div class="refresh_field" @click="allInit">
             <div class="inner">
               <img
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/to_final.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/to_final.png"
                 alt=""
               />
               <div class="text">刷新战场</div>
@@ -170,7 +170,7 @@
           >
             <div class="inner">
               <img
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/to_final.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/to_final.png"
                 alt=""
               />
               <div class="text">鹿原奖池</div>
@@ -206,21 +206,21 @@
 
           <div class="time_row" v-if="!arriveNext && !isBattleIng">
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/clock.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/clock.png"
               alt=""
             />
             {{ timing }}
           </div>
           <div class="time_row" v-if="arriveNext && !isBattleIng">
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/clock.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/clock.png"
               alt=""
             />
             <span style="color: red">请点击此处决策</span>
           </div>
           <div class="time_row" v-if="isBattleIng">
             <img
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/clock.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/clock.png"
               alt=""
             />
             <span style="color: red">战斗进行中</span>
@@ -617,10 +617,10 @@ export default {
     };
     const getMap = computed(() => {
       return [
-        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_0.png",
-        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_1.png",
-        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_2.png",
-        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/map_3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/map_0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/map_1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/map_2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/map_3.png",
       ][data.curCamp];
     });
     const getPos = (now, arriveTime) => {
@@ -788,7 +788,7 @@ export default {
     }
     width: 7rem;
     height: 15rem;
-    background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/main_camp.png")
+    background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/main_camp.png")
       no-repeat;
     background-size: 100% 100%;
     margin-bottom: 1.5rem;
@@ -861,7 +861,7 @@ export default {
   bottom: 15%;
   width: 5rem;
   height: 5rem;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/allstar_assets/main/pack_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/main/pack_bg.png")
     no-repeat;
   background-size: 100% 100%;
   font-size: 1rem;

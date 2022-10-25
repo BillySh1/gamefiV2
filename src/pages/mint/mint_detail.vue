@@ -4,7 +4,7 @@
     <InjectGoBack v-if="!loading && !minting" />
     <img
       class="badge"
-      src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/mint_detail_bg_badge.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/mint_detail_bg_badge.png"
       alt=""
     />
     <div v-if="minting || loading" class="content">
@@ -37,7 +37,7 @@
       <div class="right_c">
         <img
           class="blood"
-          src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/blood.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/blood.png"
           alt=""
         />
         <div class="right_c_title">
@@ -45,7 +45,7 @@
             {{ info.title }}
             <img
               class="right_c_title_badge"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/common/active_title.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/active_title.png"
             />
           </div>
           <div class="right_c_price">
@@ -72,7 +72,7 @@
               <img
                 style="cursor: pointer"
                 class="img_action"
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/minus.svg"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
                 @click="
                   () => {
                     if (payFrom == 0) {
@@ -93,7 +93,7 @@
               <div class="ipt_bg">
                 <img
                   class="ipt_img"
-                  src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/input.png"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/input.png"
                   alt=""
                 />
                 <div class="input">
@@ -103,7 +103,7 @@
               <img
                 class="img_action"
                 style="cursor: pointer"
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/add.svg"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
                 @click="
                   () => {
                     if (payFrom == 0) {
@@ -126,7 +126,7 @@
               <img
                 style="cursor: pointer"
                 class="img_action"
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/minus.svg"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
                 @click="
                   () => {
                     const temp = buyValue - 1;
@@ -141,7 +141,7 @@
               <div class="ipt_bg">
                 <img
                   class="ipt_img"
-                  src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/input.png"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/input.png"
                   alt=""
                 />
                 <input
@@ -158,7 +158,7 @@
               <img
                 class="img_action"
                 style="cursor: pointer"
-                src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/add.svg"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
                 @click="
                   () => {
                     buyValue += 1;
@@ -171,7 +171,7 @@
           <div class="right_c_btn" @click="btnClick">
             <img
               class="btn_img"
-              src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/mint/btn.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/btn.png"
               alt=""
             />
             <div class="richt_c_btn_value">{{ btnText }}</div>

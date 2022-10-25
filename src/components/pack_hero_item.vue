@@ -6,11 +6,11 @@
     <div class="power_zone">
       <div class="zone_inner">
         <div class="value_box">
-          <img class="part" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/power_text_left.svg" alt="" />
+          <img class="part" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_text_left.svg" alt="" />
           <div class="text">
-            <img class="power_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/power_item.png" />
+            <img class="power_img" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png" />
           </div>
-          <img class="part" src="https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/assets/pack/power_text_right.svg" alt="" />
+          <img class="part" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_text_right.svg" alt="" />
         </div>
 
         <div class="power_value">

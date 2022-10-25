@@ -71,7 +71,7 @@ export default {
       const path = require("path");
       const files = require.context("../assets/", true, /\.svg$/).keys();
       const prefix =
-        "https://cryptorich3.mypinata.cloud/ipfs/QmTLaiRRXJ1BaDbxb92T3cfyN9xMMyD1GuWaxHXGQSFhQg/rich/";
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/";
       files.map((i) => {
         const _relativePath = path.join("assets", i);
         // const file = require(`../${_relativePath}`);
