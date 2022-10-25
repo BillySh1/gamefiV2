@@ -148,7 +148,10 @@
                   v-model="buyValue"
                   class="input"
                   @input="
-                    buyValue = Number($event.target.value.replace(/\D+/, ''))
+                    () => {
+                      buyValue = Number($event.target.value.replace(/\D+/, ''));
+                     
+                    }
                   "
                 />
               </div>
@@ -256,6 +259,10 @@ export default {
     };
 
     const btnClick = async () => {
+      if(data.buyValue > 30){
+        proxy.$toast(t("max num 30"), store.state.toast_error);
+        return
+      }
       if (data.btnStatus == 0) {
         await approve();
       } else if (data.btnStatus == 1) {
