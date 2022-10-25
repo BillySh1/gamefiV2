@@ -116,7 +116,7 @@ export default {
           key: 2,
           img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_2.png",
           price: 300,
-          title: t("drawQuality1"),
+          title: t("drawQuality3"),
           bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type2_bg.png",
           maxWidth: 311,
           maxHeight: 337,
