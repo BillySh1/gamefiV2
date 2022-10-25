@@ -298,9 +298,10 @@ export default {
       try {
         proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_recruit;
-        const value = data.web3.utils.toWei(
-          (data.showPrice * 1.2).toString(),
-          "ether"
+        console.log(
+          data.rawPrice,
+          "gggg",
+          data.web3.utils.fromWei(data.rawPrice.toString(), "ether")
         );
         const gasPrice = await data.web3.eth.getGasPrice();
         let invite = "0x0000000000000000000000000000000000000000";
@@ -310,15 +311,18 @@ export default {
         }
         const gas = await c.methods
           .buy(data.info.key, data.buyValue, invite, data.payFrom)
-          .estimateGas({ from: data.account });
+          .estimateGas({
+            from: data.account,
+            value: data.payFrom == 0 ? (data.rawPrice * 1.1).toString() : "",
+          });
         data.minting = true;
         const res = await c.methods
           .buy(data.info.key, data.buyValue, invite, data.payFrom)
           .send({
             gasPrice: gasPrice,
-            gas: Number.parseInt(gas, 10) * 1.2 + 500000,
+            gas: Number.parseInt(gas, 10) + 500000,
             from: data.account,
-            value: data.payFrom == 0 ? value : "",
+            value: data.payFrom == 0 ? (data.rawPrice * 1.1).toString() : "",
           });
 
         if (res.status) {
@@ -379,8 +383,8 @@ export default {
       data.info = JSON.parse(route.query.info);
       await getBeforePack();
       await getCost();
-      if(data.payFrom == 0){
-        data.btnStatus = 1
+      if (data.payFrom == 0) {
+        data.btnStatus = 1;
       }
       data.loading = false;
     });
