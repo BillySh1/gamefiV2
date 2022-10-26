@@ -146,7 +146,7 @@
           <div class="text">{{ t("sell") }}</div>
         </div>
         <div
-          class="action_item disable"
+          class="action_item"
           @click="
             () =>
               $router.push({

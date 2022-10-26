@@ -54,7 +54,13 @@
     </div>
     <img
       class="hero"
-      :style="info.rarity == 0 ? 'width: 68%;top: 53%;left: 45%;' : ''"
+      :style="
+        info.rarity == 0
+          ? 'width: 68%;top: 53%;left: 45%;'
+          : $route.path.includes('upgrade')
+          ? 'transform:translate(-43%,-69%)'
+          : ''
+      "
       :src="
         info.rarity == 0
           ? info.img

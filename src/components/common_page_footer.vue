@@ -79,28 +79,24 @@ export default {
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/exchange.png",
         href: "exchange",
         text: t("exchange"),
-        disable: true
       },
       {
         key: "store",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/store.png",
         href: "store",
         text: t("store"),
-        disable: true,
       },
       {
         key: "reborn",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/reborn.png",
         href: "reborn",
         text: t("reborn"),
-        disable: true,
       },
       {
         key: "mix",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mix.png",
         href: "mix",
         text: t("mix"),
-        disable: true,
       },
     ]);
     const data = reactive({});
