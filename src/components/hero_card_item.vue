@@ -223,23 +223,20 @@ export default {
   }
   .stars {
     position: absolute;
-    top: 10%;
-    right: 1%;
+    bottom: 15%;
+    left: 20%;
     z-index: 30;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 6%;
+    height: 1rem;    
     img {
-      width: 100%;
-      margin-bottom: 4px;
+      height: 100%;
+      margin-right: 4px;
     }
   }
   .levels {
     position: absolute;
-    bottom: 18%;
-    left: 8%;
+    top: 13%;
+    left: 0%;
     z-index: 30;
     display: flex;
     flex-direction: column;
