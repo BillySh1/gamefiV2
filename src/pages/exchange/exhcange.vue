@@ -157,7 +157,7 @@ export default {
       try {
         proxy.$toast('wait', store.state.toast_info);
         const c = store.state.c_m3t;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .recharge(value)

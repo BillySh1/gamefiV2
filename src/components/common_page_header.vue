@@ -152,16 +152,17 @@ export default {
       await getInfo();
     });
     const getInfo = async () => {
-      const mmc = store.state.c_mdao;
+      // todo: temp kill mdao
+      // const mmc = store.state.c_mdao;
       const shop = store.state.c_richShop;
       const hero = store.state.c_hero;
       const m3t = store.state.c_m3t;
       const cardNum = await hero.methods.cardList(data.account).call();
-      const mmcBalance = await mmc.methods.balanceOf(data.account).call();
+      // const mmcBalance = await mmc.methods.balanceOf(data.account).call();
       const m3tBalance = await m3t.methods.balanceOf(data.account).call();
-      data.list[0].value = data.web3.utils
-        .fromWei(mmcBalance, "ether")
-        .split(".")[0];
+      // data.list[0].value = data.web3.utils
+      //   .fromWei(mmcBalance, "ether")
+      //   .split(".")[0];
       data.list[1].value = data.web3.utils
         .fromWei(m3tBalance, "ether")
         .split(".")[0];
