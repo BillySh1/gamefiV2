@@ -15,7 +15,7 @@
           <div class="rate_detail">
             <div>1 USDT</div>
             <div style="margin: 0 4rem">:</div>
-            <div>{{ 25 }} {{ t("coin") }}</div>
+            <div>{{ 50 }} {{ t("coin") }}</div>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
           </div>
           <div class="xs">
             <div>{{ t("ex_can_ex") }}</div>
-            <div style="margin: 0 1rem">{{ 25 * buyNum }}</div>
+            <div style="margin: 0 1rem">{{ 50 * buyNum }}</div>
             <div>{{ t("coin") }}</div>
           </div>
         </div>
@@ -128,9 +128,12 @@ export default {
     };
     const approve = async () => {
       try {
-        proxy.$toast(t('common_wait_approve'), store.state.toast_info);
+        proxy.$toast(t("common_wait_approve"), store.state.toast_info);
         const c = store.state.c_usdt;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
+        const value = data.web3.utils.toWei(
+          data.buyNum.toString(),
+          "picoether"
+        );
         const addr = store.state.c_m3t.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -144,10 +147,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast(t('common_wait_approve'), store.state.toast_success);
+          proxy.$toast(t("common_wait_approve"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(t('common_approve_failed'), store.state.toast_error);
+        proxy.$toast(t("common_approve_failed"), store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -155,9 +158,12 @@ export default {
     };
     const exchange = async () => {
       try {
-        proxy.$toast('wait', store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_m3t;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
+        const value = data.web3.utils.toWei(
+          data.buyNum.toString(),
+          "picoether"
+        );
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .recharge(value)
@@ -170,10 +176,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast(t('ex_success'), store.state.toast_success);
+          proxy.$toast(t("ex_success"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(t('ex_failed'), store.state.toast_error);
+        proxy.$toast(t("ex_failed"), store.state.toast_error);
         console.log(e);
       } finally {
         await getBalanceInfo();
