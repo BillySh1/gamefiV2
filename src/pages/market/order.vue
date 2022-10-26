@@ -12,7 +12,7 @@
           <img
             class="back"
             style="width: 2.5rem"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/back.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/back.svg"
             @click="
               (e) => {
                 $router.go(-1);
@@ -34,7 +34,7 @@
             </div>
             <img
               class="divider"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/market/order/divider.svg"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/market/order/divider.svg"
               alt=""
             />
           </div>
@@ -50,7 +50,7 @@
               "
             >
               <img
-                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/left.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/left.png"
                 alt=""
               />
             </div>
@@ -81,7 +81,7 @@
               "
             >
               <img
-                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/right.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/right.png"
                 alt=""
               />
             </div>
@@ -95,7 +95,7 @@
       >
         <div class="inner">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/tip_badge.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/tip_badge.svg"
           />
           <div class="text">{{ t("my_order") }}</div>
         </div>
@@ -247,7 +247,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/market/bg.png");
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/market/bg.png");
   .tip_badge {
     cursor: pointer;
     position: absolute;
@@ -365,7 +365,7 @@ export default {
           margin: 1rem 0;
         }
         .active {
-          background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/active_tab.png")
+          background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/active_tab.png")
             no-repeat;
           background-size: 100% 100%;
         }

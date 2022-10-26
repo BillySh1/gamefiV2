@@ -3,7 +3,7 @@
     <InjectGoBack />
     <CommonPageHeader :title="pageTitle" />
     <div class="content">
-      <img class="bg" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/success_bg.png" alt="" />
+      <img class="bg" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/success_bg.png" alt="" />
       <img class="item" :src="info.img" alt="" />
       <div class="text">
         数量: {{ num }} <br />

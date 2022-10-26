@@ -18,7 +18,7 @@
         <div
           v-for="item in routerItems"
           :key="item.key"
-          class="item"
+          :class="item.disable ? 'item disable' : 'item'"
           @click="() => (curShowType = item.key)"
         >
           <img :src="item.img" alt="" />
@@ -30,7 +30,7 @@
       <div class="bg_badge">
         <img
           class="badge"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/bg_badge.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/bg_badge.svg"
           alt=""
         />
       </div>
@@ -62,22 +62,24 @@ export default {
     const route = useRoute();
     const { t } = useI18n();
     const data = reactive({
-      pageTitle: t('myPack'),
+      pageTitle: t("myPack"),
       routerItems: [
         {
           key: 0,
           name: t("hero"),
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/0.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/0.png",
         },
         {
           key: 1,
           name: t("equipment"),
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/1.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/1.png",
+          disable: true,
         },
         {
           key: 2,
           name: t("treasure"),
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/2.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/2.png",
+          disable: true,
         },
       ],
       curShowType: undefined,
@@ -115,7 +117,7 @@ export default {
   background: #280505;
 }
 .hero_pack {
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/pack_hero_bg.svg")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/pack_hero_bg.svg")
     no-repeat;
   background-size: cover;
 }
@@ -125,6 +127,11 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   z-index: 100;
+  .disable{
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(1);
+  }
   .item {
     &:hover {
       opacity: 0.8;

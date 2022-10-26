@@ -7,7 +7,7 @@
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'bottom:22%;font-size:1rem;left:45%'
+            ? 'bottom:21%;font-size:1.5rem;left:45%'
             : ''
         "
       >
@@ -23,7 +23,7 @@
         "
       >
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/mix.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/mix.png"
           alt=""
         />
       </div>
@@ -34,14 +34,14 @@
         <img
           v-for="(item, index) in stars"
           :key="index"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/star.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/star.png"
         />
       </div>
       <div class="levels">
         <img
           v-for="(item, index) in levels"
           :key="index"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/level.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/level.png"
           alt=""
         />
       </div>
@@ -54,11 +54,20 @@
     </div>
     <img
       class="hero"
+      :style="
+        info.rarity == 0
+          ? 'width: 68%;top: 53%;left: 45%;'
+          : $route.path.includes('upgrade')
+          ? 'transform:translate(-43%,-69%)'
+          : ''
+      "
       :src="
-        info.img
-          .slice(0, info.img.length - 4)
-          .concat(info.quality, info.img.slice(info.img.length - 4))
-          .replace('.png', '.jpg')
+        info.rarity == 0
+          ? info.img
+          : info.img
+              .slice(0, info.img.length - 4)
+              .concat(info.quality, info.img.slice(info.img.length - 4))
+              .replace('.png', '.jpg')
       "
     />
   </div>
@@ -85,19 +94,19 @@ export default {
     });
     const qualityImg = computed(() => {
       return [
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/q0.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/q1.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/q2.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/q3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/q0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/q1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/q2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/q3.png",
       ][prop.info.quality];
     });
     const campImg = computed(() => {
       return {
         img: [
-          "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/c0.png",
-          "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/c1.png",
-          "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/c2.png",
-          "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/c3.png",
+          "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/c0.png",
+          "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/c1.png",
+          "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/c2.png",
+          "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/c3.png",
         ][prop.info.camp],
       };
     });
@@ -122,12 +131,12 @@ export default {
 
     const getBadgeImg = computed(() => {
       return [
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_0.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_1.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_2.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_3.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_4.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/badge_5.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_4.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/badge_5.png",
       ][prop.info.preference];
     });
 
@@ -214,23 +223,20 @@ export default {
   }
   .stars {
     position: absolute;
-    top: 10%;
-    right: 1%;
+    bottom: 15%;
+    left: 20%;
     z-index: 30;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 6%;
+    height: 1rem;    
     img {
-      width: 100%;
-      margin-bottom: 4px;
+      height: 100%;
+      margin-right: 4px;
     }
   }
   .levels {
     position: absolute;
-    bottom: 18%;
-    left: 8%;
+    top: 13%;
+    left: 0%;
     z-index: 30;
     display: flex;
     flex-direction: column;

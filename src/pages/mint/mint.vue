@@ -49,11 +49,11 @@
           <div class="price_box" v-show="activeIndex == item.key">
             <img
               class="price_icon"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/usdt.png"
               alt=""
             />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
-              item.price
+              item.price 
             }}</span>
           </div>
         </SwiperSlide>
@@ -65,7 +65,7 @@
 
 <script >
 import { reactive, toRefs, onBeforeMount } from "vue";
-import { useStore } from "vuex";
+// import { useStore } from "vuex";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -84,7 +84,7 @@ export default {
     InjectGoBack,
   },
   setup() {
-    const store = useStore();
+    // const store = useStore();
     const route = useRoute();
     const { t } = useI18n();
     const data = reactive({
@@ -92,10 +92,10 @@ export default {
       blindBoxes: [
         {
           key: 0,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_0.png",
-          price: 5000,
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type_0.png",
+          price: 30,
           title: t("drawQuality1"),
-          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type0_bg.png",
+          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type0_bg.png",
           maxWidth: 180,
           maxHeight: 344,
           offsetX: "-45%",
@@ -103,10 +103,10 @@ export default {
         },
         {
           key: 1,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_1.png",
-          price: 10000,
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type_1.png",
+          price: 100,
           title: t("drawQuality2"),
-          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type1_bg.png",
+          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type1_bg.png",
           maxWidth: 430,
           maxHeight: 157,
           offsetX: "-50%",
@@ -114,10 +114,10 @@ export default {
         },
         {
           key: 2,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type_2.png",
-          price: 30000,
-          title: t("drawQuality1"),
-          bg: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/type2_bg.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type_2.png",
+          price: 300,
+          title: t("drawQuality3"),
+          bg: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/type2_bg.png",
           maxWidth: 311,
           maxHeight: 337,
           offsetX: "-60%",
@@ -140,18 +140,18 @@ export default {
         const temp = atob(route.query.invite);
         localStorage.setItem("invite", temp);
       }
-      await getPrice();
+      // await getPrice();
     });
-    const getPrice = async () => {
-      const c = store.state.c_recruit;
-      const res = await c.methods.getBlindBoxPrice().call();
-      if (res.length) {
-        const priceMap = res.map((x) => data.web3.utils.fromWei(x, "ether"));
-        priceMap.forEach((i, idx) => {
-          data.blindBoxes[idx].price = i;
-        });
-      }
-    };
+    // const getPrice = async () => {
+    //   const c = store.state.c_recruit;
+    //   const res = await c.methods.getBlindBoxPrice().call();
+    //   if (res.length) {
+    //     const priceMap = res.map((x) => data.web3.utils.fromWei(x, "ether"));
+    //     priceMap.forEach((i, idx) => {
+    //       data.blindBoxes[idx].price = i;
+    //     });
+    //   }
+    // };
     const onSlideChange = (e) => {
       data.activeIndex = e.realIndex;
     };

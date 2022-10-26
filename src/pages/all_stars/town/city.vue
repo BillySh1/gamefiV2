@@ -10,7 +10,7 @@
       class="back"
     >
       <div class="inner">
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/back.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/back.png" alt="" />
         <div class="text">返回</div>
       </div>
     </div>
@@ -36,16 +36,16 @@
     </div>
     <div class="board">
       <div class="inner" @click="() => $router.push({ name: 'bf_history' })">
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/board.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/board.png" alt="" />
         <div class="text">理事馆</div>
       </div>
       <div class="inner" @click="() => $router.push({ name: 'bf_casio' })">
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/casio_bg.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/casio_bg.png" alt="" />
         <div class="text">赌场</div>
       </div>
     </div>
     <div v-if="player.baseSpeed == 0" class="empty" @click="() => $router.push({ name: 'bf_stake' })">
-      <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/empty.png" alt="" />
+      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/empty.png" alt="" />
     </div>
   </div>
 </template>
@@ -64,19 +64,19 @@ export default {
         {
           key: 0,
           name: "天策府",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/item_0.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/item_0.png",
           to: "bf_stake",
         },
         {
           key: 1,
           name: "驿站",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/item_1.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/item_1.png",
           to: "bf_store",
         },
         {
           key: 2,
           name: "名人堂",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/item_2.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/item_2.png",
           disable: true,
         },
       ],
@@ -87,10 +87,10 @@ export default {
     });
     const campImg = computed(() => {
       return [
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/c_0.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/c_1.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/c_2.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/c_3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/c_0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/c_1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/c_2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/c_3.png",
       ][data.camp];
     });
     const campText = computed(() => {
@@ -98,10 +98,10 @@ export default {
     });
     const getBgImg = () => {
       const campBg = [
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/bg_0.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/bg_1.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/bg_2.png",
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/city/bg_3.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/bg_0.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/bg_1.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/bg_2.png",
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/city/bg_3.png",
       ][data.camp];
       bg.value.style.background = `url(${campBg}) no-repeat`;
       bg.value.style.backgroundSize = "100% 100%";

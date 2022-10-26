@@ -1,12 +1,12 @@
 <template>
   <div class="com_box">
     <div class="power_box">
-      <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/power_bg.png" />
+      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png" />
       <div class="inner">
         <div class="text">战力值</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
-          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/power_item.png" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png" alt="" />
         </div>
       </div>
     </div>
@@ -15,10 +15,10 @@
         需要消耗
         <div class="num">{{ updateInfo.breakGemUse }}</div>
         <strong style="color: yellow">玉灵瓶</strong> 突破
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/item/yuruyi.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png" alt="" />
       </div>
       <div class="sub_info">
-        当前拥有 <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/item/yuruyi.png" alt="" /><span
+        当前拥有 <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png" alt="" /><span
           style="color: yellow"
           >玉灵瓶</span
         >, 数量: {{ remainNum }}
@@ -28,10 +28,10 @@
           >数量不足</span
         >
       </div>
-      <img class="divider" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/divider.png" />
+      <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider.png" />
     </div>
     <div v-if="canDo" class="over_box">
-      <img class="badge" src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/proper_badge.png" />
+      <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/proper_badge.png" />
       <div class="info">
         您将为 <span style="color: yellow">{{ info.name }}</span> 突破并升星
       </div>
@@ -47,7 +47,7 @@
         "
         @click="handleBtnClick"
       >
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/action_bg_round.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg_round.png" alt="" />
         <div class="inner">{{ btnText }}</div>
       </div>
     </div>
@@ -202,7 +202,7 @@ export default {
 .com_box {
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/upgrade/over_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/over_bg.png") no-repeat;
   background-size: 100% 100%;
   .empty {
     margin-top: 4rem;

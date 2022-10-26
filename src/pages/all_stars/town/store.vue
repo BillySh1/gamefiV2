@@ -9,7 +9,7 @@
     <div class="inner">
       <div class="left">
         <div class="title">
-          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/title_bg.png" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/title_bg.png" alt="" />
           <div class="text">{{ curTabItem.title }}</div>
         </div>
         <div class="subText">
@@ -19,7 +19,7 @@
           <div class="item" v-for="item in boxMap" :key="item.key">
             <img class="item_img" :src="item.img" alt="" />
             <div class="intro">
-              <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_bg.png" alt="" />
+              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_bg.png" alt="" />
               <div class="text" :style="`color:${item.color}`">
                 {{ item.name }}
               </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="back" @click="() => $router.go(-1)">
-          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/back.png" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/back.png" alt="" />
           <div class="text">返回</div>
         </div>
         <div class="stockDetail">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="right">
-        <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/right_bg.png" alt="" />
+        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/right_bg.png" alt="" />
         <div class="tab_box">
           <div
             class="item"
@@ -49,8 +49,8 @@
             <img
               :src="
                 item.key == curTab
-                  ? 'https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/active_tab.png'
-                  : 'https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/inactive_tab.png'
+                  ? 'https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/active_tab.png'
+                  : 'https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/inactive_tab.png'
               "
               alt=""
             />
@@ -61,25 +61,25 @@
         </div>
         <div class="inner">
           <div class="title_img">
-            <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/box.png" alt="" />
+            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/box.png" alt="" />
           </div>
           <div class="name_price">
             <div class="name">
               {{ stockName }}
             </div>
             <div class="price">
-              <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc.png" alt="" />
+              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mmc.png" alt="" />
               {{ stockPrice }}
             </div>
           </div>
           <div class="action">
-            <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/right_d_bg.png" alt="" />
+            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/right_d_bg.png" alt="" />
             <div class="ac_inner">
               <div class="input_box">
                 <img
                   style="cursor: pointer"
                   class="img_action"
-                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/minus.svg"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
                   @click="
                     () => {
                       const temp = buyNum - 1;
@@ -94,7 +94,7 @@
                 <div class="ipt_bg">
                   <img
                     class="ipt_img"
-                    src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/input.png"
+                    src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/input.png"
                     alt=""
                   />
                   <input
@@ -108,7 +108,7 @@
                 <img
                   class="img_action"
                   style="cursor: pointer"
-                  src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mint/add.svg"
+                  src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
                   @click="
                     () => {
                       buyNum += 1;
@@ -163,31 +163,31 @@ export default {
       boxMap: [
         {
           key: 0,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_0.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_0.png",
           name: "青铜骏马",
           color: "#B5B5B5",
         },
         {
           key: 1,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_1.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_1.png",
           name: "白金汗血",
           color: "#3F63C7",
         },
         {
           key: 2,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_2.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_2.png",
           name: "银狐牺尊",
           color: "#5D17AC",
         },
         {
           key: 3,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_3.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_3.png",
           name: "白神象彝",
           color: "#BA5F0F",
         },
         {
           key: 4,
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/0_4.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/0_4.png",
           name: "龙刻陨星",
           color: "#FFDF3C",
         },
@@ -344,7 +344,7 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/bf_store_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/bf_store_bg.png") no-repeat;
   background-size: 100% 100%;
   .inner {
     width: 100%;

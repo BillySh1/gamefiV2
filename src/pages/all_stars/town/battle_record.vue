@@ -10,7 +10,7 @@
     >
       <img
         class="close"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/close.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/close.svg"
         alt=""
         @click="
           (e) => {
@@ -22,7 +22,7 @@
 
       <img
         class="bg"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/modal_bg.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/modal_bg.png"
         alt=""
       />
       <div class="title">战斗日志</div>

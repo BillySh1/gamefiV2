@@ -3,7 +3,7 @@
     <div class="content">
       <img
         class="bg_badge"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/bg_badge.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/bg_badge.svg"
         alt=""
       />
 

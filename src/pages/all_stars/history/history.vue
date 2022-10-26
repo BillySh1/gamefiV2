@@ -3,7 +3,7 @@
     <div class="topbar">
       <div class="title">
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/title_bg.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/title_bg.png"
           alt=""
         />
         <div class="text">理事馆</div>
@@ -11,7 +11,7 @@
     </div>
     <div class="main">
       <img
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/history/history_ctx_bg.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/history/history_ctx_bg.png"
         alt=""
       />
       <div class="content">
@@ -21,7 +21,7 @@
     <div class="footer">
       <div class="back" @click="() => $router.go(-1)">
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/store/back.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/store/back.png"
           alt=""
         />
         <div class="text">返回</div>
@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/history/history_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/history/history_bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

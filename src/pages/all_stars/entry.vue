@@ -16,21 +16,21 @@
       <div class="content">
         <img
           class="logo"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/logo.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/logo.png"
           alt=""
         />
         <img
           class="text"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/text.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/text.png"
           alt=""
         />
         <img
           class="divider"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/divider.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/divider.png"
           alt=""
         />
         <div class="enter" @click="jump">
-          <img src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/btn_bg.png" alt="" />
+          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/btn_bg.png" alt="" />
           <div class="text">加入战斗</div>
         </div>
         <div class="back" @click="() => $router.push({ name: 'home' })">
@@ -78,13 +78,13 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/bg.png") no-repeat;
   background-size: 100% 100%;
   .mask {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/mask.png") no-repeat;
+    background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/mask.png") no-repeat;
     background-size: 100% 100%;
   }
   .fire {

@@ -74,6 +74,14 @@ const c_map = {
     abi: StakingABI.abi,
     address: addressMap.staking,
   },
+  c_ethf: {
+    abi: MDAOTokenABI.abi,
+    address: addressMap.ethf,
+  },
+  c_rm: {
+    abi: MDAOTokenABI.abi,
+    address: addressMap.rm,
+  },
 };
 
 const store = createStore({

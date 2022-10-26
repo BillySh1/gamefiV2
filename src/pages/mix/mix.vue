@@ -28,7 +28,7 @@
           您将使用
           <img
             style="width: 4rem"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/item/jinjie.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/jinjie.png"
             alt=""
           />
           并尊盟约 x {{ costNum }} 对 {{ leftInfo.name }}和
@@ -82,7 +82,7 @@
         >
           <img
             v-if="!qualityCost"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/item_add.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/item_add.png"
             alt=""
           />
           <div v-else>
@@ -114,7 +114,7 @@
         >
           <img
             v-if="!attrCost"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/item_add.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/item_add.png"
             alt=""
           />
           <div v-else>
@@ -147,14 +147,14 @@
       />
       <img
         class="mix_mist"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/mix_mist.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/mix_mist.png"
         alt=""
       />
     </div>
     <div v-if="!showPack && !loading" class="content">
       <img
         class="mix_mist"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/mix_mist.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/mix_mist.png"
         alt=""
       />
       <div class="inner">
@@ -170,7 +170,7 @@
         >
           <img
             class="mix_item_bg"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/mix_item.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/mix_item.png"
             alt=""
           />
           <div class="hero_selected" v-if="leftInfo">
@@ -179,14 +179,14 @@
           <img
             v-if="leftInfo"
             class="ready"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/ready.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
         </div>
         <div class="mix_swirl">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/swirl.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/swirl.png"
             alt=""
           />
         </div>
@@ -202,7 +202,7 @@
         >
           <img
             class="mix_item_bg"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/mix_item.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/mix_item.png"
             alt=""
           />
           <div class="hero_selected" v-if="rightInfo">
@@ -211,7 +211,7 @@
           <img
             v-if="rightInfo"
             class="ready"
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/ready.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/ready.png"
             alt=""
           />
           <div v-else class="no_selected">{{ $t("pleaseSelectCard") }}</div>
@@ -220,7 +220,7 @@
       <div class="tip_badge" @click="() => (showModal = true)">
         <div class="inner">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/tip_badge.svg"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/tip_badge.svg"
           />
           <div class="text">进阶提醒</div>
         </div>
@@ -685,7 +685,7 @@ export default {
         cursor: pointer;
         width: 5rem;
         height: 5rem;
-        background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/mix/item_bg.png")
+        background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mix/item_bg.png")
           no-repeat;
         background-size: 100% 100%;
         margin: 0 1rem;

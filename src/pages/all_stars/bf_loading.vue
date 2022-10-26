@@ -3,7 +3,7 @@
     <InjectGoBack :custom="true" v-if="isMobile" @back="close" />
     <div class="p_content">
       <img
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/loading_logo.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/loading_logo.png"
       />
       <div class="text">
         {{ progressText }}
@@ -78,7 +78,7 @@ export default {
         .context("../../allstar_assets/", true, /\.svg$/)
         .keys();
       const prefix =
-        "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/";
+        "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/";
       files.map((i) => {
         const _relativePath = path.join("allstar_assets", i);
         // const file = require(`../${_relativePath}`);

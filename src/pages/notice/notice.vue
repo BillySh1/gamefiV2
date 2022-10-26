@@ -5,7 +5,7 @@
     <div class="content">
       <div class="border">
         <img
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/notice/border.svg"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/notice/border.svg"
           alt=""
         />
         <div v-if="noticeData.length > 0" class="inner">
@@ -90,7 +90,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/notice/notice_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/notice/notice_bg.png")
     no-repeat;
   background-size: cover;
 }

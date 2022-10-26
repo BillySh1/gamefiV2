@@ -3,13 +3,13 @@
     <CommonPageHeader :title="pageTitle" />
     <img
       class="badge"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/hero_sit.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/hero_sit.png"
       alt=""
     />
     <img
       v-if="!loading"
       class="light"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/store/success_bg.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/success_bg.png"
       alt=""
     />
     <div class="content">

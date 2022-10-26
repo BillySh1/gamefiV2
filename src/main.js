@@ -10,14 +10,6 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
       // 移动端全屏
       fullScreen: 1,
     });
-    tp.popGestureRecognizerEnable({
-      // 禁止iOS自带的左滑手势返回
-      enable: false,
-    });
-    tp.forwardNavigationGesturesEnable({
-      // 禁止webview自带的左滑手势触发goback
-      enable: false,
-    });
     sessionStorage.setItem("fullScreen", "1");
   }
 }
@@ -35,7 +27,7 @@ const _app = createApp(App).use(i18n);
 _app.config.globalProperties.$toast = createToast;
 _app.config.globalProperties.resolveAssets = (path) => {
   const ipfs_host =
-    "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/";
+    "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/";
   return ipfs_host + path;
 };
 _app.component("Lottie", lottie);

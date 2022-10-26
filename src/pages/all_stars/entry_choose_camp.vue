@@ -3,12 +3,12 @@
   <div class="box">
     <img
       class="bg"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/choose_camp.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/choose_camp.png"
       alt=""
     />
     <img
       class="logo"
-      src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/logo.png"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/logo.png"
       alt=""
     />
     <Lottie
@@ -63,17 +63,17 @@
       >
         <img
           class="b"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/ball.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/ball.png"
           alt=""
         />
         <img
           class="c"
-          :src="`https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/all_stars/entry/camp/c_${item.key}.png`"
+          :src="`https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/camp/c_${item.key}.png`"
           alt=""
         />
         <img
           class="p"
-          :src="`https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/cardImgs/hero/bg/c${item.key}.png`"
+          :src="`https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/bg/c${item.key}.png`"
           alt=""
         />
         <div class="text">{{ item.name }}</div>

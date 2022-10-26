@@ -4,25 +4,25 @@
       <img
         @click="() => $emit('close')"
         class="close"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/close.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/popups/close.svg"
         alt=""
       />
       <img
         class="c_bg"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/scroll_vertical.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/popups/scroll_vertical.png"
         alt=""
       />
       <div class="top">
         <div class="place">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/place_bg.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/popups/place_bg.png"
             alt=""
           />
           <div class="text">{{ placeText }}</div>
         </div>
         <div class="status">
           <img
-            src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/alert_icon.png"
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/popups/alert_icon.png"
             alt=""
           />
           <div>据点锁定</div>
@@ -39,7 +39,7 @@
             @click="()=>$emit('unlock')"
           >
             <img
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/allstar_assets/popups/btn_orange.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/popups/btn_orange.png"
               alt=""
             />
             <div class="text">打扫战场</div>

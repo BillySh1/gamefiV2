@@ -18,7 +18,7 @@
     <div class="swap" @click="toSwap">
       <img
         class="img"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc_logo.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mmc_logo.svg"
         alt=""
       />
       <div class="text">Swap</div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="call disable" @click="() => $router.push({ name: 'mint' })">
+    <div class="call" @click="() => $router.push({ name: 'mint' })">
       <div class="common_call">
         <img
           :src="
@@ -63,44 +63,40 @@ export default {
     const menuList = computed(() => [
       {
         key: "pack",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/pack.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/pack.png",
         href: "pack",
         text: t("pack"),
       },
       {
         key: "market",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/market.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/market.png",
         href: "market",
         text: t("market"),
         disable: true,
       },
       {
         key: "exchange",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/exchange.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/exchange.png",
         href: "exchange",
         text: t("exchange"),
-        disable: true,
       },
       {
         key: "store",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/store.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/store.png",
         href: "store",
         text: t("store"),
-        disable: true,
       },
       {
         key: "reborn",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/reborn.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/reborn.png",
         href: "reborn",
         text: t("reborn"),
-        disable: true,
       },
       {
         key: "mix",
-        img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mix.png",
+        img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mix.png",
         href: "mix",
         text: t("mix"),
-        disable: true,
       },
     ]);
     const data = reactive({});

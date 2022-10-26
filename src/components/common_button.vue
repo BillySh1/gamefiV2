@@ -13,7 +13,7 @@ export default {
     const btn = ref(null);
     onMounted(() => {
       if (prop.circle) {
-        btn.value.style.background = `url(https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/circle_btn.png) no-repeat`;
+        btn.value.style.background = `url(https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/circle_btn.png) no-repeat`;
         btn.value.style.backgroundSize = "100% 100%";
       }
     });
@@ -32,7 +32,7 @@ export default {
   position: relative;
   width: fit-content;
   padding: 0.5rem 1rem;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/pack/active_tab.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/active_tab.png")
     no-repeat;
   background-size: 100% 100%;
   font-size: 1.2rem;

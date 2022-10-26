@@ -25,7 +25,7 @@
           <div class="item">
             <img
               class="icon"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/exchange/coin.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/coin.png"
             />
             <span class="name">{{ t("coin") }}</span>
             <span>{{ m3t_balance }}</span>
@@ -33,7 +33,7 @@
           <div class="item">
             <img
               class="icon"
-              src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/exchange/usdt.png"
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/usdt.png"
             />
             <span class="name">USDT</span>
             <span>{{ usdt_balance }}</span>
@@ -43,7 +43,7 @@
           <div class="buy_num">
             <div class="icon">
               <img
-                src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/exchange/usdt.png"
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/usdt.png"
               />
             </div>
             <input
@@ -130,7 +130,7 @@ export default {
       try {
         proxy.$toast(t('common_wait_approve'), store.state.toast_info);
         const c = store.state.c_usdt;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
         const addr = store.state.c_m3t.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -157,7 +157,7 @@ export default {
       try {
         proxy.$toast('wait', store.state.toast_info);
         const c = store.state.c_m3t;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
           .recharge(value)
@@ -202,7 +202,7 @@ export default {
       ).toFixed(2);
       const raw_usdt = await c_usdt.methods.balanceOf(data.account).call();
       data.usdt_balance = Number.parseInt(
-        data.web3.utils.fromWei(raw_usdt, "ether"),
+        data.web3.utils.fromWei(raw_usdt, "picoether"),
         10
       ).toFixed(2);
     };
@@ -222,7 +222,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/exchange/ex_bg.png")
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/ex_bg.png")
     no-repeat;
   background-size: 100% 100%;
 }

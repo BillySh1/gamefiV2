@@ -6,7 +6,7 @@
     <div v-else class="page_title">
       <img
         class="title_badge"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/active_title.png"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/active_title.png"
         alt=""
       />
       {{ title }}
@@ -24,7 +24,7 @@
         </div>
         <img
           class="img_right"
-          src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/currency_plus.png"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/currency_plus.png"
        
         />
       </div>
@@ -33,13 +33,13 @@
       <img
         @click="$router.push({ name: 'notice' })"
         class="icon"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/notice.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/notice.svg"
         alt=""
       />
       <img
         @click="switchLang"
         class="icon"
-        src="https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/lang.svg"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/lang.svg"
         alt=""
       />
       <img
@@ -79,31 +79,31 @@ export default {
       list: [
         {
           key: "mmc",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/mmc.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mmc.png",
           value: 0,
         },
         {
           key: "m3t",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/exchange/coin.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/coin.png",
           value: 0,
           href: "exchange",
         },
         {
           key: "card",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/card.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/card.png",
           value: 0,
           href: "mint",
         },
         {
           key: "grain",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/grain.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/grain.png",
           value: 0,
           href: "storeDetail",
           tokenId: 12,
         },
         {
           key: "drum",
-          img: "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/drum.png",
+          img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/drum.png",
           value: 0,
           href: "storeDetail",
           tokenId: 11,
@@ -119,8 +119,8 @@ export default {
     });
     const getScreenAciton = computed(() => {
       return data.isFull
-        ? "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/exitFullScreen.png"
-        : "https://bafybeickixvp7jbv6tbrhv7xklr5vy2t6j6qgvf6maugc5xrvmj6tocd3u.ipfs.4everland.io/rich/assets/common/fullScreen.png";
+        ? "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/exitFullScreen.png"
+        : "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/fullScreen.png";
     });
     const exitFullScreen = () => {
       const tp = require("tp-js-sdk");
@@ -152,16 +152,17 @@ export default {
       await getInfo();
     });
     const getInfo = async () => {
-      const mmc = store.state.c_mdao;
+      // todo: temp kill mdao
+      // const mmc = store.state.c_mdao;
       const shop = store.state.c_richShop;
       const hero = store.state.c_hero;
       const m3t = store.state.c_m3t;
       const cardNum = await hero.methods.cardList(data.account).call();
-      const mmcBalance = await mmc.methods.balanceOf(data.account).call();
+      // const mmcBalance = await mmc.methods.balanceOf(data.account).call();
       const m3tBalance = await m3t.methods.balanceOf(data.account).call();
-      data.list[0].value = data.web3.utils
-        .fromWei(mmcBalance, "ether")
-        .split(".")[0];
+      // data.list[0].value = data.web3.utils
+      //   .fromWei(mmcBalance, "ether")
+      //   .split(".")[0];
       data.list[1].value = data.web3.utils
         .fromWei(m3tBalance, "ether")
         .split(".")[0];
