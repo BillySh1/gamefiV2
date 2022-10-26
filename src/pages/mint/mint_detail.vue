@@ -51,11 +51,7 @@
           <div class="right_c_price">
             <img
               style="margin-right: 2rem; border-radius: 99%"
-              :src="
-                payFrom == 0
-                  ? 'https://www.gate.io/images/coin_icon/64/ethf.png'
-                  : 'https://ethf.mdaoswap.com/rmn.jpg'
-              "
+              :src="'https://www.gate.io/images/coin_icon/64/ethf.png'"
             />
             <span>{{ showPrice }}</span>
           </div>
@@ -71,24 +67,8 @@
             <div class="input_box">
               <img
                 style="cursor: pointer"
-                class="img_action"
+                class="img_action disable"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
-                @click="
-                  () => {
-                    if (payFrom == 0) {
-                      payFrom = 1;
-                      if (isApproved) {
-                        btnStatus = 1;
-                      } else {
-                        btnStatus = 0;
-                      }
-                    } else {
-                      payFrom = 0;
-                      btnStatus = 1;
-                    }
-                    getCost();
-                  }
-                "
               />
               <div class="ipt_bg">
                 <img
@@ -101,25 +81,9 @@
                 </div>
               </div>
               <img
-                class="img_action"
+                class="img_action disable"
                 style="cursor: pointer"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
-                @click="
-                  () => {
-                    if (payFrom == 0) {
-                      payFrom = 1;
-                      if (isApproved) {
-                        btnStatus = 1;
-                      } else {
-                        btnStatus = 0;
-                      }
-                    } else {
-                      payFrom = 0;
-                      btnStatus = 1;
-                    }
-                    getCost();
-                  }
-                "
               />
             </div>
             <div class="input_box">
@@ -150,7 +114,6 @@
                   @input="
                     () => {
                       buyValue = Number($event.target.value.replace(/\D+/, ''));
-                     
                     }
                   "
                 />
@@ -259,9 +222,9 @@ export default {
     };
 
     const btnClick = async () => {
-      if(data.buyValue > 30){
+      if (data.buyValue > 30) {
         proxy.$toast(t("max num 30"), store.state.toast_error);
-        return
+        return;
       }
       if (data.btnStatus == 0) {
         await approve();
@@ -514,6 +477,11 @@ export default {
   margin-right: 3rem;
   .img_action {
     width: 2rem;
+  }
+  .disable{
+    filter: grayscale(1);
+    pointer-events: none;
+    user-select: none;
   }
   .ipt_img {
     margin: 0 1rem;
