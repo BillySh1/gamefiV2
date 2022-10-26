@@ -130,7 +130,7 @@ export default {
       try {
         proxy.$toast(t('common_wait_approve'), store.state.toast_info);
         const c = store.state.c_usdt;
-        const value = data.web3.utils.toWei(data.buyNum.toString(), "ether");
+        const value = data.web3.utils.toWei(data.buyNum.toString(), "picoether");
         const addr = store.state.c_m3t.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -202,7 +202,7 @@ export default {
       ).toFixed(2);
       const raw_usdt = await c_usdt.methods.balanceOf(data.account).call();
       data.usdt_balance = Number.parseInt(
-        data.web3.utils.fromWei(raw_usdt, "ether"),
+        data.web3.utils.fromWei(raw_usdt, "picoether"),
         10
       ).toFixed(2);
     };
