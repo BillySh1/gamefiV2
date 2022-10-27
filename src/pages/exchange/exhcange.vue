@@ -48,15 +48,23 @@
             </div>
             <input
               class="ipt"
-              v-model="buyNum"
-              @input="buyNum = Number($event.target.value.replace(/\D+/, ''))"
+              v-model="buyNumUSDT"
+              @input="
+                buyNumUSDT = Number($event.target.value.replace(/\D+/, ''))
+              "
             />
             <div class="text">USDT</div>
           </div>
+
           <div class="xs">
             <div>{{ t("ex_can_ex") }}</div>
-            <div style="margin: 0 1rem">{{ 50 * buyNum }}</div>
+            <div style="margin: 1rem">{{ 50 * buyNumUSDT }}</div>
             <div>{{ t("coin") }}</div>
+          </div>
+          <div class="xs">
+            <div>COST</div>
+            <div style="margin: 0 1rem">{{ ethfCost }}</div>
+            <div>ETHF</div>
           </div>
         </div>
 
@@ -64,6 +72,11 @@
           <div class="badge">{{ t("ex_ex_input") }}</div>
           <CommonButton class="btn" @click="btnClick">
             {{ btnText }}
+          </CommonButton>
+        </div>
+        <div class="action_button">
+          <CommonButton class="btn" @click="buyWithETHF">
+            BUY WITH ETHF
           </CommonButton>
         </div>
       </div>
@@ -80,6 +93,7 @@ import {
   onBeforeMount,
   computed,
   getCurrentInstance,
+  watch,
 } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -105,7 +119,7 @@ export default {
     const { proxy } = getCurrentInstance();
     const data = reactive({
       pageTitle: t("ex_page_title"),
-      buyNum: 1000,
+      buyNumUSDT: 1000,
       btnStatus: 0,
       m3t_balance: 0,
       usdt_balance: 0,
@@ -115,7 +129,14 @@ export default {
         animationData: require("../../assets/common/loading.json"),
       },
       loading: false,
+      ethfCost: 0,
     });
+    watch(
+      () => data.buyNumUSDT,
+      async () => {
+        await getETHFCost();
+      }
+    );
     const btnText = computed(() => {
       return [t("approve_usdt"), t("ex_to_coin")][data.btnStatus];
     });
@@ -126,12 +147,57 @@ export default {
         await exchange();
       }
     };
+    const getETHFCost = async () => {
+      const c = store.state.c_m3t;
+      const value = data.web3.utils.toWei(
+        data.buyNumUSDT.toString(),
+        "picoether"
+      );
+      const res = await c.methods.getETHFCost(value).call();
+      data.ethfCost = Number(
+        data.web3.utils.fromWei(res.toString(), "ether")
+      ).toFixed(2);
+    };
+    const buyWithETHF = async () => {
+      try {
+        proxy.$toast("wait", store.state.toast_info);
+        const c = store.state.c_m3t;
+        const value = data.web3.utils.toWei(
+          data.buyNumUSDT.toString(),
+          "picoether"
+        );
+        const txValue = data.web3.utils.toWei(
+          (data.ethfCost * 1.1).toString(),
+          "ether"
+        );
+        const gasPrice = await data.web3.eth.getGasPrice();
+        const gas = await c.methods
+          .recharge(value, 0)
+          .estimateGas({ from: data.account, value: txValue });
+        data.loading = true;
+        const res = await c.methods.recharge(value, 0).send({
+          gas: gas,
+          gasPrice: gasPrice,
+          from: data.account,
+          value: txValue,
+        });
+        if (res.status) {
+          proxy.$toast(t("ex_success"), store.state.toast_success);
+        }
+      } catch (e) {
+        proxy.$toast(t("ex_failed"), store.state.toast_error);
+        console.log(e);
+      } finally {
+        await getBalanceInfo();
+        data.loading = false;
+      }
+    };
     const approve = async () => {
       try {
         proxy.$toast(t("common_wait_approve"), store.state.toast_info);
         const c = store.state.c_usdt;
         const value = data.web3.utils.toWei(
-          data.buyNum.toString(),
+          data.buyNumUSDT.toString(),
           "picoether"
         );
         const addr = store.state.c_m3t.options.address;
@@ -161,15 +227,15 @@ export default {
         proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_m3t;
         const value = data.web3.utils.toWei(
-          data.buyNum.toString(),
+          data.buyNumUSDT.toString(),
           "picoether"
         );
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .recharge(value)
+          .recharge(value, 1)
           .estimateGas({ from: data.account });
         data.loading = true;
-        const res = await c.methods.recharge(value).send({
+        const res = await c.methods.recharge(value, 1).send({
           gas: gas,
           gasPrice: gasPrice,
           from: data.account,
@@ -197,6 +263,7 @@ export default {
         }
       );
       await getBalanceInfo();
+      await getETHFCost();
     });
     const getBalanceInfo = async () => {
       const c_m3t = store.state.c_m3t;
@@ -219,6 +286,8 @@ export default {
       ...refData,
       btnText,
       btnClick,
+      buyWithETHF,
+      getETHFCost,
     };
   },
 };
