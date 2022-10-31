@@ -65,10 +65,10 @@
 </template>
 
 <script>
-const host = "http://54.151.194.138:8999";
 import { reactive, toRefs, watch } from "vue";
 import postData from "../../../utils/useFetch";
 import TableItem from "../../../components/table_item.vue";
+import { SEVER_HOST } from "../../../utils/constants";
 export default {
   name: "inject_modal",
   props: ["value", "title", "btnText", "btnDisable", "player"],
@@ -91,7 +91,7 @@ export default {
       }
     );
     const getRemoteData = async () => {
-      const url = host + "/conflict/list";
+      const url = SEVER_HOST + "/conflict/list";
       const res = await postData(url, {
         page: data.page,
         limit_num: 4,

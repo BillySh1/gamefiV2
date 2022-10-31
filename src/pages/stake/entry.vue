@@ -13,17 +13,14 @@
         }
       "
     />
-    <div v-if="player.inStaking" class="ing">
+    <div v-if="player.inFarm" class="ing">
       <div class="inner">
         <img src="../../assets/stake/map/ing.png" alt="" />
         <div class="text">探索中</div>
       </div>
     </div>
-    <div v-if="!player.inStaking" class="help_text">
+    <div v-if="!player.inFarm" class="help_text">
       请选择 {{ curPlace }} 开始挑战
-    </div>
-    <div v-else class="help_text progress">
-      <Progress :value="100 * Number(player.percent)" />
     </div>
     <div
       class="float_city"
@@ -33,7 +30,7 @@
       @click="
         () => {
           if (item.active) {
-            if (player.inStaking) {
+            if (player.inFarm) {
               $router.push({
                 name: 'stk_main',
               });
@@ -73,12 +70,10 @@ import { reactive, toRefs, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3";
 import BackToHome from "./back_to_home";
-import Progress from "./components/progress.vue";
 export default {
   name: "entry",
   components: {
     BackToHome,
-    Progress,
   },
   setup() {
     const store = useStore();
@@ -109,7 +104,8 @@ export default {
     });
     const getPlayer = async () => {
       const c = store.state.c_staking;
-      const res = await c.methods.players(data.account).call();
+      const res = await c.methods.getUserInfo(data.account).call();
+      console.log("player", res);
       data.player = res;
     };
     const refData = toRefs(data);
@@ -159,9 +155,6 @@ export default {
   transform: translateX(-50%);
   font-size: 1.5rem;
   color: white;
-}
-.progress {
-  width: 23rem;
 }
 
 .float_city {

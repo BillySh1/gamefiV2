@@ -57,7 +57,8 @@
       :style="
         info.rarity == 0
           ? 'width: 68%;top: 53%;left: 45%;'
-          : $route.path.includes('upgrade')
+          : $route.path.includes('upgrade') ||
+            $route.path.includes('stk_go_detail')
           ? 'transform:translate(-43%,-69%)'
           : ''
       "
@@ -227,7 +228,7 @@ export default {
     left: 20%;
     z-index: 30;
     display: flex;
-    height: 1rem;    
+    height: 1rem;
     img {
       height: 100%;
       margin-right: 4px;

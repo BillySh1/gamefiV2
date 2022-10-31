@@ -3,7 +3,7 @@
     <div class="power_box">
       <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png" />
       <div class="inner">
-        <div class="text">战力值</div>
+        <div class="text">{{t('power')}}</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
           <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png" alt="" />
@@ -148,6 +148,7 @@ import { useStore } from "vuex";
 import { usePropertyName } from "../../utils/useHeroInfo";
 import InjectModal from "../../components/inject_modal.vue";
 import HeroCardItem from "../../components/hero_card_item.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "com_upgrade",
   props: ["info", "stockBox"],
@@ -169,6 +170,7 @@ export default {
       info: "",
       btnDsiabled: false,
     });
+    const { t } = useI18n();
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const modalBtnText = computed(() => {
@@ -329,6 +331,7 @@ export default {
       handleClickUpgrade,
       handleClickOneKeyUpgrade,
       modalBtnClick,
+      t,
     };
   },
 };

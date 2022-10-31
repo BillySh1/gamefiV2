@@ -46,7 +46,6 @@
 </template>
 
 <script>
-const host = "http://54.151.194.138:8999";
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -56,6 +55,8 @@ import TableItem from "../../components/table_item.vue";
 import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useI18n } from "vue-i18n";
+import { SEVER_HOST } from "../../utils/constants";
+import { formatText } from "../../utils/utils";
 export default {
   name: "store",
   components: {
@@ -104,7 +105,7 @@ export default {
       }
     };
     const getBoard = async () => {
-      const url = host + "/invite/getTotal";
+      const url = SEVER_HOST + "powerList/hero";
       const res = await postData(url, {
         page: 1,
         limit_num: 30,
@@ -115,15 +116,11 @@ export default {
       data.totalData = [];
       data.totalData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
-        data.totalData.push([
-          index + 1,
-          item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
-        ]);
+        data.totalData.push([index + 1, formatText(item.owner), item.power]);
       });
     };
     const getDayBoard = async () => {
-      const url = host + "/invite/getDay";
+      const url = SEVER_HOST + "powerList/player";
       const res = await postData(url, {
         page: 1,
         limit_num: 30,
@@ -134,11 +131,7 @@ export default {
       data.dayData = [];
       data.dayData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
-        data.dayData.push([
-          index + 1,
-          item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
-        ]);
+        data.dayData.push([index + 1, formatText(item.player), item.power]);
       });
     };
 
