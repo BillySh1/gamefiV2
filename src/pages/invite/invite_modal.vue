@@ -83,7 +83,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 30rem;
+  min-width: 45rem;
   background: linear-gradient(180deg, rgba(41, 22, 22, 0.54) 0%, #291616 100%);
   border-radius: 20px;
   border: 1px solid #765b34;

@@ -268,17 +268,13 @@ export default {
       try {
         proxy.$toast(t("common_wait_check"), store.state.toast_info);
         const c = store.state.c_recruit;
-        console.log(
-          data.rawPrice,
-          "gggg",
-          data.web3.utils.fromWei(data.rawPrice.toString(), "ether")
-        );
         const gasPrice = await data.web3.eth.getGasPrice();
         let invite = "0x0000000000000000000000000000000000000000";
         const _local = localStorage.getItem("invite");
         if (_local && _local.toLowerCase() != data.account.toLowerCase()) {
           invite = _local;
         }
+        
         const gas = await c.methods
           .buy(data.info.key, data.buyValue, invite, data.payFrom)
           .estimateGas({

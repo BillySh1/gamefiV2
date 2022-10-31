@@ -12,14 +12,14 @@
               :text="t('airdrop')"
             />
           </div>
-          <!-- <div class="float_item">
+          <div class="float_item">
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
                 :src="'https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/index/invite.png'"
                 :text="t('invite')"
               />
             </div>
-          </div> -->
+          </div>
         </div>
         <!-- <div class="flex">
           <div class="float_item" @click="jump('obtain')">

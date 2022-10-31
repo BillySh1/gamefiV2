@@ -46,7 +46,7 @@
 </template>
 
 <script>
-const host = "http://54.151.194.138:8999";
+
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -56,6 +56,7 @@ import TableItem from "../../components/table_item.vue";
 import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useI18n } from "vue-i18n";
+import { SEVER_HOST } from "../../utils/constants";
 export default {
   name: "store",
   components: {
@@ -104,7 +105,7 @@ export default {
       }
     };
     const getBoard = async () => {
-      const url = host + "/invite/getTotal";
+      const url = SEVER_HOST + "invite/getTotal";
       const res = await postData(url, {
         page: 1,
         limit_num: 30,
@@ -123,7 +124,7 @@ export default {
       });
     };
     const getDayBoard = async () => {
-      const url = host + "/invite/getDay";
+      const url = SEVER_HOST + "invite/getDay";
       const res = await postData(url, {
         page: 1,
         limit_num: 30,

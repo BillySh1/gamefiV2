@@ -53,7 +53,7 @@
               alt=""
             />
             <span class="swiper_price_value" style="margin-left: 3rem">{{
-              item.price 
+              item.price
             }}</span>
           </div>
         </SwiperSlide>
@@ -74,6 +74,8 @@ import initWeb3 from "../../utils/initWeb3.js";
 import "swiper/swiper.less";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { SEVER_HOST } from "../../utils/constants";
+import postData from "../../utils/useFetch";
 export default {
   name: "mint",
   components: {
@@ -136,12 +138,20 @@ export default {
           data.web3 = p;
         }
       );
-      if (route.query && route.query.invite) {
-        const temp = atob(route.query.invite);
+      if (route.query && route.query.i) {
+        const temp = await getInvite();
         localStorage.setItem("invite", temp);
       }
       // await getPrice();
     });
+    const getInvite = async () => {
+      const encode = route.query.i;
+      const url = SEVER_HOST + "invite/getAddress";
+      const res = await postData(url, {
+        invite_code: encode,
+      });
+      return res.data || "";
+    };
     // const getPrice = async () => {
     //   const c = store.state.c_recruit;
     //   const res = await c.methods.getBlindBoxPrice().call();

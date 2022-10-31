@@ -36,7 +36,9 @@
               {{ t("my_income") }}
             </div>
             <div class="item">
-              <div class="num">{{ inviteDay }} <span class="xs">MDAO</span></div>
+              <div class="num">
+                {{ inviteDay }} <span class="xs">MDAO</span>
+              </div>
               <div class="des">{{ t("day_income") }}</div>
             </div>
             <div class="item">
@@ -109,7 +111,6 @@
 </template>
 
 <script >
-const host = "http://54.151.194.138:8999";
 import { reactive, toRefs, onBeforeMount, getCurrentInstance } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -120,6 +121,7 @@ import InjectGoBack from "../../components/inject_go_back.vue";
 import postData from "../../utils/useFetch";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import { SEVER_HOST } from "../../utils/constants";
 export default {
   name: "invite",
   components: {
@@ -159,16 +161,21 @@ export default {
       await getAmount();
     });
     const getAmount = async () => {
-      const url = host + "/invite/getAmount";
+      const url = SEVER_HOST + "invite/getAmount";
       const res = await postData(url, {
         from: data.account,
       }).then((res) => res.data);
       data.inviteDay = data.web3.utils.fromWei(res.invite_day, "ether");
       data.inviteTotal = data.web3.utils.fromWei(res.invite_total, "ether");
     };
-    const generate = () => {
+    const generate = async() => {
+      proxy.$toast("waiting", store.state.toast_info);
+      const url = SEVER_HOST + 'invite/getInviteCode';
+      const res = await postData(url,{
+        Address: data.account
+      })
       data.encodeData =
-        window.location.host + "/#/mint?invite=" + btoa(data.account);
+        window.location.host + "/#/mint?i=" + res.data;
       proxy.$toast("邀请链接已生成", store.state.toast_success);
       data.showModal = true;
     };
