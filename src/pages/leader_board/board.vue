@@ -56,6 +56,7 @@ import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useI18n } from "vue-i18n";
 import { SEVER_HOST } from "../../utils/constants";
+import { formatText } from "../../utils/utils";
 export default {
   name: "store",
   components: {
@@ -115,11 +116,7 @@ export default {
       data.totalData = [];
       data.totalData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
-        data.totalData.push([
-          index + 1,
-          item.owner,
-          item.power,
-        ]);
+        data.totalData.push([index + 1, formatText(item.owner), item.power]);
       });
     };
     const getDayBoard = async () => {
@@ -134,11 +131,7 @@ export default {
       data.dayData = [];
       data.dayData.push([t("rank"), t("address"), t("power")]);
       res.list.map((item, index) => {
-        data.dayData.push([
-          index + 1,
-          item.player,
-          item.power,
-        ]);
+        data.dayData.push([index + 1, formatText(item.player), item.power]);
       });
     };
 

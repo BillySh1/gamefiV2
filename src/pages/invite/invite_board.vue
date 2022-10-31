@@ -57,6 +57,7 @@ import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useI18n } from "vue-i18n";
 import { SEVER_HOST } from "../../utils/constants";
+import { formatText } from '../../utils/utils';
 export default {
   name: "store",
   components: {
@@ -137,7 +138,7 @@ export default {
       res.list.map((item, index) => {
         data.dayData.push([
           index + 1,
-          item.inviter,
+          formatText(item.inviter),
           data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
         ]);
       });
