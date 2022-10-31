@@ -464,12 +464,13 @@ export default {
           "ether"
         ) || 0;
       const resPending = await c.methods.pending(data.account).call();
-      data.pendingRewardMDAO = Number.parseFloat(
+      data.pendingReward = Number.parseFloat(
         fromWei(resPending[0], "ether")
       ).toFixed(2);
       data.pendingRewardETHF = Number.parseFloat(
         fromWei(resPending[1], "ether")
       ).toFixed(2);
+      console.log(data.pendingReward, data.pendingRewardETHF,'pending')
       data.mdaoToDeposit =
         fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
         0;
@@ -644,10 +645,10 @@ export default {
       justify-content: center;
       white-space: nowrap;
       .title {
-        font-size: 1.3vmin;
+        font-size: 1vmin;
       }
       .coin {
-        width: 3rem;
+        width: 2rem;
         position: absolute;
         right: 0;
         transform: translateX(4rem);
@@ -893,9 +894,6 @@ export default {
       width: 4rem;
       margin-right: 2rem;
     }
-  }
-  .progress {
-    width: 23rem;
   }
 }
 .bonus_zone {
