@@ -420,7 +420,7 @@ const heroMap = {
   },
   err: {
     name: t("name_err"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/0/s1.png",
+    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s1.png",
     intro: t("intro_err"),
     avatar: require("../assets/avatar/4/s4.jpg"),
   },

@@ -108,7 +108,7 @@ export default {
     CommonPageHeader,
     CommonPageFooter,
     CommonButton,
-    InjectGoBack,
+    InjectGoBack, 
   },
   setup() {
     const { t } = useI18n({
