@@ -124,6 +124,7 @@ export default {
         });
       }
       data.loading = false;
+      getPlayer()
     };
     const clickMission = () => {
       localStorage.setItem("stake_diff", data.activeIndex);
