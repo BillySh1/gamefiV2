@@ -1,4 +1,4 @@
-# NFT-RICH
+# YOUNG_MONEY
 
 ## Project setup
 ```

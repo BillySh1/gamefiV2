@@ -69,6 +69,16 @@
             <img class="coin" src="../../assets/stake/coin.png" alt="" />
           </div>
         </div>
+        <div class="item">
+          <img src="../../assets/stake/main_item.png" alt="" />
+          <div class="inner">
+            <div class="title">全网有效收益(ETHF)</div>
+            <div style="font-size: 1.2rem; margin: 0 1rem">
+              {{ totalIncomeETHF }}
+            </div>
+            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+          </div>
+        </div>
       </div>
     </div>
     <div class="main_body">
@@ -90,11 +100,21 @@
           </div>
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
-              当前历史累计收益
-              {{ pendingReward }}
-              MDAO
+              <div>
+                当前历史累计收益
+                {{ pendingReward }}
+                MDAO
+              </div>
+              <div>
+                当前历史累计收益
+                {{ pendingRewardETHF }}
+                ETHF
+              </div>
             </div>
-            <div class="lg white">每区块奖励 {{ rewardPerblock }} MDAO</div>
+            <div class="lg white">
+              <div>每区块奖励 {{ rewardPerblockMDAO }} MDAO</div>
+              <div>每区块奖励 {{ rewardPerblockETHF }} ETHF</div>
+            </div>
           </div>
         </div>
         <div class="item">
@@ -104,15 +124,15 @@
           </div>
           <div class="detail">
             <div class="lg">
-              {{ fromWei(player.inviteReward, "ether") }}
-              MDAO
+              <div>{{ fromWei(player.inviteReward[0], "ether") }} MDAO</div>
+              <div>{{ fromWei(player.inviteReward[1], "ether") }} ETHF</div>
             </div>
           </div>
         </div>
       </div>
       <img class="divider" src="../../assets/stake/stake/divider.png" alt="" />
       <div class="right">
-        <div class="top">
+        <div class="top disable">
           <div class="dia">
             <img
               :src="
@@ -124,9 +144,10 @@
             />
           </div>
           <div v-if="Number(player.mdao) > 0">
-            当前已质押 {{ fromWei(player.mdao, "ether") }} MDAO
+            <!-- 当前已质押 {{ fromWei(player.mdao, "ether") }} MDAO -->
+            当前已质押 0 MDAO
           </div>
-          <div v-else class="cur">当前可质押 {{ mdaoToDeposit }} MDAO</div>
+          <div v-else class="cur">当前可质押 {{ "???" }} MDAO</div>
 
           <div class="rule" @click="() => (showRuleModal = true)">规则说明</div>
           <div
@@ -180,10 +201,15 @@
             <div>
               <p>当前任务奖励</p>
               <p>{{ pendingReward }} MDAO</p>
+              <p>{{ pendingRewardETHF }} MDAO</p>
             </div>
           </div>
           <div style="display: flex; align-items: center">
-            <div  class="big_btn" @click="releaseHero" v-if="player.inFarm && canRelease">
+            <div
+              class="big_btn"
+              @click="releaseHero"
+              v-if="player.inFarm && canRelease"
+            >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
               <div class="text">取回卡牌</div>
             </div>
@@ -324,15 +350,18 @@ export default {
       remainTime: 0,
       totalPower: 0,
       totalIncome: 0,
-      rewardPerblock: 0,
+      totalIncomeETHF: 0,
+      rewardPerblockMDAO: 0,
+      rewardPerblockETHF: 0,
       mdaoToDeposit: 0,
       mdaoStkBtnStatus: 0,
       pendingReward: 0,
+      pendingRewardETHF: 0,
       ticker: undefined,
       showWarningModal: false,
       loading: false,
       showRuleModal: false,
-      canRelease:false,
+      canRelease: false,
     });
     const actionType = computed(() => {
       if (!data.player.isUnClaim && !data.player.inFarm) return 0; // no staked
@@ -348,21 +377,21 @@ export default {
           data.web3 = p;
         }
       );
-      await getGlobalPower();
+      // await getGlobalPower();
       await getPlayer();
       if (data.player.endTime) {
         getTicker();
       }
       data.loading = false;
     });
-    const canRelease = async()=>{
+    const canRelease = async () => {
       const c = store.state.c_staking;
       data.canRelease = await c.methods.canRelease().call();
-    }
+    };
     const refresh = async () => {
       await getGlobalPower();
       await getPlayer();
-      await canRelease()
+      await canRelease();
     };
     const obtain = async (type) => {
       if (data.player.inFarm) {
@@ -424,14 +453,22 @@ export default {
       data.player = await c.methods.getUserInfo(data.account).call();
       localStorage.setItem("stake_diff", data.player.difficulty);
       console.log(data.player, "player");
-      data.rewardPerblock =
+      data.rewardPerblockMDAO =
         data.web3.utils.fromWei(
           await c.methods.rewardPerBlock().call(),
           "ether"
         ) || 0;
+      data.rewardPerblockETHF =
+        data.web3.utils.fromWei(
+          await c.methods.rewardPerBlockETHF().call(),
+          "ether"
+        ) || 0;
       const resPending = await c.methods.pending(data.account).call();
-      data.pendingReward = Number.parseFloat(
-        fromWei(resPending, "ether")
+      data.pendingRewardMDAO = Number.parseFloat(
+        fromWei(resPending[0], "ether")
+      ).toFixed(2);
+      data.pendingRewardETHF = Number.parseFloat(
+        fromWei(resPending[1], "ether")
       ).toFixed(2);
       data.mdaoToDeposit =
         fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
@@ -522,6 +559,7 @@ export default {
       const c = store.state.c_staking;
       data.totalPower = await c.methods.totalPowers().call();
       data.totalIncome = await c.methods.paidOut().call();
+      data.totalIncomeETHF = await c.methods.paidOutETHF().call();
     };
     const getDiffName = computed(() => {
       if (data.player) {
@@ -612,7 +650,7 @@ export default {
         width: 3rem;
         position: absolute;
         right: 0;
-        transform: translateX(3rem);
+        transform: translateX(4rem);
       }
     }
   }
@@ -672,6 +710,11 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
+    .disable {
+      filter: grayscale(1);
+      user-select: none;
+      pointer-events: none;
+    }
     .top {
       width: 80%;
       padding: 1rem 2rem;

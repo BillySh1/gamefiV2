@@ -118,13 +118,13 @@ export default {
       data.loading = true;
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
+      console.log(data.player,'player')
       if (data.player.inFarm || data.player.isUnClaim) {
         router.push({
           name: "stk_main",
         });
       }
       data.loading = false;
-      getPlayer()
     };
     const clickMission = () => {
       localStorage.setItem("stake_diff", data.activeIndex);
