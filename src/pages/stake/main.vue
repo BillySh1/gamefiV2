@@ -231,7 +231,7 @@
             </div>
 
             <div
-              class="big_btn"
+              class="big_btn disable"
               v-if="player.isUnClaim"
               @click="() => obtain(1)"
             >
@@ -282,7 +282,7 @@
         </div>
       </div>
 
-      <div
+      <!-- <div
         v-if="Number(player.mdao) > 0"
         class="bonus_zone"
         @click="jumpToList"
@@ -296,7 +296,7 @@
             <div>剩余天数 ??天</div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="place_zone">
         <div class="text">浮育城</div>
         <img class="img" src="../../assets/stake/city.png" alt="" />

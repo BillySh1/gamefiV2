@@ -12,12 +12,12 @@
             });
           }
         "
-        :text="'考虑一下'"
+        :text="t('stake_think')"
       />
 
       <div class="btn_wrapper" @click="clickMission">
         <img class="btn_bg" src="../../assets/stake/choose/btn_bg.png" alt="" />
-        <div class="text">下一步</div>
+        <div class="text">{{ t("stake_next") }}</div>
       </div>
     </div>
 
@@ -44,15 +44,19 @@
           />
         </div>
         <div class="intro_box">
-          <div class="md">执行{{ item.name }}任务</div>
+          <div class="md">
+            {{ t("stkae_excute") }} {{ item.name }} {{ t("stake_mission") }}
+          </div>
           <img class="badge" src="../../assets/stake/divider.png" alt="" />
-          <div class="sm">为期{{ item.time }}天</div>
-          <div class="sm">战力增幅:</div>
-          <div class="xs">可质押战力值10%的MDAO</div>
-          <div class="xs">以此提示总战力的1%</div>
+          <div class="sm">
+            {{ t("stake_time") }}{{ item.time }} {{ t("day") }}
+          </div>
+          <div class="sm">{{ t("power_up") }}:</div>
+          <div class="xs">{{ t("stake_mention_1") }}</div>
+          <div class="xs">{{ t("stake_mention_2%") }}</div>
 
-          <div class="sm">您已经进行过 3次</div>
-          <div class="sm">当前是否存在复利 否</div>
+          <div class="sm">{{ t("stkae_times") }}</div>
+          <div class="sm">{{ t("stake_fuli") }}</div>
         </div>
       </div>
     </div>
@@ -65,6 +69,7 @@ import initWeb3 from "../../utils/initWeb3";
 import StkBtn from "./components/stk_btn.vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 export default {
   name: "choose_mission",
   components: {
@@ -73,22 +78,23 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
+    const { t } = useI18n();
     const data = reactive({
       map: [
         {
-          name: "斥候",
+          name: t("mission_0"),
           time: 7,
           apy: 1000,
           img: require("../../assets/stake/choose/mission_1.png"),
         },
         {
-          name: "扫荡",
+          name: t("mission_1"),
           time: 15,
           apy: 900,
           img: require("../../assets/stake/choose/mission_2.png"),
         },
         {
-          name: "驻扎",
+          name: t("mission_2"),
           time: 30,
           apy: 800,
           img: require("../../assets/stake/choose/mission_3.png"),
@@ -118,7 +124,7 @@ export default {
       data.loading = true;
       const c = store.state.c_staking;
       data.player = await c.methods.getUserInfo(data.account).call();
-      console.log(data.player,'player')
+      console.log(data.player, "player");
       if (data.player.inFarm || data.player.isUnClaim) {
         router.push({
           name: "stk_main",
@@ -137,6 +143,7 @@ export default {
     return {
       ...refData,
       clickMission,
+      t,
     };
   },
 };

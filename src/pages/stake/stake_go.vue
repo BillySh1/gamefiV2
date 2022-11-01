@@ -14,7 +14,7 @@
         "
       >
         <img src="../../assets/stake/stake/back.png" alt="" />
-        <div class="text">返回</div>
+        <div class="text">{{t('back')}}</div>
       </div>
     </div>
     <div class="scroll">
@@ -31,16 +31,16 @@
       <div>
         <div class="curPower">
           <img src="../../assets/stake/stake/curPowerBg.png" alt="" />
-          <div class="text">当前战力 {{ curTotalPower }}</div>
+          <div class="text">{{t('cur_power')}} {{ curTotalPower }}</div>
         </div>
         <div class="curInfo">
           <img src="../../assets/stake/stake/curInfoBg.png" alt="" />
           <div class="info">
             <div style="display: flex">
-              <div class="title">当前总出战人数</div>
+              <div class="title">{{t('total_num')}}</div>
               <div class="red">{{ selected.length }}</div>
             </div>
-            <div class="gap">已选择</div>
+            <div class="gap">{{t('selected')}}</div>
             <div class="red">
               {{ selected.map((x) => x.name).join(", ") }}
             </div>
@@ -50,7 +50,7 @@
 
       <div class="btn_wrapper" @click="next">
         <img class="btn_bg" src="../../assets/stake/choose/btn_bg.png" alt="" />
-        <div class="text">下一步</div>
+        <div class="text">{{t('next')}}</div>
       </div>
     </div>
   </div>
@@ -69,6 +69,7 @@ import useHeroDetail from "../../utils/useHeroDetail.js";
 import initWeb3 from "../../utils/initWeb3";
 import stake_pack_item from "./components/stake_pack_item.vue";
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 export default {
   name: "stk_go",
   components: {
@@ -79,6 +80,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const store = useStore();
+    const {t} = useI18n()
     const data = reactive({
       account: "",
       web3: "",
@@ -164,7 +166,7 @@ export default {
           });
         });
       } catch (e) {
-        proxy.$toast("获取武将背包失败", store.state.toast_error);
+        proxy.$toast("err", store.state.toast_error);
       }
     };
     const refData = toRefs(data);
@@ -174,6 +176,7 @@ export default {
       curTotalPower,
       next,
       onSelect,
+      t
     };
   },
 };
