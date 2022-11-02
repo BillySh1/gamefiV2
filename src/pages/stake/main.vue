@@ -61,7 +61,7 @@
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ Number(totalPower) / 100 || 0 }}
             </div>
-            <img class="coin" src="../../assets/stake/totalpower.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/totalpower.png" alt="" /> -->
           </div>
         </div>
         <div class="item">
@@ -71,7 +71,7 @@
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ totalIncome }}
             </div>
-            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/coin.png" alt="" /> -->
           </div>
         </div>
         <div class="item">
@@ -81,7 +81,7 @@
             <div style="font-size: 1.2rem; margin: 0 1rem">
               {{ totalIncomeETHF }}
             </div>
-            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/coin.png" alt="" /> -->
           </div>
         </div>
       </div>
@@ -394,7 +394,7 @@ export default {
           data.web3 = p;
         }
       );
-      // await getGlobalPower();
+      await getGlobalPower();
       await getPlayer();
       if (data.player.endTime) {
         getTicker();
@@ -578,6 +578,7 @@ export default {
       data.totalPower = await c.methods.totalPowers().call();
       data.totalIncome = await c.methods.paidOut().call();
       data.totalIncomeETHF = await c.methods.paidOutETHF().call();
+      console.log(data.totalPower, data.totalIncome, data.totalIncomeETHF,'data')
     };
     const getDiffName = computed(() => {
       if (data.player) {
