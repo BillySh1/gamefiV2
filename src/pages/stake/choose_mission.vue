@@ -23,7 +23,7 @@
 
     <div class="main_body">
       <div
-        class="item"
+        :class="item.disable ? 'item disable' : 'item'"
         v-for="(item, index) in map"
         :key="index"
         @click="() => (activeIndex = index)"
@@ -92,12 +92,14 @@ export default {
           time: 15,
           apy: 900,
           img: require("../../assets/stake/choose/mission_2.png"),
+          disable: true,
         },
         {
           name: t("mission_2"),
           time: 30,
           apy: 800,
           img: require("../../assets/stake/choose/mission_3.png"),
+          disable: true,
         },
       ],
       activeIndex: 0,
@@ -226,6 +228,11 @@ export default {
   transform: translate(-50%, -60%);
   display: flex;
   align-items: center;
+  .disable {
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(1);
+  }
   .item {
     position: relative;
     cursor: pointer;
