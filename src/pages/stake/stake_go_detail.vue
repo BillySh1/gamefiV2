@@ -278,9 +278,9 @@ export default {
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .deposit(data.selected, 1)
+          .deposit(data.selected, 0)
           .estimateGas({ from: data.account });
-        const res = await c.methods.deposit(data.selected, 1).send({
+        const res = await c.methods.deposit(data.selected, 0).send({
           gas: gas,
           gasPrice: gasPrice,
           from: data.account,

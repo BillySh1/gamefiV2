@@ -20,7 +20,10 @@
       </div>
 
       <div class="rule_modal_item" style="color: red">
-        您当前可领取收益为 {{ 2000 }} MDAO
+        您当前可领取收益为 {{ pendingReward }} MDAO
+      </div>
+      <div class="rule_modal_item" style="color: red">
+        您当前可领取收益为 {{ pendingRewardETHF }} ETHF
       </div>
     </InjectModal>
     <InjectModal
@@ -201,7 +204,7 @@
             <div>
               <p>当前任务奖励</p>
               <p>{{ pendingReward }} MDAO</p>
-              <p>{{ pendingRewardETHF }} MDAO</p>
+              <p>{{ pendingRewardETHF }} ETHF</p>
             </div>
           </div>
           <div style="display: flex; align-items: center">
