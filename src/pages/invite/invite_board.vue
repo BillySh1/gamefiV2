@@ -46,7 +46,6 @@
 </template>
 
 <script>
-
 import { reactive, toRefs, onBeforeMount } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -57,7 +56,7 @@ import postData from "../../utils/useFetch";
 import initWeb3 from "../../utils/initWeb3.js";
 import { useI18n } from "vue-i18n";
 import { SEVER_HOST } from "../../utils/constants";
-import { formatText } from '../../utils/utils';
+import { formatText } from "../../utils/utils";
 export default {
   name: "store",
   components: {
@@ -119,8 +118,9 @@ export default {
       res.list.map((item, index) => {
         data.totalData.push([
           index + 1,
-          item.inviter,
-          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
+          formatText(item.inviter),
+          Number(data.web3.utils.fromWei(item.amount, "ether")).toFixed(2) +
+            " ETHF",
         ]);
       });
     };
@@ -139,7 +139,8 @@ export default {
         data.dayData.push([
           index + 1,
           formatText(item.inviter),
-          data.web3.utils.fromWei(item.amount, "ether") + " MDAO",
+          Number(data.web3.utils.fromWei(item.amount, "ether")).toFixed(2) +
+            " ETHF",
         ]);
       });
     };
