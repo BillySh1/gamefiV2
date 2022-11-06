@@ -1,40 +1,55 @@
 <template>
   <div class="com_box">
     <div class="power_box">
-      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png" />
+      <img
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png"
+      />
       <div class="inner">
-        <div class="text">{{t('power')}}</div>
+        <div class="text">{{ t("power") }}</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
-          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png" alt="" />
+          <img
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
     <div class="cost_box" v-if="updateInfo.canLevelup">
       <div class="info">
-        需要消耗 <strong class="num">{{ updateInfo.bookUse }}</strong>
-        <strong>{{ costName }}</strong> 升级
+        {{ t("need_cost") }}
+        <strong class="num">{{ updateInfo.bookUse }}</strong>
+        <strong>{{ costName }}</strong> {{ t("upgrade") }}
         <img :src="costImg" alt="" />
       </div>
       <div class="sub_info">
-        当前拥有 <img :src="costImg" alt="" /><span style="color: yellow">{{
-          costName
-        }}</span
-        >, 数量: {{ remainNum }}
+        {{ t("now_have") }} <img :src="costImg" alt="" /><span
+          style="color: yellow"
+          >{{ costName }}</span
+        >, {{ t("number") }}: {{ remainNum }}
         <span
           v-if="Number(remainNum) < Number(updateInfo.bookUse)"
           style="margin-left: 1rem"
-          >数量不足</span
+          >{{ t("lack_number") }}</span
         >
       </div>
-      <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider.png" />
+      <img
+        class="divider"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider.png"
+      />
     </div>
     <div class="property_box" v-if="updateInfo.canLevelup">
-      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/properties_bg.png" alt="" />
-      <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/proper_badge.png" />
+      <img
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/properties_bg.png"
+        alt=""
+      />
+      <img
+        class="badge"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/proper_badge.png"
+      />
       <div class="inner">
         <div class="item">
-          <div class="title">当前属性</div>
+          <div class="title">{{ t("cur_pro") }}</div>
           <div
             class="property"
             v-for="(item, index) in curProperty"
@@ -45,7 +60,7 @@
           </div>
         </div>
         <div class="item">
-          <div class="title">升级后属性</div>
+          <div class="title">{{ t("upgraded_pro") }}</div>
           <div class="property" v-for="(item, index) in nextInfo" :key="index">
             <div class="name">{{ item.title }}</div>
             <div class="next">{{ item.value }}</div>
@@ -65,21 +80,27 @@
         "
         @click="handleClickUpgrade"
       >
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg.png" alt="" />
-        <div class="inner">升级</div>
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg.png"
+          alt=""
+        />
+        <div class="inner">{{ t("upgrade") }}</div>
       </div>
       <div
         :class="oneKeyInfo.canLevelup ? 'item' : 'item disable'"
         @click="handleClickOneKeyUpgrade"
       >
-        <div class="inner">一键升级</div>
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg_1.png" alt="" />
+        <div class="inner">{{ t("one_key_update") }}</div>
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg_1.png"
+          alt=""
+        />
       </div>
     </div>
     <div class="injection" v-if="showUpgradeModal || showOneKeyModal">
       <InjectModal
         :value="showUpgradeModal"
-        :title="'确认升级'"
+        :title="t('confirm_update')"
         :btnText="modalBtnText"
         :btnDisable="btnDsiabled"
         @confirm="modalBtnClick"
@@ -87,16 +108,21 @@
       >
         <div class="modal_inner_box">
           <div class="up">
-            您将使用 {{ costName }} x {{ updateInfo.bookUse }} 对
-            {{ info.name }} 进行升级吗
+            {{ t("you_will_use") }} {{ costName }} x {{ updateInfo.bookUse }}
+            {{ t("to") }} {{ info.name }} {{ t("update_second") }}
           </div>
-          <div class="sub">当前拥有 {{ costName }} 数量 {{ remainNum }}</div>
+          <div class="sub">
+            {{ t("now_have") }} {{ costName }} {{ t("number") }} {{ remainNum }}
+          </div>
           <div class="main">
             <div class="item">
               <img :src="costImg" alt="" />
             </div>
             <div class="middle">
-              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/right.png" alt="" />
+              <img
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/right.png"
+                alt=""
+              />
             </div>
             <div class="item">
               <HeroCardItem :info="info" />
@@ -106,7 +132,7 @@
       </InjectModal>
       <InjectModal
         :value="showOneKeyModal"
-        :title="'一键升级'"
+        :title="t('one_key_update')"
         :btnText="modalBtnText"
         :btnDisable="btnDsiabled"
         @confirm="() => modalBtnClick(true)"
@@ -114,16 +140,22 @@
       >
         <div class="modal_inner_box">
           <div class="up">
-            升到满级共将花费 {{ costName }} x {{ oneKeyInfo.bookUse }}<br />
-            当背包道具数量不够时， 根据当前拥有道具数量智能升级
+            {{ t("update_cost_tip1") }} {{ costName }} x {{ oneKeyInfo.bookUse
+            }}<br />
+            {{ t("update_cost_tip2") }}
           </div>
-          <div class="sub">当前拥有 {{ costName }} 数量 {{ remainNum }}</div>
+          <div class="sub">
+            {{ t("now_have") }} {{ costName }} {{ t("number") }} {{ remainNum }}
+          </div>
           <div class="main">
             <div class="item">
               <img :src="costImg" alt="" />
             </div>
             <div class="middle">
-              <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/right.png" alt="" />
+              <img
+                src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/right.png"
+                alt=""
+              />
             </div>
             <div class="item">
               <HeroCardItem :info="info" />
@@ -174,15 +206,15 @@ export default {
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const modalBtnText = computed(() => {
-      return ["授权", "升级"][data.modalStatus];
+      return [t("approve"), t("upgrade")][data.modalStatus];
     });
 
     const emptyText = computed(() => {
       const stars = [1, 3, 4, 5, 10][data.info.rarity];
       if (data.info.star < stars) {
-        return "无法继续升级，请前往突破";
+        return t("cannot_update");
       } else {
-        return "您已满级，请前往进阶";
+        return t("have_to_break");
       }
     });
     const modalBtnClick = async (isOneKey) => {
@@ -196,14 +228,17 @@ export default {
     };
     const approveStock = async () => {
       try {
-        proxy.$toast(`t('common_wait_approve') ${costName.value}`, store.state.toast_info);
+        proxy.$toast(
+          `t('common_wait_approve') ${costName.value}`,
+          store.state.toast_info
+        );
         const c = store.state.c_richShop;
         const addr = store.state.c_training.options.address;
         const isApproved = await c.methods
           .isApprovedForAll(data.account, addr)
           .call();
         if (isApproved) {
-          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
+          proxy.$toast(`enough`, store.state.toast_info);
           data.modalStatus = 1;
           return;
         }
@@ -219,10 +254,10 @@ export default {
         });
         if (res.status) {
           data.modalStatus = 1;
-          proxy.$toast(`授权成功`, store.state.toast_success);
+          proxy.$toast(`success`, store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(`授权失败`, store.state.toast_error);
+        proxy.$toast(`failed`, store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -231,7 +266,7 @@ export default {
 
     const update = async (isOneKey) => {
       try {
-        proxy.$toast('wait', store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = props.info.tokenId;
@@ -247,11 +282,11 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("升级成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           data.showOneKeyModal = false;
         }
       } catch (e) {
-        proxy.$toast("升级失败", store.state.toast_error);
+        proxy.$toast("failed", store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -340,7 +375,8 @@ export default {
 .com_box {
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/over_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/over_bg.png")
+    no-repeat;
   background-size: 100% 100%;
 
   .power_box {

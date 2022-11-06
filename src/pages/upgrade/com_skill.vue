@@ -1,6 +1,6 @@
 <template>
   <div class="com_box">
-      技能
+      skill
   </div>
 </template>
 

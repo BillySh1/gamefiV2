@@ -16,11 +16,11 @@
     <div v-if="player.inFarm" class="ing">
       <div class="inner">
         <img src="../../assets/stake/map/ing.png" alt="" />
-        <div class="text">探索中</div>
+        <div class="text">{{ t("stkae_ing") }}</div>
       </div>
     </div>
     <div v-if="!player.inFarm" class="help_text">
-      请选择 {{ curPlace }} 开始挑战
+      {{t('stake_select')}} {{ curPlace }} {{t('stake_start')}}
     </div>
     <div
       class="float_city"
@@ -70,6 +70,7 @@ import { reactive, toRefs, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import initWeb3 from "../../utils/initWeb3";
 import BackToHome from "./back_to_home";
+import { useI18n } from "vue-i18n";
 export default {
   name: "entry",
   components: {
@@ -77,15 +78,16 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n();
     const data = reactive({
-      curPlace: "浮育",
+      curPlace: t('city_0'),
       citys: [
-        { key: 1, name: "浮育", size: 0, x: 40, y: 40, active: true },
-        { key: 2, name: "逾城", size: 0, x: 29, y: 60 },
-        { key: 3, name: "泗水", size: 1, x: 44, y: 64 },
-        { key: 4, name: "霓昂", size: 1, x: 50, y: 30 },
-        { key: 5, name: "凝关", size: 1, x: 68, y: 45 },
-        { key: 6, name: "泊寨", size: 0, x: 60, y: 60 },
+        { key: 1, name: t('city_0'), size: 0, x: 40, y: 40, active: true },
+        { key: 2, name: t('city_1'), size: 0, x: 29, y: 60 },
+        { key: 3, name: t('city_2'), size: 1, x: 44, y: 64 },
+        { key: 4, name: t('city_3'), size: 1, x: 50, y: 30 },
+        { key: 5, name: t('city_4'), size: 1, x: 68, y: 45 },
+        { key: 6, name: t('city_5'), size: 0, x: 60, y: 60 },
       ],
       account: "",
       web3: "",
@@ -111,6 +113,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      t,
     };
   },
 };
@@ -146,6 +149,7 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    writing-mode: tb-rl;
   }
 }
 .help_text {
@@ -199,6 +203,7 @@ export default {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
+          writing-mode: tb-rl;
         }
       }
     }

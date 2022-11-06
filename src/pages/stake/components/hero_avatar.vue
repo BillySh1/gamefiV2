@@ -1,6 +1,17 @@
 <template>
   <div class="hero_avatar_item">
-    <img class="avatar" :src="item.avatar" alt="" />
+    <img
+      class="avatar"
+      :src="
+        item.rarity == 0
+          ? item.avatar
+          : item.img
+              .slice(0, item.img.length - 4)
+              .concat(item.quality, item.img.slice(item.img.length - 4))
+              .replace('.png', '.jpg')
+      "
+      alt=""
+    />
     <div class="hero_name_zone">
       {{ item.name }}
     </div>
@@ -61,7 +72,7 @@ export default {
     bottom: 0;
     left: 0;
     height: 1.5rem;
-    transform: translate(-40%,0);
+    transform: translate(-40%, 0);
     img {
       height: 100%;
     }

@@ -42,7 +42,10 @@
         />
         <ComOverfulfil v-if="curTab == 1" :info="info" @refresh="refresh" />
         <ComSkill v-if="curTab == 2" />
-        <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider_tab.png" />
+        <img
+          class="divider"
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider_tab.png"
+        />
 
         <div class="tabs_box">
           <div
@@ -57,7 +60,9 @@
               }
             "
           >
-            <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/tab_bg.png" />
+            <img
+              src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/tab_bg.png"
+            />
             <div class="inner">
               {{ item }}
             </div>
@@ -79,11 +84,16 @@
       "
     >
       <div class="inner">
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/tip_badge.svg" />
-        <div class="text">前往商城</div>
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/tip_badge.svg"
+        />
+        <div class="text">{{ t("go_to_store") }}</div>
       </div>
     </div>
-    <img class="bg_badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/bg_badge.svg" />
+    <img
+      class="bg_badge"
+      src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/bg_badge.svg"
+    />
   </div>
 </template>
 
@@ -100,6 +110,7 @@ import ComUpgrade from "./com_upgrade.vue";
 import ComOverfulfil from "./com_overfulfil.vue";
 import ComSkill from "./com_skill.vue";
 import InjectGoBack from "../../components/inject_go_back.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "upgrade",
   components: {
@@ -113,8 +124,9 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const { t } = useI18n();
     const data = reactive({
-      pageTitle: "卡牌升级",
+      pageTitle: t("card_upgrade"),
       info: "",
       account: "",
       web3: "",
@@ -122,7 +134,7 @@ export default {
       stockBox: [],
       costNum: "",
       curTab: 0,
-      tabMap: ["升级", "突破", "技能"],
+      tabMap: [t("upgrade"), t("breakthrough"), t("skill")],
     });
     const getWeb3 = async () => {
       await initWeb3.Init(
@@ -173,6 +185,7 @@ export default {
     const refData = toRefs(data);
     return {
       ...refData,
+      t,
       refresh,
     };
   },

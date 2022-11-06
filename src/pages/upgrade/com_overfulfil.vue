@@ -1,41 +1,59 @@
 <template>
   <div class="com_box">
     <div class="power_box">
-      <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png" />
+      <img
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/power_bg.png"
+      />
       <div class="inner">
-        <div class="text">战力值</div>
+        <div class="text">{{ t("power") }}</div>
         <div class="value">{{ info.power }}</div>
         <div class="pImg">
-          <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png" alt="" />
+          <img
+            src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/pack/power_item.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
     <div class="cost_box">
       <div class="info">
-        需要消耗
+        {{ t("need_cost") }}
         <div class="num">{{ updateInfo.breakGemUse }}</div>
-        <strong style="color: yellow">玉灵瓶</strong> 突破
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png" alt="" />
+        <strong style="color: yellow">{{ t("upgrade_com") }}</strong>
+        {{ t("breakthrough") }}
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png"
+          alt=""
+        />
       </div>
       <div class="sub_info">
-        当前拥有 <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png" alt="" /><span
-          style="color: yellow"
-          >玉灵瓶</span
-        >, 数量: {{ remainNum }}
+        {{ t("now_have") }}
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/store/item/yuruyi.png"
+          alt=""
+        /><span style="color: yellow">{{ t("upgrade_com") }}</span
+        >, {{ t("number") }}: {{ remainNum }}
         <span
           v-if="Number(remainNum) < Number(updateInfo.breakGemUse)"
           style="margin-left: 1rem"
-          >数量不足</span
+          >{{ t("lack_number") }}</span
         >
       </div>
-      <img class="divider" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider.png" />
+      <img
+        class="divider"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/divider.png"
+      />
     </div>
     <div v-if="canDo" class="over_box">
-      <img class="badge" src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/proper_badge.png" />
+      <img
+        class="badge"
+        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/proper_badge.png"
+      />
       <div class="info">
-        您将为 <span style="color: yellow">{{ info.name }}</span> 突破并升星
+        {{ t("you_will") }} <span style="color: yellow">{{ info.name }}</span>
+        {{ t("break_tip") }}
       </div>
-      <div>突破后战力值</div>
+      <div>{{ t("breaked_power") }}</div>
       <div class="power_value">
         {{ updateInfo.power / 100 }}
       </div>
@@ -47,7 +65,10 @@
         "
         @click="handleBtnClick"
       >
-        <img src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg_round.png" alt="" />
+        <img
+          src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/action_bg_round.png"
+          alt=""
+        />
         <div class="inner">{{ btnText }}</div>
       </div>
     </div>
@@ -67,11 +88,13 @@ import {
 } from "vue";
 import initWeb3 from "../../utils/initWeb3";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 export default {
   name: "com_upgrade",
   props: ["info", "stockBox"],
   setup(props, context) {
     const { proxy } = getCurrentInstance();
+    const { t } = useI18n();
     const data = reactive({
       updateInfo: "",
       account: "",
@@ -106,14 +129,14 @@ export default {
     };
     const approveStock = async () => {
       try {
-        proxy.$toast(`等待授权 玉灵瓶`, store.state.toast_info);
+        proxy.$toast(`waiting`, store.state.toast_info);
         const c = store.state.c_richShop;
         const addr = store.state.c_training.options.address;
         const isApproved = await c.methods
           .isApprovedForAll(data.account, addr)
           .call();
         if (isApproved) {
-          proxy.$toast(`授权额度足够，无需授权`, store.state.toast_info);
+          proxy.$toast(`enough`, store.state.toast_info);
           data.btnStatus = 1;
           return;
         }
@@ -129,10 +152,10 @@ export default {
         });
         if (res.status) {
           data.btnStatus = 1;
-          proxy.$toast(`授权成功`, store.state.toast_success);
+          proxy.$toast(t("common_approve_success"), store.state.toast_success);
         }
       } catch (e) {
-        proxy.$toast(`授权失败`, store.state.toast_error);
+        proxy.$toast(`err`, store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -141,7 +164,7 @@ export default {
 
     const overfulfill = async () => {
       try {
-        proxy.$toast('wait', store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_training;
         const gasPrice = await data.web3.eth.getGasPrice();
         const tokenId = props.info.tokenId;
@@ -155,11 +178,11 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("突破成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           data.showOneKeyModal = false;
         }
       } catch (e) {
-        proxy.$toast("突破失败", store.state.toast_error);
+        proxy.$toast("failed", store.state.toast_error);
         console.log(e);
       } finally {
         data.loading = false;
@@ -180,19 +203,20 @@ export default {
     const emptyText = computed(() => {
       const stars = [1, 3, 4, 5, 10][props.info.rarity];
       if (props.info.star < stars) {
-        return "您未满级,无法突破";
+        return t("cannot_break");
       } else {
-        return "您已满星，请前往进阶";
+        return t("have_to_mix");
       }
     });
     const btnText = computed(() => {
-      return ["授权", "突破"][data.btnStatus];
+      return [t("approve"), t("breakthrough")][data.btnStatus];
     });
     const refData = toRefs(data);
     return {
       ...refData,
       btnText,
       emptyText,
+      t,
       handleBtnClick,
     };
   },
@@ -202,7 +226,8 @@ export default {
 .com_box {
   width: 100%;
   height: 100%;
-  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/over_bg.png") no-repeat;
+  background: url("https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/upgrade/over_bg.png")
+    no-repeat;
   background-size: 100% 100%;
   .empty {
     margin-top: 4rem;

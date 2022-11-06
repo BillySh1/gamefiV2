@@ -4,7 +4,7 @@
   </div>
   <div v-else class="box">
     <InjectModal
-      :title="'提前领取'"
+      :title="t('obtain_early')"
       :value="showWarningModal"
       @close="() => (showWarningModal = false)"
       @confirm="
@@ -14,17 +14,20 @@
         }
       "
     >
-      <div class="rule_modal_item">确认提前领取收益吗？</div>
+      <div class="rule_modal_item">{{ t("early_tip") }}</div>
       <div class="rule_modal_item" style="color: red">
-        提前领取将导致70%收益衰减
+        {{ t("early_tip_2") }}
       </div>
 
       <div class="rule_modal_item" style="color: red">
-        您当前可领取收益为 {{ 2000 }} MDAO
+        {{ t("cur_income") }} {{ pendingReward }} MDAO
+      </div>
+      <div class="rule_modal_item" style="color: red">
+        {{ t("cur_income") }} {{ pendingRewardETHF }} ETHF
       </div>
     </InjectModal>
     <InjectModal
-      :title="'追加质押'"
+      :title="t('add_again')"
       :value="showRuleModal"
       @close="() => (showRuleModal = false)"
       @confirm="
@@ -33,13 +36,15 @@
         }
       "
     >
-      <div class="rule_modal_item">追加质押MDAO 规则</div>
-      <div class="rule_modal_item" style="color: red">1MDAO = 10 战力</div>
+      <div class="rule_modal_item">{{ t("add_rule") }}</div>
+      <div class="rule_modal_item" style="color: red">
+        1MDAO = 10 {{ t("power") }}
+      </div>
     </InjectModal>
     <div class="topbar">
       <StkBtn
         class="check_map"
-        :text="'查看地图'"
+        :text="t('check_map')"
         @click="
           () => {
             $router.push({
@@ -52,31 +57,31 @@
         <div class="item">
           <img src="../../assets/stake/main_item.png" alt="" />
           <div class="inner">
-            <div class="title">全网总战力</div>
+            <div class="title">{{ t("all_power") }}</div>
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ Number(totalPower) / 100 || 0 }}
             </div>
-            <img class="coin" src="../../assets/stake/totalpower.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/totalpower.png" alt="" /> -->
           </div>
         </div>
         <div class="item">
           <img src="../../assets/stake/main_item.png" alt="" />
           <div class="inner">
-            <div class="title">全网有效收益</div>
+            <div class="title">{{ t("all_income_valid") }}</div>
             <div style="font-size: 1.2rem; margin: 0 1.5rem">
               {{ totalIncome }}
             </div>
-            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/coin.png" alt="" /> -->
           </div>
         </div>
         <div class="item">
           <img src="../../assets/stake/main_item.png" alt="" />
           <div class="inner">
-            <div class="title">全网有效收益(ETHF)</div>
+            <div class="title">{{ t("all_income_valid") }} (ETHF)</div>
             <div style="font-size: 1.2rem; margin: 0 1rem">
               {{ totalIncomeETHF }}
             </div>
-            <img class="coin" src="../../assets/stake/coin.png" alt="" />
+            <!-- <img class="coin" src="../../assets/stake/coin.png" alt="" /> -->
           </div>
         </div>
       </div>
@@ -86,41 +91,45 @@
         <div class="item">
           <div class="badge">
             <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
-            <div class="text">剩余时间</div>
+            <div class="text">{{ t("rest_time") }}</div>
           </div>
           <div class="detail">
-            <div class="lg">任务剩余时间 {{ remainTime }}</div>
-            <div class="sm">中途中止作战会衰减出征收益</div>
+            <div class="lg">{{ t("mission_rest_time") }} {{ remainTime }}</div>
+            <div class="sm">{{ t("break_stake_tip") }}</div>
           </div>
         </div>
         <div class="item">
           <div class="badge">
             <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
-            <div class="text">累计收益</div>
+            <div class="text">{{ t("already_income") }}</div>
           </div>
           <div class="detail">
             <div class="white lg" style="margin-bottom: 1rem">
               <div>
-                当前历史累计收益
+                {{ t("current_his_income") }}
                 {{ pendingReward }}
                 MDAO
               </div>
               <div>
-                当前历史累计收益
+                {{ t("current_his_income") }}
                 {{ pendingRewardETHF }}
                 ETHF
               </div>
             </div>
             <div class="lg white">
-              <div>每区块奖励 {{ rewardPerblockMDAO }} MDAO</div>
-              <div>每区块奖励 {{ rewardPerblockETHF }} ETHF</div>
+              <div>
+                {{ t("bonus_per_block") }} {{ rewardPerblockMDAO }} MDAO
+              </div>
+              <div>
+                {{ t("bonus_per_block") }} {{ rewardPerblockETHF }} ETHF
+              </div>
             </div>
           </div>
         </div>
         <div class="item">
           <div class="badge">
             <img class="bg" src="../../assets/stake/stake/badge.png" alt="" />
-            <div class="text">推广收益</div>
+            <div class="text">{{ t("invite_income") }}</div>
           </div>
           <div class="detail">
             <div class="lg">
@@ -145,11 +154,13 @@
           </div>
           <div v-if="Number(player.mdao) > 0">
             <!-- 当前已质押 {{ fromWei(player.mdao, "ether") }} MDAO -->
-            当前已质押 0 MDAO
+            {{ t("staked") }} 0 MDAO
           </div>
-          <div v-else class="cur">当前可质押 {{ "???" }} MDAO</div>
+          <div v-else class="cur">{{ t("can_stake") }} {{ "???" }} MDAO</div>
 
-          <div class="rule" @click="() => (showRuleModal = true)">规则说明</div>
+          <div class="rule" @click="() => (showRuleModal = true)">
+            {{ t("rule_intro") }}
+          </div>
           <div
             v-if="Number(mdaoToDeposit > 0)"
             class="stk_btn"
@@ -165,8 +176,8 @@
           >
             <img src="../../assets/stake/stake/stk_btn_bg.png" alt="" />
             <div class="text">
-              <div v-if="mdaoStkBtnStatus == 0">授权</div>
-              <div v-else>质押</div>
+              <div v-if="mdaoStkBtnStatus == 0">{{ t("approve") }}</div>
+              <div v-else>{{ t("stake") }}</div>
             </div>
           </div>
         </div>
@@ -199,9 +210,9 @@
           <div class="income">
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
-              <p>当前任务奖励</p>
+              <p>{{ t("cur_mission_income") }}</p>
               <p>{{ pendingReward }} MDAO</p>
-              <p>{{ pendingRewardETHF }} MDAO</p>
+              <p>{{ pendingRewardETHF }} ETHF</p>
             </div>
           </div>
           <div style="display: flex; align-items: center">
@@ -211,7 +222,7 @@
               v-if="player.inFarm && canRelease"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
-              <div class="text">取回卡牌</div>
+              <div class="text">{{ t("release_card") }}</div>
             </div>
             <div
               class="big_btn"
@@ -219,7 +230,7 @@
               v-if="player.inFarm"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
-              <div class="text">继续质押</div>
+              <div class="text">{{ t("add_continue") }}</div>
             </div>
             <div
               class="big_btn"
@@ -227,11 +238,13 @@
               @click="() => obtain(0)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
-              <div class="text">{{ player.inFarm ? "提前领取" : "领取" }}</div>
+              <div class="text">
+                {{ player.inFarm ? t("obtain_early") : t("obtain") }}
+              </div>
             </div>
 
             <div
-              class="big_btn"
+              class="big_btn disable"
               v-if="player.isUnClaim"
               @click="() => obtain(1)"
             >
@@ -247,24 +260,24 @@
       <div class="info">
         <div class="check">
           <img src="../../assets/stake/income/check.png" alt="" />
-          <div>查看</div>
+          <div>{{ t("check") }}</div>
         </div>
         <div class="power">
           <div class="total">
             <div class="item">
-              <span class="mar">总战力</span>
+              <span class="mar">{{ t("total_own_power") }}</span>
               <span>{{ Number(player.buffedPower) / 100 || 0 }}</span>
             </div>
           </div>
           <div class="common">
             <div class="item">
-              <span class="mar">原军队战力</span>
+              <span class="mar">{{ t("origin_power") }}</span>
               <span>{{ Number(player.realPower) / 100 || 0 }}</span>
             </div>
           </div>
           <div class="common">
             <div class="item">
-              <span class="mar">追加增幅</span>
+              <span class="mar">{{ t("added_power_up") }}</span>
               <span>{{
                 Number(player.buffedPower - player.realPower) / 100 || 0
               }}</span>
@@ -278,11 +291,13 @@
             :src="require(`../../assets/stake/detail/m_${type}.png`)"
             alt=""
           />
-          <div class="text">正在执行 {{ getDiffName }} 任务</div>
+          <div class="text">
+            {{ t("excute") }} {{ getDiffName }} {{ t("mission") }}
+          </div>
         </div>
       </div>
 
-      <div
+      <!-- <div
         v-if="Number(player.mdao) > 0"
         class="bonus_zone"
         @click="jumpToList"
@@ -296,9 +311,9 @@
             <div>剩余天数 ??天</div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="place_zone">
-        <div class="text">浮育城</div>
+        <div class="text">{{ t("city_0") }}</div>
         <img class="img" src="../../assets/stake/city.png" alt="" />
       </div>
     </div>
@@ -326,6 +341,7 @@ import { useStore } from "vuex";
 import { fromWei } from "web3-utils";
 import { useRouter } from "vue-router";
 import InjectModal from ".././../components/inject_modal";
+import { useI18n } from "vue-i18n";
 export default {
   name: "stk_main",
   components: {
@@ -336,6 +352,7 @@ export default {
     const store = useStore();
     const { proxy } = getCurrentInstance();
     const router = useRouter();
+    const { t } = useI18n();
     const lottie_options = computed(() => {
       return {
         animationData: require(`../../assets/common/loading.json`),
@@ -377,7 +394,7 @@ export default {
           data.web3 = p;
         }
       );
-      // await getGlobalPower();
+      await getGlobalPower();
       await getPlayer();
       if (data.player.endTime) {
         getTicker();
@@ -400,7 +417,7 @@ export default {
       }
       try {
         data.btnDisable = true;
-        proxy.$toast("等待确认", store.state.toast_info);
+        proxy.$toast("waiting", store.state.toast_info);
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -412,11 +429,11 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("领取成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           await refresh();
         }
       } catch (e) {
-        proxy.$toast("领取失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       } finally {
         data.btnDisable = false;
       }
@@ -440,10 +457,10 @@ export default {
       if (parseInt(h, 10) < 0) h = "0";
       if (parseInt(m, 10) < 0) m = "0";
       if (parseInt(d, 10) < 0) d = "0";
-      data.remainTime = `${d}天${h}时${m}分`;
+      data.remainTime = `${d} ${t("day")} ${h} ${t("hour")} ${m} ${t("minute")}`;
 
       if (d == 0 && m == 0 && h == 0) {
-        data.remainTime = "任务已完成";
+        data.remainTime = "FINISHED";
         clearInterval(data.ticker);
       }
     };
@@ -470,14 +487,14 @@ export default {
       data.pendingRewardETHF = Number.parseFloat(
         fromWei(resPending[1], "ether")
       ).toFixed(2);
-      console.log(data.pendingReward, data.pendingRewardETHF,'pending')
+      console.log(data.pendingReward, data.pendingRewardETHF, "pending");
       data.mdaoToDeposit =
         fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
         0;
     };
     const approveMdao = async () => {
       try {
-        proxy.$toast("等到授权mdao", store.state.toast_info);
+        proxy.$toast("wait", store.state.toast_info);
         const c = store.state.c_mdao;
         const addr = store.state.c_staking.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -499,11 +516,11 @@ export default {
           });
         if (res.status) {
           data.mdaoStkBtnStatus = 1;
-          proxy.$toast("授权成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
         }
       } catch (e) {
         console.error(e);
-        proxy.$toast("授权失败", store.state.toast_error);
+        proxy.$toast("failed", store.state.toast_error);
       }
     };
     const jumpToList = () => {
@@ -514,7 +531,7 @@ export default {
     const depositMdao = async () => {
       try {
         data.btnDisable = true;
-        proxy.$toast("等待mdao 确认", store.state.toast_info);
+        proxy.$toast("waiting", store.state.toast_info);
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -526,18 +543,18 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("质押成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           await refresh();
         }
       } catch (e) {
-        proxy.$toast("质押失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       } finally {
         data.btnDisable = false;
       }
     };
     const releaseHero = async () => {
       try {
-        proxy.$toast("等待取出卡牌", store.state.toast_info);
+        proxy.$toast("waiting", store.state.toast_info);
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
@@ -549,11 +566,11 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("取回成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           await refresh();
         }
       } catch (e) {
-        proxy.$toast("取回失败", store.state.toast_error);
+        proxy.$toast("error", store.state.toast_error);
       }
     };
     const getGlobalPower = async () => {
@@ -561,10 +578,11 @@ export default {
       data.totalPower = await c.methods.totalPowers().call();
       data.totalIncome = await c.methods.paidOut().call();
       data.totalIncomeETHF = await c.methods.paidOutETHF().call();
+      console.log(data.totalPower, data.totalIncome, data.totalIncomeETHF,'data')
     };
     const getDiffName = computed(() => {
       if (data.player) {
-        return ["斥候", "扫荡", "驻扎"][data.player.difficulty];
+        return [t('mission_0'), t('mission_1'), t('mission_2')][data.player.difficulty];
       }
       return "err";
     });
@@ -580,6 +598,7 @@ export default {
       releaseHero,
       obtain,
       fromWei,
+      t,
     };
   },
 };

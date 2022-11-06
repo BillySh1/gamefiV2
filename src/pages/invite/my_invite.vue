@@ -57,7 +57,6 @@
 </template>
 
 <script >
-const host = "http://54.151.194.138:8999";
 import { onBeforeMount, reactive, toRefs } from "vue";
 import CommonPageHeader from "../../components/common_page_header";
 import CommonPageFooter from "../../components/common_page_footer";
@@ -66,6 +65,7 @@ import initWeb3 from "../../utils/initWeb3";
 import TableItem from "../../components/table_item.vue";
 import postData from "../../utils/useFetch";
 import { useI18n } from "vue-i18n";
+import { SEVER_HOST } from "../../utils/constants";
 export default {
   name: "notice",
   components: {
@@ -99,7 +99,7 @@ export default {
       await getAmount();
     });
     const getAmount = async () => {
-      const url = host + "/invite/getAmount";
+      const url = SEVER_HOST + "/invite/getAmount";
       const res = await postData(url, {
         from: data.account,
       }).then((res) => res.data);

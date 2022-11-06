@@ -12,13 +12,13 @@
             <img class="quality" :src="qualityImg" alt="" />
           </div>
           <div>
-            战力值
+            {{ t("power") }}
             <span style="margin-bottom: 1rem; color: rgba(252, 98, 98, 1)">{{
               selectedHero.power
             }}</span>
           </div>
         </div>
-        <StkBtn class="cancel" :text="'取消上阵'" @click="onCancelHero" />
+        <StkBtn class="cancel" :text="t('stake_pull')" @click="onCancelHero" />
       </div>
     </div>
     <div class="main">
@@ -45,13 +45,15 @@
             />
             <div>
               <div class="text">
-                正在执行
+                {{ t("stkae_excute") }}
                 <span style="color: rgba(252, 98, 98, 1)">{{
                   getDiffName.name
                 }}</span>
-                任务
+                {{ t("stake_mission") }}
               </div>
-              <div class="text">为期 {{ getDiffName.time }} 天</div>
+              <div class="text">
+                {{ t("stake_time") }} {{ getDiffName.time }} {{ t("day") }}
+              </div>
               <!-- <div class="text" style="color: rgba(252, 98, 98, 1)">
                 已质押MDAO
               </div> -->
@@ -63,11 +65,11 @@
             <div style="margin-bottom: 1rem; color: rgba(252, 98, 98, 1)">
               {{ curTotalPower }}
             </div>
-            <div>当前出战总战力</div>
+            <div>{{ t("cur_total_power") }}</div>
           </div>
           <div class="detail">
             <div style="margin-bottom: 1rem">
-              当前出战人数
+              {{ t("total_num") }}
               <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem">{{
                 heroes.length
               }}</span>
@@ -76,8 +78,8 @@
               <span style="color: rgba(252, 98, 98, 1); margin-left: 1.5rem">
                 {{
                   heroes.includes((x) => x.rarity == 5)
-                    ? "触发金卡加成"
-                    : "未触发金卡加成"
+                    ? t("golden_bonus")
+                    : t("no_golden")
                 }}</span
               >
             </div>
@@ -101,7 +103,7 @@
             class="btn_bg"
             src="../../assets/stake/stake/detail/addBtn.png"
           />
-          <div class="text">继续添加</div>
+          <div class="text">{{ t("continue_add") }}</div>
         </div>
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div
@@ -121,7 +123,9 @@
             src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/stake/stake_btn_bg.png"
             alt=""
           />
-          <div class="text">{{ btnStatus == 1 ? "出征" : "授权" }}</div>
+          <div class="text disable">
+            {{ btnStatus == 1 ? t("stake_go") : t("approve") }}
+          </div>
         </div>
       </div>
     </div>
@@ -144,6 +148,7 @@ import HeroCardItem from "../../components/hero_card_item.vue";
 import HeroAvatar from "./components/hero_avatar.vue";
 import { useRoute, useRouter } from "vue-router";
 import StkBtn from "./components/stk_btn.vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "stk_go_detail",
   components: {
@@ -156,6 +161,7 @@ export default {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
+    const { t } = useI18n();
     const data = reactive({
       account: "",
       web3: "",
@@ -166,7 +172,7 @@ export default {
       type: 0,
       btnStatus: 0,
       diff: undefined,
-      btnDisable: false
+      btnDisable: false,
     });
     const selectedHero = computed(() => {
       return data.heroes[data.chosen] || data.heroes[0];
@@ -197,15 +203,15 @@ export default {
     const getDiffName = computed(() => {
       const arr = [
         {
-          name: "斥候",
+          name: t("mission_0"),
           time: 7,
         },
         {
-          name: "扫荡",
+          name: t("mission_1"),
           time: 14,
         },
         {
-          name: "驻扎",
+          name: t("mission_2"),
           time: 30,
         },
         {
@@ -243,7 +249,7 @@ export default {
     const approve = async () => {
       data.btnDisable = true;
       try {
-        proxy.$toast("等到授权英雄", store.state.toast_info);
+        proxy.$toast("waiting", store.state.toast_info);
         const c = store.state.c_hero;
         const addr = store.state.c_staking.options.address;
         const gasPrice = await data.web3.eth.getGasPrice();
@@ -256,11 +262,11 @@ export default {
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("授权成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           data.btnStatus = 1;
         }
       } catch (e) {
-        proxy.$toast("授权失败", store.state.toast_error);
+        proxy.$toast("failed", store.state.toast_error);
       } finally {
         data.btnDisable = false;
       }
@@ -268,26 +274,26 @@ export default {
     const deposit = async () => {
       try {
         data.btnDisable = true;
-        proxy.$toast("等到质押英雄", store.state.toast_info);
+        proxy.$toast("waiting", store.state.toast_info);
         const c = store.state.c_staking;
         const gasPrice = await data.web3.eth.getGasPrice();
         const gas = await c.methods
-          .deposit(data.selected, 1)
+          .deposit(data.selected, 0)
           .estimateGas({ from: data.account });
-        const res = await c.methods.deposit(data.selected, 1).send({
+        const res = await c.methods.deposit(data.selected, 0).send({
           gas: gas,
           gasPrice: gasPrice,
           from: data.account,
         });
         if (res.status) {
-          proxy.$toast("质押成功", store.state.toast_success);
+          proxy.$toast("success", store.state.toast_success);
           router.push({
             name: "stk_main",
           });
         }
       } catch (e) {
         console.error(e);
-        proxy.$toast("质押失败", store.state.toast_error);
+        proxy.$toast("failed", store.state.toast_error);
       } finally {
         data.btnDisable = false;
       }
@@ -312,6 +318,7 @@ export default {
       onSelect,
       deposit,
       approve,
+      t,
     };
   },
 };
@@ -500,8 +507,10 @@ export default {
         font-size: 2vmin;
       }
     }
-    .disable{
+    .disable {
       filter: grayscale(1);
+      user-select: none;
+      pointer-events: none;
     }
   }
 }
