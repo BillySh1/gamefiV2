@@ -44,7 +44,7 @@
         <div class="actions_inner_zh">
           <img
             @click="jump('stk_entry')"
-            class="left"
+            class="left disable"
             :src="require(`../../assets/Lang/left_${curLang}.png`)"
           />
           <img
@@ -199,6 +199,11 @@ export default {
   .actions_inner_zh {
     display: flex;
     margin-top: 2rem;
+    .disable{
+      user-select: none;
+      pointer-events: none;
+      filter: grayscale(1)
+    }
     .left {
       &:hover {
         opacity: 0.6;
