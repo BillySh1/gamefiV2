@@ -210,7 +210,7 @@
           <div class="income">
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
-              <p>{{ t("cur_mission_income") }} can release</p>
+              <p>{{ t("cur_mission_income") }} Release</p>
               <!-- <p>{{ pendingReward }} MDAO</p>
               <p>{{ pendingRewardETHF }} ETHF</p> -->
             </div>
@@ -394,7 +394,7 @@ export default {
           data.web3 = p;
         }
       );
-      await refresh()
+      await refresh();
       if (data.player.endTime) {
         getTicker();
       }
@@ -403,7 +403,6 @@ export default {
     const canRelease = async () => {
       const c = store.state.c_staking;
       data.canRelease = await c.methods.canRelease(data.account).call();
-      console.log(data.canRelease,'ggg')
     };
     const refresh = async () => {
       await getGlobalPower();
@@ -450,19 +449,20 @@ export default {
       }, 1000);
     };
     const getRTime = (startTime, endTime) => {
-      const delta = Number(endTime) - Number(startTime);
-      let d = Math.floor(delta / (60 * 60 * 24));
-      let h = Math.floor((delta / 60 / 60) % 24);
-      let m = Math.floor((delta / 60) % 60);
-      if (parseInt(h, 10) < 0) h = "0";
-      if (parseInt(m, 10) < 0) m = "0";
-      if (parseInt(d, 10) < 0) d = "0";
-      data.remainTime = `${d} ${t("day")} ${h} ${t("hour")} ${m} ${t("minute")}`;
+      console.log(startTime, endTime, "time");
+      // const delta = Number(endTime) - Number(startTime);
+      // let d = Math.floor(delta / (60 * 60 * 24));
+      // let h = Math.floor((delta / 60 / 60) % 24);
+      // let m = Math.floor((delta / 60) % 60);
+      // if (parseInt(h, 10) < 0) h = "0";
+      // if (parseInt(m, 10) < 0) m = "0";
+      // if (parseInt(d, 10) < 0) d = "0";
+      // data.remainTime = `${d} ${t("day")} ${h} ${t("hour")} ${m} ${t("minute")}`;
 
-      if (d == 0 && m == 0 && h == 0) {
-        data.remainTime = "FINISHED";
-        clearInterval(data.ticker);
-      }
+      // if (d == 0 && m == 0 && h == 0) {
+      data.remainTime = "FINISHED";
+      clearInterval(data.ticker);
+      // }
     };
 
     const getPlayer = async () => {
@@ -576,13 +576,26 @@ export default {
     const getGlobalPower = async () => {
       const c = store.state.c_staking;
       data.totalPower = await c.methods.totalPowers().call();
-      data.totalIncome = await c.methods.paidOut().call();
-      data.totalIncomeETHF = await c.methods.paidOutETHF().call();
-      console.log(data.totalPower, data.totalIncome, data.totalIncomeETHF,'data')
+      data.totalIncome =
+        data.web3.utils.fromWei(await c.methods.paidOut().call(), "ether") || 0;
+      data.totalIncomeETHF =
+        data.web3.utils.fromWei(
+          await c.methods.paidOutETHF().call(),
+          "ether"
+        ) || 0;
+
+      console.log(
+        data.totalPower,
+        data.totalIncome,
+        data.totalIncomeETHF,
+        "data"
+      );
     };
     const getDiffName = computed(() => {
       if (data.player) {
-        return [t('mission_0'), t('mission_1'), t('mission_2')][data.player.difficulty];
+        return [t("mission_0"), t("mission_1"), t("mission_2")][
+          data.player.difficulty
+        ];
       }
       return "err";
     });
