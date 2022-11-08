@@ -44,7 +44,7 @@
         <div class="actions_inner_zh">
           <img
             @click="jump('stk_entry')"
-            class="left disable"
+            class="left"
             :src="require(`../../assets/Lang/left_${curLang}.png`)"
           />
           <img

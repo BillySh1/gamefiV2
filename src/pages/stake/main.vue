@@ -163,7 +163,7 @@
           </div>
           <div
             v-if="Number(mdaoToDeposit > 0)"
-            class="stk_btn"
+            class="stk_btn disable"
             @click="
               () => {
                 if (mdaoStkBtnStatus == 0) {
