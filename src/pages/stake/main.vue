@@ -210,9 +210,9 @@
           <div class="income">
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
-              <p>{{ t("cur_mission_income") }}</p>
-              <p>{{ pendingReward }} MDAO</p>
-              <p>{{ pendingRewardETHF }} ETHF</p>
+              <p>{{ t("cur_mission_income") }} can release</p>
+              <!-- <p>{{ pendingReward }} MDAO</p>
+              <p>{{ pendingRewardETHF }} ETHF</p> -->
             </div>
           </div>
           <div style="display: flex; align-items: center">
@@ -394,8 +394,7 @@ export default {
           data.web3 = p;
         }
       );
-      await getGlobalPower();
-      await getPlayer();
+      await refresh()
       if (data.player.endTime) {
         getTicker();
       }
@@ -403,7 +402,8 @@ export default {
     });
     const canRelease = async () => {
       const c = store.state.c_staking;
-      data.canRelease = await c.methods.canRelease().call();
+      data.canRelease = await c.methods.canRelease(data.account).call();
+      console.log(data.canRelease,'ggg')
     };
     const refresh = async () => {
       await getGlobalPower();
@@ -480,13 +480,13 @@ export default {
           await c.methods.rewardPerBlockETHF().call(),
           "ether"
         ) || 0;
-      const resPending = await c.methods.pending(data.account).call();
-      data.pendingReward = Number.parseFloat(
-        fromWei(resPending[0], "ether")
-      ).toFixed(2);
-      data.pendingRewardETHF = Number.parseFloat(
-        fromWei(resPending[1], "ether")
-      ).toFixed(2);
+      // const resPending = await c.methods.pending(data.account).call();
+      // data.pendingReward = Number.parseFloat(
+      //   fromWei(resPending[0], "ether")
+      // ).toFixed(2);
+      // data.pendingRewardETHF = Number.parseFloat(
+      //   fromWei(resPending[1], "ether")
+      // ).toFixed(2);
       console.log(data.pendingReward, data.pendingRewardETHF, "pending");
       data.mdaoToDeposit =
         fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
