@@ -187,7 +187,7 @@
             src="../../assets/stake/stake/empty_mission.png"
             alt=""
           />
-          <p>未选择任务</p>
+          <p>choose mission</p>
           <div
             class="btn_wrapper"
             @click="
@@ -203,7 +203,7 @@
               src="../../assets/stake/choose/btn_bg.png"
               alt=""
             />
-            <div class="text">去出征</div>
+            <div class="text">Go</div>
           </div>
         </div>
         <div class="action_zone_2" v-else>
@@ -243,14 +243,14 @@
               </div>
             </div>
 
-            <div
+            <!-- <div
               class="big_btn disable"
               v-if="player.isUnClaim"
               @click="() => obtain(1)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
               <div class="text">复利领取</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
