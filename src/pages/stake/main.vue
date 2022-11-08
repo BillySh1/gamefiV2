@@ -233,8 +233,8 @@
               <div class="text">{{ t("add_continue") }}</div>
             </div>
             <div
+              v-if="player.inUnClaim"
               class="big_btn"
-              v-if="player.isUnClaim"
               @click="() => obtain(0)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
@@ -577,12 +577,13 @@ export default {
       const c = store.state.c_staking;
       data.totalPower = await c.methods.totalPowers().call();
       data.totalIncome =
-        data.web3.utils.fromWei(await c.methods.paidOut().call(), "ether") || 0;
+        Number.parseFloat(
+          data.web3.utils.fromWei(await c.methods.paidOut().call(), "ether")
+        ).toFixed(1) || 0;
       data.totalIncomeETHF =
-        data.web3.utils.fromWei(
-          await c.methods.paidOutETHF().call(),
-          "ether"
-        ) || 0;
+        Number.parseFloat(
+          data.web3.utils.fromWei(await c.methods.paidOutETHF().call(), "ether")
+        ).toFixed(1) || 0;
 
       console.log(
         data.totalPower,
