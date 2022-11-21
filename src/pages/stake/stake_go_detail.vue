@@ -107,7 +107,7 @@
         </div>
         <img class="dia" src="../../assets/stake/diamond.png" alt="" />
         <div
-          :class="btnDisable ? 'stake disable' : 'stake'"
+          :class="btnDisable ? 'stake disable' : 'stake disable'"
           @click="
             () => {
               if (btnDisable) return;

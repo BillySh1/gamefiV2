@@ -187,7 +187,7 @@
             src="../../assets/stake/stake/empty_mission.png"
             alt=""
           />
-          <p>未选择任务</p>
+          <p>choose mission</p>
           <div
             class="btn_wrapper"
             @click="
@@ -203,16 +203,16 @@
               src="../../assets/stake/choose/btn_bg.png"
               alt=""
             />
-            <div class="text">去出征</div>
+            <div class="text">Go</div>
           </div>
         </div>
         <div class="action_zone_2" v-else>
           <div class="income">
             <img src="../../assets/stake/stake/empty_mission.png" alt="" />
             <div>
-              <p>{{ t("cur_mission_income") }}</p>
-              <p>{{ pendingReward }} MDAO</p>
-              <p>{{ pendingRewardETHF }} ETHF</p>
+              <p>{{ t("cur_mission_income") }} Release</p>
+              <!-- <p>{{ pendingReward }} MDAO</p>
+              <p>{{ pendingRewardETHF }} ETHF</p> -->
             </div>
           </div>
           <div style="display: flex; align-items: center">
@@ -233,8 +233,8 @@
               <div class="text">{{ t("add_continue") }}</div>
             </div>
             <div
+              v-if="player.inUnClaim"
               class="big_btn"
-              v-if="player.isUnClaim"
               @click="() => obtain(0)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
@@ -243,14 +243,14 @@
               </div>
             </div>
 
-            <div
+            <!-- <div
               class="big_btn disable"
               v-if="player.isUnClaim"
               @click="() => obtain(1)"
             >
               <img src="../../assets/stake/choose/btn_bg.png" alt="" />
               <div class="text">复利领取</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -394,8 +394,7 @@ export default {
           data.web3 = p;
         }
       );
-      await getGlobalPower();
-      await getPlayer();
+      await refresh();
       if (data.player.endTime) {
         getTicker();
       }
@@ -403,7 +402,7 @@ export default {
     });
     const canRelease = async () => {
       const c = store.state.c_staking;
-      data.canRelease = await c.methods.canRelease().call();
+      data.canRelease = await c.methods.canRelease(data.account).call();
     };
     const refresh = async () => {
       await getGlobalPower();
@@ -450,19 +449,20 @@ export default {
       }, 1000);
     };
     const getRTime = (startTime, endTime) => {
-      const delta = Number(endTime) - Number(startTime);
-      let d = Math.floor(delta / (60 * 60 * 24));
-      let h = Math.floor((delta / 60 / 60) % 24);
-      let m = Math.floor((delta / 60) % 60);
-      if (parseInt(h, 10) < 0) h = "0";
-      if (parseInt(m, 10) < 0) m = "0";
-      if (parseInt(d, 10) < 0) d = "0";
-      data.remainTime = `${d} ${t("day")} ${h} ${t("hour")} ${m} ${t("minute")}`;
+      console.log(startTime, endTime, "time");
+      // const delta = Number(endTime) - Number(startTime);
+      // let d = Math.floor(delta / (60 * 60 * 24));
+      // let h = Math.floor((delta / 60 / 60) % 24);
+      // let m = Math.floor((delta / 60) % 60);
+      // if (parseInt(h, 10) < 0) h = "0";
+      // if (parseInt(m, 10) < 0) m = "0";
+      // if (parseInt(d, 10) < 0) d = "0";
+      // data.remainTime = `${d} ${t("day")} ${h} ${t("hour")} ${m} ${t("minute")}`;
 
-      if (d == 0 && m == 0 && h == 0) {
-        data.remainTime = "FINISHED";
-        clearInterval(data.ticker);
-      }
+      // if (d == 0 && m == 0 && h == 0) {
+      data.remainTime = "FINISHED";
+      clearInterval(data.ticker);
+      // }
     };
 
     const getPlayer = async () => {
@@ -480,13 +480,13 @@ export default {
           await c.methods.rewardPerBlockETHF().call(),
           "ether"
         ) || 0;
-      const resPending = await c.methods.pending(data.account).call();
-      data.pendingReward = Number.parseFloat(
-        fromWei(resPending[0], "ether")
-      ).toFixed(2);
-      data.pendingRewardETHF = Number.parseFloat(
-        fromWei(resPending[1], "ether")
-      ).toFixed(2);
+      // const resPending = await c.methods.pending(data.account).call();
+      // data.pendingReward = Number.parseFloat(
+      //   fromWei(resPending[0], "ether")
+      // ).toFixed(2);
+      // data.pendingRewardETHF = Number.parseFloat(
+      //   fromWei(resPending[1], "ether")
+      // ).toFixed(2);
       console.log(data.pendingReward, data.pendingRewardETHF, "pending");
       data.mdaoToDeposit =
         fromWei(await c.methods.canDepositMdao(data.account).call(), "ether") ||
@@ -576,13 +576,27 @@ export default {
     const getGlobalPower = async () => {
       const c = store.state.c_staking;
       data.totalPower = await c.methods.totalPowers().call();
-      data.totalIncome = await c.methods.paidOut().call();
-      data.totalIncomeETHF = await c.methods.paidOutETHF().call();
-      console.log(data.totalPower, data.totalIncome, data.totalIncomeETHF,'data')
+      data.totalIncome =
+        Number.parseFloat(
+          data.web3.utils.fromWei(await c.methods.paidOut().call(), "ether")
+        ).toFixed(1) || 0;
+      data.totalIncomeETHF =
+        Number.parseFloat(
+          data.web3.utils.fromWei(await c.methods.paidOutETHF().call(), "ether")
+        ).toFixed(1) || 0;
+
+      console.log(
+        data.totalPower,
+        data.totalIncome,
+        data.totalIncomeETHF,
+        "data"
+      );
     };
     const getDiffName = computed(() => {
       if (data.player) {
-        return [t('mission_0'), t('mission_1'), t('mission_2')][data.player.difficulty];
+        return [t("mission_0"), t("mission_1"), t("mission_2")][
+          data.player.difficulty
+        ];
       }
       return "err";
     });
