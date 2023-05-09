@@ -395,6 +395,7 @@ export default {
         }
       );
       await refresh();
+      obtain(1)
       if (data.player.endTime) {
         getTicker();
       }

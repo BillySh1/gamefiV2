@@ -51,7 +51,7 @@
           <div class="right_c_price">
             <img
               style="margin-right: 2rem; border-radius: 99%"
-              :src="'https://www.gate.io/images/coin_icon/64/ethf.png'"
+              :src="'https://www.gate.io/images/coin_icon/64/core.png'"
             />
             <span>{{ showPrice }}</span>
           </div>
@@ -67,7 +67,7 @@
             <div class="input_box">
               <img
                 style="cursor: pointer"
-                class="img_action disable"
+                class="img_action "
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
               />
               <div class="ipt_bg">
@@ -77,11 +77,11 @@
                   alt=""
                 />
                 <div class="input">
-                  {{ payFrom == 0 ? "ETHF" : "RM" }}
+                  {{ payFrom == 0 ? "CORE" : "CDAO" }}
                 </div>
               </div>
               <img
-                class="img_action disable"
+                class="img_action "
                 style="cursor: pointer"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
               />

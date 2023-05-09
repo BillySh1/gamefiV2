@@ -8,7 +8,8 @@ export default {
     } else {
       this.provider = new Web3.providers.HttpProvider(
         // "https://data-seed-prebsc-1-s1.binance.org:8545"
-        "https://rpc.etherfair.org"
+        // "https://rpc.etherfair.org"
+        "https://rpc.coredao.org"
       );
     }
     const web3 = new Web3(this.provider);

@@ -3,7 +3,7 @@
     <div class="chain_icon_box">
       <img
         class="chain_icon"
-        src="https://www.gate.io/images/coin_icon/64/ethf.png"
+        src="https://www.gate.io/images/coin_icon/64/core.png"
         alt=""
       />
     </div>

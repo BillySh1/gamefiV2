@@ -49,7 +49,7 @@ import initWeb3 from "./utils/initWeb3";
 import GlobalLoading from "./components/global_loading.vue";
 import ConnectWalletModal from "./components/connect_wallet_modal.vue";
 import AudioBox from "./components/audio.vue";
-const acceptNetWorks = [513100];
+const acceptNetWorks = [1116];
 export default {
   name: "app",
   components: {
@@ -106,6 +106,7 @@ export default {
     
       if (window.ethereum) {
         chainId = parseInt(window.ethereum.chainId || window.ethereum.eth_chainId(),16);
+       
       } else {
         chainId = await this.Web3.eth.getChainId();
       }
