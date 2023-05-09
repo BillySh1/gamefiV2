@@ -199,12 +199,15 @@ export default {
   .actions_inner_zh {
     display: flex;
     margin-top: 2rem;
-    .disable{
+    .disable {
       user-select: none;
       pointer-events: none;
-      filter: grayscale(1)
+      filter: grayscale(1);
     }
     .left {
+      user-select: none;
+      pointer-events: none;
+      filter: grayscale(1);
       &:hover {
         opacity: 0.6;
       }
