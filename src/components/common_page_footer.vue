@@ -18,7 +18,7 @@
     <div class="swap" @click="toSwap">
       <img
         class="img"
-        src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mmc_logo.svg"
+        src="https://www.coredaoswap.com/logo.png"
         alt=""
       />
       <div class="text">Swap</div>

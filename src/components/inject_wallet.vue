@@ -31,7 +31,7 @@ export default {
       curLang: "en",
     });
     const jump2Swap = () => {
-      window.open("https://ethf.mdaoswap.com/", "_blank");
+      window.open("https://www.coredaoswap.com", "_blank");
     };
     const walletValue = computed(() => {
       const wallet = data.wallet;

@@ -50,8 +50,12 @@
           </div>
           <div class="right_c_price">
             <img
-              style="margin-right: 2rem; border-radius: 99%"
-              :src="'https://www.gate.io/images/coin_icon/64/core.png'"
+              style="margin-right: 2rem; border-radius: 99%; width:3.5rem"
+              :src="
+                payFrom == 0
+                  ? 'https://www.gate.io/images/coin_icon/64/core.png'
+                  : 'https://www.coredaoswap.com/cdao.png'
+              "
             />
             <span>{{ showPrice }}</span>
           </div>
@@ -67,8 +71,24 @@
             <div class="input_box">
               <img
                 style="cursor: pointer"
-                class="img_action "
+                class="img_action"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
+                @click="
+                  () => {
+                    if (payFrom == 0) {
+                      payFrom = 1;
+                      if (isApproved) {
+                        btnStatus = 1;
+                      } else {
+                        btnStatus = 0;
+                      }
+                    } else {
+                      payFrom = 0;
+                      btnStatus = 1;
+                    }
+                    getCost();
+                  }
+                "
               />
               <div class="ipt_bg">
                 <img
@@ -81,9 +101,25 @@
                 </div>
               </div>
               <img
-                class="img_action "
+                class="img_action"
                 style="cursor: pointer"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
+                @click="
+                  () => {
+                    if (payFrom == 0) {
+                      payFrom = 1;
+                      if (isApproved) {
+                        btnStatus = 1;
+                      } else {
+                        btnStatus = 0;
+                      }
+                    } else {
+                      payFrom = 0;
+                      btnStatus = 1;
+                    }
+                    getCost();
+                  }
+                "
               />
             </div>
             <div class="input_box">
@@ -274,7 +310,7 @@ export default {
         if (_local && _local.toLowerCase() != data.account.toLowerCase()) {
           invite = _local;
         }
-        
+
         const gas = await c.methods
           .buy(data.info.key, data.buyValue, invite, data.payFrom)
           .estimateGas({
@@ -474,7 +510,7 @@ export default {
   .img_action {
     width: 2rem;
   }
-  .disable{
+  .disable {
     filter: grayscale(1);
     pointer-events: none;
     user-select: none;
