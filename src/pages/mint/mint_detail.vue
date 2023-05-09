@@ -50,7 +50,7 @@
           </div>
           <div class="right_c_price">
             <img
-              style="margin-right: 2rem; border-radius: 99%; width:3.5rem"
+              style="margin-right: 2rem; border-radius: 99%; width: 3.5rem"
               :src="
                 payFrom == 0
                   ? 'https://www.gate.io/images/coin_icon/64/core.png'
@@ -71,7 +71,7 @@
             <div class="input_box">
               <img
                 style="cursor: pointer"
-                class="img_action"
+                class="img_action disable"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
                 @click="
                   () => {
@@ -101,7 +101,7 @@
                 </div>
               </div>
               <img
-                class="img_action"
+                class="img_action disable"
                 style="cursor: pointer"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
                 @click="
@@ -125,7 +125,7 @@
             <div class="input_box">
               <img
                 style="cursor: pointer"
-                class="img_action"
+                class="img_action disable"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/minus.svg"
                 @click="
                   () => {
@@ -155,7 +155,7 @@
                 />
               </div>
               <img
-                class="img_action"
+                class="img_action disable"
                 style="cursor: pointer"
                 src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/add.svg"
                 @click="
@@ -167,7 +167,10 @@
             </div>
           </div>
 
-          <div class="right_c_btn" @click="btnClick">
+          <div
+            :class="info.key == 0 ? 'right_c_btn' : 'right_c_btn disable'"
+            @click="btnClick"
+          >
             <img
               class="btn_img"
               src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/mint/btn.png"
@@ -544,6 +547,11 @@ export default {
   .btn_img {
     max-width: 10rem;
   }
+}
+.disable {
+  filter: grayscale(1);
+  pointer-events: none;
+  user-select: none;
 }
 .richt_c_btn_value {
   position: absolute;

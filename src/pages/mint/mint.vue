@@ -45,7 +45,7 @@
               :src="item.bg"
             />
           </div>
-
+<!-- 
           <div class="price_box" v-show="activeIndex == item.key">
             <img
               class="price_icon"
@@ -55,7 +55,7 @@
             <span class="swiper_price_value" style="margin-left: 3rem">{{
               item.price
             }}</span>
-          </div>
+          </div> -->
         </SwiperSlide>
       </Swiper>
     </div>

@@ -12,8 +12,8 @@ import en from "./locales/en";
 const i18n = createI18n({
   globalInjection: true,
   legacy: false,
-  locale: localStorage.getItem("lang") || "en",
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "en",
+  locale: localStorage.getItem("lang") || "zh",
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "zh",
   messages: {
     zh,
     en,
