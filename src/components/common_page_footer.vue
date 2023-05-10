@@ -79,29 +79,33 @@ export default {
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/exchange.png",
         href: "exchange",
         text: t("exchange"),
+        disable: true
       },
       {
         key: "store",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/store.png",
         href: "store",
         text: t("store"),
+        disable: true
       },
       {
         key: "reborn",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/reborn.png",
         href: "reborn",
         text: t("reborn"),
+        disable: true
       },
       {
         key: "mix",
         img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/mix.png",
         href: "mix",
         text: t("mix"),
+        disable: true
       },
     ]);
     const data = reactive({});
     const toSwap = () => {
-      window.open("http://www.mdaoswap.xyz/", "_blank");
+      window.open("https://www.coredaoswap.com/", "_blank");
     };
     const refData = toRefs(data);
     return {
@@ -178,8 +182,6 @@ export default {
   font-size: 1.5rem;
   font-weight: 400;
   margin-left: 1rem;
-  pointer-events: none;
-  filter: grayscale(1);
   .text {
     margin-left: 1rem;
   }

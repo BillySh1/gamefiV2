@@ -120,7 +120,7 @@ export default {
           index + 1,
           formatText(item.inviter),
           Number(data.web3.utils.fromWei(item.amount, "ether")).toFixed(2) +
-            " ETHF",
+            " CORE",
         ]);
       });
     };
@@ -140,7 +140,7 @@ export default {
           index + 1,
           formatText(item.inviter),
           Number(data.web3.utils.fromWei(item.amount, "ether")).toFixed(2) +
-            " ETHF",
+            " CORE",
         ]);
       });
     };

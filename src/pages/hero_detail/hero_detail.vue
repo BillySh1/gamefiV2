@@ -64,7 +64,7 @@
               <div class="chain_info">
                 <span>Token ID: {{ info.tokenId }}</span>
                 <div class="view_on_chain" @click="viewOnChain">
-                  View on ETHFScan
+                  View on COREScan
                 </div>
               </div>
             </div>

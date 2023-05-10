@@ -23,7 +23,7 @@
         {{ t("cur_income") }} {{ pendingReward }} MDAO
       </div>
       <div class="rule_modal_item" style="color: red">
-        {{ t("cur_income") }} {{ pendingRewardETHF }} ETHF
+        {{ t("cur_income") }} {{ pendingRewardETHF }} CORE
       </div>
     </InjectModal>
     <InjectModal
@@ -77,7 +77,7 @@
         <div class="item">
           <img src="../../assets/stake/main_item.png" alt="" />
           <div class="inner">
-            <div class="title">{{ t("all_income_valid") }} (ETHF)</div>
+            <div class="title">{{ t("all_income_valid") }} (CORE)</div>
             <div style="font-size: 1.2rem; margin: 0 1rem">
               {{ totalIncomeETHF }}
             </div>
@@ -113,7 +113,7 @@
               <div>
                 {{ t("current_his_income") }}
                 {{ pendingRewardETHF }}
-                ETHF
+                CORE
               </div>
             </div>
             <div class="lg white">
@@ -121,7 +121,7 @@
                 {{ t("bonus_per_block") }} {{ rewardPerblockMDAO }} MDAO
               </div>
               <div>
-                {{ t("bonus_per_block") }} {{ rewardPerblockETHF }} ETHF
+                {{ t("bonus_per_block") }} {{ rewardPerblockETHF }} CORE
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@
           <div class="detail">
             <div class="lg">
               <div>{{ fromWei(player.inviteReward[0], "ether") }} MDAO</div>
-              <div>{{ fromWei(player.inviteReward[1], "ether") }} ETHF</div>
+              <div>{{ fromWei(player.inviteReward[1], "ether") }} CORE</div>
             </div>
           </div>
         </div>

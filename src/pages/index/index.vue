@@ -6,12 +6,12 @@
       <InjectUser :power="power" />
       <div class="float_right_box">
         <div class="flex">
-          <div class="float_item" @click="jump('airdrop')">
+          <!-- <div class="float_item" @click="jump('airdrop')">
             <InjectIcon
               :src="'https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/index/airdrop.png'"
               :text="t('airdrop')"
             />
-          </div>
+          </div> -->
           <div class="float_item">
             <div class="float_item" @click="jump('invite')">
               <InjectIcon
@@ -164,6 +164,11 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    .disbale {
+      filter: grayscale(1);
+      pointer-events: none;
+      cursor: pointer;
+    }
   }
 }
 

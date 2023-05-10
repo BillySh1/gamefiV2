@@ -64,7 +64,7 @@
           <div class="xs">
             <div>COST</div>
             <div style="margin: 0 1rem">{{ ethfCost }}</div>
-            <div>ETHF</div>
+            <div>CORE</div>
           </div>
         </div>
 
@@ -76,7 +76,7 @@
         </div>
         <div class="action_button">
           <CommonButton class="btn" @click="buyWithETHF">
-            BUY WITH ETHF
+            BUY WITH CORE
           </CommonButton>
         </div>
       </div>
