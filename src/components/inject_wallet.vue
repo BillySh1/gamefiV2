@@ -12,7 +12,7 @@
       <div class="drop_down">
         <div class="item" @click="$emit('exit')">{{ $t("disconnect") }}</div>
         <div class="item" @click="controlAudio">{{ audioText }}</div>
-        <div class="item" @click="jump2Swap">MemorySwap ></div>
+        <div class="item" @click="jump2Swap">CoreDAOSwap ></div>
       </div>
     </div>
   </div>

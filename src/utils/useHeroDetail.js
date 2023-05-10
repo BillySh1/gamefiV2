@@ -390,39 +390,39 @@ const heroMap = {
   },
   s0: {
     name: t("name_s0"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s0.png",
+    img: require("../assets/cardImgs/hero/s0.png"),
     intro: t("name_s0"),
     avatar: require("../assets/avatar/4/s0.jpg"),
   },
   s1: {
     name: t("name_s1"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s1.png",
+    img: require("../assets/cardImgs/hero/s1.png"),
     intro: t("name_s1"),
     avatar: require("../assets/avatar/4/s1.jpg"),
   },
   s2: {
     name: t("name_s2"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s2.png",
+    img: require("../assets/cardImgs/hero/s2.png"),
     intro: t("name_s2"),
     avatar: require("../assets/avatar/4/s2.jpg"),
   },
   s3: {
     name: t("name_s3"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s3.png",
+    img: require("../assets/cardImgs/hero/s3.png"),
     intro: t("name_s3"),
     avatar: require("../assets/avatar/4/s3.jpg"),
   },
   s4: {
     name: t("name_s4"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s4.png",
+    img: require("../assets/cardImgs/hero/s4.png"),
     intro: t("name_s4"),
     avatar: require("../assets/avatar/4/s4.jpg"),
   },
   err: {
     name: t("name_err"),
-    img: "https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/cardImgs/hero/s1.png",
+    img: "../assets/cardImgs/hero/s1.png",
     intro: t("intro_err"),
-    avatar: require("../assets/avatar/4/s4.jpg"),
+    avatar: require("../assets/avatar/4/s1.jpg"),
   },
 };
 

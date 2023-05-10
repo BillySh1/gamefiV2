@@ -7,7 +7,7 @@
         class="name"
         :style="
           ['/heroDetail', '/orderDetail', '/sell'].includes($route.path) || big
-            ? 'bottom:21%;font-size:1.5rem;left:45%'
+            ? 'bottom:12%;font-size:1.5rem;left:63%'
             : ''
         "
       >
@@ -55,11 +55,10 @@
     <img
       class="hero"
       :style="
-        info.rarity == 0
-          ? 'width: 68%;top: 53%;left: 45%;'
-          : $route.path.includes('upgrade') ||
-            $route.path.includes('stk_go_detail')
-          ? 'transform:translate(-43%,-69%)'
+        $route.path.includes('upgrade') ||
+        $route.path.includes('stk_go_detail') ||
+        $route.path.includes('heroDetail')
+          ? 'height:55%;top:43%'
           : ''
       "
       :src="
@@ -85,8 +84,8 @@ export default {
     const borderImg = computed(() => {
       return (
         [
-          require("../assets/cardImgs/hero/bg/r0.svg"),
-          require("../assets/cardImgs/hero/bg/r1.svg"),
+          require("../assets/cardImgs/hero/bg/r0.png"),
+          require("../assets/cardImgs/hero/bg/r1.png"),
           require("../assets/cardImgs/hero/bg/r2.svg"),
           require("../assets/cardImgs/hero/bg/r3.svg"),
           require("../assets/cardImgs/hero/bg/r4.svg"),
@@ -175,7 +174,7 @@ export default {
   .hero {
     position: absolute;
     width: 80%;
-    height: auto;
+    height: 61%;
     top: 41%;
     left: 47%;
     transform: translate(-43%, -52%);
@@ -186,12 +185,12 @@ export default {
       font-size: 0.8rem;
     }
     position: absolute;
-    bottom: 20.5%;
-    left: 42%;
+    bottom: 11%;
+    left: 62%;
     transform: translate(0, -50%);
     z-index: 30;
     text-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
   .mix {
     position: absolute;
@@ -250,10 +249,10 @@ export default {
   }
   .camp {
     position: absolute;
-    left: 14%;
-    bottom: 20%;
+    left: 12%;
+    bottom: 21%;
     z-index: 30;
-    width: 15%;
+    width: 18%;
     img {
       width: 100%;
     }
@@ -263,7 +262,7 @@ export default {
     left: 2%;
     top: 1%;
     z-index: 30;
-    width: 43%;
+    width: 65%;
     img {
       width: 100%;
     }

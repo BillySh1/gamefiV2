@@ -45,17 +45,18 @@
               :src="item.bg"
             />
           </div>
-<!-- 
+
           <div class="price_box" v-show="activeIndex == item.key">
-            <img
+            <!-- <img
               class="price_icon"
               src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/exchange/usdt.png"
               alt=""
-            />
+            /> -->
+            <span> Minted </span>
             <span class="swiper_price_value" style="margin-left: 3rem">{{
-              item.price
+              minted
             }}</span>
-          </div> -->
+          </div>
         </SwiperSlide>
       </Swiper>
     </div>
@@ -76,6 +77,7 @@ import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { SEVER_HOST } from "../../utils/constants";
 import postData from "../../utils/useFetch";
+import { useStore } from "vuex";
 export default {
   name: "mint",
   components: {
@@ -88,9 +90,11 @@ export default {
   setup() {
     // const store = useStore();
     const route = useRoute();
+    const store = useStore();
     const { t } = useI18n();
     const data = reactive({
       activeIndex: 0,
+      minted: 0,
       blindBoxes: [
         {
           key: 0,
@@ -143,6 +147,7 @@ export default {
         localStorage.setItem("invite", temp);
       }
       // await getPrice();
+      await getMinted();
     });
     const getInvite = async () => {
       const encode = route.query.i;
@@ -151,6 +156,11 @@ export default {
         invite_code: encode,
       });
       return res.data || "";
+    };
+    const getMinted = async () => {
+      const c = store.state.c_recruit;
+      const res = await c.methods.getBlindBoxNumber(0).call();
+      data.minted = 50000 - res
     };
     // const getPrice = async () => {
     //   const c = store.state.c_recruit;
