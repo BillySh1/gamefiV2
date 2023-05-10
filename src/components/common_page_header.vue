@@ -25,7 +25,6 @@
         <img
           class="img_right"
           src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/assets/common/currency_plus.png"
-       
         />
       </div>
     </div>
@@ -57,9 +56,7 @@ import { reactive, toRefs, computed, onBeforeMount } from "vue";
 import InjectWallet from "./inject_wallet.vue";
 import initWeb3 from "../utils/initWeb3";
 import { useStore } from "vuex";
-import { getCurrentInstance } from "vue";
-import { useI18n } from "vue-i18n";
-import i18n from '../i18n'
+import i18n from "../i18n";
 export default {
   name: "common_page_header",
   props: ["title"],
@@ -67,11 +64,6 @@ export default {
     InjectWallet,
   },
   setup() {
-    const { proxy } = getCurrentInstance();
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
     const store = useStore();
     const data = reactive({
       account: "",
@@ -184,8 +176,6 @@ export default {
         i18n.global.locale.value = "en";
         localStorage.setItem("lang", "en");
       }
-
-      proxy.$toast(t("common_tip_success"), store.state.toast_success);
     };
     const refData = toRefs(data);
     return {
