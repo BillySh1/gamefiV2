@@ -147,6 +147,7 @@
                 <input
                   v-model="buyValue"
                   class="input"
+                  disabled
                   @input="
                     () => {
                       buyValue = Number($event.target.value.replace(/\D+/, ''));
