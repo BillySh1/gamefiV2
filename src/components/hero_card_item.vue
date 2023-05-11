@@ -86,10 +86,10 @@ export default {
         [
           require("../assets/cardImgs/hero/bg/r0.png"),
           require("../assets/cardImgs/hero/bg/r1.png"),
-          require("../assets/cardImgs/hero/bg/r2.svg"),
-          require("../assets/cardImgs/hero/bg/r3.svg"),
-          require("../assets/cardImgs/hero/bg/r4.svg"),
-        ][prop.info.rarity] || require("../assets/cardImgs/hero/bg/r0.svg")
+          require("../assets/cardImgs/hero/bg/r2.png"),
+          require("../assets/cardImgs/hero/bg/r3.png"),
+          require("../assets/cardImgs/hero/bg/r4.png"),
+        ][prop.info.rarity] || require("../assets/cardImgs/hero/bg/r0.png")
       );
     });
     const qualityImg = computed(() => {
