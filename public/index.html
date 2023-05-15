@@ -32,9 +32,9 @@
       >
     </noscript>
 
-    <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
+    <script src="./utils//preload.min.js"></script>
     <script>
-      window.createjs = this.createjs;
+      window.createjs = this.createjs || null;
     </script>
     <div id="app"></div>
   </body>

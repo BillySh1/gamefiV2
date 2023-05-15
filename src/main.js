@@ -1,6 +1,5 @@
-const tp = require("tp-js-sdk");
-
 if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+  const tp = require("tp-js-sdk");
   if (tp) {
     tp.rollHorizontal({
       // 移动端横屏

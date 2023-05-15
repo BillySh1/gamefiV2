@@ -1,5 +1,5 @@
 <template>
-  <AudioBox />
+  <!-- <AudioBox /> -->
   <router-view v-if="correctChainId && connected && !loading"></router-view>
   <ConnectWalletModal
     :value="modalShow"
@@ -27,9 +27,7 @@
             src="https://cryptorich3.mypinata.cloud/ipfs/QmYcwx7pKcH9y9kFCwx2pswmvjGSFPLPDv2Ld8SovipH2h/rich/allstar_assets/all_stars/entry/btn_bg.png"
             alt=""
           />
-          <div class="inner" @click="() => (modalShow = true)">
-            Connect
-          </div>
+          <div class="inner" @click="() => (modalShow = true)">Connect</div>
         </div>
         <div class="btn" v-show="isMobile && !correctChainId && connected">
           <img
@@ -48,14 +46,14 @@
 import initWeb3 from "./utils/initWeb3";
 import GlobalLoading from "./components/global_loading.vue";
 import ConnectWalletModal from "./components/connect_wallet_modal.vue";
-import AudioBox from "./components/audio.vue";
+// import AudioBox from "./components/audio.vue";
 const acceptNetWorks = [1116];
 export default {
   name: "app",
   components: {
     GlobalLoading,
     ConnectWalletModal,
-    AudioBox,
+    // AudioBox,
   },
   data() {
     return {
@@ -103,10 +101,12 @@ export default {
     },
     async judge() {
       let chainId;
-    
+
       if (window.ethereum) {
-        chainId = parseInt(window.ethereum.chainId || window.ethereum.eth_chainId(),16);
-       
+        chainId = parseInt(
+          window.ethereum.chainId || window.ethereum.eth_chainId(),
+          16
+        );
       } else {
         chainId = await this.Web3.eth.getChainId();
       }
